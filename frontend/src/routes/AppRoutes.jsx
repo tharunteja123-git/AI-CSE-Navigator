@@ -15,6 +15,8 @@ import Profile from "../pages/Profile";
 import MockInterview from "../pages/MockInterview";
 import SkillGapAnalyzer from "../pages/SkillGapAnalyzer";
 import ConceptHub from "../pages/ConceptHub";
+import InterviewRoom from "../pages/InterviewRoom";
+
 
 function PrivateRoute({ children }) {
   const { token, loading } = useAuth();
@@ -44,6 +46,7 @@ export default function AppRoutes() {
       <Route path="/coding-tracker"  element={<PrivateRoute><CodingTracker /></PrivateRoute>} />
       <Route path="/jobs"            element={<PrivateRoute><Jobs /></PrivateRoute>} />
       <Route path="/profile"         element={<PrivateRoute><Profile /></PrivateRoute>} />
+      <Route path="/interview-room"  element={<PrivateRoute><InterviewRoom /></PrivateRoute>} />
     </Routes>
   );
 }

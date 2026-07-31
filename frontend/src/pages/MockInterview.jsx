@@ -1,673 +1,872 @@
-import { useState, useRef, useEffect } from "react";
-import { api } from "../services/api";
-import DashboardLayout from "../layouts/DashboardLayout";
-import ReactMarkdown from "react-markdown";
-import {
-  FiArrowLeft, FiArrowRight, FiCheck, FiSend,
-  FiRefreshCw, FiAward, FiTarget, FiZap,
-  FiClock, FiBookOpen, FiCode, FiCpu, FiLayers,
-  FiTrendingUp, FiUsers, FiStar, FiChevronRight,
-} from "react-icons/fi";
+import { useState, useRef, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
-// ─────────────────────────────────────────
-// DATA
-// ─────────────────────────────────────────
-const ROLES = [
-  { id: "sde", label: "Software Engineer", icon: ">", desc: "Algorithms, System Design, CS Fundamentals" },
-  { id: "frontend", label: "Frontend Developer", icon: ">", desc: "React, JavaScript, CSS, Web APIs" },
-  { id: "backend", label: "Backend Developer", icon: ">", desc: "APIs, Databases, Caching, Architecture" },
-  { id: "fullstack", label: "Full Stack Developer", icon: ">", desc: "Frontend + Backend + DevOps basics" },
-  { id: "ai_ml", label: "AI / ML Engineer", icon: ">", desc: "ML concepts, Python, Mathematics, LLMs" },
-  { id: "data", label: "Data Scientist", icon: ">", desc: "Statistics, SQL, Python, ML models" },
-  { id: "devops", label: "DevOps Engineer", icon: ">", desc: "CI/CD, Docker, Kubernetes, Cloud" },
-  { id: "mobile", label: "Mobile Developer", icon: ">", desc: "React Native / Flutter, APIs, UX" },
-];
+/*
+  Resume text extraction uses pdfjs-dist (PDF) and mammoth (DOCX).
+  Install once in your project:
 
-const LEVELS = [
-  { id: "fresher", label: "Fresher", sub: "0 – 1 yr", color: "bg-green-500", light: "bg-green-50", border: "border-green-200", text: "text-green-700" },
-  { id: "junior", label: "Junior", sub: "1 – 2 yr", color: "bg-blue-500", light: "bg-blue-50", border: "border-blue-200", text: "text-blue-700" },
-  { id: "mid", label: "Mid-Level", sub: "2 – 4 yr", color: "bg-violet-500", light: "bg-violet-50", border: "border-violet-200", text: "text-violet-700" },
-  { id: "senior", label: "Senior", sub: "4+ yr", color: "bg-orange-500", light: "bg-orange-50", border: "border-orange-200", text: "text-orange-700" },
-];
+    npm install pdfjs-dist mammoth
+
+  Both are dynamically imported inside extractTextFromFile(), so the
+  rest of the app still builds even before you install them — you'll
+  just get a friendly inline error until you do.
+
+  For the display/body font pairing referenced below (Fraunces + Inter
+  + IBM Plex Mono), add this to your index.html <head>:
+
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+*/
+
+// ---------------------------------------------------------------------------
+// Static data
+// ---------------------------------------------------------------------------
 
 const CATEGORIES = [
-  { id: "dsa", label: "Data Structures & Algorithms", icon: <FiCode />, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-200", desc: "Arrays, Trees, Graphs, DP, Sorting" },
-  { id: "system", label: "System Design", icon: <FiLayers />, color: "text-violet-600", bg: "bg-violet-50", border: "border-violet-200", desc: "Scalability, Caching, Load Balancing" },
-  { id: "cs_core", label: "CS Fundamentals", icon: <FiCpu />, color: "text-orange-600", bg: "bg-orange-50", border: "border-orange-200", desc: "OS, DBMS, CN, OOP, Compilers" },
-  { id: "behavioral", label: "HR & Behavioral", icon: <FiUsers />, color: "text-pink-600", bg: "bg-pink-50", border: "border-pink-200", desc: "Tell me about yourself, conflict, goals" },
-  { id: "project", label: "Project Based", icon: <FiBookOpen />, color: "text-teal-600", bg: "bg-teal-50", border: "border-teal-200", desc: "Deep dive on resume projects" },
-  { id: "aptitude", label: "Aptitude & Puzzles", icon: <FiZap />, color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-200", desc: "Logic, reasoning, brain teasers" },
+  "Technical",
+  "Projects",
+  "Resume",
+  "Behavioral",
+  "HR",
+  "DSA",
+  "SQL",
+  "System Design",
+  "Python",
+  "React",
+  "FastAPI",
+  "AI / ML",
 ];
 
-const TOTAL_ROUNDS = 5;
+const ROLE_OPTIONS = [
+  "AI Engineer",
+  "Full Stack Developer",
+  "Backend Developer",
+  "Frontend Developer",
+  "Data Scientist",
+  "DevOps Engineer",
+];
 
-const diffColor = { Easy: "text-green-600 bg-green-50 border-green-200", Medium: "text-yellow-600 bg-yellow-50 border-yellow-200", Hard: "text-red-600 bg-red-50 border-red-200" };
-const scoreColor = (s) => s >= 8 ? "text-green-600" : s >= 6 ? "text-yellow-600" : "text-red-500";
-const scoreBg = (s) => s >= 8 ? "bg-green-50 border-green-200" : s >= 6 ? "bg-yellow-50 border-yellow-200" : "bg-red-50 border-red-100";
-const scoreLabel = (s) => s >= 9 ? "Outstanding 🌟" : s >= 8 ? "Excellent 🎉" : s >= 7 ? "Good 👍" : s >= 5 ? "Average 📚" : "Needs Work 💪";
+const COMPANY_OPTIONS = [
+  "Google",
+  "Microsoft",
+  "Amazon",
+  "Meta",
+  "Accenture",
+  "TCS",
+  "Infosys",
+  "Wipro",
+  "Zoho",
+  "Startup",
+];
 
-// ─────────────────────────────────────────
-// STEP INDICATOR
-// ─────────────────────────────────────────
-function StepBar({ steps, current }) {
+const EXPERIENCE_OPTIONS = ["Student", "Fresher", "0-2 Years", "2-5 Years", "5+ Years"];
+
+const AI_FEATURES = [
+  "Resume Based Questions",
+  "Project Deep Dive",
+  "Company Specific Questions",
+  "Behavioral Interview",
+  "Technical Interview",
+  "Follow-up Questions",
+  "Real-time Feedback",
+  "Confidence Analysis",
+  "Communication Analysis",
+  "Grammar Checking",
+  "Answer Quality Score",
+  "Final Interview Report",
+];
+
+// keyword -> canonical skill name, used to scan extracted resume text
+const SKILL_KEYWORDS = {
+  Python: ["python", "django", "flask"],
+  FastAPI: ["fastapi"],
+  React: ["react.js", "react ", "redux", "next.js", "nextjs"],
+  SQL: ["sql", "mysql", "postgres", "postgresql", "sqlite"],
+  JavaScript: ["javascript", "typescript", "node.js", "nodejs"],
+  Docker: ["docker", "container"],
+  AWS: ["aws", "amazon web services", "ec2", "s3"],
+  "Machine Learning": ["machine learning", "scikit", "tensorflow", "pytorch", "keras"],
+  Git: ["git", "github", "gitlab"],
+  "System Design": ["system design", "microservice", "scalab", "load balanc"],
+  Redis: ["redis"],
+  "CI/CD": ["ci/cd", "jenkins", "github actions", "continuous integration"],
+};
+
+// which skills matter most for each target role, used to compute gaps
+const ROLE_SKILL_MAP = {
+  "AI Engineer": ["Python", "Machine Learning", "SQL", "Docker", "AWS"],
+  "Full Stack Developer": ["JavaScript", "React", "SQL", "Docker", "Git"],
+  "Backend Developer": ["Python", "SQL", "Docker", "System Design", "AWS"],
+  "Frontend Developer": ["JavaScript", "React", "Git", "CI/CD"],
+  "Data Scientist": ["Python", "Machine Learning", "SQL", "Git"],
+  "DevOps Engineer": ["Docker", "AWS", "CI/CD", "System Design", "Git"],
+};
+
+const TECH_QUESTION_BANK = {
+  Python: "Explain Python's GIL and how it affects multi-threaded code.",
+  FastAPI: "Why did you choose FastAPI over Flask or Django for this project?",
+  React: "Walk me through how React's reconciliation and hooks lifecycle work.",
+  SQL: "Write a query to find the second-highest salary in an Employees table.",
+  JavaScript: "Explain the event loop and how async/await is handled under the hood.",
+  Docker: "What's the difference between a Docker image and a container, and how would you slim one down?",
+  AWS: "How would you design a highly available deployment on AWS for this app?",
+  "Machine Learning": "Explain the bias-variance tradeoff and how you'd diagnose overfitting.",
+  Git: "Walk me through resolving a merge conflict during a rebase.",
+  "System Design": "How would you scale this system to handle 10,000 concurrent users?",
+  Redis: "When would you reach for Redis over a relational database?",
+  "CI/CD": "Describe a CI/CD pipeline you've built or maintained end to end.",
+};
+
+const HR_QUESTIONS = [
+  "Tell me about yourself.",
+  "Why should we hire you over another candidate?",
+  "Tell me about a time you failed and what you learned from it.",
+  "Describe a conflict with a teammate and how you resolved it.",
+  "Where do you see yourself in five years?",
+];
+
+const CHECKLIST_ITEMS = [
+  { key: "internet", label: "Stable internet connection" },
+  { key: "camera", label: "Camera ready" },
+  { key: "mic", label: "Microphone working" },
+  { key: "quiet", label: "Quiet environment" },
+];
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+// ---------------------------------------------------------------------------
+// Resume parsing
+// ---------------------------------------------------------------------------
+
+async function extractTextFromFile(file) {
+  const ext = file.name.split(".").pop().toLowerCase();
+
+  if (ext === "pdf") {
+    let pdfjsLib;
+    try {
+      pdfjsLib = await import("pdfjs-dist/build/pdf");
+    } catch {
+      throw new Error("PDF parsing needs the pdfjs-dist package — run: npm install pdfjs-dist");
+    }
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+    const buffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+    let text = "";
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const content = await page.getTextContent();
+      text += content.items.map((item) => item.str).join(" ") + "\n";
+    }
+    return text;
+  }
+
+  if (ext === "docx") {
+    let mammoth;
+    try {
+      mammoth = await import("mammoth");
+    } catch {
+      throw new Error("DOCX parsing needs the mammoth package — run: npm install mammoth");
+    }
+    const buffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer: buffer });
+    return result.value;
+  }
+
+  if (ext === "doc") {
+    throw new Error("Legacy .doc files can't be parsed in the browser — please upload a PDF or DOCX instead.");
+  }
+
+  throw new Error("Unsupported file type — upload a PDF or DOCX.");
+}
+
+function analyzeResumeText(text, targetRole) {
+  const lower = text.toLowerCase();
+
+  const detected = Object.keys(SKILL_KEYWORDS).filter((skill) =>
+    SKILL_KEYWORDS[skill].some((kw) => lower.includes(kw))
+  );
+
+  const roleSkills = ROLE_SKILL_MAP[targetRole] || ROLE_SKILL_MAP["Full Stack Developer"];
+  const recommended = roleSkills.filter((skill) => !detected.includes(skill));
+
+  const hasEmail = /[^\s@]+@[^\s@]+\.[^\s@]{2,}/.test(text);
+  const hasProjects = /project/i.test(text);
+  const hasExperience = /experience/i.test(text);
+  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+
+  let score = 40;
+  score += Math.min(detected.length * 6, 30);
+  if (hasEmail) score += 8;
+  if (hasProjects) score += 7;
+  if (hasExperience) score += 7;
+  if (wordCount > 150) score += 8;
+  score = Math.min(Math.round(score), 98);
+
+  return { score, detected, recommended, wordCount };
+}
+
+function buildQuestions(analysis, candidate) {
+  const role = candidate.role || "this role";
+  const company = candidate.company;
+
+  const projectQuestions = [
+    "Walk me through the most complex project on your resume — what was your specific role?",
+    analysis.detected.length >= 2
+      ? `You listed ${analysis.detected.slice(0, 2).join(" and ")} — which project used them together, and why that combination?`
+      : "Which project are you proudest of, and what would you do differently now?",
+    "What was the hardest technical decision on that project, and how did you resolve it?",
+    "If that project suddenly had to support 10,000 concurrent users, what breaks first?",
+  ];
+
+  const technicalQuestions = analysis.detected.length
+    ? analysis.detected.slice(0, 5).map((skill) => TECH_QUESTION_BANK[skill] || `Explain a core concept in ${skill} and where you've used it.`)
+    : [`Tell me about a technical stack you're comfortable with for a ${role} position.`];
+
+  const hrQuestions = company
+    ? [`Why ${company} specifically, and what do you know about their engineering culture?`, ...HR_QUESTIONS.slice(0, 4)]
+    : HR_QUESTIONS;
+
+  return { projectQuestions, technicalQuestions, hrQuestions };
+}
+
+// ---------------------------------------------------------------------------
+// Small presentational helpers
+// ---------------------------------------------------------------------------
+
+function ReadinessDial({ percent }) {
+  const size = 84;
+  const stroke = 8;
+  const r = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * r;
+  const offset = circumference * (1 - percent / 100);
+
   return (
-    <div className="flex items-center gap-0 mb-8">
-      {steps.map((step, i) => (
-        <div key={i} className="flex items-center flex-1 last:flex-none">
-          <div className={`flex items-center gap-2 ${i < current ? "opacity-100" : i === current ? "opacity-100" : "opacity-40"}`}>
-            <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${
-              i < current
-                ? "bg-indigo-600 border-indigo-600 text-white"
-                : i === current
-                ? "bg-white border-indigo-600 text-indigo-600"
-                : "bg-white border-slate-300 text-slate-400"
-            }`}>
-              {i < current ? <FiCheck /> : i + 1}
-            </div>
-            <span className={`text-xs font-semibold hidden sm:block ${i === current ? "text-indigo-700" : "text-slate-400"}`}>{step}</span>
-          </div>
-          {i < steps.length - 1 && (
-            <div className={`flex-1 h-px mx-3 ${i < current ? "bg-indigo-400" : "bg-slate-200"}`} />
-          )}
-        </div>
-      ))}
+    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
+      <svg width={size} height={size} className="-rotate-90">
+        <circle cx={size / 2} cy={size / 2} r={r} stroke="#E4E1DA" strokeWidth={stroke} fill="none" />
+        <circle
+          cx={size / 2}
+          cy={size / 2}
+          r={r}
+          stroke={percent >= 100 ? "#1F6F63" : "#E8963C"}
+          strokeWidth={stroke}
+          fill="none"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: "stroke-dashoffset 400ms ease, stroke 300ms ease" }}
+        />
+      </svg>
+      <div className="absolute flex flex-col items-center">
+        <span className="text-lg font-semibold text-[#12181F]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+          {percent}%
+        </span>
+        <span className="text-[10px] uppercase tracking-wide text-[#5B6472]">ready</span>
+      </div>
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// ROUND PROGRESS BAR
-// ─────────────────────────────────────────
-function RoundProgress({ round, scores }) {
+function Field({ label, error, children }) {
   return (
-    <div className="flex items-center gap-2 mb-6">
-      {Array.from({ length: TOTAL_ROUNDS }).map((_, i) => {
-        const s = scores[i];
-        const isCurrent = i === round - 1;
-        const isDone = i < round - 1;
-        return (
-          <div key={i} className="flex-1">
-            <div className={`h-2 rounded-full transition-all duration-500 ${
-              isDone
-                ? s >= 8 ? "bg-green-500" : s >= 6 ? "bg-yellow-500" : "bg-red-400"
-                : isCurrent
-                ? "bg-indigo-500 animate-pulse"
-                : "bg-slate-200"
-            }`} />
-            <div className="text-center mt-1">
-              <span className={`text-xs font-semibold ${isCurrent ? "text-indigo-600" : "text-slate-300"}`}>
-                {isDone ? (s ?? "–") : isCurrent ? `Q${i + 1}` : ""}
-              </span>
-            </div>
-          </div>
-        );
-      })}
-      <span className="text-xs text-slate-500 whitespace-nowrap ml-1">{round}/{TOTAL_ROUNDS}</span>
+    <div>
+      <label className="block text-sm font-semibold mb-2 text-[#12181F]">{label}</label>
+      {children}
+      {error && <p className="text-xs text-rose-600 mt-1.5">{error}</p>}
     </div>
   );
 }
 
-// ─────────────────────────────────────────
-// MAIN PAGE
-// ─────────────────────────────────────────
+// ---------------------------------------------------------------------------
+// Main component
+// ---------------------------------------------------------------------------
+
 export default function MockInterview() {
-  const [phase, setPhase] = useState("setup"); // setup | interview | done
-  const [setupStep, setSetupStep] = useState(0); // 0=role, 1=level, 2=category
-  const [role, setRole] = useState(null);
-  const [level, setLevel] = useState(null);
-  const [category, setCategory] = useState(null);
+  const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
-  const [round, setRound] = useState(1);
-  const [question, setQuestion] = useState("");
-  const [questionMeta, setQuestionMeta] = useState({ difficulty: "Medium", topic: "" });
-  const [answer, setAnswer] = useState("");
-  const [feedback, setFeedback] = useState("");
-  const [score, setScore] = useState(null);
-  const [scores, setScores] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [interviewPhase, setInterviewPhase] = useState("question"); // question | answer | feedback
+  const [candidate, setCandidate] = useState({
+    fullName: "",
+    email: "",
+    role: ROLE_OPTIONS[0],
+    company: COMPANY_OPTIONS[0],
+    experience: "Fresher",
+  });
+  const [touched, setTouched] = useState({ fullName: false, email: false });
 
-  const answerRef = useRef(null);
+  const [resume, setResume] = useState(null);
+  const [resumeAnalysis, setResumeAnalysis] = useState(null);
+  const [analyzing, setAnalyzing] = useState(false);
+  const [analysisError, setAnalysisError] = useState(null);
 
-  useEffect(() => {
-    if (interviewPhase === "answer" && answerRef.current) {
-      answerRef.current.focus();
-    }
-  }, [interviewPhase]);
+  const [selectedCategories, setSelectedCategories] = useState(
+    () => Object.fromEntries(CATEGORIES.map((c) => [c, true]))
+  );
 
-  // ── SETUP STEP CONFIG ──
-  const setupSteps = ["Choose Role", "Select Level", "Pick Category"];
+  const [mode, setMode] = useState("Mixed (Recommended)");
+  const [difficulty, setDifficulty] = useState("Adaptive AI ⭐");
+  const [duration, setDuration] = useState(30);
 
-  // ── GENERATE QUESTION ──
-  const generateQuestion = async () => {
-    setLoading(true);
-    setQuestion("");
-    setAnswer("");
-    setFeedback("");
-    setScore(null);
-    setInterviewPhase("question");
-    const roleObj = ROLES.find(r => r.id === role);
-    const levelObj = LEVELS.find(l => l.id === level);
-    const catObj = CATEGORIES.find(c => c.id === category);
+  const [checklist, setChecklist] = useState({
+    internet: false,
+    camera: false,
+    mic: false,
+    quiet: false,
+  });
+
+  const [showMissing, setShowMissing] = useState(false);
+
+  const updateCandidate = (field) => (e) => setCandidate((c) => ({ ...c, [field]: e.target.value }));
+
+  const nameError = touched.fullName && !candidate.fullName.trim() ? "Enter your full name." : null;
+  const emailError = touched.email && !EMAIL_RE.test(candidate.email) ? "Enter a valid email address." : null;
+
+  function handleFileChosen(file) {
+    if (!file) return;
+    setResume(file);
+    setResumeAnalysis(null);
+    setAnalysisError(null);
+  }
+
+  async function handleAnalyze() {
+    if (!resume) return;
+    setAnalyzing(true);
+    setAnalysisError(null);
     try {
-      const data = await api.chat(
-        `You are a senior technical interviewer at a top tech company in India conducting a mock interview.
-
-Role: ${roleObj?.label}
-Level: ${levelObj?.label} (${levelObj?.sub})
-Category: ${catObj?.label}
-Round: ${round} of ${TOTAL_ROUNDS}
-
-Generate ONE interview question. Rules:
-- Ask only ONE clear, specific question
-- No introduction or preamble — just the question directly
-- For DSA: include a concrete problem statement with example
-- For System Design: include specific scale requirements (e.g., "design for 10M users")
-- For CS Core: ask something precise and testable
-- For Behavioral: make it situational and open-ended
-- For Project: ask to explain architecture decisions and tradeoffs
-- Vary difficulty across rounds: round 1-2 easier, round 3-4 medium, round 5 hard
-
-Also on the VERY LAST LINE write exactly: DIFFICULTY: Easy|Medium|Hard`
-      );
-      const raw = data.response || "";
-      const lines = raw.trim().split("\n");
-      const lastLine = lines[lines.length - 1];
-      let diff = "Medium";
-      let qText = raw.trim();
-      if (lastLine.startsWith("DIFFICULTY:")) {
-        diff = lastLine.replace("DIFFICULTY:", "").trim();
-        qText = lines.slice(0, -1).join("\n").trim();
+      const text = await extractTextFromFile(resume);
+      if (!text.trim()) {
+        throw new Error("Couldn't find any readable text in this file — try a different export of your resume.");
       }
-      setQuestion(qText);
-      setQuestionMeta({ difficulty: diff, topic: catObj?.label || "" });
-      setInterviewPhase("answer");
-    } catch {
-      setQuestion("❌ Failed to generate question. Please check your API key.");
-      setInterviewPhase("answer");
+      setResumeAnalysis(analyzeResumeText(text, candidate.role));
+    } catch (err) {
+      setAnalysisError(err.message || "Something went wrong while reading this file.");
+    } finally {
+      setAnalyzing(false);
     }
-    setLoading(false);
-  };
+  }
 
-  // ── START INTERVIEW ──
-  const startInterview = () => {
-    setPhase("interview");
-    setRound(1);
-    setScores([]);
-    generateQuestion();
-  };
+  function toggleCategory(category) {
+    setSelectedCategories((prev) => ({ ...prev, [category]: !prev[category] }));
+  }
 
-  // ── SUBMIT ANSWER ──
-  const submitAnswer = async () => {
-    if (!answer.trim()) return;
-    setLoading(true);
-    setInterviewPhase("feedback");
-    const roleObj = ROLES.find(r => r.id === role);
-    try {
-      const data = await api.chat(
-        `You are an expert technical interviewer evaluating a ${roleObj?.label} candidate.
+  function toggleChecklist(key) {
+    setChecklist((prev) => ({ ...prev, [key]: !prev[key] }));
+  }
 
-Question: ${question}
+  const activeCategoryCount = useMemo(
+    () => Object.values(selectedCategories).filter(Boolean).length,
+    [selectedCategories]
+  );
 
-Candidate's Answer: ${answer}
+  const questions = useMemo(
+    () => (resumeAnalysis ? buildQuestions(resumeAnalysis, candidate) : null),
+    [resumeAnalysis, candidate]
+  );
 
-Evaluate strictly but fairly and give actionable feedback. Format your response EXACTLY like this:
+  const steps = [
+    { key: "name", done: !!candidate.fullName.trim(), label: "Add your full name" },
+    { key: "email", done: EMAIL_RE.test(candidate.email), label: "Add a valid email" },
+    { key: "resume", done: !!resume, label: "Upload your resume" },
+    { key: "analysis", done: !!resumeAnalysis, label: "Analyze your resume" },
+    { key: "categories", done: activeCategoryCount > 0, label: "Select at least one question category" },
+    { key: "internet", done: checklist.internet, label: "Confirm your internet connection" },
+    { key: "camera", done: checklist.camera, label: "Confirm your camera" },
+    { key: "mic", done: checklist.mic, label: "Confirm your microphone" },
+    { key: "quiet", done: checklist.quiet, label: "Confirm a quiet environment" },
+  ];
+  const completedCount = steps.filter((s) => s.done).length;
+  const percent = Math.round((completedCount / steps.length) * 100);
+  const isReady = completedCount === steps.length;
+  const missingSteps = steps.filter((s) => !s.done);
 
-**Score: X/10**
-
-**Verdict:** [One line honest assessment]
-
-**✅ What Was Good:**
-- [specific strength 1]
-- [specific strength 2]
-
-**❌ What Was Missing / Wrong:**
-- [specific gap 1]
-- [specific gap 2]
-
-**💡 Ideal Answer:**
-[3-5 lines of the best answer approach]
-
-**⚡ Key Takeaway:**
-[One actionable tip to improve]`
-      );
-      const raw = data.response || "";
-      setFeedback(raw);
-      const match = raw.match(/Score:\s*(\d+)/i);
-      const s = match ? parseInt(match[1]) : 6;
-      setScore(s);
-      setScores(prev => [...prev, s]);
-    } catch {
-      setFeedback("❌ Failed to evaluate. Please try again.");
+  function handleStart() {
+    if (!isReady) {
+      setShowMissing(true);
+      return;
     }
-    setLoading(false);
-  };
+    navigate("/interview-room", {
+      state: {
+        candidate,
+        mode,
+        difficulty,
+        duration,
+        categories: Object.keys(selectedCategories).filter((c) => selectedCategories[c]),
+        resumeAnalysis,
+      },
+    });
+  }
 
-  // ── NEXT ROUND ──
-  const nextRound = () => {
-    if (round >= TOTAL_ROUNDS) {
-      setPhase("done");
-    } else {
-      setRound(r => r + 1);
-      generateQuestion();
-    }
-  };
+  return (
+    <div className="max-w-4xl mx-auto space-y-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+      {/* Candidate Profile */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+        <h2
+          className="text-2xl font-bold text-[#12181F] mb-6"
+          style={{ fontFamily: "'Fraunces', serif" }}
+        >
+          Candidate Profile
+        </h2>
 
-  // ── RESTART ──
-  const restart = () => {
-    setPhase("setup");
-    setSetupStep(0);
-    setRole(null);
-    setLevel(null);
-    setCategory(null);
-    setRound(1);
-    setScores([]);
-    setQuestion("");
-    setAnswer("");
-    setFeedback("");
-    setScore(null);
-  };
+        <div className="grid md:grid-cols-2 gap-5">
+          <Field label="Full Name" error={nameError}>
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={candidate.fullName}
+              onChange={updateCandidate("fullName")}
+              onBlur={() => setTouched((t) => ({ ...t, fullName: true }))}
+              className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
+                nameError ? "border-rose-400" : "border-[#E4E1DA]"
+              }`}
+            />
+          </Field>
 
-  const avgScore = scores.length ? Math.round(scores.reduce((a, b) => a + b, 0) / scores.length) : 0;
+          <Field label="Email" error={emailError}>
+            <input
+              type="email"
+              placeholder="john@gmail.com"
+              value={candidate.email}
+              onChange={updateCandidate("email")}
+              onBlur={() => setTouched((t) => ({ ...t, email: true }))}
+              className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
+                emailError ? "border-rose-400" : "border-[#E4E1DA]"
+              }`}
+            />
+          </Field>
 
-  // ─────────────────────────────────────────
-  // RENDER: SETUP
-  // ─────────────────────────────────────────
-  if (phase === "setup") {
-    return (
-      <DashboardLayout>
-        <div className="max-w-3xl mx-auto">
-          {/* Hero */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
-              <FiZap className="text-xs" /> AI-Powered Mock Interview
+          <Field label="Target Role">
+            <select
+              value={candidate.role}
+              onChange={updateCandidate("role")}
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+            >
+              {ROLE_OPTIONS.map((role) => (
+                <option key={role}>{role}</option>
+              ))}
+            </select>
+          </Field>
+
+          <Field label="Target Company">
+            <select
+              value={candidate.company}
+              onChange={updateCandidate("company")}
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+            >
+              {COMPANY_OPTIONS.map((company) => (
+                <option key={company}>{company}</option>
+              ))}
+            </select>
+          </Field>
+
+          <Field label="Experience">
+            <select
+              value={candidate.experience}
+              onChange={updateCandidate("experience")}
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+            >
+              {EXPERIENCE_OPTIONS.map((exp) => (
+                <option key={exp}>{exp}</option>
+              ))}
+            </select>
+          </Field>
+        </div>
+      </section>
+
+      {/* Resume upload */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+        <h2 className="text-2xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+          Resume
+        </h2>
+
+        <label className="border-2 border-dashed border-[#E8963C]/50 rounded-2xl p-10 flex flex-col items-center justify-center cursor-pointer hover:bg-[#E8963C]/5 transition">
+          <div className="text-5xl">📄</div>
+          <h3 className="font-bold text-lg mt-3 text-[#12181F]">Upload Resume</h3>
+          <p className="text-[#5B6472] mt-2">Drag & Drop PDF / DOCX</p>
+          <button
+            type="button"
+            onClick={() => fileInputRef.current.click()}
+            className="mt-5 bg-[#12181F] hover:bg-[#1F2731] text-white px-5 py-2 rounded-xl transition"
+          >
+            Choose File
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".pdf,.doc,.docx"
+            hidden
+            onChange={(e) => handleFileChosen(e.target.files?.[0] || null)}
+          />
+        </label>
+
+        {resume && (
+          <div className="mt-5 rounded-xl bg-[#1F6F63]/10 border border-[#1F6F63]/30 p-4 flex items-center justify-between">
+            <div>
+              <div className="font-semibold text-[#1F6F63]">Resume uploaded</div>
+              <div className="text-sm mt-1 text-[#12181F]">{resume.name}</div>
             </div>
-            <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Practice Like It's Real</h1>
-            <p className="text-slate-500 text-sm max-w-md mx-auto">
-              5 rounds of real interview questions with instant AI feedback, scoring, and improvement tips.
+            <button
+              onClick={handleAnalyze}
+              disabled={analyzing}
+              className="px-4 py-2 rounded-lg bg-[#12181F] text-white hover:bg-[#1F2731] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {analyzing ? "Analyzing…" : resumeAnalysis ? "Re-analyze" : "Analyze Resume"}
+            </button>
+          </div>
+        )}
+
+        {analysisError && (
+          <div className="mt-4 rounded-xl bg-rose-50 border border-rose-200 p-4 text-sm text-rose-700">
+            {analysisError}
+          </div>
+        )}
+      </section>
+
+      {/* AI Resume Analysis */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+          AI Resume Analysis
+        </h2>
+
+        {!resumeAnalysis ? (
+          <p className="text-sm text-[#5B6472]">
+            {resume ? "Click \"Analyze Resume\" above to scan your file." : "Upload a resume to see your score and detected skills."}
+          </p>
+        ) : (
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="rounded-xl bg-[#E8963C]/10 p-5">
+              <p className="text-sm text-[#5B6472]">Resume Score</p>
+              <h2
+                className="text-4xl font-bold text-[#E8963C]"
+                style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+              >
+                {resumeAnalysis.score}%
+              </h2>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3 text-[#12181F]">Skills Detected</h3>
+              <div className="flex flex-wrap gap-2">
+                {resumeAnalysis.detected.length ? (
+                  resumeAnalysis.detected.map((skill) => (
+                    <span key={skill} className="px-3 py-1 rounded-full bg-[#1F6F63]/10 text-[#1F6F63] text-sm">
+                      {skill}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-sm text-[#5B6472]">No known skills detected yet.</span>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3 text-[#12181F]">Recommended for {candidate.role}</h3>
+              <div className="flex flex-wrap gap-2">
+                {resumeAnalysis.recommended.length ? (
+                  resumeAnalysis.recommended.map((skill) => (
+                    <span key={skill} className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm">
+                      {skill}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-sm text-[#5B6472]">Great coverage for this role.</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Interview Preferences */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+        <h2 className="text-xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+          Interview Preferences
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div>
+            <label className="font-semibold text-[#12181F] block mb-2">Interview Mode</label>
+            <select
+              value={mode}
+              onChange={(e) => setMode(e.target.value)}
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+            >
+              <option>Resume Based</option>
+              <option>Company Based</option>
+              <option>Mixed (Recommended)</option>
+            </select>
+            <p className="text-xs text-[#5B6472] mt-2">
+              Mixed mode asks questions from both your resume and your target company.
             </p>
           </div>
 
-          {/* Steps */}
-          <StepBar steps={setupSteps} current={setupStep} />
-
-          {/* ── STEP 0: Role ── */}
-          {setupStep === 0 && (
-            <div>
-              <p className="text-sm font-bold text-slate-700 mb-4">What role are you interviewing for?</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {ROLES.map(r => (
-                  <button key={r.id} onClick={() => setRole(r.id)}
-                    className={`text-left flex items-start gap-4 p-4 rounded-2xl border-2 transition-all hover:-translate-y-0.5 hover:shadow-md ${
-                      role === r.id
-                        ? "border-indigo-500 bg-indigo-50"
-                        : "border-slate-200 bg-white hover:border-indigo-300"
-                    }`}>
-                    <span className="text-2xl">{r.icon}</span>
-                    <div>
-                      <p className={`font-bold text-sm ${role === r.id ? "text-indigo-700" : "text-slate-800"}`}>{r.label}</p>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-4">{r.desc}</p>
-                    </div>
-                    {role === r.id && <FiCheck className="ml-auto text-indigo-500 flex-shrink-0 mt-0.5" />}
-                  </button>
-                ))}
-              </div>
-              <button onClick={() => setSetupStep(1)} disabled={!role}
-                className="btn-primary w-full mt-6 flex items-center justify-center gap-2 disabled:opacity-40">
-                Continue <FiArrowRight />
-              </button>
-            </div>
-          )}
-
-          {/* ── STEP 1: Level ── */}
-          {setupStep === 1 && (
-            <div>
-              <p className="text-sm font-bold text-slate-700 mb-4">What is your experience level?</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {LEVELS.map(l => (
-                  <button key={l.id} onClick={() => setLevel(l.id)}
-                    className={`text-left flex items-center gap-4 p-5 rounded-2xl border-2 transition-all hover:-translate-y-0.5 hover:shadow-md ${
-                      level === l.id
-                        ? `${l.border} ${l.light}`
-                        : "border-slate-200 bg-white hover:border-slate-300"
-                    }`}>
-                    <div className={`w-10 h-10 ${l.color} rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-                      {l.sub.split("–")[0].trim()}yr
-                    </div>
-                    <div className="flex-1">
-                      <p className={`font-bold ${level === l.id ? l.text : "text-slate-800"}`}>{l.label}</p>
-                      <p className="text-xs text-slate-400">{l.sub} experience</p>
-                    </div>
-                    {level === l.id && <FiCheck className={`${l.text} flex-shrink-0`} />}
-                  </button>
-                ))}
-              </div>
-              <div className="flex gap-3 mt-6">
-                <button onClick={() => setSetupStep(0)} className="btn-outline flex items-center gap-2">
-                  <FiArrowLeft /> Back
-                </button>
-                <button onClick={() => setSetupStep(2)} disabled={!level}
-                  className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-40">
-                  Continue <FiArrowRight />
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* ── STEP 2: Category ── */}
-          {setupStep === 2 && (
-            <div>
-              <p className="text-sm font-bold text-slate-700 mb-4">What type of questions do you want to practice?</p>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {CATEGORIES.map(c => (
-                  <button key={c.id} onClick={() => setCategory(c.id)}
-                    className={`text-left flex items-start gap-4 p-4 rounded-2xl border-2 transition-all hover:-translate-y-0.5 hover:shadow-md ${
-                      category === c.id
-                        ? `${c.border} ${c.bg}`
-                        : "border-slate-200 bg-white hover:border-slate-300"
-                    }`}>
-                    <span className={`text-lg mt-0.5 ${category === c.id ? c.color : "text-slate-400"}`}>{c.icon}</span>
-                    <div className="flex-1">
-                      <p className={`font-bold text-sm ${category === c.id ? c.color : "text-slate-800"}`}>{c.label}</p>
-                      <p className="text-xs text-slate-400 mt-0.5 leading-4">{c.desc}</p>
-                    </div>
-                    {category === c.id && <FiCheck className={`${c.color} flex-shrink-0`} />}
-                  </button>
-                ))}
-              </div>
-
-              {/* Summary */}
-              {role && level && category && (
-                <div className="mt-5 p-4 bg-indigo-50 border border-indigo-100 rounded-2xl">
-                  <p className="text-xs font-bold text-indigo-700 mb-2 uppercase tracking-wider">Interview Setup</p>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      { label: ROLES.find(r => r.id === role)?.label, icon: ROLES.find(r => r.id === role)?.icon },
-                      { label: LEVELS.find(l => l.id === level)?.label },
-                      { label: CATEGORIES.find(c => c.id === category)?.label },
-                      { label: `${TOTAL_ROUNDS} Rounds` },
-                    ].map(({ label, icon }) => (
-                      <span key={label} className="text-xs bg-white border border-indigo-200 text-indigo-700 px-2.5 py-1 rounded-full font-medium">
-                        {icon && `${icon} `}{label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <div className="flex gap-3 mt-5">
-                <button onClick={() => setSetupStep(1)} className="btn-outline flex items-center gap-2">
-                  <FiArrowLeft /> Back
-                </button>
-                <button onClick={startInterview} disabled={!category}
-                  className="btn-primary flex-1 flex items-center justify-center gap-2 text-base disabled:opacity-40 py-3">
-                  <FiZap /> Start Interview
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </DashboardLayout>
-    );
-  }
-
-  // ─────────────────────────────────────────
-  // RENDER: DONE
-  // ─────────────────────────────────────────
-  if (phase === "done") {
-    const grade = avgScore >= 8 ? "A" : avgScore >= 6 ? "B" : avgScore >= 4 ? "C" : "D";
-    const gradeColor = avgScore >= 8 ? "text-green-600" : avgScore >= 6 ? "text-yellow-600" : "text-red-500";
-    const gradeBg = avgScore >= 8 ? "bg-green-50 border-green-200" : avgScore >= 6 ? "bg-yellow-50 border-yellow-200" : "bg-red-50 border-red-100";
-    const verdict = avgScore >= 8 ? "Interview Ready! 🏆" : avgScore >= 6 ? "Strong Candidate 🌟" : avgScore >= 4 ? "Keep Practicing 📚" : "More Prep Needed 💪";
-    const roleObj = ROLES.find(r => r.id === role);
-    return (
-      <DashboardLayout>
-        <div className="max-w-2xl mx-auto">
-          {/* Hero result */}
-          <div className={`card text-center py-10 border-2 ${gradeBg} mb-6`}>
-            <div className={`text-7xl font-extrabold ${gradeColor} mb-1`}>{grade}</div>
-            <div className={`text-3xl font-extrabold ${gradeColor} mb-1`}>{avgScore}/10</div>
-            <p className="text-slate-600 font-semibold text-lg mb-1">{verdict}</p>
-            <p className="text-slate-400 text-sm">{TOTAL_ROUNDS} rounds of {roleObj?.label} interview completed</p>
-          </div>
-
-          {/* Round breakdown */}
-          <div className="card mb-5">
-            <p className="font-bold text-slate-800 mb-4">Round-by-Round Performance</p>
-            <div className="space-y-3">
-              {scores.map((s, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <span className="text-xs font-bold text-slate-500 w-16">Round {i + 1}</span>
-                  <div className="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                    <div
-                      className={`h-2.5 rounded-full transition-all duration-700 ${s >= 8 ? "bg-green-500" : s >= 6 ? "bg-yellow-500" : "bg-red-400"}`}
-                      style={{ width: `${s * 10}%` }}
-                    />
-                  </div>
-                  <span className={`text-sm font-extrabold w-8 text-right ${scoreColor(s)}`}>{s}/10</span>
-                  <span className="text-xs text-slate-400 w-28">{scoreLabel(s)}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Next steps */}
-          <div className="card mb-5">
-            <p className="font-bold text-slate-800 mb-3">What to Do Next</p>
-            <div className="space-y-2">
-              {avgScore < 6 && (
-                <div className="flex items-start gap-3 p-3 bg-red-50 border border-red-100 rounded-xl">
-                  <FiBookOpen className="text-red-500 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-red-700">Focus on fundamentals first — revisit core concepts in the Concept Hub</p>
-                </div>
-              )}
-              {avgScore >= 6 && avgScore < 8 && (
-                <div className="flex items-start gap-3 p-3 bg-yellow-50 border border-yellow-100 rounded-xl">
-                  <FiTarget className="text-yellow-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-yellow-700">Good foundation! Practice more problems and work on articulation</p>
-                </div>
-              )}
-              {avgScore >= 8 && (
-                <div className="flex items-start gap-3 p-3 bg-green-50 border border-green-100 rounded-xl">
-                  <FiAward className="text-green-600 mt-0.5 flex-shrink-0" />
-                  <p className="text-sm text-green-700">Excellent performance! You're ready for real interviews. Start applying!</p>
-                </div>
-              )}
-              {[
-                "Try the Skill Gap Analyzer with a real job description",
-                "Practice more in the Coding Tracker — solve 3 problems today",
-                "Polish your resume with the Resume Analyzer",
-              ].map((tip, i) => (
-                <div key={i} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-                  <span className="w-5 h-5 bg-indigo-100 text-indigo-600 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0">{i + 1}</span>
-                  <p className="text-sm text-slate-700">{tip}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex gap-3">
-            <button onClick={restart} className="btn-primary flex-1 flex items-center justify-center gap-2">
-              <FiRefreshCw /> Practice Again
-            </button>
-            <button onClick={() => { setPhase("interview"); setRound(1); setScores([]); generateQuestion(); }}
-              className="btn-outline flex items-center gap-2">
-              Same Setup
-            </button>
+          <div>
+            <label className="font-semibold text-[#12181F] block mb-2">Difficulty</label>
+            <select
+              value={difficulty}
+              onChange={(e) => setDifficulty(e.target.value)}
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+            >
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+              <option>Adaptive AI ⭐</option>
+            </select>
+            <p className="text-xs text-[#5B6472] mt-2">
+              Adaptive AI changes question difficulty based on your answers.
+            </p>
           </div>
         </div>
-      </DashboardLayout>
-    );
-  }
+      </section>
 
-  // ─────────────────────────────────────────
-  // RENDER: INTERVIEW
-  // ─────────────────────────────────────────
-  const roleObj = ROLES.find(r => r.id === role);
-  const levelObj = LEVELS.find(l => l.id === level);
-  const catObj = CATEGORIES.find(c => c.id === category);
-
-  return (
-    <DashboardLayout>
-      <div className="max-w-4xl mx-auto">
-
-        {/* Top bar */}
+      {/* Question Categories */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
         <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-3">
-            <button onClick={restart} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition-all">
-              <FiArrowLeft />
-            </button>
-            <div>
-              <h1 className="font-bold text-slate-900 text-lg">Mock Interview</h1>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="text-xs text-slate-500">{roleObj?.icon} {roleObj?.label}</span>
-                <span className="text-slate-300">·</span>
-                <span className={`text-xs font-semibold ${levelObj?.text}`}>{levelObj?.label}</span>
-                <span className="text-slate-300">·</span>
-                <span className={`text-xs font-semibold ${catObj?.color}`}>{catObj?.label}</span>
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <FiClock className="text-slate-400 text-sm" />
-            <span className="text-sm text-slate-500">Round {round} of {TOTAL_ROUNDS}</span>
-          </div>
+          <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
+            Question Categories
+          </h2>
+          <span className="text-sm text-[#5B6472]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+            {activeCategoryCount}/{CATEGORIES.length} selected
+          </span>
         </div>
 
-        {/* Round progress */}
-        <RoundProgress round={round} scores={scores} />
-
-        {/* Loading state */}
-        {loading && interviewPhase === "question" && (
-          <div className="card text-center py-16">
-            <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
-            <p className="font-semibold text-slate-700">Generating your question...</p>
-            <p className="text-slate-400 text-sm mt-1">AI is crafting a personalized {catObj?.label} question</p>
-          </div>
-        )}
-
-        {/* Question Phase */}
-        {interviewPhase === "answer" && question && (
-          <div className="space-y-4">
-            {/* Question card */}
-            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full -translate-y-8 translate-x-8" />
-              <div className="relative">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${diffColor[questionMeta.difficulty]}`}>
-                    {questionMeta.difficulty}
-                  </span>
-                  <span className="text-xs text-white/40 font-medium">{catObj?.label}</span>
-                  <span className="ml-auto text-xs text-white/30">Round {round}</span>
-                </div>
-                <div className="prose prose-invert prose-sm max-w-none">
-                  <ReactMarkdown>{question}</ReactMarkdown>
-                </div>
-              </div>
-            </div>
-
-            {/* Answer area */}
-            <div className="card">
-              <div className="flex items-center justify-between mb-3">
-                <label className="text-sm font-bold text-slate-700">Your Answer</label>
-                <span className="text-xs text-slate-400">{answer.length} characters</span>
-              </div>
-              <textarea
-                ref={answerRef}
-                value={answer}
-                onChange={e => setAnswer(e.target.value)}
-                rows={9}
-                className="input resize-none font-mono text-sm leading-6 w-full"
-                placeholder={
-                  catObj?.id === "dsa"
-                    ? "Explain your approach, time & space complexity, then write the code..."
-                    : catObj?.id === "system"
-                    ? "Describe the high-level design, components, data flow, and tradeoffs..."
-                    : catObj?.id === "behavioral"
-                    ? "Use the STAR method: Situation, Task, Action, Result..."
-                    : "Write your detailed answer here..."
-                }
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {CATEGORIES.map((category) => (
+            <label
+              key={category}
+              className={`flex items-center gap-2 rounded-xl border p-3 cursor-pointer transition ${
+                selectedCategories[category]
+                  ? "border-[#E8963C] bg-[#E8963C]/5"
+                  : "border-[#E4E1DA] hover:bg-[#E8963C]/5"
+              }`}
+            >
+              <input
+                type="checkbox"
+                className="accent-[#E8963C]"
+                checked={!!selectedCategories[category]}
+                onChange={() => toggleCategory(category)}
               />
-              <div className="flex items-center justify-between mt-4">
-                <div className="flex items-center gap-2 text-xs text-slate-400">
-                  <FiTarget className="text-xs" />
-                  <span>Tip: {catObj?.id === "dsa" ? "State brute force first, then optimize" : catObj?.id === "system" ? "Start with requirements, then architecture" : "Be specific and use examples"}</span>
-                </div>
-                <div className="flex gap-3">
-                  <button onClick={() => nextRound()} className="btn-outline text-sm">
-                    Skip
-                  </button>
-                  <button onClick={submitAnswer} disabled={!answer.trim() || loading}
-                    className="btn-primary flex items-center gap-2 disabled:opacity-40">
-                    <FiSend className="text-sm" /> Submit Answer
-                  </button>
-                </div>
-              </div>
-            </div>
+              <span className="text-sm text-[#12181F]">{category}</span>
+            </label>
+          ))}
+        </div>
+      </section>
+
+      {/* Interview Duration */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
+            Interview Duration
+          </h2>
+          <span
+            className="text-lg font-semibold text-[#E8963C]"
+            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+          >
+            {duration} min
+          </span>
+        </div>
+
+        <input
+          type="range"
+          min="10"
+          max="60"
+          step="5"
+          value={duration}
+          onChange={(e) => setDuration(Number(e.target.value))}
+          className="w-full accent-[#E8963C]"
+        />
+
+        <div className="flex justify-between text-sm text-[#5B6472] mt-2">
+          <span>10 min</span>
+          <span>60 min</span>
+        </div>
+      </section>
+
+      {/* Generated questions preview */}
+      {questions && (
+        <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
+              Sample Questions For You
+            </h2>
+            <p className="text-sm text-[#5B6472]">Generated from your resume, role, and company.</p>
           </div>
-        )}
 
-        {/* Feedback Phase */}
-        {interviewPhase === "feedback" && (
           <div className="space-y-4">
-            {loading ? (
-              <div className="card text-center py-12">
-                <div className="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-3" />
-                <p className="font-semibold text-slate-700">Evaluating your answer...</p>
-                <p className="text-slate-400 text-sm mt-1">AI interviewer is reviewing your response</p>
+            {selectedCategories["Projects"] && (
+              <div className="rounded-xl border border-[#E4E1DA] p-4">
+                <h3 className="font-semibold text-[#12181F] mb-2">📂 Project Questions</h3>
+                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+                  {questions.projectQuestions.map((q) => (
+                    <li key={q}>{q}</li>
+                  ))}
+                </ul>
               </div>
-            ) : (
-              <>
-                {/* Score banner */}
-                <div className={`card border-2 ${scoreBg(score ?? 0)} text-center py-6`}>
-                  <div className={`text-5xl font-extrabold mb-1 ${scoreColor(score ?? 0)}`}>{score}/10</div>
-                  <p className={`font-bold text-lg ${scoreColor(score ?? 0)}`}>{scoreLabel(score ?? 0)}</p>
-                  <p className="text-slate-400 text-sm mt-1">Round {round} Score</p>
-                </div>
+            )}
 
-                {/* AI Feedback */}
-                <div className="card">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-indigo-100 rounded-xl flex items-center justify-center">
-                      <FiStar className="text-indigo-600 text-sm" />
-                    </div>
-                    <p className="font-bold text-slate-800">Interviewer Feedback</p>
-                  </div>
-                  <div className="prose prose-slate prose-sm max-w-none
-                    prose-headings:text-slate-800 prose-headings:font-bold
-                    prose-strong:text-slate-800
-                    prose-li:text-slate-600">
-                    <ReactMarkdown>{feedback}</ReactMarkdown>
-                  </div>
-                </div>
+            {selectedCategories["Technical"] && (
+              <div className="rounded-xl border border-[#E4E1DA] p-4">
+                <h3 className="font-semibold text-[#12181F] mb-2">💻 Technical Questions</h3>
+                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+                  {questions.technicalQuestions.map((q) => (
+                    <li key={q}>{q}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-                {/* Your answer recap */}
-                <div className="card bg-slate-50 border border-slate-100">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Your Answer</p>
-                  <p className="text-sm text-slate-600 whitespace-pre-wrap leading-6">{answer}</p>
-                </div>
-
-                {/* Next action */}
-                <div className="flex gap-3">
-                  {round < TOTAL_ROUNDS ? (
-                    <button onClick={nextRound} className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-base">
-                      Next Question <FiChevronRight />
-                    </button>
-                  ) : (
-                    <button onClick={() => setPhase("done")} className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-base">
-                      <FiAward /> See Final Results
-                    </button>
-                  )}
-                  <button onClick={restart} className="btn-outline flex items-center gap-2">
-                    <FiRefreshCw /> Restart
-                  </button>
-                </div>
-              </>
+            {selectedCategories["HR"] && (
+              <div className="rounded-xl border border-[#E4E1DA] p-4">
+                <h3 className="font-semibold text-[#12181F] mb-2">🧠 HR Questions</h3>
+                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+                  {questions.hrQuestions.map((q) => (
+                    <li key={q}>{q}</li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
+        </section>
+      )}
+
+      {/* Dashboard */}
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
+        <div className="flex items-center justify-between mb-6 gap-4">
+          <div>
+            <h2 className="text-2xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
+              AI Interview Dashboard
+            </h2>
+            <p className="text-[#5B6472] text-sm">Your interview settings and readiness.</p>
+          </div>
+          <ReadinessDial percent={percent} />
+        </div>
+
+        <div className="grid md:grid-cols-4 gap-5">
+          <div className="rounded-xl bg-[#E8963C]/10 p-5">
+            <div className="text-3xl">🎯</div>
+            <p className="text-sm text-[#5B6472] mt-2">Target Role</p>
+            <h3 className="font-bold text-lg text-[#12181F]">{candidate.role}</h3>
+          </div>
+
+          <div className="rounded-xl bg-[#1F6F63]/10 p-5">
+            <div className="text-3xl">🏢</div>
+            <p className="text-sm text-[#5B6472] mt-2">Company</p>
+            <h3 className="font-bold text-lg text-[#12181F]">{candidate.company}</h3>
+          </div>
+
+          <div className="rounded-xl bg-orange-50 p-5">
+            <div className="text-3xl">📄</div>
+            <p className="text-sm text-[#5B6472] mt-2">Resume</p>
+            <h3 className="font-bold text-lg text-[#12181F]">
+              {resumeAnalysis ? "Analyzed" : resume ? "Uploaded" : "Not Uploaded"}
+            </h3>
+          </div>
+
+          <div className="rounded-xl bg-slate-50 p-5">
+            <div className="text-3xl">⏱️</div>
+            <p className="text-sm text-[#5B6472] mt-2">Duration</p>
+            <h3 className="font-bold text-lg text-[#12181F]">{duration} min</h3>
+          </div>
+        </div>
+      </section>
+
+      {/* AI Features */}
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
+        <h2 className="text-xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+          AI Features
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-4">
+          {AI_FEATURES.map((feature) => (
+            <div
+              key={feature}
+              className="rounded-xl border border-[#E4E1DA] p-4 hover:border-[#E8963C] hover:bg-[#E8963C]/5 transition"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#E8963C]/15 text-[#E8963C] flex items-center justify-center">
+                  ✓
+                </div>
+                <h3 className="font-semibold text-[#12181F]">{feature}</h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Before You Start */}
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
+        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+          Before You Start
+        </h2>
+
+        <div className="space-y-4">
+          {CHECKLIST_ITEMS.map((item) => (
+            <label key={item.key} className="flex items-center gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                className="accent-[#E8963C]"
+                checked={checklist[item.key]}
+                onChange={() => toggleChecklist(item.key)}
+              />
+              <span className="text-[#12181F]">{item.label}</span>
+            </label>
+          ))}
+
+          <div className="flex items-center gap-3">
+            <span
+              className={`w-5 h-5 rounded flex items-center justify-center text-xs ${
+                resume ? "bg-[#1F6F63] text-white" : "bg-[#E4E1DA] text-[#5B6472]"
+              }`}
+            >
+              {resume ? "✓" : ""}
+            </span>
+            <span className="text-[#12181F]">
+              Resume uploaded {resume ? <span className="text-[#1F6F63] text-sm">(done automatically)</span> : null}
+            </span>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="bg-[#12181F] rounded-2xl text-white p-8">
+        <div className="flex items-start gap-3">
+          <span
+            className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${
+              isReady ? "bg-[#1F6F63]" : "bg-[#E8963C] animate-pulse"
+            }`}
+          />
+          <div>
+            <h2 className="text-3xl font-bold" style={{ fontFamily: "'Fraunces', serif" }}>
+              Ready for Your AI Interview?
+            </h2>
+            <p className="mt-3 text-slate-300">
+              The AI interviewer will ask resume-based, company-specific, technical, behavioral, and follow-up
+              questions. At the end you'll receive a detailed performance report with strengths and improvement
+              areas.
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={handleStart}
+          className={`mt-8 font-bold px-8 py-4 rounded-xl transition ${
+            isReady
+              ? "bg-white text-[#12181F] hover:scale-105"
+              : "bg-white/20 text-white cursor-pointer hover:bg-white/25"
+          }`}
+        >
+          {isReady ? "Start AI Interview" : "Check What's Missing"}
+        </button>
+
+        {showMissing && !isReady && (
+          <div className="mt-5 rounded-xl bg-white/10 border border-white/20 p-4">
+            <p className="text-sm font-semibold mb-2">Finish these steps first:</p>
+            <ul className="list-disc ml-5 text-sm text-slate-200 space-y-1">
+              {missingSteps.map((s) => (
+                <li key={s.key}>{s.label}</li>
+              ))}
+            </ul>
+          </div>
         )}
-      </div>
-    </DashboardLayout>
+      </section>
+    </div>
   );
 }
