@@ -1,5 +1,10 @@
 import { useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  FileText, FolderKanban, Building2, MessageSquare, Code2, HelpCircle,
+  Activity, Gauge, Mic2, SpellCheck, Star, ClipboardCheck,
+} from "lucide-react";
+import { BioluminescentGrid, BioluminescentGridItem } from "../components/ui/bioluminescent-grid";
 
 /*
   Resume text extraction uses pdfjs-dist (PDF) and mammoth (DOCX).
@@ -60,19 +65,22 @@ const COMPANY_OPTIONS = [
 
 const EXPERIENCE_OPTIONS = ["Student", "Fresher", "0-2 Years", "2-5 Years", "5+ Years"];
 
-const AI_FEATURES = [
-  "Resume Based Questions",
-  "Project Deep Dive",
-  "Company Specific Questions",
-  "Behavioral Interview",
-  "Technical Interview",
-  "Follow-up Questions",
-  "Real-time Feedback",
-  "Confidence Analysis",
-  "Communication Analysis",
-  "Grammar Checking",
-  "Answer Quality Score",
-  "Final Interview Report",
+const AMBER = "#E8963C";
+const TEAL = "#1F6F63";
+
+const AI_FEATURE_ITEMS = [
+  { icon: FileText, title: "Resume Based Questions", description: "Questions generated directly from what's on your resume.", accent: AMBER, className: "col-span-2 row-span-2" },
+  { icon: FolderKanban, title: "Project Deep Dive", description: "Drills into the projects you actually built.", accent: TEAL, className: "" },
+  { icon: Building2, title: "Company Specific Questions", description: "Tailored to your target company's interview style.", accent: AMBER, className: "" },
+  { icon: MessageSquare, title: "Behavioral Interview", description: "STAR-style questions on teamwork and conflict.", accent: TEAL, className: "row-span-2" },
+  { icon: Code2, title: "Technical Interview", description: "Core concepts across your strongest languages.", accent: AMBER, className: "col-span-2" },
+  { icon: HelpCircle, title: "Follow-up Questions", description: "Digs deeper based on how you answer.", accent: TEAL, className: "" },
+  { icon: Activity, title: "Real-time Feedback", description: "Live cues while you're still talking.", accent: AMBER, className: "" },
+  { icon: Gauge, title: "Confidence Analysis", description: "Reads tone and pacing to gauge confidence.", accent: TEAL, className: "col-span-2 row-span-2" },
+  { icon: Mic2, title: "Communication Analysis", description: "Clarity, filler words, and structure.", accent: AMBER, className: "" },
+  { icon: SpellCheck, title: "Grammar Checking", description: "Flags grammar slips in spoken answers.", accent: TEAL, className: "" },
+  { icon: Star, title: "Answer Quality Score", description: "Scores each answer against what great looks like.", accent: AMBER, className: "row-span-2" },
+  { icon: ClipboardCheck, title: "Final Interview Report", description: "A full writeup of strengths and gaps to work on.", accent: TEAL, className: "col-span-2" },
 ];
 
 // keyword -> canonical skill name, used to scan extracted resume text
@@ -132,6 +140,7 @@ const CHECKLIST_ITEMS = [
 ];
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const MAX_RESUME_MB = 8;
 
 // ---------------------------------------------------------------------------
 // Resume parsing
@@ -276,6 +285,20 @@ function Field({ label, error, children }) {
   );
 }
 
+function AIFeatureGrid() {
+  return (
+    <BioluminescentGrid>
+      {AI_FEATURE_ITEMS.map(({ icon: Icon, title, description, accent, className }) => (
+        <BioluminescentGridItem key={title} accent={accent} className={className}>
+          <Icon className="icon" />
+          <h3 className="item-title">{title}</h3>
+          <p className="item-description">{description}</p>
+        </BioluminescentGridItem>
+      ))}
+    </BioluminescentGrid>
+  );
+}
+
 // ---------------------------------------------------------------------------
 // Main component
 // ---------------------------------------------------------------------------
@@ -297,6 +320,7 @@ export default function MockInterview() {
   const [resumeAnalysis, setResumeAnalysis] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
   const [analysisError, setAnalysisError] = useState(null);
+  const [dragActive, setDragActive] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState(
     () => Object.fromEntries(CATEGORIES.map((c) => [c, true]))
@@ -320,11 +344,30 @@ export default function MockInterview() {
   const nameError = touched.fullName && !candidate.fullName.trim() ? "Enter your full name." : null;
   const emailError = touched.email && !EMAIL_RE.test(candidate.email) ? "Enter a valid email address." : null;
 
-  function handleFileChosen(file) {
+  function validateAndSetFile(file) {
     if (!file) return;
+    const ext = file.name.split(".").pop().toLowerCase();
+    if (!["pdf", "doc", "docx"].includes(ext)) {
+      setAnalysisError("Unsupported file type — upload a PDF or DOCX.");
+      return;
+    }
+    if (file.size > MAX_RESUME_MB * 1024 * 1024) {
+      setAnalysisError(`That file is too large — please upload something under ${MAX_RESUME_MB}MB.`);
+      return;
+    }
     setResume(file);
     setResumeAnalysis(null);
     setAnalysisError(null);
+  }
+
+  function handleFileChosen(file) {
+    validateAndSetFile(file);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setDragActive(false);
+    validateAndSetFile(e.dataTransfer.files?.[0] || null);
   }
 
   async function handleAnalyze() {
@@ -396,17 +439,17 @@ export default function MockInterview() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6" style={{ fontFamily: "'Inter', sans-serif" }}>
+    <div className="max-w-4xl mx-auto space-y-5" style={{ fontFamily: "'Inter', sans-serif" }}>
       {/* Candidate Profile */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
         <h2
-          className="text-2xl font-bold text-[#12181F] mb-6"
+          className="text-xl font-bold text-[#12181F] mb-5"
           style={{ fontFamily: "'Fraunces', serif" }}
         >
           Candidate Profile
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 gap-4">
           <Field label="Full Name" error={nameError}>
             <input
               type="text"
@@ -414,7 +457,7 @@ export default function MockInterview() {
               value={candidate.fullName}
               onChange={updateCandidate("fullName")}
               onBlur={() => setTouched((t) => ({ ...t, fullName: true }))}
-              className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
+              className={`w-full rounded-xl border px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
                 nameError ? "border-rose-400" : "border-[#E4E1DA]"
               }`}
             />
@@ -427,7 +470,7 @@ export default function MockInterview() {
               value={candidate.email}
               onChange={updateCandidate("email")}
               onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-              className={`w-full rounded-xl border px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
+              className={`w-full rounded-xl border px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
                 emailError ? "border-rose-400" : "border-[#E4E1DA]"
               }`}
             />
@@ -437,7 +480,7 @@ export default function MockInterview() {
             <select
               value={candidate.role}
               onChange={updateCandidate("role")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
             >
               {ROLE_OPTIONS.map((role) => (
                 <option key={role}>{role}</option>
@@ -449,7 +492,7 @@ export default function MockInterview() {
             <select
               value={candidate.company}
               onChange={updateCandidate("company")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
             >
               {COMPANY_OPTIONS.map((company) => (
                 <option key={company}>{company}</option>
@@ -461,7 +504,7 @@ export default function MockInterview() {
             <select
               value={candidate.experience}
               onChange={updateCandidate("experience")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
             >
               {EXPERIENCE_OPTIONS.map((exp) => (
                 <option key={exp}>{exp}</option>
@@ -471,123 +514,137 @@ export default function MockInterview() {
         </div>
       </section>
 
-      {/* Resume upload */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
-        <h2 className="text-2xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+      {/* Resume upload + analysis, combined into one compact section */}
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
+        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
           Resume
         </h2>
 
-        <label className="border-2 border-dashed border-[#E8963C]/50 rounded-2xl p-10 flex flex-col items-center justify-center cursor-pointer hover:bg-[#E8963C]/5 transition">
-          <div className="text-5xl">📄</div>
-          <h3 className="font-bold text-lg mt-3 text-[#12181F]">Upload Resume</h3>
-          <p className="text-[#5B6472] mt-2">Drag & Drop PDF / DOCX</p>
-          <button
-            type="button"
-            onClick={() => fileInputRef.current.click()}
-            className="mt-5 bg-[#12181F] hover:bg-[#1F2731] text-white px-5 py-2 rounded-xl transition"
+        {!resume ? (
+          <label
+            onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
+            onDragLeave={() => setDragActive(false)}
+            onDrop={handleDrop}
+            className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition ${
+              dragActive ? "border-[#E8963C] bg-[#E8963C]/10" : "border-[#E8963C]/50 hover:bg-[#E8963C]/5"
+            }`}
           >
-            Choose File
-          </button>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,.doc,.docx"
-            hidden
-            onChange={(e) => handleFileChosen(e.target.files?.[0] || null)}
-          />
-        </label>
-
-        {resume && (
-          <div className="mt-5 rounded-xl bg-[#1F6F63]/10 border border-[#1F6F63]/30 p-4 flex items-center justify-between">
-            <div>
-              <div className="font-semibold text-[#1F6F63]">Resume uploaded</div>
-              <div className="text-sm mt-1 text-[#12181F]">{resume.name}</div>
-            </div>
+            <div className="text-3xl">📄</div>
+            <h3 className="font-bold text-sm mt-2 text-[#12181F]">Upload Resume</h3>
+            <p className="text-[#5B6472] text-sm mt-1">Drag & drop, or</p>
             <button
-              onClick={handleAnalyze}
-              disabled={analyzing}
-              className="px-4 py-2 rounded-lg bg-[#12181F] text-white hover:bg-[#1F2731] disabled:opacity-50 disabled:cursor-not-allowed"
+              type="button"
+              onClick={() => fileInputRef.current.click()}
+              className="mt-3 bg-[#12181F] hover:bg-[#1F2731] text-white text-sm px-4 py-2 rounded-lg transition"
             >
-              {analyzing ? "Analyzing…" : resumeAnalysis ? "Re-analyze" : "Analyze Resume"}
+              Choose File
             </button>
+            <p className="text-[11px] text-[#5B6472]/70 mt-2">PDF or DOCX, up to {MAX_RESUME_MB}MB</p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf,.doc,.docx"
+              hidden
+              onChange={(e) => handleFileChosen(e.target.files?.[0] || null)}
+            />
+          </label>
+        ) : (
+          <div className="rounded-xl bg-[#1F6F63]/10 border border-[#1F6F63]/30 p-3.5 flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <div className="font-semibold text-[#1F6F63] text-sm">Resume uploaded</div>
+              <div className="text-xs mt-0.5 text-[#12181F] truncate">{resume.name}</div>
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                onClick={handleAnalyze}
+                disabled={analyzing}
+                className="px-3.5 py-1.5 rounded-lg bg-[#12181F] text-white text-sm hover:bg-[#1F2731] disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {analyzing ? "Analyzing…" : resumeAnalysis ? "Re-analyze" : "Analyze Resume"}
+              </button>
+              <button
+                onClick={() => { setResume(null); setResumeAnalysis(null); setAnalysisError(null); }}
+                className="text-xs text-[#5B6472] hover:text-[#12181F] px-2 py-1.5"
+              >
+                Remove
+              </button>
+            </div>
           </div>
         )}
 
         {analysisError && (
-          <div className="mt-4 rounded-xl bg-rose-50 border border-rose-200 p-4 text-sm text-rose-700">
+          <div className="mt-3 rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">
             {analysisError}
           </div>
         )}
-      </section>
 
-      {/* AI Resume Analysis */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
-        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
-          AI Resume Analysis
-        </h2>
+        {/* Analysis results, inline within the same card */}
+        {resume && (
+          <div className="mt-4 pt-4 border-t border-[#E4E1DA]">
+            {!resumeAnalysis ? (
+              <p className="text-sm text-[#5B6472]">
+                Click "Analyze Resume" above to scan your file and see your score and detected skills.
+              </p>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="rounded-xl bg-[#E8963C]/10 p-4">
+                  <p className="text-xs text-[#5B6472]">Resume Score</p>
+                  <h2
+                    className="text-3xl font-bold text-[#E8963C]"
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                  >
+                    {resumeAnalysis.score}%
+                  </h2>
+                </div>
 
-        {!resumeAnalysis ? (
-          <p className="text-sm text-[#5B6472]">
-            {resume ? "Click \"Analyze Resume\" above to scan your file." : "Upload a resume to see your score and detected skills."}
-          </p>
-        ) : (
-          <div className="grid md:grid-cols-3 gap-5">
-            <div className="rounded-xl bg-[#E8963C]/10 p-5">
-              <p className="text-sm text-[#5B6472]">Resume Score</p>
-              <h2
-                className="text-4xl font-bold text-[#E8963C]"
-                style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-              >
-                {resumeAnalysis.score}%
-              </h2>
-            </div>
+                <div>
+                  <h3 className="font-semibold text-sm mb-2 text-[#12181F]">Skills Detected</h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {resumeAnalysis.detected.length ? (
+                      resumeAnalysis.detected.map((skill) => (
+                        <span key={skill} className="px-2.5 py-1 rounded-full bg-[#1F6F63]/10 text-[#1F6F63] text-xs">
+                          {skill}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-[#5B6472]">No known skills detected yet.</span>
+                    )}
+                  </div>
+                </div>
 
-            <div>
-              <h3 className="font-semibold mb-3 text-[#12181F]">Skills Detected</h3>
-              <div className="flex flex-wrap gap-2">
-                {resumeAnalysis.detected.length ? (
-                  resumeAnalysis.detected.map((skill) => (
-                    <span key={skill} className="px-3 py-1 rounded-full bg-[#1F6F63]/10 text-[#1F6F63] text-sm">
-                      {skill}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-[#5B6472]">No known skills detected yet.</span>
-                )}
+                <div>
+                  <h3 className="font-semibold text-sm mb-2 text-[#12181F]">Recommended for {candidate.role}</h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {resumeAnalysis.recommended.length ? (
+                      resumeAnalysis.recommended.map((skill) => (
+                        <span key={skill} className="px-2.5 py-1 rounded-full bg-orange-100 text-orange-700 text-xs">
+                          {skill}
+                        </span>
+                      ))
+                    ) : (
+                      <span className="text-xs text-[#5B6472]">Great coverage for this role.</span>
+                    )}
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-3 text-[#12181F]">Recommended for {candidate.role}</h3>
-              <div className="flex flex-wrap gap-2">
-                {resumeAnalysis.recommended.length ? (
-                  resumeAnalysis.recommended.map((skill) => (
-                    <span key={skill} className="px-3 py-1 rounded-full bg-orange-100 text-orange-700 text-sm">
-                      {skill}
-                    </span>
-                  ))
-                ) : (
-                  <span className="text-sm text-[#5B6472]">Great coverage for this role.</span>
-                )}
-              </div>
-            </div>
+            )}
           </div>
         )}
       </section>
 
       {/* Interview Preferences */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
-        <h2 className="text-xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
+        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
           Interview Preferences
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-5">
           <div>
-            <label className="font-semibold text-[#12181F] block mb-2">Interview Mode</label>
+            <label className="font-semibold text-sm text-[#12181F] block mb-2">Interview Mode</label>
             <select
               value={mode}
               onChange={(e) => setMode(e.target.value)}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
             >
               <option>Resume Based</option>
               <option>Company Based</option>
@@ -599,11 +656,11 @@ export default function MockInterview() {
           </div>
 
           <div>
-            <label className="font-semibold text-[#12181F] block mb-2">Difficulty</label>
+            <label className="font-semibold text-sm text-[#12181F] block mb-2">Difficulty</label>
             <select
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-3 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
+              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
             >
               <option>Easy</option>
               <option>Medium</option>
@@ -618,8 +675,8 @@ export default function MockInterview() {
       </section>
 
       {/* Question Categories */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
-        <div className="flex items-center justify-between mb-5">
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
             Question Categories
           </h2>
@@ -628,11 +685,11 @@ export default function MockInterview() {
           </span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
           {CATEGORIES.map((category) => (
             <label
               key={category}
-              className={`flex items-center gap-2 rounded-xl border p-3 cursor-pointer transition ${
+              className={`flex items-center gap-2 rounded-xl border p-2.5 cursor-pointer transition ${
                 selectedCategories[category]
                   ? "border-[#E8963C] bg-[#E8963C]/5"
                   : "border-[#E4E1DA] hover:bg-[#E8963C]/5"
@@ -651,8 +708,8 @@ export default function MockInterview() {
       </section>
 
       {/* Interview Duration */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-6">
-        <div className="flex items-center justify-between mb-5">
+      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
             Interview Duration
           </h2>
@@ -682,19 +739,19 @@ export default function MockInterview() {
 
       {/* Generated questions preview */}
       {questions && (
-        <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
-          <div className="mb-6">
+        <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
+          <div className="mb-5">
             <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
               Sample Questions For You
             </h2>
             <p className="text-sm text-[#5B6472]">Generated from your resume, role, and company.</p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3">
             {selectedCategories["Projects"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-4">
-                <h3 className="font-semibold text-[#12181F] mb-2">📂 Project Questions</h3>
-                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
+                <h3 className="font-semibold text-sm text-[#12181F] mb-2">📂 Project Questions</h3>
+                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
                   {questions.projectQuestions.map((q) => (
                     <li key={q}>{q}</li>
                   ))}
@@ -703,9 +760,9 @@ export default function MockInterview() {
             )}
 
             {selectedCategories["Technical"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-4">
-                <h3 className="font-semibold text-[#12181F] mb-2">💻 Technical Questions</h3>
-                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
+                <h3 className="font-semibold text-sm text-[#12181F] mb-2">💻 Technical Questions</h3>
+                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
                   {questions.technicalQuestions.map((q) => (
                     <li key={q}>{q}</li>
                   ))}
@@ -714,9 +771,9 @@ export default function MockInterview() {
             )}
 
             {selectedCategories["HR"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-4">
-                <h3 className="font-semibold text-[#12181F] mb-2">🧠 HR Questions</h3>
-                <ul className="list-disc ml-6 text-sm text-[#5B6472] space-y-2">
+              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
+                <h3 className="font-semibold text-sm text-[#12181F] mb-2">🧠 HR Questions</h3>
+                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
                   {questions.hrQuestions.map((q) => (
                     <li key={q}>{q}</li>
                   ))}
@@ -728,10 +785,10 @@ export default function MockInterview() {
       )}
 
       {/* Dashboard */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
-        <div className="flex items-center justify-between mb-6 gap-4">
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
+        <div className="flex items-center justify-between mb-5 gap-4">
           <div>
-            <h2 className="text-2xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
               AI Interview Dashboard
             </h2>
             <p className="text-[#5B6472] text-sm">Your interview settings and readiness.</p>
@@ -739,65 +796,51 @@ export default function MockInterview() {
           <ReadinessDial percent={percent} />
         </div>
 
-        <div className="grid md:grid-cols-4 gap-5">
-          <div className="rounded-xl bg-[#E8963C]/10 p-5">
-            <div className="text-3xl">🎯</div>
-            <p className="text-sm text-[#5B6472] mt-2">Target Role</p>
-            <h3 className="font-bold text-lg text-[#12181F]">{candidate.role}</h3>
+        <div className="grid md:grid-cols-4 gap-4">
+          <div className="rounded-xl bg-[#E8963C]/10 p-4">
+            <div className="text-2xl">🎯</div>
+            <p className="text-xs text-[#5B6472] mt-1.5">Target Role</p>
+            <h3 className="font-bold text-[#12181F]">{candidate.role}</h3>
           </div>
 
-          <div className="rounded-xl bg-[#1F6F63]/10 p-5">
-            <div className="text-3xl">🏢</div>
-            <p className="text-sm text-[#5B6472] mt-2">Company</p>
-            <h3 className="font-bold text-lg text-[#12181F]">{candidate.company}</h3>
+          <div className="rounded-xl bg-[#1F6F63]/10 p-4">
+            <div className="text-2xl">🏢</div>
+            <p className="text-xs text-[#5B6472] mt-1.5">Company</p>
+            <h3 className="font-bold text-[#12181F]">{candidate.company}</h3>
           </div>
 
-          <div className="rounded-xl bg-orange-50 p-5">
-            <div className="text-3xl">📄</div>
-            <p className="text-sm text-[#5B6472] mt-2">Resume</p>
-            <h3 className="font-bold text-lg text-[#12181F]">
+          <div className="rounded-xl bg-orange-50 p-4">
+            <div className="text-2xl">📄</div>
+            <p className="text-xs text-[#5B6472] mt-1.5">Resume</p>
+            <h3 className="font-bold text-[#12181F]">
               {resumeAnalysis ? "Analyzed" : resume ? "Uploaded" : "Not Uploaded"}
             </h3>
           </div>
 
-          <div className="rounded-xl bg-slate-50 p-5">
-            <div className="text-3xl">⏱️</div>
-            <p className="text-sm text-[#5B6472] mt-2">Duration</p>
-            <h3 className="font-bold text-lg text-[#12181F]">{duration} min</h3>
+          <div className="rounded-xl bg-slate-50 p-4">
+            <div className="text-2xl">⏱️</div>
+            <p className="text-xs text-[#5B6472] mt-1.5">Duration</p>
+            <h3 className="font-bold text-[#12181F]">{duration} min</h3>
           </div>
         </div>
       </section>
 
-      {/* AI Features */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
-        <h2 className="text-xl font-bold text-[#12181F] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+      {/* AI Features — Bioluminescent glow grid */}
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
+        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
           AI Features
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-4">
-          {AI_FEATURES.map((feature) => (
-            <div
-              key={feature}
-              className="rounded-xl border border-[#E4E1DA] p-4 hover:border-[#E8963C] hover:bg-[#E8963C]/5 transition"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#E8963C]/15 text-[#E8963C] flex items-center justify-center">
-                  ✓
-                </div>
-                <h3 className="font-semibold text-[#12181F]">{feature}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
+        <AIFeatureGrid />
       </section>
 
       {/* Before You Start */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-6">
-        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
+        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
           Before You Start
         </h2>
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           {CHECKLIST_ITEMS.map((item) => (
             <label key={item.key} className="flex items-center gap-3 cursor-pointer">
               <input
@@ -806,7 +849,7 @@ export default function MockInterview() {
                 checked={checklist[item.key]}
                 onChange={() => toggleChecklist(item.key)}
               />
-              <span className="text-[#12181F]">{item.label}</span>
+              <span className="text-sm text-[#12181F]">{item.label}</span>
             </label>
           ))}
 
@@ -818,15 +861,15 @@ export default function MockInterview() {
             >
               {resume ? "✓" : ""}
             </span>
-            <span className="text-[#12181F]">
-              Resume uploaded {resume ? <span className="text-[#1F6F63] text-sm">(done automatically)</span> : null}
+            <span className="text-sm text-[#12181F]">
+              Resume uploaded {resume ? <span className="text-[#1F6F63] text-xs">(done automatically)</span> : null}
             </span>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-[#12181F] rounded-2xl text-white p-8">
+      <section className="bg-[#12181F] rounded-2xl text-white p-6">
         <div className="flex items-start gap-3">
           <span
             className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${
@@ -834,10 +877,10 @@ export default function MockInterview() {
             }`}
           />
           <div>
-            <h2 className="text-3xl font-bold" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="text-2xl font-bold" style={{ fontFamily: "'Fraunces', serif" }}>
               Ready for Your AI Interview?
             </h2>
-            <p className="mt-3 text-slate-300">
+            <p className="mt-2.5 text-slate-300 text-sm">
               The AI interviewer will ask resume-based, company-specific, technical, behavioral, and follow-up
               questions. At the end you'll receive a detailed performance report with strengths and improvement
               areas.
@@ -847,7 +890,7 @@ export default function MockInterview() {
 
         <button
           onClick={handleStart}
-          className={`mt-8 font-bold px-8 py-4 rounded-xl transition ${
+          className={`mt-6 font-bold px-7 py-3.5 rounded-xl transition ${
             isReady
               ? "bg-white text-[#12181F] hover:scale-105"
               : "bg-white/20 text-white cursor-pointer hover:bg-white/25"

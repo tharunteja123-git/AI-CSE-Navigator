@@ -10,6 +10,7 @@ import binarySearch from "./binarySearch";
 import timeComplexity from "./timeComplexity";
 import dp from "./dynamicProgramming";
 
+
 // ── Coming soon (stub files ready, data being added) ──
 //import stackData from "./stack";
 /*import queueData from "./queue";
@@ -52,5 +53,6 @@ export const ACTIVE_TOPICS = [arrays, strings, linkedList, sorting, twopointers,
 
 // ── All topics combined ──
 const TOPICS = [...ACTIVE_TOPICS, /*...COMING_SOON_TOPICS*/];
+
 
 export default TOPICS;
