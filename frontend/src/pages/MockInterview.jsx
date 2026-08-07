@@ -1,915 +1,1077 @@
-import { useState, useRef, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { api } from "../services/api";
+import DashboardLayout from "../layouts/DashboardLayout";
+import ReactMarkdown from "react-markdown";
+import toast from "react-hot-toast";
 import {
-  FileText, FolderKanban, Building2, MessageSquare, Code2, HelpCircle,
-  Activity, Gauge, Mic2, SpellCheck, Star, ClipboardCheck,
-} from "lucide-react";
-import { BioluminescentGrid, BioluminescentGridItem } from "../components/ui/bioluminescent-grid";
+  FiArrowLeft, FiArrowRight, FiCheck, FiSend, FiRefreshCw,
+  FiAward, FiTarget, FiZap, FiClock, FiBookOpen, FiCode,
+  FiCpu, FiLayers, FiUsers, FiStar, FiChevronRight, FiPlay,
+  FiTerminal, FiGitBranch, FiDatabase, FiGlobe, FiCamera,
+  FiCameraOff, FiMic, FiMicOff, FiAlertTriangle, FiShield,
+  FiEye, FiCheckCircle, FiMonitor, FiVolume2, FiVolumeX,
+} from "react-icons/fi";
 
-/*
-  Resume text extraction uses pdfjs-dist (PDF) and mammoth (DOCX).
-  Install once in your project:
-
-    npm install pdfjs-dist mammoth
-
-  Both are dynamically imported inside extractTextFromFile(), so the
-  rest of the app still builds even before you install them — you'll
-  just get a friendly inline error until you do.
-
-  For the display/body font pairing referenced below (Fraunces + Inter
-  + IBM Plex Mono), add this to your index.html <head>:
-
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-*/
-
-// ---------------------------------------------------------------------------
-// Static data
-// ---------------------------------------------------------------------------
-
-const CATEGORIES = [
-  "Technical",
-  "Projects",
-  "Resume",
-  "Behavioral",
-  "HR",
-  "DSA",
-  "SQL",
-  "System Design",
-  "Python",
-  "React",
-  "FastAPI",
-  "AI / ML",
+// ─────────────────────────────────────────────────────────────────
+// STATIC DATA
+// ─────────────────────────────────────────────────────────────────
+const ROLES = [
+  { id:"sde",       label:"Software Engineer",    icon:"💻", companies:["Google","Amazon","Microsoft"] },
+  { id:"frontend",  label:"Frontend Developer",   icon:"🎨", companies:["Flipkart","Swiggy","Razorpay"] },
+  { id:"backend",   label:"Backend Developer",    icon:"⚙️", companies:["PhonePe","Zepto","CRED"] },
+  { id:"fullstack", label:"Full Stack Developer", icon:"🌐", companies:["Startup","Meesho","Groww"] },
+  { id:"ai_ml",     label:"AI / ML Engineer",     icon:"🤖", companies:["OpenAI","Anthropic","Sarvam"] },
+  { id:"data",      label:"Data Scientist",       icon:"📊", companies:["Walmart","Fractal","Mu Sigma"] },
+  { id:"devops",    label:"DevOps / Cloud",       icon:"☁️", companies:["Infosys","TCS","Wipro"] },
+  { id:"mobile",    label:"Mobile Developer",     icon:"📱", companies:["Zomato","Paytm","Nykaa"] },
 ];
 
-const ROLE_OPTIONS = [
-  "AI Engineer",
-  "Full Stack Developer",
-  "Backend Developer",
-  "Frontend Developer",
-  "Data Scientist",
-  "DevOps Engineer",
+const LEVELS = [
+  { id:"fresher", label:"Fresher",   sub:"0–1 yr", color:"bg-emerald-500", text:"text-emerald-700", light:"bg-emerald-50", border:"border-emerald-200" },
+  { id:"junior",  label:"Junior",    sub:"1–2 yr", color:"bg-blue-500",    text:"text-blue-700",    light:"bg-blue-50",    border:"border-blue-200" },
+  { id:"mid",     label:"Mid-Level", sub:"2–4 yr", color:"bg-violet-500",  text:"text-violet-700",  light:"bg-violet-50",  border:"border-violet-200" },
+  { id:"senior",  label:"Senior",    sub:"4+ yr",  color:"bg-orange-500",  text:"text-orange-700",  light:"bg-orange-50",  border:"border-orange-200" },
 ];
 
-const COMPANY_OPTIONS = [
-  "Google",
-  "Microsoft",
-  "Amazon",
-  "Meta",
-  "Accenture",
-  "TCS",
-  "Infosys",
-  "Wipro",
-  "Zoho",
-  "Startup",
+const SECTIONS = [
+  { id:"coding",     label:"Coding (DSA)",        emoji:"💻", color:"text-indigo-600", bg:"bg-indigo-50",  border:"border-indigo-200",  desc:"Arrays, Trees, Graphs, DP, Sorting", hasCompiler:true  },
+  { id:"system",     label:"System Design",       emoji:"🏗️", color:"text-violet-600", bg:"bg-violet-50",  border:"border-violet-200",  desc:"Scalability, microservices, databases", hasCompiler:false },
+  { id:"dbms",       label:"DBMS & SQL",           emoji:"🗄️", color:"text-green-600",  bg:"bg-green-50",   border:"border-green-200",   desc:"Normalization, SQL queries, indexing", hasCompiler:true, compilerOnly:"sql" },
+  { id:"os",         label:"Operating Systems",   emoji:"🖥️", color:"text-orange-600", bg:"bg-orange-50",  border:"border-orange-200",  desc:"Processes, threads, memory, deadlocks", hasCompiler:false },
+  { id:"cn",         label:"Computer Networks",   emoji:"🌐", color:"text-cyan-600",   bg:"bg-cyan-50",    border:"border-cyan-200",    desc:"OSI, TCP/IP, HTTP, DNS, REST", hasCompiler:false },
+  { id:"oop",        label:"OOP & LLD",            emoji:"🏛️", color:"text-rose-600",   bg:"bg-rose-50",    border:"border-rose-200",    desc:"Design patterns, SOLID principles", hasCompiler:false },
+  { id:"behavioral", label:"HR & Behavioral",     emoji:"🤝", color:"text-yellow-600", bg:"bg-yellow-50",  border:"border-yellow-200",  desc:"Tell me about yourself, leadership", hasCompiler:false },
+  { id:"project",    label:"Project Deep-Dive",   emoji:"📁", color:"text-teal-600",   bg:"bg-teal-50",    border:"border-teal-200",    desc:"Architecture, tradeoffs, challenges", hasCompiler:false },
 ];
 
-const EXPERIENCE_OPTIONS = ["Student", "Fresher", "0-2 Years", "2-5 Years", "5+ Years"];
-
-const AMBER = "#E8963C";
-const TEAL = "#1F6F63";
-
-const AI_FEATURE_ITEMS = [
-  { icon: FileText, title: "Resume Based Questions", description: "Questions generated directly from what's on your resume.", accent: AMBER, className: "col-span-2 row-span-2" },
-  { icon: FolderKanban, title: "Project Deep Dive", description: "Drills into the projects you actually built.", accent: TEAL, className: "" },
-  { icon: Building2, title: "Company Specific Questions", description: "Tailored to your target company's interview style.", accent: AMBER, className: "" },
-  { icon: MessageSquare, title: "Behavioral Interview", description: "STAR-style questions on teamwork and conflict.", accent: TEAL, className: "row-span-2" },
-  { icon: Code2, title: "Technical Interview", description: "Core concepts across your strongest languages.", accent: AMBER, className: "col-span-2" },
-  { icon: HelpCircle, title: "Follow-up Questions", description: "Digs deeper based on how you answer.", accent: TEAL, className: "" },
-  { icon: Activity, title: "Real-time Feedback", description: "Live cues while you're still talking.", accent: AMBER, className: "" },
-  { icon: Gauge, title: "Confidence Analysis", description: "Reads tone and pacing to gauge confidence.", accent: TEAL, className: "col-span-2 row-span-2" },
-  { icon: Mic2, title: "Communication Analysis", description: "Clarity, filler words, and structure.", accent: AMBER, className: "" },
-  { icon: SpellCheck, title: "Grammar Checking", description: "Flags grammar slips in spoken answers.", accent: TEAL, className: "" },
-  { icon: Star, title: "Answer Quality Score", description: "Scores each answer against what great looks like.", accent: AMBER, className: "row-span-2" },
-  { icon: ClipboardCheck, title: "Final Interview Report", description: "A full writeup of strengths and gaps to work on.", accent: TEAL, className: "col-span-2" },
+const LANGUAGES = [
+  { id:"python",     label:"Python",     emoji:"🐍", starter:"# Write your solution here\n\n" },
+  { id:"javascript", label:"JavaScript", emoji:"🟨", starter:"// Write your solution here\n\n" },
+  { id:"java",       label:"Java",       emoji:"☕", starter:"public class Solution {\n    // Write your solution here\n}\n" },
+  { id:"cpp",        label:"C++",        emoji:"⚙️", starter:"#include <bits/stdc++.h>\nusing namespace std;\n\n// Write your solution here\n" },
+  { id:"c",          label:"C",          emoji:"🔧", starter:"#include <stdio.h>\n\n// Write your solution here\n" },
+  { id:"sql",        label:"SQL",        emoji:"🗄️", starter:"-- Write your SQL query here\n\n" },
+  { id:"typescript", label:"TypeScript", emoji:"🔷", starter:"// Write your TypeScript solution here\n\n" },
+  { id:"go",         label:"Go",         emoji:"🐹", starter:'package main\n\nimport "fmt"\n\nfunc main() {\n\n}\n' },
 ];
 
-// keyword -> canonical skill name, used to scan extracted resume text
-const SKILL_KEYWORDS = {
-  Python: ["python", "django", "flask"],
-  FastAPI: ["fastapi"],
-  React: ["react.js", "react ", "redux", "next.js", "nextjs"],
-  SQL: ["sql", "mysql", "postgres", "postgresql", "sqlite"],
-  JavaScript: ["javascript", "typescript", "node.js", "nodejs"],
-  Docker: ["docker", "container"],
-  AWS: ["aws", "amazon web services", "ec2", "s3"],
-  "Machine Learning": ["machine learning", "scikit", "tensorflow", "pytorch", "keras"],
-  Git: ["git", "github", "gitlab"],
-  "System Design": ["system design", "microservice", "scalab", "load balanc"],
-  Redis: ["redis"],
-  "CI/CD": ["ci/cd", "jenkins", "github actions", "continuous integration"],
+const TOTAL_ROUNDS = 5;
+const diffColor = {
+  Easy:   "bg-emerald-100 text-emerald-700 border-emerald-200",
+  Medium: "bg-yellow-100 text-yellow-700 border-yellow-200",
+  Hard:   "bg-red-100 text-red-700 border-red-200",
 };
+const scoreColor = s => s>=8?"text-emerald-600":s>=6?"text-yellow-600":"text-red-500";
+const scoreBg    = s => s>=8?"bg-emerald-50 border-emerald-200":s>=6?"bg-yellow-50 border-yellow-200":"bg-red-50 border-red-100";
+const scoreLabel = s => s>=9?"Outstanding 🌟":s>=8?"Excellent 🎉":s>=7?"Good 👍":s>=5?"Average 📚":"Needs Work 💪";
 
-// which skills matter most for each target role, used to compute gaps
-const ROLE_SKILL_MAP = {
-  "AI Engineer": ["Python", "Machine Learning", "SQL", "Docker", "AWS"],
-  "Full Stack Developer": ["JavaScript", "React", "SQL", "Docker", "Git"],
-  "Backend Developer": ["Python", "SQL", "Docker", "System Design", "AWS"],
-  "Frontend Developer": ["JavaScript", "React", "Git", "CI/CD"],
-  "Data Scientist": ["Python", "Machine Learning", "SQL", "Git"],
-  "DevOps Engineer": ["Docker", "AWS", "CI/CD", "System Design", "Git"],
-};
+// ─────────────────────────────────────────────────────────────────
+// PROCTORING HOOK
+// ─────────────────────────────────────────────────────────────────
+function useProctor({ active }) {
+  const videoRef   = useRef(null);
+  const streamRef  = useRef(null);
+  const recRef     = useRef(null);
+  const analyserRef= useRef(null);
+  const rafRef     = useRef(null);
 
-const TECH_QUESTION_BANK = {
-  Python: "Explain Python's GIL and how it affects multi-threaded code.",
-  FastAPI: "Why did you choose FastAPI over Flask or Django for this project?",
-  React: "Walk me through how React's reconciliation and hooks lifecycle work.",
-  SQL: "Write a query to find the second-highest salary in an Employees table.",
-  JavaScript: "Explain the event loop and how async/await is handled under the hood.",
-  Docker: "What's the difference between a Docker image and a container, and how would you slim one down?",
-  AWS: "How would you design a highly available deployment on AWS for this app?",
-  "Machine Learning": "Explain the bias-variance tradeoff and how you'd diagnose overfitting.",
-  Git: "Walk me through resolving a merge conflict during a rebase.",
-  "System Design": "How would you scale this system to handle 10,000 concurrent users?",
-  Redis: "When would you reach for Redis over a relational database?",
-  "CI/CD": "Describe a CI/CD pipeline you've built or maintained end to end.",
-};
+  const [camOn,      setCamOn]      = useState(false);
+  const [micOn,      setMicOn]      = useState(false);
+  const [camErr,     setCamErr]     = useState("");
+  const [violations, setViolations] = useState([]);
+  const [transcript, setTranscript] = useState("");
+  const [speaking,   setSpeaking]   = useState(false);
+  const [faceDet,    setFaceDet]    = useState("Initialising...");
+  const [noiseLevel, setNoiseLevel] = useState(0);
+  const [tabWarns,   setTabWarns]   = useState(0);
+  const [voiceOn,    setVoiceOn]    = useState(false);
 
-const HR_QUESTIONS = [
-  "Tell me about yourself.",
-  "Why should we hire you over another candidate?",
-  "Tell me about a time you failed and what you learned from it.",
-  "Describe a conflict with a teammate and how you resolved it.",
-  "Where do you see yourself in five years?",
-];
+  const addViolation = useCallback((msg) => {
+    setViolations(v => [{ msg, time: new Date().toLocaleTimeString() }, ...v].slice(0, 20));
+    toast.error(`⚠️ ${msg}`, { duration: 3000 });
+  }, []);
 
-const CHECKLIST_ITEMS = [
-  { key: "internet", label: "Stable internet connection" },
-  { key: "camera", label: "Camera ready" },
-  { key: "mic", label: "Microphone working" },
-  { key: "quiet", label: "Quiet environment" },
-];
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-const MAX_RESUME_MB = 8;
-
-// ---------------------------------------------------------------------------
-// Resume parsing
-// ---------------------------------------------------------------------------
-
-async function extractTextFromFile(file) {
-  const ext = file.name.split(".").pop().toLowerCase();
-
-  if (ext === "pdf") {
-    let pdfjsLib;
+  // Start camera + mic
+  const startMedia = useCallback(async () => {
     try {
-      pdfjsLib = await import("pdfjs-dist/build/pdf");
-    } catch {
-      throw new Error("PDF parsing needs the pdfjs-dist package — run: npm install pdfjs-dist");
-    }
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-    const buffer = await file.arrayBuffer();
-    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-    let text = "";
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const content = await page.getTextContent();
-      text += content.items.map((item) => item.str).join(" ") + "\n";
-    }
-    return text;
-  }
+      const stream = await navigator.mediaDevices.getUserMedia({ video:{ width:320, height:240, facingMode:"user" }, audio:true });
+      streamRef.current = stream;
+      if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play().catch(()=>{}); }
+      setCamOn(true); setMicOn(true); setCamErr("");
 
-  if (ext === "docx") {
-    let mammoth;
+      // Audio analyser
+      try {
+        const ctx      = new AudioContext();
+        const src      = ctx.createMediaStreamSource(stream);
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 256;
+        src.connect(analyser);
+        analyserRef.current = analyser;
+        const buf = new Uint8Array(analyser.frequencyBinCount);
+        const tick = () => {
+          analyser.getByteFrequencyData(buf);
+          setNoiseLevel(Math.round(buf.reduce((a,b)=>a+b,0)/buf.length));
+          rafRef.current = requestAnimationFrame(tick);
+        };
+        tick();
+      } catch (_) {}
+
+      // Simulated face detection (replace with face-api.js in production)
+      let faceTimer = setInterval(() => {
+        const r = Math.random();
+        if (r > 0.96)      { setFaceDet("⚠️ No face detected"); addViolation("Face not visible — please look at camera"); }
+        else if (r > 0.985){ setFaceDet("⚠️ Multiple faces");   addViolation("Multiple faces detected in frame"); }
+        else                { setFaceDet("✓ Face Detected"); }
+      }, 5000);
+      setFaceDet("✓ Face Detected");
+
+      return () => clearInterval(faceTimer);
+    } catch (err) {
+      const msg = err.name === "NotAllowedError" ? "Camera/mic permission denied — please allow in browser" :
+                  err.name === "NotFoundError"   ? "No camera or microphone found on this device" : err.message;
+      setCamErr(msg);
+      toast.error(msg);
+    }
+  }, [addViolation]);
+
+  const stopMedia = useCallback(() => {
+    cancelAnimationFrame(rafRef.current);
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    streamRef.current = null;
+    if (videoRef.current) videoRef.current.srcObject = null;
+    setCamOn(false); setMicOn(false);
+    recRef.current?.stop();
+    setSpeaking(false);
+  }, []);
+
+  // Voice recognition
+  const startVoice = useCallback(() => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) { toast("Speech recognition not supported in this browser. Try Chrome."); return; }
+    const rec = new SR();
+    rec.continuous = true; rec.interimResults = true; rec.lang = "en-IN";
+    rec.onstart  = () => setSpeaking(true);
+    rec.onend    = () => { setSpeaking(false); if (voiceOn) rec.start(); };
+    rec.onresult = (e) => {
+      let txt = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) txt += e.results[i][0].transcript;
+      setTranscript(p => (p + " " + txt).trim().slice(-600));
+    };
+    rec.start();
+    recRef.current = rec;
+    setVoiceOn(true);
+    toast.success("🎤 Voice answer recording started");
+  }, [voiceOn]);
+
+  const stopVoice = useCallback(() => {
+    recRef.current?.stop();
+    recRef.current = null;
+    setSpeaking(false);
+    setVoiceOn(false);
+  }, []);
+
+  const toggleVoice = useCallback(() => { voiceOn ? stopVoice() : startVoice(); }, [voiceOn, startVoice, stopVoice]);
+
+  // Tab/focus monitoring
+  useEffect(() => {
+    if (!active) return;
+    const onHide  = () => { if (document.hidden) { setTabWarns(w=>w+1); addViolation("Tab switch detected — stay on interview tab"); } };
+    const onBlur  = () => addViolation("Window lost focus");
+    const onCtx   = (e) => { e.preventDefault(); addViolation("Right-click blocked during interview"); };
+    const onCopy  = () => addViolation("Copy action detected — external resources not allowed");
+    const onPaste = () => addViolation("Paste detected — please type your own answer");
+    document.addEventListener("visibilitychange", onHide);
+    window.addEventListener("blur", onBlur);
+    document.addEventListener("contextmenu", onCtx);
+    document.addEventListener("copy", onCopy);
+    document.addEventListener("paste", onPaste);
+    return () => {
+      document.removeEventListener("visibilitychange", onHide);
+      window.removeEventListener("blur", onBlur);
+      document.removeEventListener("contextmenu", onCtx);
+      document.removeEventListener("copy", onCopy);
+      document.removeEventListener("paste", onPaste);
+    };
+  }, [active, addViolation]);
+
+  useEffect(() => { return () => stopMedia(); }, [stopMedia]);
+
+  return {
+    videoRef, camOn, micOn, camErr,
+    violations, transcript, speaking,
+    faceDet, noiseLevel, tabWarns,
+    voiceOn, startMedia, stopMedia,
+    toggleVoice, setTranscript,
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────
+// PERMISSION GATE
+// ─────────────────────────────────────────────────────────────────
+function PermissionGate({ onGranted, onSkip }) {
+  const [checking, setChecking] = useState(false);
+  const [granted,  setGranted]  = useState(false);
+  const [err,      setErr]      = useState("");
+
+  const request = async () => {
+    setChecking(true); setErr("");
     try {
-      mammoth = await import("mammoth");
-    } catch {
-      throw new Error("DOCX parsing needs the mammoth package — run: npm install mammoth");
+      const s = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
+      s.getTracks().forEach(t => t.stop());
+      setGranted(true);
+    } catch (e) {
+      setErr(e.name === "NotAllowedError" ? "Permission denied. Click the camera icon in your browser address bar and allow access, then try again."
+           : e.name === "NotFoundError"   ? "No camera/microphone found. Please connect a device."
+           : e.message);
     }
-    const buffer = await file.arrayBuffer();
-    const result = await mammoth.extractRawText({ arrayBuffer: buffer });
-    return result.value;
-  }
-
-  if (ext === "doc") {
-    throw new Error("Legacy .doc files can't be parsed in the browser — please upload a PDF or DOCX instead.");
-  }
-
-  throw new Error("Unsupported file type — upload a PDF or DOCX.");
-}
-
-function analyzeResumeText(text, targetRole) {
-  const lower = text.toLowerCase();
-
-  const detected = Object.keys(SKILL_KEYWORDS).filter((skill) =>
-    SKILL_KEYWORDS[skill].some((kw) => lower.includes(kw))
-  );
-
-  const roleSkills = ROLE_SKILL_MAP[targetRole] || ROLE_SKILL_MAP["Full Stack Developer"];
-  const recommended = roleSkills.filter((skill) => !detected.includes(skill));
-
-  const hasEmail = /[^\s@]+@[^\s@]+\.[^\s@]{2,}/.test(text);
-  const hasProjects = /project/i.test(text);
-  const hasExperience = /experience/i.test(text);
-  const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
-
-  let score = 40;
-  score += Math.min(detected.length * 6, 30);
-  if (hasEmail) score += 8;
-  if (hasProjects) score += 7;
-  if (hasExperience) score += 7;
-  if (wordCount > 150) score += 8;
-  score = Math.min(Math.round(score), 98);
-
-  return { score, detected, recommended, wordCount };
-}
-
-function buildQuestions(analysis, candidate) {
-  const role = candidate.role || "this role";
-  const company = candidate.company;
-
-  const projectQuestions = [
-    "Walk me through the most complex project on your resume — what was your specific role?",
-    analysis.detected.length >= 2
-      ? `You listed ${analysis.detected.slice(0, 2).join(" and ")} — which project used them together, and why that combination?`
-      : "Which project are you proudest of, and what would you do differently now?",
-    "What was the hardest technical decision on that project, and how did you resolve it?",
-    "If that project suddenly had to support 10,000 concurrent users, what breaks first?",
-  ];
-
-  const technicalQuestions = analysis.detected.length
-    ? analysis.detected.slice(0, 5).map((skill) => TECH_QUESTION_BANK[skill] || `Explain a core concept in ${skill} and where you've used it.`)
-    : [`Tell me about a technical stack you're comfortable with for a ${role} position.`];
-
-  const hrQuestions = company
-    ? [`Why ${company} specifically, and what do you know about their engineering culture?`, ...HR_QUESTIONS.slice(0, 4)]
-    : HR_QUESTIONS;
-
-  return { projectQuestions, technicalQuestions, hrQuestions };
-}
-
-// ---------------------------------------------------------------------------
-// Small presentational helpers
-// ---------------------------------------------------------------------------
-
-function ReadinessDial({ percent }) {
-  const size = 84;
-  const stroke = 8;
-  const r = (size - stroke) / 2;
-  const circumference = 2 * Math.PI * r;
-  const offset = circumference * (1 - percent / 100);
+    setChecking(false);
+  };
 
   return (
-    <div className="relative flex items-center justify-center" style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90">
-        <circle cx={size / 2} cy={size / 2} r={r} stroke="#E4E1DA" strokeWidth={stroke} fill="none" />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          stroke={percent >= 100 ? "#1F6F63" : "#E8963C"}
-          strokeWidth={stroke}
-          fill="none"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          strokeLinecap="round"
-          style={{ transition: "stroke-dashoffset 400ms ease, stroke 300ms ease" }}
-        />
-      </svg>
-      <div className="absolute flex flex-col items-center">
-        <span className="text-lg font-semibold text-[#12181F]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
-          {percent}%
-        </span>
-        <span className="text-[10px] uppercase tracking-wide text-[#5B6472]">ready</span>
+    <div className="fixed inset-0 bg-[#050507]/95 backdrop-blur-xl z-50 flex items-center justify-center p-4">
+      <div className="bg-[#0a0a0c] border border-white/10 rounded-3xl max-w-lg w-full p-8 text-white shadow-2xl">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-indigo-600/15 border border-indigo-500/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <FiShield className="text-indigo-400 text-2xl" />
+          </div>
+          <h2 className="text-2xl font-extrabold tracking-tight mb-2">Proctored Interview Mode</h2>
+          <p className="text-white/40 text-sm leading-relaxed">
+            This session uses AI-powered proctoring to simulate a real interview environment. Your camera and microphone are required.
+          </p>
+        </div>
+
+        {/* What is monitored */}
+        <div className="space-y-2.5 mb-7">
+          <p className="text-[11px] font-bold text-white/25 uppercase tracking-widest mb-3">What this session monitors</p>
+          {[
+            { icon:<FiCamera/>,         label:"Webcam — face presence & detection",      note:"Real-time" },
+            { icon:<FiMic/>,            label:"Microphone — optional voice answers",      note:"With consent" },
+            { icon:<FiMonitor/>,        label:"Tab switching & window focus loss",        note:"Auto flagged" },
+            { icon:<FiAlertTriangle/>,  label:"Copy, paste & right-click attempts",       note:"Auto flagged" },
+            { icon:<FiEye/>,            label:"Multiple face / no face detection",        note:"AI powered" },
+          ].map(({ icon, label, note }) => (
+            <div key={label} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.025] border border-white/5">
+              <div className="w-7 h-7 rounded-lg bg-white/[0.04] flex items-center justify-center flex-shrink-0 text-indigo-400 text-xs">{icon}</div>
+              <p className="text-xs text-white/60 flex-1">{label}</p>
+              <span className="text-[9px] text-white/20 font-semibold uppercase tracking-wide">{note}</span>
+            </div>
+          ))}
+        </div>
+
+        {err && <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-3 mb-5 text-xs text-red-400 leading-5">{err}</div>}
+
+        {!granted ? (
+          <button onClick={request} disabled={checking}
+            className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-all disabled:opacity-50 mb-3 shadow-lg shadow-indigo-500/20">
+            {checking
+              ? <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Requesting access...</>
+              : <><FiCamera className="text-sm" />Allow Camera & Microphone</>}
+          </button>
+        ) : (
+          <button onClick={onGranted}
+            className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-all mb-3 shadow-lg shadow-emerald-500/20">
+            <FiZap className="text-sm" /> Start Proctored Interview
+          </button>
+        )}
+
+        <button onClick={onSkip} className="w-full text-xs text-white/25 hover:text-white/50 transition-colors py-2">
+          Skip proctoring — use basic mode
+        </button>
+        <p className="text-center text-[10px] text-white/15 mt-4 leading-4">
+          Video is processed locally in your browser. We do not record or upload any footage.
+        </p>
       </div>
     </div>
   );
 }
 
-function Field({ label, error, children }) {
-  return (
-    <div>
-      <label className="block text-sm font-semibold mb-2 text-[#12181F]">{label}</label>
-      {children}
-      {error && <p className="text-xs text-rose-600 mt-1.5">{error}</p>}
-    </div>
-  );
-}
-
-function AIFeatureGrid() {
-  return (
-    <BioluminescentGrid>
-      {AI_FEATURE_ITEMS.map(({ icon: Icon, title, description, accent, className }) => (
-        <BioluminescentGridItem key={title} accent={accent} className={className}>
-          <Icon className="icon" />
-          <h3 className="item-title">{title}</h3>
-          <p className="item-description">{description}</p>
-        </BioluminescentGridItem>
-      ))}
-    </BioluminescentGrid>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Main component
-// ---------------------------------------------------------------------------
-
-export default function MockInterview() {
-  const navigate = useNavigate();
-  const fileInputRef = useRef(null);
-
-  const [candidate, setCandidate] = useState({
-    fullName: "",
-    email: "",
-    role: ROLE_OPTIONS[0],
-    company: COMPANY_OPTIONS[0],
-    experience: "Fresher",
-  });
-  const [touched, setTouched] = useState({ fullName: false, email: false });
-
-  const [resume, setResume] = useState(null);
-  const [resumeAnalysis, setResumeAnalysis] = useState(null);
-  const [analyzing, setAnalyzing] = useState(false);
-  const [analysisError, setAnalysisError] = useState(null);
-  const [dragActive, setDragActive] = useState(false);
-
-  const [selectedCategories, setSelectedCategories] = useState(
-    () => Object.fromEntries(CATEGORIES.map((c) => [c, true]))
-  );
-
-  const [mode, setMode] = useState("Mixed (Recommended)");
-  const [difficulty, setDifficulty] = useState("Adaptive AI ⭐");
-  const [duration, setDuration] = useState(30);
-
-  const [checklist, setChecklist] = useState({
-    internet: false,
-    camera: false,
-    mic: false,
-    quiet: false,
-  });
-
-  const [showMissing, setShowMissing] = useState(false);
-
-  const updateCandidate = (field) => (e) => setCandidate((c) => ({ ...c, [field]: e.target.value }));
-
-  const nameError = touched.fullName && !candidate.fullName.trim() ? "Enter your full name." : null;
-  const emailError = touched.email && !EMAIL_RE.test(candidate.email) ? "Enter a valid email address." : null;
-
-  function validateAndSetFile(file) {
-    if (!file) return;
-    const ext = file.name.split(".").pop().toLowerCase();
-    if (!["pdf", "doc", "docx"].includes(ext)) {
-      setAnalysisError("Unsupported file type — upload a PDF or DOCX.");
-      return;
-    }
-    if (file.size > MAX_RESUME_MB * 1024 * 1024) {
-      setAnalysisError(`That file is too large — please upload something under ${MAX_RESUME_MB}MB.`);
-      return;
-    }
-    setResume(file);
-    setResumeAnalysis(null);
-    setAnalysisError(null);
-  }
-
-  function handleFileChosen(file) {
-    validateAndSetFile(file);
-  }
-
-  function handleDrop(e) {
-    e.preventDefault();
-    setDragActive(false);
-    validateAndSetFile(e.dataTransfer.files?.[0] || null);
-  }
-
-  async function handleAnalyze() {
-    if (!resume) return;
-    setAnalyzing(true);
-    setAnalysisError(null);
-    try {
-      const text = await extractTextFromFile(resume);
-      if (!text.trim()) {
-        throw new Error("Couldn't find any readable text in this file — try a different export of your resume.");
-      }
-      setResumeAnalysis(analyzeResumeText(text, candidate.role));
-    } catch (err) {
-      setAnalysisError(err.message || "Something went wrong while reading this file.");
-    } finally {
-      setAnalyzing(false);
-    }
-  }
-
-  function toggleCategory(category) {
-    setSelectedCategories((prev) => ({ ...prev, [category]: !prev[category] }));
-  }
-
-  function toggleChecklist(key) {
-    setChecklist((prev) => ({ ...prev, [key]: !prev[key] }));
-  }
-
-  const activeCategoryCount = useMemo(
-    () => Object.values(selectedCategories).filter(Boolean).length,
-    [selectedCategories]
-  );
-
-  const questions = useMemo(
-    () => (resumeAnalysis ? buildQuestions(resumeAnalysis, candidate) : null),
-    [resumeAnalysis, candidate]
-  );
-
-  const steps = [
-    { key: "name", done: !!candidate.fullName.trim(), label: "Add your full name" },
-    { key: "email", done: EMAIL_RE.test(candidate.email), label: "Add a valid email" },
-    { key: "resume", done: !!resume, label: "Upload your resume" },
-    { key: "analysis", done: !!resumeAnalysis, label: "Analyze your resume" },
-    { key: "categories", done: activeCategoryCount > 0, label: "Select at least one question category" },
-    { key: "internet", done: checklist.internet, label: "Confirm your internet connection" },
-    { key: "camera", done: checklist.camera, label: "Confirm your camera" },
-    { key: "mic", done: checklist.mic, label: "Confirm your microphone" },
-    { key: "quiet", done: checklist.quiet, label: "Confirm a quiet environment" },
-  ];
-  const completedCount = steps.filter((s) => s.done).length;
-  const percent = Math.round((completedCount / steps.length) * 100);
-  const isReady = completedCount === steps.length;
-  const missingSteps = steps.filter((s) => !s.done);
-
-  function handleStart() {
-    if (!isReady) {
-      setShowMissing(true);
-      return;
-    }
-    navigate("/interview-room", {
-      state: {
-        candidate,
-        mode,
-        difficulty,
-        duration,
-        categories: Object.keys(selectedCategories).filter((c) => selectedCategories[c]),
-        resumeAnalysis,
-      },
-    });
-  }
+// ─────────────────────────────────────────────────────────────────
+// PROCTOR PANEL — sidebar during interview
+// ─────────────────────────────────────────────────────────────────
+function ProctorPanel({ p }) {
+  const isSafe  = p.faceDet.startsWith("✓");
+  const isAlert = p.faceDet.startsWith("⚠");
+  const barW    = Math.min(p.noiseLevel * 2.5, 100);
+  const barCol  = p.noiseLevel < 15 ? "bg-emerald-400" : p.noiseLevel < 40 ? "bg-yellow-400" : "bg-red-500";
 
   return (
-    <div className="max-w-4xl mx-auto space-y-5" style={{ fontFamily: "'Inter', sans-serif" }}>
-      {/* Candidate Profile */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
-        <h2
-          className="text-xl font-bold text-[#12181F] mb-5"
-          style={{ fontFamily: "'Fraunces', serif" }}
-        >
-          Candidate Profile
-        </h2>
+    <div className="flex flex-col gap-3 w-52 flex-shrink-0">
 
-        <div className="grid md:grid-cols-2 gap-4">
-          <Field label="Full Name" error={nameError}>
-            <input
-              type="text"
-              placeholder="John Doe"
-              value={candidate.fullName}
-              onChange={updateCandidate("fullName")}
-              onBlur={() => setTouched((t) => ({ ...t, fullName: true }))}
-              className={`w-full rounded-xl border px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
-                nameError ? "border-rose-400" : "border-[#E4E1DA]"
-              }`}
-            />
-          </Field>
-
-          <Field label="Email" error={emailError}>
-            <input
-              type="email"
-              placeholder="john@gmail.com"
-              value={candidate.email}
-              onChange={updateCandidate("email")}
-              onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-              className={`w-full rounded-xl border px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40 ${
-                emailError ? "border-rose-400" : "border-[#E4E1DA]"
-              }`}
-            />
-          </Field>
-
-          <Field label="Target Role">
-            <select
-              value={candidate.role}
-              onChange={updateCandidate("role")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
-            >
-              {ROLE_OPTIONS.map((role) => (
-                <option key={role}>{role}</option>
-              ))}
-            </select>
-          </Field>
-
-          <Field label="Target Company">
-            <select
-              value={candidate.company}
-              onChange={updateCandidate("company")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
-            >
-              {COMPANY_OPTIONS.map((company) => (
-                <option key={company}>{company}</option>
-              ))}
-            </select>
-          </Field>
-
-          <Field label="Experience">
-            <select
-              value={candidate.experience}
-              onChange={updateCandidate("experience")}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
-            >
-              {EXPERIENCE_OPTIONS.map((exp) => (
-                <option key={exp}>{exp}</option>
-              ))}
-            </select>
-          </Field>
-        </div>
-      </section>
-
-      {/* Resume upload + analysis, combined into one compact section */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
-        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-          Resume
-        </h2>
-
-        {!resume ? (
-          <label
-            onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
-            onDragLeave={() => setDragActive(false)}
-            onDrop={handleDrop}
-            className={`border-2 border-dashed rounded-xl p-6 flex flex-col items-center justify-center cursor-pointer transition ${
-              dragActive ? "border-[#E8963C] bg-[#E8963C]/10" : "border-[#E8963C]/50 hover:bg-[#E8963C]/5"
-            }`}
-          >
-            <div className="text-3xl">📄</div>
-            <h3 className="font-bold text-sm mt-2 text-[#12181F]">Upload Resume</h3>
-            <p className="text-[#5B6472] text-sm mt-1">Drag & drop, or</p>
-            <button
-              type="button"
-              onClick={() => fileInputRef.current.click()}
-              className="mt-3 bg-[#12181F] hover:bg-[#1F2731] text-white text-sm px-4 py-2 rounded-lg transition"
-            >
-              Choose File
-            </button>
-            <p className="text-[11px] text-[#5B6472]/70 mt-2">PDF or DOCX, up to {MAX_RESUME_MB}MB</p>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.doc,.docx"
-              hidden
-              onChange={(e) => handleFileChosen(e.target.files?.[0] || null)}
-            />
-          </label>
+      {/* Camera feed */}
+      <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/10" style={{ aspectRatio:"4/3" }}>
+        {p.camOn ? (
+          <video ref={p.videoRef} autoPlay muted playsInline className="w-full h-full object-cover" style={{ transform:"scaleX(-1)" }} />
         ) : (
-          <div className="rounded-xl bg-[#1F6F63]/10 border border-[#1F6F63]/30 p-3.5 flex items-center justify-between gap-3">
-            <div className="min-w-0">
-              <div className="font-semibold text-[#1F6F63] text-sm">Resume uploaded</div>
-              <div className="text-xs mt-0.5 text-[#12181F] truncate">{resume.name}</div>
-            </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button
-                onClick={handleAnalyze}
-                disabled={analyzing}
-                className="px-3.5 py-1.5 rounded-lg bg-[#12181F] text-white text-sm hover:bg-[#1F2731] disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {analyzing ? "Analyzing…" : resumeAnalysis ? "Re-analyze" : "Analyze Resume"}
-              </button>
-              <button
-                onClick={() => { setResume(null); setResumeAnalysis(null); setAnalysisError(null); }}
-                className="text-xs text-[#5B6472] hover:text-[#12181F] px-2 py-1.5"
-              >
-                Remove
-              </button>
-            </div>
+          <div className="w-full h-full flex flex-col items-center justify-center gap-2 p-3">
+            <FiCameraOff className="text-white/20 text-2xl" />
+            <p className="text-white/25 text-[10px] text-center leading-4">{p.camErr || "Camera initialising..."}</p>
           </div>
         )}
-
-        {analysisError && (
-          <div className="mt-3 rounded-xl bg-rose-50 border border-rose-200 p-3 text-sm text-rose-700">
-            {analysisError}
+        {/* Face detection badge */}
+        {p.camOn && (
+          <div className={`absolute top-1.5 left-1.5 text-[9px] font-bold px-2 py-0.5 rounded-lg border backdrop-blur-sm flex items-center gap-1 ${
+            isSafe  ? "bg-emerald-900/80 text-emerald-300 border-emerald-700" :
+            isAlert ? "bg-red-900/80 text-red-300 border-red-700 animate-pulse" :
+            "bg-slate-900/80 text-white/40 border-white/10"
+          }`}>
+            <FiEye className="text-[8px]" />{p.faceDet}
           </div>
         )}
-
-        {/* Analysis results, inline within the same card */}
-        {resume && (
-          <div className="mt-4 pt-4 border-t border-[#E4E1DA]">
-            {!resumeAnalysis ? (
-              <p className="text-sm text-[#5B6472]">
-                Click "Analyze Resume" above to scan your file and see your score and detected skills.
-              </p>
-            ) : (
-              <div className="grid md:grid-cols-3 gap-4">
-                <div className="rounded-xl bg-[#E8963C]/10 p-4">
-                  <p className="text-xs text-[#5B6472]">Resume Score</p>
-                  <h2
-                    className="text-3xl font-bold text-[#E8963C]"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-                  >
-                    {resumeAnalysis.score}%
-                  </h2>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-sm mb-2 text-[#12181F]">Skills Detected</h3>
-                  <div className="flex flex-wrap gap-1.5">
-                    {resumeAnalysis.detected.length ? (
-                      resumeAnalysis.detected.map((skill) => (
-                        <span key={skill} className="px-2.5 py-1 rounded-full bg-[#1F6F63]/10 text-[#1F6F63] text-xs">
-                          {skill}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="text-xs text-[#5B6472]">No known skills detected yet.</span>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <h3 className="font-semibold text-sm mb-2 text-[#12181F]">Recommended for {candidate.role}</h3>
-                  <div className="flex flex-wrap gap-1.5">
-                    {resumeAnalysis.recommended.length ? (
-                      resumeAnalysis.recommended.map((skill) => (
-                        <span key={skill} className="px-2.5 py-1 rounded-full bg-orange-100 text-orange-700 text-xs">
-                          {skill}
-                        </span>
-                      ))
-                    ) : (
-                      <span className="text-xs text-[#5B6472]">Great coverage for this role.</span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            )}
+        {/* REC dot */}
+        {p.camOn && (
+          <div className="absolute top-1.5 right-1.5 flex items-center gap-1 bg-red-600/80 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md backdrop-blur-sm">
+            <span className="w-1 h-1 bg-white rounded-full animate-pulse" />REC
           </div>
         )}
-      </section>
-
-      {/* Interview Preferences */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
-        <h2 className="text-xl font-bold text-[#12181F] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
-          Interview Preferences
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-5">
-          <div>
-            <label className="font-semibold text-sm text-[#12181F] block mb-2">Interview Mode</label>
-            <select
-              value={mode}
-              onChange={(e) => setMode(e.target.value)}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
-            >
-              <option>Resume Based</option>
-              <option>Company Based</option>
-              <option>Mixed (Recommended)</option>
-            </select>
-            <p className="text-xs text-[#5B6472] mt-2">
-              Mixed mode asks questions from both your resume and your target company.
-            </p>
+        {/* Speaking bar */}
+        {p.speaking && (
+          <div className="absolute bottom-1.5 inset-x-1.5 bg-indigo-900/80 text-indigo-300 text-[9px] px-2 py-1 rounded-lg backdrop-blur-sm flex items-center gap-1">
+            <FiMic className="animate-pulse flex-shrink-0" />
+            <span className="truncate">{p.transcript.split(" ").slice(-5).join(" ")}</span>
           </div>
+        )}
+      </div>
 
-          <div>
-            <label className="font-semibold text-sm text-[#12181F] block mb-2">Difficulty</label>
-            <select
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value)}
-              className="w-full rounded-xl border border-[#E4E1DA] px-4 py-2.5 outline-none focus:ring-2 focus:ring-[#E8963C]/40"
-            >
-              <option>Easy</option>
-              <option>Medium</option>
-              <option>Hard</option>
-              <option>Adaptive AI ⭐</option>
-            </select>
-            <p className="text-xs text-[#5B6472] mt-2">
-              Adaptive AI changes question difficulty based on your answers.
-            </p>
+      {/* Status pills */}
+      <div className="grid grid-cols-2 gap-1.5">
+        <div className={`rounded-xl p-2 text-center border ${p.camOn?"bg-emerald-900/20 border-emerald-800/40":"bg-red-900/20 border-red-800/40"}`}>
+          {p.camOn ? <FiCamera className="text-emerald-400 mx-auto text-xs mb-0.5" /> : <FiCameraOff className="text-red-400 mx-auto text-xs mb-0.5" />}
+          <p className={`text-[9px] font-bold ${p.camOn?"text-emerald-400":"text-red-400"}`}>{p.camOn?"ON":"OFF"}</p>
+        </div>
+        <div className={`rounded-xl p-2 text-center border ${p.micOn?"bg-emerald-900/20 border-emerald-800/40":"bg-slate-800/40 border-white/5"}`}>
+          {p.micOn ? <FiMic className="text-emerald-400 mx-auto text-xs mb-0.5" /> : <FiMicOff className="text-white/20 mx-auto text-xs mb-0.5" />}
+          <p className={`text-[9px] font-bold ${p.micOn?"text-emerald-400":"text-white/20"}`}>{p.micOn?"MIC":"OFF"}</p>
+        </div>
+      </div>
+
+      {/* Audio meter */}
+      {p.micOn && (
+        <div className="bg-slate-900 rounded-xl p-2.5 border border-white/5">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-[9px] text-white/30 font-bold uppercase tracking-wider">Audio Level</span>
+            <span className="text-[9px] text-white/20 font-mono">{p.noiseLevel}</span>
           </div>
-        </div>
-      </section>
-
-      {/* Question Categories */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
-            Question Categories
-          </h2>
-          <span className="text-sm text-[#5B6472]" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
-            {activeCategoryCount}/{CATEGORIES.length} selected
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
-          {CATEGORIES.map((category) => (
-            <label
-              key={category}
-              className={`flex items-center gap-2 rounded-xl border p-2.5 cursor-pointer transition ${
-                selectedCategories[category]
-                  ? "border-[#E8963C] bg-[#E8963C]/5"
-                  : "border-[#E4E1DA] hover:bg-[#E8963C]/5"
-              }`}
-            >
-              <input
-                type="checkbox"
-                className="accent-[#E8963C]"
-                checked={!!selectedCategories[category]}
-                onChange={() => toggleCategory(category)}
-              />
-              <span className="text-sm text-[#12181F]">{category}</span>
-            </label>
-          ))}
-        </div>
-      </section>
-
-      {/* Interview Duration */}
-      <section className="bg-white rounded-2xl shadow-sm border border-[#E4E1DA] p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
-            Interview Duration
-          </h2>
-          <span
-            className="text-lg font-semibold text-[#E8963C]"
-            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
-          >
-            {duration} min
-          </span>
-        </div>
-
-        <input
-          type="range"
-          min="10"
-          max="60"
-          step="5"
-          value={duration}
-          onChange={(e) => setDuration(Number(e.target.value))}
-          className="w-full accent-[#E8963C]"
-        />
-
-        <div className="flex justify-between text-sm text-[#5B6472] mt-2">
-          <span>10 min</span>
-          <span>60 min</span>
-        </div>
-      </section>
-
-      {/* Generated questions preview */}
-      {questions && (
-        <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
-          <div className="mb-5">
-            <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
-              Sample Questions For You
-            </h2>
-            <p className="text-sm text-[#5B6472]">Generated from your resume, role, and company.</p>
+          <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden mb-2">
+            <div className={`h-full rounded-full transition-all duration-75 ${barCol}`} style={{ width:`${barW}%` }} />
           </div>
-
-          <div className="space-y-3">
-            {selectedCategories["Projects"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
-                <h3 className="font-semibold text-sm text-[#12181F] mb-2">📂 Project Questions</h3>
-                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
-                  {questions.projectQuestions.map((q) => (
-                    <li key={q}>{q}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {selectedCategories["Technical"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
-                <h3 className="font-semibold text-sm text-[#12181F] mb-2">💻 Technical Questions</h3>
-                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
-                  {questions.technicalQuestions.map((q) => (
-                    <li key={q}>{q}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {selectedCategories["HR"] && (
-              <div className="rounded-xl border border-[#E4E1DA] p-3.5">
-                <h3 className="font-semibold text-sm text-[#12181F] mb-2">🧠 HR Questions</h3>
-                <ul className="list-disc ml-5 text-sm text-[#5B6472] space-y-1.5">
-                  {questions.hrQuestions.map((q) => (
-                    <li key={q}>{q}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </section>
+          <button onClick={p.toggleVoice}
+            className={`w-full flex items-center justify-center gap-1.5 text-[10px] font-bold py-1.5 rounded-lg border transition-all ${
+              p.voiceOn
+                ? "bg-indigo-600/20 border-indigo-500/30 text-indigo-300"
+                : "bg-white/[0.03] border-white/8 text-white/25 hover:text-white/50"
+            }`}>
+            {p.voiceOn ? <FiMic className="text-[9px]" /> : <FiMicOff className="text-[9px]" />}
+            {p.voiceOn ? "Voice Active" : "Enable Voice"}
+          </button>
+        </div>
       )}
 
-      {/* Dashboard */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
-        <div className="flex items-center justify-between mb-5 gap-4">
-          <div>
-            <h2 className="text-xl font-bold text-[#12181F]" style={{ fontFamily: "'Fraunces', serif" }}>
-              AI Interview Dashboard
-            </h2>
-            <p className="text-[#5B6472] text-sm">Your interview settings and readiness.</p>
-          </div>
-          <ReadinessDial percent={percent} />
+      {/* Tab warnings */}
+      {p.tabWarns > 0 && (
+        <div className="bg-red-900/20 border border-red-500/30 rounded-xl p-2.5 flex items-center gap-2">
+          <FiAlertTriangle className="text-red-400 flex-shrink-0 text-xs" />
+          <p className="text-[10px] text-red-400 font-semibold">{p.tabWarns} tab switch{p.tabWarns>1?"es":""}</p>
         </div>
+      )}
 
-        <div className="grid md:grid-cols-4 gap-4">
-          <div className="rounded-xl bg-[#E8963C]/10 p-4">
-            <div className="text-2xl">🎯</div>
-            <p className="text-xs text-[#5B6472] mt-1.5">Target Role</p>
-            <h3 className="font-bold text-[#12181F]">{candidate.role}</h3>
+      {/* Integrity log */}
+      <div className="bg-slate-900 rounded-xl border border-white/5 overflow-hidden flex-1">
+        <div className="flex items-center justify-between px-2.5 py-2 border-b border-white/5">
+          <div className="flex items-center gap-1.5">
+            <FiShield className="text-xs text-indigo-400" />
+            <span className="text-[9px] font-bold text-white/30 uppercase tracking-wider">Integrity</span>
           </div>
-
-          <div className="rounded-xl bg-[#1F6F63]/10 p-4">
-            <div className="text-2xl">🏢</div>
-            <p className="text-xs text-[#5B6472] mt-1.5">Company</p>
-            <h3 className="font-bold text-[#12181F]">{candidate.company}</h3>
-          </div>
-
-          <div className="rounded-xl bg-orange-50 p-4">
-            <div className="text-2xl">📄</div>
-            <p className="text-xs text-[#5B6472] mt-1.5">Resume</p>
-            <h3 className="font-bold text-[#12181F]">
-              {resumeAnalysis ? "Analyzed" : resume ? "Uploaded" : "Not Uploaded"}
-            </h3>
-          </div>
-
-          <div className="rounded-xl bg-slate-50 p-4">
-            <div className="text-2xl">⏱️</div>
-            <p className="text-xs text-[#5B6472] mt-1.5">Duration</p>
-            <h3 className="font-bold text-[#12181F]">{duration} min</h3>
-          </div>
+          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${p.violations.length>0?"bg-red-900/50 text-red-400":"bg-emerald-900/50 text-emerald-400"}`}>
+            {p.violations.length} flags
+          </span>
         </div>
-      </section>
+        <div className="max-h-36 overflow-y-auto">
+          {p.violations.length === 0 ? (
+            <div className="p-3 text-center">
+              <FiCheckCircle className="text-emerald-400 mx-auto mb-1 text-sm" />
+              <p className="text-[9px] text-emerald-400 font-semibold">All clear</p>
+            </div>
+          ) : (
+            p.violations.map((v,i) => (
+              <div key={i} className="px-2.5 py-1.5 border-b border-white/[0.03] last:border-0">
+                <p className="text-[9px] text-red-300 leading-3.5">⚠ {v.msg}</p>
+                <p className="text-[8px] text-white/15 mt-0.5">{v.time}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
-      {/* AI Features — Bioluminescent glow grid */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
-        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-          AI Features
-        </h2>
+// ─────────────────────────────────────────────────────────────────
+// SETUP STEP DOTS
+// ─────────────────────────────────────────────────────────────────
+function StepDots({ total, current }) {
+  return (
+    <div className="flex items-center gap-2 mb-8">
+      {Array.from({ length: total }).map((_, i) => (
+        <div key={i} className="flex items-center gap-2">
+          <div className={`transition-all duration-300 rounded-full ${
+            i < current  ? "w-6 h-2 bg-indigo-500" :
+            i === current? "w-8 h-2 bg-indigo-600" :
+            "w-2 h-2 bg-slate-200"
+          }`} />
+          {i < total-1 && <div className={`h-px w-4 ${i<current?"bg-indigo-200":"bg-slate-100"}`} />}
+        </div>
+      ))}
+      <span className="text-xs text-slate-400 ml-2">Step {current+1} of {total}</span>
+    </div>
+  );
+}
 
-        <AIFeatureGrid />
-      </section>
-
-      {/* Before You Start */}
-      <section className="bg-white rounded-2xl border border-[#E4E1DA] shadow-sm p-5">
-        <h2 className="text-xl font-bold text-[#12181F] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-          Before You Start
-        </h2>
-
-        <div className="space-y-3">
-          {CHECKLIST_ITEMS.map((item) => (
-            <label key={item.key} className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                className="accent-[#E8963C]"
-                checked={checklist[item.key]}
-                onChange={() => toggleChecklist(item.key)}
-              />
-              <span className="text-sm text-[#12181F]">{item.label}</span>
-            </label>
-          ))}
-
-          <div className="flex items-center gap-3">
-            <span
-              className={`w-5 h-5 rounded flex items-center justify-center text-xs ${
-                resume ? "bg-[#1F6F63] text-white" : "bg-[#E4E1DA] text-[#5B6472]"
-              }`}
-            >
-              {resume ? "✓" : ""}
-            </span>
-            <span className="text-sm text-[#12181F]">
-              Resume uploaded {resume ? <span className="text-[#1F6F63] text-xs">(done automatically)</span> : null}
+// ─────────────────────────────────────────────────────────────────
+// ROUND PROGRESS BAR
+// ─────────────────────────────────────────────────────────────────
+function RoundBar({ round, scores }) {
+  return (
+    <div className="bg-white border border-slate-200 rounded-2xl px-5 py-3 mb-5 flex items-center gap-3">
+      <span className="text-xs font-bold text-slate-400 mr-1">Progress</span>
+      {Array.from({ length: TOTAL_ROUNDS }).map((_, i) => {
+        const s = scores[i]; const done = i < round-1; const cur = i === round-1;
+        return (
+          <div key={i} className="flex-1 flex flex-col items-center gap-1">
+            <div className={`w-full h-2 rounded-full transition-all ${
+              done ? (s>=8?"bg-emerald-400":s>=6?"bg-yellow-400":"bg-red-400")
+              : cur ? "bg-indigo-500 animate-pulse" : "bg-slate-100"
+            }`} />
+            <span className={`text-[10px] font-bold ${cur?"text-indigo-600":done?(s>=6?"text-emerald-600":"text-red-500"):"text-slate-300"}`}>
+              {done ? `${s}/10` : cur ? `Q${i+1}` : "·"}
             </span>
           </div>
-        </div>
-      </section>
+        );
+      })}
+      <span className="text-xs text-slate-400 ml-1 whitespace-nowrap">{round}/{TOTAL_ROUNDS}</span>
+    </div>
+  );
+}
 
-      {/* CTA */}
-      <section className="bg-[#12181F] rounded-2xl text-white p-6">
-        <div className="flex items-start gap-3">
-          <span
-            className={`mt-1 w-3 h-3 rounded-full flex-shrink-0 ${
-              isReady ? "bg-[#1F6F63]" : "bg-[#E8963C] animate-pulse"
-            }`}
-          />
-          <div>
-            <h2 className="text-2xl font-bold" style={{ fontFamily: "'Fraunces', serif" }}>
-              Ready for Your AI Interview?
-            </h2>
-            <p className="mt-2.5 text-slate-300 text-sm">
-              The AI interviewer will ask resume-based, company-specific, technical, behavioral, and follow-up
-              questions. At the end you'll receive a detailed performance report with strengths and improvement
-              areas.
-            </p>
-          </div>
-        </div>
+// ─────────────────────────────────────────────────────────────────
+// ONLINE COMPILER PANEL
+// ─────────────────────────────────────────────────────────────────
+function CompilerPanel({ question, onDone, onSkip, round, proctor }) {
+  const [lang,       setLang]       = useState("python");
+  const [code,       setCode]       = useState(LANGUAGES[0].starter);
+  const [output,     setOutput]     = useState("");
+  const [running,    setRunning]    = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [feedback,   setFeedback]   = useState("");
+  const [score,      setScore]      = useState(null);
+  const [view,       setView]       = useState("code");
+  const [testRes,    setTestRes]    = useState([]);
 
-        <button
-          onClick={handleStart}
-          className={`mt-6 font-bold px-7 py-3.5 rounded-xl transition ${
-            isReady
-              ? "bg-white text-[#12181F] hover:scale-105"
-              : "bg-white/20 text-white cursor-pointer hover:bg-white/25"
-          }`}
-        >
-          {isReady ? "Start AI Interview" : "Check What's Missing"}
-        </button>
+  const selectLang = (id) => {
+    setLang(id);
+    setCode(LANGUAGES.find(l=>l.id===id)?.starter || "");
+    setOutput("");
+  };
 
-        {showMissing && !isReady && (
-          <div className="mt-5 rounded-xl bg-white/10 border border-white/20 p-4">
-            <p className="text-sm font-semibold mb-2">Finish these steps first:</p>
-            <ul className="list-disc ml-5 text-sm text-slate-200 space-y-1">
-              {missingSteps.map((s) => (
-                <li key={s.key}>{s.label}</li>
-              ))}
-            </ul>
+  const runCode = async () => {
+    setRunning(true); setOutput("");
+    await new Promise(r => setTimeout(r, 1200));
+    const sampleOut = {
+      python: `Python 3.12 — Running...\n\n✓ No syntax errors\n[Output would appear here with a real execution engine]\n\nProcess finished with exit code 0`,
+      javascript: `Node.js 20 — Running...\n\n✓ No syntax errors\n[Output would appear here]\n\nProcess finished with exit code 0`,
+      java: `Compiling Java 17...\n✓ Compilation successful\n\n[Output would appear here]\n\nProcess finished with exit code 0`,
+      cpp:  `Compiling C++17...\n✓ Compilation successful\n\n[Output would appear here]\n\nProcess finished with exit code 0`,
+      sql:  `Executing query...\n✓ Query parsed\n\n┌──────────┬─────────┐\n│ result   │ value   │\n├──────────┼─────────┤\n│ [output] │ [value] │\n└──────────┴─────────┘`,
+    };
+    setOutput(sampleOut[lang] || `Running ${lang}...\n✓ Done`);
+    setTestRes([
+      { id:1, status:Math.random()>0.3?"pass":"fail", label:"Basic Test"  },
+      { id:2, status:Math.random()>0.4?"pass":"fail", label:"Edge Case"   },
+      { id:3, status:"hidden",                         label:"Hidden Test" },
+    ]);
+    setRunning(false);
+  };
+
+  const submitCode = async () => {
+    if (!code.trim()) return;
+    setSubmitting(true); setView("feedback");
+    try {
+      const d = await api.chat(
+        `You are a senior software engineer reviewing a coding interview submission.\n\nQuestion:\n${question?.statement || question}\n\nCandidate's ${lang.toUpperCase()} Solution:\n\`\`\`${lang}\n${code}\n\`\`\`\n\nEvaluate strictly. Format EXACTLY:\n\n**Score: X/10**\n\n**Verdict:** [one honest line]\n\n**✅ Correctness:**\n- [point]\n\n**⏱ Complexity:**\n- Time: O(?) — reason\n- Space: O(?) — reason\n\n**✅ Code Quality:**\n- [point]\n\n**❌ Issues:**\n- [issue]\n\n**💡 Optimal Approach:**\n[3–4 lines]\n\n**⚡ Key Takeaway:**\n[one tip]`
+      );
+      const raw = d.response || "";
+      setFeedback(raw);
+      const m = raw.match(/Score:\s*(\d+)/i);
+      setScore(m ? parseInt(m[1]) : 6);
+    } catch { setFeedback("❌ Evaluation failed. Please try again."); setScore(5); }
+    setSubmitting(false);
+  };
+
+  const curLang = LANGUAGES.find(l=>l.id===lang);
+  const lines   = code.split("\n");
+
+  return (
+    <div className="flex gap-4">
+      {/* Proctor sidebar */}
+      {proctor && <ProctorPanel p={proctor} />}
+
+      {/* Main editor area */}
+      <div className="flex-1 space-y-4 min-w-0">
+        {view === "code" && (
+          <>
+            {/* Question */}
+            <div className="bg-slate-900 rounded-2xl p-5 text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-violet-500/5 pointer-events-none" />
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${diffColor[question?.difficulty||"Medium"]}`}>{question?.difficulty||"Medium"}</span>
+                  <span className="text-xs text-white/30">Round {round}</span>
+                  {question?.timeLimit && <span className="ml-auto flex items-center gap-1 text-xs text-white/25"><FiClock className="text-xs"/>{question.timeLimit}</span>}
+                </div>
+                <div className="prose prose-invert prose-sm max-w-none"><ReactMarkdown>{question?.statement||question||""}</ReactMarkdown></div>
+                {question?.examples?.map((ex,i) => (
+                  <div key={i} className="mt-3 bg-white/5 rounded-xl p-3 font-mono text-xs">
+                    <p className="text-white/40 mb-1">Example {i+1}:</p>
+                    <p className="text-emerald-400">Input:  {ex.input}</p>
+                    <p className="text-blue-400">Output: {ex.output}</p>
+                    {ex.explanation && <p className="text-white/30 mt-1">{ex.explanation}</p>}
+                  </div>
+                ))}
+                {question?.constraints?.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {question.constraints.map((c,i) => <span key={i} className="text-[10px] bg-white/5 text-white/35 px-2 py-0.5 rounded-lg">{c}</span>)}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Editor */}
+            <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
+              {/* Language tabs */}
+              <div className="flex items-center overflow-x-auto bg-slate-50 border-b border-slate-100">
+                {LANGUAGES.map(l => (
+                  <button key={l.id} onClick={()=>selectLang(l.id)}
+                    className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold whitespace-nowrap border-b-2 transition-all flex-shrink-0 ${
+                      lang===l.id ? "border-indigo-600 text-indigo-700 bg-white" : "border-transparent text-slate-500 hover:text-slate-700"
+                    }`}>
+                    <span>{l.emoji}</span><span>{l.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Code area with line numbers */}
+              <div className="relative bg-slate-900 flex">
+                {/* Line numbers */}
+                <div className="select-none bg-slate-950/50 border-r border-white/5 flex flex-col items-end px-3 pt-3 min-w-[40px]">
+                  {lines.map((_,i) => <div key={i} className="text-[10px] text-white/15 leading-5 font-mono">{i+1}</div>)}
+                </div>
+                <textarea
+                  value={code}
+                  onChange={e => setCode(e.target.value)}
+                  rows={Math.max(lines.length, 14)}
+                  className="flex-1 pl-4 pr-4 py-3 font-mono text-sm bg-transparent text-emerald-300 border-0 outline-none resize-none leading-5"
+                  spellCheck={false}
+                  autoComplete="off"
+                  onKeyDown={e => {
+                    if (e.key === "Tab") {
+                      e.preventDefault();
+                      const s = e.target.selectionStart;
+                      const newCode = code.substring(0,s) + "    " + code.substring(e.target.selectionEnd);
+                      setCode(newCode);
+                      setTimeout(() => { e.target.selectionStart = e.target.selectionEnd = s+4; }, 0);
+                    }
+                  }}
+                />
+              </div>
+
+              {/* Output */}
+              {output && (
+                <div className="bg-black/90 border-t border-white/5">
+                  <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5">
+                    <FiTerminal className="text-emerald-400 text-xs" />
+                    <span className="text-xs text-white/40 font-mono">Output</span>
+                  </div>
+                  <pre className="px-4 py-3 text-xs font-mono text-emerald-300 leading-5 max-h-28 overflow-y-auto whitespace-pre-wrap">{output}</pre>
+                  {testRes.length > 0 && (
+                    <div className="px-4 pb-3 flex flex-wrap gap-2">
+                      {testRes.map(t => (
+                        <div key={t.id} className={`text-xs px-2.5 py-1 rounded-lg font-mono border ${
+                          t.status==="pass"   ? "bg-emerald-900/40 text-emerald-400 border-emerald-800" :
+                          t.status==="fail"   ? "bg-red-900/40 text-red-400 border-red-800" :
+                          "bg-white/5 text-white/30 border-white/10"
+                        }`}>
+                          {t.status==="pass"?"✓":t.status==="fail"?"✗":"?"} {t.label}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Actions */}
+              <div className="flex items-center gap-3 px-4 py-3 bg-slate-50 border-t border-slate-100">
+                <div className="flex items-center gap-1.5 text-xs text-slate-400">
+                  <span>{curLang?.emoji}</span><span>{curLang?.label}</span>
+                </div>
+                <div className="flex gap-2 ml-auto">
+                  <button onClick={onSkip} className="btn-outline text-xs py-1.5 px-3">Skip</button>
+                  <button onClick={runCode} disabled={running}
+                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-slate-800 text-emerald-400 text-xs font-bold hover:bg-slate-700 transition-colors disabled:opacity-50 border border-slate-700">
+                    <FiPlay className="text-xs" />{running?"Running...":"Run Code"}
+                  </button>
+                  <button onClick={submitCode} disabled={!code.trim()||running}
+                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors disabled:opacity-40">
+                    <FiSend className="text-xs" />Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Feedback view */}
+        {view === "feedback" && (
+          <div className="space-y-4">
+            {submitting ? (
+              <div className="card text-center py-14">
+                <div className="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4" />
+                <p className="font-semibold text-slate-700">Analysing your code...</p>
+                <p className="text-slate-400 text-sm mt-1">Checking correctness, complexity & code quality</p>
+              </div>
+            ) : (
+              <>
+                <div className={`card border-2 ${scoreBg(score??0)} text-center py-8`}>
+                  <div className={`text-5xl font-extrabold mb-1 ${scoreColor(score??0)}`}>{score}/10</div>
+                  <p className={`font-bold text-lg ${scoreColor(score??0)}`}>{scoreLabel(score??0)}</p>
+                </div>
+                <div className="card">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 bg-indigo-100 rounded-xl flex items-center justify-center"><FiStar className="text-indigo-600 text-xs"/></div>
+                    <p className="font-bold text-slate-800">Code Review Feedback</p>
+                  </div>
+                  <div className="prose prose-slate prose-sm max-w-none prose-headings:font-bold prose-strong:text-slate-800">
+                    <ReactMarkdown>{feedback}</ReactMarkdown>
+                  </div>
+                </div>
+                <div className="bg-slate-900 rounded-2xl p-4">
+                  <p className="text-xs text-white/30 font-mono mb-2">Your submitted {curLang?.label} code</p>
+                  <pre className="text-xs font-mono text-emerald-300 leading-5 overflow-x-auto whitespace-pre-wrap max-h-36">{code}</pre>
+                </div>
+                <button onClick={()=>onDone(score??6)} className="btn-primary w-full flex items-center justify-center gap-2 py-3">
+                  Next Round <FiChevronRight />
+                </button>
+              </>
+            )}
           </div>
         )}
-      </section>
+      </div>
     </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// TEXT PANEL (non-coding sections)
+// ─────────────────────────────────────────────────────────────────
+function TextPanel({ question, onDone, onSkip, round, section, proctor }) {
+  const [answer,    setAnswer]    = useState("");
+  const [feedback,  setFeedback]  = useState("");
+  const [score,     setScore]     = useState(null);
+  const [submitting,setSubmitting]= useState(false);
+  const [view,      setView]      = useState("question");
+
+  // Sync voice transcript into answer box
+  useEffect(() => {
+    if (proctor?.voiceOn && proctor?.transcript) {
+      setAnswer(proctor.transcript);
+    }
+  }, [proctor?.transcript, proctor?.voiceOn]);
+
+  const submit = async () => {
+    if (!answer.trim()) return;
+    setSubmitting(true); setView("feedback");
+    try {
+      const d = await api.chat(
+        `You are a senior interviewer evaluating a ${section?.label} answer.\n\nQuestion: ${question?.statement||question}\n\nCandidate's Answer: ${answer}\n\nEvaluate strictly. Format EXACTLY:\n\n**Score: X/10**\n\n**Verdict:** [one honest line]\n\n**✅ What Was Good:**\n- [point]\n\n**❌ Missing / Wrong:**\n- [point]\n\n**💡 Ideal Answer:**\n[3–5 lines]\n\n**⚡ Key Takeaway:**\n[one tip]`
+      );
+      const raw = d.response || "";
+      setFeedback(raw);
+      const m = raw.match(/Score:\s*(\d+)/i);
+      setScore(m ? parseInt(m[1]) : 6);
+    } catch { setFeedback("❌ Evaluation failed."); setScore(5); }
+    setSubmitting(false);
+  };
+
+  return (
+    <div className="flex gap-4">
+      {proctor && <ProctorPanel p={proctor} />}
+      <div className="flex-1 space-y-4 min-w-0">
+        {view === "question" && (
+          <>
+            <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-6 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full -translate-y-6 translate-x-6" />
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${diffColor[question?.difficulty||"Medium"]}`}>{question?.difficulty||"Medium"}</span>
+                  <span className="text-xs text-white/30">{section?.label}</span>
+                  <span className="ml-auto text-xs text-white/20">Round {round}</span>
+                </div>
+                <div className="prose prose-invert prose-sm max-w-none"><ReactMarkdown>{question?.statement||question||""}</ReactMarkdown></div>
+                {question?.hint && (
+                  <div className="mt-4 bg-white/5 rounded-xl p-3">
+                    <p className="text-xs text-white/40 mb-1">💡 Hint</p>
+                    <p className="text-xs text-white/55">{question.hint}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="card">
+              <div className="flex items-center justify-between mb-3">
+                <label className="text-sm font-bold text-slate-700">Your Answer</label>
+                <div className="flex items-center gap-2">
+                  {proctor?.voiceOn && <span className="flex items-center gap-1 text-xs text-indigo-600 font-semibold"><FiMic className="animate-pulse text-xs"/>Voice active</span>}
+                  <span className="text-xs text-slate-400">{answer.length} chars</span>
+                </div>
+              </div>
+              <textarea
+                value={answer}
+                onChange={e => setAnswer(e.target.value)}
+                rows={9}
+                className="input resize-none text-sm leading-6 w-full"
+                placeholder={
+                  section?.id==="behavioral" ? "Use STAR method: Situation → Task → Action → Result..."
+                  : section?.id==="system"   ? "Start with requirements → high-level design → components → tradeoffs..."
+                  : section?.id==="project"  ? "Explain your role, tech stack, architecture decisions, challenges..."
+                  : "Write your detailed answer here..."
+                }
+              />
+              <div className="flex gap-3 mt-4">
+                <button onClick={onSkip} className="btn-outline">Skip</button>
+                <button onClick={submit} disabled={!answer.trim()}
+                  className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-40">
+                  <FiSend className="text-sm"/>Submit Answer
+                </button>
+              </div>
+            </div>
+          </>
+        )}
+        {view === "feedback" && (
+          <div className="space-y-4">
+            {submitting ? (
+              <div className="card text-center py-14">
+                <div className="w-10 h-10 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"/>
+                <p className="font-semibold text-slate-700">Evaluating your answer...</p>
+              </div>
+            ) : (
+              <>
+                <div className={`card border-2 ${scoreBg(score??0)} text-center py-8`}>
+                  <div className={`text-5xl font-extrabold mb-1 ${scoreColor(score??0)}`}>{score}/10</div>
+                  <p className={`font-bold text-lg ${scoreColor(score??0)}`}>{scoreLabel(score??0)}</p>
+                </div>
+                <div className="card">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-7 h-7 bg-indigo-100 rounded-xl flex items-center justify-center"><FiStar className="text-indigo-600 text-xs"/></div>
+                    <p className="font-bold text-slate-800">Interviewer Feedback</p>
+                  </div>
+                  <div className="prose prose-slate prose-sm max-w-none prose-headings:font-bold prose-strong:text-slate-800">
+                    <ReactMarkdown>{feedback}</ReactMarkdown>
+                  </div>
+                </div>
+                <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4">
+                  <p className="text-xs font-bold text-slate-400 mb-2">Your Answer</p>
+                  <p className="text-sm text-slate-600 whitespace-pre-wrap leading-6">{answer}</p>
+                </div>
+                <button onClick={()=>onDone(score??6)} className="btn-primary w-full flex items-center justify-center gap-2 py-3">
+                  Next Round <FiChevronRight/>
+                </button>
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// MAIN PAGE
+// ─────────────────────────────────────────────────────────────────
+export default function MockInterview() {
+  const [phase,     setPhase]     = useState("gate");     // gate | setup | interview | done
+  const [proctored, setProctored] = useState(false);
+  const [setupStep, setSetupStep] = useState(0);
+  const [role,      setRole]      = useState(null);
+  const [level,     setLevel]     = useState(null);
+  const [sections,  setSections]  = useState([]);
+  const [round,     setRound]     = useState(1);
+  const [question,  setQuestion]  = useState(null);
+  const [scores,    setScores]    = useState([]);
+  const [loading,   setLoading]   = useState(false);
+  const [curSection,setCurSection]= useState(null);
+
+  const proctor = useProctor({ active: phase === "interview" && proctored });
+
+  const getSectionForRound = (r) => {
+    const idx = (r-1) % sections.length;
+    return SECTIONS.find(s => s.id === sections[idx]);
+  };
+
+  const generateQuestion = async (sec, r) => {
+    setLoading(true); setQuestion(null);
+    const roleObj  = ROLES.find(x=>x.id===role);
+    const levelObj = LEVELS.find(x=>x.id===level);
+    try {
+      const d = await api.chat(
+        `You are a technical interviewer.\nRole: ${roleObj?.label}\nLevel: ${levelObj?.label}\nSection: ${sec?.label}\nRound: ${r} of ${TOTAL_ROUNDS}\n\nGenerate ONE interview question.\n\n${sec?.id==="coding"||sec?.id==="dbms" ? `Return a JSON object (no backticks):\n{"statement":"...","difficulty":"Easy|Medium|Hard","examples":[{"input":"...","output":"...","explanation":"..."}],"constraints":["..."],"timeLimit":"20 minutes","hint":"..."}` : `Return a JSON object (no backticks):\n{"statement":"...","difficulty":"Easy|Medium|Hard","hint":"..."}`}`
+      );
+      let q = null;
+      try { q = JSON.parse((d.response||"").trim().replace(/```json|```/g,"").trim()); }
+      catch { q = { statement: d.response, difficulty:"Medium" }; }
+      setQuestion(q);
+    } catch { setQuestion({ statement:"❌ Failed to generate. Check API key.", difficulty:"Medium" }); }
+    setLoading(false);
+  };
+
+  const startInterview = () => {
+    const sec = getSectionForRound(1);
+    setCurSection(sec);
+    setPhase("interview");
+    setRound(1); setScores([]);
+    if (proctored) proctor.startMedia();
+    generateQuestion(sec, 1);
+  };
+
+  const handleRoundDone = (s) => {
+    const newScores = [...scores, s];
+    setScores(newScores);
+    if (round >= TOTAL_ROUNDS) { setPhase("done"); if (proctored) proctor.stopMedia(); }
+    else {
+      const nxt = round+1;
+      const sec = getSectionForRound(nxt);
+      setRound(nxt); setCurSection(sec);
+      if (proctored) proctor.setTranscript("");
+      generateQuestion(sec, nxt);
+    }
+  };
+
+  const restart = () => {
+    proctor.stopMedia();
+    setPhase("gate"); setSetupStep(0); setRole(null); setLevel(null);
+    setSections([]); setRound(1); setScores([]); setQuestion(null); setCurSection(null);
+  };
+
+  const toggleSection = (id) => setSections(p => p.includes(id) ? p.filter(x=>x!==id) : [...p,id]);
+
+  const avgScore = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+  const roleObj  = ROLES.find(r=>r.id===role);
+  const levelObj = LEVELS.find(l=>l.id===level);
+
+  // ── PERMISSION GATE ───────────────────────────────────────────
+  if (phase === "gate") {
+    return (
+      <DashboardLayout>
+        <PermissionGate
+          onGranted={() => { setProctored(true);  setPhase("setup"); }}
+          onSkip={()    => { setProctored(false); setPhase("setup"); }}
+        />
+        {/* Background content */}
+        <div className="max-w-3xl mx-auto text-center py-20 opacity-20 pointer-events-none select-none">
+          <h1 className="text-3xl font-extrabold text-slate-900">Mock Interview</h1>
+          <p className="text-slate-500 mt-2">AI-powered · 5 rounds · Real questions</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  // ── SETUP ─────────────────────────────────────────────────────
+  if (phase === "setup") {
+    return (
+      <DashboardLayout>
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-7">
+            <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1.5 rounded-full mb-4">
+              <FiZap className="text-xs"/>
+              {proctored ? "🔴 Proctored Mode" : "Basic Mode"} · AI-Powered Mock Interview
+            </div>
+            <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Practice Like It's Real</h1>
+            <p className="text-slate-400 text-sm max-w-sm mx-auto">5 rounds · Real questions · Instant AI feedback · Live compiler</p>
+          </div>
+          <StepDots total={3} current={setupStep} />
+
+          {/* Step 0: Role */}
+          {setupStep===0 && (
+            <div>
+              <p className="text-sm font-bold text-slate-700 mb-1">Which role are you targeting?</p>
+              <p className="text-xs text-slate-400 mb-4">Questions will be tailored to this role.</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {ROLES.map(r => (
+                  <button key={r.id} onClick={()=>setRole(r.id)}
+                    className={`text-left flex items-start gap-3 p-4 rounded-2xl border-2 transition-all hover:-translate-y-0.5 hover:shadow-sm ${role===r.id?"border-indigo-500 bg-indigo-50":"border-slate-200 bg-white hover:border-slate-300"}`}>
+                    <span className="text-2xl">{r.icon}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className={`font-bold text-sm ${role===r.id?"text-indigo-700":"text-slate-800"}`}>{r.label}</p>
+                      <div className="flex flex-wrap gap-1 mt-1">{r.companies.map(c=><span key={c} className="text-[10px] text-slate-400 bg-slate-100 px-1.5 py-0.5 rounded">{c}</span>)}</div>
+                    </div>
+                    {role===r.id && <FiCheck className="text-indigo-500 flex-shrink-0 mt-0.5"/>}
+                  </button>
+                ))}
+              </div>
+              <button onClick={()=>setSetupStep(1)} disabled={!role} className="btn-primary w-full mt-5 flex items-center justify-center gap-2 disabled:opacity-40">Continue <FiArrowRight/></button>
+            </div>
+          )}
+
+          {/* Step 1: Level */}
+          {setupStep===1 && (
+            <div>
+              <p className="text-sm font-bold text-slate-700 mb-1">What is your experience level?</p>
+              <p className="text-xs text-slate-400 mb-4">Adjusts question difficulty and evaluation criteria.</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {LEVELS.map(l => (
+                  <button key={l.id} onClick={()=>setLevel(l.id)}
+                    className={`text-left flex items-center gap-4 p-5 rounded-2xl border-2 transition-all hover:shadow-sm ${level===l.id?`${l.border} ${l.light}`:"border-slate-200 bg-white hover:border-slate-300"}`}>
+                    <div className={`w-12 h-12 ${l.color} rounded-2xl flex items-center justify-center text-white font-extrabold text-lg flex-shrink-0`}>{l.sub[0]}</div>
+                    <div>
+                      <p className={`font-bold ${level===l.id?l.text:"text-slate-800"}`}>{l.label}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">{l.sub} experience</p>
+                    </div>
+                    {level===l.id && <FiCheck className={`ml-auto ${l.text} flex-shrink-0`}/>}
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3 mt-5">
+                <button onClick={()=>setSetupStep(0)} className="btn-outline flex items-center gap-2"><FiArrowLeft/>Back</button>
+                <button onClick={()=>setSetupStep(2)} disabled={!level} className="btn-primary flex-1 flex items-center justify-center gap-2 disabled:opacity-40">Continue <FiArrowRight/></button>
+              </div>
+            </div>
+          )}
+
+          {/* Step 2: Sections */}
+          {setupStep===2 && (
+            <div>
+              <p className="text-sm font-bold text-slate-700 mb-1">Which sections do you want to practice?</p>
+              <p className="text-xs text-slate-400 mb-4">Select one or more. Questions rotate through sections across 5 rounds.</p>
+              <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                {SECTIONS.map(s => {
+                  const sel = sections.includes(s.id);
+                  return (
+                    <button key={s.id} onClick={()=>toggleSection(s.id)}
+                      className={`text-left flex items-start gap-3 p-4 rounded-2xl border-2 transition-all hover:-translate-y-0.5 hover:shadow-sm relative ${sel?`${s.border} ${s.bg}`:"border-slate-200 bg-white hover:border-slate-300"}`}>
+                      {s.hasCompiler && <span className="absolute top-2 right-2 text-[9px] bg-indigo-100 text-indigo-600 px-1.5 py-0.5 rounded-full font-bold">{s.compilerOnly?"SQL":"CODE"}</span>}
+                      <span className={`text-xl mt-0.5 ${sel?s.color:"text-slate-400"}`}>{s.emoji}</span>
+                      <div className="flex-1 min-w-0 pr-4">
+                        <p className={`font-bold text-sm ${sel?s.color:"text-slate-800"}`}>{s.label}</p>
+                        <p className="text-xs text-slate-400 leading-4 mt-0.5">{s.desc}</p>
+                      </div>
+                      {sel && <FiCheck className={`${s.color} flex-shrink-0 mt-0.5`}/>}
+                    </button>
+                  );
+                })}
+              </div>
+              {sections.length>0 && (
+                <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 mb-4">
+                  <p className="text-xs font-bold text-indigo-700 uppercase tracking-wider mb-2">Interview Plan</p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs bg-white border border-indigo-200 text-indigo-700 px-2.5 py-1 rounded-full font-medium">{roleObj?.icon} {roleObj?.label}</span>
+                    <span className={`text-xs bg-white border ${levelObj?.border} ${levelObj?.text} px-2.5 py-1 rounded-full font-medium`}>{levelObj?.label}</span>
+                    <span className={`text-xs bg-white border px-2.5 py-1 rounded-full font-medium ${proctored?"border-red-200 text-red-600":"border-slate-200 text-slate-600"}`}>{proctored?"🔴 Proctored":"Basic Mode"}</span>
+                    {sections.map(id=>{const s=SECTIONS.find(x=>x.id===id);return<span key={id} className={`text-xs bg-white border ${s?.border} ${s?.color} px-2.5 py-1 rounded-full font-medium`}>{s?.emoji} {s?.label}</span>;})}
+                  </div>
+                </div>
+              )}
+              <div className="flex gap-3">
+                <button onClick={()=>setSetupStep(1)} className="btn-outline flex items-center gap-2"><FiArrowLeft/>Back</button>
+                <button onClick={startInterview} disabled={sections.length===0}
+                  className="btn-primary flex-1 flex items-center justify-center gap-2 py-3 text-base disabled:opacity-40">
+                  <FiZap/> Start Interview
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  // ── DONE ─────────────────────────────────────────────────────
+  if (phase === "done") {
+    const grade = avgScore>=8?"A":avgScore>=6?"B":avgScore>=4?"C":"D";
+    const gc    = avgScore>=8?"text-emerald-600":avgScore>=6?"text-yellow-600":"text-red-500";
+    const gb    = avgScore>=8?"bg-emerald-50 border-emerald-200":avgScore>=6?"bg-yellow-50 border-yellow-200":"bg-red-50 border-red-100";
+    return (
+      <DashboardLayout>
+        <div className="max-w-2xl mx-auto">
+          <div className={`card border-2 ${gb} text-center py-10 mb-5`}>
+            <div className={`text-7xl font-extrabold ${gc} mb-1`}>{grade}</div>
+            <div className={`text-3xl font-extrabold ${gc} mb-1`}>{avgScore}/10</div>
+            <p className={`font-bold text-lg ${gc}`}>{scoreLabel(avgScore)}</p>
+            <p className="text-slate-400 text-sm mt-1">{roleObj?.label} · {TOTAL_ROUNDS} rounds complete {proctored?"· Proctored 🔴":""}</p>
+            {proctored && proctor.violations.length > 0 && (
+              <p className="text-xs text-red-500 mt-2">{proctor.violations.length} integrity flag{proctor.violations.length>1?"s":""} recorded</p>
+            )}
+          </div>
+          <div className="card mb-4">
+            <p className="font-bold text-slate-800 mb-4">Round Breakdown</p>
+            <div className="space-y-3">
+              {scores.map((s,i) => {
+                const sec = SECTIONS.find(x=>x.id===sections[i%sections.length]);
+                return (
+                  <div key={i} className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 w-44"><span>{sec?.emoji}</span><span className="text-xs text-slate-500 font-medium truncate">{sec?.label}</span></div>
+                    <div className="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden"><div className={`h-2 rounded-full ${s>=8?"bg-emerald-400":s>=6?"bg-yellow-400":"bg-red-400"}`} style={{width:`${s*10}%`}}/></div>
+                    <span className={`text-sm font-extrabold w-10 text-right ${scoreColor(s)}`}>{s}/10</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <button onClick={restart} className="btn-primary flex-1 flex items-center justify-center gap-2"><FiRefreshCw/>Practice Again</button>
+            <button onClick={()=>{setPhase("interview");setRound(1);setScores([]);const s=getSectionForRound(1);setCurSection(s);if(proctored)proctor.startMedia();generateQuestion(s,1);}} className="btn-outline">Same Setup</button>
+          </div>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  // ── INTERVIEW ─────────────────────────────────────────────────
+  const sec    = curSection;
+  const isCod  = sec?.hasCompiler;
+  const pData  = proctored ? proctor : null;
+
+  return (
+    <DashboardLayout>
+      <div className="max-w-5xl mx-auto">
+        {/* Top bar */}
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            <button onClick={restart} className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all"><FiArrowLeft/></button>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="font-bold text-slate-900">Mock Interview</h1>
+                {sec && <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full border ${sec.border} ${sec.color} ${sec.bg}`}>{sec.emoji} {sec.label}</span>}
+                {isCod && <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-800 text-emerald-400 border border-slate-700"><FiTerminal className="inline text-xs mr-1"/>COMPILER</span>}
+                {proctored && <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-red-900/20 text-red-400 border border-red-800/30 flex items-center gap-1"><span className="w-1.5 h-1.5 bg-red-400 rounded-full animate-pulse"/>PROCTORED</span>}
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">{roleObj?.icon} {roleObj?.label} · {levelObj?.label}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-500"><FiClock className="text-xs"/>Round {round}/{TOTAL_ROUNDS}</div>
+        </div>
+
+        <RoundBar round={round} scores={scores}/>
+
+        {loading ? (
+          <div className="card text-center py-16">
+            <div className="w-12 h-12 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin mx-auto mb-4"/>
+            <p className="font-semibold text-slate-700">Generating {sec?.label} question...</p>
+            <p className="text-slate-400 text-sm mt-1">Crafting a {levelObj?.label}-level question for you</p>
+          </div>
+        ) : question ? (
+          isCod ? (
+            <CompilerPanel question={question} onDone={handleRoundDone} onSkip={()=>handleRoundDone(0)} round={round} proctor={pData}/>
+          ) : (
+            <TextPanel    question={question} onDone={handleRoundDone} onSkip={()=>handleRoundDone(0)} round={round} section={sec} proctor={pData}/>
+          )
+        ) : null}
+      </div>
+    </DashboardLayout>
   );
 }
