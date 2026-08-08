@@ -1,4 +1,3 @@
-
 import { useState, useMemo, useRef } from "react";
 import DashboardLayout from "../layouts/DashboardLayout";
 import { Link } from "react-router-dom";
@@ -9,6 +8,7 @@ import {
   FiUsers, FiBookOpen, FiGlobe, FiLayers, FiCpu,
   FiArrowRight, FiLock, FiUnlock, FiGift,
 } from "react-icons/fi";
+
 
 // ─────────────────────────────────────────────────────────────────
 // PYTHON ROADMAP DATA — 5 Levels, 1000+ lines of real content
@@ -22,13 +22,13 @@ const ROADMAP = [
     emoji: "🌱",
     tagline: "Zero to first working program",
     duration: "3–4 weeks",
-    color: "emerald",
-    bg: "bg-emerald-50",
-    border: "border-emerald-200",
-    text: "text-emerald-700",
-    ring: "ring-emerald-200",
-    bar: "bg-emerald-500",
-    badge: "bg-emerald-100 text-emerald-700 border-emerald-200",
+    color: "indigo",
+    bg: "bg-indigo-50",
+    border: "border-indigo-200",
+    text: "text-indigo-700",
+    ring: "ring-indigo-200",
+    bar: "bg-indigo-500",
+    badge: "bg-indigo-100 text-indigo-700 border-indigo-200",
     sections: [
       {
         id: "l1-setup",
@@ -137,9 +137,9 @@ In Python, variables are references to objects.
 Unlike many programming languages, variables themselves do not directly store values.
 Instead,
 Variable
-↓
+  ↓
 Reference
-↓
+  ↓
 Object in Memory
 Python automatically manages this reference system.
 ---`,
@@ -3136,11 +3136,6 @@ If total amount is greater than ₹1000,
 provide free delivery.
 Otherwise,
 add delivery charges.
-Weather App:
-If temperature is below 20°C,
-suggest wearing a jacket.
-Otherwise,
-display normal weather information.
 ----------------------------------------
 Conditional Statements in Python
 ----------------------------------------
@@ -3179,6 +3174,2617 @@ Conditional statements are one of the most important concepts in Python programm
 
             },
 
+            {
+  heading: "Indentation in Conditional Statements",
+  body: `Indentation is one of the most important rules in Python. It is the whitespace placed at the beginning of a line to define which statements belong to a particular block of code. Unlike languages such as C, C++, and Java, Python does not use curly braces {} to define code blocks. Python uses indentation instead.
+When Python sees a colon (:) after a statement such as if, elif, else, for, while, or a function definition, it expects the following block of code to be indented.
+----------------------------------------
+What is Indentation?
+----------------------------------------
+Indentation means adding spaces or tabs before a statement.
+Example:
+if age >= 18:
+    print("You are eligible")
+Here:
+if age >= 18: → Condition
+    print("You are eligible") → Indented code block
+The four spaces before print() tell Python that the print statement belongs to the if statement.
+----------------------------------------
+Why Does Python Use Indentation?
+----------------------------------------
+Indentation makes the structure of Python code visually clear.
+Compare this with languages that use braces:
+Python:
+if age >= 18:
+    print("Eligible")
+C/Java style:
+if (age >= 18) {
+    print("Eligible");
+}
+Python removes the need for {} by using indentation to represent the structure of the program.
+----------------------------------------
+Standard Indentation
+----------------------------------------
+The standard Python convention is four spaces for each indentation level.
+Example:
+if age >= 18:
+    print("Eligible")
+    print("You can vote")
+Both print statements have the same indentation, so both belong to the if block.
+----------------------------------------
+Multiple Statements Inside a Block
+----------------------------------------
+You can place multiple statements inside the same conditional block.
+Example:
+age = 21
+if age >= 18:
+    print("Age requirement satisfied")
+    print("You are eligible to vote")
+    print("You can continue")
+All three statements are indented equally, so Python considers all three statements part of the if block.
+----------------------------------------
+Nested Indentation
+----------------------------------------
+A conditional statement can exist inside another conditional statement. This is called a nested conditional.
+Each new block requires another indentation level.
+Example:
+age = 21
+has_id = True
+if age >= 18:
+    print("Adult")
+    if has_id:
+        print("ID verified")
+Here:
+First level:
+if age >= 18:
+    print("Adult")
+Second level:
+    if has_id:
+        print("ID verified")
+The inner if statement is indented inside the outer if block.
+----------------------------------------
+Indentation Levels
+----------------------------------------
+Think of indentation as levels.
+Level 0:
+if age >= 18:
+Level 1:
+    print("Adult")
+Level 1:
+    if has_id:
+Level 2:
+        print("ID verified")
+Level 2 statements belong to the inner block.
+Level 1 statements belong to the outer block.
+----------------------------------------
+Indentation with if...else
+----------------------------------------
+Both if and else blocks have their own indentation.
+Example:
+age = 16
+if age >= 18:
+    print("Eligible")
+else:
+    print("Not eligible")
+Notice that if and else are aligned at the same indentation level.
+Their statements are indented one level inside them.
+Correct structure:
+if condition:
+    statement
+else:
+    statement
+----------------------------------------
+Indentation with if...elif...else
+----------------------------------------
+Every conditional branch has its own block.
+Example:
+marks = 85
+if marks >= 90:
+    print("A+")
+elif marks >= 75:
+    print("A")
+else:
+    print("Needs improvement")
+The keywords if, elif, and else are aligned.
+Their corresponding statements are indented.
+----------------------------------------
+Incorrect Indentation
+----------------------------------------
+Example:
+if age >= 18:
+print("Eligible")
+This is incorrect because print() is not indented.
+Python will raise:
+IndentationError
+Correct:
+if age >= 18:
+    print("Eligible")
+----------------------------------------
+Unexpected Indentation
+----------------------------------------
+Indentation should only be added where Python expects a new block.
+Incorrect:
+age = 20
+    print(age)
+There is no statement before print() that creates an indented block.
+Python raises an IndentationError.
+Correct:
+age = 20
+print(age)
+----------------------------------------
+Inconsistent Indentation
+----------------------------------------
+Do not randomly change the number of spaces within the same block.
+Incorrect:
+if age >= 18:
+    print("Adult")
+      print("Eligible")
+The statements do not have consistent indentation.
+Correct:
+if age >= 18:
+    print("Adult")
+    print("Eligible")
+----------------------------------------
+Spaces vs Tabs
+----------------------------------------
+Python allows indentation using spaces or tabs, but mixing tabs and spaces can cause errors.
+The recommended practice is:
+Use four spaces for each indentation level.
+Most modern Python editors automatically insert four spaces when you press Tab.
+Example:
+if condition:
+    print("Statement")
+----------------------------------------
+Indentation Determines Program Structure
+----------------------------------------
+Indentation is not just formatting in Python. It changes the actual meaning and execution structure of the program.
+Example:
+age = 20
+if age >= 18:
+    print("Adult")
+print("Program finished")
+Here, only the first print statement belongs to the if block.
+The second print statement is outside the if block because it has no indentation.
+If age is 20:
+Adult
+Program finished
+If age is 15:
+Program finished
+This demonstrates that indentation determines which statements are controlled by the condition.
+----------------------------------------
+Colon and Indentation Work Together
+----------------------------------------
+A colon (:) indicates that a new block is beginning.
+Example:
+if age >= 18:
+    print("Eligible")
+The colon tells Python:
+"A block is starting."
+The indentation tells Python:
+"This statement belongs to that block."
+The general pattern is:
+statement:
+    indented statement
+----------------------------------------
+Indentation After elif and else
+----------------------------------------
+The same rule applies to elif and else.
+Example:
+temperature = 35
+if temperature > 40:
+    print("Very hot")
+elif temperature > 30:
+    print("Hot")
+else:
+    print("Normal")
+if, elif, and else are at the same level.
+Their corresponding code blocks are indented.
+----------------------------------------
+Indentation and pass
+----------------------------------------
+If a block does not contain any code yet, Python requires a statement such as pass.
+Example:
+if age >= 18:
+    pass
+The pass statement allows the block to remain empty without producing an error.
+----------------------------------------
+Professional Python Practice
+----------------------------------------
+Use four spaces for indentation.
+Keep indentation consistent.
+Do not mix tabs and spaces.
+Keep statements belonging to the same block at the same indentation level.
+Use an editor that automatically manages indentation.
+Indent nested blocks one additional level.
+----------------------------------------
+Key Rule to Remember
+----------------------------------------
+Colon (:) → Starts a new block.
+Indentation → Defines the block.
+Same indentation → Same block.
+More indentation → Nested block.
+Less indentation → End of the current block.
+Example:
+if condition:
+    statement_1
+    statement_2
+    if another_condition:
+        statement_3
+    statement_4
+statement_5
+Here:
+statement_1 → Inside first if
+statement_2 → Inside first if
+statement_3 → Inside nested if
+statement_4 → Inside first if
+statement_5 → Outside all conditions
+----------------------------------------
+Summary
+----------------------------------------
+Python uses indentation to define the structure of conditional statements. Four spaces are the standard indentation level. Statements with the same indentation belong to the same block, while additional indentation creates nested blocks. Correct indentation is essential because Python treats indentation as part of the program's syntax, not merely as visual formatting.`,
+},
+
+{
+  heading: "The if Statement",
+  body: `The if statement is the simplest conditional statement in Python. It is used when you want Python to execute a block of code only when a particular condition is True.
+The basic structure is:
+if condition:
+    statement
+Python first evaluates the condition. If the condition evaluates to True, the indented block is executed. If the condition evaluates to False, Python skips the block and continues with the next statement.
+----------------------------------------
+Basic Example
+----------------------------------------
+age = 20
+if age >= 18:
+    print("You are an adult")
+Output:
+You are an adult
+Here:
+age >= 18 → Condition
+: → Indicates that the if block begins
+    print(...) → Code belonging to the if block
+Because 20 >= 18 is True, Python executes the print statement.
+----------------------------------------
+When the Condition is False
+----------------------------------------
+age = 15
+if age >= 18:
+    print("You are an adult")
+print("Program continues")
+Output:
+Program continues
+The condition 15 >= 18 is False, so Python skips the indented statement. Execution then continues with the next statement outside the if block.
+----------------------------------------
+How Python Executes an if Statement
+----------------------------------------
+Python follows these steps:
+1. Read the if statement.
+2. Evaluate the condition.
+3. Convert the result to True or False.
+4. If the result is True, execute the indented block.
+5. If the result is False, skip the block.
+6. Continue executing the remaining program.
+Example:
+marks = 85
+if marks >= 40:
+    print("Pass")
+Python evaluates:
+85 >= 40
+Result:
+True
+Therefore:
+Pass
+is printed.
+----------------------------------------
+Using Comparison Operators
+----------------------------------------
+The condition of an if statement commonly uses comparison operators.
+Example:
+age = 21
+if age == 21:
+    print("Age is 21")
+Other examples:
+if age > 18:
+    print("Above 18")
+if age < 30:
+    print("Below 30")
+if age >= 18:
+    print("Eligible")
+if age <= 60:
+    print("Within limit")
+if age != 25:
+    print("Age is not 25")
+----------------------------------------
+Using Variables in Conditions
+----------------------------------------
+Conditions usually compare variables with values.
+Example:
+salary = 50000
+if salary > 30000:
+    print("Good salary")
+Python evaluates the value stored in salary and then checks the condition.
+----------------------------------------
+Using Boolean Variables
+----------------------------------------
+An if statement can directly use a Boolean variable.
+Example:
+is_logged_in = True
+if is_logged_in:
+    print("Welcome to your dashboard")
+Because is_logged_in contains True, the statement executes.
+Another example:
+is_admin = False
+if is_admin:
+    print("Admin panel")
+The condition is False, so nothing is printed.
+----------------------------------------
+Using Expressions
+----------------------------------------
+The condition does not have to be a simple comparison. It can be an expression.
+Example:
+a = 10
+b = 20
+if a + b > 25:
+    print("Sum is greater than 25")
+Python first calculates:
+10 + 20 = 30
+Then checks:
+30 > 25
+Result:
+True
+----------------------------------------
+Multiple Statements Inside if
+----------------------------------------
+An if block can contain multiple statements.
+Example:
+age = 22
+if age >= 18:
+    print("You are an adult")
+    print("You can vote")
+    print("You can apply for a driving license")
+All three statements execute because they belong to the same indented block.
+----------------------------------------
+Nested if Statement
+----------------------------------------
+An if statement can be placed inside another if statement.
+Example:
+age = 22
+has_id = True
+if age >= 18:
+    print("Age requirement satisfied")
+    if has_id:
+        print("ID verified")
+The inner if executes only when the outer if condition is True.
+----------------------------------------
+Using String Conditions
+----------------------------------------
+Strings can also be compared in conditions.
+Example:
+name = "Rahul"
+if name == "Rahul":
+    print("Welcome Rahul")
+Python compares the value of name with the string "Rahul".
+----------------------------------------
+Using Membership with if
+----------------------------------------
+The in operator can be used to check whether a value exists inside a collection.
+Example:
+languages = ["Python", "Java", "C++"]
+if "Python" in languages:
+    print("Python is available")
+Output:
+Python is available
+----------------------------------------
+Using None with if
+----------------------------------------
+None can also be checked using an if statement.
+Example:
+data = None
+if data is None:
+    print("No data available")
+This is commonly used when a value has not been assigned yet.
+----------------------------------------
+Truthy and Falsy Values
+----------------------------------------
+Python does not require every condition to explicitly contain True or False. Many values are automatically treated as True or False in a condition.
+Falsy values include:
+False
+None
+0
+0.0
+""
+[]
+()
+{}
+Example:
+name = ""
+if name:
+    print("Name entered")
+Because an empty string is falsy, the statement is not executed.
+Example:
+name = "Rahul"
+if name:
+    print("Name entered")
+Output:
+Name entered
+A non-empty string is truthy.
+----------------------------------------
+The Colon (:)
+----------------------------------------
+The colon after the condition is mandatory.
+Correct:
+if age >= 18:
+    print("Eligible")
+Incorrect:
+if age >= 18
+    print("Eligible")
+The second example produces a SyntaxError because the colon is missing.
+----------------------------------------
+Indentation Requirement
+----------------------------------------
+The statements controlled by if must be indented.
+Correct:
+if age >= 18:
+    print("Eligible")
+Incorrect:
+if age >= 18:
+print("Eligible")
+The incorrect version raises an IndentationError.
+----------------------------------------
+if with Function Calls
+----------------------------------------
+An if statement can control whether a function is called.
+Example:
+is_valid = True
+if is_valid:
+    print("Validation successful")
+----------------------------------------
+Real-World Example — Voting
+----------------------------------------
+age = 25
+if age >= 18:
+    print("You are eligible to vote")
+The condition determines whether the user is eligible.
+----------------------------------------
+Real-World Example — Login
+----------------------------------------
+is_logged_in = True
+if is_logged_in:
+    print("Open Dashboard")
+The dashboard action occurs only when the user is logged in.
+----------------------------------------
+Real-World Example — Minimum Balance
+----------------------------------------
+balance = 5000
+withdrawal = 2000
+if balance >= withdrawal:
+    print("Withdrawal allowed")
+The condition checks whether enough balance is available.
+----------------------------------------
+Important Rule
+----------------------------------------
+An if statement performs an action only when its condition is True.
+The basic mental model is:
+if condition:
+    execute this code
+If condition → True:
+Code executes.
+If condition → False:
+Code is skipped.
+----------------------------------------
+Summary
+----------------------------------------
+The if statement is the foundation of decision making in Python. It evaluates a condition and executes an indented block only when that condition is True. Conditions can use comparison operators, Boolean values, expressions, strings, collections, and other Python objects. The if statement is the building block for more advanced decision-making structures such as if...else, if...elif...else, and nested conditions.`,
+},
+
+{
+  heading: "The if...else Statement",
+  body: `The if...else statement is used when a program needs to choose between two possible paths.
+The if block runs when the condition is True.
+The else block runs when the condition is False.
+Unlike a simple if statement, if...else guarantees that one of the two blocks will execute.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+if condition:
+    statement_if_true
+else:
+    statement_if_false
+The if and else keywords must be aligned at the same indentation level.
+The statements inside each block must be indented.
+----------------------------------------
+Basic Example
+----------------------------------------
+age = 20
+if age >= 18:
+    print("You are an adult")
+else:
+    print("You are a minor")
+Output:
+You are an adult
+The condition:
+age >= 18
+is True, so Python executes the if block and skips the else block.
+----------------------------------------
+When the Condition is False
+----------------------------------------
+age = 15
+if age >= 18:
+    print("You are an adult")
+else:
+    print("You are a minor")
+Output:
+You are a minor
+The condition:
+15 >= 18
+is False.
+Therefore, Python skips the if block and executes the else block.
+----------------------------------------
+How if...else Works
+----------------------------------------
+Python follows this process:
+1. Evaluate the condition.
+2. If the condition is True, execute the if block.
+3. If the condition is False, execute the else block.
+4. Continue with the remaining program.
+Only one of the two blocks executes.
+----------------------------------------
+Flow of Execution
+----------------------------------------
+Consider:
+marks = 35
+if marks >= 40:
+    print("Pass")
+else:
+    print("Fail")
+Python checks:
+35 >= 40
+Result:
+False
+Therefore:
+Fail
+is printed.
+If marks were 80:
+80 >= 40
+Result:
+True
+Therefore:
+Pass
+is printed.
+----------------------------------------
+if and else Must Be Aligned
+----------------------------------------
+Correct:
+if age >= 18:
+    print("Eligible")
+else:
+    print("Not eligible")
+Incorrect:
+if age >= 18:
+    print("Eligible")
+    else:
+        print("Not eligible")
+The else must belong to the same indentation level as its if.
+----------------------------------------
+Multiple Statements
+----------------------------------------
+Both blocks can contain multiple statements.
+Example:
+age = 22
+if age >= 18:
+    print("Adult")
+    print("Eligible to vote")
+else:
+    print("Minor")
+    print("Not eligible to vote")
+All statements inside the selected block are executed.
+----------------------------------------
+Using Comparison Operators
+----------------------------------------
+if score >= 40:
+    print("Pass")
+else:
+    print("Fail")
+Other comparisons can also be used:
+if temperature > 30:
+    print("Hot")
+else:
+    print("Normal")
+if password == "python123":
+    print("Login successful")
+else:
+    print("Incorrect password")
+----------------------------------------
+Using Boolean Values
+----------------------------------------
+is_logged_in = True
+if is_logged_in:
+    print("Welcome to Dashboard")
+else:
+    print("Please login")
+If is_logged_in is True, the first block executes.
+If it is False, the else block executes.
+----------------------------------------
+Using Expressions
+----------------------------------------
+a = 10
+b = 5
+if a > b:
+    print("a is greater")
+else:
+    print("b is greater or equal")
+Python evaluates the expression before choosing a block.
+----------------------------------------
+Using Strings
+----------------------------------------
+name = "Rahul"
+if name == "Rahul":
+    print("Welcome Rahul")
+else:
+    print("Unknown user")
+String comparisons can be used directly in conditions.
+----------------------------------------
+Using Membership Operators
+----------------------------------------
+language = "Python"
+if language in ["Python", "Java", "C++"]:
+    print("Supported language")
+else:
+    print("Unsupported language")
+----------------------------------------
+Using Logical Operators
+----------------------------------------
+age = 25
+has_id = True
+if age >= 18 and has_id:
+    print("Entry allowed")
+else:
+    print("Entry denied")
+The entire logical expression is evaluated before Python chooses the block.
+----------------------------------------
+Real-World Example — Voting
+----------------------------------------
+age = 17
+if age >= 18:
+    print("You are eligible to vote")
+else:
+    print("You are not eligible to vote")
+The program chooses exactly one result based on age.
+----------------------------------------
+Real-World Example — Login
+----------------------------------------
+username = "admin"
+password = "1234"
+if username == "admin" and password == "1234":
+    print("Login successful")
+else:
+    print("Invalid username or password")
+This pattern is commonly used in authentication logic.
+----------------------------------------
+Real-World Example — ATM
+----------------------------------------
+balance = 5000
+withdrawal = 6000
+if balance >= withdrawal:
+    print("Withdrawal successful")
+else:
+    print("Insufficient balance")
+Because the balance is less than the withdrawal amount, the else block executes.
+----------------------------------------
+Real-World Example — Even or Odd
+----------------------------------------
+number = 7
+if number % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
+The modulus operator checks whether the number has a remainder of zero.
+----------------------------------------
+Nested if with else
+----------------------------------------
+An if...else statement can contain another if...else statement.
+Example:
+age = 20
+has_id = True
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+    else:
+        print("ID required")
+else:
+    print("Underage")
+Here, the inner decision is made only after the outer condition is True.
+----------------------------------------
+The else Block Is Optional in if
+----------------------------------------
+An if statement can exist without else:
+if temperature > 40:
+    print("Very hot")
+But when else is added:
+if temperature > 40:
+    print("Very hot")
+else:
+    print("Temperature is normal")
+the program has an action for both possible outcomes.
+----------------------------------------
+Important Difference
+----------------------------------------
+Simple if:
+if condition:
+    statement
+If the condition is False, nothing from the if block executes.
+if...else:
+if condition:
+    statement_1
+else:
+    statement_2
+If the condition is False, the else block executes.
+Therefore, if...else is useful when there are exactly two possible paths.
+----------------------------------------
+Common Mistake — Using = Instead of ==
+----------------------------------------
+Do not use assignment = when comparing values.
+Incorrect:
+if age = 18:
+    print("Age is 18")
+Correct:
+if age == 18:
+    print("Age is 18")
+Remember:
+=  → Assignment
+== → Comparison
+----------------------------------------
+Common Mistake — Missing Colon
+----------------------------------------
+Incorrect:
+if age >= 18
+    print("Adult")
+Correct:
+if age >= 18:
+    print("Adult")
+The colon is required after the condition and after else.
+----------------------------------------
+Common Mistake — Incorrect Indentation
+----------------------------------------
+Incorrect:
+if age >= 18:
+print("Adult")
+else:
+print("Minor")
+Correct:
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+Python uses indentation to identify the blocks.
+----------------------------------------
+Key Rules
+----------------------------------------
+• if checks the condition.
+• True → execute the if block.
+• False → execute the else block.
+• Only one branch executes.
+• if and else must be aligned.
+• Statements inside each block must be indented.
+• A colon is required after if and else.
+• Conditions can contain comparisons, expressions, Boolean values, and logical operators.
+----------------------------------------
+Summary
+----------------------------------------
+The if...else statement allows Python programs to choose between two different execution paths. When the condition is True, Python executes the if block. When the condition is False, Python executes the else block. This makes if...else one of the most important tools for creating decision-based and interactive Python programs.`,
+},
+{
+  heading: "The if...elif...else Statement",
+  body: `The if...elif...else statement is used when a program needs to choose between more than two possible conditions.
+The if statement checks the first condition.
+If the first condition is False, Python checks the elif condition.
+Python can have multiple elif blocks.
+If none of the if or elif conditions are True, the else block executes.
+Only one branch of the entire if...elif...else chain executes.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+if condition_1:
+    statement_1
+elif condition_2:
+    statement_2
+elif condition_3:
+    statement_3
+else:
+    statement_4
+The conditions are checked from top to bottom.
+As soon as Python finds a True condition, it executes that block and skips the remaining branches.
+----------------------------------------
+Basic Example
+----------------------------------------
+marks = 75
+if marks >= 90:
+    print("Grade A+")
+elif marks >= 75:
+    print("Grade A")
+elif marks >= 60:
+    print("Grade B")
+else:
+    print("Needs Improvement")
+Output:
+Grade A
+Python checks:
+marks >= 90
+75 >= 90
+False
+Then:
+marks >= 75
+75 >= 75
+True
+Therefore Python executes:
+print("Grade A")
+Python does not check the remaining elif and else blocks.
+----------------------------------------
+How Python Checks Conditions
+----------------------------------------
+Consider:
+temperature = 25
+if temperature >= 40:
+    print("Very Hot")
+elif temperature >= 30:
+    print("Hot")
+elif temperature >= 20:
+    print("Pleasant")
+else:
+    print("Cold")
+Python checks:
+40 or above → False
+30 or above → False
+20 or above → True
+Therefore:
+Pleasant
+is printed.
+The checking stops as soon as a True condition is found.
+----------------------------------------
+Why Use elif?
+----------------------------------------
+Without elif, multiple independent if statements may execute.
+Example:
+marks = 85
+if marks >= 40:
+    print("Pass")
+if marks >= 75:
+    print("Good")
+if marks >= 90:
+    print("Excellent")
+Output:
+Pass
+Good
+Here, multiple conditions can execute.
+With elif:
+if marks >= 90:
+    print("Excellent")
+elif marks >= 75:
+    print("Good")
+elif marks >= 40:
+    print("Pass")
+else:
+    print("Fail")
+Output:
+Good
+Only one branch executes.
+----------------------------------------
+Order of Conditions Matters
+----------------------------------------
+Python checks conditions from top to bottom.
+Example:
+marks = 95
+if marks >= 40:
+    print("Pass")
+elif marks >= 75:
+    print("Good")
+elif marks >= 90:
+    print("Excellent")
+else:
+    print("Fail")
+Output:
+Pass
+The first condition is already True, so Python never reaches the later conditions.
+Better ordering:
+if marks >= 90:
+    print("Excellent")
+elif marks >= 75:
+    print("Good")
+elif marks >= 40:
+    print("Pass")
+else:
+    print("Fail")
+Output:
+Excellent
+More specific conditions should generally be checked before broader conditions.
+----------------------------------------
+Using Multiple elif Blocks
+----------------------------------------
+Python allows multiple elif conditions.
+Example:
+score = 82
+if score >= 90:
+    print("A+")
+elif score >= 80:
+    print("A")
+elif score >= 70:
+    print("B")
+elif score >= 60:
+    print("C")
+elif score >= 50:
+    print("D")
+else:
+    print("F")
+Output:
+A
+Only the first matching condition is executed.
+----------------------------------------
+The else Block Is Optional
+----------------------------------------
+An if...elif chain does not require an else block.
+Example:
+age = 25
+if age < 18:
+    print("Minor")
+elif age >= 18:
+    print("Adult")
+If no condition is True and there is no else block, Python simply continues with the next statement.
+----------------------------------------
+Using Comparison Operators
+----------------------------------------
+elif conditions can use all comparison operators.
+Example:
+number = 0
+if number > 0:
+    print("Positive")
+elif number < 0:
+    print("Negative")
+else:
+    print("Zero")
+Output:
+Zero
+This is a common pattern for classifying a number.
+----------------------------------------
+Using Logical Operators
+----------------------------------------
+Multiple conditions can be combined using and, or, and not.
+Example:
+age = 25
+salary = 50000
+if age >= 18 and salary >= 40000:
+    print("Eligible")
+elif age >= 18:
+    print("Age eligible but salary is low")
+else:
+    print("Not eligible")
+----------------------------------------
+Using Strings
+----------------------------------------
+A string can be used to select between different options.
+Example:
+language = "Python"
+if language == "Python":
+    print("Python selected")
+elif language == "Java":
+    print("Java selected")
+elif language == "C++":
+    print("C++ selected")
+else:
+    print("Unknown language")
+Output:
+Python selected
+----------------------------------------
+Real-World Example — Login
+----------------------------------------
+role = "admin"
+if role == "admin":
+    print("Open Admin Dashboard")
+elif role == "developer":
+    print("Open Developer Dashboard")
+elif role == "student":
+    print("Open Student Dashboard")
+else:
+    print("Access Denied")
+The program selects the appropriate dashboard based on the user's role.
+----------------------------------------
+Real-World Example — Grade System
+----------------------------------------
+marks = 86
+if marks >= 90:
+    grade = "A+"
+elif marks >= 80:
+    grade = "A"
+elif marks >= 70:
+    grade = "B"
+elif marks >= 60:
+    grade = "C"
+elif marks >= 50:
+    grade = "D"
+else:
+    grade = "F"
+print(grade)
+Output:
+A
+----------------------------------------
+Real-World Example — Age Category
+----------------------------------------
+age = 25
+if age < 13:
+    print("Child")
+elif age < 18:
+    print("Teenager")
+elif age < 60:
+    print("Adult")
+else:
+    print("Senior Citizen")
+Python evaluates each condition in order.
+Because age is 25:
+age < 13 → False
+age < 18 → False
+age < 60 → True
+Output:
+Adult
+----------------------------------------
+Real-World Example — Temperature
+----------------------------------------
+temperature = 32
+if temperature >= 40:
+    print("Extremely Hot")
+elif temperature >= 30:
+    print("Hot")
+elif temperature >= 20:
+    print("Comfortable")
+elif temperature >= 10:
+    print("Cool")
+else:
+    print("Cold")
+Output:
+Hot
+----------------------------------------
+Nested if Inside elif
+----------------------------------------
+An elif branch can contain another if statement.
+Example:
+age = 25
+has_id = True
+if age < 18:
+    print("Underage")
+elif age >= 18:
+    if has_id:
+        print("Entry allowed")
+    else:
+        print("ID required")
+The inner if is evaluated only when the elif condition is True.
+----------------------------------------
+elif Must Belong to an if
+----------------------------------------
+An elif cannot be used independently.
+Incorrect:
+elif age >= 18:
+    print("Adult")
+Python will raise a SyntaxError.
+Correct:
+if age < 18:
+    print("Minor")
+elif age >= 18:
+    print("Adult")
+----------------------------------------
+else Must Come Last
+----------------------------------------
+The else block must always come after the if and all elif blocks.
+Correct:
+if score >= 90:
+    print("A+")
+elif score >= 75:
+    print("A")
+else:
+    print("Needs Improvement")
+Incorrect:
+if score >= 90:
+    print("A+")
+else:
+    print("Needs Improvement")
+elif score >= 75:
+    print("A")
+The elif after else is invalid syntax.
+----------------------------------------
+Indentation Rules
+----------------------------------------
+The if, elif, and else keywords must be aligned.
+Correct:
+if condition:
+    print("First")
+elif another_condition:
+    print("Second")
+else:
+    print("Third")
+The statements inside each branch must be indented.
+----------------------------------------
+Colon Requirement
+----------------------------------------
+A colon is required after every if, elif, and else statement.
+Correct:
+if age >= 18:
+    print("Adult")
+elif age >= 13:
+    print("Teenager")
+else:
+    print("Child")
+----------------------------------------
+Important Difference Between if and elif
+----------------------------------------
+Multiple independent if statements:
+if condition_1:
+    statement_1
+if condition_2:
+    statement_2
+Both conditions can execute if both are True.
+if...elif:
+if condition_1:
+    statement_1
+elif condition_2:
+    statement_2
+Only the first True branch executes.
+Use separate if statements when multiple actions may need to happen.
+Use if...elif...else when exactly one decision path should be selected.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of if...elif...else like a decision chain:
+if → Try the first condition.
+elif → Try the next condition if the previous one failed.
+elif → Continue checking.
+else → Execute when nothing matched.
+The flow is:
+Condition 1
+↓
+True → Execute Block 1 → Finish
+False
+↓
+Condition 2
+↓
+True → Execute Block 2 → Finish
+False
+↓
+Condition 3
+↓
+True → Execute Block 3 → Finish
+False
+↓
+else → Execute Default Block
+----------------------------------------
+Key Rules
+----------------------------------------
+• if starts the conditional chain.
+• elif means "else if".
+• Multiple elif blocks are allowed.
+• Conditions are checked from top to bottom.
+• The first True condition wins.
+• Only one branch executes.
+• else handles the case where no condition is True.
+• else is optional.
+• else must always come last.
+• elif must come before else.
+• if, elif, and else must be properly indented.
+• A colon is required after every condition and else.
+• The order of conditions can change the result.
+----------------------------------------
+Summary
+----------------------------------------
+The if...elif...else statement allows Python programs to make decisions among multiple possible choices. Python evaluates conditions from top to bottom and immediately executes the first block whose condition is True. If none of the conditions are True, the optional else block executes. Understanding condition order, indentation, and the difference between independent if statements and an if...elif...else chain is essential for writing reliable Python programs.`,
+},
+
+{
+  heading: "Nested if Statements",
+  body: `A nested if statement is an if statement placed inside another if statement. It is used when a program needs to make a second decision only after a first condition has been satisfied.
+Think of nested if statements as a decision inside another decision.
+For example:
+First check whether a person is an adult.
+If they are an adult, then check whether they have an ID.
+Only when both conditions are satisfied should entry be allowed.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+if condition_1:
+    if condition_2:
+        statement
+The inner if belongs to the outer if block, so it must have one additional indentation level.
+----------------------------------------
+Basic Example
+----------------------------------------
+age = 20
+if age >= 18:
+    print("You are an adult")
+    if age >= 21:
+        print("You are 21 or older")
+Output:
+You are an adult
+The outer condition is True, so Python enters the outer block.
+It then evaluates the inner condition.
+20 >= 21 is False, so the inner print statement is skipped.
+----------------------------------------
+Understanding the Execution Flow
+----------------------------------------
+Consider:
+age = 25
+if age >= 18:
+    print("Adult")
+    if age >= 21:
+        print("21 or older")
+Python first checks:
+age >= 18
+25 >= 18
+True
+Python enters the outer block.
+Then it checks:
+age >= 21
+25 >= 21
+True
+Therefore both statements execute.
+Output:
+Adult
+21 or older
+----------------------------------------
+Nested if with else
+----------------------------------------
+An inner if can also have an else block.
+Example:
+age = 20
+has_id = True
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+    else:
+        print("ID required")
+else:
+    print("Underage")
+Here, Python first checks the person's age.
+If the person is an adult, Python then checks whether they have an ID.
+----------------------------------------
+Step-by-Step Execution
+----------------------------------------
+Suppose:
+age = 20
+has_id = True
+Python checks:
+age >= 18
+Result:
+True
+Python enters the outer block.
+Then:
+has_id
+Result:
+True
+Python executes:
+Entry allowed
+Output:
+Entry allowed
+----------------------------------------
+When the Outer Condition is False
+----------------------------------------
+Example:
+age = 16
+has_id = True
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+    else:
+        print("ID required")
+else:
+    print("Underage")
+The outer condition is False.
+Therefore Python never checks the inner if statement.
+Output:
+Underage
+This is an important property of nested conditions:
+If the outer condition fails, the inner condition is never evaluated.
+----------------------------------------
+Nested if with Multiple Levels
+----------------------------------------
+Python allows more than one level of nesting.
+Example:
+age = 25
+has_id = True
+is_member = True
+if age >= 18:
+    if has_id:
+        if is_member:
+            print("Premium entry allowed")
+Here:
+Level 1:
+if age >= 18:
+Level 2:
+    if has_id:
+Level 3:
+        if is_member:
+Each nested block is indented one additional level.
+----------------------------------------
+Nested if with elif
+----------------------------------------
+An inner conditional can also contain elif.
+Example:
+age = 25
+if age >= 18:
+    if age >= 60:
+        print("Senior")
+    elif age >= 30:
+        print("Middle-aged")
+    else:
+        print("Young adult")
+else:
+    print("Minor")
+The outer if first checks whether the person is an adult.
+Only then does the inner if...elif...else chain execute.
+----------------------------------------
+Nested if vs Multiple Conditions
+----------------------------------------
+Sometimes nested if statements can be replaced with logical operators.
+Nested version:
+age = 25
+has_id = True
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+Equivalent logical condition:
+if age >= 18 and has_id:
+    print("Entry allowed")
+Both can produce the same result.
+The best choice depends on how complex the decision is and whether separate stages of validation make the code clearer.
+----------------------------------------
+Nested if for Validation
+----------------------------------------
+Nested conditions are useful when validation must happen in stages.
+Example:
+username = "admin"
+password = "python123"
+if username == "admin":
+    if password == "python123":
+        print("Login successful")
+    else:
+        print("Incorrect password")
+else:
+    print("Unknown username")
+The password is checked only after the username is confirmed.
+----------------------------------------
+Real-World Example — ATM
+----------------------------------------
+balance = 5000
+withdrawal = 2000
+pin_correct = True
+if pin_correct:
+    if withdrawal <= balance:
+        print("Withdrawal successful")
+    else:
+        print("Insufficient balance")
+else:
+    print("Incorrect PIN")
+The program first verifies the PIN.
+Only after the PIN is correct does it check the account balance.
+----------------------------------------
+Real-World Example — Student Eligibility
+----------------------------------------
+age = 20
+marks = 75
+if age >= 18:
+    if marks >= 60:
+        print("Eligible for the program")
+    else:
+        print("Marks requirement not satisfied")
+else:
+    print("Age requirement not satisfied")
+The program checks age first and marks second.
+----------------------------------------
+Real-World Example — Online Purchase
+----------------------------------------
+logged_in = True
+balance = 5000
+price = 3000
+if logged_in:
+    if balance >= price:
+        print("Purchase successful")
+    else:
+        print("Insufficient balance")
+else:
+    print("Please login first")
+The purchase check occurs only when the user is logged in.
+----------------------------------------
+Indentation in Nested if
+----------------------------------------
+Indentation is extremely important in nested conditions.
+Correct:
+if age >= 18:
+    if has_id:
+        print("Entry allowed")
+Incorrect:
+if age >= 18:
+if has_id:
+    print("Entry allowed")
+The inner if must be indented because it belongs to the outer if block.
+----------------------------------------
+Identifying Which Block a Statement Belongs To
+----------------------------------------
+Look at the indentation level.
+Example:
+if condition_1:
+    print("A")
+    if condition_2:
+        print("B")
+    print("C")
+print("D")
+Here:
+print("A") → Outer if block
+if condition_2 → Outer if block
+print("B") → Inner if block
+print("C") → Outer if block
+print("D") → Outside both if statements
+This is why indentation is part of Python's syntax.
+----------------------------------------
+Nested if with Boolean Values
+----------------------------------------
+Boolean variables are often useful in nested conditions.
+Example:
+is_logged_in = True
+is_admin = True
+if is_logged_in:
+    if is_admin:
+        print("Admin dashboard")
+    else:
+        print("User dashboard")
+else:
+    print("Please login")
+The second decision is made only after the first condition succeeds.
+----------------------------------------
+Nested if with Membership
+----------------------------------------
+Example:
+language = "Python"
+level = "Beginner"
+if language in ["Python", "Java"]:
+    if level == "Beginner":
+        print("Beginner programming course")
+    else:
+        print("Advanced programming course")
+else:
+    print("Language not supported")
+----------------------------------------
+Avoiding Unnecessary Nesting
+----------------------------------------
+Nested if statements are useful, but excessive nesting can make code difficult to read.
+For simple conditions, logical operators can sometimes make the code cleaner.
+Nested:
+if age >= 18:
+    if has_id:
+        print("Allowed")
+Cleaner:
+if age >= 18 and has_id:
+    print("Allowed")
+However, nested conditions can be clearer when each decision represents a separate validation step.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A nested if is an if statement inside another if statement.
+• The inner if executes only when execution reaches it.
+• If the outer condition is False, the inner condition is skipped.
+• Each nested block requires additional indentation.
+• Nested if can contain else and elif.
+• Nested conditions can be combined with logical operators when appropriate.
+• Avoid unnecessary levels of nesting because deeply nested code can become difficult to maintain.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of nested if as a series of locked doors.
+First door:
+Are you 18 or older?
+If No → Stop.
+If Yes → Continue.
+Second door:
+Do you have an ID?
+If No → Stop.
+If Yes → Continue.
+Third door:
+Are you a member?
+If No → Stop.
+If Yes → Allow entry.
+Each decision is reached only after the previous decision succeeds.
+----------------------------------------
+Summary
+----------------------------------------
+Nested if statements allow Python programs to make decisions inside other decisions. The outer condition controls whether execution reaches the inner condition. Each additional level requires additional indentation. Nested conditions are especially useful for staged validation, authentication, permissions, eligibility checks, and other situations where one decision depends on another.`,
+},
+
+{
+  heading: "Ternary (Conditional) Expression",
+  body: `A ternary expression is a short and compact way to write a simple if...else decision in a single line.
+It is useful when you need to choose between exactly two values based on one condition.
+Instead of writing multiple lines with if and else, Python allows the decision to be written as an expression.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+value_if_true if condition else value_if_false
+Python first evaluates the condition.
+If the condition is True, value_if_true is returned.
+If the condition is False, value_if_false is returned.
+----------------------------------------
+Basic Example
+----------------------------------------
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+print(status)
+Output:
+Adult
+Python evaluates:
+age >= 18
+20 >= 18
+True
+Therefore:
+status = "Adult"
+----------------------------------------
+Equivalent if...else
+----------------------------------------
+Ternary expression:
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+Equivalent normal conditional:
+age = 20
+if age >= 18:
+    status = "Adult"
+else:
+    status = "Minor"
+Both produce the same result.
+The ternary expression is simply a shorter form for simple two-way decisions.
+----------------------------------------
+Another Example
+----------------------------------------
+number = 7
+result = "Even" if number % 2 == 0 else "Odd"
+print(result)
+Output:
+Odd
+The condition:
+number % 2 == 0
+is False because 7 % 2 is 1.
+Therefore:
+result = "Odd"
+----------------------------------------
+Using Numbers
+----------------------------------------
+age = 25
+fee = 1000 if age >= 18 else 500
+print(fee)
+Output:
+1000
+The value assigned to fee depends on the condition.
+----------------------------------------
+Using Comparison Operators
+----------------------------------------
+marks = 85
+result = "Pass" if marks >= 40 else "Fail"
+print(result)
+Output:
+Pass
+This is useful when a program needs to select one of two simple results.
+----------------------------------------
+Using Boolean Values
+----------------------------------------
+is_logged_in = True
+message = "Welcome" if is_logged_in else "Please login"
+print(message)
+Output:
+Welcome
+----------------------------------------
+Using Strings
+----------------------------------------
+name = "Rahul"
+message = "User found" if name == "Rahul" else "User not found"
+print(message)
+Output:
+User found
+----------------------------------------
+Using Expressions
+----------------------------------------
+a = 10
+b = 20
+larger = a if a > b else b
+print(larger)
+Output:
+20
+The expression selects whichever value is larger.
+----------------------------------------
+Finding the Minimum
+----------------------------------------
+a = 15
+b = 8
+smallest = a if a < b else b
+print(smallest)
+Output:
+8
+----------------------------------------
+Finding the Maximum
+----------------------------------------
+a = 15
+b = 8
+largest = a if a > b else b
+print(largest)
+Output:
+15
+----------------------------------------
+Ternary Expression with Function Calls
+----------------------------------------
+is_valid = True
+message = "Valid" if is_valid else "Invalid"
+print(message)
+A function result can also be used as the condition.
+----------------------------------------
+Nested Ternary Expressions
+----------------------------------------
+A ternary expression can technically contain another ternary expression.
+Example:
+marks = 85
+grade = "A" if marks >= 90 else "B" if marks >= 75 else "C"
+print(grade)
+Output:
+B
+Python evaluates the conditions from left to right.
+However, deeply nested ternary expressions can become difficult to read.
+For complex decisions, normal if...elif...else statements are usually better.
+----------------------------------------
+Ternary Expression vs if...elif...else
+----------------------------------------
+Use a ternary expression when there are only two simple outcomes.
+Example:
+result = "Pass" if marks >= 40 else "Fail"
+For multiple conditions, use if...elif...else.
+Example:
+if marks >= 90:
+    grade = "A+"
+elif marks >= 75:
+    grade = "A"
+elif marks >= 60:
+    grade = "B"
+else:
+    grade = "C"
+Trying to put many decisions into one ternary expression can reduce readability.
+----------------------------------------
+Ternary Expression Returns a Value
+----------------------------------------
+One important difference is that a ternary expression produces a value.
+Example:
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+The selected value is assigned to status.
+This makes ternary expressions useful inside assignments and other expressions.
+----------------------------------------
+Using Ternary Inside print()
+----------------------------------------
+You can use a ternary expression directly inside a function call.
+Example:
+age = 20
+print("Adult" if age >= 18 else "Minor")
+Output:
+Adult
+No separate variable is required.
+----------------------------------------
+Using Ternary in Calculations
+----------------------------------------
+Example:
+age = 20
+discount = 10 if age >= 18 else 5
+price = 1000
+final_price = price - discount
+print(final_price)
+The ternary expression determines the discount value.
+----------------------------------------
+Truthy and Falsy Conditions
+----------------------------------------
+A ternary expression can use Python's truthy and falsy values.
+Example:
+name = "Rahul"
+message = "Name exists" if name else "Name is empty"
+print(message)
+Output:
+Name exists
+A non-empty string is truthy.
+An empty string is falsy.
+----------------------------------------
+Using None
+----------------------------------------
+value = None
+message = "Available" if value is not None else "No value"
+print(message)
+Output:
+No value
+The is operator is commonly used when checking against None.
+----------------------------------------
+Using Logical Operators
+----------------------------------------
+age = 25
+has_id = True
+status = "Allowed" if age >= 18 and has_id else "Denied"
+print(status)
+Output:
+Allowed
+The complete logical condition is evaluated before Python selects the value.
+----------------------------------------
+Real-World Example — Login Status
+----------------------------------------
+logged_in = True
+status = "Online" if logged_in else "Offline"
+print(status)
+Output:
+Online
+----------------------------------------
+Real-World Example — Pass or Fail
+----------------------------------------
+marks = 72
+result = "Pass" if marks >= 40 else "Fail"
+print(result)
+Output:
+Pass
+----------------------------------------
+Real-World Example — Positive or Negative
+----------------------------------------
+number = -10
+result = "Positive" if number > 0 else "Negative or Zero"
+print(result)
+Output:
+Negative or Zero
+----------------------------------------
+Important Rules
+----------------------------------------
+• A ternary expression is a compact form of a simple if...else decision.
+• It must contain a condition.
+• It provides two possible values or expressions.
+• The syntax is value_if_true if condition else value_if_false.
+• The condition is evaluated first.
+• Only one of the two expressions is selected.
+• A ternary expression produces a value.
+• It can be used in assignments, function calls, calculations, and other expressions.
+• Use normal if...elif...else when the logic becomes complex.
+• Avoid deeply nested ternary expressions because they can reduce readability.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a ternary expression as:
+Is the condition True?
+↓
+Yes → Choose the first value.
+No → Choose the second value.
+Example:
+age = 20
+status = "Adult" if age >= 18 else "Minor"
+The decision is:
+age >= 18?
+Yes → "Adult"
+No → "Minor"
+----------------------------------------
+Summary
+----------------------------------------
+A ternary expression provides a concise way to choose between two values based on a condition. It is especially useful for short and simple decisions such as Pass or Fail, Adult or Minor, Online or Offline, and selecting the larger or smaller value. For complex decision-making, regular if...elif...else statements are easier to read and maintain.`,
+},
+
+{
+  heading: "The match...case Statement",
+  body: `The match...case statement is a pattern matching feature introduced in Python 3.10. It provides a clean way to compare a value against multiple possible patterns and execute the code associated with the first matching pattern.
+It is similar to a switch statement found in some other programming languages, but Python's match...case is more powerful because it supports pattern matching, literals, structures, sequences, mappings, and conditions.
+The basic idea is:
+Take a value.
+Compare it with different patterns.
+When a pattern matches, execute that case.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+match value:
+    case pattern_1:
+        statement_1
+    case pattern_2:
+        statement_2
+    case pattern_3:
+        statement_3
+    case _:
+        default_statement
+Here:
+match → Starts the pattern-matching statement.
+value → The value Python will compare against the cases.
+case → Defines a possible matching pattern.
+_ → Wildcard pattern that matches anything.
+----------------------------------------
+Simple Example
+----------------------------------------
+day = 2
+match day:
+    case 1:
+        print("Monday")
+    case 2:
+        print("Tuesday")
+    case 3:
+        print("Wednesday")
+    case _:
+        print("Invalid day")
+Output:
+Tuesday
+Python evaluates the value of day and checks each case from top to bottom.
+day = 2
+case 1 → No match
+case 2 → Match
+Python executes:
+print("Tuesday")
+After a case matches, the remaining cases are not executed.
+----------------------------------------
+How match...case Works
+----------------------------------------
+Python follows a simple process:
+1. Evaluate the expression after match.
+2. Compare the resulting value against the first case.
+3. If the pattern matches, execute that case.
+4. Stop checking further cases.
+5. If no case matches, execute the wildcard case if it exists.
+Example:
+command = "start"
+match command:
+    case "start":
+        print("Starting...")
+    case "stop":
+        print("Stopping...")
+    case "pause":
+        print("Paused")
+    case _:
+        print("Unknown command")
+Output:
+Starting...
+----------------------------------------
+The Wildcard Pattern _
+----------------------------------------
+The underscore _ is commonly used as the default case.
+Example:
+choice = 5
+match choice:
+    case 1:
+        print("Option 1")
+    case 2:
+        print("Option 2")
+    case 3:
+        print("Option 3")
+    case _:
+        print("Invalid option")
+Because 5 does not match 1, 2, or 3, the _ case executes.
+The wildcard means:
+"Match anything that reaches this case."
+----------------------------------------
+match...case Without a Default
+----------------------------------------
+The wildcard case is optional.
+Example:
+status = "success"
+match status:
+    case "success":
+        print("Operation completed")
+    case "failed":
+        print("Operation failed")
+If status contains another value, nothing happens because there is no matching case.
+----------------------------------------
+Matching Strings
+----------------------------------------
+match...case works very well with strings.
+Example:
+command = "login"
+match command:
+    case "login":
+        print("Opening login page")
+    case "logout":
+        print("Logging out")
+    case "profile":
+        print("Opening profile")
+    case _:
+        print("Unknown command")
+This is useful for menu systems, commands, application states, and user actions.
+----------------------------------------
+Matching Integers
+----------------------------------------
+Example:
+option = 2
+match option:
+    case 1:
+        print("Create account")
+    case 2:
+        print("Login")
+    case 3:
+        print("Exit")
+    case _:
+        print("Invalid option")
+Output:
+Login
+----------------------------------------
+Matching Boolean Values
+----------------------------------------
+Boolean values can also be matched.
+Example:
+is_admin = True
+match is_admin:
+    case True:
+        print("Admin access")
+    case False:
+        print("Regular user")
+----------------------------------------
+Multiple Values in One Case
+----------------------------------------
+The | operator can be used to match multiple alternatives.
+Example:
+day = "Saturday"
+match day:
+    case "Saturday" | "Sunday":
+        print("Weekend")
+    case "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday":
+        print("Weekday")
+    case _:
+        print("Invalid day")
+Output:
+Weekend
+The first case matches either Saturday or Sunday.
+----------------------------------------
+Using Conditions with if
+----------------------------------------
+A case can have an additional condition using a guard with if.
+Example:
+age = 25
+match age:
+    case age if age >= 18:
+        print("Adult")
+    case _:
+        print("Minor")
+The pattern matches the value and the guard then checks the additional condition.
+The guard is useful when simple pattern matching is not enough.
+----------------------------------------
+Matching Exact Values
+----------------------------------------
+Example:
+status = "success"
+match status:
+    case "success":
+        print("Request completed")
+    case "error":
+        print("Request failed")
+    case "pending":
+        print("Request is still processing")
+    case _:
+        print("Unknown status")
+This style is useful when working with fixed application states.
+----------------------------------------
+Matching Tuples
+----------------------------------------
+One of the powerful features of match...case is that it can match the structure of data.
+Example:
+point = (10, 20)
+match point:
+    case (0, 0):
+        print("Origin")
+    case (0, y):
+        print("On Y-axis")
+    case (x, 0):
+        print("On X-axis")
+    case (x, y):
+        print("Point:", x, y)
+Output:
+Point: 10 20
+Here x and y capture values from the tuple.
+The pattern:
+(x, y)
+matches a two-element tuple and assigns its values to x and y.
+----------------------------------------
+Capturing Values
+----------------------------------------
+Patterns can capture values into variables.
+Example:
+point = (5, 10)
+match point:
+    case (x, y):
+        print("X =", x)
+        print("Y =", y)
+Output:
+X = 5
+Y = 10
+This is different from simply comparing the complete tuple.
+The pattern extracts the individual values.
+----------------------------------------
+Matching Lists
+----------------------------------------
+Sequence patterns can also be used.
+Example:
+numbers = [1, 2, 3]
+match numbers:
+    case [1, 2, 3]:
+        print("Exact sequence")
+    case [1, 2, x]:
+        print("Last value:", x)
+    case _:
+        print("Different sequence")
+Output:
+Exact sequence
+Python checks the structure and values of the list.
+----------------------------------------
+Matching Different Structures
+----------------------------------------
+Example:
+data = ("Rahul", 21)
+match data:
+    case (name, age):
+        print("Name:", name)
+        print("Age:", age)
+The pattern matches the two-element sequence and captures its values.
+----------------------------------------
+The _ Wildcard in Patterns
+----------------------------------------
+The wildcard can ignore a value.
+Example:
+point = (10, 20)
+match point:
+    case (0, 0):
+        print("Origin")
+    case (x, _):
+        print("X coordinate:", x)
+The underscore means:
+"I don't care about this value."
+Output:
+X coordinate: 10
+----------------------------------------
+Matching Dictionaries
+----------------------------------------
+match...case can also match dictionary structures.
+Example:
+user = {"name": "Rahul", "role": "admin"}
+match user:
+    case {"name": name, "role": "admin"}:
+        print(name, "is an admin")
+    case {"name": name}:
+        print(name, "is a user")
+    case _:
+        print("Unknown data")
+Output:
+Rahul is an admin
+This is particularly useful when working with structured data such as API responses.
+----------------------------------------
+Real-World Example — Menu System
+----------------------------------------
+choice = 2
+match choice:
+    case 1:
+        print("Create Account")
+    case 2:
+        print("Login")
+    case 3:
+        print("View Profile")
+    case 4:
+        print("Exit")
+    case _:
+        print("Invalid choice")
+This provides a clean way to implement menu-based applications.
+----------------------------------------
+Real-World Example — HTTP Status
+----------------------------------------
+status = 404
+match status:
+    case 200:
+        print("Success")
+    case 201:
+        print("Created")
+    case 400:
+        print("Bad Request")
+    case 401:
+        print("Unauthorized")
+    case 404:
+        print("Not Found")
+    case 500:
+        print("Server Error")
+    case _:
+        print("Unknown status")
+This pattern is useful in backend development when handling API responses.
+----------------------------------------
+Real-World Example — User Role
+----------------------------------------
+role = "admin"
+match role:
+    case "admin":
+        print("Full access")
+    case "developer":
+        print("Development access")
+    case "student":
+        print("Student access")
+    case _:
+        print("Limited access")
+----------------------------------------
+match...case vs if...elif...else
+----------------------------------------
+For simple value comparisons:
+match...case can be cleaner.
+Example:
+match command:
+    case "start":
+        print("Start")
+    case "stop":
+        print("Stop")
+    case "pause":
+        print("Pause")
+The equivalent if...elif structure is:
+if command == "start":
+    print("Start")
+elif command == "stop":
+    print("Stop")
+elif command == "pause":
+    print("Pause")
+Both approaches are valid.
+Use the structure that makes the logic easiest to understand.
+----------------------------------------
+When to Use match...case
+----------------------------------------
+match...case is useful when:
+• Comparing one value against many possible patterns.
+• Building menu systems.
+• Handling commands.
+• Processing application states.
+• Matching API responses.
+• Working with tuples and sequences.
+• Extracting values from structured data.
+• Matching dictionaries and structured objects.
+• Implementing pattern-based logic.
+----------------------------------------
+When if...elif Is Better
+----------------------------------------
+Use if...elif when the logic mainly consists of independent conditions or complex comparisons.
+Example:
+temperature = 35
+if temperature > 40:
+    print("Very Hot")
+elif temperature > 30:
+    print("Hot")
+elif temperature > 20:
+    print("Normal")
+This type of range-based decision is usually clearer with if...elif.
+----------------------------------------
+Important Difference
+----------------------------------------
+if...elif primarily evaluates Boolean conditions.
+match...case primarily performs pattern matching.
+Example:
+if:
+    condition → True or False
+match:
+    value → pattern
+This distinction becomes especially useful when working with structured data.
+----------------------------------------
+Indentation Rules
+----------------------------------------
+Like other Python control-flow statements, match and case use indentation.
+Correct:
+match value:
+    case 1:
+        print("One")
+    case 2:
+        print("Two")
+Incorrect:
+match value:
+case 1:
+    print("One")
+The case must be indented inside match.
+The statement inside case must be indented one additional level.
+----------------------------------------
+Version Requirement
+----------------------------------------
+match...case was introduced in Python 3.10.
+Therefore, your Python version should be Python 3.10 or newer to use this feature.
+You can check your Python version with:
+python --version
+Example:
+Python 3.12.0
+If you are using an older Python version, match...case will not be available.
+----------------------------------------
+Important Rules
+----------------------------------------
+• match starts pattern matching.
+• case defines a pattern.
+• Cases are evaluated from top to bottom.
+• The first matching case executes.
+• _ can be used as a wildcard/default case.
+• Multiple alternatives can be combined using |.
+• A case can use an if guard.
+• Patterns can match values and data structures.
+• Patterns can capture values into variables.
+• match...case requires Python 3.10 or newer.
+• Proper indentation is required.
+• The wildcard case should normally be placed last.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of match...case as a pattern detector.
+Given:
+value
+Python asks:
+Does it match case 1?
+No → Try case 2.
+No → Try case 3.
+Yes → Execute that case and finish.
+No cases match → Execute _ if provided.
+For structured data, Python can also ask:
+Does the shape match?
+Do the values match?
+Can values be extracted?
+Are additional conditions satisfied?
+This makes match...case more powerful than a basic switch-style statement.
+----------------------------------------
+Summary
+----------------------------------------
+The match...case statement is Python's pattern matching system, introduced in Python 3.10. It allows programs to compare values against multiple patterns and can handle simple values as well as structured data such as tuples, lists, and dictionaries. The first matching case is executed, while the wildcard _ can provide a default branch. For simple value-based decisions, match...case can make code cleaner and easier to read, while if...elif remains preferable for many range-based and complex Boolean conditions.`,
+},
+
+{
+  heading: "The pass Statement",
+  body: `The pass statement is a Python statement that does nothing.
+It is used as a placeholder when Python requires a statement to be present, but you do not want to execute any code yet.
+In simple words:
+pass = "Do nothing for now."
+The pass statement is especially useful while designing a program, creating empty functions or classes, leaving a conditional branch temporarily empty, or preparing code that will be implemented later.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+pass
+The pass statement does not require parentheses, arguments, or any additional syntax.
+----------------------------------------
+Basic Example
+----------------------------------------
+if True:
+    pass
+Python accepts this code and simply does nothing when the pass statement executes.
+Without pass:
+if True:
+Python raises an IndentationError because Python expects an indented statement after the colon.
+With pass:
+if True:
+    pass
+The block is syntactically complete.
+----------------------------------------
+Why Do We Need pass?
+----------------------------------------
+Python does not allow certain blocks to remain completely empty.
+For example:
+if age >= 18:
+Python expects an indented statement after the colon.
+If you are not ready to write the logic yet, use pass:
+if age >= 18:
+    pass
+This tells Python:
+"The block is intentionally empty."
+----------------------------------------
+pass Does Not Mean Stop
+----------------------------------------
+An important point is that pass does not stop program execution.
+It simply does nothing and then Python continues with the next statement.
+Example:
+print("Start")
+pass
+print("End")
+Output:
+Start
+End
+The pass statement does not terminate the program.
+----------------------------------------
+pass vs break
+----------------------------------------
+pass and break have completely different purposes.
+pass:
+Does nothing.
+break:
+Immediately exits the current loop.
+Example:
+for i in range(3):
+    pass
+print("Loop completed")
+The loop continues normally.
+Example:
+for i in range(3):
+    break
+print("Loop stopped")
+Here break terminates the loop.
+----------------------------------------
+pass vs continue
+----------------------------------------
+pass and continue are also different.
+pass does nothing.
+continue skips the remaining statements of the current loop iteration and moves to the next iteration.
+Example:
+for i in range(3):
+    pass
+The loop continues normally.
+Example:
+for i in range(3):
+    continue
+The current iteration immediately moves to the next iteration.
+----------------------------------------
+pass Inside if
+----------------------------------------
+pass can be used when a condition should intentionally perform no action.
+Example:
+age = 15
+if age >= 18:
+    pass
+else:
+    print("Minor")
+Output:
+Minor
+When age is 15, the else block executes.
+When age is 18 or above, the if block executes pass and does nothing.
+----------------------------------------
+pass Inside if...elif...else
+----------------------------------------
+Example:
+status = "pending"
+if status == "success":
+    print("Success")
+elif status == "pending":
+    pass
+else:
+    print("Failed")
+When status is "pending", Python intentionally performs no action.
+This can be useful when a particular state needs to be handled later.
+----------------------------------------
+pass Inside Loops
+----------------------------------------
+pass can be used inside for and while loops.
+Example:
+for number in range(5):
+    pass
+The loop still executes five iterations, but no visible action occurs during those iterations.
+After the loop:
+print("Finished")
+Output:
+Finished
+----------------------------------------
+pass Inside a for Loop with a Condition
+----------------------------------------
+Example:
+for number in range(1, 6):
+    if number == 3:
+        pass
+    else:
+        print(number)
+Output:
+1
+2
+4
+5
+The pass itself produces no output.
+When number is 3, Python simply does nothing for that iteration.
+----------------------------------------
+pass Inside a while Loop
+----------------------------------------
+Example:
+count = 0
+while count < 3:
+    pass
+    count += 1
+The pass does nothing, while count += 1 allows the loop to progress.
+Output:
+No output
+The loop finishes after count reaches 3.
+----------------------------------------
+Empty Function with pass
+----------------------------------------
+A function body cannot be completely empty.
+This is invalid:
+def calculate():
+Python expects an indented statement.
+Use pass when the function will be implemented later:
+def calculate():
+    pass
+Now Python accepts the function definition.
+The function can be called:
+calculate()
+Nothing happens because its body contains only pass.
+----------------------------------------
+Placeholder Function
+----------------------------------------
+pass is commonly used while designing an application.
+Example:
+def login():
+    pass
+def register():
+    pass
+def logout():
+    pass
+These functions are placeholders.
+Later, you can replace pass with the actual implementation.
+----------------------------------------
+Empty Class with pass
+----------------------------------------
+A class body also cannot be completely empty.
+Example:
+class Student:
+    pass
+This creates a valid class without defining any attributes or methods yet.
+You can then create an object:
+student = Student()
+print(student)
+The class exists even though it currently has no custom behavior.
+----------------------------------------
+Placeholder Class in Project Development
+----------------------------------------
+When building a large Python application, you may define the structure first and implement functionality later.
+Example:
+class AIModel:
+    pass
+class Database:
+    pass
+class APIClient:
+    pass
+This allows the program structure to be created before the implementation is completed.
+----------------------------------------
+pass in Exception Handling
+----------------------------------------
+pass can be used when an exception should intentionally be ignored.
+Example:
+try:
+    number = int("abc")
+except ValueError:
+    pass
+The ValueError occurs, but the except block intentionally performs no action.
+The program can then continue.
+However, silently ignoring exceptions should be done carefully because it can hide real problems.
+----------------------------------------
+pass as a Temporary Placeholder
+----------------------------------------
+One of the most common uses of pass is during development.
+Suppose you are planning a function:
+def calculate_salary():
+    pass
+Later, you can replace it with:
+def calculate_salary():
+    salary = 50000
+    bonus = 5000
+    return salary + bonus
+The pass statement is useful while the function is still under development.
+----------------------------------------
+pass in Conditional Branches
+----------------------------------------
+Sometimes a branch is intentionally inactive.
+Example:
+feature_enabled = False
+if feature_enabled:
+    pass
+else:
+    print("Feature is currently disabled")
+The pass makes the empty branch valid Python code.
+----------------------------------------
+pass Does Not Return a Value
+----------------------------------------
+pass itself does not produce a useful value.
+It is a statement, not a value-producing expression.
+Example:
+def example():
+    pass
+Calling example() returns None because the function reaches the end without a return statement.
+The None result comes from the function's behavior, not because pass explicitly returns None.
+----------------------------------------
+pass vs return
+----------------------------------------
+These statements have very different purposes.
+pass:
+Does nothing and continues execution.
+return:
+Ends a function and optionally sends a value back to the caller.
+Example:
+def first():
+    pass
+    print("Still running")
+first()
+Output:
+Still running
+Example:
+def second():
+    return
+    print("This never runs")
+second()
+The return statement ends the function immediately.
+----------------------------------------
+pass vs print
+----------------------------------------
+pass does not display anything.
+Example:
+pass
+There is no output.
+print displays information:
+print("Hello")
+Output:
+Hello
+Therefore, pass should not be used when you want to display something.
+----------------------------------------
+pass vs comments
+----------------------------------------
+A comment is ignored by Python and is mainly used to explain code.
+Example:
+# Add login logic here
+A pass statement is actual Python code that makes an otherwise empty block syntactically valid.
+Example:
+def login():
+    pass
+A comment alone cannot always replace pass.
+For example:
+def login():
+    # Login logic will be added later
+Depending on the block, Python still requires an actual statement.
+Using pass makes the placeholder explicit.
+----------------------------------------
+Using pass During Prototyping
+----------------------------------------
+When developing a large application, you may know the structure before knowing the implementation.
+Example:
+def authenticate_user():
+    pass
+def generate_token():
+    pass
+def analyze_resume():
+    pass
+def recommend_career():
+    pass
+Later, each placeholder can be replaced with actual Python logic.
+This is useful during the early design stage of software development.
+----------------------------------------
+Important Rules
+----------------------------------------
+• pass is a valid Python statement.
+• It performs no operation.
+• It is mainly used as a placeholder.
+• It can be used inside if statements.
+• It can be used inside loops.
+• It can be used inside functions.
+• It can be used inside classes.
+• It can be used inside exception handlers.
+• It does not stop a loop.
+• It does not exit a function.
+• It does not return a value.
+• It does not produce output.
+• It allows intentionally empty blocks to remain syntactically valid.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of pass as an empty instruction.
+Python:
+"Execute this statement."
+pass:
+"Do nothing."
+Then Python:
+"Continue with the next statement."
+Example:
+print("A")
+pass
+print("B")
+Execution:
+A
+↓
+pass → nothing happens
+↓
+B
+----------------------------------------
+When to Use pass
+----------------------------------------
+Use pass when:
+• A function is planned but not implemented yet.
+• A class is planned but not implemented yet.
+• A conditional branch intentionally has no action.
+• A loop body needs a placeholder.
+• An exception should intentionally be ignored.
+• You are prototyping the structure of a program.
+• You want to temporarily leave a block empty.
+----------------------------------------
+When Not to Use pass
+----------------------------------------
+Do not use pass when you actually need an action.
+If you want to exit a loop, use break.
+If you want to skip the current loop iteration, use continue.
+If you want to exit a function, use return.
+If you want to display something, use print().
+If you want to explain code, use a comment.
+----------------------------------------
+Summary
+----------------------------------------
+The pass statement is Python's simplest placeholder statement. It intentionally performs no operation while allowing a code block to remain syntactically valid. It is commonly used during development, prototyping, empty functions, empty classes, conditional branches, loops, and selected exception handlers. Remember that pass does not stop execution, exit a function, skip a loop iteration, or return a value. It simply does nothing and allows Python to continue.`,
+},
            ],
            code: `marks = 78
 
@@ -3216,7 +5822,433 @@ print(10 < x < 20)   # True — Java/C++ can't do this!`,
           {
             title: "Loops — for & while",
             type: "concept",
-            detail: "Python's for loop is actually a FOR-EACH — it works on ANY sequence. Use range() for number sequences. enumerate() when you need both index and value.",
+            detail: "Loops allow Python to repeat a block of code efficiently. The for loop is used to iterate over sequences and other iterable objects, while the while loop repeats code as long as a condition remains True. Learn iteration, range(), loop control, and nested loops to build reliable Python programs.",
+            subsections: [
+              {
+  heading: "Introduction to Loops",
+  body: `A loop is a control-flow structure used to execute the same block of code repeatedly.
+Instead of writing the same statements again and again, Python allows us to place them inside a loop and repeat them automatically.
+Loops are one of the most important concepts in programming because many real-world problems require repetitive operations.
+For example, a program may need to:
+Print numbers from 1 to 100.
+Process every student in a class.
+Read every item from a list.
+Check every character in a string.
+Process thousands of records from a database.
+Repeat an operation until a condition becomes False.
+Without loops, these tasks would require writing the same code many times.
+----------------------------------------
+Simple Example Without a Loop
+----------------------------------------
+print("Hello")
+print("Hello")
+print("Hello")
+print("Hello")
+print("Hello")
+The same statement is repeated five times.
+This works, but it is inefficient and difficult to maintain.
+----------------------------------------
+The Same Example With a Loop
+----------------------------------------
+for i in range(5):
+    print("Hello")
+Output:
+Hello
+Hello
+Hello
+Hello
+Hello
+The loop allows Python to repeat the print statement automatically.
+----------------------------------------
+Why Do We Need Loops?
+----------------------------------------
+Loops reduce repetitive code and make programs shorter, cleaner, and easier to maintain.
+Consider printing numbers from 1 to 100.
+Without a loop, you would need 100 print statements.
+With a loop:
+for number in range(1, 101):
+    print(number)
+The same logic handles all 100 numbers.
+----------------------------------------
+Basic Loop Concept
+----------------------------------------
+A loop generally has three important parts:
+Start
+↓
+Check or obtain the next value
+↓
+Execute the loop body
+↓
+Repeat
+Eventually, the loop reaches its stopping condition or runs out of values.
+----------------------------------------
+Types of Loops in Python
+----------------------------------------
+Python primarily provides two looping statements:
+1. for loop
+2. while loop
+The for loop is generally used when iterating over an iterable or when you know the sequence of values that should be processed.
+The while loop is used when repetition should continue as long as a condition remains True.
+----------------------------------------
+The for Loop
+----------------------------------------
+The for loop iterates over items in an iterable.
+An iterable is an object that can provide its elements one at a time.
+Examples include:
+Lists
+Tuples
+Strings
+Sets
+Dictionaries
+Ranges
+Many other Python objects
+Example:
+numbers = [10, 20, 30]
+for number in numbers:
+    print(number)
+Output:
+10
+20
+30
+Python takes each element from numbers and assigns it to number one at a time.
+----------------------------------------
+The for Loop Is Iteration
+----------------------------------------
+Consider:
+names = ["Rahul", "Anita", "Kiran"]
+for name in names:
+    print(name)
+Python performs:
+name = "Rahul"
+print("Rahul")
+Then:
+name = "Anita"
+print("Anita")
+Then:
+name = "Kiran"
+print("Kiran")
+The loop automatically moves from one element to the next.
+----------------------------------------
+The while Loop
+----------------------------------------
+A while loop repeatedly executes a block of code while a condition is True.
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+Output:
+1
+2
+3
+4
+5
+The condition:
+count <= 5
+is checked before every iteration.
+When count becomes 6, the condition becomes False and the loop stops.
+----------------------------------------
+for vs while
+----------------------------------------
+The main difference is how repetition is controlled.
+for:
+Iterates through an iterable.
+Example:
+for number in [1, 2, 3]:
+    print(number)
+while:
+Continues while a condition is True.
+Example:
+number = 1
+while number <= 3:
+    print(number)
+    number += 1
+A for loop is often convenient when processing a known collection of values.
+A while loop is useful when the number of repetitions depends on a changing condition.
+----------------------------------------
+Iteration
+----------------------------------------
+Iteration means executing the loop body once for each cycle of the loop.
+Example:
+for number in range(3):
+    print(number)
+There are three iterations:
+Iteration 1 → number = 0
+Iteration 2 → number = 1
+Iteration 3 → number = 2
+Each execution of the loop body is called an iteration.
+----------------------------------------
+Loop Variable
+----------------------------------------
+The variable used by a for loop is called the loop variable.
+Example:
+for name in ["Rahul", "Anita", "Kiran"]:
+    print(name)
+Here:
+name → loop variable
+The loop variable receives one element during each iteration.
+The variable name can be anything meaningful.
+Example:
+for student in students:
+    print(student)
+for item in items:
+    print(item)
+for number in numbers:
+    print(number)
+Meaningful variable names make loops easier to understand.
+----------------------------------------
+Loop Body
+----------------------------------------
+The statements that execute repeatedly are called the loop body.
+Example:
+for number in range(3):
+    print("Number:", number)
+    print("Processing...")
+Both print statements belong to the loop body because they are indented.
+Output:
+Number: 0
+Processing...
+Number: 1
+Processing...
+Number: 2
+Processing...
+----------------------------------------
+Indentation in Loops
+----------------------------------------
+Python uses indentation to identify the statements belonging to a loop.
+Correct:
+for number in range(3):
+    print(number)
+Incorrect:
+for number in range(3):
+print(number)
+The loop body must be indented.
+----------------------------------------
+Loops and Conditions
+----------------------------------------
+Loops can contain conditional statements.
+Example:
+for number in range(1, 6):
+    if number % 2 == 0:
+        print(number, "is even")
+Output:
+2 is even
+4 is even
+This allows programs to repeat an operation while making decisions during each iteration.
+----------------------------------------
+Conditions Inside while Loops
+----------------------------------------
+A while loop can also contain conditions.
+Example:
+number = 1
+while number <= 5:
+    if number % 2 == 0:
+        print(number, "is even")
+    number += 1
+Output:
+2 is even
+4 is even
+----------------------------------------
+Nested Loops
+----------------------------------------
+A loop can be placed inside another loop.
+This is called a nested loop.
+Example:
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+The inner loop runs completely for each iteration of the outer loop.
+Nested loops are commonly used for tables, matrices, grids, combinations, and many algorithmic problems.
+----------------------------------------
+Infinite Loops
+----------------------------------------
+A loop that never becomes False or never reaches the end of its iterable is called an infinite loop.
+Example:
+while True:
+    print("Running")
+The condition True never becomes False, so the loop continues indefinitely.
+Infinite loops can be intentional, such as in continuously running services, but they can also happen accidentally.
+----------------------------------------
+Accidental Infinite Loop
+----------------------------------------
+Example:
+count = 1
+while count <= 5:
+    print(count)
+If count is never changed, the condition remains True forever.
+A corrected version:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+The variable controlling the condition must eventually change so that the loop can terminate.
+----------------------------------------
+Loop Termination
+----------------------------------------
+Every loop needs a way to finish.
+A for loop normally terminates when all elements of its iterable have been processed.
+A while loop terminates when its condition becomes False.
+Example:
+for number in range(3):
+    print(number)
+The loop ends automatically after processing 0, 1, and 2.
+Example:
+count = 1
+while count <= 3:
+    print(count)
+    count += 1
+The loop ends when count becomes 4.
+----------------------------------------
+Loops Can Process Large Amounts of Data
+----------------------------------------
+Loops are especially powerful when processing large collections.
+Example:
+students = ["Rahul", "Anita", "Kiran", "Priya"]
+for student in students:
+    print("Processing:", student)
+The same operation is applied to every student.
+The collection could contain thousands or millions of items without requiring separate statements for every item.
+----------------------------------------
+Loops in Real Python Applications
+----------------------------------------
+Loops appear throughout real software development.
+Examples:
+Processing API responses.
+Reading files line by line.
+Processing database records.
+Validating user input.
+Searching collections.
+Training machine-learning data.
+Processing images.
+Generating reports.
+Iterating through JSON data.
+Handling multiple users or requests.
+Building menus.
+Running repeated background tasks.
+----------------------------------------
+Loops in AI and Data Processing
+----------------------------------------
+Loops are also important in AI and data-related programming.
+Example:
+scores = [85, 90, 78, 92]
+total = 0
+for score in scores:
+    total += score
+average = total / len(scores)
+print(average)
+Output:
+86.25
+The loop processes every score and calculates the total.
+Many data-processing operations follow this same basic idea:
+Take one item.
+Process it.
+Move to the next item.
+Continue until all items are processed.
+----------------------------------------
+Loop Control Statements
+----------------------------------------
+Python provides statements that allow you to control loop execution.
+The most important ones are:
+break
+continue
+pass
+break → immediately exits the loop.
+continue → skips the current iteration and moves to the next iteration.
+pass → does nothing and acts as a placeholder.
+These will be covered separately in detail.
+----------------------------------------
+for...else and while...else
+----------------------------------------
+Python also allows an else block to be associated with a loop.
+Example:
+for number in range(3):
+    print(number)
+else:
+    print("Loop completed")
+The loop else executes when the loop finishes normally.
+It does not execute when the loop is terminated using break.
+This is a distinct Python feature and will be covered separately.
+----------------------------------------
+Loop Execution Flow
+----------------------------------------
+A loop can be visualized as:
+Start
+↓
+Get value / Check condition
+↓
+Execute loop body
+↓
+Update or move to next value
+↓
+Repeat
+↓
+Loop finished?
+No → Repeat
+Yes → Continue with the next statement
+Understanding this flow makes both for and while loops much easier to understand.
+----------------------------------------
+Choosing the Right Loop
+----------------------------------------
+Use a for loop when you want to iterate over:
+A list.
+A tuple.
+A string.
+A set.
+A dictionary.
+A range.
+Another iterable.
+Example:
+for item in items:
+    print(item)
+Use a while loop when repetition depends on a condition.
+Example:
+while password != correct_password:
+    password = input("Enter password: ")
+The loop continues until the condition becomes False.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Loops repeat a block of code.
+• Python has two primary loops: for and while.
+• A for loop iterates over an iterable.
+• A while loop continues while its condition is True.
+• Each execution of a loop body is an iteration.
+• Loop variables receive values during iteration.
+• Loop bodies must be properly indented.
+• A loop can contain if statements.
+• A loop can contain another loop.
+• A nested loop is a loop inside another loop.
+• for loops normally finish after all iterable elements are processed.
+• while loops must eventually reach a False condition unless intentionally infinite.
+• break can terminate a loop.
+• continue can skip an iteration.
+• pass performs no operation.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a loop like processing a queue of tasks.
+For a for loop:
+Take the next item.
+Process it.
+Take the next item.
+Process it.
+Continue until there are no items left.
+For a while loop:
+Check the condition.
+If True → perform the task.
+Check again.
+If True → perform the task again.
+Continue until the condition becomes False.
+----------------------------------------
+Summary
+----------------------------------------
+Loops allow Python programs to repeat operations efficiently without duplicating code. Python provides two primary looping mechanisms: for and while. The for loop is designed for iterating over iterable objects such as lists, strings, dictionaries, sets, and ranges, while the while loop continues as long as a condition remains True. Loops can contain conditions, nested loops, and loop-control statements. Understanding iteration, loop variables, loop bodies, termination, and the difference between for and while provides the foundation for writing efficient Python programs.`,
+},
+{
+
+}
+
+            ],
             code: `# for loop — iterates over ANY iterable
 fruits = ["apple", "banana", "cherry"]
 for fruit in fruits:
@@ -4822,7 +7854,7 @@ function saveProgress(data) {
 const TYPE_COLORS = {
   concept:  "bg-indigo-100 text-indigo-700 border-indigo-200",
   task:     "bg-amber-100 text-amber-700 border-amber-200",
-  project:  "bg-emerald-100 text-emerald-700 border-emerald-200",
+  project:  "bg-indigo-100 text-indigo-700 border-indigo-200",
   practice: "bg-violet-100 text-violet-700 border-violet-200",
 };
 const TYPE_LABELS = {
@@ -4837,12 +7869,12 @@ const RESOURCE_ICONS = {
   tool:     <FiZap className="text-xs" />,
 };
 const RESOURCE_COLORS = {
-  official: "bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100",
-  article:  "bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100",
-  video:    "bg-red-50 border-red-200 text-red-700 hover:bg-red-100",
-  course:   "bg-emerald-50 border-emerald-200 text-emerald-700 hover:bg-emerald-100",
-  platform: "bg-violet-50 border-violet-200 text-violet-700 hover:bg-violet-100",
-  tool:     "bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100",
+  official: "bg-slate-950/70 text-slate-200 hover:bg-slate-900",
+  article:  "bg-slate-950/70 text-slate-200 hover:bg-slate-900",
+  video:    "bg-slate-950/70 text-red-300 hover:bg-slate-900",
+  course:   "bg-slate-950/70 text-indigo-300 hover:bg-slate-900",
+  platform: "bg-slate-950/70 text-violet-300 hover:bg-slate-900",
+  tool:     "bg-slate-950/70 text-amber-300 hover:bg-slate-900",
 };
 
 // ─────────────────────────────────────────────────────────────────
@@ -4854,146 +7886,287 @@ function ResourceLink({ r }) {
   const icon  = RESOURCE_ICONS[r.type]  || <FiExternalLink className="text-xs" />;
   return (
     <a href={r.url} target="_blank" rel="noopener noreferrer"
-      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg border transition-colors ${color}`}>
+      className={`inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg transition-colors ${color}`}>
       {icon}{r.label}
     </a>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────
-// 21st.dev FeatureShowcase pattern — SubsectionAccordion
-// Left: accordion steps  |  Right: animated content panel
+// SubsectionAccordion — clean vertical accordion, full-width
+// No side-by-side split. Each subtopic opens inline below its tab.
 // ─────────────────────────────────────────────────────────────────
 function SubsectionAccordion({ subsections }) {
-  const [active, setActive] = useState(0);
-  const contentRef = useRef(null);
+  const [active, setActive] = useState(null);
 
-  const handleStep = (i) => {
-    setActive(i);
-    contentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+  const toggle = (i) => setActive(prev => prev === i ? null : i);
+
+  const renderBody = (body) => {
+    const lines = body.split("\n");
+    const output = [];
+    let i = 0;
+    while (i < lines.length) {
+      const t = lines[i].trim();
+      i++;
+      if (!t || t === "---") continue;
+
+      // Arrow / separator lines
+      if (t.startsWith("↓") || t.startsWith("→") || t === "↓" || t === "→") {
+        output.push(
+          <div key={i} className="flex items-center gap-2 py-1">
+            <div className="flex-1 h-px bg-white/5" />
+            <span className="text-indigo-400 text-xs font-bold">{t}</span>
+            <div className="flex-1 h-px bg-white/5" />
+          </div>
+        );
+        continue;
+      }
+
+      // Bullet points
+      if (t.startsWith("•") || (t.startsWith("-") && t.length > 2 && t[1] === " ")) {
+        output.push(
+          <div key={i} className="flex items-start gap-2.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0 mt-2" />
+            <span className="text-slate-300 text-sm leading-6">{t.replace(/^[•\-]\s*/, "")}</span>
+          </div>
+        );
+        continue;
+      }
+
+      // Numbered items like "1. Something" or "1) Something"
+      if (/^\d+[.)]\s/.test(t)) {
+        const num = t.match(/^(\d+)/)[1];
+        const text = t.replace(/^\d+[.)]\s*/, "");
+        output.push(
+          <div key={i} className="flex items-start gap-2.5">
+            <span className="w-5 h-5 rounded-full bg-indigo-600/30 text-indigo-300 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{num}</span>
+            <span className="text-slate-300 text-sm leading-6">{text}</span>
+          </div>
+        );
+        continue;
+      }
+
+      // Code-like inline lines (short variable assignments)
+      if (/^[a-z_A-Z][\w]*\s*=\s*.+/.test(t) && t.length < 72 && !t.includes(" is ") && !t.includes(" are ")) {
+        output.push(
+          <div key={i} className="font-mono text-xs bg-[#0b0f18] border border-white/5 px-3 py-1.5 rounded-lg text-emerald-300">{t}</div>
+        );
+        continue;
+      }
+
+      // Hash comment lines
+      if (t.startsWith("#") && t.length < 80) {
+        output.push(
+          <div key={i} className="font-mono text-xs bg-[#0b0f18] border border-white/5 px-3 py-1.5 rounded-lg text-slate-400 italic">{t}</div>
+        );
+        continue;
+      }
+
+      // Label → value pairs
+      if (t.includes("→") && t.length < 80) {
+        const [lbl, ...rest] = t.split("→");
+        output.push(
+          <div key={i} className="flex items-center gap-2 font-mono text-xs bg-[#0b0f18] border border-white/5 px-3 py-1.5 rounded-lg">
+            <span className="text-slate-100 font-bold">{lbl.trim()}</span>
+            <span className="text-slate-600">→</span>
+            <span className="text-indigo-300">{rest.join("→").trim()}</span>
+          </div>
+        );
+        continue;
+      }
+
+      // Uppercase label lines
+      if (/^[A-Z][A-Z\s]+:$/.test(t)) {
+        output.push(<p key={i} className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest pt-2 pb-0.5">{t}</p>);
+        continue;
+      }
+
+      // Normal paragraph text
+      output.push(<p key={i} className="text-slate-300 text-sm leading-6">{t}</p>);
+    }
+    return output;
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-sm">
-
-      {/* ── Eyebrow header (FeatureShowcase top bar) ── */}
-      <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-indigo-50 to-white border-b border-slate-100">
-        <div className="flex items-center gap-2">
-          <div className="w-5 h-5 bg-indigo-100 rounded-md flex items-center justify-center flex-shrink-0">
-            <FiBookOpen className="text-indigo-500 text-[10px]" />
-          </div>
-          <span className="text-[11px] font-bold text-indigo-600 uppercase tracking-widest">
-            Full Concept
-          </span>
-          <span className="text-[10px] text-slate-400">·</span>
-          <span className="text-[10px] text-slate-400 font-semibold">{subsections.length} topics</span>
-        </div>
-        {/* Dot indicators */}
-        <div className="flex items-center gap-1">
-          {subsections.map((_, i) => (
-            <button key={i} onClick={() => handleStep(i)}
-              className={`rounded-full transition-all duration-300 ${
-                i === active ? "w-4 h-1.5 bg-indigo-500" : "w-1.5 h-1.5 bg-slate-300 hover:bg-slate-400"
-              }`}
-            />
-          ))}
-        </div>
+    <div className="rounded-xl bg-[#0d111b] overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-900/70">
+        <FiBookOpen className="text-indigo-400 text-xs flex-shrink-0" />
+        <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-widest">Full Concept</span>
+        <span className="ml-auto text-[10px] text-slate-500 font-medium">{subsections.length} subtopics</span>
       </div>
 
-      {/* ── Two-column layout: left accordion + right panel ── */}
-      <div className="grid md:grid-cols-[220px_1fr]">
-
-        {/* LEFT: Accordion steps (21st.dev left column) */}
-        <div className="border-r border-slate-100 bg-slate-50/60 p-3 space-y-1">
-          {subsections.map((sub, i) => {
-            const isActive = i === active;
-            return (
-              <button key={i} onClick={() => handleStep(i)}
-                className={`relative w-full text-left rounded-xl border px-3.5 py-2.5 transition-all duration-200 group ${
-                  isActive
-                    ? "border-indigo-200 bg-white shadow-sm"
-                    : "border-transparent hover:border-slate-200 hover:bg-white"
+      {/* Accordion items — full width, vertical */}
+      <div className="divide-y divide-slate-800/60">
+        {subsections.map((sub, i) => {
+          const isOpen = active === i;
+          return (
+            <div key={i}>
+              <button
+                onClick={() => toggle(i)}
+                className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
+                  isOpen ? "bg-slate-900/70" : "bg-slate-950/60 hover:bg-slate-900/70"
                 }`}
               >
-                {/* Left rail accent — 21st.dev accordion trigger style */}
-                <div className={`absolute left-0 top-3 bottom-3 w-0.5 rounded-full transition-all ${
-                  isActive ? "bg-indigo-500" : "bg-transparent group-hover:bg-slate-300"
-                }`} />
-                <div className="flex items-start gap-2.5 pl-1">
-                  <span className={`w-5 h-5 rounded-full text-[9px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
-                    isActive ? "bg-indigo-500 text-white" : "bg-slate-200 text-slate-500"
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className={`w-6 h-6 rounded-full text-[10px] font-bold flex items-center justify-center flex-shrink-0 ${
+                    isOpen ? "bg-indigo-500 text-slate-950" : "bg-slate-800 text-slate-400"
                   }`}>{i + 1}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className={`text-[11px] font-semibold leading-tight line-clamp-2 transition-colors ${
-                      isActive ? "text-indigo-700" : "text-slate-600 group-hover:text-slate-800"
-                    }`}>{sub.heading}</p>
-                    {isActive && (
-                      <p className="text-[10px] text-indigo-400 mt-0.5 font-medium">Reading now</p>
-                    )}
-                  </div>
-                  {isActive && <FiArrowRight className="text-indigo-400 text-xs flex-shrink-0 mt-0.5" />}
+                  <span className={`text-sm font-semibold leading-snug ${
+                    isOpen ? "text-slate-100" : "text-slate-300"
+                  }`}>{sub.heading}</span>
+                </div>
+                <div className={`ml-3 flex-shrink-0 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>
+                  <FiChevronDown className={`text-sm ${isOpen ? "text-indigo-500" : "text-slate-300"}`} />
                 </div>
               </button>
-            );
-          })}
-        </div>
-
-        {/* RIGHT: Content panel (21st.dev right column / TabsContent) */}
-        <div ref={contentRef}
-          className="p-5 min-h-[180px] max-h-[360px] overflow-y-auto bg-white relative">
-
-          {/* Animated content (like TabsContent switching) */}
-          <div key={active} style={{ animation: "fadeInUp 0.22s ease-out both" }}>
-
-            {/* Section title */}
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className="w-7 h-7 bg-indigo-500 text-white text-[11px] font-bold rounded-full flex items-center justify-center flex-shrink-0">
-                {active + 1}
-              </span>
-              <h4 className="font-bold text-slate-900 text-sm leading-tight">
-                {subsections[active].heading}
-              </h4>
+              {isOpen && (
+                <div className="px-4 pb-4 pt-2 bg-slate-950/70 space-y-2">
+                  {renderBody(sub.body)}
+                </div>
+              )}
             </div>
-
-            {/* Body text */}
-            <div className="text-sm text-slate-600 leading-6 whitespace-pre-line pl-9">
-              {subsections[active].body}
-            </div>
-          </div>
-
-          {/* Bottom nav (21st.dev CTA row) */}
-          <div className="flex items-center justify-between pt-4 mt-4 border-t border-slate-100">
-            <button onClick={() => handleStep(Math.max(0, active - 1))}
-              disabled={active === 0}
-              className="flex items-center gap-1 text-[11px] font-semibold text-slate-400 hover:text-indigo-600 disabled:opacity-25 transition-colors">
-              <FiChevronUp className="rotate-[-90deg] text-xs" /> Prev
-            </button>
-            <span className="text-[11px] text-slate-300 tabular-nums">
-              {active + 1} / {subsections.length}
-            </span>
-            <button onClick={() => handleStep(Math.min(subsections.length - 1, active + 1))}
-              disabled={active === subsections.length - 1}
-              className="flex items-center gap-1 text-[11px] font-semibold text-slate-400 hover:text-indigo-600 disabled:opacity-25 transition-colors">
-              Next <FiChevronDown className="rotate-[-90deg] text-xs" />
-            </button>
-          </div>
-        </div>
+          );
+        })}
       </div>
-
-      {/* CSS keyframe */}
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(8px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
 
 // ─────────────────────────────────────────────────────────────────
-// SectionTopicShowcase — 21st.dev FeatureShowcase adapted
-// Left: topic list (accordion steps)  |  Right: topic detail panel (TabsContent)
+// tokenizePython — splits one Python line into colored token objects
+// ─────────────────────────────────────────────────────────────────
+const PY_KEYWORDS = new Set([
+  "def","class","return","import","from","if","elif","else","for","while",
+  "in","not","and","or","True","False","None","try","except","finally","with",
+  "as","pass","break","continue","yield","lambda","del","global","nonlocal",
+  "raise","assert","is","async","await",
+]);
+const PY_BUILTINS = new Set([
+  "print","range","len","type","int","str","float","bool","list","dict","set",
+  "tuple","input","open","enumerate","zip","map","filter","sorted","reversed",
+  "sum","min","max","abs","round","isinstance","hasattr","getattr","setattr",
+  "super","property","staticmethod","classmethod","next","iter","any","all",
+]);
+
+function tokenizeLine(raw) {
+  // Preserve leading indent exactly
+  const indent = raw.match(/^( *)/)[1];
+  const code   = raw.slice(indent.length);
+
+  // Detect trailing comment, skip # inside strings
+  let body    = code;
+  let comment = "";
+  let inStr   = false;
+  let strChar = "";
+  for (let ci = 0; ci < code.length; ci++) {
+    const ch = code[ci];
+    if (!inStr && (ch === '"' || ch === "'")) { inStr = true; strChar = ch; }
+    else if (inStr && ch === strChar && code[ci-1] !== "\\") inStr = false;
+    else if (!inStr && ch === "#") { comment = code.slice(ci); body = code.slice(0, ci); break; }
+  }
+
+  // Regex tokenizer: strings, numbers, identifiers, operators, whitespace
+  const TOKEN_RE = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\d+\.?\d*|[a-zA-Z_]\w*|\s+|[^\w\s"'])/g;
+  const tokens = [];
+  let m;
+  while ((m = TOKEN_RE.exec(body)) !== null) {
+    const tok = m[0];
+    if (!tok) continue;
+    let cls = "";
+    if (/^["']/.test(tok))                     cls = "text-amber-300";
+    else if (/^\d/.test(tok))                 cls = "text-orange-300";
+    else if (PY_KEYWORDS.has(tok))             cls = "text-violet-400 font-semibold";
+    else if (PY_BUILTINS.has(tok))             cls = "text-cyan-300";
+    else if (/^[A-Z_][A-Z0-9_]{2,}$/.test(tok)) cls = "text-orange-200";
+    else if (/^[A-Z][a-zA-Z]+/.test(tok))     cls = "text-emerald-300";
+    else if (/^[=<>!+\-*/%&|^~()\[\]{},.:;@]/.test(tok)) cls = "text-slate-400";
+    else if (/^\s+$/.test(tok))               cls = "";
+    else                                       cls = "text-slate-100";
+    tokens.push({ text: tok, cls });
+  }
+
+  return { indent, tokens, comment };
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SyntaxLine — renders ONE line, preserving exact indentation
+// ─────────────────────────────────────────────────────────────────
+function SyntaxLine({ line }) {
+  const { indent, tokens, comment } = tokenizeLine(line);
+  return (
+    <span>
+      {indent ? <span>{indent}</span> : null}
+      {tokens.map((tok, i) =>
+        tok.cls
+          ? <span key={i} className={tok.cls}>{tok.text}</span>
+          : <span key={i}>{tok.text}</span>
+      )}
+      {comment ? <span className="text-slate-500 italic">{comment}</span> : null}
+    </span>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// CodeBlock — syntax-highlighted Python code editor look
+// ─────────────────────────────────────────────────────────────────
+function CodeBlock({ code, filename = "solution.py" }) {
+  const lines = code.split("\n");
+  return (
+    <div className="rounded-xl overflow-hidden border border-white/5 shadow-xl">
+      <div className="flex items-center gap-3 px-4 py-2.5 bg-[#161b22] border-b border-white/5">
+        <div className="flex gap-1.5">
+          <span className="block w-3 h-3 rounded-full bg-red-500/70" />
+          <span className="block w-3 h-3 rounded-full bg-yellow-500/70" />
+          <span className="block w-3 h-3 rounded-full bg-emerald-500/70" />
+        </div>
+        <span className="text-[11px] text-slate-500 font-mono">{filename}</span>
+        <span className="ml-auto text-[10px] text-slate-600 font-mono">Python 3.12 🐍</span>
+      </div>
+      <div className="flex bg-[#0d1117] overflow-x-auto">
+        <div className="select-none flex-shrink-0 py-3 pl-3 pr-4 border-r border-white/5 text-right">
+          {lines.map((_, i) => (
+            <div key={i} className="text-[11px] text-slate-600 font-mono leading-5">{i + 1}</div>
+          ))}
+        </div>
+        <pre className="flex-1 py-3 px-4 text-[12px] font-mono leading-5 overflow-x-auto whitespace-pre max-h-80 overflow-y-auto">
+          {lines.map((line, i) => (
+            <div key={i}>
+              <SyntaxLine line={line} />
+            </div>
+          ))}
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// ConceptBox — visual highlight for important concept explanations
+// ─────────────────────────────────────────────────────────────────
+function ConceptBox({ type = "info", children }) {
+  const styles = {
+    info:    { bg:"bg-indigo-500/10", border:"border-indigo-500/20", icon:"💡", label:"Key Concept",  text:"text-indigo-300", label_c:"text-indigo-400" },
+    tip:     { bg:"bg-emerald-500/10",border:"border-emerald-500/20",icon:"⚡", label:"Pro Tip",      text:"text-emerald-300",label_c:"text-emerald-400"},
+    warning: { bg:"bg-amber-500/10",  border:"border-amber-500/20",  icon:"⚠️", label:"Watch Out",   text:"text-amber-200",  label_c:"text-amber-400"  },
+    syntax:  { bg:"bg-violet-500/10", border:"border-violet-500/20", icon:"📐", label:"Syntax",      text:"text-violet-200", label_c:"text-violet-400" },
+    memory:  { bg:"bg-sky-500/10",    border:"border-sky-500/20",    icon:"🧠", label:"Remember",    text:"text-sky-200",    label_c:"text-sky-400"    },
+  };
+  const s = styles[type] || styles.info;
+  return (
+    <div className={`rounded-xl border ${s.bg} ${s.border} px-4 py-3`}>
+      <div className="flex items-center gap-2 mb-1.5">
+        <span className="text-sm">{s.icon}</span>
+        <span className={`text-[10px] font-bold uppercase tracking-widest ${s.label_c}`}>{s.label}</span>
+      </div>
+      <div className={`text-sm leading-6 ${s.text}`}>{children}</div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────
+// SectionTopicShowcase — vertical topic list left + full content right
+// Uses full available width, readable at any screen size
 // ─────────────────────────────────────────────────────────────────
 function SectionTopicShowcase({ section, levelKey, progress, onToggle }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -5005,63 +8178,53 @@ function SectionTopicShowcase({ section, levelKey, progress, onToggle }) {
   };
 
   const topic = section.topics[activeTab];
-  const key = `${levelKey}-${section.id}-${activeTab}`;
+  const key   = `${levelKey}-${section.id}-${activeTab}`;
   const checked = !!progress[key];
-
-  const typeColor = TYPE_COLORS[topic?.type] || TYPE_COLORS.concept;
   const typeLabel = TYPE_LABELS[topic?.type] || "Concept";
+  const doneCnt = section.topics.filter((_, ti) => progress[`${levelKey}-${section.id}-${ti}`]).length;
 
   return (
-    <div className="grid md:grid-cols-[220px_1fr] min-h-[300px] rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden shadow-sm">
+    <div className="flex flex-col md:flex-row min-h-0">
 
-      {/* ── LEFT: Step list (FeatureShowcase Accordion steps) ── */}
-      <div className="border-r border-slate-200 bg-slate-50/40 p-3">
-
-        {/* Section stats */}
-        <div className="flex items-center justify-between px-2 py-1.5 mb-2">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+      {/* ── LEFT: Topic list — clean, no boxes, just rows ── */}
+      <div className="md:w-52 flex-shrink-0 border-b md:border-b-0 md:border-r border-white/5 bg-[#0b0f18]">
+        {/* Tiny header */}
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/5">
+          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
             {section.topics.length} Topics
           </span>
-          <span className="text-[10px] font-bold text-indigo-500">
-            {section.topics.filter((_, ti) => progress[`${levelKey}-${section.id}-${ti}`]).length} done
-          </span>
+          <span className="text-[10px] text-indigo-400 font-bold">{doneCnt} done</span>
         </div>
-
-        {/* Topic steps */}
-        <div className="space-y-1">
+        {/* Topic list — plain rows, no pill boxes */}
+        <div>
           {section.topics.map((t, ti) => {
             const isActive = ti === activeTab;
-            const isDone = !!progress[`${levelKey}-${section.id}-${ti}`];
+            const isDone   = !!progress[`${levelKey}-${section.id}-${ti}`];
             return (
               <button key={ti} onClick={() => handleTabChange(ti)}
-                className={`relative w-full text-left rounded-xl border px-3 py-2.5 transition-all duration-200 group ${
-                  isActive
-                    ? "border-indigo-200 bg-white shadow-sm"
-                    : "border-transparent hover:border-slate-200 hover:bg-white/80"
+                className={`w-full text-left flex items-start gap-2.5 px-4 py-3 border-b border-white/[0.04] transition-all group relative ${
+                  isActive ? "bg-indigo-600/10" : "hover:bg-white/[0.02]"
                 }`}>
-                {/* Active left rail (FeatureShowcase AccordionItem border) */}
-                <div className={`absolute left-0 top-2 bottom-2 w-0.5 rounded-full transition-all ${
-                  isActive ? "bg-indigo-500" : "bg-transparent group-hover:bg-slate-200"
-                }`} />
-                <div className="flex items-start gap-2 pl-1">
-                  {/* Done indicator */}
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
-                    isDone
-                      ? "bg-emerald-500 border-emerald-500 text-white"
-                      : isActive
-                        ? "border-indigo-400"
-                        : "border-slate-300 group-hover:border-slate-400"
-                  }`}>
-                    {isDone && <FiCheckCircle className="text-[9px]" />}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className={`text-[11px] font-semibold leading-tight transition-colors ${
-                      isDone ? "line-through text-slate-400" : isActive ? "text-indigo-700" : "text-slate-700 group-hover:text-slate-900"
-                    }`}>{t.title}</p>
-                    <p className={`text-[10px] mt-0.5 transition-colors ${
-                      isActive ? "text-indigo-400" : isDone ? "text-slate-400" : "text-slate-400"
-                    }`}>{isActive ? "Viewing now" : isDone ? "Completed" : t.type}</p>
-                  </div>
+                {isActive && (
+                  <div className="absolute left-0 top-2 bottom-2 w-0.5 bg-indigo-500 rounded-full" />
+                )}
+                <div className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
+                  isDone ? "bg-indigo-600 border-indigo-600" : isActive ? "border-indigo-500" : "border-slate-700 group-hover:border-slate-500"
+                }`}>
+                  {isDone && (
+                    <svg viewBox="0 0 10 10" className="w-2 h-2 text-white" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M1.5 5.5l2 2 5-4" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-xs font-semibold leading-4 ${
+                    isDone ? "line-through text-slate-600" : isActive ? "text-slate-100" : "text-slate-400 group-hover:text-slate-200"
+                  }`}>{t.title}</p>
+                  <p className={`text-[10px] mt-0.5 ${isActive ? "text-indigo-400" : "text-slate-600"}`}>
+                    {TYPE_LABELS[t.type] || "Concept"}
+                    {t.subsections?.length > 0 && ` · ${t.subsections.length} subtopics`}
+                  </p>
                 </div>
               </button>
             );
@@ -5069,89 +8232,76 @@ function SectionTopicShowcase({ section, levelKey, progress, onToggle }) {
         </div>
       </div>
 
-      {/* ── RIGHT: Content panel (FeatureShowcase Card / TabsContent) ── */}
-      <div ref={panelRef} className="overflow-y-auto max-h-[600px] bg-white">
-
+      {/* ── RIGHT: Full content panel — uses remaining width ── */}
+      <div ref={panelRef} className="flex-1 min-w-0 overflow-y-auto bg-[#0d111b]" style={{ maxHeight: "560px" }}>
         {topic && (
-          <div key={`${activeTab}-content`} style={{ animation: "topicFadeIn 0.2s ease-out both" }}>
+          <div key={`${activeTab}-content`} style={{ animation: "topicFadeIn 0.18s ease-out both" }}>
 
-            {/* ── Panel header — card toolbar ── */}
-            <div className="flex items-start justify-between px-5 pt-5 pb-4 border-b border-slate-100">
-              <div className="flex-1 min-w-0 pr-4">
-                <div className="flex items-center gap-2 flex-wrap mb-1.5">
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${typeColor}`}>
-                    {typeLabel}
-                  </span>
-                  {topic.subsections?.length > 0 && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 border border-violet-200 text-violet-600">
-                      {topic.subsections.length} subtopics
+            {/* Topic header */}
+            <div className="px-5 pt-5 pb-4 border-b border-white/5">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap mb-2">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 uppercase tracking-wider">
+                      {typeLabel}
                     </span>
-                  )}
-                  {checked && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700">
-                      ✓ Completed
-                    </span>
-                  )}
+                    {topic.subsections?.length > 0 && (
+                      <span className="text-[10px] text-slate-500">{topic.subsections.length} subtopics</span>
+                    )}
+                    {checked && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400">✓ Completed</span>
+                    )}
+                  </div>
+                  <h3 className={`font-extrabold text-lg leading-tight ${checked ? "line-through text-slate-500" : "text-slate-50"}`}>
+                    {topic.title}
+                  </h3>
                 </div>
-                <h3 className={`font-extrabold text-base text-slate-900 leading-tight tracking-tight ${
-                  checked ? "line-through text-slate-400" : ""
-                }`}>{topic.title}</h3>
+                <button onClick={() => onToggle(key)}
+                  className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg flex-shrink-0 transition-all ${
+                    checked ? "bg-indigo-600 text-white" : "bg-white/5 border border-white/10 text-slate-400 hover:border-indigo-500/50 hover:text-indigo-300"
+                  }`}>
+                  <FiCheckCircle className="text-xs" />
+                  {checked ? "Done" : "Mark done"}
+                </button>
               </div>
-              {/* Mark done button */}
-              <button onClick={() => onToggle(key)}
-                className={`flex items-center gap-1.5 text-[11px] font-bold px-3 py-1.5 rounded-xl border flex-shrink-0 transition-all ${
-                  checked
-                    ? "bg-emerald-500 border-emerald-500 text-white"
-                    : "bg-white border-slate-200 text-slate-500 hover:border-indigo-300 hover:text-indigo-600"
-                }`}>
-                <FiCheckCircle className="text-xs" />
-                {checked ? "Done!" : "Mark done"}
-              </button>
+
+              <p className="text-sm text-slate-400 mt-3 leading-6">{topic.detail}</p>
             </div>
 
-            {/* ── Panel body ── */}
-            <div className="px-5 py-4 space-y-5">
+            {/* Content body */}
+            <div className="px-5 py-4 space-y-4">
 
-              {/* Detail */}
-              <p className="text-sm text-slate-700 leading-6">{topic.detail}</p>
+              {/* Visual concept boxes for important keywords in detail */}
+              {topic.type === "concept" && (
+                <ConceptBox type="syntax">
+                  <span className="font-mono text-xs">
+                    {topic.title.toLowerCase().includes("variable") && "variable_name = value  # Python infers type automatically"}
+                    {topic.title.toLowerCase().includes("function") && "def function_name(params):\n    # body\n    return value"}
+                    {topic.title.toLowerCase().includes("class") && "class ClassName:\n    def __init__(self, ...):\n        self.attr = value"}
+                    {topic.title.toLowerCase().includes("loop") && "for item in iterable:  # for-each\n    # body\nwhile condition:  # while loop\n    # body"}
+                    {topic.title.toLowerCase().includes("if") && "if condition:\n    # runs if True\nelif other:\n    # else-if\nelse:\n    # fallback"}
+                    {topic.title.toLowerCase().includes("list") && "my_list = [1, 2, 3]    # mutable, ordered\nmy_list.append(4)       # add to end O(1)\nmy_list[0]              # access by index O(1)"}
+                    {topic.title.toLowerCase().includes("dict") && "my_dict = {key: value}  # hash table O(1) lookup\nmy_dict[key] = val      # set\nmy_dict.get(key, default)  # safe access"}
+                    {topic.title.toLowerCase().includes("string") && 'text = "Python"   # str — immutable sequence\nf"Hello {name}"   # f-string formatting\ntext[0]           # indexing\ntext[::-1]        # slicing reversed'}
+                    {!["variable","function","class","loop","if","list","dict","string"].some(k => topic.title.toLowerCase().includes(k)) && `# ${topic.title}\n# See code examples below`}
+                  </span>
+                </ConceptBox>
+              )}
 
-              {/* Subsections (nested SubsectionAccordion) */}
+              {/* Subsections */}
               {topic.subsections?.length > 0 && (
                 <SubsectionAccordion subsections={topic.subsections} />
               )}
 
-              {/* Code block — 21st.dev dark card style */}
+              {/* Code block with syntax highlighting */}
               {topic.code && (
-                <div className="rounded-2xl overflow-hidden border border-slate-800 shadow-xl shadow-slate-900/10">
-                  <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-950 border-b border-white/5">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-500/70" />
-                    </div>
-                    <span className="text-[10px] text-white/25 font-mono ml-2 flex-1">solution.py</span>
-                    <span className="text-[10px] bg-indigo-600/25 text-indigo-300 border border-indigo-600/30 px-2 py-0.5 rounded-md font-mono">
-                      Python 3.12 🐍
-                    </span>
-                  </div>
-                  <div className="bg-[#0d1117] flex">
-                    {/* Line numbers */}
-                    <div className="select-none bg-[#161b22]/60 border-r border-white/5 py-3 px-2 text-right flex-shrink-0 min-w-[32px]">
-                      {topic.code.split("\n").map((_, i) => (
-                        <div key={i} className="text-[10px] text-white/15 font-mono leading-5">{i+1}</div>
-                      ))}
-                    </div>
-                    <pre className="flex-1 px-4 py-3 text-xs font-mono text-emerald-300 leading-5 overflow-x-auto whitespace-pre max-h-80 overflow-y-auto">
-                      <code>{topic.code}</code>
-                    </pre>
-                  </div>
-                </div>
+                <CodeBlock code={topic.code} filename={`${topic.title.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")} .py`} />
               )}
 
-              {/* Resources — FeatureShowcase CTA row */}
+              {/* Resources */}
               {topic.resources?.length > 0 && (
-                <div className="pt-1">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                <div className="rounded-xl bg-[#0b0f18] border border-white/5 p-4">
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-1.5">
                     <FiArrowRight className="text-indigo-400 text-xs" /> Resources & Links
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -5160,35 +8310,11 @@ function SectionTopicShowcase({ section, levelKey, progress, onToggle }) {
                 </div>
               )}
             </div>
-
-            {/* ── Panel footer: prev / next navigation ── */}
-            <div className="flex items-center justify-between px-5 py-3 border-t border-slate-100 bg-slate-50/50">
-              <button
-                onClick={() => handleTabChange(Math.max(0, activeTab - 1))}
-                disabled={activeTab === 0}
-                className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-colors">
-                <FiChevronDown className="rotate-90 text-sm" /> Previous
-              </button>
-              <span className="text-xs text-slate-300 tabular-nums font-mono">
-                {activeTab + 1} / {section.topics.length}
-              </span>
-              <button
-                onClick={() => handleTabChange(Math.min(section.topics.length - 1, activeTab + 1))}
-                disabled={activeTab === section.topics.length - 1}
-                className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-indigo-600 disabled:opacity-30 transition-colors">
-                Next <FiChevronDown className="-rotate-90 text-sm" />
-              </button>
-            </div>
           </div>
         )}
       </div>
 
-      <style>{`
-        @keyframes topicFadeIn {
-          from { opacity: 0; transform: translateY(6px); filter: blur(2px); }
-          to   { opacity: 1; transform: translateY(0);   filter: blur(0); }
-        }
-      `}</style>
+      <style>{`\n        @keyframes topicFadeIn {\n          from { opacity: 0; transform: translateY(5px); }\n          to   { opacity: 1; transform: translateY(0); }\n        }\n      `}</style>
     </div>
   );
 }
@@ -5200,69 +8326,54 @@ function TopicCard({ topic, checked, onToggle }) {
   const hasSubsections = topic.subsections?.length > 0;
 
   return (
-    <div className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
-      checked ? "border-emerald-200 bg-emerald-50/50" : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm"
+    <div className={`rounded-2xl transition-all duration-200 overflow-hidden ${
+      checked ? "bg-[#0d1420]" : "bg-[#0d1420] ring-1 ring-slate-800/20 hover:ring-slate-700/30"
     }`}>
       {/* Header */}
-      <div className="flex items-start gap-3 p-4">
-        <button onClick={onToggle}
+      <div className="flex items-start gap-3 px-4 py-3">
+          <button onClick={onToggle}
           className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
-            checked ? "bg-emerald-500 border-emerald-500 text-white" : "border-slate-300 hover:border-indigo-400"
+            checked ? "bg-indigo-600 border-indigo-600 text-white" : "border-slate-700 hover:border-indigo-600"
           }`}>
           {checked && <FiCheckCircle className="text-[11px]" />}
         </button>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap mb-1">
-            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${typeColor}`}>{typeLabel}</span>
+          <div className="flex flex-wrap gap-3 mb-1 text-[10px] text-slate-400">
+            <span className="uppercase tracking-[0.18em]">{typeLabel}</span>
             {hasSubsections && (
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full border bg-indigo-50 border-indigo-200 text-indigo-600">
-                {topic.subsections.length} subtopics
-              </span>
+              <span>{topic.subsections.length} subtopics</span>
             )}
           </div>
-          <h4 className={`font-bold text-sm ${checked ? "line-through text-slate-400" : "text-slate-800"}`}>{topic.title}</h4>
-          {!open && <p className="text-xs text-slate-500 mt-1 line-clamp-1">{topic.detail}</p>}
+          <h4 className={`font-bold text-sm ${checked ? "line-through text-slate-500" : "text-slate-100"}`}>{topic.title}</h4>
+          {!open && <p className="text-xs text-slate-400 mt-1 line-clamp-1">{topic.detail}</p>}
         </div>
         <button onClick={() => setOpen(v => !v)}
-          className="text-slate-400 hover:text-slate-600 transition-colors p-1 flex-shrink-0">
+          className="text-slate-500 hover:text-slate-300 transition-colors p-1 flex-shrink-0">
           {open ? <FiChevronUp /> : <FiChevronDown />}
         </button>
       </div>
 
       {/* Expanded content */}
       {open && (
-        <div className="px-4 pb-4 space-y-4 border-t border-slate-100 pt-4">
+        <div className="px-4 pb-4 space-y-4 pt-4">
 
           {/* Main detail */}
-          <p className="text-sm text-slate-600 leading-6">{topic.detail}</p>
+          <p className="text-sm text-slate-300 leading-6">{topic.detail}</p>
 
           {/* Subsections accordion — full concept breakdown */}
           {hasSubsections && (
             <SubsectionAccordion subsections={topic.subsections} />
           )}
 
-          {/* Code block */}
+          {/* Code block with syntax highlighting */}
           {topic.code && (
-            <div className="bg-slate-900 rounded-xl overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-white/10">
-                <div className="flex gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/60" />
-                </div>
-                <span className="text-[10px] text-white/30 font-mono ml-2">Python 3.12</span>
-                <span className="text-[9px] text-white/15 ml-auto">🐍</span>
-              </div>
-              <pre className="px-4 py-3 text-xs font-mono text-emerald-300 leading-5 overflow-x-auto whitespace-pre max-h-96 overflow-y-auto">
-                <code>{topic.code}</code>
-              </pre>
-            </div>
+            <CodeBlock code={topic.code} filename={`${topic.title.toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "")}.py`} />
           )}
 
           {/* Resources */}
           {topic.resources?.length > 0 && (
             <div>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2">Resources</p>
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Resources</p>
               <div className="flex flex-wrap gap-2">
                 {topic.resources.map((r, i) => <ResourceLink key={i} r={r} />)}
               </div>
@@ -5272,7 +8383,8 @@ function TopicCard({ topic, checked, onToggle }) {
       )}
     </div>
   );
-}
+}  
+
 
 function LevelCard({ data, progress, onToggle, globalOpen, onGlobalOpen }) {
   const [openSections, setOpenSections] = useState(new Set([data.sections[0]?.id]));
@@ -5285,13 +8397,13 @@ function LevelCard({ data, progress, onToggle, globalOpen, onGlobalOpen }) {
   const pct = totalTopics ? Math.round((doneTopics / totalTopics) * 100) : 0;
 
   const colorMap = {
-    emerald: { ring:"ring-emerald-400", node:"bg-emerald-500", bg:"bg-emerald-500" },
+    emerald: { ring:"ring-indigo-400", node:"bg-indigo-500", bg:"bg-indigo-500" },
     blue:    { ring:"ring-blue-400",    node:"bg-blue-500",    bg:"bg-blue-500"    },
     violet:  { ring:"ring-violet-400",  node:"bg-violet-500",  bg:"bg-violet-500"  },
     orange:  { ring:"ring-orange-400",  node:"bg-orange-500",  bg:"bg-orange-500"  },
     pink:    { ring:"ring-pink-400",    node:"bg-pink-500",    bg:"bg-pink-500"    },
   };
-  const c = colorMap[data.color];
+  const c = colorMap[data.color] || colorMap['emerald'] || { ring:"ring-indigo-400", node:"bg-indigo-500", bg:"bg-indigo-500" };
 
   const isOpen = globalOpen === data.level;
   const toggleSection = (id) => setOpenSections(prev => {
@@ -5302,13 +8414,11 @@ function LevelCard({ data, progress, onToggle, globalOpen, onGlobalOpen }) {
 
   return (
     <div id={`level-${data.level}`}
-      className={`rounded-3xl border-2 transition-all duration-300 ${
-        isOpen ? `${data.border} ${data.ring} ring-4` : "border-slate-200 hover:border-slate-300"
-      }`}>
+      className="rounded-2xl transition-all duration-200 bg-[#0d1420] ring-1 ring-slate-800/20 hover:ring-slate-700/30">
 
       {/* Level Header */}
       <button onClick={() => onGlobalOpen(isOpen ? null : data.level)}
-        className="w-full text-left p-6 flex items-center gap-5">
+        className="w-full text-left px-5 py-4 flex items-center gap-4">
         {/* Level badge */}
         <div className={`w-14 h-14 ${c.node} rounded-2xl flex flex-col items-center justify-center text-white flex-shrink-0 shadow-lg`}>
           <span className="text-xl leading-none">{data.emoji}</span>
@@ -5317,109 +8427,123 @@ function LevelCard({ data, progress, onToggle, globalOpen, onGlobalOpen }) {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap mb-1">
-            <h2 className="font-extrabold text-slate-900 text-lg">{data.label}</h2>
-            {pct === 100 && <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-700 border border-emerald-200">Complete ✓</span>}
+            <h2 className="font-extrabold text-slate-50 text-lg">{data.label}</h2>
+            {pct === 100 && <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-900/40 text-indigo-400">Complete ✓</span>}
           </div>
-          <p className="text-sm text-slate-500">{data.tagline}</p>
+          <p className="text-sm text-slate-400">{data.tagline}</p>
           {/* Progress bar */}
           <div className="mt-2 flex items-center gap-3">
-            <div className="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-              <div className={`h-full rounded-full transition-all duration-500 ${c.bg}`} style={{ width:`${pct}%` }} />
+            <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+              <div className={`h-full rounded-full transition-all duration-500 ${c.bg}`} style={{ width: `${pct}%` }} />
             </div>
             <span className={`text-xs font-bold ${data.text}`}>{doneTopics}/{totalTopics}</span>
           </div>
         </div>
 
-        <div className="text-slate-400 flex-shrink-0">
+        <div className="text-slate-500 flex-shrink-0">
           {isOpen ? <FiChevronUp className="text-xl" /> : <FiChevronDown className="text-xl" />}
         </div>
       </button>
 
       {/* Expanded content */}
       {isOpen && (
-        <div className="px-6 pb-6 space-y-5">
+        <div className="px-4 pb-5 space-y-4">
 
           {/* Sections */}
-          {data.sections.map(section => (
-            <div key={section.id} className="rounded-2xl border border-slate-200 overflow-hidden">
-              <button onClick={() => toggleSection(section.id)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-slate-50 hover:bg-slate-100 transition-colors text-left">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">{section.emoji}</span>
-                  <div>
-                    <p className="font-bold text-slate-800 text-sm">{section.title}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">{section.why}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  <span className="text-xs text-slate-400">
-                    {section.topics.filter((_, ti) => progress[`${data.level}-${section.id}-${ti}`]).length}/{section.topics.length}
-                  </span>
-                  {openSections.has(section.id) ? <FiChevronUp className="text-slate-400" /> : <FiChevronDown className="text-slate-400" />}
-                </div>
-              </button>
+          {data.sections.map(section => {
+            const secDone  = section.topics.filter((_, ti) => progress[`${data.level}-${section.id}-${ti}`]).length;
+            const secTotal = section.topics.length;
+            const secPct   = secTotal ? Math.round((secDone / secTotal) * 100) : 0;
+            const isSecOpen= openSections.has(section.id);
 
-              {openSections.has(section.id) && (
-                <div className="bg-white">
-                  <SectionTopicShowcase
-                    section={section}
-                    levelKey={data.level}
-                    progress={progress}
-                    onToggle={onToggle}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
+            return (
+              <div key={section.id} className={`rounded-xl overflow-hidden border transition-all ${
+                isSecOpen ? "border-indigo-500/20" : "border-white/5 hover:border-white/10"
+              }`}>
+                {/* Section header */}
+                <button onClick={() => toggleSection(section.id)}
+                  className={`w-full flex items-center justify-between px-4 py-3.5 text-left transition-all ${
+                    isSecOpen ? "bg-indigo-600/10" : "bg-[#0f1522] hover:bg-[#111827]"
+                  }`}>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-lg flex-shrink-0 ${
+                      isSecOpen ? "bg-indigo-500/20" : "bg-white/5"
+                    }`}>{section.emoji}</div>
+                    <div className="min-w-0">
+                      <p className={`font-bold text-sm ${isSecOpen ? "text-slate-100" : "text-slate-200"}`}>{section.title}</p>
+                      <p className="text-xs text-slate-500 mt-0.5 truncate">{section.why}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 flex-shrink-0 ml-3">
+                    {/* Mini progress */}
+                    <div className="hidden sm:flex items-center gap-2">
+                      <div className="w-16 h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div className={`h-full rounded-full transition-all ${secPct === 100 ? "bg-emerald-500" : "bg-indigo-500"}`} style={{ width:`${secPct}%` }} />
+                      </div>
+                      <span className={`text-[10px] font-bold tabular-nums ${secPct === 100 ? "text-emerald-400" : "text-slate-500"}`}>{secDone}/{secTotal}</span>
+                    </div>
+                    <div className={`transition-transform duration-200 ${isSecOpen ? "rotate-180" : ""}`}>
+                      <FiChevronDown className={`text-sm ${isSecOpen ? "text-indigo-400" : "text-slate-600"}`} />
+                    </div>
+                  </div>
+                </button>
+
+                {/* Section content */}
+                {isSecOpen && (
+                  <div className="bg-[#0b0f18] border-t border-white/5">
+                    <SectionTopicShowcase section={section} levelKey={data.level} progress={progress} onToggle={onToggle} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           {/* Resources & YouTube */}
-          <div className="rounded-2xl border border-slate-200 overflow-hidden">
+          <div className="rounded-2xl bg-[#0f1720] overflow-hidden">
             <button onClick={() => setShowResources(v => !v)}
-              className="w-full flex items-center justify-between px-4 py-3 bg-slate-50 hover:bg-slate-100 transition-colors">
+              className="w-full flex items-center justify-between px-4 py-3 bg-slate-900/40 hover:bg-slate-800/50 transition-colors">
               <div className="flex items-center gap-2">
-                <FiBookOpen className="text-slate-500" />
-                <p className="font-bold text-slate-700 text-sm">YouTube Channels & Platforms</p>
+                <FiBookOpen className="text-slate-400" />
+                <p className="font-bold text-slate-200 text-sm">YouTube Channels & Platforms</p>
               </div>
-              {showResources ? <FiChevronUp className="text-slate-400" /> : <FiChevronDown className="text-slate-400" />}
+              {showResources ? <FiChevronUp className="text-slate-500" /> : <FiChevronDown className="text-slate-500" />}
             </button>
 
             {showResources && (
-              <div className="p-4 grid sm:grid-cols-2 gap-4">
-                {/* YouTube */}
+              <div className="space-y-4 p-4 text-slate-300">
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500 mb-2 flex items-center gap-2">
                     <FiYoutube className="text-red-500" /> YouTube Channels
                   </p>
                   <div className="space-y-2">
                     {data.youtube.map((y, i) => (
                       <a key={i} href={y.url} target="_blank" rel="noopener noreferrer"
-                        className="flex items-start gap-2 p-2.5 rounded-xl bg-red-50 border border-red-100 hover:bg-red-100 transition-colors group">
-                        <FiYoutube className="text-red-500 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold text-red-800 group-hover:underline">{y.channel}</p>
-                          <p className="text-[10px] text-red-500 mt-0.5">{y.note}</p>
+                        className="flex items-start gap-3 p-3 rounded-2xl bg-slate-950/40 hover:bg-slate-900/60 transition-colors group">
+                        <FiYoutube className="text-red-400 flex-shrink-0 mt-0.5" />
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-slate-100 group-hover:underline">{y.channel}</p>
+                          <p className="text-xs text-slate-400 mt-1">{y.note}</p>
                         </div>
-                        <FiExternalLink className="text-red-300 text-xs ml-auto flex-shrink-0 mt-0.5" />
+                        <FiExternalLink className="text-slate-500 text-xs ml-auto flex-shrink-0 mt-0.5" />
                       </a>
                     ))}
                   </div>
                 </div>
 
-                {/* Platforms */}
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1">
-                    <FiGlobe className="text-indigo-500" /> Practice Platforms
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-slate-500 mb-2 flex items-center gap-2">
+                    <FiGlobe className="text-indigo-300" /> Practice Platforms
                   </p>
                   <div className="space-y-2">
                     {data.platforms.map((p, i) => (
                       <a key={i} href={p.url} target="_blank" rel="noopener noreferrer"
-                        className="flex items-start gap-2 p-2.5 rounded-xl bg-indigo-50 border border-indigo-100 hover:bg-indigo-100 transition-colors group">
-                        <FiCode className="text-indigo-500 flex-shrink-0 mt-0.5" />
-                        <div>
-                          <p className="text-xs font-bold text-indigo-800 group-hover:underline">{p.name}</p>
-                          <p className="text-[10px] text-indigo-500 mt-0.5">{p.note}</p>
+                        className="flex items-start gap-3 p-3 rounded-2xl bg-slate-950/40 hover:bg-slate-900/60 transition-colors group">
+                        <FiCode className="text-indigo-300 flex-shrink-0 mt-0.5" />
+                        <div className="min-w-0">
+                          <p className="text-sm font-semibold text-slate-100 group-hover:underline">{p.name}</p>
+                          <p className="text-xs text-slate-400 mt-1">{p.note}</p>
                         </div>
-                        <FiExternalLink className="text-indigo-300 text-xs ml-auto flex-shrink-0 mt-0.5" />
+                        <FiExternalLink className="text-slate-500 text-xs ml-auto flex-shrink-0 mt-0.5" />
                       </a>
                     ))}
                   </div>
@@ -5480,24 +8604,24 @@ export default function Roadmap() {
     }
   };
 
-  return (
+return (
     <DashboardLayout>
-      <div className="w-full min-h-screen pb-16">
+      <div className="w-full -mx-4 sm:-mx-6 -my-4 lg:-my-8 px-4 sm:px-6 lg:px-8 pb-8 bg-[#0a0e17] min-h-screen">
 
         {/* ── HERO ── */}
-        <div className="mb-8 relative">
-          <div className="absolute -top-10 -left-10 w-56 h-56 bg-indigo-100/30 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -top-6 right-0 w-40 h-40 bg-violet-100/20 rounded-full blur-2xl pointer-events-none" />
+        <div className="mb-6 relative pt-6">
+          <div className="absolute -top-10 -left-10 w-56 h-56 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-6 right-0 w-40 h-40 bg-indigo-500/10 rounded-full blur-2xl pointer-events-none" />
           <div className="relative">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-violet-50 border border-indigo-200 text-indigo-700 text-xs font-bold px-4 py-2 rounded-full mb-5 shadow-sm shadow-indigo-100">
+            <div className="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-800/20 text-indigo-400 text-xs font-bold px-4 py-2 rounded-full mb-5">
               <span className="text-base">🐍</span>
               Python Career Roadmap 2025
-              <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse ml-1" />
+              <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full animate-pulse ml-1" />
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3 leading-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-50 tracking-tight mb-3 leading-tight">
               Zero to Python Pro
             </h1>
-            <p className="text-slate-600 text-sm leading-relaxed">
+            <p className="text-slate-400 text-sm leading-relaxed">
               A practical, step-by-step roadmap from absolute beginner to AI Engineer.
               Every topic includes real code, curated resources, and YouTube channels.
               Check off topics as you complete them — progress saves to your browser.
@@ -5506,10 +8630,10 @@ export default function Roadmap() {
         </div>
 
         {/* ── OVERALL PROGRESS CARD ── */}
-        <div className="bg-gradient-to-br from-[#0f0f1a] via-slate-900 to-[#150f2a] rounded-3xl p-6 mb-8 text-white relative overflow-hidden border border-white/5 shadow-2xl shadow-indigo-900/20">
-          <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-500/10 rounded-full -translate-y-16 translate-x-16 blur-2xl" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-violet-600/10 rounded-full translate-y-10 -translate-x-10 blur-xl" />
-          <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage:"linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)", backgroundSize:"36px 36px" }} />
+        <div className="bg-[#0d1420] rounded-2xl p-5 mb-6 text-white relative overflow-hidden border border-indigo-900/30 shadow-2xl shadow-black/40">
+          <div className="absolute top-0 right-0 w-72 h-72 bg-indigo-500/5 rounded-full -translate-y-16 translate-x-16 blur-2xl" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-600/5 rounded-full translate-y-10 -translate-x-10 blur-xl" />
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage:"linear-gradient(white 1px,transparent 1px),linear-gradient(90deg,white 1px,transparent 1px)", backgroundSize:"36px 36px" }} />
           <div className="relative">
             <div className="flex items-center justify-between mb-5 flex-wrap gap-4">
               <div>
@@ -5549,7 +8673,7 @@ export default function Roadmap() {
                     className="text-center group">
                     <div className="text-xl mb-1">{level.emoji}</div>
                     <div className="h-1.5 bg-white/10 rounded-full overflow-hidden mb-1">
-                      <div className="h-full bg-indigo-400 rounded-full transition-all duration-500" style={{ width:`${ls.pct}%` }} />
+                      <div className="h-full bg-indigo-500 rounded-full transition-all duration-500" style={{ width:`${ls.pct}%` }} />
                     </div>
                     <p className="text-[9px] text-white/30 group-hover:text-white/60 transition-colors">{level.label}</p>
                     <p className="text-[10px] font-bold text-indigo-400">{ls.pct}%</p>
@@ -5561,23 +8685,23 @@ export default function Roadmap() {
         </div>
 
         {/* ── QUICK STATS ROW ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
           {[
-            { icon:<FiLayers/>,     label:"Levels",       value:"5",           color:"text-indigo-600", bg:"bg-indigo-50", border:"border-indigo-100" },
-            { icon:<FiBook/>,       label:"Total Topics",  value:`${stats.total}`, color:"text-violet-600", bg:"bg-violet-50", border:"border-violet-100" },
-            { icon:<FiCode/>,       label:"Code Examples", value:"50+",         color:"text-emerald-600",bg:"bg-emerald-50",border:"border-emerald-100"},
-            { icon:<FiYoutube/>,    label:"YouTube Links", value:"15+",         color:"text-red-600",   bg:"bg-red-50",   border:"border-red-100"   },
+            { icon:<FiLayers/>,     label:"Levels",       value:"5",           color:"text-indigo-400", bg:"bg-[#0d1420]", border:"border-indigo-900/30" },
+            { icon:<FiBook/>,       label:"Total Topics",  value:`${stats.total}`, color:"text-indigo-400", bg:"bg-[#0d1420]", border:"border-indigo-900/30" },
+            { icon:<FiCode/>,       label:"Code Examples", value:"50+",         color:"text-indigo-400", bg:"bg-[#0d1420]", border:"border-indigo-900/30" },
+            { icon:<FiYoutube/>,    label:"YouTube Links", value:"15+",         color:"text-red-400",     bg:"bg-[#0d1420]", border:"border-indigo-900/30" },
           ].map(s => (
-            <div key={s.label} className={`rounded-2xl border p-4 ${s.bg} ${s.border} hover:-translate-y-0.5 hover:shadow-md transition-all duration-200 cursor-default`}>
+            <div key={s.label} className={`rounded-2xl border p-4 ${s.bg} ${s.border} hover:-translate-y-0.5 hover:shadow-md hover:shadow-indigo-900/20 transition-all duration-200 cursor-default`}>
               <div className={`${s.color} mb-2 text-lg`}>{s.icon}</div>
               <p className={`text-2xl font-extrabold ${s.color} tabular-nums`}>{s.value}</p>
-              <p className="text-xs text-slate-600 mt-0.5 font-medium">{s.label}</p>
+              <p className="text-xs text-slate-400 mt-0.5 font-medium">{s.label}</p>
             </div>
           ))}
         </div>
 
         {/* ── LEVEL CARDS ── */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {ROADMAP.map((level) => (
             <LevelCard
               key={level.level}
@@ -5591,16 +8715,16 @@ export default function Roadmap() {
         </div>
 
         {/* ── COMING SOON ── */}
-        <div className="mt-8 rounded-3xl border-2 border-dashed border-slate-200 p-8 text-center">
+        <div className="mt-8 rounded-3xl border-2 border-dashed border-indigo-900/40 p-8 text-center">
           <div className="text-4xl mb-3">🔜</div>
-          <h3 className="font-bold text-slate-700 text-lg mb-2">More Content Coming Soon</h3>
-          <p className="text-slate-400 text-sm mb-5">
+          <h3 className="font-bold text-slate-200 text-lg mb-2">More Content Coming Soon</h3>
+          <p className="text-slate-500 text-sm mb-5">
             Advanced Django REST Framework, Python for DevOps, Web Scraping with Playwright,
             Quantum Python, Competitive Programming in Python, and Interview Mock Sessions.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
             {["Django REST","Web Scraping","Python DevOps","Competitive Python","Interview Prep","FastAPI Advanced","PyTorch Deep Dive","Python Patterns"].map(tag => (
-              <span key={tag} className="text-xs bg-slate-100 text-slate-500 px-3 py-1.5 rounded-full border border-slate-200">
+              <span key={tag} className="text-xs bg-[#0d1420] text-slate-400 px-3 py-1.5 rounded-full border border-indigo-900/30">
                 {tag}
               </span>
             ))}
@@ -5610,7 +8734,7 @@ export default function Roadmap() {
         {/* ── RESET BUTTON ── */}
         <div className="mt-6 text-center">
           <button onClick={resetProgress}
-            className="text-xs text-slate-400 hover:text-red-500 transition-colors border border-slate-200 hover:border-red-200 px-3 py-1.5 rounded-lg">
+            className="text-xs text-slate-500 hover:text-red-400 transition-colors border border-indigo-900/30 hover:border-red-800/40 px-3 py-1.5 rounded-lg">
             Reset all progress
           </button>
         </div>
@@ -5618,4 +8742,4 @@ export default function Roadmap() {
       </div>
     </DashboardLayout>
   );
-} 
+}
