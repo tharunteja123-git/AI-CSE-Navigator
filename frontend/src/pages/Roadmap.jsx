@@ -5890,82 +5890,6 @@ Python primarily provides two looping statements:
 The for loop is generally used when iterating over an iterable or when you know the sequence of values that should be processed.
 The while loop is used when repetition should continue as long as a condition remains True.
 ----------------------------------------
-The for Loop
-----------------------------------------
-The for loop iterates over items in an iterable.
-An iterable is an object that can provide its elements one at a time.
-Examples include:
-Lists
-Tuples
-Strings
-Sets
-Dictionaries
-Ranges
-Many other Python objects
-Example:
-numbers = [10, 20, 30]
-for number in numbers:
-    print(number)
-Output:
-10
-20
-30
-Python takes each element from numbers and assigns it to number one at a time.
-----------------------------------------
-The for Loop Is Iteration
-----------------------------------------
-Consider:
-names = ["Rahul", "Anita", "Kiran"]
-for name in names:
-    print(name)
-Python performs:
-name = "Rahul"
-print("Rahul")
-Then:
-name = "Anita"
-print("Anita")
-Then:
-name = "Kiran"
-print("Kiran")
-The loop automatically moves from one element to the next.
-----------------------------------------
-The while Loop
-----------------------------------------
-A while loop repeatedly executes a block of code while a condition is True.
-Example:
-count = 1
-while count <= 5:
-    print(count)
-    count += 1
-Output:
-1
-2
-3
-4
-5
-The condition:
-count <= 5
-is checked before every iteration.
-When count becomes 6, the condition becomes False and the loop stops.
-----------------------------------------
-for vs while
-----------------------------------------
-The main difference is how repetition is controlled.
-for:
-Iterates through an iterable.
-Example:
-for number in [1, 2, 3]:
-    print(number)
-while:
-Continues while a condition is True.
-Example:
-number = 1
-while number <= 3:
-    print(number)
-    number += 1
-A for loop is often convenient when processing a known collection of values.
-A while loop is useful when the number of repetitions depends on a changing condition.
-----------------------------------------
 Iteration
 ----------------------------------------
 Iteration means executing the loop body once for each cycle of the loop.
@@ -6126,25 +6050,6 @@ Handling multiple users or requests.
 Building menus.
 Running repeated background tasks.
 ----------------------------------------
-Loops in AI and Data Processing
-----------------------------------------
-Loops are also important in AI and data-related programming.
-Example:
-scores = [85, 90, 78, 92]
-total = 0
-for score in scores:
-    total += score
-average = total / len(scores)
-print(average)
-Output:
-86.25
-The loop processes every score and calculates the total.
-Many data-processing operations follow this same basic idea:
-Take one item.
-Process it.
-Move to the next item.
-Continue until all items are processed.
-----------------------------------------
 Loop Control Statements
 ----------------------------------------
 Python provides statements that allow you to control loop execution.
@@ -6245,8 +6150,5160 @@ Summary
 Loops allow Python programs to repeat operations efficiently without duplicating code. Python provides two primary looping mechanisms: for and while. The for loop is designed for iterating over iterable objects such as lists, strings, dictionaries, sets, and ranges, while the while loop continues as long as a condition remains True. Loops can contain conditions, nested loops, and loop-control statements. Understanding iteration, loop variables, loop bodies, termination, and the difference between for and while provides the foundation for writing efficient Python programs.`,
 },
 {
-
+  heading: "for Loop — Iterating Over Iterables",
+  body: `The for loop is one of the most commonly used looping structures in Python.
+It is used to iterate over the elements of an iterable one item at a time.
+Unlike some programming languages where a for loop is mainly used with a counter, Python's for loop is designed primarily for iteration.
+An iterable is an object whose elements can be accessed one after another.
+Common Python iterables include:
+Lists
+Tuples
+Strings
+Sets
+Dictionaries
+Ranges
+Files
+Many other Python objects
+----------------------------------------
+Basic Syntax
+----------------------------------------
+for variable in iterable:
+    statement
+Here:
+for → starts the loop.
+variable → receives one item at a time.
+in → connects the variable with the iterable.
+iterable → provides the values to the loop.
+The indented statements form the loop body.
+----------------------------------------
+Basic Example
+----------------------------------------
+numbers = [10, 20, 30, 40]
+for number in numbers:
+    print(number)
+Output:
+10
+20
+30
+40
+Python takes each element from numbers and assigns it to number during each iteration.
+----------------------------------------
+How the for Loop Works
+----------------------------------------
+Consider:
+numbers = [10, 20, 30]
+for number in numbers:
+    print(number)
+Python conceptually performs:
+First iteration:
+number = 10
+print(10)
+Second iteration:
+number = 20
+print(20)
+Third iteration:
+number = 30
+print(30)
+After all elements have been processed, the loop finishes.
+The programmer does not need to manually increase an index.
+----------------------------------------
+for Loop with a String
+----------------------------------------
+Strings are iterable, so Python can process each character individually.
+Example:
+name = "Python"
+for character in name:
+    print(character)
+Output:
+P
+y
+t
+h
+o
+n
+Each iteration receives one character from the string.
+----------------------------------------
+for Loop with a List
+----------------------------------------
+Example:
+languages = ["Python", "Java", "C++"]
+for language in languages:
+    print(language)
+Output:
+Python
+Java
+C++
+The loop visits each list element from left to right.
+----------------------------------------
+for Loop with a Tuple
+----------------------------------------
+Example:
+coordinates = (10, 20, 30)
+for value in coordinates:
+    print(value)
+Output:
+10
+20
+30
+Tuples are iterable, so their elements can be processed directly.
+----------------------------------------
+for Loop with a Set
+----------------------------------------
+Example:
+numbers = {10, 20, 30}
+for number in numbers:
+    print(number)
+The loop processes each element in the set.
+Remember that sets are unordered collections, so you should not depend on a particular iteration order.
+----------------------------------------
+for Loop with a Dictionary
+----------------------------------------
+When you directly iterate over a dictionary, Python iterates over its keys.
+Example:
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "course": "Python"
 }
+for key in student:
+    print(key)
+Output:
+name
+age
+course
+----------------------------------------
+Iterating Over Dictionary Values
+----------------------------------------
+Use .values() when you want the values.
+Example:
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "course": "Python"
+}
+for value in student.values():
+    print(value)
+Output:
+Rahul
+21
+Python
+----------------------------------------
+Iterating Over Dictionary Keys and Values
+----------------------------------------
+Use .items() when you need both the key and value.
+Example:
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+for key, value in student.items():
+    print(key, value)
+Output:
+name Rahul
+age 21
+The loop unpacks each key-value pair into key and value.
+----------------------------------------
+Loop Variable
+----------------------------------------
+The variable after for is called the loop variable.
+Example:
+for student in students:
+    print(student)
+Here:
+student → loop variable
+students → iterable
+The loop variable receives a new value during every iteration.
+----------------------------------------
+Choosing a Good Loop Variable
+----------------------------------------
+Use meaningful names when possible.
+Good:
+for student in students:
+    print(student)
+for product in products:
+    print(product)
+for score in scores:
+    print(score)
+Less descriptive:
+for x in students:
+    print(x)
+Short names such as i or x are common when the value has no special meaning, but descriptive names improve readability.
+----------------------------------------
+Loop Body
+----------------------------------------
+The indented statements after the for statement form the loop body.
+Example:
+for number in numbers:
+    print("Number:", number)
+    print("Processing...")
+Both statements execute during every iteration.
+Output:
+Number: 10
+Processing...
+Number: 20
+Processing...
+Number: 30
+Processing...
+----------------------------------------
+Indentation
+----------------------------------------
+Python uses indentation to determine which statements belong to the loop.
+Correct:
+for number in numbers:
+    print(number)
+Incorrect:
+for number in numbers:
+print(number)
+The loop body must be indented.
+----------------------------------------
+Multiple Statements Inside a for Loop
+----------------------------------------
+Example:
+numbers = [2, 4, 6]
+for number in numbers:
+    square = number ** 2
+    print("Number:", number)
+    print("Square:", square)
+Output:
+Number: 2
+Square: 4
+Number: 4
+Square: 16
+Number: 6
+Square: 36
+Every statement inside the indented block runs for each element.
+----------------------------------------
+Using Conditions Inside a for Loop
+----------------------------------------
+A for loop can contain an if statement.
+Example:
+numbers = [1, 2, 3, 4, 5]
+for number in numbers:
+    if number % 2 == 0:
+        print(number)
+Output:
+2
+4
+The loop processes every number, while the if statement decides which numbers should produce output.
+----------------------------------------
+for Loop with else
+----------------------------------------
+Python allows an else block after a for loop.
+Example:
+for number in [1, 2, 3]:
+    print(number)
+else:
+    print("Loop completed")
+Output:
+1
+2
+3
+Loop completed
+The loop's else block runs when the loop finishes normally.
+This feature becomes especially useful when combined with break and will be covered separately.
+----------------------------------------
+Nested for Loops
+----------------------------------------
+A for loop can contain another for loop.
+Example:
+for i in [1, 2, 3]:
+    for j in [10, 20]:
+        print(i, j)
+Output:
+1 10
+1 20
+2 10
+2 20
+3 10
+3 20
+For every iteration of the outer loop, the inner loop runs completely.
+----------------------------------------
+Processing Multiple Lists
+----------------------------------------
+You can process multiple collections using nested loops, but when elements need to be paired, Python provides zip().
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+scores = [85, 90, 78]
+for name, score in zip(names, scores):
+    print(name, score)
+Output:
+Rahul 85
+Anita 90
+Kiran 78
+zip() combines corresponding elements for iteration.
+----------------------------------------
+for Loop with range()
+----------------------------------------
+range() is a useful iterable for generating a sequence of integers.
+Example:
+for number in range(5):
+    print(number)
+Output:
+0
+1
+2
+3
+4
+The important concept is that range() provides the values and for iterates over them.
+The detailed behavior of range() will be covered in the next subsection.
+----------------------------------------
+for Loop with enumerate()
+----------------------------------------
+When you need both the index and the value, enumerate() is useful.
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+for index, name in enumerate(names):
+    print(index, name)
+Output:
+0 Rahul
+1 Anita
+2 Kiran
+enumerate() provides both the position and the corresponding value.
+----------------------------------------
+Iterating Through a File
+----------------------------------------
+Files are also iterable.
+Example:
+with open("data.txt") as file:
+    for line in file:
+        print(line.strip())
+The loop processes the file one line at a time.
+This is useful because the entire file does not need to be loaded into memory at once.
+----------------------------------------
+Looping Through Nested Data
+----------------------------------------
+Python can iterate through nested collections.
+Example:
+students = [
+    ["Rahul", 85],
+    ["Anita", 90],
+    ["Kiran", 78]
+]
+for student in students:
+    print(student)
+Output:
+['Rahul', 85]
+['Anita', 90]
+['Kiran', 78]
+You can unpack the inner values directly:
+for name, score in students:
+    print(name, score)
+Output:
+Rahul 85
+Anita 90
+Kiran 78
+----------------------------------------
+Unpacking in a for Loop
+----------------------------------------
+Python allows sequence unpacking during iteration.
+Example:
+points = [(10, 20), (30, 40), (50, 60)]
+for x, y in points:
+    print("X:", x, "Y:", y)
+Each tuple is unpacked into x and y.
+----------------------------------------
+Using _ as the Loop Variable
+----------------------------------------
+If you do not need the value being produced by the iterable, _ is commonly used as the loop variable.
+Example:
+for _ in range(3):
+    print("Hello")
+Output:
+Hello
+Hello
+Hello
+The underscore communicates:
+"I intentionally do not need this value."
+----------------------------------------
+Modifying a Collection During Iteration
+----------------------------------------
+Be careful when modifying a collection while iterating over it.
+For example, removing items from a list while directly iterating over that same list can cause unexpected behavior.
+Instead, create a separate collection or iterate over a copy when appropriate.
+Example:
+numbers = [1, 2, 3, 4, 5]
+for number in numbers[:]:
+    if number % 2 == 0:
+        numbers.remove(number)
+print(numbers)
+Output:
+[1, 3, 5]
+Using numbers[:] creates a shallow copy for the iteration.
+----------------------------------------
+for Loop and Performance
+----------------------------------------
+A for loop itself is not automatically slow.
+Its performance depends on what happens inside the loop and how much data is being processed.
+For large datasets, Python programmers often use appropriate built-in functions, comprehensions, libraries, vectorized operations, or specialized tools when they provide clearer or more efficient solutions.
+The important principle is:
+First write correct and readable code.
+Then optimize when performance actually matters.
+----------------------------------------
+Real-World Example — Student Scores
+----------------------------------------
+scores = [85, 72, 91, 64, 88]
+for score in scores:
+    if score >= 75:
+        print(score, "Good")
+    else:
+        print(score, "Needs improvement")
+The loop processes each score and applies the same decision to every student.
+----------------------------------------
+Real-World Example — Shopping Cart
+----------------------------------------
+cart = [500, 250, 1000]
+total = 0
+for price in cart:
+    total += price
+print("Total:", total)
+Output:
+Total: 1750
+The loop processes every item and adds its price to the total.
+----------------------------------------
+Real-World Example — Text Processing
+----------------------------------------
+text = "python"
+for character in text:
+    print(character.upper())
+Output:
+P
+Y
+T
+H
+O
+N
+Each character is processed individually.
+----------------------------------------
+Real-World Example — AI/Data Processing
+----------------------------------------
+predictions = [0.82, 0.91, 0.73, 0.88]
+for prediction in predictions:
+    if prediction >= 0.80:
+        print("High confidence")
+    else:
+        print("Low confidence")
+The loop applies the same evaluation to every prediction.
+----------------------------------------
+Important Rules
+----------------------------------------
+• for is an iteration statement.
+• It processes elements from an iterable one at a time.
+• The syntax is for variable in iterable:.
+• The loop variable receives one value during each iteration.
+• The loop body must be indented.
+• Python automatically moves to the next item.
+• You do not normally need to manually increment a loop variable.
+• Lists, tuples, strings, sets, dictionaries, ranges, and files can be iterated.
+• Direct dictionary iteration produces keys.
+• .values() iterates over dictionary values.
+• .items() provides dictionary key-value pairs.
+• enumerate() provides indexes and values.
+• zip() allows corresponding elements from multiple iterables to be processed together.
+• range() can generate sequences of integers for iteration.
+• A for loop can contain conditions and other loops.
+• A for loop can have an else block.
+• break, continue, and pass can control loop behavior.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a for loop as a worker processing a queue.
+Iterable:
+[Task 1, Task 2, Task 3]
+The loop does:
+Take Task 1
+↓
+Process Task 1
+↓
+Take Task 2
+↓
+Process Task 2
+↓
+Take Task 3
+↓
+Process Task 3
+↓
+No items remaining
+↓
+Loop ends
+This is the core idea behind Python iteration.
+----------------------------------------
+Summary
+----------------------------------------
+The Python for loop is designed to iterate over iterable objects one element at a time. It automatically obtains each value and assigns it to the loop variable, executes the indented loop body, and continues until the iterable is exhausted. It works naturally with lists, tuples, strings, sets, dictionaries, ranges, files, and many other Python objects. Conditions, nested loops, enumerate(), zip(), and dictionary methods can extend its usefulness. Understanding iteration and iterables is essential before learning range(), loop control statements, and more advanced looping techniques.`,
+},
+{
+  heading: "range() Function",
+  body: `The range() function is one of the most important tools used with Python's for loop.
+It generates a sequence of integers that can be iterated over one at a time.
+The most important rule to understand first is:
+range(n) → 0 to n - 1
+The value n is NOT included.
+----------------------------------------
+range(n) — The Most Important Rule
+----------------------------------------
+When range() receives one argument:
+range(n)
+Python automatically:
+Starts at 0.
+Stops before n.
+Uses a step of 1.
+Therefore:
+range(n) → 0, 1, 2, ..., n - 1
+Example:
+range(5)
+means:
+0, 1, 2, 3, 4
+It does NOT mean:
+0, 1, 2, 3, 4, 5
+So:
+range(5) → 0 to 4
+range(10) → 0 to 9
+range(100) → 0 to 99
+----------------------------------------
+Why Is n Not Included?
+----------------------------------------
+Python's range() follows the rule:
+Start → Included
+Stop → Excluded
+This is called a start-inclusive, stop-exclusive range.
+Example:
+range(2, 6)
+produces:
+2, 3, 4, 5
+Here:
+2 → included
+6 → excluded
+Think of it as:
+2 → 3 → 4 → 5 → 6
+                         ↑
+                       STOP
+Python stops before including 6.
+----------------------------------------
+Visualizing range(5)
+----------------------------------------
+Think of:
+range(5)
+as:
+0 → 1 → 2 → 3 → 4 → 5
+↑                   ↑
+START               STOP
+Python starts at 0.
+It moves forward by 1.
+When it reaches 5, it stops before including it.
+Final sequence:
+0, 1, 2, 3, 4
+----------------------------------------
+Basic Example
+----------------------------------------
+for number in range(5):
+    print(number)
+Output:
+0
+1
+2
+3
+4
+Here:
+range(5) → provides 0, 1, 2, 3, 4
+for → iterates over those values
+number → receives one value at a time
+----------------------------------------
+Why range(5) Contains 5 Values
+----------------------------------------
+range(5)
+produces:
+0, 1, 2, 3, 4
+There are exactly 5 values.
+The number of values is:
+5 - 0 = 5
+This is one reason Python's exclusive stop rule is convenient.
+----------------------------------------
+range() with Start and Stop
+----------------------------------------
+Syntax:
+range(start, stop)
+Example:
+for number in range(2, 7):
+    print(number)
+Output:
+2
+3
+4
+5
+6
+Here:
+start = 2 → included
+stop = 7 → excluded
+step = 1 → default
+Therefore:
+range(2, 7) → 2 to 6
+----------------------------------------
+General Rule
+----------------------------------------
+range(start, stop)
+means:
+start → included
+stop → excluded
+So:
+range(1, 6) → 1, 2, 3, 4, 5
+range(5, 10) → 5, 6, 7, 8, 9
+range(10, 15) → 10, 11, 12, 13, 14
+----------------------------------------
+range() with Start, Stop, and Step
+----------------------------------------
+Syntax:
+range(start, stop, step)
+The step controls how much the value changes after every iteration.
+Example:
+for number in range(1, 10, 2):
+    print(number)
+Output:
+1
+3
+5
+7
+9
+Here:
+start = 1
+stop = 10
+step = 2
+The values are generated as:
+1 → 3 → 5 → 7 → 9 → 11
+11 passes the stop boundary, so the sequence ends at 9.
+----------------------------------------
+Understanding Step
+----------------------------------------
+Step = 1:
+range(1, 6, 1)
+→ 1, 2, 3, 4, 5
+Step = 2:
+range(1, 6, 2)
+→ 1, 3, 5
+Step = 3:
+range(1, 10, 3)
+→ 1, 4, 7
+The step determines the distance between consecutive values.
+----------------------------------------
+Negative Step
+----------------------------------------
+A negative step makes range() move backwards.
+Example:
+for number in range(5, 0, -1):
+    print(number)
+Output:
+5
+4
+3
+2
+1
+Here:
+start = 5
+stop = 0
+step = -1
+The sequence moves downward and stops before including 0.
+Therefore:
+range(5, 0, -1) → 5, 4, 3, 2, 1
+----------------------------------------
+Visualizing Negative Step
+----------------------------------------
+range(5, 0, -1)
+means:
+5 → 4 → 3 → 2 → 1 → 0
+↑                         ↑
+START                     STOP
+Python stops before including 0.
+----------------------------------------
+Counting Backwards by 2
+----------------------------------------
+Example:
+for number in range(10, 0, -2):
+    print(number)
+Output:
+10
+8
+6
+4
+2
+Therefore:
+range(10, 0, -2) → 10, 8, 6, 4, 2
+----------------------------------------
+range() for Repetition
+----------------------------------------
+If you only want to repeat an operation a fixed number of times, you can use:
+for _ in range(5):
+    print("Hello")
+Output:
+Hello
+Hello
+Hello
+Hello
+Hello
+Here the generated numbers are not needed, so _ is used as the loop variable.
+----------------------------------------
+range() for Even Numbers
+----------------------------------------
+for number in range(2, 11, 2):
+    print(number)
+Output:
+2
+4
+6
+8
+10
+Here:
+start = 2
+stop = 11
+step = 2
+The stop value 11 is excluded.
+----------------------------------------
+range() for Odd Numbers
+----------------------------------------
+for number in range(1, 11, 2):
+    print(number)
+Output:
+1
+3
+5
+7
+9
+----------------------------------------
+range() for Multiplication Tables
+----------------------------------------
+number = 5
+for i in range(1, 11):
+    print(number, "x", i, "=", number * i)
+Output:
+5 x 1 = 5
+5 x 2 = 10
+5 x 3 = 15
+5 x 4 = 20
+5 x 5 = 25
+5 x 6 = 30
+5 x 7 = 35
+5 x 8 = 40
+5 x 9 = 45
+5 x 10 = 50
+Notice:
+range(1, 11)
+produces:
+1 to 10
+11 is excluded.
+----------------------------------------
+range() Returns a range Object
+----------------------------------------
+Example:
+numbers = range(5)
+print(numbers)
+Output:
+range(0, 5)
+range() does not directly return a list.
+It returns a range object that represents the sequence.
+You can convert it to a list:
+numbers = list(range(5))
+print(numbers)
+Output:
+[0, 1, 2, 3, 4]
+----------------------------------------
+Why range() Is Memory Efficient
+----------------------------------------
+range() represents the sequence instead of creating a complete list of values.
+Example:
+numbers = range(1000000)
+This allows Python to represent a very large sequence efficiently.
+If you use:
+numbers = list(range(1000000))
+Python creates an actual list containing all those values.
+Therefore, when you only need to iterate, range() is generally the better choice.
+----------------------------------------
+range() Is Iterable
+----------------------------------------
+A range object is iterable.
+That is why it works with a for loop:
+for number in range(5):
+    print(number)
+The for loop obtains each number from the range object one at a time.
+Remember:
+for → performs iteration
+range() → provides the integer sequence
+----------------------------------------
+range() with len()
+----------------------------------------
+range() can be combined with len() when indexes are needed.
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+for i in range(len(names)):
+    print(i, names[i])
+Output:
+0 Rahul
+1 Anita
+2 Kiran
+However, when both index and value are required, enumerate() is usually clearer:
+for i, name in enumerate(names):
+    print(i, name)
+----------------------------------------
+range() with User Input
+----------------------------------------
+limit = int(input("Enter a limit: "))
+for number in range(1, limit + 1):
+    print(number)
+If the user enters:
+5
+Output:
+1
+2
+3
+4
+5
+Why +1?
+Because the stop value is exclusive.
+If we wrote:
+range(1, limit)
+the value 5 would not be included.
+----------------------------------------
+Common Off-by-One Mistake
+----------------------------------------
+Suppose you want:
+1
+2
+3
+4
+5
+Incorrect:
+range(1, 5)
+Output:
+1
+2
+3
+4
+Correct:
+range(1, 6)
+Output:
+1
+2
+3
+4
+5
+Remember:
+To include a final value n in a forward range, the stop value is usually n + 1.
+----------------------------------------
+range() with Floating-Point Values
+----------------------------------------
+range() works with integers.
+This is invalid:
+range(0, 1, 0.1)
+The built-in range() function does not support floating-point steps.
+If floating-point sequences are required, other approaches or libraries such as NumPy can be used.
+----------------------------------------
+Important Rules
+----------------------------------------
+• range(n) starts at 0.
+• range(n) stops before n.
+• Therefore, range(n) → 0 to n - 1.
+• The start value is included.
+• The stop value is excluded.
+• The default step is 1.
+• range(start, stop, step) provides control over the sequence.
+• A positive step moves forward.
+• A negative step moves backward.
+• range() accepts integer arguments.
+• range() returns a range object.
+• A range object is iterable.
+• range() is commonly used with for loops.
+• range() is memory-efficient compared with an equivalent list.
+• Use list(range(...)) when an actual list is required.
+• Use enumerate() when both index and value are needed.
+----------------------------------------
+Mental Model
+----------------------------------------
+Always remember:
+range(n)
+↓
+Start at 0
+↓
+Move by 1
+↓
+Stop before n
+↓
+Final value = n - 1
+For example:
+range(5)
+↓
+0
+↓
+1
+↓
+2
+↓
+3
+↓
+4
+↓
+5 → STOP
+Final result:
+0, 1, 2, 3, 4
+The single most important rule is:
+range(n) = 0 to n - 1
+and n is always excluded.`,
+},
+{
+  heading: "while Loop — Repeating While a Condition Is True",
+  body: `The while loop is a control-flow statement used to repeatedly execute a block of code as long as a given condition remains True.
+Unlike the for loop, which normally iterates through the values of an iterable, the while loop is controlled by a condition.
+The loop continues until that condition becomes False.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+while condition:
+    statement
+Here:
+while → starts the loop.
+condition → determines whether the loop should continue.
+statement → loop body that executes while the condition is True.
+The loop body must be indented.
+----------------------------------------
+Basic Example
+----------------------------------------
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+Output:
+1
+2
+3
+4
+5
+How it works:
+count = 1 → condition is True → print 1
+count = 2 → condition is True → print 2
+count = 3 → condition is True → print 3
+count = 4 → condition is True → print 4
+count = 5 → condition is True → print 5
+count = 6 → condition is False → stop
+----------------------------------------
+The Three Important Parts
+----------------------------------------
+A well-designed while loop usually contains three important parts:
+1. Initial value
+2. Condition
+3. Update
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+Here:
+Initial value → count = 1
+Condition → count <= 5
+Update → count += 1
+The update is important because it eventually makes the condition False.
+----------------------------------------
+Visual Execution Flow
+----------------------------------------
+while loop execution can be understood as:
+Start
+↓
+Check condition
+↓
+Is condition True?
+↓ Yes
+Execute loop body
+↓
+Update the value
+↓
+Check condition again
+↓
+True → Repeat
+False → Exit loop
+----------------------------------------
+Condition Is Checked Before Every Iteration
+----------------------------------------
+The while loop checks its condition before executing the loop body.
+Example:
+count = 10
+while count < 5:
+    print(count)
+Output:
+No output
+The condition is False from the beginning, so the loop body never executes.
+This means a while loop can execute zero times.
+----------------------------------------
+Condition Becomes False
+----------------------------------------
+Example:
+number = 1
+while number <= 3:
+    print(number)
+    number += 1
+Output:
+1
+2
+3
+After printing 3:
+number becomes 4
+Then:
+4 <= 3
+is False.
+The loop terminates.
+----------------------------------------
+Updating the Loop Variable
+----------------------------------------
+The variable controlling the condition usually needs to change inside the loop.
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+The statement:
+count += 1
+moves the loop toward termination.
+Without an appropriate update, the loop may never end.
+----------------------------------------
+Infinite while Loop
+----------------------------------------
+A loop that never becomes False is called an infinite loop.
+Example:
+count = 1
+while count <= 5:
+    print(count)
+If count is never changed, count remains 1 forever.
+Therefore:
+count <= 5
+always remains True.
+The program continues indefinitely.
+----------------------------------------
+Intentional Infinite Loop
+----------------------------------------
+Sometimes infinite loops are intentionally created for programs that should continue running until an internal condition tells them to stop.
+Example:
+while True:
+    command = input("Enter command: ")
+    if command == "quit":
+        break
+Here:
+while True
+creates a loop that continues indefinitely.
+The break statement provides a way to exit it.
+break will be covered separately in loop control statements.
+----------------------------------------
+while with an if Statement
+----------------------------------------
+A while loop can contain conditional statements.
+Example:
+number = 1
+while number <= 10:
+    if number % 2 == 0:
+        print(number)
+    number += 1
+Output:
+2
+4
+6
+8
+10
+The while loop controls repetition.
+The if statement controls the decision inside each iteration.
+----------------------------------------
+while with User Input
+----------------------------------------
+One of the most common uses of while is repeatedly accepting input until the user provides an acceptable value.
+Example:
+age = int(input("Enter your age: "))
+while age < 0:
+    print("Age cannot be negative.")
+    age = int(input("Enter your age: "))
+print("Valid age:", age)
+The loop continues while the input is invalid.
+Once age becomes 0 or greater, the condition becomes False and the loop ends.
+----------------------------------------
+Input Validation
+----------------------------------------
+while loops are especially useful for validation.
+Example:
+password = input("Enter password: ")
+while password != "python123":
+    print("Incorrect password.")
+    password = input("Try again: ")
+print("Access granted.")
+The loop continues until the required condition is satisfied.
+In real applications, passwords should never be hard-coded like this; this example is only for understanding loop logic.
+----------------------------------------
+Counting Down
+----------------------------------------
+A while loop can also count backwards.
+Example:
+count = 5
+while count >= 1:
+    print(count)
+    count -= 1
+Output:
+5
+4
+3
+2
+1
+The update:
+count -= 1
+moves the value toward the stopping condition.
+----------------------------------------
+Counting by Different Steps
+----------------------------------------
+The update does not have to be 1.
+Example:
+number = 2
+while number <= 10:
+    print(number)
+    number += 2
+Output:
+2
+4
+6
+8
+10
+Here the value increases by 2 each iteration.
+----------------------------------------
+Using Multiple Conditions
+----------------------------------------
+A while condition can contain logical operators.
+Example:
+age = 20
+has_id = True
+while age < 18 or not has_id:
+    print("Access denied")
+    break
+Logical operators such as and, or, and not can be used to build more complex conditions.
+----------------------------------------
+while with and
+----------------------------------------
+Example:
+number = 1
+while number <= 10 and number % 2 != 0:
+    print(number)
+    number += 2
+Output:
+1
+3
+5
+7
+9
+The loop continues only while both conditions are True.
+----------------------------------------
+while with or
+----------------------------------------
+Example:
+number = 1
+while number < 3 or number == 10:
+    print(number)
+    number += 1
+This example demonstrates that a while condition can combine multiple logical conditions.
+Care must always be taken to ensure that the loop eventually terminates.
+----------------------------------------
+Nested while Loops
+----------------------------------------
+A while loop can contain another while loop.
+Example:
+i = 1
+while i <= 3:
+    j = 1
+    while j <= 2:
+        print(i, j)
+        j += 1
+    i += 1
+Output:
+1 1
+1 2
+2 1
+2 2
+3 1
+3 2
+The inner loop completes its iterations for every iteration of the outer loop.
+----------------------------------------
+while Loop with a Counter
+----------------------------------------
+Counters are commonly used with while loops.
+Example:
+count = 0
+while count < 5:
+    print("Iteration:", count)
+    count += 1
+Output:
+Iteration: 0
+Iteration: 1
+Iteration: 2
+Iteration: 3
+Iteration: 4
+The counter keeps track of how many iterations have occurred.
+----------------------------------------
+while Loop with an Accumulator
+----------------------------------------
+A while loop can repeatedly build a result.
+Example:
+number = 1
+total = 0
+while number <= 5:
+    total += number
+    number += 1
+print(total)
+Output:
+15
+The accumulator total stores the running result.
+----------------------------------------
+Searching with while
+----------------------------------------
+A while loop can be used when searching until a desired condition is reached.
+Example:
+numbers = [4, 8, 12, 16, 20]
+index = 0
+while index < len(numbers):
+    if numbers[index] == 12:
+        print("Found")
+        break
+    index += 1
+The loop checks elements one by one until the required value is found.
+----------------------------------------
+for vs while
+----------------------------------------
+The two loops solve different types of problems.
+for:
+Used mainly to iterate over an iterable.
+Example:
+for number in numbers:
+    print(number)
+while:
+Used mainly when repetition depends on a condition.
+Example:
+while count < 10:
+    print(count)
+    count += 1
+Simple mental model:
+for → "For every item, do this."
+while → "While this condition is true, keep doing this."
+----------------------------------------
+When to Use while
+----------------------------------------
+A while loop is useful when:
+The number of iterations is not known beforehand.
+The loop depends on user input.
+The loop depends on a changing condition.
+You need to continue until a specific event occurs.
+You need repeated validation.
+You need to monitor a changing state.
+Example:
+while user_is_active:
+    process_request()
+The number of iterations depends on when user_is_active becomes False.
+----------------------------------------
+When for Is Better
+----------------------------------------
+If you already have an iterable to process, a for loop is usually clearer.
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+for name in names:
+    print(name)
+You normally do not need:
+index = 0
+while index < len(names):
+    print(names[index])
+    index += 1
+The for loop directly expresses the intention to process every item.
+----------------------------------------
+while and range()
+----------------------------------------
+range() is commonly associated with for loops, but a while loop does not require range().
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+Here the condition and update manually control the sequence.
+Compare:
+for count in range(1, 6):
+    print(count)
+Both produce:
+1
+2
+3
+4
+5
+But they express the repetition differently.
+----------------------------------------
+while Loop and Boolean Conditions
+----------------------------------------
+The condition can directly use a Boolean variable.
+Example:
+running = True
+while running:
+    print("Program is running")
+    running = False
+Output:
+Program is running
+The loop executes while running is True.
+----------------------------------------
+Changing the Condition
+----------------------------------------
+The condition can depend on values that change during the loop.
+Example:
+balance = 100
+while balance > 0:
+    print("Remaining balance:", balance)
+    balance -= 25
+Output:
+Remaining balance: 100
+Remaining balance: 75
+Remaining balance: 50
+Remaining balance: 25
+When balance becomes 0, the condition becomes False.
+----------------------------------------
+Common Mistake — Forgetting the Update
+----------------------------------------
+Incorrect:
+count = 1
+while count <= 5:
+    print(count)
+The value of count never changes.
+Therefore the condition remains True forever.
+Correct:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+----------------------------------------
+Common Mistake — Wrong Update Direction
+----------------------------------------
+Example:
+count = 5
+while count > 0:
+    print(count)
+    count += 1
+This is incorrect because count increases instead of decreasing.
+The condition:
+count > 0
+will remain True.
+Correct:
+count = 5
+while count > 0:
+    print(count)
+    count -= 1
+----------------------------------------
+Common Mistake — Incorrect Condition
+----------------------------------------
+Example:
+count = 1
+while count < 5:
+    print(count)
+    count += 1
+Output:
+1
+2
+3
+4
+The value 5 is not printed because the condition requires count to be less than 5.
+If you want to include 5:
+while count <= 5:
+    print(count)
+    count += 1
+----------------------------------------
+while Loop with else
+----------------------------------------
+Python allows an else block with a while loop.
+Example:
+count = 1
+while count <= 3:
+    print(count)
+    count += 1
+else:
+    print("Loop completed")
+Output:
+1
+2
+3
+Loop completed
+The else block executes when the while loop finishes normally.
+Its behavior with break will be covered separately.
+----------------------------------------
+Real-World Example — Menu System
+----------------------------------------
+choice = ""
+while choice != "q":
+    print("1. Start")
+    print("2. Settings")
+    print("q. Quit")
+    choice = input("Choose: ")
+The loop continues displaying the menu until the user chooses q.
+This pattern is common in command-line applications.
+----------------------------------------
+Real-World Example — Retry Attempts
+----------------------------------------
+attempts = 0
+while attempts < 3:
+    print("Attempt:", attempts + 1)
+    attempts += 1
+Output:
+Attempt: 1
+Attempt: 2
+Attempt: 3
+The counter limits the number of attempts.
+----------------------------------------
+Real-World Example — AI/Data Processing
+----------------------------------------
+index = 0
+predictions = [0.82, 0.91, 0.73]
+while index < len(predictions):
+    prediction = predictions[index]
+    print("Prediction:", prediction)
+    index += 1
+Output:
+Prediction: 0.82
+Prediction: 0.91
+Prediction: 0.73
+Although a for loop is usually cleaner for directly processing a list, this example demonstrates how a while loop can control processing through an index.
+----------------------------------------
+Loop Control Statements
+----------------------------------------
+while loops can be controlled using:
+break
+continue
+pass
+break → immediately exits the loop.
+continue → skips the current iteration and starts the next iteration.
+pass → does nothing and acts as a placeholder.
+These statements will be covered in detail after the basic loop concepts.
+----------------------------------------
+Important Rules
+----------------------------------------
+• while repeats a block of code while a condition is True.
+• The condition is checked before every iteration.
+• A while loop can execute zero times.
+• The loop body must be indented.
+• The condition should eventually become False unless an infinite loop is intentional.
+• A loop variable or state usually needs to be updated.
+• Forgetting the update can create an infinite loop.
+• The update must move the program toward termination.
+• while loops are useful for input validation.
+• while loops are useful when the number of iterations is unknown.
+• while loops can contain if statements.
+• while loops can contain other loops.
+• while loops can use logical operators.
+• while loops can have an else block.
+• break, continue, and pass can control loop execution.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a while loop like a security checkpoint.
+Check the condition.
+↓
+Condition True?
+↓ Yes
+Allow the operation.
+↓
+Update the situation.
+↓
+Check again.
+↓
+Condition True?
+→ Repeat
+Condition False?
+→ Stop
+The key question for a while loop is:
+"Should I continue?"
+As long as the answer is True, the loop keeps running.
+----------------------------------------
+Summary
+----------------------------------------
+The while loop repeatedly executes a block of code as long as its condition remains True. Unlike the for loop, which is primarily used to iterate over iterable objects, while is condition-driven. A while loop checks its condition before every iteration and can execute zero or many times. Proper initialization, condition design, and updating of the controlling value are essential to avoid accidental infinite loops. while loops are especially useful for input validation, menus, retries, monitoring changing states, and situations where the number of iterations is not known in advance.`,
+},
+{
+  heading: "break Statement — Exiting a Loop Early",
+  body: `The break statement is a loop-control statement used to immediately terminate the nearest enclosing loop.
+When Python encounters break, it stops the loop completely and continues execution with the first statement after the loop.
+break can be used inside both for loops and while loops.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+for item in iterable:
+    if condition:
+        break
+The break statement is normally used when a specific condition is satisfied and there is no reason to continue processing the remaining iterations.
+----------------------------------------
+Basic Example with for
+----------------------------------------
+for number in range(1, 11):
+    if number == 5:
+        break
+    print(number)
+Output:
+1
+2
+3
+4
+The loop reaches number == 5.
+The break statement immediately terminates the loop.
+Numbers 6 through 10 are never processed.
+----------------------------------------
+Execution Flow
+----------------------------------------
+Consider:
+for number in range(1, 6):
+    if number == 3:
+        break
+    print(number)
+Execution:
+number = 1
+↓
+1 == 3 → False
+↓
+print(1)
+↓
+number = 2
+↓
+2 == 3 → False
+↓
+print(2)
+↓
+number = 3
+↓
+3 == 3 → True
+↓
+break
+↓
+Loop terminates
+↓
+Continue after the loop
+The output is:
+1
+2
+----------------------------------------
+break Does Not Mean "Skip"
+----------------------------------------
+break and continue have completely different meanings.
+break:
+Stops the entire loop.
+continue:
+Skips only the current iteration.
+Example:
+for number in range(1, 6):
+    if number == 3:
+        break
+    print(number)
+Output:
+1
+2
+The entire loop ends when 3 is reached.
+----------------------------------------
+break with while
+----------------------------------------
+break can also terminate a while loop.
+Example:
+count = 1
+while count <= 10:
+    if count == 5:
+        break
+    print(count)
+    count += 1
+Output:
+1
+2
+3
+4
+When count becomes 5, break terminates the loop.
+----------------------------------------
+break with User Input
+----------------------------------------
+A common use of break is creating a loop that continues until the user chooses to stop.
+Example:
+while True:
+    command = input("Enter command: ")
+    if command == "quit":
+        break
+    print("Command:", command)
+The loop continues until the user enters quit.
+When quit is entered:
+command == "quit"
+becomes True.
+break executes.
+The loop ends.
+----------------------------------------
+Searching for a Value
+----------------------------------------
+break is very useful when searching for something.
+Example:
+numbers = [10, 20, 30, 40, 50]
+for number in numbers:
+    if number == 30:
+        print("Found")
+        break
+Output:
+Found
+Once 30 is found, there is no need to continue searching.
+break stops unnecessary processing.
+----------------------------------------
+Searching with a Flag
+----------------------------------------
+Sometimes a Boolean variable is used to remember whether something was found.
+Example:
+numbers = [10, 20, 30, 40]
+found = False
+for number in numbers:
+    if number == 30:
+        found = True
+        break
+print(found)
+Output:
+True
+The break avoids checking the remaining elements after the required value has been found.
+----------------------------------------
+Finding the First Matching Value
+----------------------------------------
+Example:
+numbers = [4, 7, 12, 15, 20]
+for number in numbers:
+    if number > 10:
+        print("First value greater than 10:", number)
+        break
+Output:
+First value greater than 10: 12
+The loop stops at the first value satisfying the condition.
+----------------------------------------
+break with Conditions
+----------------------------------------
+break is commonly combined with if.
+Example:
+for number in range(1, 101):
+    if number % 17 == 0:
+        print("First multiple:", number)
+        break
+Output:
+First multiple: 17
+The loop does not need to check 18 through 100 because the first matching value has already been found.
+----------------------------------------
+break in Nested Loops
+----------------------------------------
+When break is used inside nested loops, it terminates only the nearest enclosing loop.
+Example:
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+        print(i, j)
+Output:
+0 0
+1 0
+2 0
+Here, break terminates the inner loop.
+The outer loop continues with its next iteration.
+----------------------------------------
+Understanding Nested Loop break
+----------------------------------------
+Consider:
+for i in range(2):
+    for j in range(3):
+        print(i, j)
+        if j == 1:
+            break
+The outer loop controls i.
+The inner loop controls j.
+When j becomes 1:
+break
+↓
+Inner loop ends
+↓
+Outer loop continues
+Therefore break affects only the closest loop containing it.
+----------------------------------------
+Breaking an Infinite Loop
+----------------------------------------
+break is often used with while True.
+Example:
+while True:
+    number = int(input("Enter a positive number: "))
+    if number > 0:
+        break
+    print("Invalid number")
+print("Accepted:", number)
+The loop is intentionally created as an infinite loop.
+break provides the exit condition.
+----------------------------------------
+Input Validation Pattern
+----------------------------------------
+A common pattern is:
+while True:
+    value = input("Enter yes or no: ")
+    if value in ("yes", "no"):
+        break
+    print("Invalid input")
+print("Valid input:", value)
+The loop continues until valid input is received.
+----------------------------------------
+break and for Loop Completion
+----------------------------------------
+Normally, a for loop finishes after all iterable values have been processed.
+Example:
+for number in range(5):
+    print(number)
+Output:
+0
+1
+2
+3
+4
+But break allows the loop to finish early.
+Example:
+for number in range(5):
+    if number == 2:
+        break
+    print(number)
+Output:
+0
+1
+The loop does not process the remaining values.
+----------------------------------------
+break and while Loop Termination
+----------------------------------------
+A while loop normally ends when its condition becomes False.
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+break provides another way to terminate it.
+Example:
+count = 1
+while count <= 5:
+    if count == 3:
+        break
+    print(count)
+    count += 1
+Output:
+1
+2
+The loop terminates because break is reached before count becomes 4.
+----------------------------------------
+break vs Natural Loop Termination
+----------------------------------------
+There are two different ways a loop can finish.
+Natural termination:
+for number in range(5):
+    print(number)
+The loop finishes because all values have been processed.
+Early termination:
+for number in range(5):
+    if number == 2:
+        break
+    print(number)
+The loop finishes early because break is executed.
+----------------------------------------
+break Does Not Return a Value
+----------------------------------------
+break controls loop execution.
+It does not return a value like return does.
+Example:
+for number in range(5):
+    if number == 2:
+        break
+The purpose of break is simply:
+"Stop this loop now."
+----------------------------------------
+break vs return
+----------------------------------------
+break:
+Exits the nearest loop.
+The function continues after the loop.
+return:
+Exits the entire function.
+Example:
+def find_number(numbers):
+    for number in numbers:
+        if number == 10:
+            break
+    print("Function continues")
+break only ends the loop.
+----------------------------------------
+break vs continue
+----------------------------------------
+break:
+Stop the entire loop.
+continue:
+Skip the current iteration.
+Example using break:
+for number in range(1, 6):
+    if number == 3:
+        break
+    print(number)
+Output:
+1
+2
+Example using continue:
+for number in range(1, 6):
+    if number == 3:
+        continue
+    print(number)
+Output:
+1
+2
+4
+5
+The difference is critical:
+break → leave the loop.
+continue → remain in the loop but skip one iteration.
+----------------------------------------
+break with else
+----------------------------------------
+Python's loop else has an important relationship with break.
+Example:
+for number in range(1, 6):
+    if number == 3:
+        break
+else:
+    print("Loop completed normally")
+The else block does NOT execute because the loop was terminated using break.
+Without break:
+for number in range(1, 6):
+    print(number)
+else:
+    print("Loop completed normally")
+Here the else block executes because the loop finished normally.
+----------------------------------------
+Search Example with for...else
+----------------------------------------
+numbers = [10, 20, 30, 40]
+target = 30
+for number in numbers:
+    if number == target:
+        print("Found")
+        break
+else:
+    print("Not found")
+Output:
+Found
+If the target is found, break stops the loop and the else block is skipped.
+If no target is found, the loop finishes normally and else executes.
+----------------------------------------
+Real-World Example — Login Attempts
+----------------------------------------
+attempts = 0
+while attempts < 3:
+    password = input("Enter password: ")
+    attempts += 1
+    if password == "python123":
+        print("Login successful")
+        break
+    print("Incorrect password")
+The break stops the loop immediately after the correct password is entered.
+In real applications, passwords should be securely stored and verified rather than hard-coded.
+----------------------------------------
+Real-World Example — Processing Records
+----------------------------------------
+records = [101, 102, 103, 104, 105]
+for record in records:
+    print("Processing:", record)
+    if record == 103:
+        print("Required record reached")
+        break
+Output:
+Processing: 101
+Processing: 102
+Processing: 103
+Required record reached
+The loop stops once the required record is reached.
+----------------------------------------
+Real-World Example — AI/Data Search
+----------------------------------------
+predictions = [0.42, 0.51, 0.91, 0.73, 0.88]
+for prediction in predictions:
+    if prediction >= 0.90:
+        print("High-confidence prediction:", prediction)
+        break
+Output:
+High-confidence prediction: 0.91
+The loop stops after finding the first prediction meeting the required threshold.
+----------------------------------------
+Important Rules
+----------------------------------------
+• break immediately terminates the nearest enclosing loop.
+• break works with both for and while loops.
+• Code after break inside the current loop is not executed.
+• The loop continues with the statement after the loop.
+• break only affects the nearest enclosing loop.
+• In nested loops, break does not automatically terminate every loop.
+• break is useful for searching.
+• break is useful for input validation.
+• break is useful for stopping when a required condition is reached.
+• break is often used with while True.
+• A loop's else block does not execute when the loop is terminated by break.
+• break is different from continue.
+• break is different from return.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a loop as a road:
+Start
+↓
+Process item
+↓
+Process item
+↓
+Process item
+↓
+BREAK!
+↓
+Leave the loop
+↓
+Continue with the code after the loop
+The key idea is:
+"Stop the entire loop immediately."
+----------------------------------------
+Summary
+----------------------------------------
+The break statement is used to terminate a loop immediately when a specific condition is met. It works with both for and while loops and is particularly useful for searching, input validation, stopping at a required value, and exiting intentionally created infinite loops. In nested loops, break affects only the nearest enclosing loop. Unlike continue, which skips only the current iteration, break completely exits the loop. Understanding break is essential before learning continue and other loop-control techniques.`,
+},
+{
+  heading: "continue Statement — Skipping the Current Iteration",
+  body: `The continue statement is a loop-control statement used to skip the remaining code in the current iteration and immediately move to the next iteration of the loop.
+Unlike break, continue does NOT terminate the loop.
+The loop continues running after the current iteration is skipped.
+continue can be used inside both for loops and while loops.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+for item in iterable:
+    if condition:
+        continue
+    statement
+When Python reaches continue:
+The remaining statements in the current iteration are skipped.
+The loop moves to its next iteration.
+----------------------------------------
+Basic Example with for
+----------------------------------------
+for number in range(1, 6):
+    if number == 3:
+        continue
+    print(number)
+Output:
+1
+2
+4
+5
+When number becomes 3, continue is executed.
+The print statement is skipped only for that iteration.
+The loop then continues with 4.
+----------------------------------------
+Execution Flow
+----------------------------------------
+Consider:
+for number in range(1, 6):
+    if number == 3:
+        continue
+    print(number)
+Execution:
+number = 1
+↓
+1 == 3 → False
+↓
+print(1)
+↓
+number = 2
+↓
+2 == 3 → False
+↓
+print(2)
+↓
+number = 3
+↓
+3 == 3 → True
+↓
+continue
+↓
+Skip remaining code
+↓
+Next iteration
+↓
+number = 4
+↓
+print(4)
+↓
+number = 5
+↓
+print(5)
+Output:
+1
+2
+4
+5
+----------------------------------------
+continue Does Not Stop the Loop
+----------------------------------------
+This is the most important difference between continue and break.
+break:
+Stops the entire loop.
+continue:
+Skips only the current iteration.
+Example:
+for number in range(1, 6):
+    if number == 3:
+        break
+    print(number)
+Output:
+1
+2
+The loop ends completely.
+Now:
+for number in range(1, 6):
+    if number == 3:
+        continue
+    print(number)
+Output:
+1
+2
+4
+5
+The loop continues after skipping 3.
+----------------------------------------
+continue with while Loop
+----------------------------------------
+continue can also be used inside a while loop.
+Example:
+count = 0
+while count < 5:
+    count += 1
+    if count == 3:
+        continue
+    print(count)
+Output:
+1
+2
+4
+5
+When count becomes 3, the current iteration is skipped.
+The loop then continues with count = 4.
+----------------------------------------
+Important while Loop Rule
+----------------------------------------
+When using continue inside a while loop, make sure the loop-control variable is updated before continue when necessary.
+Correct:
+count = 0
+while count < 5:
+    count += 1
+    if count == 3:
+        continue
+    print(count)
+Here count is updated before continue.
+This prevents the loop from becoming stuck.
+----------------------------------------
+Potential Infinite Loop
+----------------------------------------
+Be careful with:
+count = 0
+while count < 5:
+    if count == 3:
+        continue
+    count += 1
+This creates an infinite loop when count becomes 3.
+Why?
+count = 3
+↓
+condition is True
+↓
+continue
+↓
+count += 1 is skipped
+↓
+count remains 3
+↓
+condition remains True
+↓
+continue again
+The loop never reaches the update.
+----------------------------------------
+Correcting the Problem
+----------------------------------------
+Move the update before continue:
+count = 0
+while count < 5:
+    count += 1
+    if count == 3:
+        continue
+    print(count)
+Output:
+1
+2
+4
+5
+The important rule is:
+Make sure the while loop can still make progress when continue is executed.
+----------------------------------------
+Skipping Even Numbers
+----------------------------------------
+Example:
+for number in range(1, 11):
+    if number % 2 == 0:
+        continue
+    print(number)
+Output:
+1
+3
+5
+7
+9
+The loop skips every even number and processes only odd numbers.
+----------------------------------------
+Skipping Odd Numbers
+----------------------------------------
+Example:
+for number in range(1, 11):
+    if number % 2 != 0:
+        continue
+    print(number)
+Output:
+2
+4
+6
+8
+10
+The loop skips odd numbers and processes only even numbers.
+----------------------------------------
+continue with Conditions
+----------------------------------------
+continue is commonly combined with if statements.
+Example:
+numbers = [10, -5, 20, -2, 30]
+for number in numbers:
+    if number < 0:
+        continue
+    print(number)
+Output:
+10
+20
+30
+Negative numbers are skipped while positive values are processed.
+----------------------------------------
+Skipping Empty Values
+----------------------------------------
+continue can be useful when processing data containing empty or invalid values.
+Example:
+names = ["Rahul", "", "Anita", "", "Kiran"]
+for name in names:
+    if name == "":
+        continue
+    print(name)
+Output:
+Rahul
+Anita
+Kiran
+The empty values are ignored.
+----------------------------------------
+Skipping Invalid Data
+----------------------------------------
+Example:
+scores = [85, 92, -1, 76, -1, 88]
+for score in scores:
+    if score == -1:
+        continue
+    print("Score:", score)
+Output:
+Score: 85
+Score: 92
+Score: 76
+Score: 88
+Here -1 is treated as an invalid or missing value for demonstration purposes.
+----------------------------------------
+continue with Strings
+----------------------------------------
+Example:
+text = "python"
+for character in text:
+    if character == "o":
+        continue
+    print(character)
+Output:
+p
+y
+t
+h
+n
+The character o is skipped.
+----------------------------------------
+continue with Nested Loops
+----------------------------------------
+When continue is used inside nested loops, it affects only the nearest enclosing loop.
+Example:
+for i in range(2):
+    for j in range(3):
+        if j == 1:
+            continue
+        print(i, j)
+Output:
+0 0
+0 2
+1 0
+1 2
+The inner loop skips j = 1.
+The outer loop continues normally.
+----------------------------------------
+Understanding Nested Loop continue
+----------------------------------------
+Consider:
+for i in range(2):
+    for j in range(3):
+        if j == 1:
+            continue
+        print(i, j)
+When j == 1:
+continue
+↓
+Skip the remaining statements in the inner loop iteration
+↓
+Move to j = 2
+The outer loop is not skipped.
+----------------------------------------
+continue and Loop Body
+----------------------------------------
+Any statements after continue in the current loop iteration are skipped.
+Example:
+for number in range(1, 5):
+    if number == 2:
+        continue
+    print("Number:", number)
+    print("Processed")
+Output:
+Number: 1
+Processed
+Number: 3
+Processed
+Number: 4
+Processed
+For number = 2, both print statements are skipped.
+----------------------------------------
+continue and Multiple Conditions
+----------------------------------------
+Example:
+numbers = range(1, 11)
+for number in numbers:
+    if number % 2 == 0 or number % 3 == 0:
+        continue
+    print(number)
+The loop skips numbers divisible by 2 or 3.
+Only values satisfying neither condition are processed.
+----------------------------------------
+continue with User Input
+----------------------------------------
+Example:
+while True:
+    value = input("Enter a value: ")
+    if value == "":
+        continue
+    if value == "quit":
+        break
+    print("You entered:", value)
+Here:
+Empty input → continue
+quit → break
+Other input → process normally
+This example shows the difference clearly:
+continue → stay in the loop
+break → leave the loop
+----------------------------------------
+continue with for...else
+----------------------------------------
+continue does not prevent a loop's else block from executing.
+Example:
+for number in range(1, 4):
+    if number == 2:
+        continue
+    print(number)
+else:
+    print("Loop completed")
+Output:
+1
+3
+Loop completed
+The loop still finishes normally.
+Since continue does not terminate the loop, the else block executes.
+----------------------------------------
+break vs continue vs pass
+----------------------------------------
+break:
+Immediately exits the loop.
+continue:
+Skips the current iteration and moves to the next iteration.
+pass:
+Does nothing and continues normally.
+Example:
+break:
+for number in range(5):
+    if number == 2:
+        break
+    print(number)
+Output:
+0
+1
+continue:
+for number in range(5):
+    if number == 2:
+        continue
+    print(number)
+Output:
+0
+1
+3
+4
+pass:
+for number in range(5):
+    if number == 2:
+        pass
+    print(number)
+Output:
+0
+1
+2
+3
+4
+The three statements have completely different purposes.
+----------------------------------------
+continue vs Filtering
+----------------------------------------
+Sometimes continue can make a loop easier to understand.
+Example:
+for score in scores:
+    if score < 50:
+        continue
+    print(score)
+This reads naturally as:
+"If the score is invalid, skip it. Otherwise, process it."
+For more complex transformations, list comprehensions or other techniques may sometimes be more appropriate, but continue is perfectly valid when it improves loop control and readability.
+----------------------------------------
+Real-World Example — Processing Valid Records
+----------------------------------------
+records = [
+    {"name": "Rahul", "score": 85},
+    {"name": "Anita", "score": None},
+    {"name": "Kiran", "score": 92}
+]
+for record in records:
+    if record["score"] is None:
+        continue
+    print(record["name"], record["score"])
+Output:
+Rahul 85
+Kiran 92
+Records without a score are skipped.
+----------------------------------------
+Real-World Example — AI/Data Processing
+----------------------------------------
+predictions = [0.91, None, 0.82, None, 0.95]
+for prediction in predictions:
+    if prediction is None:
+        continue
+    if prediction >= 0.90:
+        print("High confidence:", prediction)
+Output:
+High confidence: 0.91
+High confidence: 0.95
+The loop ignores missing predictions and processes only available values.
+----------------------------------------
+Real-World Example — Data Cleaning
+----------------------------------------
+values = [10, None, 20, None, 30]
+total = 0
+for value in values:
+    if value is None:
+        continue
+    total += value
+print(total)
+Output:
+60
+Missing values are skipped instead of being added.
+----------------------------------------
+When Should You Use continue?
+----------------------------------------
+Use continue when:
+You want to ignore certain values.
+You want to skip invalid data.
+You want to skip unwanted cases.
+You want to process only values satisfying a condition.
+You want to avoid deeply nested if statements.
+Example:
+for value in values:
+    if not valid(value):
+        continue
+    process(value)
+This creates a clear "skip invalid data, process valid data" structure.
+----------------------------------------
+When Should You NOT Use continue?
+----------------------------------------
+Do not use continue simply because an if statement would be clearer without it.
+Compare:
+for number in numbers:
+    if number >= 0:
+        print(number)
+This may be simpler than:
+for number in numbers:
+    if number < 0:
+        continue
+    print(number)
+Both are valid.
+Choose the structure that makes the logic easiest to understand.
+----------------------------------------
+Important Rules
+----------------------------------------
+• continue skips the current iteration.
+• continue does not terminate the loop.
+• After continue, the loop moves to its next iteration.
+• continue works with both for and while loops.
+• continue affects only the nearest enclosing loop.
+• In nested loops, continue does not automatically affect the outer loop.
+• Statements after continue in the current iteration are skipped.
+• continue is commonly used with if statements.
+• continue is useful for filtering unwanted values.
+• continue can be used for input validation.
+• continue does not prevent a loop else block from executing.
+• Be careful with continue inside while loops.
+• A while loop must still update its controlling state so it can eventually terminate.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a loop as a queue of tasks:
+Task 1
+↓
+Process
+↓
+Task 2
+↓
+Process
+↓
+Task 3
+↓
+SKIP
+↓
+Task 4
+↓
+Process
+↓
+Task 5
+↓
+Process
+The key idea is:
+"Skip this one, but keep going."
+----------------------------------------
+Summary
+----------------------------------------
+The continue statement skips the remaining code in the current loop iteration and immediately moves to the next iteration. Unlike break, it does not terminate the loop. It is useful for ignoring unwanted values, filtering invalid data, skipping specific cases, and keeping loop logic readable. continue works with for and while loops, but special care is required in while loops to ensure that the loop's controlling condition can still change and eventually become False.`,
+},
+{
+  heading: "pass Statement — Placeholder in Code Blocks",
+  body: `The pass statement is a Python statement that does nothing.
+It is used as a placeholder when Python requires a statement syntactically, but you do not want the code to perform any action yet.
+Unlike break and continue, pass does not change the flow of a loop.
+It simply tells Python:
+"Do nothing here and continue normally."
+----------------------------------------
+Basic Syntax
+----------------------------------------
+pass
+The pass statement does not require any additional syntax.
+----------------------------------------
+Basic Example
+----------------------------------------
+for number in range(5):
+    if number == 2:
+        pass
+    print(number)
+Output:
+0
+1
+2
+3
+4
+When number is 2, pass executes but does nothing.
+The loop continues normally.
+----------------------------------------
+pass Does Not Skip an Iteration
+----------------------------------------
+This is an important difference.
+Example:
+for number in range(5):
+    if number == 2:
+        pass
+    print(number)
+Output:
+0
+1
+2
+3
+4
+The value 2 is still printed.
+pass does NOT skip the iteration.
+----------------------------------------
+pass vs continue
+----------------------------------------
+pass:
+Does nothing.
+The remaining statements in the current iteration still execute.
+continue:
+Skips the remaining statements in the current iteration.
+Example:
+Using pass:
+for number in range(3):
+    if number == 1:
+        pass
+    print(number)
+Output:
+0
+1
+2
+Using continue:
+for number in range(3):
+    if number == 1:
+        continue
+    print(number)
+Output:
+0
+2
+Therefore:
+pass → do nothing and continue normally.
+continue → skip this iteration.
+----------------------------------------
+pass vs break
+----------------------------------------
+break:
+Terminates the loop.
+continue:
+Skips the current iteration.
+pass:
+Does nothing.
+Example:
+for number in range(5):
+    if number == 2:
+        break
+Output:
+No values after reaching 2.
+Now:
+for number in range(5):
+    if number == 2:
+        continue
+    print(number)
+Output:
+0
+1
+3
+4
+Now:
+for number in range(5):
+    if number == 2:
+        pass
+    print(number)
+Output:
+0
+1
+2
+3
+4
+Remember:
+break → stop
+continue → skip
+pass → do nothing
+----------------------------------------
+pass in a while Loop
+----------------------------------------
+pass can also be used inside a while loop.
+Example:
+count = 0
+while count < 5:
+    if count == 2:
+        pass
+    print(count)
+    count += 1
+Output:
+0
+1
+2
+3
+4
+The loop continues normally.
+----------------------------------------
+pass as a Placeholder
+----------------------------------------
+One of the most important uses of pass is creating a placeholder for code that will be implemented later.
+Example:
+def calculate_salary():
+    pass
+The function has not been implemented yet, but Python accepts the function because pass provides a valid statement.
+Without pass:
+def calculate_salary():
+This produces a syntax error because Python expects an indented statement inside the function.
+----------------------------------------
+pass in an Empty Class
+----------------------------------------
+A class cannot have an empty body.
+pass can be used as a placeholder.
+Example:
+class Student:
+    pass
+The class is syntactically valid even though it currently has no implementation.
+Later, methods and attributes can be added.
+----------------------------------------
+pass in an Empty Function
+----------------------------------------
+Example:
+def future_feature():
+    pass
+This is useful when designing a program structure before implementing every function.
+----------------------------------------
+pass in Conditional Statements
+----------------------------------------
+pass can also be used inside if, elif, and else blocks.
+Example:
+age = 20
+if age < 18:
+    pass
+else:
+    print("Adult")
+Output:
+Adult
+The pass branch intentionally performs no action.
+----------------------------------------
+pass in Exception Handling
+----------------------------------------
+pass can be used when an exception is intentionally ignored.
+Example:
+try:
+    number = int("abc")
+except ValueError:
+    pass
+The ValueError occurs, but the program intentionally does nothing in response.
+However, silently ignoring exceptions should be used carefully because it can hide real problems.
+In production code, logging or appropriate error handling is usually better when the error matters.
+----------------------------------------
+pass in Loops for Future Logic
+----------------------------------------
+Example:
+for user in users:
+    if user.is_admin:
+        pass
+    else:
+        process_user(user)
+Here pass means no action is currently required for administrators.
+However, if there is no future logic planned, a clearer condition may sometimes be preferable.
+----------------------------------------
+pass and Indentation
+----------------------------------------
+Python requires an indented statement after constructs such as:
+if
+for
+while
+def
+class
+try
+except
+Sometimes you intentionally want an empty block.
+pass provides the required statement.
+Example:
+if condition:
+    pass
+----------------------------------------
+Why Python Needs pass
+----------------------------------------
+Consider:
+if user_logged_in:
+    # implement later
+Python does not consider a comment to be an executable statement.
+Therefore, the block is still empty and produces a syntax error.
+Use:
+if user_logged_in:
+    pass
+Now the block is syntactically valid.
+----------------------------------------
+pass Does Not Affect Program Flow
+----------------------------------------
+Example:
+print("Before")
+pass
+print("After")
+Output:
+Before
+After
+The pass statement has no runtime effect on the program's control flow.
+It simply occupies a valid statement position.
+----------------------------------------
+pass in Nested Loops
+----------------------------------------
+pass can appear inside nested loops.
+Example:
+for i in range(2):
+    for j in range(3):
+        if j == 1:
+            pass
+        print(i, j)
+Output:
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+The pass statement does not affect either loop.
+----------------------------------------
+pass and Placeholder Design
+----------------------------------------
+During development, you may first create the structure of a program and implement individual parts later.
+Example:
+def load_data():
+    pass
+
+def clean_data():
+    pass
+
+def train_model():
+    pass
+
+def evaluate_model():
+    pass
+This allows the overall structure to be created before every function is implemented.
+----------------------------------------
+Real-World Example — AI Project Structure
+----------------------------------------
+def preprocess_data():
+    pass
+
+def train_model():
+    pass
+
+def evaluate_model():
+    pass
+
+def generate_prediction():
+    pass
+These functions can initially act as placeholders while the application architecture is being developed.
+Later, each pass can be replaced with the actual implementation.
+----------------------------------------
+pass vs Comments
+----------------------------------------
+A comment explains something to the programmer.
+Example:
+# Training logic will be added later
+pass
+The comment provides information.
+The pass statement provides a valid Python statement for an otherwise empty block.
+They serve different purposes.
+----------------------------------------
+pass vs Ellipsis (...)
+----------------------------------------
+Python also provides the ellipsis object:
+...
+Example:
+def future_function():
+    ...
+Both pass and ... can appear in placeholder code.
+However, pass is the traditional and clearer choice when the intention is simply to do nothing.
+The ellipsis is also commonly seen in incomplete implementations, type stubs, and other specialized contexts.
+----------------------------------------
+Common Beginner Mistake
+----------------------------------------
+Some beginners think:
+pass
+means:
+"skip this iteration."
+That is incorrect.
+For skipping an iteration, use:
+continue
+For stopping the loop, use:
+break
+For doing nothing, use:
+pass
+----------------------------------------
+Important Comparison
+----------------------------------------
+break:
+Stop the nearest loop completely.
+continue:
+Skip the current iteration and move to the next iteration.
+pass:
+Do nothing and continue normal execution.
+Example:
+for number in range(5):
+    if number == 2:
+        pass
+    print(number)
+Output:
+0
+1
+2
+3
+4
+----------------------------------------
+When Should You Use pass?
+----------------------------------------
+Use pass when:
+A block must exist but intentionally has no implementation yet.
+You are creating a class structure before implementing it.
+You are creating function placeholders.
+You intentionally want an empty branch.
+You need syntactically valid temporary code during development.
+----------------------------------------
+When Should You Avoid pass?
+----------------------------------------
+Do not use pass when you actually want to skip an iteration.
+Use continue instead.
+Do not use pass when you want to stop a loop.
+Use break instead.
+Do not use pass to silently hide important errors without understanding the consequences.
+----------------------------------------
+Important Rules
+----------------------------------------
+• pass does nothing.
+• pass is a valid Python statement.
+• pass does not stop a loop.
+• pass does not skip an iteration.
+• pass does not terminate a function.
+• pass does not change a condition.
+• pass can be used as a placeholder.
+• pass can be used in functions.
+• pass can be used in classes.
+• pass can be used in conditional blocks.
+• pass can be used in loops.
+• pass can be used in exception handlers.
+• pass is useful during program development.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of pass as an empty instruction:
+Python:
+"Do something here."
+Programmer:
+"Not yet."
+Python:
+"Okay, continue."
+So:
+pass → Do nothing.
+continue → Skip this iteration.
+break → Stop the loop.
+----------------------------------------
+Summary
+----------------------------------------
+The pass statement is a placeholder statement that performs no operation. It is useful when Python requires a statement inside a code block but no action is currently needed. pass can be used in functions, classes, conditional statements, loops, and other blocks. It does not skip iterations like continue and does not terminate loops like break. Understanding the difference between pass, continue, and break is essential for writing clear Python control-flow logic.`,
+},
+{
+  heading: "How to Choose while Loop Values — while True vs Starting with a Variable",
+  body: `A while loop is controlled by a condition.
+The most important question before writing a while loop is:
+"What condition should keep the loop running?"
+Once you know that, choose the appropriate loop pattern.
+There are two common patterns:
+1. A condition-controlled loop
+2. An intentionally infinite loop using while True
+Understanding when to use each pattern makes while loops much easier to write correctly.
+----------------------------------------
+Pattern 1 — Start with a Variable
+----------------------------------------
+Use a variable when the loop has a clear starting state and a condition that can be checked before every iteration.
+Example:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+Here:
+i = 1 → starting value
+i <= 5 → continuation condition
+i += 1 → update
+The loop means:
+"Start at 1 and continue while i is less than or equal to 5."
+Output:
+1
+2
+3
+4
+5
+This is the preferred pattern when you already know the variable that controls the loop.
+----------------------------------------
+Why Do We Write i = 1?
+----------------------------------------
+The initial value depends on the problem.
+If you want to count from 1:
+i = 1
+If you want to count from 0:
+i = 0
+If you want to count backwards:
+i = 10
+The starting value should represent the state of the first iteration.
+Example:
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+Output:
+0
+1
+2
+3
+4
+Here starting from 0 makes sense because the required sequence begins at 0.
+----------------------------------------
+How to Choose the Starting Value
+----------------------------------------
+Ask:
+"What should the value be before the first iteration?"
+Example:
+Print numbers from 1 to 10:
+i = 1
+while i <= 10:
+    print(i)
+    i += 1
+Example:
+Print numbers from 0 to 9:
+i = 0
+while i < 10:
+    print(i)
+    i += 1
+Example:
+Count down from 5:
+i = 5
+while i >= 1:
+    print(i)
+    i -= 1
+The starting value comes directly from the requirement.
+----------------------------------------
+How to Choose the Condition
+----------------------------------------
+The condition answers:
+"Should the loop continue?"
+Example:
+Print 1 to 5:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+The condition is:
+i <= 5
+because 5 must be included.
+Example:
+Print 0 to 4:
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+The condition is:
+i < 5
+because 5 should not be included.
+The condition should represent exactly when the loop is allowed to continue.
+----------------------------------------
+How to Choose the Update
+----------------------------------------
+The update changes the loop-control variable so that the condition eventually becomes False.
+Example:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+The value changes:
+1 → 2 → 3 → 4 → 5 → 6
+When i becomes 6:
+i <= 5
+is False.
+The loop stops.
+For a forward loop, the update usually increases the value.
+For a backward loop, the update usually decreases the value.
+----------------------------------------
+Forward Counting Pattern
+----------------------------------------
+Use:
+i = start
+while i <= end:
+    print(i)
+    i += 1
+Example:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+This produces:
+1
+2
+3
+4
+5
+----------------------------------------
+Backward Counting Pattern
+----------------------------------------
+Use:
+i = start
+while i >= end:
+    print(i)
+    i -= 1
+Example:
+i = 5
+while i >= 1:
+    print(i)
+    i -= 1
+Output:
+5
+4
+3
+2
+1
+The update direction must match the direction of the loop.
+----------------------------------------
+Pattern 2 — while True
+----------------------------------------
+Sometimes you do not know exactly when the loop should stop before entering it.
+In such cases, while True can be useful.
+Example:
+while True:
+    command = input("Enter command: ")
+    if command == "quit":
+        break
+Here:
+while True
+means:
+"Keep running unless something inside the loop tells me to stop."
+The break statement provides the exit condition.
+----------------------------------------
+Why Use while True?
+----------------------------------------
+Use while True when the stopping condition is determined by something that happens inside the loop.
+Common examples:
+User enters a quit command.
+Valid input is received.
+A search finds the required item.
+A task completes.
+A specific event occurs.
+Example:
+while True:
+    password = input("Enter password: ")
+    if password == "correct":
+        break
+    print("Try again")
+The number of attempts is not known beforehand.
+The loop continues until the correct condition occurs.
+----------------------------------------
+while True Does Not Mean "Always Run Forever"
+----------------------------------------
+Beginners often think:
+while True:
+means:
+"This loop can never stop."
+That is not necessarily true.
+Example:
+while True:
+    value = input("Enter q to quit: ")
+    if value == "q":
+        break
+The loop is intentionally infinite until break is reached.
+Therefore:
+while True + break
+is a controlled loop pattern.
+----------------------------------------
+When Should You Use i = 1?
+----------------------------------------
+Use a starting variable such as:
+i = 1
+when the loop has a predictable starting point and a condition that can be checked before each iteration.
+Examples:
+Counting numbers.
+Processing positions using an index.
+Repeating until a counter reaches a limit.
+Traversing a sequence manually.
+Example:
+i = 1
+while i <= 10:
+    print(i)
+    i += 1
+This is a counter-controlled loop.
+----------------------------------------
+When Should You Use i = 0?
+----------------------------------------
+Use:
+i = 0
+when the problem naturally starts from zero.
+This is especially common with indexes.
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+i = 0
+while i < len(names):
+    print(names[i])
+    i += 1
+Output:
+Rahul
+Anita
+Kiran
+Python list indexes start at 0, so i = 0 is appropriate here.
+However, when simply processing every item in a list, a for loop is usually cleaner.
+----------------------------------------
+When Should You Use while True?
+----------------------------------------
+Use while True when:
+The stopping point is not known beforehand.
+The user controls when the loop ends.
+You need to repeatedly ask for input until valid input is received.
+You want to continuously monitor something until an event occurs.
+The exit condition naturally occurs inside the loop.
+Example:
+while True:
+    choice = input("Enter q to quit: ")
+    if choice == "q":
+        break
+----------------------------------------
+Input Validation — Better Example
+----------------------------------------
+Suppose the user must enter a positive number.
+The number of invalid attempts is unknown.
+A natural solution is:
+while True:
+    number = int(input("Enter a positive number: "))
+    if number > 0:
+        break
+    print("Invalid number")
+print("Accepted:", number)
+Why while True?
+Because we do not know how many attempts the user will need.
+The loop stops when valid input is received.
+----------------------------------------
+Known Repetition vs Unknown Repetition
+----------------------------------------
+This is the easiest way to decide.
+Known number of repetitions:
+Use for.
+Example:
+for i in range(5):
+    print(i)
+Condition-controlled repetition:
+Use while with a variable.
+Example:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+Unknown stopping point:
+Use while True with break when appropriate.
+Example:
+while True:
+    command = input("Command: ")
+    if command == "quit":
+        break
+----------------------------------------
+Three Important Patterns
+----------------------------------------
+Pattern 1 — Known sequence:
+for i in range(1, 6):
+    print(i)
+Pattern 2 — Condition-controlled:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+Pattern 3 — Event-controlled:
+while True:
+    command = input("Enter command: ")
+    if command == "quit":
+        break
+Each pattern solves a different type of problem.
+----------------------------------------
+Do Not Choose i = 1 Automatically
+----------------------------------------
+A common beginner mistake is writing:
+i = 1
+for every while loop.
+That is not a rule.
+The initial value depends on what the program is trying to do.
+Example:
+Start from zero:
+i = 0
+Start from one:
+i = 1
+Start from ten:
+i = 10
+Start with an empty string:
+value = ""
+Start with an empty list:
+items = []
+Start with a Boolean state:
+running = True
+The initial value should represent the starting state of the problem.
+----------------------------------------
+The Variable Does Not Have to Be Called i
+----------------------------------------
+i is only a common variable name.
+Choose a meaningful name when possible.
+Example:
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+This is often clearer than:
+i = 1
+while i <= 5:
+    print(i)
+    i += 1
+Other examples:
+attempts = 0
+while attempts < 3:
+    attempts += 1
+Example:
+index = 0
+while index < len(names):
+    print(names[index])
+    index += 1
+The variable name should communicate its purpose.
+----------------------------------------
+Counter-Controlled while Loop
+----------------------------------------
+A counter-controlled loop has:
+Starting value
+Condition
+Update
+Example:
+count = 0
+while count < 5:
+    print("Iteration:", count)
+    count += 1
+This pattern is useful when the number of iterations is controlled by a counter.
+----------------------------------------
+Sentinel-Controlled while Loop
+----------------------------------------
+A sentinel is a special value that tells the loop to stop.
+Example:
+while True:
+    value = input("Enter a number or q to quit: ")
+    if value == "q":
+        break
+    print("You entered:", value)
+Here:
+q
+is the sentinel value.
+It tells the program that the user wants to stop.
+Another common form is:
+value = input("Enter value: ")
+while value != "quit":
+    print(value)
+    value = input("Enter value: ")
+Here quit is the sentinel.
+----------------------------------------
+State-Controlled while Loop
+----------------------------------------
+Sometimes the loop depends on the state of the program.
+Example:
+running = True
+while running:
+    print("Application running")
+    running = False
+The loop continues while the state is True.
+This pattern is common in menus, applications, services, and event-driven programs.
+----------------------------------------
+A Simple Decision Guide
+----------------------------------------
+Ask these questions in order:
+1. Do I have an iterable to process?
+Yes → Consider for.
+2. Do I know the number of repetitions?
+Yes → for or a counter-controlled while.
+3. Does the loop depend on a condition changing?
+Yes → while.
+4. Do I know the stopping condition before the loop starts?
+Yes → use a normal while condition.
+5. Is the stopping event determined inside the loop?
+Yes → while True with break can be appropriate.
+----------------------------------------
+Common Mistakes
+----------------------------------------
+Mistake 1:
+Using while True without an exit mechanism.
+Example:
+while True:
+    print("Running")
+This creates an intentional infinite loop with no visible way to stop.
+Mistake 2:
+Using i = 1 when the problem should start at 0.
+Mistake 3:
+Using <= when < is required.
+Mistake 4:
+Forgetting to update the loop variable.
+Mistake 5:
+Updating the variable in the wrong direction.
+Mistake 6:
+Using while when a simple for loop would be clearer.
+----------------------------------------
+Best Mental Model
+----------------------------------------
+Do not memorize:
+"while always uses i = 1."
+Instead remember:
+Starting value
+↓
+Where should the loop begin?
+Condition
+↓
+When should the loop continue?
+Update
+↓
+How should the state change?
+Exit condition
+↓
+When should the loop stop?
+If the exit event is only discovered during execution:
+while True
+↓
+Perform work
+↓
+Check exit condition
+↓
+break when finished
+----------------------------------------
+Important Rules
+----------------------------------------
+• i = 1 is not a requirement for while loops.
+• The initial value depends on the problem.
+• i = 0 is common when working with indexes.
+• i = 1 is common when counting from one.
+• Other variables and starting values can be used.
+• The condition determines whether the loop continues.
+• The update should move the loop toward its stopping condition.
+• while True creates an intentionally always-True condition.
+• while True is useful when the exit condition is discovered inside the loop.
+• while True should normally have a clear exit mechanism such as break.
+• Use a normal while condition when the stopping condition is already clear.
+• Use for when directly iterating over an iterable.
+• Choose the loop structure based on the problem, not by memorizing a fixed pattern.
+----------------------------------------
+Summary
+----------------------------------------
+There is no single starting value that every while loop should use. A value such as i = 1 is chosen when the problem naturally begins at 1, while i = 0 is common for zero-based indexes. The condition should describe when the loop should continue, and the update should move the program toward termination. When the stopping point is known and can be expressed directly, a normal while condition is usually best. When the stopping event is determined during execution, while True with a clear break condition is often a clean solution. The key is to choose the loop pattern based on the problem being solved.`,
+},
+{
+  heading: "Loop else — for...else and while...else",
+  body: `Python allows an else block to be attached directly to a for loop or while loop.
+This is different from the else used with if statements.
+The loop else block executes when the loop finishes normally without encountering a break statement.
+The easiest way to remember it is:
+Loop completes normally → else runs.
+Loop stops using break → else does not run.
+----------------------------------------
+Basic for...else Syntax
+----------------------------------------
+for item in iterable:
+    statements
+else:
+    statements
+The else block belongs to the loop, not to an if statement.
+----------------------------------------
+Basic Example
+----------------------------------------
+for number in range(1, 6):
+    print(number)
+else:
+    print("Loop completed")
+Output:
+1
+2
+3
+4
+5
+Loop completed
+The for loop processes every value and finishes normally.
+Therefore, the else block executes.
+----------------------------------------
+for...else with break
+----------------------------------------
+for number in range(1, 6):
+    if number == 3:
+        break
+    print(number)
+else:
+    print("Loop completed")
+Output:
+1
+2
+The else block does not execute because break terminated the loop.
+This is the most important rule:
+Normal completion → else runs.
+break → else is skipped.
+----------------------------------------
+Why Does Loop else Exist?
+----------------------------------------
+Loop else is especially useful for search operations.
+The idea is:
+"Search through all items.
+If you find what you are looking for, break.
+If the loop finishes without finding it, execute else."
+Example:
+numbers = [10, 20, 30, 40]
+target = 30
+for number in numbers:
+    if number == target:
+        print("Found")
+        break
+else:
+    print("Not found")
+Output:
+Found
+Because 30 was found, break executed and the else block was skipped.
+----------------------------------------
+Search When Value Is Not Found
+----------------------------------------
+numbers = [10, 20, 30, 40]
+target = 50
+for number in numbers:
+    if number == target:
+        print("Found")
+        break
+else:
+    print("Not found")
+Output:
+Not found
+The loop checked every value.
+No break occurred.
+Therefore, the else block executed.
+----------------------------------------
+Think of for...else as Search...else
+----------------------------------------
+A useful mental model is:
+for → search/process items
+if match → break
+else → no match found
+Example:
+for item in items:
+    if item == target:
+        break
+else:
+    print("Target was not found")
+The else means:
+"The loop completed without breaking."
+----------------------------------------
+Important: else Does NOT Mean "After Every Loop"
+----------------------------------------
+This is a common misconception.
+Example:
+for number in range(3):
+    if number == 1:
+        break
+else:
+    print("Completed")
+The else does not run.
+Therefore, loop else means:
+"Run this block only if the loop finishes normally."
+It does NOT simply mean:
+"Run this after the loop."
+----------------------------------------
+Code After the Loop vs Loop else
+----------------------------------------
+Normal code after a loop always runs after the loop.
+Example:
+for number in range(3):
+    if number == 1:
+        break
+else:
+    print("Loop completed normally")
+print("After loop")
+Output:
+After loop
+The print after the loop executes regardless of whether break occurred.
+The loop else does not.
+This difference is extremely important.
+----------------------------------------
+for...else with continue
+----------------------------------------
+continue does not prevent else from executing.
+Example:
+for number in range(1, 5):
+    if number == 2:
+        continue
+    print(number)
+else:
+    print("Loop completed")
+Output:
+1
+3
+4
+Loop completed
+Why?
+continue only skips one iteration.
+The loop still finishes normally.
+Therefore, else executes.
+----------------------------------------
+for...else with pass
+----------------------------------------
+pass also does not prevent else.
+Example:
+for number in range(3):
+    if number == 1:
+        pass
+    print(number)
+else:
+    print("Loop completed")
+Output:
+0
+1
+2
+Loop completed
+pass does not terminate the loop.
+Therefore, the loop finishes normally and else executes.
+----------------------------------------
+for...else with Nested Conditions
+----------------------------------------
+Example:
+numbers = [2, 4, 6, 8]
+target = 5
+for number in numbers:
+    if number == target:
+        print("Found")
+        break
+else:
+    print("Target not found")
+Output:
+Target not found
+The if statement checks each item.
+break is used only when the target is found.
+The else handles the case where the complete search finishes without a match.
+----------------------------------------
+while...else Syntax
+----------------------------------------
+while condition:
+    statements
+else:
+    statements
+The same basic rule applies:
+while finishes normally → else runs.
+break → else is skipped.
+----------------------------------------
+Basic while...else Example
+----------------------------------------
+count = 1
+while count <= 3:
+    print(count)
+    count += 1
+else:
+    print("Loop completed")
+Output:
+1
+2
+3
+Loop completed
+The condition eventually becomes False.
+The loop finishes normally.
+Therefore, else executes.
+----------------------------------------
+while...else with break
+----------------------------------------
+count = 1
+while count <= 5:
+    if count == 3:
+        break
+    print(count)
+    count += 1
+else:
+    print("Loop completed")
+Output:
+1
+2
+The loop stops because break executes.
+Therefore, the else block is skipped.
+----------------------------------------
+while...else with a Search
+----------------------------------------
+numbers = [10, 20, 30, 40]
+target = 30
+index = 0
+while index < len(numbers):
+    if numbers[index] == target:
+        print("Found")
+        break
+    index += 1
+else:
+    print("Not found")
+Output:
+Found
+The target is found and break executes.
+Therefore, the else block does not run.
+----------------------------------------
+while...else When Value Is Missing
+----------------------------------------
+numbers = [10, 20, 30, 40]
+target = 50
+index = 0
+while index < len(numbers):
+    if numbers[index] == target:
+        print("Found")
+        break
+    index += 1
+else:
+    print("Not found")
+Output:
+Not found
+The loop reaches the end normally.
+No break occurs.
+Therefore, else executes.
+----------------------------------------
+The Core Rule
+----------------------------------------
+Remember this single rule:
+else belongs to the loop.
+It runs when the loop terminates normally.
+It does not run when break terminates the loop.
+This applies to both:
+for...else
+while...else
+----------------------------------------
+Execution Flow of for...else
+----------------------------------------
+for item in items:
+    if condition:
+        break
+else:
+    no_match()
+Flow:
+Start
+↓
+Process item
+↓
+Condition satisfied?
+↓ Yes
+break
+↓
+Exit loop
+↓
+Skip else
+↓
+Continue after loop
+If condition never causes break:
+Process all items
+↓
+Loop finishes
+↓
+Run else
+----------------------------------------
+Execution Flow of while...else
+----------------------------------------
+while condition:
+    if exit_condition:
+        break
+else:
+    normal_completion()
+Flow:
+Check while condition
+↓
+True
+↓
+Execute loop
+↓
+break?
+├── Yes → Exit loop → Skip else
+└── No → Continue
+↓
+Condition becomes False
+↓
+Run else
+----------------------------------------
+Loop else Is Useful for Searching
+----------------------------------------
+The most common practical use is searching.
+Example:
+names = ["Rahul", "Anita", "Kiran"]
+target = "Anita"
+for name in names:
+    if name == target:
+        print("Found:", name)
+        break
+else:
+    print("Name not found")
+This avoids creating a separate Boolean flag.
+----------------------------------------
+Without Loop else
+----------------------------------------
+The same search could be written using a flag:
+found = False
+for name in names:
+    if name == target:
+        found = True
+        break
+if not found:
+    print("Name not found")
+This works, but loop else can express the search logic more directly.
+----------------------------------------
+Loop else with Prime Checking
+----------------------------------------
+One classic Python example is checking whether a number is prime.
+Example:
+number = 17
+for divisor in range(2, number):
+    if number % divisor == 0:
+        print("Not prime")
+        break
+else:
+    print("Prime")
+Output:
+Prime
+The loop searches for a divisor.
+If a divisor is found:
+break → Not prime.
+If no divisor is found:
+loop finishes normally → else → Prime.
+----------------------------------------
+Why This Prime Example Works
+----------------------------------------
+For number = 12:
+divisor = 2
+12 % 2 == 0
+↓
+break
+↓
+"Not prime"
+The else block does not execute.
+For number = 17:
+No divisor from 2 through 16 divides 17.
+The loop finishes normally.
+Therefore:
+else → "Prime"
+----------------------------------------
+Loop else with continue
+----------------------------------------
+continue does not affect the normal completion rule.
+Example:
+for number in range(1, 6):
+    if number % 2 == 0:
+        continue
+    print(number)
+else:
+    print("Finished")
+Output:
+1
+3
+5
+Finished
+The loop still completes.
+Therefore, else runs.
+----------------------------------------
+Loop else with pass
+----------------------------------------
+pass also allows normal completion.
+Example:
+for number in range(3):
+    if number == 1:
+        pass
+else:
+    print("Finished")
+Output:
+Finished
+The pass statement does nothing.
+The loop completes normally.
+----------------------------------------
+Nested Loop else
+----------------------------------------
+Each loop can have its own else block.
+Example:
+for i in range(2):
+    for j in range(3):
+        if j == 2:
+            break
+    else:
+        print("Inner loop completed")
+The inner else belongs to the inner loop.
+A loop's else always belongs to the nearest loop at the same indentation level.
+----------------------------------------
+Indentation Is Important
+----------------------------------------
+Correct:
+for number in numbers:
+    if number == target:
+        break
+else:
+    print("Not found")
+The else aligns with for.
+Incorrect:
+for number in numbers:
+    if number == target:
+        break
+    else:
+        print("Not found")
+Here else belongs to the if statement, not the loop.
+The meaning is completely different.
+----------------------------------------
+Loop else vs if...else
+----------------------------------------
+if...else:
+if condition:
+    print("True")
+else:
+    print("False")
+The else depends on whether the if condition is True or False.
+Loop else:
+for number in numbers:
+    if number == target:
+        break
+else:
+    print("Not found")
+The else depends on whether the loop ended normally or was terminated by break.
+----------------------------------------
+Loop else vs Code After Loop
+----------------------------------------
+This distinction should be clear:
+Loop else:
+Runs only after normal loop completion.
+Code after loop:
+Runs after the loop regardless of break.
+Example:
+for number in range(5):
+    if number == 2:
+        break
+else:
+    print("Normal completion")
+print("Always runs after loop")
+Output:
+Always runs after loop
+The second print executes whether the loop finishes normally or breaks.
+----------------------------------------
+When Should You Use Loop else?
+----------------------------------------
+Use loop else when:
+You are searching for something.
+You want to perform an action only when no break occurred.
+You want to distinguish successful completion from early termination.
+You want to avoid an extra Boolean flag.
+Prime-number checking is a classic example.
+----------------------------------------
+When Might You Avoid Loop else?
+----------------------------------------
+Loop else is a valid Python feature, but beginners may initially find it unusual.
+If the logic becomes difficult to understand, a flag or a clearly named variable may be easier to maintain.
+The goal is readable code, not using loop else just because Python supports it.
+----------------------------------------
+Common Beginner Mistake
+----------------------------------------
+Mistake:
+Thinking else always runs after the loop.
+Incorrect understanding:
+"for loop finishes → else always runs."
+Correct understanding:
+"for loop finishes normally without break → else runs."
+----------------------------------------
+Another Common Mistake
+----------------------------------------
+Thinking continue prevents else.
+It does not.
+Example:
+for number in range(5):
+    if number == 2:
+        continue
+else:
+    print("Finished")
+Output:
+Finished
+continue does not terminate the loop.
+Only break prevents loop else from executing.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Python supports else with both for and while loops.
+• Loop else executes when the loop finishes normally.
+• break prevents the loop else block from executing.
+• continue does not prevent loop else.
+• pass does not prevent loop else.
+• Loop else is especially useful for searching.
+• for...else and while...else follow the same basic rule.
+• The else belongs to the loop at the same indentation level.
+• Code after the loop executes regardless of whether break occurred.
+• Loop else is different from if...else.
+• Loop else does not mean "always execute after the loop."
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a loop as a search mission:
+Start searching
+↓
+Found what I need?
+↓ Yes
+break
+↓
+Success
+If the entire search finishes:
+↓
+Nothing was found
+↓
+else
+So:
+break → "I found it, stop."
+else → "I searched everything and never broke."
+----------------------------------------
+Quick Comparison
+----------------------------------------
+break:
+Stops the loop.
+continue:
+Skips the current iteration.
+pass:
+Does nothing.
+loop else:
+Runs when the loop finishes normally without break.
+Example:
+for number in range(5):
+    if number == 2:
+        break
+else:
+    print("Completed")
+break → else skipped.
+----------------------------------------
+Summary
+----------------------------------------
+Loop else is a special Python feature available with both for and while loops. The else block executes only when the loop completes normally without encountering break. This makes loop else particularly useful for search operations, where break represents finding the required item and else represents searching every item without finding it. continue and pass do not prevent else from executing because neither one terminates the loop. The key rule to remember is: normal loop completion runs else; break skips else.`,
+},
+{
+  heading: "Nested Loops — Loops Inside Loops",
+  body: `A nested loop is a loop placed inside another loop.
+The outer loop controls the larger repetition, while the inner loop runs completely for each iteration of the outer loop.
+Nested loops are useful when working with tables, matrices, grids, combinations, patterns, and multi-dimensional data.
+----------------------------------------
+Basic Structure
+----------------------------------------
+for outer in outer_sequence:
+    for inner in inner_sequence:
+        statement
+The inner loop belongs to the outer loop because it is indented inside it.
+For every single iteration of the outer loop, the inner loop starts again from its beginning.
+----------------------------------------
+Basic Example
+----------------------------------------
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+Output:
+0 0
+0 1
+1 0
+1 1
+2 0
+2 1
+How it works:
+Outer i = 0
+→ Inner j = 0
+→ Inner j = 1
+Outer i = 1
+→ Inner j = 0
+→ Inner j = 1
+Outer i = 2
+→ Inner j = 0
+→ Inner j = 1
+The inner loop runs completely for every value of i.
+----------------------------------------
+The Most Important Rule
+----------------------------------------
+For every ONE iteration of the outer loop, the inner loop completes ALL of its iterations.
+Example:
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+Outer loop → 3 iterations
+Inner loop → 2 iterations for each outer iteration
+Total executions:
+3 × 2 = 6
+This multiplication idea is extremely important when analyzing nested loops.
+----------------------------------------
+Visual Execution
+----------------------------------------
+Consider:
+for i in range(2):
+    for j in range(3):
+        print(i, j)
+Execution:
+i = 0
+    j = 0 → print(0, 0)
+    j = 1 → print(0, 1)
+    j = 2 → print(0, 2)
+i = 1
+    j = 0 → print(1, 0)
+    j = 1 → print(1, 1)
+    j = 2 → print(1, 2)
+Output:
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+----------------------------------------
+Nested while Loops
+----------------------------------------
+Nested loops are not limited to for loops.
+A while loop can also contain another while loop.
+Example:
+i = 1
+while i <= 3:
+    j = 1
+    while j <= 2:
+        print(i, j)
+        j += 1
+    i += 1
+Output:
+1 1
+1 2
+2 1
+2 2
+3 1
+3 2
+The inner loop must be reset for every outer-loop iteration.
+----------------------------------------
+Why Reset the Inner Variable?
+----------------------------------------
+Notice:
+i = 1
+while i <= 3:
+    j = 1
+    while j <= 2:
+        print(i, j)
+        j += 1
+    i += 1
+The statement:
+j = 1
+is inside the outer loop.
+Therefore, j starts from 1 every time the outer loop repeats.
+If j were initialized incorrectly outside the outer loop, the inner loop might not execute as expected on later iterations.
+----------------------------------------
+Nested for and while
+----------------------------------------
+You can combine different loop types.
+Example:
+for i in range(3):
+    j = 0
+    while j < 2:
+        print(i, j)
+        j += 1
+The outer loop is for.
+The inner loop is while.
+Python allows this because both are normal control-flow statements.
+----------------------------------------
+Nested while and for
+----------------------------------------
+You can also reverse them.
+Example:
+i = 0
+while i < 2:
+    for j in range(3):
+        print(i, j)
+    i += 1
+The outer loop is while.
+The inner loop is for.
+----------------------------------------
+Nested Loops with Conditions
+----------------------------------------
+Nested loops can contain if statements.
+Example:
+for i in range(1, 4):
+    for j in range(1, 4):
+        if i == j:
+            print(i, j)
+Output:
+1 1
+2 2
+3 3
+The if statement controls which combinations are processed.
+----------------------------------------
+Nested Loops for a Multiplication Table
+----------------------------------------
+Nested loops are useful for generating tables.
+Example:
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i * j)
+Output:
+1
+2
+3
+2
+4
+6
+3
+6
+9
+The outer loop chooses the first number.
+The inner loop chooses the second number.
+----------------------------------------
+Formatted Multiplication Table
+----------------------------------------
+Example:
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i * j, end=" ")
+    print()
+Output:
+1 2 3
+2 4 6
+3 6 9
+Here:
+end=" "
+keeps values on the same line.
+The print() after the inner loop moves to the next line.
+This creates a table-like structure.
+----------------------------------------
+Nested Loops and Patterns
+----------------------------------------
+Nested loops are commonly used to generate patterns.
+Example:
+for i in range(1, 5):
+    for j in range(i):
+        print("*", end=" ")
+    print()
+Output:
+*
+* *
+* * *
+* * * *
+The outer loop controls the number of rows.
+The inner loop controls how many symbols appear in each row.
+----------------------------------------
+Understanding Pattern Logic
+----------------------------------------
+For:
+for i in range(1, 5):
+    for j in range(i):
+        print("*", end=" ")
+    print()
+Outer values:
+i = 1 → inner loop runs 1 time
+i = 2 → inner loop runs 2 times
+i = 3 → inner loop runs 3 times
+i = 4 → inner loop runs 4 times
+Therefore:
+1 star
+2 stars
+3 stars
+4 stars
+This is the basic idea behind many pattern-printing problems.
+----------------------------------------
+Nested Loops with Lists
+----------------------------------------
+Nested loops can process nested lists.
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+for row in matrix:
+    for value in row:
+        print(value)
+Output:
+1
+2
+3
+4
+5
+6
+7
+8
+9
+The outer loop gets one row at a time.
+The inner loop gets each value inside that row.
+----------------------------------------
+Printing a Matrix
+----------------------------------------
+Example:
+matrix = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+for row in matrix:
+    for value in row:
+        print(value, end=" ")
+    print()
+Output:
+1 2
+3 4
+5 6
+This is a common pattern for working with two-dimensional data.
+----------------------------------------
+Nested Loops with Coordinates
+----------------------------------------
+Nested loops are useful for generating coordinate pairs.
+Example:
+for x in range(3):
+    for y in range(3):
+        print(x, y)
+Output:
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+2 0
+2 1
+2 2
+The loops generate every combination of x and y.
+----------------------------------------
+Generating Combinations
+----------------------------------------
+Example:
+colors = ["Red", "Blue"]
+sizes = ["S", "M", "L"]
+for color in colors:
+    for size in sizes:
+        print(color, size)
+Output:
+Red S
+Red M
+Red L
+Blue S
+Blue M
+Blue L
+The outer loop selects a color.
+The inner loop combines it with every available size.
+----------------------------------------
+Nested Loops and Cartesian Products
+----------------------------------------
+The previous example represents a Cartesian product.
+If:
+colors = ["Red", "Blue"]
+sizes = ["S", "M", "L"]
+The nested loops produce:
+Red × S
+Red × M
+Red × L
+Blue × S
+Blue × M
+Blue × L
+This technique is useful when generating all possible combinations between two collections.
+----------------------------------------
+break in Nested Loops
+----------------------------------------
+break affects only the nearest enclosing loop.
+Example:
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+        print(i, j)
+Output:
+0 0
+1 0
+2 0
+When j becomes 1, the inner loop stops.
+The outer loop continues.
+This rule is extremely important.
+----------------------------------------
+continue in Nested Loops
+----------------------------------------
+continue also affects only the nearest enclosing loop.
+Example:
+for i in range(2):
+    for j in range(3):
+        if j == 1:
+            continue
+        print(i, j)
+Output:
+0 0
+0 2
+1 0
+1 2
+The inner loop skips j = 1.
+The outer loop continues normally.
+----------------------------------------
+pass in Nested Loops
+----------------------------------------
+pass does nothing.
+Example:
+for i in range(2):
+    for j in range(3):
+        if j == 1:
+            pass
+        print(i, j)
+Output:
+0 0
+0 1
+0 2
+1 0
+1 1
+1 2
+Neither loop is affected.
+----------------------------------------
+Breaking the Outer Loop
+----------------------------------------
+A break inside the inner loop cannot directly terminate the outer loop.
+Example:
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+The break only terminates the inner loop.
+If you need to stop multiple nested loops, you need another control technique such as a flag, a function return, or restructuring the logic.
+----------------------------------------
+Using a Flag with Nested Loops
+----------------------------------------
+Example:
+found = False
+for i in range(3):
+    for j in range(3):
+        if i == 1 and j == 1:
+            found = True
+            break
+    if found:
+        break
+print("Search finished")
+Here:
+The inner break exits the inner loop.
+The flag records that the target was found.
+The outer loop then checks the flag and also breaks.
+----------------------------------------
+Nested Loops and Complexity
+----------------------------------------
+Nested loops can increase the amount of work significantly.
+Example:
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+The outer loop runs n times.
+For each outer iteration, the inner loop runs n times.
+Total operations are approximately:
+n × n = n²
+Therefore, the time complexity is O(n²).
+This is called quadratic time complexity.
+----------------------------------------
+Three Nested Loops
+----------------------------------------
+Loops can be nested more than two levels deep.
+Example:
+for i in range(2):
+    for j in range(2):
+        for k in range(2):
+            print(i, j, k)
+Total executions:
+2 × 2 × 2 = 8
+Three equally sized nested loops generally produce O(n³) work.
+----------------------------------------
+Why Too Many Nested Loops Can Be a Problem
+----------------------------------------
+Deep nesting can make code:
+Harder to read.
+Harder to debug.
+Harder to maintain.
+Potentially slower.
+Example:
+for a in data:
+    for b in data:
+        for c in data:
+            for d in data:
+                process(a, b, c, d)
+Four nested loops can result in O(n⁴) work when each loop processes n items.
+Whenever possible, consider whether the problem can be solved using a better algorithm or data structure.
+----------------------------------------
+Nested Loops with enumerate()
+----------------------------------------
+enumerate() can provide both an index and a value.
+Example:
+matrix = [
+    ["A", "B"],
+    ["C", "D"]
+]
+for row_index, row in enumerate(matrix):
+    for column_index, value in enumerate(row):
+        print(row_index, column_index, value)
+Output:
+0 0 A
+0 1 B
+1 0 C
+1 1 D
+This is often cleaner than manually maintaining index variables.
+----------------------------------------
+Nested Loops with range(len())
+----------------------------------------
+You may also see:
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        print(matrix[i][j])
+This works, but when indexes are not required, direct iteration is usually clearer:
+for row in matrix:
+    for value in row:
+        print(value)
+Use indexes when the algorithm actually needs them.
+----------------------------------------
+Nested Loops with Dictionaries
+----------------------------------------
+Nested loops can process dictionary data.
+Example:
+students = {
+    "Rahul": {"Python": 85, "SQL": 90},
+    "Anita": {"Python": 92, "SQL": 88}
+}
+for name, subjects in students.items():
+    for subject, score in subjects.items():
+        print(name, subject, score)
+Output:
+Rahul Python 85
+Rahul SQL 90
+Anita Python 92
+Anita SQL 88
+The outer loop processes each student.
+The inner loop processes each student's subjects.
+----------------------------------------
+Real-World Example — Grid Processing
+----------------------------------------
+grid = [
+    [1, 0, 1],
+    [0, 1, 0],
+    [1, 1, 1]
+]
+for row in grid:
+    for cell in row:
+        if cell == 1:
+            print("Active cell")
+The outer loop processes rows.
+The inner loop processes cells.
+This pattern is common in grid-based algorithms and image-like data.
+----------------------------------------
+Real-World Example — Image Processing
+----------------------------------------
+An image can conceptually be represented as rows and columns of pixels.
+Example:
+image = [
+    [10, 20, 30],
+    [40, 50, 60]
+]
+for row in image:
+    for pixel in row:
+        print("Pixel:", pixel)
+The outer loop processes rows.
+The inner loop processes pixels within each row.
+Real image-processing libraries normally provide more efficient operations, but this example demonstrates the nested-loop concept.
+----------------------------------------
+Real-World Example — AI/Data Processing
+----------------------------------------
+dataset = [
+    [0.82, 0.91, 0.73],
+    [0.65, 0.88, 0.94]
+]
+for row in dataset:
+    for prediction in row:
+        if prediction >= 0.90:
+            print("High confidence:", prediction)
+Output:
+High confidence: 0.91
+High confidence: 0.94
+The outer loop processes records or rows.
+The inner loop processes values inside each record.
+----------------------------------------
+Nested Loops with Functions
+----------------------------------------
+A nested loop can call functions.
+Example:
+def process(value):
+    print("Processing:", value)
+for i in range(2):
+    for j in range(3):
+        process((i, j))
+Functions can help keep nested-loop logic readable.
+----------------------------------------
+How to Read a Nested Loop
+----------------------------------------
+When you see:
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+Read it as:
+"For every i,
+    go through every j."
+This mental model makes nested loops much easier to understand.
+----------------------------------------
+How to Calculate Total Iterations
+----------------------------------------
+If loops are independent:
+for i in range(4):
+    for j in range(3):
+        ...
+Total:
+4 × 3 = 12
+If there are three independent loops:
+for i in range(4):
+    for j in range(3):
+        for k in range(2):
+            ...
+Total:
+4 × 3 × 2 = 24
+If the inner loop depends on the outer variable, calculate each iteration separately.
+Example:
+for i in range(1, 4):
+    for j in range(i):
+        ...
+Inner executions:
+i = 1 → 1
+i = 2 → 2
+i = 3 → 3
+Total:
+1 + 2 + 3 = 6
+----------------------------------------
+Common Mistake — Wrong Indentation
+----------------------------------------
+Incorrect:
+for i in range(3):
+for j in range(2):
+    print(i, j)
+Python requires the inner loop to be indented.
+Correct:
+for i in range(3):
+    for j in range(2):
+        print(i, j)
+Indentation defines which loop contains the other.
+----------------------------------------
+Common Mistake — Forgetting the Inner Loop Restarts
+----------------------------------------
+Beginners sometimes think j continues from where it stopped.
+But with:
+for i in range(2):
+    for j in range(3):
+        print(i, j)
+The inner for loop starts again for every new i.
+The sequence is:
+i = 0 → j = 0, 1, 2
+i = 1 → j = 0, 1, 2
+----------------------------------------
+Common Mistake — Unnecessary Nesting
+----------------------------------------
+Do not automatically use nested loops just because you have two pieces of data.
+Always ask whether a simpler operation exists.
+For example, if you only need to process every value in a list, one loop may be enough.
+Nested loops are appropriate when one repetition genuinely depends on another repetition.
+----------------------------------------
+When Should You Use Nested Loops?
+----------------------------------------
+Use nested loops when working with:
+Two-dimensional data.
+Matrices.
+Tables.
+Grids.
+Rows and columns.
+All combinations between collections.
+Pattern generation.
+Pair comparisons.
+Multi-level structured data.
+Image-like pixel data.
+Some searching and sorting algorithms.
+----------------------------------------
+When Should You Avoid Nested Loops?
+----------------------------------------
+Avoid unnecessary nesting when:
+A single loop can solve the problem.
+A built-in function is clearer.
+A more efficient data structure can eliminate repeated searching.
+The nesting makes the algorithm unnecessarily complex.
+For large datasets, always consider the time complexity.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A nested loop is a loop inside another loop.
+• The inner loop runs completely for each outer-loop iteration.
+• The inner loop restarts for every new outer iteration.
+• Nested loops can be for loops, while loops, or combinations of both.
+• break affects only the nearest enclosing loop.
+• continue affects only the nearest enclosing loop.
+• pass does not affect loop execution.
+• Nested loops are useful for two-dimensional data.
+• Nested loops can generate combinations.
+• Nested loops can generate patterns.
+• Multiple nested loops can significantly increase time complexity.
+• Two independent loops of size n commonly result in O(n²).
+• Three independent loops of size n commonly result in O(n³).
+• Meaningful variable names improve nested-loop readability.
+• Avoid nesting when a simpler or more efficient approach exists.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of the outer loop as a classroom.
+For every student in the classroom:
+    check every subject.
+Outer loop:
+Student 1
+    Subject 1
+    Subject 2
+    Subject 3
+Student 2
+    Subject 1
+    Subject 2
+    Subject 3
+The inner loop completes all its work before the outer loop moves to the next item.
+The key idea is:
+"Every outer iteration runs the entire inner loop."
+----------------------------------------
+Summary
+----------------------------------------
+Nested loops are loops placed inside other loops. The outer loop controls the larger repetition, while the inner loop completes all of its iterations for every outer iteration. They are especially useful for matrices, tables, grids, combinations, patterns, and multi-dimensional data. Nested loops can be combined with for, while, if, break, continue, and other control-flow statements. Because each additional independent loop can multiply the amount of work, nested loops should be used intentionally and their time complexity should be considered when processing large datasets.`,
+},
+{
+  heading: "Loop Patterns — Counter, Accumulator, Sentinel & Flag",
+  body: `Loop patterns are common problem-solving techniques built using for and while loops.
+Instead of memorizing individual programs, it is better to understand the purpose of the variable used to control or collect information during the loop.
+Four important patterns are:
+1. Counter
+2. Accumulator
+3. Sentinel
+4. Flag
+These patterns appear repeatedly in real Python programs, coding interviews, DSA, data processing, and AI applications.
+----------------------------------------
+1. Counter Pattern
+----------------------------------------
+A counter keeps track of how many times something happens.
+Basic pattern:
+count = 0
+for item in items:
+    if condition:
+        count += 1
+print(count)
+The counter usually starts at 0 because nothing has been counted yet.
+Whenever the required condition is satisfied, increase the counter.
+----------------------------------------
+Example — Count Even Numbers
+----------------------------------------
+numbers = [10, 15, 20, 25, 30]
+count = 0
+for number in numbers:
+    if number % 2 == 0:
+        count += 1
+print(count)
+Output:
+3
+The even numbers are:
+10
+20
+30
+Therefore, count becomes 3.
+----------------------------------------
+Why Does the Counter Start at 0?
+----------------------------------------
+Before the loop begins, we have found zero matching items.
+Therefore:
+count = 0
+Then each successful match adds one:
+0 → 1 → 2 → 3
+This is called initialization.
+----------------------------------------
+Counter with while
+----------------------------------------
+count = 0
+i = 1
+while i <= 10:
+    if i % 2 == 0:
+        count += 1
+    i += 1
+print(count)
+Output:
+5
+The counter records how many even numbers were found.
+----------------------------------------
+Counting Occurrences
+----------------------------------------
+Counter patterns are useful when you need to count how many times a value appears.
+Example:
+numbers = [2, 5, 2, 7, 2, 9]
+count = 0
+for number in numbers:
+    if number == 2:
+        count += 1
+print(count)
+Output:
+3
+The value 2 appears three times.
+----------------------------------------
+Counter vs Position
+----------------------------------------
+Do not confuse a counter with an index.
+A counter answers:
+"How many?"
+An index answers:
+"Where?"
+Example:
+count = 0
+for number in numbers:
+    if number > 10:
+        count += 1
+The counter tracks the number of matching values.
+----------------------------------------
+2. Accumulator Pattern
+----------------------------------------
+An accumulator stores a running result while the loop executes.
+The most common accumulator is used for totals and sums.
+Basic pattern:
+total = 0
+for item in items:
+    total += item
+print(total)
+The accumulator starts with the identity value appropriate for the operation.
+For addition:
+total = 0
+For multiplication:
+product = 1
+----------------------------------------
+Example — Sum of Numbers
+----------------------------------------
+numbers = [10, 20, 30, 40]
+total = 0
+for number in numbers:
+    total += number
+print(total)
+Output:
+100
+Execution:
+total = 0
+↓
+0 + 10 = 10
+↓
+10 + 20 = 30
+↓
+30 + 30 = 60
+↓
+60 + 40 = 100
+The variable total accumulates the result.
+----------------------------------------
+Accumulator with while
+----------------------------------------
+total = 0
+i = 1
+while i <= 5:
+    total += i
+    i += 1
+print(total)
+Output:
+15
+The values 1, 2, 3, 4, and 5 are progressively added to total.
+----------------------------------------
+Product Accumulator
+----------------------------------------
+For multiplication, start with 1 rather than 0.
+Example:
+numbers = [2, 3, 4]
+product = 1
+for number in numbers:
+    product *= number
+print(product)
+Output:
+24
+Execution:
+1 × 2 = 2
+2 × 3 = 6
+6 × 4 = 24
+If product started at 0:
+product = 0
+then:
+0 × anything = 0
+So the correct starting value is important.
+----------------------------------------
+Accumulator for Maximum
+----------------------------------------
+An accumulator does not always have to be a sum.
+It can maintain the largest value found so far.
+Example:
+numbers = [12, 45, 7, 31]
+maximum = numbers[0]
+for number in numbers:
+    if number > maximum:
+        maximum = number
+print(maximum)
+Output:
+45
+The variable maximum stores the best result found so far.
+----------------------------------------
+Accumulator for Minimum
+----------------------------------------
+Example:
+numbers = [12, 45, 7, 31]
+minimum = numbers[0]
+for number in numbers:
+    if number < minimum:
+        minimum = number
+print(minimum)
+Output:
+7
+The accumulator-like variable keeps the smallest value found so far.
+----------------------------------------
+Counter + Accumulator Together
+----------------------------------------
+These patterns are often used together.
+Example:
+numbers = [10, 20, 30, 40]
+total = 0
+count = 0
+for number in numbers:
+    total += number
+    count += 1
+average = total / count
+print(average)
+Output:
+25.0
+Here:
+total → accumulator
+count → counter
+----------------------------------------
+3. Sentinel Pattern
+----------------------------------------
+A sentinel is a special value that tells a loop when to stop.
+The sentinel is not usually treated as normal data.
+Example:
+while True:
+    value = input("Enter a number or q to quit: ")
+    if value == "q":
+        break
+    print("Value:", value)
+Here:
+q
+is the sentinel.
+It signals:
+"Stop accepting input."
+----------------------------------------
+Why Use a Sentinel?
+----------------------------------------
+Use a sentinel when the number of inputs or iterations is unknown.
+For example:
+The user may enter 3 values.
+Or 20 values.
+Or 100 values.
+You do not know beforehand.
+A special value can tell the program when the input is finished.
+----------------------------------------
+Sentinel with Numbers
+----------------------------------------
+Example:
+total = 0
+while True:
+    number = int(input("Enter number (-1 to stop): "))
+    if number == -1:
+        break
+    total += number
+print("Total:", total)
+Here:
+-1
+is the sentinel.
+The sentinel tells the program to stop.
+----------------------------------------
+Important Sentinel Rule
+----------------------------------------
+The sentinel should be distinguishable from valid data.
+If -1 is a valid score, then using -1 as the sentinel would create ambiguity.
+For example, if valid values are:
+-10 through 10
+then -1 cannot safely be used as a sentinel.
+Choose a value that cannot be a normal input, or use another stopping mechanism.
+----------------------------------------
+Sentinel with while Condition
+----------------------------------------
+A sentinel does not always require while True.
+Example:
+value = input("Enter value: ")
+while value != "quit":
+    print(value)
+    value = input("Enter value: ")
+Here:
+quit
+is the sentinel.
+The loop continues while the input is not quit.
+----------------------------------------
+Sentinel vs while True
+----------------------------------------
+Both patterns can be used for unknown-length input.
+Using while True:
+while True:
+    value = input("Enter value: ")
+    if value == "quit":
+        break
+Using a sentinel condition:
+value = input("Enter value: ")
+while value != "quit":
+    print(value)
+    value = input("Enter value: ")
+Both are valid.
+Choose the version that makes the program easiest to understand.
+----------------------------------------
+4. Flag Pattern
+----------------------------------------
+A flag is usually a Boolean variable that records whether an event has occurred.
+The common starting value is:
+found = False
+If the event occurs:
+found = True
+Example:
+numbers = [10, 20, 30, 40]
+found = False
+for number in numbers:
+    if number == 30:
+        found = True
+        break
+print(found)
+Output:
+True
+The flag records whether 30 was found.
+----------------------------------------
+Why Use a Flag?
+----------------------------------------
+A flag is useful when the program needs to remember something after the loop finishes.
+Example:
+found = False
+for number in numbers:
+    if number == 50:
+        found = True
+        break
+print(found)
+Output:
+False
+Even though the loop has finished, found still tells us what happened during the search.
+----------------------------------------
+Flag for Validation
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+valid = True
+for number in numbers:
+    if number < 0:
+        valid = False
+        break
+print(valid)
+Output:
+True
+The flag records whether all values passed the validation.
+----------------------------------------
+Flag for Finding an Error
+----------------------------------------
+Example:
+scores = [85, 92, -1, 76]
+has_error = False
+for score in scores:
+    if score < 0:
+        has_error = True
+        break
+print(has_error)
+Output:
+True
+The flag tells the program that an invalid value was detected.
+----------------------------------------
+Flag with while
+----------------------------------------
+found = False
+i = 0
+numbers = [10, 20, 30]
+while i < len(numbers):
+    if numbers[i] == 20:
+        found = True
+        break
+    i += 1
+print(found)
+Output:
+True
+----------------------------------------
+Counter vs Accumulator vs Sentinel vs Flag
+----------------------------------------
+Counter:
+Counts occurrences.
+Example:
+count += 1
+Accumulator:
+Builds a running result.
+Example:
+total += value
+Sentinel:
+Special value that signals termination.
+Example:
+"quit"
+Flag:
+Boolean state that records whether something happened.
+Example:
+found = True
+----------------------------------------
+Visual Comparison
+----------------------------------------
+Counter:
+count = 0
+↓
+condition occurs
+↓
+count += 1
+↓
+count records HOW MANY
+Accumulator:
+total = 0
+↓
+process value
+↓
+total += value
+↓
+total records TOTAL RESULT
+Sentinel:
+read input
+↓
+sentinel?
+↓ Yes
+stop
+Flag:
+flag = False
+↓
+event occurs
+↓
+flag = True
+↓
+flag records WHETHER IT HAPPENED
+----------------------------------------
+Combining All Four Patterns
+----------------------------------------
+Real programs can use several patterns together.
+Example:
+total = 0
+count = 0
+found = False
+while True:
+    value = input("Enter number or q: ")
+    if value == "q":
+        break
+    number = int(value)
+    total += number
+    count += 1
+    if number == 100:
+        found = True
+print("Total:", total)
+print("Count:", count)
+print("Found 100:", found)
+Here:
+total → accumulator
+count → counter
+q → sentinel
+found → flag
+This demonstrates how loop patterns work together.
+----------------------------------------
+Real-World Example — Student Scores
+----------------------------------------
+scores = [85, 92, 78, 95, 88]
+total = 0
+count = 0
+highest = scores[0]
+for score in scores:
+    total += score
+    count += 1
+    if score > highest:
+        highest = score
+average = total / count
+print("Total:", total)
+print("Average:", average)
+print("Highest:", highest)
+Here:
+total → accumulator
+count → counter
+highest → running maximum
+----------------------------------------
+Real-World Example — Data Validation
+----------------------------------------
+data = [10, 20, 30, -5, 40]
+valid = True
+for value in data:
+    if value < 0:
+        valid = False
+        break
+print("Data valid:", valid)
+Output:
+Data valid: False
+The flag stores the final validation state.
+----------------------------------------
+Real-World Example — Searching Data
+----------------------------------------
+users = ["Rahul", "Anita", "Kiran"]
+target = "Anita"
+found = False
+for user in users:
+    if user == target:
+        found = True
+        break
+if found:
+    print("User found")
+else:
+    print("User not found")
+The flag preserves the result of the search after the loop.
+----------------------------------------
+Real-World Example — Processing Until Sentinel
+----------------------------------------
+total = 0
+while True:
+    value = input("Enter amount or done: ")
+    if value == "done":
+        break
+    total += float(value)
+print("Total:", total)
+Here:
+done → sentinel
+total → accumulator
+----------------------------------------
+Choosing the Correct Pattern
+----------------------------------------
+Ask:
+"Do I need to know how many?"
+Use a counter.
+"Do I need to build a total or result?"
+Use an accumulator.
+"Do I need a special value to stop input?"
+Use a sentinel.
+"Do I need to remember whether something happened?"
+Use a flag.
+These four questions cover a large number of beginner and intermediate loop problems.
+----------------------------------------
+Initialization Matters
+----------------------------------------
+Always choose the correct initial value.
+Counter:
+count = 0
+Sum:
+total = 0
+Product:
+product = 1
+Flag:
+found = False
+Sentinel:
+Choose a special stopping value that cannot be confused with valid data.
+The initialization determines how the loop behaves.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Starting a counter with 1 when nothing has been counted yet.
+Usually:
+count = 0
+Mistake 2:
+Starting a multiplication accumulator with 0.
+Usually:
+product = 1
+Mistake 3:
+Using a valid data value as a sentinel.
+Mistake 4:
+Forgetting to update a counter.
+Mistake 5:
+Forgetting to change a flag when the event occurs.
+Mistake 6:
+Using a flag when a simple loop else would be clearer.
+Mistake 7:
+Using while True without a clear exit condition.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A counter tracks how many times something occurs.
+• An accumulator stores a running result.
+• A sentinel is a special value used to terminate a loop.
+• A flag usually stores True or False to remember a condition or event.
+• Counters commonly start at 0.
+• Sum accumulators commonly start at 0.
+• Product accumulators commonly start at 1.
+• Flags commonly start at False.
+• Sentinel values should be distinguishable from normal data.
+• Multiple patterns can be combined in the same loop.
+• Choosing the correct initialization is essential.
+• These patterns are common in coding interviews and real applications.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a loop as a worker processing items.
+Counter:
+"How many did I process?"
+Accumulator:
+"What is my running result?"
+Sentinel:
+"When should I stop?"
+Flag:
+"Did something important happen?"
+These four questions help you design many loop-based programs.
+----------------------------------------
+Summary
+----------------------------------------
+Counter, accumulator, sentinel, and flag are four fundamental loop patterns used to solve common programming problems. A counter tracks the number of occurrences, an accumulator builds a running result, a sentinel provides a special stopping value, and a flag records whether a particular event or condition occurred. These patterns can be used independently or combined in the same loop. Understanding these patterns is more valuable than memorizing individual programs because the same ideas appear throughout Python programming, DSA, data processing, and real-world software development.`,
+},
 
             ],
             code: `# for loop — iterates over ANY iterable
@@ -6292,6 +11349,4449 @@ for i in range(10):
             title: "Functions — Reusable Code",
             type: "concept",
             detail: "Functions are the single biggest tool for writing good code. Every time you copy-paste code, you should write a function instead.",
+            subsections:[
+                {
+  heading: "Introduction to Functions",
+  body: `A function is a reusable block of code designed to perform a specific task.
+Instead of writing the same code repeatedly, we can define the code once inside a function and call that function whenever we need it. or we can say A function is a reusable block of code that performs a specific task. Instead of
+writing the same logic again and again, you write it once inside a function
+and call it whenever you need it.
+This follows the DRY principle - Don't Repeat Yourself. It is one of the most
+important principles in programming.
+Functions also make your code easier to read, easier to debug, and easier
+to maintain. If the logic needs to change, you change it in one place
+not everywhere.
+Functions are one of the most important concepts in Python because they make programs:
+• Reusable
+• Organized
+• Readable
+• Modular
+• Easier to test
+• Easier to maintain
+----------------------------------------
+Why Do We Need Functions?
+----------------------------------------
+Imagine you need to calculate the square of a number many times.
+Without a function:
+number = 5
+print(number * number)
+
+number = 10
+print(number * number)
+
+number = 20
+print(number * number)
+The same logic is repeated multiple times.
+With a function, we can write the logic once and reuse it.
+----------------------------------------
+Basic Function Idea
+----------------------------------------
+Define once:
+def square(number):
+    return number * number
+Use many times:
+print(square(5))
+print(square(10))
+print(square(20))
+Output:
+25
+100
+400
+The function contains the logic.
+Each function call supplies a different value.
+----------------------------------------
+Function Structure
+----------------------------------------
+The basic syntax is:
+def function_name():
+    statements
+Here:
+def → tells Python that we are defining a function.
+function_name → the name used to identify the function.
+() → contains parameters when required.
+: → begins the function block.
+Indented statements → code belonging to the function.
+----------------------------------------
+Defining a Simple Function
+----------------------------------------
+Example:
+def greet():
+    print("Hello!")
+This creates a function named greet.
+However, defining a function does not execute its code.
+The function must be called.
+----------------------------------------
+Calling a Function
+----------------------------------------
+Example:
+def greet():
+    print("Hello!")
+greet()
+Output:
+Hello!
+The statement:
+greet()
+is a function call.
+When Python reaches the call, it executes the code inside the function.
+----------------------------------------
+Definition vs Calling
+----------------------------------------
+Function definition:
+def greet():
+    print("Hello")
+Function call:
+greet()
+Think of it as:
+Define → create the function
+Call → execute the function
+----------------------------------------
+A Function Can Be Called Multiple Times
+----------------------------------------
+Example:
+def greet():
+    print("Hello!")
+greet()
+greet()
+greet()
+Output:
+Hello!
+Hello!
+Hello!
+The same function can be reused as many times as required.
+----------------------------------------
+Function with a Parameter
+----------------------------------------
+A function can receive information from the caller.
+Example:
+def greet(name):
+    print("Hello", name)
+Call:
+greet("Rahul")
+greet("Anita")
+Output:
+Hello Rahul
+Hello Anita
+Here:
+name
+is a parameter.
+"Rahul" and "Anita"
+are arguments supplied during the function calls.
+----------------------------------------
+Parameter vs Argument
+----------------------------------------
+Parameter:
+The variable written in the function definition.
+Example:
+def greet(name):
+    print("Hello", name)
+name → parameter
+Argument:
+The actual value supplied when calling the function.
+Example:
+greet("Rahul")
+"Rahul" → argument
+Simple way to remember:
+Parameter → placeholder
+Argument → actual value
+----------------------------------------
+Multiple Parameters
+----------------------------------------
+A function can accept multiple parameters.
+Example:
+def add(a, b):
+    print(a + b)
+Call:
+add(10, 20)
+Output:
+30
+Here:
+a and b → parameters
+10 and 20 → arguments
+----------------------------------------
+Function with return
+----------------------------------------
+A function can send a result back to the caller using return.
+Example:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+The return statement sends the calculated value back.
+----------------------------------------
+print() vs return
+----------------------------------------
+print() displays a value.
+return sends a value back to the caller.
+Example:
+def add(a, b):
+    print(a + b)
+This displays the result but does not provide the result for further use.
+Using return:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+The returned value can be stored, calculated with, passed to another function, or used in a condition.
+This distinction becomes very important when designing reusable functions.
+----------------------------------------
+Function Without return
+----------------------------------------
+Example:
+def greet():
+    print("Hello")
+result = greet()
+print(result)
+Output:
+Hello
+None
+If a function does not explicitly return a value, Python returns:
+None
+automatically.
+----------------------------------------
+Function with return
+----------------------------------------
+Example:
+def square(number):
+    return number * number
+result = square(5)
+print(result)
+Output:
+25
+The function calculates the value and sends it back to the caller.
+----------------------------------------
+Functions Can Perform Different Tasks
+----------------------------------------
+A function can:
+• Display information
+• Calculate values
+• Validate data
+• Process strings
+• Search data
+• Modify data
+• Return results
+• Call other functions
+• Perform a specific business operation
+Good functions usually focus on one clear responsibility.
+----------------------------------------
+Function Naming
+----------------------------------------
+Use meaningful names that describe what the function does.
+Good:
+def calculate_total():
+    ...
+def validate_email():
+    ...
+def find_student():
+    ...
+Avoid unclear names such as:
+def x():
+    ...
+def abc():
+    ...
+Python function names normally use snake_case.
+Example:
+def calculate_average():
+    ...
+----------------------------------------
+Function Execution Flow
+----------------------------------------
+Consider:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Execution:
+Python defines add
+↓
+Python reaches add(10, 20)
+↓
+10 is assigned to a
+20 is assigned to b
+↓
+Function executes
+↓
+a + b → 30
+↓
+return 30
+↓
+30 is assigned to result
+↓
+print(result)
+Output:
+30
+Understanding this flow makes parameters and return values much easier to understand.
+----------------------------------------
+Functions and Variables
+----------------------------------------
+Variables created inside a function normally belong to that function's local scope.
+Example:
+def calculate():
+    value = 100
+    print(value)
+calculate()
+The variable value is created inside the function.
+It is a local variable.
+----------------------------------------
+Why Functions Improve Programs
+----------------------------------------
+Without functions, large programs can become:
+Long
+Repetitive
+Difficult to understand
+Difficult to test
+Difficult to maintain
+Functions allow us to divide a large problem into smaller logical pieces.
+For example:
+def login_user():
+    ...
+def validate_user():
+    ...
+def load_dashboard():
+    ...
+Each function handles a specific responsibility.
+----------------------------------------
+Functions in Real Applications
+----------------------------------------
+Functions are everywhere in software development.
+For example, an application might have:
+def register_user():
+    ...
+def login_user():
+    ...
+def calculate_salary():
+    ...
+def analyze_resume():
+    ...
+def generate_roadmap():
+    ...
+def search_jobs():
+    ...
+Each function represents a reusable piece of program logic.
+----------------------------------------
+Functions in AI and Data Science
+----------------------------------------
+Functions are also fundamental in AI and machine learning.
+Example:
+def preprocess_data(data):
+    ...
+def train_model(data):
+    ...
+def predict(model, data):
+    ...
+def calculate_accuracy(actual, predicted):
+    ...
+A complex AI application can be divided into many smaller functions.
+This makes the code easier to test, reuse, and maintain.
+----------------------------------------
+Function as a Reusable Machine
+----------------------------------------
+A useful mental model is:
+Input
+↓
+Function
+↓
+Processing
+↓
+Output
+Example:
+10, 20
+↓
+add()
+↓
+10 + 20
+↓
+30
+The function acts like a small reusable machine.
+----------------------------------------
+Important Function Concepts
+----------------------------------------
+Every function can be understood through four main questions:
+1. What is the function called?
+2. What input does it receive?
+3. What work does it perform?
+4. What output does it return?
+Example:
+def add(a, b):
+    return a + b
+Function name → add
+Input → a, b
+Processing → a + b
+Output → returned sum
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Defining a function but never calling it.
+Example:
+def greet():
+    print("Hello")
+Nothing is printed because the function was never called.
+Mistake 2:
+Forgetting indentation.
+Incorrect:
+def greet():
+print("Hello")
+Correct:
+def greet():
+    print("Hello")
+Mistake 3:
+Confusing parameters and arguments.
+Mistake 4:
+Using print() when the function should return a result.
+Mistake 5:
+Using unclear function names.
+Mistake 6:
+Trying to access local variables outside the function.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Functions are reusable blocks of code.
+• Define a function using def.
+• Defining a function does not execute it.
+• Call the function to execute it.
+• Parameters receive input.
+• Arguments provide actual values.
+• A function can have zero or more parameters.
+• return sends a result back to the caller.
+• A function without an explicit return returns None.
+• Functions should generally have a clear purpose.
+• Meaningful names improve readability.
+• Python function names commonly use snake_case.
+• Functions help divide large programs into smaller logical components.
+----------------------------------------
+Summary
+----------------------------------------
+A function is a reusable block of code designed to perform a specific task. Python functions are created using def and executed by calling their names. Functions can receive input through parameters and arguments and can send results back using return. They help reduce code duplication, organize programs, improve readability, and make large applications easier to develop and maintain. Functions are fundamental not only to Python programming but also to backend development, data science, machine learning, AI, and software engineering.`,
+},
+
+{
+  heading: "Function Parameters and Arguments",
+  body: `Parameters and arguments allow functions to receive information from the code that calls them.
+They are what make functions flexible and reusable.
+Instead of creating a separate function for every value, we can create one function and provide different values whenever we call it.
+----------------------------------------
+Basic Idea
+----------------------------------------
+Think of a function as a machine:
+Input → Function → Output
+Example:
+def square(number):
+    return number * number
+result = square(5)
+Here:
+5 → input
+square() → function
+25 → output
+The variable number receives the value 5.
+----------------------------------------
+What Is a Parameter?
+----------------------------------------
+A parameter is a variable written inside the parentheses of a function definition.
+Example:
+def greet(name):
+    print("Hello", name)
+Here:
+name
+is a parameter.
+It acts as a placeholder for the value that will be provided later.
+----------------------------------------
+What Is an Argument?
+----------------------------------------
+An argument is the actual value supplied when calling a function.
+Example:
+greet("Rahul")
+Here:
+"Rahul"
+is the argument.
+The value "Rahul" is assigned to the parameter name.
+Conceptually:
+name ← "Rahul"
+Then the function executes:
+print("Hello", name)
+Output:
+Hello Rahul
+----------------------------------------
+Parameter vs Argument
+----------------------------------------
+Parameter:
+Appears in the function definition.
+Example:
+def greet(name):
+    ...
+name → parameter
+Argument:
+Appears in the function call.
+Example:
+greet("Rahul")
+"Rahul" → argument
+Easy way to remember:
+Parameter → placeholder
+Argument → actual value
+----------------------------------------
+Function Without Parameters
+----------------------------------------
+A function does not always need input.
+Example:
+def greet():
+    print("Hello!")
+greet()
+The empty parentheses mean the function does not require any arguments.
+----------------------------------------
+Function with One Parameter
+----------------------------------------
+Example:
+def greet(name):
+    print("Hello", name)
+greet("Rahul")
+greet("Anita")
+Output:
+Hello Rahul
+Hello Anita
+The same function handles different inputs.
+----------------------------------------
+Function with Multiple Parameters
+----------------------------------------
+A function can accept multiple parameters.
+Example:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+Here:
+a → parameter
+b → parameter
+10 → argument
+20 → argument
+----------------------------------------
+How Multiple Arguments Are Assigned
+----------------------------------------
+When positional arguments are used, Python assigns them according to their position.
+Example:
+def introduce(name, age):
+    print("Name:", name)
+    print("Age:", age)
+introduce("Rahul", 22)
+Assignment:
+name ← "Rahul"
+age ← 22
+Output:
+Name: Rahul
+Age: 22
+----------------------------------------
+Positional Arguments
+----------------------------------------
+Positional arguments are matched according to their position.
+Example:
+def subtract(a, b):
+    return a - b
+print(subtract(10, 3))
+Here:
+a ← 10
+b ← 3
+Result:
+7
+If the order changes:
+print(subtract(3, 10))
+Result:
+-7
+Therefore, order matters with positional arguments.
+----------------------------------------
+Keyword Arguments
+----------------------------------------
+Keyword arguments specify the parameter name explicitly.
+Example:
+def introduce(name, age):
+    print(name, age)
+introduce(age=22, name="Rahul")
+Output:
+Rahul 22
+The order does not matter because Python knows which value belongs to which parameter.
+----------------------------------------
+Positional vs Keyword
+----------------------------------------
+Positional:
+introduce("Rahul", 22)
+Python matches:
+name ← "Rahul"
+age ← 22
+Keyword:
+introduce(name="Rahul", age=22)
+Python matches by parameter name.
+Both forms are useful.
+----------------------------------------
+Mixing Positional and Keyword Arguments
+----------------------------------------
+You can combine positional and keyword arguments, but positional arguments must come before keyword arguments.
+Correct:
+def student(name, age, course):
+    print(name, age, course)
+student("Rahul", age=22, course="Python")
+Incorrect:
+student(name="Rahul", 22, course="Python")
+A positional argument cannot appear after a keyword argument.
+----------------------------------------
+Default Parameters
+----------------------------------------
+A parameter can have a default value.
+Example:
+def greet(name="Guest"):
+    print("Hello", name)
+greet()
+greet("Rahul")
+Output:
+Hello Guest
+Hello Rahul
+If no argument is supplied, Python uses the default value.
+If an argument is supplied, it replaces the default.
+----------------------------------------
+Why Use Default Parameters?
+----------------------------------------
+Default parameters are useful when a function has a common or optional value.
+Example:
+def connect(host="localhost"):
+    print("Connecting to", host)
+connect()
+connect("192.168.1.10")
+Output:
+Connecting to localhost
+Connecting to 192.168.1.10
+The caller only needs to provide a value when a different value is required.
+----------------------------------------
+Required vs Optional Parameters
+----------------------------------------
+Required parameter:
+def greet(name):
+    print(name)
+The caller must provide name.
+Optional parameter:
+def greet(name="Guest"):
+    print(name)
+The caller may provide name.
+Example:
+greet()
+greet("Rahul")
+Both calls are valid.
+----------------------------------------
+Multiple Default Parameters
+----------------------------------------
+Example:
+def student(name="Unknown", age=0, course="Python"):
+    print(name, age, course)
+student()
+Output:
+Unknown 0 Python
+Values can also be overridden:
+student("Rahul", 22, "FastAPI")
+----------------------------------------
+Important Default Parameter Rule
+----------------------------------------
+Required parameters generally come before parameters with default values.
+Correct:
+def student(name, age=18):
+    print(name, age)
+Incorrect:
+def student(age=18, name):
+    print(name, age)
+Python does not allow a required parameter to follow a default parameter.
+----------------------------------------
+Passing Expressions as Arguments
+----------------------------------------
+Arguments do not have to be literal values.
+They can be variables or expressions.
+Example:
+a = 10
+b = 20
+print(add(a, b))
+The variables are evaluated and their values are passed to the function.
+Expressions can also be used:
+print(add(5 + 5, 10 * 2))
+The values passed are:
+10
+20
+Output:
+30
+----------------------------------------
+Passing Different Data Types
+----------------------------------------
+Parameters can receive different types of values.
+Example:
+def display(value):
+    print(value)
+display(10)
+display("Python")
+display(3.14)
+display([1, 2, 3])
+display(True)
+The same parameter can receive different objects.
+Python uses dynamic typing, so the parameter does not need a declared type for basic use.
+----------------------------------------
+Passing a List
+----------------------------------------
+Example:
+def calculate_total(numbers):
+    total = 0
+    for number in numbers:
+        total += number
+    return total
+numbers = [10, 20, 30]
+print(calculate_total(numbers))
+Output:
+60
+The list is passed as an argument and received by numbers.
+----------------------------------------
+Passing a Dictionary
+----------------------------------------
+Example:
+def show_user(user):
+    print(user["name"])
+    print(user["age"])
+user = {"name": "Rahul", "age": 22}
+show_user(user)
+Output:
+Rahul
+22
+Functions can receive complex data structures as arguments.
+----------------------------------------
+Passing Multiple Values
+----------------------------------------
+Example:
+def calculate_average(a, b, c):
+    return (a + b + c) / 3
+print(calculate_average(10, 20, 30))
+Output:
+20.0
+Each argument is assigned to its corresponding parameter.
+----------------------------------------
+Argument Count Must Match
+----------------------------------------
+If a function requires two parameters:
+def add(a, b):
+    return a + b
+Then this is valid:
+add(10, 20)
+But:
+add(10)
+causes an error because b is missing.
+Likewise:
+add(10, 20, 30)
+causes an error because too many arguments were provided.
+Default parameters can make some arguments optional.
+----------------------------------------
+Function Parameters Receive References to Objects
+----------------------------------------
+Python passes object references to functions.
+Example:
+def show(value):
+    print(value)
+number = 10
+show(number)
+The function receives a reference to the object represented by number.
+For beginners, the important practical idea is:
+The function parameter becomes another name through which the passed object can be accessed.
+----------------------------------------
+Mutable Objects as Arguments
+----------------------------------------
+Lists are mutable.
+A function can modify the same list object.
+Example:
+def add_item(items):
+    items.append("Python")
+numbers = ["Java"]
+add_item(numbers)
+print(numbers)
+Output:
+["Java", "Python"]
+The list was modified inside the function.
+----------------------------------------
+Immutable Objects as Arguments
+----------------------------------------
+Integers, strings, and tuples are examples of immutable objects.
+Example:
+def change_number(number):
+    number = 100
+value = 10
+change_number(value)
+print(value)
+Output:
+10
+Assigning number = 100 inside the function does not change the original integer object referenced by value.
+This is an important distinction when learning how Python handles function arguments.
+----------------------------------------
+Parameters Can Have Meaningful Names
+----------------------------------------
+Choose parameter names based on what the function receives.
+Good:
+def calculate_salary(base_salary, bonus):
+    return base_salary + bonus
+Less clear:
+def calculate_salary(a, b):
+    return a + b
+Meaningful parameter names make functions easier to understand.
+----------------------------------------
+Parameter Names Are Local to the Function
+----------------------------------------
+Example:
+name = "Rahul"
+def greet(name):
+    print(name)
+greet("Anita")
+print(name)
+Output:
+Anita
+Rahul
+The parameter name inside the function is local to the function.
+It does not replace the variable name outside the function.
+----------------------------------------
+Function Arguments Can Be Variables
+----------------------------------------
+Example:
+name = "Rahul"
+age = 22
+def introduce(name, age):
+    print(name, age)
+introduce(name, age)
+The values of the outside variables are passed to the function.
+The parameter names inside the function are local names.
+----------------------------------------
+Keyword Arguments Improve Readability
+----------------------------------------
+Compare:
+create_user("Rahul", 22, "Python", True)
+with:
+create_user(
+    name="Rahul",
+    age=22,
+    course="Python",
+    active=True
+)
+For functions with many parameters, keyword arguments can make the call easier to understand.
+----------------------------------------
+Positional Arguments and Order
+----------------------------------------
+Example:
+def divide(a, b):
+    return a / b
+divide(10, 2)
+→ a = 10
+→ b = 2
+divide(2, 10)
+→ a = 2
+→ b = 10
+The result changes because positional arguments depend on order.
+----------------------------------------
+Keyword Arguments and Order
+----------------------------------------
+Example:
+def divide(a, b):
+    return a / b
+divide(a=10, b=2)
+divide(b=2, a=10)
+Both calls produce:
+5.0
+The parameter names identify the values.
+----------------------------------------
+Practical Example — Student Details
+----------------------------------------
+def display_student(name, age, course="Python"):
+    print("Name:", name)
+    print("Age:", age)
+    print("Course:", course)
+display_student("Rahul", 22)
+display_student("Anita", 21, "AI")
+Output:
+Name: Rahul
+Age: 22
+Course: Python
+Name: Anita
+Age: 21
+Course: AI
+Here course has a default value.
+----------------------------------------
+Practical Example — Job Application
+----------------------------------------
+def create_application(name, role, experience=0):
+    print("Applicant:", name)
+    print("Role:", role)
+    print("Experience:", experience)
+create_application("Rahul", "Python Developer")
+create_application("Anita", "AI Engineer", 1)
+The experience parameter is optional because it has a default value.
+----------------------------------------
+Practical Example — AI Function
+----------------------------------------
+def predict_score(features, threshold=0.5):
+    score = sum(features) / len(features)
+    return score >= threshold
+features = [0.8, 0.7, 0.9]
+result = predict_score(features)
+print(result)
+The function accepts:
+features → required parameter
+threshold → optional parameter with default value
+This pattern is common in configurable AI and data-processing functions.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Confusing parameters with arguments.
+Parameter:
+def greet(name):
+Argument:
+greet("Rahul")
+Mistake 2:
+Changing the order of positional arguments accidentally.
+Mistake 3:
+Putting a required parameter after a default parameter.
+Mistake 4:
+Providing too few arguments.
+Mistake 5:
+Providing too many arguments.
+Mistake 6:
+Using unclear parameter names.
+Mistake 7:
+Putting a positional argument after a keyword argument.
+----------------------------------------
+Best Mental Model
+----------------------------------------
+Think of parameters as empty boxes:
+def add(a, b):
+    return a + b
+The function has two boxes:
+a → [ ? ]
+b → [ ? ]
+When called:
+add(10, 20)
+Python fills them:
+a → [10]
+b → [20]
+Then the function executes:
+10 + 20
+↓
+30
+The arguments provide the actual values.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Parameters are defined inside the function definition.
+• Arguments are supplied during the function call.
+• Positional arguments are matched by position.
+• Keyword arguments are matched by parameter name.
+• Positional arguments must come before keyword arguments.
+• Default parameters provide fallback values.
+• Required parameters must receive values unless a default is provided.
+• The number of supplied arguments must satisfy the function's parameter requirements.
+• Meaningful parameter names improve readability.
+• Parameters are local to the function.
+• Functions can receive variables, expressions, lists, dictionaries, and other objects.
+----------------------------------------
+Quick Reference
+----------------------------------------
+Parameter:
+def greet(name):
+    ...
+Argument:
+greet("Rahul")
+Positional:
+greet("Rahul", 22)
+Keyword:
+greet(name="Rahul", age=22)
+Default:
+def greet(name="Guest"):
+    ...
+Multiple:
+def add(a, b):
+    ...
+The central idea is:
+Parameters define what a function expects.
+Arguments provide what the function receives.`,
+},
+{
+  heading: "Positional Arguments and Keyword Arguments",
+  body: `Python provides different ways to pass arguments to a function.
+The two fundamental ways are:
+1. Positional Arguments
+2. Keyword Arguments
+Understanding the difference is important because it determines how Python matches the values you provide with the parameters defined by the function.
+----------------------------------------
+1. Positional Arguments
+----------------------------------------
+A positional argument is matched with a parameter based on its position.
+Example:
+def introduce(name, age):
+    print("Name:", name)
+    print("Age:", age)
+introduce("Rahul", 22)
+Python matches the values from left to right:
+name ← "Rahul"
+age ← 22
+The first argument goes to the first parameter.
+The second argument goes to the second parameter.
+----------------------------------------
+Position Matters
+----------------------------------------
+Example:
+def subtract(a, b):
+    return a - b
+print(subtract(10, 3))
+Output:
+7
+Here:
+a ← 10
+b ← 3
+If we reverse the arguments:
+print(subtract(3, 10))
+Output:
+-7
+The function is the same, but the result changes because positional arguments depend on order.
+----------------------------------------
+Multiple Positional Arguments
+----------------------------------------
+Example:
+def student(name, age, course):
+    print(name, age, course)
+student("Rahul", 22, "Python")
+Mapping:
+name ← "Rahul"
+age ← 22
+course ← "Python"
+All three arguments are assigned according to their positions.
+----------------------------------------
+Positional Arguments with Expressions
+----------------------------------------
+Arguments can be expressions.
+Example:
+def add(a, b):
+    return a + b
+result = add(5 + 5, 10 * 2)
+Python evaluates the expressions first:
+5 + 5 → 10
+10 × 2 → 20
+Then:
+a ← 10
+b ← 20
+Result:
+30
+----------------------------------------
+Positional Arguments with Variables
+----------------------------------------
+Arguments can also come from variables.
+Example:
+name = "Rahul"
+age = 22
+def introduce(name, age):
+    print(name, age)
+introduce(name, age)
+Python evaluates the variables and passes their values to the function.
+----------------------------------------
+Advantages of Positional Arguments
+----------------------------------------
+Positional arguments are:
+• Short
+• Simple
+• Easy to write
+• Convenient when a function has only a few parameters
+Example:
+add(10, 20)
+This is concise and readable when the parameter order is already obvious.
+----------------------------------------
+Disadvantage of Positional Arguments
+----------------------------------------
+The main limitation is that order matters.
+Example:
+def create_user(name, age, role):
+    ...
+create_user("Rahul", 22, "Developer")
+If the order is accidentally changed:
+create_user(22, "Rahul", "Developer")
+Python may assign the wrong values to the parameters.
+This can cause incorrect results or errors.
+----------------------------------------
+2. Keyword Arguments
+----------------------------------------
+A keyword argument specifies the parameter name explicitly.
+Example:
+def introduce(name, age):
+    print("Name:", name)
+    print("Age:", age)
+introduce(name="Rahul", age=22)
+Here:
+name="Rahul"
+age=22
+Python matches each value by parameter name instead of position.
+----------------------------------------
+Keyword Arguments Do Not Depend on Order
+----------------------------------------
+Example:
+def introduce(name, age):
+    print(name, age)
+introduce(age=22, name="Rahul")
+Output:
+Rahul 22
+The order changed, but the result is still correct because the parameter names identify the values.
+----------------------------------------
+Why Keyword Arguments Are Useful
+----------------------------------------
+Keyword arguments improve readability when a function has several parameters.
+Compare:
+create_profile("Rahul", 22, "Python", True)
+with:
+create_profile(
+    name="Rahul",
+    age=22,
+    course="Python",
+    active=True
+)
+The second version makes the meaning of every value immediately clear.
+----------------------------------------
+Positional vs Keyword
+----------------------------------------
+Positional:
+def student(name, age):
+    ...
+student("Rahul", 22)
+Matching:
+name ← "Rahul"
+age ← 22
+Keyword:
+student(name="Rahul", age=22)
+Matching:
+name ← "Rahul"
+age ← 22
+The result is the same, but the matching mechanism is different.
+----------------------------------------
+Mixing Positional and Keyword Arguments
+----------------------------------------
+Python allows positional and keyword arguments to be used together.
+Example:
+def student(name, age, course):
+    print(name, age, course)
+student("Rahul", age=22, course="Python")
+Here:
+"Rahul" → positional
+age=22 → keyword
+course="Python" → keyword
+This is valid.
+----------------------------------------
+Important Ordering Rule
+----------------------------------------
+When mixing them:
+Positional arguments must come before keyword arguments.
+Correct:
+student("Rahul", age=22, course="Python")
+Incorrect:
+student(name="Rahul", 22, course="Python")
+The second example is invalid because a positional argument appears after a keyword argument.
+Remember:
+Positional first → Keyword after.
+----------------------------------------
+Multiple Keyword Arguments
+----------------------------------------
+Example:
+def employee(name, age, role, salary):
+    print(name, age, role, salary)
+employee(
+    name="Rahul",
+    age=22,
+    role="Python Developer",
+    salary=400000
+)
+Every argument is explicitly associated with a parameter.
+----------------------------------------
+Using Only Positional Arguments
+----------------------------------------
+Example:
+def calculate_salary(base, bonus, tax):
+    return base + bonus - tax
+result = calculate_salary(40000, 5000, 2000)
+The mapping is:
+base ← 40000
+bonus ← 5000
+tax ← 2000
+----------------------------------------
+Using Only Keyword Arguments
+----------------------------------------
+Example:
+result = calculate_salary(
+    base=40000,
+    bonus=5000,
+    tax=2000
+)
+The order can be changed:
+result = calculate_salary(
+    tax=2000,
+    bonus=5000,
+    base=40000
+)
+Both calls are valid because the parameter names are specified.
+----------------------------------------
+Keyword Arguments with Default Parameters
+----------------------------------------
+Keyword arguments become especially useful with default parameters.
+Example:
+def connect(host="localhost", port=5432, secure=True):
+    print(host, port, secure)
+connect()
+Output:
+localhost 5432 True
+We can override only the value we need:
+connect(port=8000)
+Output:
+localhost 8000 True
+Or:
+connect(secure=False)
+Output:
+localhost 5432 False
+This is one of the most useful practical applications of keyword arguments.
+----------------------------------------
+Skipping Default Values
+----------------------------------------
+Example:
+def create_user(name, age=18, role="student"):
+    print(name, age, role)
+create_user("Rahul", role="developer")
+Output:
+Rahul 18 developer
+The default age is retained while role is overridden.
+This is much cleaner than providing every argument positionally.
+----------------------------------------
+Positional Argument Followed by Keyword
+----------------------------------------
+Example:
+def create_user(name, age=18, role="student"):
+    ...
+create_user("Rahul", role="developer")
+This is valid.
+The first parameter is supplied positionally.
+The later parameter is supplied by keyword.
+----------------------------------------
+Keyword Argument Before Positional Argument
+----------------------------------------
+This is invalid:
+create_user(name="Rahul", 22)
+Why?
+Python has already started using keyword-based matching, and a positional argument cannot appear afterward.
+Correct:
+create_user("Rahul", age=22)
+----------------------------------------
+Duplicate Values
+----------------------------------------
+Do not provide a parameter both positionally and by keyword.
+Example:
+def student(name, age):
+    ...
+student("Rahul", name="Anita")
+This causes an error because name receives two values:
+name ← "Rahul"
+name ← "Anita"
+Python cannot decide which one should be used.
+----------------------------------------
+Unexpected Keyword
+----------------------------------------
+The keyword must match an existing parameter name.
+Example:
+def greet(name):
+    print("Hello", name)
+greet(username="Rahul")
+This causes an error because username is not a parameter of greet().
+Correct:
+greet(name="Rahul")
+----------------------------------------
+Positional Argument Count
+----------------------------------------
+The number of positional arguments must be compatible with the function parameters.
+Example:
+def add(a, b):
+    return a + b
+add(10, 20)
+Correct.
+But:
+add(10)
+is missing an argument.
+And:
+add(10, 20, 30)
+provides too many arguments.
+Unless the function is designed to accept variable numbers of arguments.
+----------------------------------------
+Keyword Argument Count
+----------------------------------------
+The same idea applies to keyword arguments.
+Example:
+def add(a, b):
+    return a + b
+add(a=10, b=20)
+Correct.
+But:
+add(a=10, b=20, c=30)
+is invalid because c is not a parameter.
+----------------------------------------
+Positional and Keyword Together — Execution Flow
+----------------------------------------
+Consider:
+def employee(name, age, role="Developer"):
+    print(name, age, role)
+employee("Rahul", age=22)
+Step 1:
+"Rahul" is positional.
+↓
+name ← "Rahul"
+Step 2:
+age=22 is keyword.
+↓
+age ← 22
+Step 3:
+role was not supplied.
+↓
+role ← "Developer"
+Final values:
+name = "Rahul"
+age = 22
+role = "Developer"
+----------------------------------------
+Real-World Example — API Configuration
+----------------------------------------
+Imagine a function that creates an API request:
+def request(url, method="GET", timeout=30):
+    print(url, method, timeout)
+Simple call:
+request("https://example.com")
+Uses defaults:
+method = "GET"
+timeout = 30
+Override only timeout:
+request("https://example.com", timeout=60)
+This demonstrates why keyword arguments are useful in configurable functions.
+----------------------------------------
+Real-World Example — AI Model Configuration
+----------------------------------------
+Example:
+def train_model(data, epochs=10, learning_rate=0.001):
+    print(data, epochs, learning_rate)
+Basic call:
+train_model(data)
+Override one setting:
+train_model(data, epochs=50)
+Override another:
+train_model(data, learning_rate=0.01)
+Keyword arguments make configuration easier to understand.
+----------------------------------------
+Positional-Only Parameters
+----------------------------------------
+Python also allows a function to explicitly require certain parameters to be passed positionally.
+The / symbol is used.
+Example:
+def divide(a, b, /):
+    return a / b
+This is valid:
+divide(10, 2)
+But:
+divide(a=10, b=2)
+causes an error because a and b are positional-only parameters.
+This is an advanced feature and is useful when designing APIs where parameter names should not be part of the public calling interface.
+----------------------------------------
+Keyword-Only Parameters
+----------------------------------------
+Python can also require parameters to be supplied by keyword.
+The * symbol is used.
+Example:
+def create_user(name, *, age, role):
+    print(name, age, role)
+This is valid:
+create_user("Rahul", age=22, role="Developer")
+This is invalid:
+create_user("Rahul", 22, "Developer")
+Because age and role are keyword-only parameters.
+This feature is useful when you want function calls to be explicit and readable.
+----------------------------------------
+Combining Positional-Only and Keyword-Only
+----------------------------------------
+Python can define all three sections:
+def function(positional, /, normal, *, keyword_only):
+    ...
+Example:
+def process(data, /, model="default", *, verbose=False):
+    print(data, model, verbose)
+Here:
+data → positional-only
+model → can be positional or keyword
+verbose → keyword-only
+This is a more advanced function-design feature.
+----------------------------------------
+How Python Matches Arguments
+----------------------------------------
+When a function is called, Python must match the supplied arguments with the function's parameters.
+For a simple function:
+def calculate(a, b, c):
+    ...
+Call:
+calculate(10, b=20, c=30)
+Matching:
+a ← 10
+b ← 20
+c ← 30
+Python first handles the positional argument and then uses the parameter names for keyword arguments.
+----------------------------------------
+Best Practice
+----------------------------------------
+Use positional arguments when:
+• The function has a small number of obvious parameters.
+• The order is intuitive.
+Example:
+add(10, 20)
+Use keyword arguments when:
+• There are many parameters.
+• Values are optional.
+• The meaning of a value is not obvious.
+• You are overriding a default.
+Example:
+train_model(data, epochs=50, learning_rate=0.01)
+Use positional-only and keyword-only parameters when designing APIs that need a controlled calling style.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Reversing positional arguments accidentally.
+Mistake 2:
+Putting a positional argument after a keyword argument.
+Mistake 3:
+Giving the same parameter both positionally and by keyword.
+Mistake 4:
+Using a keyword that does not exist in the function definition.
+Mistake 5:
+Providing too many or too few arguments.
+Mistake 6:
+Forgetting that default parameters can be overridden.
+Mistake 7:
+Confusing a parameter name with the variable name used outside the function.
+----------------------------------------
+Quick Comparison
+----------------------------------------
+Positional:
+function(10, 20)
+Matched by position.
+Keyword:
+function(a=10, b=20)
+Matched by parameter name.
+Mixed:
+function(10, b=20)
+Positional first, keyword after.
+Default:
+function(10)
+Uses default values for omitted parameters.
+Positional-only:
+def function(a, /):
+    ...
+Must use positional syntax.
+Keyword-only:
+def function(*, a):
+    ...
+Must use keyword syntax.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of parameters as labeled boxes:
+def student(name, age, role):
+    ...
+Positional arguments fill boxes by position:
+student("Rahul", 22, "Developer")
+name ← "Rahul"
+age ← 22
+role ← "Developer"
+Keyword arguments fill boxes by label:
+student(role="Developer", name="Rahul", age=22)
+The order no longer matters because each value has a label.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Positional arguments are matched by position.
+• Keyword arguments are matched by parameter name.
+• Positional arguments must come before keyword arguments.
+• The same parameter cannot receive two values.
+• Keyword names must match existing parameters.
+• Default parameters can be overridden.
+• Positional-only parameters use /.
+• Keyword-only parameters use *.
+• Keyword arguments often improve readability.
+• Positional arguments are concise when the parameter order is obvious.
+• Choose the calling style based on readability and function design.
+----------------------------------------
+Summary
+----------------------------------------
+Positional arguments are matched to parameters according to their position, while keyword arguments are matched explicitly using parameter names. Positional arguments must appear before keyword arguments when both styles are combined. Keyword arguments are especially useful when functions have many parameters or optional settings because they make the purpose of each value clear. Python also provides positional-only and keyword-only parameters for more controlled function interfaces. Understanding these argument-passing rules is essential for writing clear, flexible, and reliable Python functions.`,
+},
+
+{
+  heading: "Default Arguments in Functions",
+  body: `A default argument allows a function parameter to have a predefined value.
+If the caller does not provide a value for that parameter, Python automatically uses the default value.
+This makes function arguments optional and allows the same function to work with both default and customized values.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+def function_name(parameter=default_value):
+    statements
+Example:
+def greet(name="Guest"):
+    print("Hello", name)
+Calling without an argument:
+greet()
+Output:
+Hello Guest
+Calling with an argument:
+greet("Rahul")
+Output:
+Hello Rahul
+When an argument is provided, the supplied value replaces the default value.
+----------------------------------------
+Why Do We Need Default Arguments?
+----------------------------------------
+Without a default value:
+def greet(name):
+    print("Hello", name)
+The caller must provide name:
+greet("Rahul")
+If we call:
+greet()
+Python raises an error because the required argument is missing.
+With a default:
+def greet(name="Guest"):
+    print("Hello", name)
+Now both calls are valid:
+greet()
+greet("Rahul")
+Default arguments make functions more flexible.
+----------------------------------------
+How Default Arguments Work
+----------------------------------------
+Consider:
+def greet(name="Guest"):
+    print("Hello", name)
+Call:
+greet()
+Python sees that no value was supplied.
+Therefore:
+name ← "Guest"
+Call:
+greet("Anita")
+Python sees that a value was supplied.
+Therefore:
+name ← "Anita"
+The default is used only when the argument is omitted.
+----------------------------------------
+Default Argument Is Used Only When Omitted
+----------------------------------------
+Example:
+def greet(name="Guest"):
+    print("Hello", name)
+greet()
+Output:
+Hello Guest
+greet("Rahul")
+Output:
+Hello Rahul
+The default does not override a supplied value.
+----------------------------------------
+Multiple Default Arguments
+----------------------------------------
+A function can have multiple parameters with default values.
+Example:
+def student(name="Unknown", age=18, course="Python"):
+    print(name, age, course)
+student()
+Output:
+Unknown 18 Python
+All three defaults are used because no arguments were provided.
+----------------------------------------
+Overriding One Default Value
+----------------------------------------
+Keyword arguments make it easy to change only the value you need.
+Example:
+def student(name="Unknown", age=18, course="Python"):
+    print(name, age, course)
+student(age=22)
+Output:
+Unknown 22 Python
+Only age changes.
+The other parameters keep their default values.
+----------------------------------------
+Overriding Multiple Defaults
+----------------------------------------
+Example:
+student(name="Rahul", course="AI")
+Output:
+Rahul 18 AI
+Here:
+name → supplied value
+age → default value
+course → supplied value
+----------------------------------------
+Default Arguments with Positional Arguments
+----------------------------------------
+Example:
+def connect(host="localhost", port=5432):
+    print(host, port)
+connect()
+Output:
+localhost 5432
+connect("127.0.0.1")
+Output:
+127.0.0.1 5432
+The first positional argument replaces host.
+port keeps its default value.
+----------------------------------------
+Default Arguments with Keyword Arguments
+----------------------------------------
+Example:
+connect(port=8000)
+Output:
+localhost 8000
+The host remains:
+localhost
+The port is changed to:
+8000
+This is one of the most practical uses of default arguments.
+----------------------------------------
+Required Parameters and Default Parameters
+----------------------------------------
+A function can have both required and optional parameters.
+Example:
+def create_user(name, role="Student"):
+    print(name, role)
+Here:
+name → required
+role → optional
+Valid:
+create_user("Rahul")
+Output:
+Rahul Student
+Also valid:
+create_user("Rahul", "Developer")
+Output:
+Rahul Developer
+----------------------------------------
+Important Parameter Ordering Rule
+----------------------------------------
+Required parameters must come before default parameters.
+Correct:
+def student(name, age=18):
+    print(name, age)
+Incorrect:
+def student(age=18, name):
+    print(name, age)
+Python raises a SyntaxError because a required parameter follows a default parameter.
+Remember:
+Required → first
+Default → after
+----------------------------------------
+Why This Rule Exists
+----------------------------------------
+Consider:
+def example(a=10, b):
+    ...
+If we call:
+example(5)
+Python would have an ambiguity.
+Should 5 replace a?
+Or should it be assigned to b?
+Python avoids this ambiguity by requiring required parameters to appear before default parameters.
+----------------------------------------
+Default Arguments and Keyword Arguments
+----------------------------------------
+Default arguments become especially powerful when combined with keyword arguments.
+Example:
+def train_model(data, epochs=10, learning_rate=0.001):
+    print(data, epochs, learning_rate)
+Basic:
+train_model(data)
+Custom epochs:
+train_model(data, epochs=50)
+Custom learning rate:
+train_model(data, learning_rate=0.01)
+Both:
+train_model(data, epochs=50, learning_rate=0.01)
+This pattern is extremely common in machine learning libraries.
+----------------------------------------
+Real-World Example — API Request
+----------------------------------------
+def request(url, method="GET", timeout=30):
+    print(url, method, timeout)
+Basic request:
+request("https://example.com")
+Output:
+https://example.com GET 30
+Custom method:
+request("https://example.com", method="POST")
+Custom timeout:
+request("https://example.com", timeout=60)
+Defaults provide sensible values while still allowing customization.
+----------------------------------------
+Real-World Example — User Registration
+----------------------------------------
+def create_user(name, role="student", active=True):
+    print(name, role, active)
+create_user("Rahul")
+Output:
+Rahul student True
+Custom role:
+create_user("Rahul", role="developer")
+Output:
+Rahul developer True
+Deactivate user:
+create_user("Rahul", active=False)
+Output:
+Rahul student False
+----------------------------------------
+Real-World Example — AI Model Configuration
+----------------------------------------
+def train_model(data, epochs=10, batch_size=32, learning_rate=0.001):
+    print("Training model...")
+    print("Epochs:", epochs)
+    print("Batch size:", batch_size)
+    print("Learning rate:", learning_rate)
+Basic usage:
+train_model(data)
+Advanced usage:
+train_model(
+    data,
+    epochs=50,
+    batch_size=64,
+    learning_rate=0.01
+)
+This allows beginners to use sensible defaults while advanced users can customize the configuration.
+----------------------------------------
+Default Values Can Be Expressions
+----------------------------------------
+A default value can be an expression that is evaluated when the function is defined.
+Example:
+DEFAULT_PORT = 8000
+def connect(port=DEFAULT_PORT):
+    print(port)
+connect()
+Output:
+8000
+The default can come from an existing variable or expression.
+----------------------------------------
+Default Values Can Be Different Data Types
+----------------------------------------
+Examples:
+def show_name(name="Guest"):
+    ...
+def set_count(count=0):
+    ...
+def set_active(active=True):
+    ...
+def set_items(items=None):
+    ...
+Default values can be strings, numbers, Booleans, None, and other objects.
+However, mutable defaults require special care.
+----------------------------------------
+Important Warning — Mutable Default Arguments
+----------------------------------------
+This is one of the most important Python concepts related to default arguments.
+Consider:
+def add_item(item, items=[]):
+    items.append(item)
+    return items
+print(add_item("A"))
+print(add_item("B"))
+You might expect:
+["A"]
+["B"]
+But Python produces:
+["A"]
+["A", "B"]
+Why?
+The default list [] is created once when the function is defined.
+It is reused across calls.
+----------------------------------------
+Why Does This Happen?
+----------------------------------------
+Function definition:
+def add_item(item, items=[]):
+    ...
+The list [] is created when Python executes the function definition.
+It is not recreated every time add_item() is called.
+Therefore:
+Call 1:
+items → same default list
+append("A")
+→ ["A"]
+Call 2:
+items → same default list
+append("B")
+→ ["A", "B"]
+This is why mutable default values such as lists and dictionaries should usually be avoided.
+----------------------------------------
+Correct Way — Use None
+----------------------------------------
+Instead of:
+def add_item(item, items=[]):
+    items.append(item)
+    return items
+Use:
+def add_item(item, items=None):
+    if items is None:
+        items = []
+    items.append(item)
+    return items
+Now each call gets a new list when no list is supplied.
+Example:
+print(add_item("A"))
+print(add_item("B"))
+Output:
+["A"]
+["B"]
+This is the standard safe pattern.
+----------------------------------------
+Why None Is Commonly Used
+----------------------------------------
+None represents:
+"No value was supplied."
+Example:
+def process_data(data=None):
+    if data is None:
+        data = []
+    ...
+This allows the function to create a fresh mutable object for each call.
+----------------------------------------
+Mutable vs Immutable Defaults
+----------------------------------------
+Immutable objects are generally safe as defaults.
+Common examples:
+int
+float
+str
+bool
+tuple
+None
+Example:
+def greet(name="Guest"):
+    ...
+def calculate(count=0):
+    ...
+Mutable objects require caution.
+Common examples:
+list
+dict
+set
+Example to avoid:
+def process(items=[]):
+    ...
+Better:
+def process(items=None):
+    if items is None:
+        items = []
+----------------------------------------
+Default Argument Evaluation Timing
+----------------------------------------
+A very important rule:
+Default argument expressions are evaluated once, when the function is defined.
+They are not evaluated every time the function is called.
+Example:
+def create_list(items=[]):
+    return items
+The default list is created once.
+This explains why mutable defaults can retain data between calls.
+----------------------------------------
+Default Argument with datetime Example
+----------------------------------------
+Avoid assuming a default expression is recalculated on every call.
+For example:
+from datetime import datetime
+def show_time(timestamp=datetime.now()):
+    print(timestamp)
+The default timestamp is calculated when the function is defined, not when show_time() is called.
+If you need the current time on every call, use None:
+from datetime import datetime
+def show_time(timestamp=None):
+    if timestamp is None:
+        timestamp = datetime.now()
+    print(timestamp)
+This creates a fresh value each time.
+----------------------------------------
+Default Arguments and Function Calls
+----------------------------------------
+Example:
+def power(number, exponent=2):
+    return number ** exponent
+power(5)
+Output:
+25
+power(5, 3)
+Output:
+125
+The default exponent is 2.
+If the caller supplies another exponent, the supplied value is used.
+----------------------------------------
+Default Arguments for Optional Behavior
+----------------------------------------
+Example:
+def search_jobs(keyword, location="India"):
+    print("Searching for", keyword, "in", location)
+search_jobs("Python Developer")
+Output:
+Searching for Python Developer in India
+Custom location:
+search_jobs("Python Developer", location="Hyderabad")
+Output:
+Searching for Python Developer in Hyderabad
+The default provides a common behavior while allowing customization.
+----------------------------------------
+Default Arguments vs Hard-Coded Values
+----------------------------------------
+Without a parameter:
+def greet():
+    name = "Guest"
+    print("Hello", name)
+The caller cannot easily customize the name.
+With a default parameter:
+def greet(name="Guest"):
+    print("Hello", name)
+Now the caller can choose:
+greet()
+greet("Rahul")
+Default parameters provide controlled flexibility.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Putting a required parameter after a default parameter.
+Mistake 2:
+Thinking the default value is used even when an argument is supplied.
+Mistake 3:
+Using a mutable object such as [] or {} as a default without understanding the behavior.
+Mistake 4:
+Forgetting that default expressions are evaluated when the function is defined.
+Mistake 5:
+Using a complicated default value when None would make the behavior clearer.
+Mistake 6:
+Using too many defaults and making the function behavior difficult to understand.
+----------------------------------------
+Best Practices
+----------------------------------------
+Use defaults when:
+• A parameter has a sensible common value.
+• The parameter is optional.
+• You want a simple function call for common cases.
+• You want users to customize advanced behavior only when necessary.
+Prefer:
+def train_model(data, epochs=10):
+    ...
+Instead of forcing:
+def train_model(data, epochs):
+    ...
+when 10 is a sensible default.
+For mutable objects:
+Prefer None:
+def process(items=None):
+    if items is None:
+        items = []
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a default argument as a fallback value.
+Example:
+def greet(name="Guest"):
+    ...
+No value supplied?
+↓
+Use "Guest"
+Value supplied?
+↓
+Use supplied value
+So:
+Missing argument → Default
+Provided argument → Provided value
+----------------------------------------
+Quick Comparison
+----------------------------------------
+Required:
+def greet(name):
+    ...
+greet("Rahul")
+The argument is required.
+Default:
+def greet(name="Guest"):
+    ...
+greet()
+Uses "Guest".
+Override:
+greet("Rahul")
+Uses "Rahul".
+Safe mutable default:
+def process(items=None):
+    if items is None:
+        items = []
+----------------------------------------
+Important Rules
+----------------------------------------
+• A default argument provides a fallback value.
+• The default is used only when the argument is omitted.
+• Required parameters must come before default parameters.
+• Default arguments can be overridden with positional or keyword arguments.
+• Default arguments are useful for optional behavior.
+• Default values are evaluated when the function is defined.
+• Mutable default values such as [] and {} should usually be avoided.
+• Use None when you need a fresh mutable object for each function call.
+• Keyword arguments make it easy to override selected defaults.
+----------------------------------------
+Summary
+----------------------------------------
+Default arguments allow Python functions to provide optional parameters with predefined values. They make functions easier to use because callers do not have to provide every value when sensible defaults exist. Required parameters must come before default parameters, and default values are used only when the corresponding argument is omitted. One important Python rule is that default expressions are evaluated when the function is defined, which is why mutable defaults such as lists and dictionaries can cause unexpected behavior. Using None and creating the mutable object inside the function is the standard safe approach.`,
+},
+{
+  heading: "*args — Variable-Length Positional Arguments",
+  body: `Sometimes we do not know in advance how many positional arguments a function will receive.
+For example, one function call might provide 2 values, another might provide 5 values, and another might provide 100 values.
+Python provides *args to handle a variable number of positional arguments.
+----------------------------------------
+Why Do We Need *args?
+----------------------------------------
+Suppose we create a function that adds numbers.
+If we define:
+def add(a, b):
+    return a + b
+This function accepts exactly two arguments.
+add(10, 20)
+Works.
+But:
+add(10, 20, 30)
+causes an error because the function has only two parameters.
+What if we want the function to accept any number of numbers?
+This is where *args is useful.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+def function_name(*args):
+    statements
+Example:
+def add(*args):
+    print(args)
+add(10, 20, 30)
+Output:
+(10, 20, 30)
+The * before args tells Python:
+"Collect all remaining positional arguments into one object."
+----------------------------------------
+What Is args?
+----------------------------------------
+Inside the function, args is a tuple.
+Example:
+def show(*args):
+    print(type(args))
+show(10, 20, 30)
+Output:
+<class 'tuple'>
+So:
+*args → syntax used in the function definition
+args → tuple available inside the function
+The name args is only a convention.
+We could technically write:
+def show(*values):
+    print(values)
+show(10, 20, 30)
+Output:
+(10, 20, 30)
+But *args is the standard and most recognizable name.
+----------------------------------------
+How *args Works
+----------------------------------------
+Consider:
+def show(*args):
+    print(args)
+show(10, 20, 30, 40)
+Python collects the positional arguments:
+10
+20
+30
+40
+and packs them into a tuple:
+args = (10, 20, 30, 40)
+Then the function executes:
+print(args)
+Output:
+(10, 20, 30, 40)
+Think:
+Many positional arguments
+        ↓
+      *args
+        ↓
+     One tuple
+----------------------------------------
+*args Can Receive Zero Arguments
+----------------------------------------
+Example:
+def show(*args):
+    print(args)
+show()
+Output:
+()
+An empty tuple is created.
+So *args can handle:
+0 arguments
+1 argument
+2 arguments
+10 arguments
+100 arguments
+and so on.
+----------------------------------------
+*args With One Argument
+----------------------------------------
+Example:
+def show(*args):
+    print(args)
+show(10)
+Output:
+(10,)
+Notice the comma.
+(10,)
+is a tuple containing one element.
+It is not the same as:
+(10)
+which is simply the integer 10.
+----------------------------------------
+*args With Multiple Arguments
+----------------------------------------
+Example:
+def show(*args):
+    print(args)
+show(10, 20, 30, 40)
+Output:
+(10, 20, 30, 40)
+All positional arguments are collected into the tuple.
+----------------------------------------
+Using *args Inside the Function
+----------------------------------------
+Because args is a tuple, we can use normal tuple operations.
+Example:
+def show(*args):
+    print("Arguments:", args)
+    print("Count:", len(args))
+show(10, 20, 30)
+Output:
+Arguments: (10, 20, 30)
+Count: 3
+We can also loop through it.
+----------------------------------------
+Looping Through *args
+----------------------------------------
+Example:
+def show(*args):
+    for value in args:
+        print(value)
+show(10, 20, 30)
+Output:
+10
+20
+30
+This is useful when the number of values is unknown.
+----------------------------------------
+Calculating Sum with *args
+----------------------------------------
+Example:
+def add(*args):
+    total = 0
+    for number in args:
+        total += number
+    return total
+print(add(10, 20))
+print(add(10, 20, 30))
+print(add(10, 20, 30, 40, 50))
+Output:
+30
+60
+150
+The same function works with different numbers of arguments.
+----------------------------------------
+Using sum() with *args
+----------------------------------------
+Because args is a tuple, Python's built-in sum() can process it.
+Example:
+def add(*args):
+    return sum(args)
+print(add(10, 20, 30, 40))
+Output:
+100
+This is much shorter than manually maintaining a total.
+----------------------------------------
+Finding the Maximum
+----------------------------------------
+Example:
+def maximum(*args):
+    return max(args)
+print(maximum(10, 50, 20, 80))
+Output:
+80
+The function can accept any number of positional values.
+Note:
+max() requires at least one value in this example.
+If maximum() is called with no arguments, max(args) raises an error.
+----------------------------------------
+Finding the Minimum
+----------------------------------------
+Example:
+def minimum(*args):
+    return min(args)
+print(minimum(10, 50, 20, 80))
+Output:
+10
+----------------------------------------
+*args with Normal Parameters
+----------------------------------------
+*args can be combined with normal parameters.
+Example:
+def greet(greeting, *names):
+    for name in names:
+        print(greeting, name)
+greet("Hello", "Rahul", "Anita", "Kiran")
+Output:
+Hello Rahul
+Hello Anita
+Hello Kiran
+Here:
+greeting → normal parameter
+names → tuple containing remaining positional arguments
+Conceptually:
+greeting ← "Hello"
+names ← ("Rahul", "Anita", "Kiran")
+----------------------------------------
+Important Order Rule
+----------------------------------------
+Normal positional parameters can appear before *args.
+Example:
+def function(a, b, *args):
+    ...
+Call:
+function(10, 20, 30, 40, 50)
+Mapping:
+a ← 10
+b ← 20
+args ← (30, 40, 50)
+The normal parameters receive their values first.
+The remaining positional arguments are collected into args.
+----------------------------------------
+*args Collects the Remaining Positional Arguments
+----------------------------------------
+Example:
+def test(a, *args):
+    print("a:", a)
+    print("args:", args)
+test(10, 20, 30, 40)
+Output:
+a: 10
+args: (20, 30, 40)
+The first positional argument goes to a.
+Everything after it goes into args.
+----------------------------------------
+Another Example
+----------------------------------------
+def test(a, b, *args):
+    print("a:", a)
+    print("b:", b)
+    print("args:", args)
+test(10, 20, 30, 40, 50)
+Output:
+a: 10
+b: 20
+args: (30, 40, 50)
+This is an important pattern to understand.
+----------------------------------------
+*args and Keyword Arguments
+----------------------------------------
+*args collects positional arguments only.
+Example:
+def test(*args):
+    print(args)
+test(10, 20, 30)
+Output:
+(10, 20, 30)
+But:
+test(a=10, b=20)
+does not put a and b into args.
+Those are keyword arguments.
+For variable-length keyword arguments, Python uses **kwargs, which is a separate concept.
+----------------------------------------
+*args vs Normal Parameter
+----------------------------------------
+Normal parameter:
+def add(a, b):
+    ...
+Requires a fixed number of positional values.
+With *args:
+def add(*args):
+    ...
+Can receive a variable number of positional values.
+Example:
+add(1, 2)
+add(1, 2, 3)
+add(1, 2, 3, 4, 5)
+All are valid with *args.
+----------------------------------------
+*args Does Not Mean "List"
+----------------------------------------
+A common beginner mistake is thinking *args creates a list.
+It creates a tuple.
+Example:
+def show(*args):
+    print(type(args))
+show(1, 2, 3)
+Output:
+<class 'tuple'>
+Tuple characteristics:
+• Ordered
+• Allows duplicate values
+• Immutable
+• Supports indexing
+• Supports iteration
+----------------------------------------
+Indexing *args
+----------------------------------------
+Example:
+def show(*args):
+    print(args[0])
+    print(args[1])
+show("Python", "FastAPI", "AI")
+Output:
+Python
+FastAPI
+Because args is a tuple.
+We can use:
+args[0]
+args[1]
+args[-1]
+and other tuple operations.
+----------------------------------------
+Checking Number of Arguments
+----------------------------------------
+Example:
+def show(*args):
+    print("Number of arguments:", len(args))
+show(10, 20, 30, 40)
+Output:
+Number of arguments: 4
+This is useful when the function needs to behave differently based on how many values were supplied.
+----------------------------------------
+Conditional Logic with *args
+----------------------------------------
+Example:
+def calculate(*numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers)
+print(calculate())
+print(calculate(10, 20, 30))
+Output:
+0
+60
+The function can safely handle an empty argument list.
+----------------------------------------
+*args with Different Data Types
+----------------------------------------
+*args can receive values of different types.
+Example:
+def show(*args):
+    for value in args:
+        print(value)
+show(10, "Python", 3.14, True)
+Output:
+10
+Python
+3.14
+True
+Python does not require all arguments to have the same type.
+However, operations such as sum() require compatible values.
+----------------------------------------
+Practical Example — Student Marks
+----------------------------------------
+Suppose a student can have any number of subjects.
+Instead of:
+def total_marks(math, science, english):
+    return math + science + english
+we can write:
+def total_marks(*marks):
+    return sum(marks)
+print(total_marks(80, 90, 85))
+Output:
+255
+Another student:
+print(total_marks(80, 90, 85, 95, 88))
+Output:
+438
+The function does not need to know the number of subjects beforehand.
+----------------------------------------
+Practical Example — Job Skills
+----------------------------------------
+A function can accept any number of skills.
+Example:
+def display_skills(name, *skills):
+    print("Candidate:", name)
+    print("Skills:")
+    for skill in skills:
+        print("-", skill)
+display_skills(
+    "Rahul",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "React"
+)
+The function can handle any number of skills.
+----------------------------------------
+Practical Example — Logging
+----------------------------------------
+A logging-style function can accept multiple messages or values.
+Example:
+def log(*messages):
+    for message in messages:
+        print("[LOG]", message)
+log("Server started", "Database connected", "API ready")
+Output:
+[LOG] Server started
+[LOG] Database connected
+[LOG] API ready
+This pattern is useful when the number of values is not fixed.
+----------------------------------------
+Practical Example — AI/Data Processing
+----------------------------------------
+Suppose a function calculates the average of multiple model scores.
+Example:
+def average_score(*scores):
+    return sum(scores) / len(scores)
+print(average_score(0.82, 0.91, 0.88))
+Output:
+0.87
+The function can process any number of scores.
+However, we should handle the zero-argument case if empty input is possible.
+----------------------------------------
+Important: *args Is Not Required Everywhere
+----------------------------------------
+Do not use *args just because it exists.
+If a function logically requires exactly two values:
+def add(a, b):
+    return a + b
+is clearer than:
+def add(*args):
+    ...
+Use *args when the number of positional arguments genuinely needs to be variable.
+----------------------------------------
+Unpacking with *
+----------------------------------------
+The * symbol also has another important use when calling a function.
+Suppose:
+def add(a, b, c):
+    return a + b + c
+numbers = [10, 20, 30]
+We can unpack the list:
+print(add(*numbers))
+Output:
+60
+The * before numbers means:
+"Take the elements of this iterable and pass them as separate positional arguments."
+Conceptually:
+numbers = [10, 20, 30]
+add(*numbers)
+becomes:
+add(10, 20, 30)
+This is different from defining *args, but the same * syntax is related to positional argument packing and unpacking.
+----------------------------------------
+Packing vs Unpacking
+----------------------------------------
+Packing:
+def show(*args):
+    ...
+Many arguments
+↓
+One tuple
+args = (10, 20, 30)
+Unpacking:
+values = [10, 20, 30]
+show(*values)
+One iterable
+↓
+Many positional arguments
+10, 20, 30
+Think:
+*args → packs
+*values → unpacks
+The exact behavior depends on whether * is used in a function definition or a function call.
+----------------------------------------
+Nested *args Example
+----------------------------------------
+Example:
+def process(first, *others):
+    print("First:", first)
+    print("Others:", others)
+process("Python", "FastAPI", "React", "PostgreSQL")
+Output:
+First: Python
+Others: ('FastAPI', 'React', 'PostgreSQL')
+This pattern is useful when one value has a special role and the remaining values form a variable-length collection.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Thinking args is a list.
+It is a tuple.
+Mistake 2:
+Thinking *args collects keyword arguments.
+It collects positional arguments only.
+Mistake 3:
+Using *args when the number of arguments should actually be fixed.
+Mistake 4:
+Forgetting that args can be empty.
+Mistake 5:
+Calling max(), min(), or similar functions without handling the empty case.
+Mistake 6:
+Confusing packing:
+def f(*args):
+with unpacking:
+f(*values)
+----------------------------------------
+Best Mental Model
+----------------------------------------
+Imagine a function with a basket:
+def show(*args):
+    ...
+Every positional argument thrown into the basket is collected.
+show(10, 20, 30, 40)
+The basket becomes:
+args = (10, 20, 30, 40)
+The function can then:
+• Loop through it
+• Count it
+• Index it
+• Calculate with it
+• Pass it to another function
+----------------------------------------
+When Should You Use *args?
+----------------------------------------
+Use *args when:
+• The number of positional arguments is unknown.
+• The function naturally accepts many values.
+• You are designing a flexible API.
+• You need to process an arbitrary number of items.
+Examples:
+sum_numbers(10, 20, 30)
+display_skills("Python", "SQL", "FastAPI")
+average_score(0.8, 0.9, 0.95)
+Do not use it when the number of inputs is logically fixed.
+----------------------------------------
+Important Rules
+----------------------------------------
+• *args allows a variable number of positional arguments.
+• Inside the function, args is a tuple.
+• *args can receive zero or more positional arguments.
+• Normal parameters can appear before *args.
+• *args collects the remaining positional arguments.
+• *args does not collect keyword arguments.
+• Keyword arguments are handled separately using **kwargs.
+• *args can be iterated, indexed, counted, and unpacked.
+• *args is useful when the number of positional inputs is genuinely variable.
+• The name args is a convention; the * is what gives the parameter its special behavior.
+• * can also unpack an iterable when calling a function.
+----------------------------------------
+Quick Comparison
+----------------------------------------
+Fixed arguments:
+def add(a, b):
+    return a + b
+add(10, 20)
+Exactly two positional values are expected.
+Variable arguments:
+def add(*args):
+    return sum(args)
+add(10, 20)
+add(10, 20, 30)
+add(10, 20, 30, 40)
+Any number of positional values can be supplied.
+Mixed:
+def show(first, *others):
+    ...
+show(10, 20, 30, 40)
+first → 10
+others → (20, 30, 40)
+----------------------------------------
+Summary
+----------------------------------------
+*args is Python's mechanism for accepting a variable number of positional arguments. Python collects those arguments into a tuple inside the function. This allows one function to handle different numbers of positional inputs without defining a separate parameter for every possible value. *args is especially useful for functions such as sum, logging, aggregation, and flexible utility functions. Remember that *args collects positional arguments only, while **kwargs is used for variable-length keyword arguments, which is the next related concept.`,
+},
+
+{
+  heading: "**kwargs — Variable-Length Keyword Arguments",
+  body: `Sometimes a function needs to accept an unknown number of keyword arguments.
+For example, one user may provide name and age, while another may provide name, age, role, city, experience, and skills.
+Python provides **kwargs for this situation.
+----------------------------------------
+What Does **kwargs Mean?
+----------------------------------------
+**kwargs allows a function to receive a variable number of keyword arguments.
+Example:
+def show_details(**kwargs):
+    print(kwargs)
+show_details(name="Rahul", age=22, role="Developer")
+Output:
+{'name': 'Rahul', 'age': 22, 'role': 'Developer'}
+Python collects all keyword arguments into a dictionary.
+Think:
+Many keyword arguments
+        ↓
+     **kwargs
+        ↓
+     One dictionary
+----------------------------------------
+What Is kwargs?
+----------------------------------------
+Inside the function, kwargs is a dictionary.
+Example:
+def show(**kwargs):
+    print(type(kwargs))
+show(name="Rahul", age=22)
+Output:
+<class 'dict'>
+So:
+**kwargs → special syntax in the function definition
+kwargs → dictionary available inside the function
+The name kwargs is only a convention.
+We could write:
+def show(**details):
+    print(details)
+show(name="Rahul", age=22)
+Output:
+{'name': 'Rahul', 'age': 22}
+The ** is what gives the parameter its special behavior.
+----------------------------------------
+How **kwargs Works
+----------------------------------------
+Consider:
+def show(**kwargs):
+    print(kwargs)
+show(name="Rahul", age=22, city="Hyderabad")
+Python collects the keyword arguments:
+name="Rahul"
+age=22
+city="Hyderabad"
+into:
+kwargs = {
+    "name": "Rahul",
+    "age": 22,
+    "city": "Hyderabad"
+}
+Then the function executes.
+----------------------------------------
+**kwargs Can Receive Zero Arguments
+----------------------------------------
+Example:
+def show(**kwargs):
+    print(kwargs)
+show()
+Output:
+{}
+An empty dictionary is created.
+Therefore **kwargs can handle:
+0 keyword arguments
+1 keyword argument
+2 keyword arguments
+100 keyword arguments
+and so on.
+----------------------------------------
+One Keyword Argument
+----------------------------------------
+Example:
+def show(**kwargs):
+    print(kwargs)
+show(name="Rahul")
+Output:
+{'name': 'Rahul'}
+The keyword becomes the dictionary key:
+"name" → key
+"Rahul" → value
+----------------------------------------
+Multiple Keyword Arguments
+----------------------------------------
+Example:
+def show(**kwargs):
+    print(kwargs)
+show(
+    name="Rahul",
+    age=22,
+    role="Python Developer",
+    experience=1
+)
+Output:
+{'name': 'Rahul', 'age': 22, 'role': 'Python Developer', 'experience': 1}
+All keyword arguments are stored in one dictionary.
+----------------------------------------
+Accessing **kwargs Values
+----------------------------------------
+Because kwargs is a dictionary, we can access values using keys.
+Example:
+def show(**kwargs):
+    print(kwargs["name"])
+    print(kwargs["age"])
+show(name="Rahul", age=22)
+Output:
+Rahul
+22
+But remember:
+If the key does not exist, kwargs["key"] raises a KeyError.
+----------------------------------------
+Using get() with **kwargs
+----------------------------------------
+A safer approach is often:
+def show(**kwargs):
+    print(kwargs.get("name"))
+    print(kwargs.get("city"))
+show(name="Rahul")
+Output:
+Rahul
+None
+get() returns None when the key does not exist, instead of raising a KeyError.
+A default can also be supplied:
+print(kwargs.get("city", "Unknown"))
+Output:
+Unknown
+----------------------------------------
+Looping Through **kwargs
+----------------------------------------
+Example:
+def show(**kwargs):
+    for key, value in kwargs.items():
+        print(key, ":", value)
+show(name="Rahul", age=22, role="Developer")
+Output:
+name : Rahul
+age : 22
+role : Developer
+The .items() method provides each key-value pair.
+----------------------------------------
+Checking Whether a Key Exists
+----------------------------------------
+Example:
+def show(**kwargs):
+    if "email" in kwargs:
+        print("Email:", kwargs["email"])
+show(name="Rahul", email="rahul@example.com")
+Output:
+Email: rahul@example.com
+This is useful when some keyword information is optional.
+----------------------------------------
+**kwargs with Normal Parameters
+----------------------------------------
+**kwargs can be combined with normal parameters.
+Example:
+def student(name, **details):
+    print("Name:", name)
+    print("Details:", details)
+student(
+    "Rahul",
+    age=22,
+    course="Python",
+    city="Hyderabad"
+)
+Output:
+Name: Rahul
+Details: {'age': 22, 'course': 'Python', 'city': 'Hyderabad'}
+Here:
+name → normal parameter
+details → dictionary containing the remaining keyword arguments
+----------------------------------------
+**kwargs Collects Remaining Keyword Arguments
+----------------------------------------
+Example:
+def employee(name, role, **details):
+    print("Name:", name)
+    print("Role:", role)
+    print("Additional details:", details)
+employee(
+    "Rahul",
+    "Developer",
+    age=22,
+    city="Hyderabad",
+    experience=1
+)
+Mapping:
+name ← "Rahul"
+role ← "Developer"
+details ← {
+    "age": 22,
+    "city": "Hyderabad",
+    "experience": 1
+}
+----------------------------------------
+*args and **kwargs Together
+----------------------------------------
+A function can accept both variable-length positional and keyword arguments.
+Example:
+def show(*args, **kwargs):
+    print("Positional:", args)
+    print("Keyword:", kwargs)
+show(10, 20, 30, name="Rahul", age=22)
+Output:
+Positional: (10, 20, 30)
+Keyword: {'name': 'Rahul', 'age': 22}
+Think:
+Positional arguments
+        ↓
+      *args
+        ↓
+      tuple
+Keyword arguments
+        ↓
+     **kwargs
+        ↓
+     dictionary
+----------------------------------------
+Order of Parameters
+----------------------------------------
+When defining a function with different parameter types, the general order is:
+1. Positional parameters
+2. *args
+3. Keyword-only parameters
+4. **kwargs
+Example:
+def function(a, b, *args, option=True, **kwargs):
+    ...
+This allows the function to accept:
+fixed positional values
++
+extra positional values
++
+named optional values
++
+extra keyword values
+----------------------------------------
+Example of All Together
+----------------------------------------
+def process(name, *skills, experience=0, **details):
+    print("Name:", name)
+    print("Skills:", skills)
+    print("Experience:", experience)
+    print("Other details:", details)
+process(
+    "Rahul",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    experience=1,
+    city="Hyderabad",
+    remote=True
+)
+Output:
+Name: Rahul
+Skills: ('Python', 'FastAPI', 'PostgreSQL')
+Experience: 1
+Other details: {'city': 'Hyderabad', 'remote': True}
+This is a powerful pattern for flexible functions.
+----------------------------------------
+**kwargs Does Not Mean "Any Data"
+----------------------------------------
+**kwargs specifically collects keyword arguments.
+Example:
+def show(**kwargs):
+    print(kwargs)
+This works:
+show(name="Rahul", age=22)
+But this does not work:
+show(10, 20)
+because 10 and 20 are positional arguments.
+Use *args for positional arguments.
+----------------------------------------
+*args vs **kwargs
+----------------------------------------
+*args:
+Collects positional arguments.
+Data type inside function:
+tuple
+Example:
+def show(*args):
+    ...
+show(10, 20, 30)
+args:
+(10, 20, 30)
+**kwargs:
+Collects keyword arguments.
+Data type inside function:
+dictionary
+Example:
+def show(**kwargs):
+    ...
+show(name="Rahul", age=22)
+kwargs:
+{'name': 'Rahul', 'age': 22}
+Easy memory trick:
+*args → tuple
+**kwargs → dictionary
+* → positional
+** → keyword
+----------------------------------------
+Packing with **kwargs
+----------------------------------------
+When defining:
+def show(**kwargs):
+    ...
+Python packs:
+show(name="Rahul", age=22)
+into:
+{
+    "name": "Rahul",
+    "age": 22
+}
+This is called packing.
+Many keyword arguments
+↓
+One dictionary
+----------------------------------------
+Unpacking with **
+----------------------------------------
+The ** syntax can also be used when calling a function.
+Example:
+def introduce(name, age):
+    print(name, age)
+details = {
+    "name": "Rahul",
+    "age": 22
+}
+introduce(**details)
+Output:
+Rahul 22
+The ** tells Python:
+"Take the dictionary's key-value pairs and pass them as keyword arguments."
+Conceptually:
+introduce(**details)
+becomes:
+introduce(name="Rahul", age=22)
+----------------------------------------
+Packing vs Unpacking
+----------------------------------------
+Packing:
+def show(**kwargs):
+    ...
+Many keyword arguments
+↓
+One dictionary
+kwargs = {"name": "Rahul", "age": 22}
+Unpacking:
+details = {"name": "Rahul", "age": 22}
+show(**details)
+One dictionary
+↓
+Many keyword arguments
+name="Rahul"
+age=22
+Remember:
+**kwargs → packs keyword arguments
+**dictionary → unpacks keyword arguments
+----------------------------------------
+Dictionary Keys Become Parameter Names
+----------------------------------------
+Example:
+def create_user(name, age):
+    print(name, age)
+data = {
+    "name": "Rahul",
+    "age": 22
+}
+create_user(**data)
+Python matches:
+"name" → name parameter
+"age" → age parameter
+The dictionary keys must match the function's expected parameter names when the target function does not have **kwargs to absorb extras.
+----------------------------------------
+Unexpected Keys
+----------------------------------------
+Example:
+def create_user(name, age):
+    print(name, age)
+data = {
+    "name": "Rahul",
+    "age": 22,
+    "city": "Hyderabad"
+}
+create_user(**data)
+This causes an error because create_user() does not have a parameter named city and does not accept arbitrary keyword arguments.
+If a function has **kwargs:
+def create_user(name, age, **kwargs):
+    print(name, age, kwargs)
+then city can be collected inside kwargs.
+----------------------------------------
+Practical Example — User Profile
+----------------------------------------
+def create_profile(**profile):
+    print("Profile:")
+    for key, value in profile.items():
+        print(key, ":", value)
+create_profile(
+    name="Rahul",
+    age=22,
+    role="Developer",
+    skills=["Python", "FastAPI"]
+)
+The function can accept different profile fields without requiring a fixed parameter list.
+----------------------------------------
+Practical Example — API Configuration
+----------------------------------------
+def configure_api(**config):
+    for key, value in config.items():
+        print(key, "=", value)
+configure_api(
+    host="localhost",
+    port=8000,
+    debug=True,
+    workers=4
+)
+This pattern is useful for configuration functions where the available settings may vary.
+----------------------------------------
+Practical Example — AI Model Configuration
+----------------------------------------
+def train_model(data, **config):
+    print("Data:", data)
+    print("Configuration:", config)
+train_model(
+    data,
+    epochs=50,
+    batch_size=64,
+    learning_rate=0.001,
+    optimizer="adam"
+)
+The function can accept additional configuration values without defining every possible option as a separate parameter.
+----------------------------------------
+Practical Example — Resume Data
+----------------------------------------
+def create_resume(**details):
+    print("Resume Details:")
+    for key, value in details.items():
+        print(key, ":", value)
+create_resume(
+    name="Rahul",
+    role="Python Developer",
+    skills=["Python", "FastAPI", "PostgreSQL"],
+    experience=1
+)
+This is useful when processing flexible structured information.
+----------------------------------------
+Practical Example — Search Filters
+----------------------------------------
+def search_jobs(**filters):
+    print("Search filters:")
+    for key, value in filters.items():
+        print(key, "=", value)
+search_jobs(
+    role="Python Developer",
+    location="Hyderabad",
+    experience=1,
+    remote=True
+)
+The function does not need a separate parameter for every possible filter.
+----------------------------------------
+When Should You Use **kwargs?
+----------------------------------------
+Use **kwargs when:
+• The number of keyword arguments is unknown.
+• The available options may vary.
+• You are building configurable functions.
+• You are forwarding options to another function.
+• You are processing flexible structured data.
+Examples:
+configure_api(...)
+train_model(...)
+search_jobs(...)
+create_profile(...)
+Do not use **kwargs simply because it is available.
+If a function has a small, fixed set of important parameters, explicit parameters are usually clearer.
+----------------------------------------
+Explicit Parameters vs **kwargs
+----------------------------------------
+Explicit:
+def create_user(name, age, role):
+    ...
+This clearly tells users what the function expects.
+Flexible:
+def create_user(**details):
+    ...
+This allows arbitrary fields.
+Use explicit parameters when the interface should be clear and controlled.
+Use **kwargs when flexibility is genuinely useful.
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Thinking **kwargs is a list.
+It is a dictionary.
+Mistake 2:
+Thinking **kwargs collects positional arguments.
+It collects keyword arguments.
+Mistake 3:
+Confusing packing with unpacking.
+Mistake 4:
+Using a dictionary with keys that do not match the target function's parameters when unpacking into a fixed-signature function.
+Mistake 5:
+Using **kwargs when explicit parameters would make the function much clearer.
+Mistake 6:
+Forgetting that kwargs can be empty.
+----------------------------------------
+Best Mental Model
+----------------------------------------
+Imagine a labeled storage box:
+def show(**kwargs):
+    ...
+Call:
+show(name="Rahul", age=22, role="Developer")
+Python collects everything into:
+kwargs = {
+    "name": "Rahul",
+    "age": 22,
+    "role": "Developer"
+}
+Unlike *args, the labels are preserved.
+*args:
+(10, 20, 30)
+**kwargs:
+{
+    "name": "Rahul",
+    "age": 22,
+    "role": "Developer"
+}
+----------------------------------------
+Important Rules
+----------------------------------------
+• **kwargs accepts a variable number of keyword arguments.
+• Inside the function, kwargs is a dictionary.
+• **kwargs can receive zero or more keyword arguments.
+• Normal parameters can appear before **kwargs.
+• **kwargs collects remaining keyword arguments.
+• *args handles variable positional arguments.
+• **kwargs handles variable keyword arguments.
+• **kwargs can be used to unpack a dictionary when calling a function.
+• Dictionary keys become keyword names during unpacking.
+• The name kwargs is a convention; ** is what provides the special behavior.
+• Use **kwargs when flexibility is actually needed, not automatically.
+----------------------------------------
+Quick Comparison
+----------------------------------------
+Fixed keyword parameters:
+def student(name, age):
+    ...
+student(name="Rahul", age=22)
+The function expects known parameters.
+Variable keyword arguments:
+def student(**details):
+    ...
+student(name="Rahul", age=22, city="Hyderabad")
+The function accepts any number of keyword arguments.
+*args:
+def show(*args):
+    ...
+show(10, 20, 30)
+args → (10, 20, 30)
+**kwargs:
+def show(**kwargs):
+    ...
+show(name="Rahul", age=22)
+kwargs → {'name': 'Rahul', 'age': 22}
+----------------------------------------
+The Big Picture
+----------------------------------------
+Python provides two powerful tools for variable-length arguments:
+*args
+→ variable-length positional arguments
+→ collected as a tuple
+**kwargs
+→ variable-length keyword arguments
+→ collected as a dictionary
+Together:
+def function(*args, **kwargs):
+    ...
+This creates a highly flexible function interface.
+----------------------------------------
+Summary
+----------------------------------------
+**kwargs allows a Python function to accept a variable number of keyword arguments. Python collects those arguments into a dictionary inside the function. This makes **kwargs useful for flexible configurations, API options, search filters, user profiles, and functions that need to forward or process arbitrary named values. The key distinction to remember is that *args collects positional arguments into a tuple, while **kwargs collects keyword arguments into a dictionary.`,
+},
+
+{
+  heading: "return Statement in Functions",
+  body: `The return statement is used to send a value from a function back to the code that called the function.
+It is one of the most important concepts in functions because it allows a function to calculate, produce, and provide a result that can be reused elsewhere in a program.
+----------------------------------------
+Basic Idea
+----------------------------------------
+Think of a function as a machine:
+Input
+↓
+Function
+↓
+Processing
+↓
+return
+↓
+Output
+Example:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+The function receives:
+a = 10
+b = 20
+It calculates:
+10 + 20
+Then return sends:
+30
+back to the caller.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+def function_name():
+    return value
+Example:
+def get_number():
+    return 10
+result = get_number()
+print(result)
+Output:
+10
+The returned value can be stored in a variable.
+----------------------------------------
+return Does Two Things
+----------------------------------------
+The return statement:
+1. Sends a value back to the caller.
+2. Immediately stops the execution of the current function.
+Example:
+def test():
+    return 10
+    print("Hello")
+result = test()
+print(result)
+Output:
+10
+The print("Hello") line never executes because return already ended the function.
+----------------------------------------
+Function Without return
+----------------------------------------
+Example:
+def greet():
+    print("Hello")
+result = greet()
+print(result)
+Output:
+Hello
+None
+If a function does not explicitly return a value, Python automatically returns:
+None
+Therefore:
+def greet():
+    print("Hello")
+is effectively returning None.
+----------------------------------------
+return vs print()
+----------------------------------------
+This distinction is extremely important.
+print():
+Displays a value on the screen.
+return:
+Sends a value back to the caller.
+Example using print():
+def add(a, b):
+    print(a + b)
+result = add(10, 20)
+print(result)
+Output:
+30
+None
+The function displayed 30, but result contains None.
+----------------------------------------
+Using return
+----------------------------------------
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+Now result actually contains the returned value.
+This means we can reuse it.
+----------------------------------------
+Why return Is More Powerful
+----------------------------------------
+Returned values can be:
+• Stored in variables
+• Used in calculations
+• Passed to other functions
+• Compared in conditions
+• Added to lists
+• Used in loops
+• Returned from another function
+Example:
+def square(n):
+    return n * n
+result = square(5) + square(3)
+print(result)
+Output:
+34
+The returned values are used in another expression.
+----------------------------------------
+Returning a Value to a Variable
+----------------------------------------
+Example:
+def get_name():
+    return "Rahul"
+name = get_name()
+print(name)
+Output:
+Rahul
+The returned string is assigned to name.
+----------------------------------------
+Returning a Number
+----------------------------------------
+Example:
+def calculate_salary(base, bonus):
+    return base + bonus
+salary = calculate_salary(40000, 5000)
+print(salary)
+Output:
+45000
+----------------------------------------
+Returning a Boolean
+----------------------------------------
+Functions can return True or False.
+Example:
+def is_even(number):
+    return number % 2 == 0
+print(is_even(10))
+print(is_even(7))
+Output:
+True
+False
+This pattern is extremely common in validation and decision-making.
+----------------------------------------
+Returning a String
+----------------------------------------
+Example:
+def get_role():
+    return "Python Developer"
+role = get_role()
+print(role)
+Output:
+Python Developer
+----------------------------------------
+Returning a List
+----------------------------------------
+A function can return any Python object.
+Example:
+def get_skills():
+    return ["Python", "FastAPI", "PostgreSQL"]
+skills = get_skills()
+print(skills)
+Output:
+['Python', 'FastAPI', 'PostgreSQL']
+----------------------------------------
+Returning a Dictionary
+----------------------------------------
+Example:
+def get_user():
+    return {
+        "name": "Rahul",
+        "age": 22,
+        "role": "Developer"
+    }
+user = get_user()
+print(user)
+The returned dictionary can then be accessed normally:
+print(user["name"])
+Output:
+Rahul
+----------------------------------------
+Returning Multiple Values
+----------------------------------------
+Python allows a function to appear to return multiple values.
+Example:
+def get_user():
+    return "Rahul", 22
+name, age = get_user()
+print(name)
+print(age)
+Output:
+Rahul
+22
+Technically, Python creates a tuple:
+("Rahul", 22)
+and then unpacking assigns the values to name and age.
+----------------------------------------
+Returning a Tuple
+----------------------------------------
+Example:
+def get_coordinates():
+    return 10, 20
+coordinates = get_coordinates()
+print(coordinates)
+Output:
+(10, 20)
+The expression:
+return 10, 20
+creates and returns a tuple.
+----------------------------------------
+Returning None Explicitly
+----------------------------------------
+A function can explicitly return None.
+Example:
+def process():
+    print("Processing...")
+    return None
+result = process()
+print(result)
+Output:
+Processing...
+None
+Usually, explicit return None is used when we want to make the function's behavior clear.
+----------------------------------------
+return Without a Value
+----------------------------------------
+Python also allows:
+def stop():
+    return
+This immediately exits the function and returns None.
+Example:
+result = stop()
+print(result)
+Output:
+None
+So:
+return
+and:
+return None
+both return None.
+----------------------------------------
+Early return
+----------------------------------------
+A function can return before reaching the end.
+Example:
+def check_age(age):
+    if age < 18:
+        return "Not eligible"
+    return "Eligible"
+print(check_age(16))
+print(check_age(22))
+Output:
+Not eligible
+Eligible
+The first return stops the function when the condition is true.
+----------------------------------------
+Why Early return Is Useful
+----------------------------------------
+Early return can simplify decision-making.
+Instead of deeply nesting code:
+def check_user(user):
+    if user:
+        if user["active"]:
+            return "Active"
+        else:
+            return "Inactive"
+    else:
+        return "Invalid"
+We can write:
+def check_user(user):
+    if not user:
+        return "Invalid"
+    if not user["active"]:
+        return "Inactive"
+    return "Active"
+This is often easier to read.
+----------------------------------------
+return Inside if
+----------------------------------------
+Example:
+def get_discount(amount):
+    if amount >= 1000:
+        return 100
+    return 0
+print(get_discount(1500))
+Output:
+100
+print(get_discount(500))
+Output:
+0
+Each execution path returns a result.
+----------------------------------------
+return Inside a Loop
+----------------------------------------
+return can also appear inside loops.
+Example:
+def find_number(numbers, target):
+    for number in numbers:
+        if number == target:
+            return number
+    return None
+print(find_number([10, 20, 30], 20))
+Output:
+20
+When the target is found, return immediately ends the function.
+The loop also stops because the entire function has ended.
+----------------------------------------
+return vs break
+----------------------------------------
+These are different.
+break:
+Stops the current loop.
+return:
+Stops the entire function.
+Example:
+def test():
+    for i in range(5):
+        if i == 2:
+            break
+    print("Function continues")
+test()
+Output:
+Function continues
+Now:
+def test():
+    for i in range(5):
+        if i == 2:
+            return
+    print("Function continues")
+test()
+No output.
+The return ended the entire function.
+----------------------------------------
+return Inside Nested Loops
+----------------------------------------
+Example:
+def search(matrix, target):
+    for row in matrix:
+        for value in row:
+            if value == target:
+                return True
+    return False
+The return immediately exits both loops and the function.
+This is useful for search operations.
+----------------------------------------
+Returning an Expression
+----------------------------------------
+You do not need to calculate a value before return.
+Example:
+def multiply(a, b):
+    return a * b
+Python evaluates:
+a * b
+and returns the result.
+Other examples:
+return x + y
+return age >= 18
+return name.upper()
+return len(items)
+return sum(numbers)
+----------------------------------------
+Returning the Result of Another Function
+----------------------------------------
+Functions can call other functions and return their results.
+Example:
+def square(n):
+    return n * n
+def calculate(n):
+    return square(n) + 10
+print(calculate(5))
+Execution:
+calculate(5)
+↓
+square(5)
+↓
+25
+↓
+25 + 10
+↓
+35
+Output:
+35
+----------------------------------------
+Function Composition
+----------------------------------------
+One function's returned value can become another function's input.
+Example:
+def square(n):
+    return n * n
+def double(n):
+    return n * 2
+result = double(square(5))
+Execution:
+square(5)
+↓
+25
+double(25)
+↓
+50
+Output:
+50
+This is an important pattern in real programs.
+----------------------------------------
+Using return in Conditions
+----------------------------------------
+Because return gives a value back, it can be used directly in conditions.
+Example:
+def is_adult(age):
+    return age >= 18
+if is_adult(22):
+    print("Access granted")
+Output:
+Access granted
+The function returns True, which the if statement uses.
+----------------------------------------
+Using return in a Loop
+----------------------------------------
+Example:
+def contains_even(numbers):
+    for number in numbers:
+        if number % 2 == 0:
+            return True
+    return False
+print(contains_even([1, 3, 5, 8]))
+Output:
+True
+The function stops as soon as an even number is found.
+----------------------------------------
+Using return with Validation
+----------------------------------------
+Example:
+def validate_age(age):
+    if age < 0:
+        return False
+    if age > 120:
+        return False
+    return True
+print(validate_age(25))
+Output:
+True
+print(validate_age(-5))
+Output:
+False
+This pattern is common in backend development and APIs.
+----------------------------------------
+Real-World Example — Login Validation
+----------------------------------------
+def validate_login(username, password):
+    if not username:
+        return False
+    if not password:
+        return False
+    return True
+result = validate_login("rahul", "secret")
+print(result)
+Output:
+True
+The function produces a Boolean result that another part of the application can use.
+----------------------------------------
+Real-World Example — Job Eligibility
+----------------------------------------
+def is_eligible(experience, skills):
+    if experience >= 1 and "Python" in skills:
+        return True
+    return False
+skills = ["Python", "FastAPI", "PostgreSQL"]
+print(is_eligible(1, skills))
+Output:
+True
+The function hides the eligibility logic and returns only the result.
+----------------------------------------
+Real-World Example — AI Prediction
+----------------------------------------
+def classify(score):
+    if score >= 0.5:
+        return "Positive"
+    return "Negative"
+result = classify(0.82)
+print(result)
+Output:
+Positive
+The returned value can be passed to another part of the AI application.
+----------------------------------------
+Returning Data from Backend Functions
+----------------------------------------
+In backend development, functions frequently return structured data.
+Example:
+def get_user():
+    return {
+        "id": 1,
+        "name": "Rahul",
+        "role": "Developer"
+    }
+A FastAPI endpoint or another function can then use this returned object.
+The important idea is:
+Function
+↓
+Process data
+↓
+return result
+↓
+Caller uses result
+----------------------------------------
+return Does Not Print Automatically
+----------------------------------------
+Example:
+def add(a, b):
+    return a + b
+add(10, 20)
+Nothing appears on the screen.
+Why?
+Because return sends the value back to the caller.
+It does not display it.
+To display it:
+print(add(10, 20))
+Output:
+30
+----------------------------------------
+Returning Without Storing
+----------------------------------------
+You do not always need a variable.
+Example:
+def square(n):
+    return n * n
+print(square(5))
+The returned value goes directly into print().
+----------------------------------------
+Returning into Another Function
+----------------------------------------
+Example:
+def get_number():
+    return 10
+def square(n):
+    return n * n
+print(square(get_number()))
+Execution:
+get_number()
+↓
+10
+square(10)
+↓
+100
+print(100)
+Output:
+100
+This demonstrates how return values can flow through multiple functions.
+----------------------------------------
+A Function Can Have Multiple return Statements
+----------------------------------------
+Example:
+def classify_number(number):
+    if number > 0:
+        return "Positive"
+    if number < 0:
+        return "Negative"
+    return "Zero"
+print(classify_number(10))
+print(classify_number(-5))
+print(classify_number(0))
+Output:
+Positive
+Negative
+Zero
+Only one return is executed during each function call.
+Once return executes, the function ends.
+----------------------------------------
+Unreachable Code After return
+----------------------------------------
+Example:
+def test():
+    return 10
+    print("This will never execute")
+The second statement is unreachable because return has already terminated the function.
+Avoid writing unnecessary code after an unconditional return.
+----------------------------------------
+Important Difference: print vs return
+----------------------------------------
+print:
+def square(n):
+    print(n * n)
+result = square(5)
+result is:
+None
+return:
+def square(n):
+    return n * n
+result = square(5)
+result is:
+25
+Remember:
+print → shows
+return → gives back
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Thinking return displays the result.
+It does not.
+Mistake 2:
+Forgetting to store or use the returned value when necessary.
+Mistake 3:
+Putting code after return and expecting it to execute.
+Mistake 4:
+Confusing return with print().
+Mistake 5:
+Using break when the intention is to exit the entire function.
+Mistake 6:
+Forgetting that a function without an explicit return produces None.
+Mistake 7:
+Not returning a value on every required execution path.
+----------------------------------------
+Best Practices
+----------------------------------------
+Use return when:
+• The caller needs the result.
+• The result will be reused.
+• The function performs a calculation.
+• The function validates something.
+• The function searches for something.
+• The function produces structured data.
+Use print() when:
+• The main purpose is displaying information.
+• You are creating a simple output-oriented function.
+Do not use print() as a replacement for return when another part of the program needs the value.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of return as handing a package back to the caller.
+Function:
+def calculate():
+    result = 100
+    return result
+Caller:
+value = calculate()
+The function hands:
+100
+back to the caller.
+The caller can then:
+• Store it
+• Print it
+• Calculate with it
+• Compare it
+• Pass it to another function
+----------------------------------------
+Important Rules
+----------------------------------------
+• return sends a value back to the caller.
+• return immediately terminates the current function.
+• A function can return any Python object.
+• A function can have multiple return statements.
+• Only the first executed return is reached during a call.
+• return without a value returns None.
+• A function without an explicit return returns None.
+• return is different from print().
+• return is different from break.
+• Returned values can be reused throughout the program.
+----------------------------------------
+Quick Reference
+----------------------------------------
+Return a value:
+def add(a, b):
+    return a + b
+Return Boolean:
+def is_even(n):
+    return n % 2 == 0
+Return multiple values:
+def get_user():
+    return "Rahul", 22
+Return None:
+def stop():
+    return
+Early return:
+def check(age):
+    if age < 18:
+        return "No"
+    return "Yes"
+----------------------------------------
+Summary
+----------------------------------------
+The return statement sends a value from a function back to its caller and immediately stops the function's execution. Unlike print(), return does not display a value; it makes the value available to the rest of the program. Returned values can be stored, calculated with, passed to other functions, tested in conditions, or returned again. A function can return numbers, strings, Booleans, lists, dictionaries, tuples, or any other Python object. Understanding return is essential for building reusable functions and is especially important in backend development, APIs, data processing, and AI applications.`,
+},
+{
+  heading: "print() vs return in Functions",
+  body: `print() and return are two completely different concepts in Python functions.
+Beginners often confuse them because both can appear to produce a result.
+The key difference is:
+print() → displays a value
+return → sends a value back to the caller
+Understanding this difference is essential for writing reusable functions.
+----------------------------------------
+1. print() — Displays a Value
+----------------------------------------
+print() is used to display information on the screen.
+Example:
+def add(a, b):
+    print(a + b)
+add(10, 20)
+Output:
+30
+The function calculates 10 + 20 and print() displays 30.
+But the function has not returned 30 to the caller.
+----------------------------------------
+2. return — Sends a Value Back
+----------------------------------------
+return sends a value from the function back to the code that called it.
+Example:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+Here:
+10 + 20
+↓
+30
+↓
+return
+↓
+result
+↓
+print(result)
+The value 30 is now available outside the function.
+----------------------------------------
+The Most Important Difference
+----------------------------------------
+Consider:
+def add(a, b):
+    print(a + b)
+result = add(10, 20)
+print(result)
+Output:
+30
+None
+Why?
+The first 30 was displayed by print().
+The function did not return anything.
+Therefore:
+result = None
+----------------------------------------
+Using return
+----------------------------------------
+Now:
+def add(a, b):
+    return a + b
+result = add(10, 20)
+print(result)
+Output:
+30
+This time:
+result = 30
+because the function returned the value.
+----------------------------------------
+Think of It Like This
+----------------------------------------
+print():
+Function
+↓
+Calculate
+↓
+Display result
+↓
+Finished
+return:
+Function
+↓
+Calculate
+↓
+Send result back
+↓
+Caller decides what to do
+This is the easiest mental model to remember.
+----------------------------------------
+print() Does Not Give the Result Back
+----------------------------------------
+Example:
+def square(number):
+    print(number * number)
+result = square(5)
+print("Result:", result)
+Output:
+25
+Result: None
+The function printed 25, but result contains None.
+The printed value and the returned value are different things.
+----------------------------------------
+return Makes the Result Reusable
+----------------------------------------
+Example:
+def square(number):
+    return number * number
+result = square(5)
+print(result)
+Output:
+25
+We can now reuse result:
+print(result + 10)
+Output:
+35
+Or:
+double = result * 2
+print(double)
+Output:
+50
+The returned value can participate in other operations.
+----------------------------------------
+Using print() Result in Another Calculation
+----------------------------------------
+This does NOT work as expected:
+def square(number):
+    print(number * number)
+result = square(5)
+print(result + 10)
+The function prints:
+25
+But result is:
+None
+Then:
+None + 10
+causes a TypeError.
+Why?
+Because print() returned None.
+----------------------------------------
+Using return in Another Calculation
+----------------------------------------
+Correct:
+def square(number):
+    return number * number
+result = square(5)
+print(result + 10)
+Output:
+35
+The returned value can be used in calculations.
+----------------------------------------
+return Can Be Passed to Another Function
+----------------------------------------
+Example:
+def square(number):
+    return number * number
+def double(number):
+    return number * 2
+result = double(square(5))
+print(result)
+Execution:
+square(5)
+↓
+25
+double(25)
+↓
+50
+Output:
+50
+This is possible because square() returns a value.
+----------------------------------------
+print() Cannot Replace return
+----------------------------------------
+Consider:
+def get_square(number):
+    print(number * number)
+This function is suitable if its only purpose is to display the square.
+But if another part of the program needs the square, use:
+def get_square(number):
+    return number * number
+The second version is much more reusable.
+----------------------------------------
+Using return with if
+----------------------------------------
+Example:
+def is_adult(age):
+    return age >= 18
+result = is_adult(22)
+print(result)
+Output:
+True
+The function returns a Boolean value.
+We can then use it:
+if is_adult(22):
+    print("Access granted")
+Output:
+Access granted
+This would not work properly if is_adult() only printed True instead of returning it.
+----------------------------------------
+Validation Example
+----------------------------------------
+Suppose we need to validate a password.
+Using print():
+def validate_password(password):
+    if len(password) >= 8:
+        print(True)
+    else:
+        print(False)
+The function displays the result, but another part of the program cannot directly use that result.
+Better:
+def validate_password(password):
+    if len(password) >= 8:
+        return True
+    return False
+Now:
+if validate_password("mypassword"):
+    print("Valid password")
+The returned Boolean controls the condition.
+----------------------------------------
+Search Example
+----------------------------------------
+Using print():
+def find_user(users, target):
+    for user in users:
+        if user == target:
+            print(user)
+This only displays the user.
+Using return:
+def find_user(users, target):
+    for user in users:
+        if user == target:
+            return user
+    return None
+Now the caller can decide what to do:
+user = find_user(users, "Rahul")
+if user:
+    print("User found:", user)
+The function becomes reusable.
+----------------------------------------
+Returning a List
+----------------------------------------
+Example:
+def get_skills():
+    return ["Python", "FastAPI", "PostgreSQL"]
+skills = get_skills()
+print(skills)
+We can then:
+print(len(skills))
+print(skills[0])
+for skill in skills:
+    print(skill)
+The returned object can be used anywhere.
+----------------------------------------
+Returning a Dictionary
+----------------------------------------
+Example:
+def get_user():
+    return {
+        "name": "Rahul",
+        "role": "Python Developer"
+    }
+user = get_user()
+print(user["name"])
+Output:
+Rahul
+The dictionary is returned to the caller and can be processed further.
+----------------------------------------
+print() Is Useful Too
+----------------------------------------
+print() is not bad.
+It is useful when the purpose is to display something.
+Example:
+def show_welcome():
+    print("Welcome to AI CSE Navigator!")
+show_welcome()
+Here the function's job is to display a message.
+There is no need to return the message if nobody needs to use it later.
+----------------------------------------
+A Function Can Use Both
+----------------------------------------
+A function can print something and return something.
+Example:
+def add(a, b):
+    result = a + b
+    print("Calculated:", result)
+    return result
+value = add(10, 20)
+print("Returned:", value)
+Output:
+Calculated: 30
+Returned: 30
+Here:
+print() → displays information
+return → sends the value back
+They can work together, but they have different purposes.
+----------------------------------------
+return Immediately Ends the Function
+----------------------------------------
+Example:
+def test():
+    print("Before")
+    return 100
+    print("After")
+test()
+Output:
+Before
+The statement after return never executes.
+This is another major difference from print().
+print() displays something and execution continues.
+return sends the value back and ends the function.
+----------------------------------------
+print() Does Not Stop the Function
+----------------------------------------
+Example:
+def test():
+    print("First")
+    print("Second")
+test()
+Output:
+First
+Second
+After the first print(), the function continues executing.
+----------------------------------------
+return Stops the Entire Function
+----------------------------------------
+Example:
+def test():
+    print("First")
+    return
+    print("Second")
+test()
+Output:
+First
+The function ended when return executed.
+----------------------------------------
+print() vs return — Variable Assignment
+----------------------------------------
+print():
+def test():
+    print(100)
+result = test()
+print(result)
+Output:
+100
+None
+return:
+def test():
+    return 100
+result = test()
+print(result)
+Output:
+100
+The difference is what gets assigned to result.
+----------------------------------------
+print() vs return — Reusability
+----------------------------------------
+Print-oriented:
+def calculate_total(a, b):
+    print(a + b)
+This function is tied to displaying the result.
+Return-oriented:
+def calculate_total(a, b):
+    return a + b
+This function can be used in many situations:
+total = calculate_total(10, 20)
+print(total)
+if calculate_total(10, 20) > 25:
+    print("Large")
+tax = calculate_total(10, 20) * 0.18
+The same function can support many different operations.
+----------------------------------------
+Real-World Backend Example
+----------------------------------------
+Imagine a backend function:
+def get_user():
+    return {
+        "id": 1,
+        "name": "Rahul"
+    }
+A FastAPI endpoint can use that returned data.
+If the function instead did:
+def get_user():
+    print({
+        "id": 1,
+        "name": "Rahul"
+    })
+the data is merely displayed in the console.
+It is not returned for the endpoint to use.
+----------------------------------------
+Real-World AI Example
+----------------------------------------
+Consider an AI prediction function:
+def predict(features):
+    score = 0.87
+    return score
+score = predict(features)
+if score > 0.5:
+    print("Positive")
+The returned prediction can be used by the rest of the application.
+If predict() only printed:
+print(score)
+the calling code would not receive the score.
+----------------------------------------
+Real-World Resume Analyzer Example
+----------------------------------------
+def analyze_resume(resume):
+    score = 82
+    return score
+score = analyze_resume(resume)
+print("Resume Score:", score)
+if score >= 70:
+    print("Good match")
+The function returns data that other parts of the application can use.
+----------------------------------------
+Real-World Job Search Example
+----------------------------------------
+def find_jobs(role):
+    jobs = ["Python Developer", "FastAPI Developer"]
+    return jobs
+jobs = find_jobs("Python")
+for job in jobs:
+    print(job)
+The function returns the job list.
+The caller decides how to display or process it.
+----------------------------------------
+The None Connection
+----------------------------------------
+A function that only prints:
+def greet():
+    print("Hello")
+has an implicit return value:
+None
+Therefore:
+result = greet()
+means:
+result = None
+This is one of the most important things to understand about print().
+----------------------------------------
+Can print() Return Something?
+----------------------------------------
+Technically:
+print() itself returns None.
+Example:
+result = print("Hello")
+Output:
+Hello
+print(result)
+Output:
+None
+So:
+print("Hello")
+does two things:
+1. Displays Hello.
+2. Returns None.
+It does NOT return "Hello".
+----------------------------------------
+Can return Display Something?
+----------------------------------------
+No.
+return itself does not display the value.
+Example:
+def get_number():
+    return 100
+get_number()
+Nothing is displayed.
+To display the returned value:
+print(get_number())
+Output:
+100
+This clearly shows the separation:
+return → gives
+print → shows
+----------------------------------------
+Choosing Between print() and return
+----------------------------------------
+Ask yourself:
+"Does another part of my program need this value?"
+If NO:
+print() may be appropriate.
+If YES:
+return is usually the correct choice.
+Example:
+def show_menu():
+    print("1. Login")
+    print("2. Register")
+This is display-oriented.
+Example:
+def calculate_total(price, tax):
+    return price + tax
+This is result-oriented.
+----------------------------------------
+A Useful Design Principle
+----------------------------------------
+Good reusable functions usually:
+Receive input
+↓
+Process input
+↓
+Return result
+The caller decides what to do with the result.
+This keeps the function independent from presentation.
+For example:
+def calculate_total(price, tax):
+    return price + tax
+Then different callers can:
+print(total)
+save(total)
+send_to_api(total)
+compare(total)
+store_in_database(total)
+----------------------------------------
+Common Beginner Mistakes
+----------------------------------------
+Mistake 1:
+Thinking print() returns the printed value.
+It returns None.
+Mistake 2:
+Using print() when the value needs to be reused.
+Mistake 3:
+Thinking return displays the value automatically.
+It does not.
+Mistake 4:
+Writing code after return and expecting it to execute.
+Mistake 5:
+Confusing the displayed output with the function's return value.
+----------------------------------------
+Quick Comparison
+----------------------------------------
+print():
+• Displays a value.
+• Returns None.
+• Does not end the function.
+• Mainly used for output/display.
+• The displayed value cannot be captured as the function result.
+return:
+• Sends a value to the caller.
+• Ends the current function immediately.
+• Can return any Python object.
+• Returned value can be stored and reused.
+• Essential for reusable calculations and logic.
+----------------------------------------
+Simple Example to Remember
+----------------------------------------
+Using print():
+def square(n):
+    print(n * n)
+result = square(5)
+print(result)
+Output:
+25
+None
+Using return:
+def square(n):
+    return n * n
+result = square(5)
+print(result)
+Output:
+25
+The first function says:
+"Here is the answer on the screen."
+The second function says:
+"Here is the answer; you can use it."
+----------------------------------------
+Important Rules
+----------------------------------------
+• print() displays a value.
+• return sends a value back to the caller.
+• print() returns None.
+• return immediately terminates the function.
+• A function without an explicit return also returns None.
+• A returned value can be stored in a variable.
+• A returned value can be used in calculations.
+• A returned value can be passed to another function.
+• A returned value can be used in conditions.
+• Use print() for presentation.
+• Use return when the caller needs the result.
+----------------------------------------
+Summary
+----------------------------------------
+print() and return serve different purposes in Python functions. print() displays information on the screen and itself returns None. return sends a value back to the caller and immediately ends the current function. A returned value can be stored, reused, calculated with, passed to another function, or used in a condition. For reusable functions, return is generally more important because it separates the function's logic from how the result is displayed or used.`,
+},
+            ],
+
             code: `# Basic function
 def greet(name):
     """Say hello to someone. (This is a docstring — always write these)"""
@@ -7941,6 +17441,33 @@ function SubsectionAccordion({ subsections }) {
           <div key={i} className="flex items-start gap-2.5">
             <span className="w-5 h-5 rounded-full bg-indigo-600/30 text-indigo-300 text-[10px] font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{num}</span>
             <span className="text-slate-300 text-sm leading-6">{text}</span>
+          </div>
+        );
+        continue;
+      }
+
+      // Example / Output blocks should render as full code panels
+      if (t === "Example:" || t === "Output:") {
+        const label = t;
+        const codeBlock = [];
+        while (i < lines.length) {
+          const nextLine = lines[i];
+          const nextTrim = nextLine.trim();
+          if (!nextTrim || nextTrim === "Example:" || nextTrim === "Output:" || nextTrim === "---") break;
+          codeBlock.push(nextLine);
+          i++;
+        }
+        output.push(
+          <div key={`${label}-${i}`} className="rounded-2xl border border-white/5 bg-[#0b0f18] px-3 py-3">
+            <div className="text-[10px] uppercase tracking-widest text-slate-500 mb-2">{label}</div>
+            <pre className="font-mono text-sm leading-6 whitespace-pre overflow-x-auto">
+              {codeBlock.map((line, idx) => (
+                <span key={idx}>
+                  <SyntaxLine line={line} />
+                  {idx < codeBlock.length - 1 ? "\n" : ""}
+                </span>
+              ))}
+            </pre>
           </div>
         );
         continue;
