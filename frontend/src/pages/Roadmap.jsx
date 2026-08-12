@@ -15790,6 +15790,3135 @@ Summary
 ----------------------------------------
 print() and return serve different purposes in Python functions. print() displays information on the screen and itself returns None. return sends a value back to the caller and immediately ends the current function. A returned value can be stored, reused, calculated with, passed to another function, or used in a condition. For reusable functions, return is generally more important because it separates the function's logic from how the result is displayed or used.`,
 },
+
+{
+  heading: "Variable Scope in Functions — Local, Global & global",
+  body: `Variable scope defines where a variable can be accessed in a Python program.
+When a variable is created inside a function, Python does not automatically make it available everywhere.
+The location where a variable is created determines its scope and how long it can normally be accessed.
+Understanding scope is essential when working with functions because the same variable name can exist in different parts of a program without always referring to the same value.
+----------------------------------------
+What is Scope?
+----------------------------------------
+Scope means the region of a program where a particular variable can be accessed.
+Example:
+def greet():
+    message = "Hello"
+    print(message)
+greet()
+Here:
+message is created inside the function.
+It can be accessed inside greet().
+It normally cannot be accessed directly outside the function.
+----------------------------------------
+Local Variables
+----------------------------------------
+A variable created inside a function is called a local variable.
+Example:
+def calculate():
+    number = 10
+    print(number)
+calculate()
+Output:
+10
+The variable number belongs to the function calculate().
+It is local to that function.
+----------------------------------------
+Accessing a Local Variable Outside the Function
+----------------------------------------
+A local variable cannot normally be accessed outside the function where it was created.
+Example:
+def calculate():
+    number = 10
+calculate()
+print(number)
+This produces:
+NameError
+because number exists only in the local scope of calculate().
+The function's local variable is not automatically available in the surrounding scope.
+----------------------------------------
+Local Variables with the Same Name
+----------------------------------------
+Different functions can have local variables with the same name.
+Example:
+def first():
+    value = 10
+    print(value)
+def second():
+    value = 20
+    print(value)
+first()
+second()
+Output:
+10
+20
+The two value variables are separate local variables.
+Changing one does not automatically change the other.
+----------------------------------------
+Global Variables
+----------------------------------------
+A variable created outside all functions is called a global variable.
+Example:
+name = "Rahul"
+def greet():
+    print(name)
+greet()
+Output:
+Rahul
+The function can read the global variable because name exists in the surrounding global scope.
+----------------------------------------
+Reading a Global Variable Inside a Function
+----------------------------------------
+Example:
+language = "Python"
+def show_language():
+    print(language)
+show_language()
+Output:
+Python
+The function reads language from the global scope because there is no local variable named language inside the function.
+----------------------------------------
+Local Variable vs Global Variable
+----------------------------------------
+Example:
+value = 100
+def show():
+    value = 50
+    print(value)
+show()
+print(value)
+Output:
+50
+100
+There are two different variables here.
+Global:
+value = 100
+Local:
+value = 50
+Inside show(), Python uses the local value.
+Outside the function, Python uses the global value.
+----------------------------------------
+The LEGB Rule
+----------------------------------------
+Python uses the LEGB rule when looking for a variable name.
+LEGB means:
+L → Local
+E → Enclosing
+G → Global
+B → Built-in
+Python searches for a name in this order.
+Local scope is checked first.
+Then enclosing function scopes.
+Then global scope.
+Finally, built-in names.
+Example:
+value = "global"
+def outer():
+    value = "enclosing"
+    def inner():
+        value = "local"
+        print(value)
+    inner()
+outer()
+Output:
+local
+Python finds value in the local scope of inner() first.
+----------------------------------------
+Enclosing Scope
+----------------------------------------
+An enclosing scope occurs when one function is defined inside another function.
+Example:
+def outer():
+    message = "Hello"
+    def inner():
+        print(message)
+    inner()
+outer()
+Output:
+Hello
+The inner function does not have a local message variable.
+Python therefore looks in the enclosing function and finds message there.
+----------------------------------------
+The global Keyword
+----------------------------------------
+The global keyword tells Python that a variable inside a function refers to a variable in the global scope.
+It is mainly needed when you want to assign a new value to a global variable from inside a function.
+Example:
+count = 0
+def increase():
+    global count
+    count += 1
+increase()
+print(count)
+Output:
+1
+Without global, Python would treat count as a local variable when assigning to it.
+----------------------------------------
+Why global is Needed for Assignment
+----------------------------------------
+Consider:
+count = 0
+def increase():
+    count = count + 1
+increase()
+This causes an error because Python sees count being assigned inside the function and therefore treats it as a local variable.
+But the right side tries to read that local count before it has been assigned a value.
+Using global fixes this:
+count = 0
+def increase():
+    global count
+    count = count + 1
+increase()
+print(count)
+Output:
+1
+----------------------------------------
+Reading Does Not Require global
+----------------------------------------
+If you only read a global variable, you do not need the global keyword.
+Example:
+score = 100
+def show_score():
+    print(score)
+show_score()
+Output:
+100
+The global keyword becomes important when assigning to the global variable from inside the function.
+----------------------------------------
+Changing a Global Variable
+----------------------------------------
+Example:
+status = "Offline"
+def login():
+    global status
+    status = "Online"
+login()
+print(status)
+Output:
+Online
+The global keyword allows the function to modify the global variable.
+----------------------------------------
+Multiple Functions Using a Global Variable
+----------------------------------------
+Example:
+counter = 0
+def increase():
+    global counter
+    counter += 1
+def decrease():
+    global counter
+    counter -= 1
+increase()
+increase()
+decrease()
+print(counter)
+Output:
+1
+Both functions operate on the same global variable counter.
+----------------------------------------
+Local Variable Takes Priority
+----------------------------------------
+If a local variable and a global variable have the same name, the local variable is normally selected inside the function.
+Example:
+name = "Global"
+def show():
+    name = "Local"
+    print(name)
+show()
+print(name)
+Output:
+Local
+Global
+The local variable shadows the global variable inside the function.
+----------------------------------------
+Variable Shadowing
+----------------------------------------
+When a local variable uses the same name as a variable from an outer scope, it is said to shadow the outer variable within that scope.
+Example:
+value = 100
+def test():
+    value = 200
+    print(value)
+test()
+print(value)
+Output:
+200
+100
+The local value temporarily hides the global value while execution is inside test().
+----------------------------------------
+Scope and Function Calls
+----------------------------------------
+Each time a function is called, its local variables belong to that function execution.
+Example:
+def calculate():
+    number = 10
+    print(number)
+calculate()
+calculate()
+Output:
+10
+10
+The local variable is created for each function execution.
+Local variables should not be treated as permanent global storage.
+----------------------------------------
+Returning a Value Instead of Using global
+----------------------------------------
+In many situations, returning a value is better than modifying a global variable.
+Instead of:
+total = 0
+def add():
+    global total
+    total += 10
+add()
+print(total)
+Prefer:
+def add(total):
+    return total + 10
+total = 0
+total = add(total)
+print(total)
+Output:
+10
+The second approach makes the data flow explicit and usually makes the function easier to test and reuse.
+----------------------------------------
+Why Excessive global Variables Can Be a Problem
+----------------------------------------
+Global variables can be convenient, but using too many of them can make a program harder to understand and maintain.
+For example:
+balance = 5000
+def withdraw():
+    global balance
+    balance -= 1000
+def deposit():
+    global balance
+    balance += 500
+Multiple functions can change the same piece of global state.
+As a project grows, it can become difficult to determine which function changed the value.
+For this reason, function parameters, return values, classes, and controlled state are often preferred.
+----------------------------------------
+Local Variables and Parameters
+----------------------------------------
+Function parameters are local to the function.
+Example:
+def greet(name):
+    message = "Hello " + name
+    print(message)
+greet("Rahul")
+Here:
+name → local parameter
+message → local variable
+Both belong to the function's local scope.
+----------------------------------------
+Local Scope with Multiple Parameters
+----------------------------------------
+Example:
+def calculate(a, b):
+    result = a + b
+    print(result)
+calculate(10, 20)
+Here:
+a → local parameter
+b → local parameter
+result → local variable
+All three are available inside calculate().
+----------------------------------------
+Scope Does Not Depend Only on Where a Function is Called
+----------------------------------------
+A function's scope is determined by where the code is defined, not simply where the function is called.
+Example:
+message = "Global"
+def show():
+    print(message)
+def main():
+    message = "Local"
+    show()
+main()
+Output:
+Global
+The local message inside main() does not become the scope of show().
+show() looks for message according to where show() was defined.
+----------------------------------------
+Using global with a Local Variable
+----------------------------------------
+The global keyword must be declared before assigning to the global variable inside that function.
+Correct:
+count = 0
+def increase():
+    global count
+    count += 1
+Incorrect:
+count = 0
+def increase():
+    count += 1
+    global count
+The global declaration must come before the use of count in that function.
+----------------------------------------
+global Does Not Create a New Variable
+----------------------------------------
+The global keyword does not create a new variable.
+It tells Python:
+"Use the variable with this name from the global scope."
+Example:
+score = 50
+def update():
+    global score
+    score = 100
+update()
+print(score)
+Output:
+100
+The function modifies the existing global variable.
+----------------------------------------
+Scope with Immutable Values
+----------------------------------------
+Consider:
+number = 10
+def change():
+    number = 20
+    print(number)
+change()
+print(number)
+Output:
+20
+10
+The assignment creates a local variable because global was not specified.
+The global number remains unchanged.
+----------------------------------------
+Scope with Mutable Objects
+----------------------------------------
+Python's scope behavior is especially important when working with mutable objects such as lists and dictionaries.
+Example:
+numbers = []
+def add_number():
+    numbers.append(10)
+add_number()
+print(numbers)
+Output:
+[10]
+The function can modify the existing list without using global because it is not rebinding the variable name.
+It is modifying the object referenced by the global variable.
+----------------------------------------
+Reassignment vs Mutation
+----------------------------------------
+These two operations are different.
+Reassignment:
+numbers = [1, 2]
+def change():
+    global numbers
+    numbers = [3, 4]
+Here the global variable is rebound to a new list.
+Mutation:
+numbers = [1, 2]
+def change():
+    numbers.append(3)
+Here the existing list is modified.
+Understanding this distinction is important when working with functions and mutable objects.
+----------------------------------------
+Best Practice
+----------------------------------------
+Prefer passing data into functions through parameters and receiving results through return statements.
+Example:
+def calculate_total(price, tax):
+    return price + tax
+total = calculate_total(100, 18)
+print(total)
+This approach keeps the function independent from unrelated global state.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A variable created inside a function is normally local to that function.
+• A variable created outside functions is normally global to the module.
+• Local variables are accessible inside their defining function.
+• Global variables can be read inside functions.
+• Reading a global variable does not require global.
+• Assigning to a global variable inside a function requires global.
+• A local variable can have the same name as a global variable.
+• A local variable takes priority over a global variable inside that function.
+• Python follows the LEGB rule when resolving names.
+• Function parameters are local variables.
+• The global keyword allows assignment to a global variable.
+• Excessive use of global variables can make programs harder to maintain.
+• Parameters and return values are generally preferable for passing data between functions.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of scope as different rooms.
+Global scope:
+The large common room.
+Functions:
+Separate private rooms.
+A variable created inside a function belongs to that function's room.
+A global variable belongs to the common room.
+A function can normally look outside its room to find a variable.
+But creating a variable inside the room does not automatically place it in the common room.
+The global keyword explicitly tells Python to use the variable from the global scope.
+----------------------------------------
+Summary
+----------------------------------------
+Variable scope determines where variables can be accessed in Python. Variables created inside functions are normally local, while variables created outside functions are normally global. Python searches for names using the LEGB rule: Local, Enclosing, Global, and Built-in. A function can read a global variable without using global, but the global keyword is required when the function needs to reassign that global variable. In well-designed programs, parameters and return values are generally preferred over excessive use of global state because they make functions easier to understand, test, reuse, and maintain.`,
+},
+{
+  heading: "Nested Functions and Enclosing Scope",
+  body: `A nested function is a function defined inside another function.
+Python allows functions to be created inside other functions, which is useful for organizing logic, hiding helper functions, creating closures, and building reusable higher-level functions.
+The function containing another function is called the outer function.
+The function defined inside it is called the inner function or nested function.
+----------------------------------------
+Basic Example
+----------------------------------------
+def outer():
+    def inner():
+        print("Hello from inner function")
+    inner()
+outer()
+Output:
+Hello from inner function
+Here:
+outer() → Outer function
+inner() → Nested function
+The inner function is created inside outer().
+The inner function can be called from inside outer().
+----------------------------------------
+Why Use Nested Functions?
+----------------------------------------
+Nested functions are useful when:
+• A helper function is needed only inside one function.
+• You want to keep implementation details private.
+• The inner function needs access to variables from the outer function.
+• You want to create closures.
+• You want to build decorators and higher-order functions.
+• You want to organize complex logic into smaller pieces.
+----------------------------------------
+Calling a Nested Function
+----------------------------------------
+Example:
+def calculate():
+    def add(a, b):
+        return a + b
+    result = add(10, 20)
+    print(result)
+calculate()
+Output:
+30
+The add() function is available inside calculate().
+----------------------------------------
+Nested Functions Have Their Own Local Scope
+----------------------------------------
+An inner function has its own local scope.
+Example:
+def outer():
+    message = "Outer"
+    def inner():
+        message = "Inner"
+        print(message)
+    inner()
+    print(message)
+outer()
+Output:
+Inner
+Outer
+The message inside inner() is local to inner().
+The message inside outer() belongs to outer().
+They are separate variables.
+----------------------------------------
+Enclosing Scope
+----------------------------------------
+The scope of an outer function surrounding an inner function is called the enclosing scope.
+Example:
+def outer():
+    message = "Hello"
+    def inner():
+        print(message)
+    inner()
+outer()
+Output:
+Hello
+The inner function does not have a local message variable.
+Python therefore looks in the enclosing scope and finds message inside outer().
+----------------------------------------
+LEGB and Enclosing Scope
+----------------------------------------
+Python uses the LEGB rule to find variable names:
+L → Local
+E → Enclosing
+G → Global
+B → Built-in
+For nested functions, the enclosing scope becomes especially important.
+Example:
+message = "Global"
+def outer():
+    message = "Enclosing"
+    def inner():
+        print(message)
+    inner()
+outer()
+Output:
+Enclosing
+Python searches:
+Local inner() → not found
+Enclosing outer() → found
+Therefore "Enclosing" is printed.
+----------------------------------------
+Inner Function Reading Outer Variables
+----------------------------------------
+An inner function can read variables from its enclosing function.
+Example:
+def outer():
+    name = "Rahul"
+    age = 21
+    def inner():
+        print(name)
+        print(age)
+    inner()
+outer()
+Output:
+Rahul
+21
+The inner function can access name and age because they exist in its enclosing scope.
+----------------------------------------
+The Inner Function Does Not Automatically Modify Outer Variables
+----------------------------------------
+Reading an enclosing variable is allowed.
+Reassigning it is different.
+Example:
+def outer():
+    count = 10
+    def inner():
+        count = 20
+        print(count)
+    inner()
+    print(count)
+outer()
+Output:
+20
+10
+The assignment:
+count = 20
+creates a new local variable inside inner().
+It does not change the count belonging to outer().
+----------------------------------------
+The nonlocal Keyword
+----------------------------------------
+The nonlocal keyword allows a nested function to modify a variable belonging to its enclosing function.
+Example:
+def outer():
+    count = 10
+    def inner():
+        nonlocal count
+        count += 1
+    inner()
+    print(count)
+outer()
+Output:
+11
+Here:
+count belongs to outer().
+nonlocal count tells Python to use that enclosing variable instead of creating a new local count.
+----------------------------------------
+Why nonlocal Is Needed
+----------------------------------------
+Without nonlocal:
+def outer():
+    count = 10
+    def inner():
+        count = count + 1
+    inner()
+outer()
+This produces an error because Python treats count inside inner() as a local variable due to the assignment.
+The local count is then referenced before it has been assigned.
+Correct:
+def outer():
+    count = 10
+    def inner():
+        nonlocal count
+        count += 1
+    inner()
+    print(count)
+outer()
+Output:
+11
+----------------------------------------
+global vs nonlocal
+----------------------------------------
+global refers to a variable in the global scope.
+nonlocal refers to a variable in an enclosing function scope.
+Example:
+count = 0
+def outer():
+    count = 10
+    def inner():
+        nonlocal count
+        count += 1
+    inner()
+    print(count)
+outer()
+print(count)
+Output:
+11
+0
+The inner function modifies outer()'s count, not the global count.
+----------------------------------------
+Nested Function Returning a Value
+----------------------------------------
+A nested function can return a value to its outer function.
+Example:
+def calculate():
+    def add(a, b):
+        return a + b
+    return add(10, 20)
+result = calculate()
+print(result)
+Output:
+30
+The inner function performs the calculation and the outer function returns the result.
+----------------------------------------
+Returning the Inner Function
+----------------------------------------
+A powerful feature of nested functions is that the outer function can return the inner function itself.
+Example:
+def outer():
+    def inner():
+        print("Hello")
+    return inner
+function = outer()
+function()
+Output:
+Hello
+Here:
+outer() creates inner().
+outer() returns the inner function.
+function stores the returned function.
+function() calls inner().
+----------------------------------------
+Functions Are Objects
+----------------------------------------
+Python treats functions as first-class objects.
+This means a function can be:
+Stored in a variable.
+Passed as an argument.
+Returned from another function.
+Stored in a data structure.
+Example:
+def greet():
+    print("Hello")
+message = greet
+message()
+Output:
+Hello
+The variable message now refers to the greet function.
+This concept makes nested functions and higher-order functions possible.
+----------------------------------------
+Closures
+----------------------------------------
+A closure occurs when an inner function remembers and uses variables from its enclosing function even after the outer function has finished executing.
+Example:
+def create_greeting(name):
+    def greet():
+        print("Hello", name)
+    return greet
+greet_user = create_greeting("Rahul")
+greet_user()
+Output:
+Hello Rahul
+The outer function create_greeting() has already returned.
+However, the returned inner function still remembers name.
+This is called a closure.
+----------------------------------------
+How a Closure Works
+----------------------------------------
+Consider:
+def create_multiplier(number):
+    def multiply(value):
+        return value * number
+    return multiply
+double = create_multiplier(2)
+triple = create_multiplier(3)
+print(double(5))
+print(triple(5))
+Output:
+10
+15
+double remembers:
+number = 2
+triple remembers:
+number = 3
+Each returned function keeps access to the value from its enclosing scope.
+----------------------------------------
+Multiple Closures
+----------------------------------------
+Each call to the outer function can create a separate closure.
+Example:
+def create_power(exponent):
+    def power(number):
+        return number ** exponent
+    return power
+square = create_power(2)
+cube = create_power(3)
+print(square(5))
+print(cube(5))
+Output:
+25
+125
+square remembers exponent = 2.
+cube remembers exponent = 3.
+----------------------------------------
+Nested Functions for Helper Logic
+----------------------------------------
+Sometimes a function needs a small helper that should not be exposed outside.
+Example:
+def process_name(name):
+    def clean_name(value):
+        return value.strip().title()
+    return clean_name(name)
+print(process_name("  rahul  "))
+Output:
+Rahul
+clean_name() is only needed by process_name(), so keeping it nested makes the design clear.
+----------------------------------------
+Nested Functions and Data Validation
+----------------------------------------
+Example:
+def register_user(username):
+    def is_valid(value):
+        return len(value) >= 3
+    if is_valid(username):
+        print("Valid username")
+    else:
+        print("Invalid username")
+register_user("Rahul")
+Output:
+Valid username
+The validation helper is kept inside the function that uses it.
+----------------------------------------
+Nested Functions in Real Applications
+----------------------------------------
+Nested functions can appear in:
+Data processing.
+Validation.
+API handling.
+Authentication.
+Configuration logic.
+Closures.
+Decorators.
+Callback creation.
+Function factories.
+Machine-learning utilities.
+Web application logic.
+They are especially useful when a helper function has no reason to be exposed outside its parent function.
+----------------------------------------
+Important Scope Rule
+----------------------------------------
+A nested function can access variables from its enclosing function.
+Example:
+def outer():
+    value = 100
+    def inner():
+        print(value)
+    inner()
+outer()
+Output:
+100
+But if inner() assigns to value without nonlocal, Python treats value as a local variable inside inner().
+----------------------------------------
+Nested Function with Parameters
+----------------------------------------
+Nested functions can have their own parameters.
+Example:
+def outer(message):
+    def inner(name):
+        print(message, name)
+    inner("Rahul")
+outer("Hello")
+Output:
+Hello Rahul
+The outer parameter message is available to inner() through the enclosing scope.
+The inner parameter name is local to inner().
+----------------------------------------
+Nested Functions Can Be Multiple Levels Deep
+----------------------------------------
+Python allows functions to be nested more than one level.
+Example:
+def level_one():
+    message = "Hello"
+    def level_two():
+        def level_three():
+            print(message)
+        level_three()
+    level_two()
+level_one()
+Output:
+Hello
+Python searches enclosing scopes until it finds the required variable.
+----------------------------------------
+Nested Functions vs Separate Functions
+----------------------------------------
+A nested function is useful when the helper belongs logically to one parent function.
+Example:
+def process_data(data):
+    def clean(value):
+        return value.strip()
+    return [clean(item) for item in data]
+If clean() is needed throughout the application, a separate top-level function may be more appropriate.
+The choice depends on how widely the helper needs to be used.
+----------------------------------------
+Best Practice
+----------------------------------------
+Use nested functions when they improve organization and the helper function is closely tied to the outer function.
+Avoid unnecessary deep nesting because excessive nesting can make code harder to read.
+Use meaningful names and keep each function focused on a clear responsibility.
+Use nonlocal only when modifying an enclosing variable is genuinely required.
+Prefer parameters and return values when they make data flow clearer.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A function defined inside another function is a nested function.
+• The outer function contains the inner function.
+• The inner function has its own local scope.
+• The inner function can read variables from the enclosing scope.
+• Assignment inside the inner function normally creates a local variable.
+• nonlocal allows an inner function to modify an enclosing variable.
+• global refers to the module-level global scope.
+• nonlocal refers to an enclosing function scope.
+• Nested functions can be returned from outer functions.
+• Returned nested functions can form closures.
+• Each call to an outer function can create a separate closure.
+• Functions are first-class objects in Python.
+• Nested functions are useful for helper logic, closures, and decorators.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of nested functions as rooms inside rooms.
+Global scope:
+Main building
+↓
+Outer function:
+Room 1
+↓
+Inner function:
+Room 2
+The inner function can look outward to find variables.
+It first checks its own room.
+If the variable is not there, it checks the outer room.
+If it is still not found, Python continues according to the LEGB rule.
+The nonlocal keyword tells the inner function:
+"Use the variable from my enclosing room."
+The global keyword tells it:
+"Use the variable from the main building."
+----------------------------------------
+Summary
+----------------------------------------
+Nested functions are functions defined inside other functions. They have their own local scope but can access variables from enclosing functions. Python's LEGB name-resolution rule allows an inner function to search its local, enclosing, global, and built-in scopes. The nonlocal keyword allows an inner function to modify a variable from its enclosing function, while global is used for module-level variables. Nested functions are useful for helper logic, closures, function factories, and decorators, and they demonstrate one of Python's powerful features: functions can be treated as objects and returned from other functions.`,
+},
+{
+  heading: "Recursion in Functions — Functions Calling Themselves",
+  body: `Recursion is a programming technique in which a function calls itself to solve a problem.
+A recursive function solves a problem by breaking it into smaller versions of the same problem.
+Instead of solving everything at once, the function repeatedly calls itself with a smaller or simpler input until it reaches a condition where no further calls are needed.
+In simple words:
+Recursion = A function calling itself.
+----------------------------------------
+Basic Example
+----------------------------------------
+def countdown(n):
+    if n == 0:
+        return
+    print(n)
+    countdown(n - 1)
+countdown(5)
+Output:
+5
+4
+3
+2
+1
+Here countdown() calls itself:
+countdown(5)
+→ countdown(4)
+→ countdown(3)
+→ countdown(2)
+→ countdown(1)
+→ countdown(0)
+When n becomes 0, the function stops making recursive calls.
+----------------------------------------
+Two Essential Parts of Recursion
+----------------------------------------
+Every properly designed recursive function needs two important parts:
+1. Base Case
+2. Recursive Case
+The base case tells the function when to stop.
+The recursive case makes the function call itself with a smaller or simpler problem.
+----------------------------------------
+Base Case
+----------------------------------------
+The base case is the condition that stops recursion.
+Example:
+def countdown(n):
+    if n == 0:
+        return
+    print(n)
+    countdown(n - 1)
+Here:
+if n == 0:
+    return
+is the base case.
+Without a base case, the function may continue calling itself indefinitely.
+----------------------------------------
+Recursive Case
+----------------------------------------
+The recursive case is the part where the function calls itself.
+Example:
+def countdown(n):
+    if n == 0:
+        return
+    print(n)
+    countdown(n - 1)
+The recursive case is:
+countdown(n - 1)
+The input becomes smaller on every call.
+----------------------------------------
+How Recursion Works
+----------------------------------------
+Consider:
+def countdown(n):
+    if n == 0:
+        return
+    print(n)
+    countdown(n - 1)
+countdown(3)
+Execution:
+countdown(3)
+↓
+print(3)
+↓
+countdown(2)
+↓
+print(2)
+↓
+countdown(1)
+↓
+print(1)
+↓
+countdown(0)
+↓
+return
+The recursion stops at the base case.
+----------------------------------------
+Factorial Using Recursion
+----------------------------------------
+A classic example of recursion is calculating a factorial.
+The factorial of 5 is:
+5 × 4 × 3 × 2 × 1 = 120
+Recursive definition:
+n! = n × (n - 1)!
+Example:
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * factorial(n - 1)
+print(factorial(5))
+Output:
+120
+----------------------------------------
+Factorial Execution
+----------------------------------------
+factorial(5)
+= 5 * factorial(4)
+= 5 * 4 * factorial(3)
+= 5 * 4 * 3 * factorial(2)
+= 5 * 4 * 3 * 2 * factorial(1)
+= 5 * 4 * 3 * 2 * 1
+= 120
+The calls are made first, and then the results are returned as the recursive calls finish.
+----------------------------------------
+Recursive Sum of Numbers
+----------------------------------------
+We can calculate the sum from 1 to n recursively.
+Example:
+def sum_numbers(n):
+    if n == 0:
+        return 0
+    return n + sum_numbers(n - 1)
+print(sum_numbers(5))
+Output:
+15
+The calculation becomes:
+5 + 4 + 3 + 2 + 1 = 15
+----------------------------------------
+Recursive Fibonacci
+----------------------------------------
+The Fibonacci sequence begins:
+0, 1, 1, 2, 3, 5, 8, 13...
+Each number is calculated from the previous two numbers.
+A simple recursive implementation is:
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+print(fibonacci(6))
+Output:
+8
+This demonstrates recursion clearly, although this simple implementation is inefficient for large values because many calculations are repeated.
+----------------------------------------
+Recursion and the Call Stack
+----------------------------------------
+Python keeps track of active function calls using a call stack.
+When a recursive function calls itself, a new function call is placed on the stack.
+Example:
+factorial(3)
+The stack grows:
+factorial(3)
+factorial(2)
+factorial(1)
+When the base case is reached, the calls return in reverse order.
+factorial(1)
+↓
+factorial(2)
+↓
+factorial(3)
+This is why recursive programs can be understood as going down into smaller problems and then coming back up with results.
+----------------------------------------
+Stack Visualization
+----------------------------------------
+For:
+factorial(3)
+The calls are:
+factorial(3)
+    ↓
+factorial(2)
+    ↓
+factorial(1)
+At factorial(1), the base case returns 1.
+Then:
+factorial(2) → 2 × 1 = 2
+factorial(3) → 3 × 2 = 6
+Final result:
+6
+----------------------------------------
+Recursive Countdown
+----------------------------------------
+Example:
+def countdown(n):
+    if n <= 0:
+        print("Done")
+        return
+    print(n)
+    countdown(n - 1)
+countdown(3)
+Output:
+3
+2
+1
+Done
+The function keeps reducing n until the base case is reached.
+----------------------------------------
+Recursion Must Move Toward the Base Case
+----------------------------------------
+A recursive function should make progress toward its stopping condition.
+Good:
+def countdown(n):
+    if n == 0:
+        return
+    countdown(n - 1)
+The value moves:
+5 → 4 → 3 → 2 → 1 → 0
+Bad:
+def countdown(n):
+    if n == 0:
+        return
+    countdown(n + 1)
+Here the value moves away from 0:
+5 → 6 → 7 → 8 → ...
+This can eventually cause excessive recursion.
+----------------------------------------
+Infinite Recursion
+----------------------------------------
+If a recursive function never reaches its base case, it becomes infinitely recursive.
+Example:
+def repeat():
+    print("Hello")
+    repeat()
+repeat()
+The function continuously calls itself.
+Python eventually raises a RecursionError when the recursion limit is exceeded.
+----------------------------------------
+RecursionError
+----------------------------------------
+Python protects programs from unlimited recursive calls by imposing a recursion depth limit.
+Example:
+def infinite():
+    infinite()
+infinite()
+Eventually Python raises:
+RecursionError: maximum recursion depth exceeded
+The exact traceback may vary depending on the program.
+----------------------------------------
+Recursion vs Loop
+----------------------------------------
+Many recursive problems can also be solved using loops.
+Recursive:
+def countdown(n):
+    if n == 0:
+        return
+    print(n)
+    countdown(n - 1)
+Loop:
+def countdown(n):
+    while n > 0:
+        print(n)
+        n -= 1
+Both approaches can produce the same result.
+The choice depends on the problem and which approach makes the logic clearer.
+----------------------------------------
+Recursion vs Iteration
+----------------------------------------
+Iteration uses loops such as:
+for
+while
+Recursion uses:
+A function calling itself.
+Iteration generally uses less call-stack memory.
+Recursion can make certain problems easier to express, especially problems that naturally contain smaller versions of themselves.
+----------------------------------------
+When Recursion Is Useful
+----------------------------------------
+Recursion is particularly useful for problems involving:
+Tree structures.
+File-system directories.
+Graph traversal.
+Divide-and-conquer algorithms.
+Backtracking.
+Searching nested structures.
+Mathematical definitions.
+Combinatorial problems.
+Nested data processing.
+Algorithms that naturally break into smaller versions of themselves.
+----------------------------------------
+Recursion with Lists
+----------------------------------------
+A recursive function can process a list.
+Example:
+def print_items(items, index=0):
+    if index == len(items):
+        return
+    print(items[index])
+    print_items(items, index + 1)
+print_items(["A", "B", "C"])
+Output:
+A
+B
+C
+The index increases until it reaches the length of the list.
+----------------------------------------
+Recursive String Processing
+----------------------------------------
+Recursion can also process strings.
+Example:
+def print_characters(text, index=0):
+    if index == len(text):
+        return
+    print(text[index])
+    print_characters(text, index + 1)
+print_characters("Python")
+Output:
+P
+y
+t
+h
+o
+n
+----------------------------------------
+Recursive Power Calculation
+----------------------------------------
+A number raised to a power can be calculated recursively.
+Example:
+def power(base, exponent):
+    if exponent == 0:
+        return 1
+    return base * power(base, exponent - 1)
+print(power(2, 4))
+Output:
+16
+Execution:
+2 × power(2, 3)
+→ 2 × 2 × power(2, 2)
+→ 2 × 2 × 2 × power(2, 1)
+→ 2 × 2 × 2 × 2 × power(2, 0)
+→ 16
+----------------------------------------
+Recursive Greatest Common Divisor
+----------------------------------------
+The Euclidean algorithm can be expressed recursively.
+Example:
+def gcd(a, b):
+    if b == 0:
+        return a
+    return gcd(b, a % b)
+print(gcd(48, 18))
+Output:
+6
+The function repeatedly replaces the problem with:
+gcd(b, a % b)
+until b becomes 0.
+----------------------------------------
+Recursive Binary Search
+----------------------------------------
+Binary search can also be implemented recursively.
+The problem is repeatedly divided into smaller sections.
+Conceptually:
+Search the middle.
+If the target is found, return it.
+If the target is smaller, search the left half.
+If the target is larger, search the right half.
+Repeat until the search range becomes empty or the target is found.
+This is an example of divide-and-conquer recursion.
+----------------------------------------
+Recursion in Tree Structures
+----------------------------------------
+Trees are naturally recursive structures.
+A tree contains nodes, and each node can contain smaller trees.
+For example:
+Root
+├── Left Child
+│   ├── Child
+│   └── Child
+└── Right Child
+A recursive function can visit a node and then recursively visit its children.
+This is one reason recursion is commonly used in tree algorithms.
+----------------------------------------
+Nested Recursion
+----------------------------------------
+A recursive function can call another function that eventually calls the original function.
+However, this is more advanced and should be used carefully because it can make execution difficult to understand.
+For beginner Python programming, direct recursion with a clear base case is usually easier to understand.
+----------------------------------------
+Recursion with return
+----------------------------------------
+Recursive functions commonly use return to pass the result back through previous calls.
+Example:
+def factorial(n):
+    if n == 1:
+        return 1
+    return n * factorial(n - 1)
+The returned value travels back through the call stack.
+This is different from simply calling the function without using its returned result.
+----------------------------------------
+Recursion and Parameters
+----------------------------------------
+Recursive functions normally change one or more parameters on every recursive call.
+Example:
+def countdown(n):
+    if n == 0:
+        return
+    countdown(n - 1)
+Here n changes on every call.
+This helps the function eventually reach the base case.
+----------------------------------------
+Common Structure of a Recursive Function
+----------------------------------------
+A typical recursive function looks like:
+def function(value):
+    if stopping_condition:
+        return result
+    return operation(function(smaller_value))
+The exact structure depends on the problem, but the two essential ideas remain:
+Base case.
+Recursive case.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Recursion means a function calls itself.
+• Every useful recursive function needs a base case.
+• The recursive case performs the self-call.
+• The recursive call should move toward the base case.
+• Recursive calls are stored on Python's call stack.
+• Results are returned as recursive calls finish.
+• Missing or unreachable base cases can cause infinite recursion.
+• Python raises RecursionError when the recursion depth becomes excessive.
+• Many recursive problems can also be solved using loops.
+• Recursion is especially useful for trees, graphs, divide-and-conquer, and backtracking.
+• Recursive solutions can be elegant but may use more memory than iterative solutions.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of recursion as opening a smaller version of the same problem.
+Problem:
+Solve 5.
+↓
+Solve 4.
+↓
+Solve 3.
+↓
+Solve 2.
+↓
+Solve 1.
+↓
+Base case reached.
+Then the answers return upward:
+1
+↓
+2
+↓
+6
+↓
+24
+↓
+120
+The function keeps breaking the problem down until it reaches the simplest possible case, then combines the results while returning.
+----------------------------------------
+Summary
+----------------------------------------
+Recursion is a technique where a function calls itself to solve smaller versions of the same problem. A recursive function must have a base case that stops the recursion and a recursive case that moves the problem toward that base case. Python manages recursive calls using the call stack, and excessive recursion can result in RecursionError. Recursion is particularly useful for naturally recursive problems such as tree traversal, divide-and-conquer algorithms, searching nested structures, and backtracking. Although many recursive problems can also be solved using loops, recursion can provide a clearer and more natural solution when a problem is defined in terms of smaller versions of itself.`,
+},
+{
+  heading: "Function Annotations and Type Hints",
+  body: `Function annotations and type hints allow you to describe the expected types of a function's parameters and return value.
+They make Python code easier to read, understand, maintain, document, and analyze with development tools.
+Python is dynamically typed, so type hints normally do not prevent a function from receiving a different type at runtime.
+Instead, they provide useful information to programmers, editors, linters, static type checkers, and other development tools.
+----------------------------------------
+Basic Type Hint
+----------------------------------------
+Example:
+def greet(name: str):
+    print("Hello", name)
+Here:
+name → Parameter
+str → Type hint
+The annotation indicates that name is expected to be a string.
+----------------------------------------
+Return Type Hint
+----------------------------------------
+A return type can be specified using an arrow:
+def add(a: int, b: int) -> int:
+    return a + b
+Here:
+a: int → a is expected to be an integer
+b: int → b is expected to be an integer
+-> int → function is expected to return an integer
+----------------------------------------
+Type Hints Do Not Automatically Enforce Types
+----------------------------------------
+Example:
+def add(a: int, b: int) -> int:
+    return a + b
+print(add(10, 20))
+Output:
+30
+The annotations describe the expected types.
+Python itself does not normally reject a different type simply because of the annotation.
+For example, passing values of an incompatible type may produce an error only when the function's actual operations cannot handle those values.
+----------------------------------------
+Why Use Type Hints?
+----------------------------------------
+Type hints provide several benefits:
+• Improve code readability.
+• Make function expectations clear.
+• Help IDEs provide better autocomplete.
+• Help detect potential type-related problems.
+• Improve documentation.
+• Make large projects easier to maintain.
+• Help static type checkers analyze code.
+• Make APIs easier for other developers to understand.
+----------------------------------------
+Multiple Parameter Types
+----------------------------------------
+Example:
+def calculate_total(price: float, quantity: int) -> float:
+    return price * quantity
+Here:
+price → expected float
+quantity → expected int
+return value → expected float
+The function signature communicates the expected data flow clearly.
+----------------------------------------
+String Type Hint
+----------------------------------------
+Example:
+def welcome(name: str) -> str:
+    return "Welcome " + name
+result = welcome("Rahul")
+print(result)
+Output:
+Welcome Rahul
+The annotation tells readers and development tools that name and the returned value are expected to be strings.
+----------------------------------------
+Boolean Type Hint
+----------------------------------------
+Example:
+def is_adult(age: int) -> bool:
+    return age >= 18
+print(is_adult(21))
+Output:
+True
+The return annotation bool indicates that the function is expected to return True or False.
+----------------------------------------
+List Type Hints
+----------------------------------------
+Modern Python allows generic collection type hints.
+Example:
+def total(numbers: list[int]) -> int:
+    return sum(numbers)
+print(total([10, 20, 30]))
+Output:
+60
+list[int] means a list whose elements are expected to be integers.
+----------------------------------------
+List of Strings
+----------------------------------------
+Example:
+def show_names(names: list[str]) -> None:
+    for name in names:
+        print(name)
+Here:
+list[str] → list containing strings
+None → function does not return a meaningful value
+----------------------------------------
+Dictionary Type Hints
+----------------------------------------
+Example:
+def get_scores(scores: dict[str, int]) -> int:
+    return scores["Rahul"]
+Here:
+dict[str, int]
+means:
+Keys → strings
+Values → integers
+Example:
+scores = {
+    "Rahul": 90,
+    "Anita": 85
+}
+print(get_scores(scores))
+Output:
+90
+----------------------------------------
+Tuple Type Hints
+----------------------------------------
+A tuple can also be annotated.
+Example:
+def get_point() -> tuple[int, int]:
+    return (10, 20)
+Here:
+tuple[int, int]
+indicates a tuple containing two integers.
+----------------------------------------
+Set Type Hints
+----------------------------------------
+Example:
+def unique_numbers(values: set[int]) -> int:
+    return len(values)
+Here:
+set[int]
+indicates a set containing integers.
+----------------------------------------
+None Return Type
+----------------------------------------
+If a function does not return a useful value, use None as the return type.
+Example:
+def display_message(message: str) -> None:
+    print(message)
+The function performs an action but does not return a value.
+----------------------------------------
+Optional Values
+----------------------------------------
+Sometimes a parameter may contain a value or None.
+Modern Python can express this using | None.
+Example:
+def greet(name: str | None) -> str:
+    if name is None:
+        return "Hello Guest"
+    return "Hello " + name
+print(greet(None))
+Output:
+Hello Guest
+Here:
+str | None
+means the value may be a string or None.
+----------------------------------------
+Union Types
+----------------------------------------
+A parameter may accept more than one type.
+Example:
+def display(value: int | str) -> None:
+    print(value)
+display(100)
+display("Python")
+Both integer and string values are allowed according to the type annotation.
+----------------------------------------
+Type Hints with Default Arguments
+----------------------------------------
+Type hints can be combined with default arguments.
+Example:
+def greet(name: str = "Guest") -> str:
+    return "Hello " + name
+print(greet())
+print(greet("Rahul"))
+Output:
+Hello Guest
+Hello Rahul
+The annotation describes the expected type, while the default value provides a value when the argument is omitted.
+----------------------------------------
+Type Hints with *args
+----------------------------------------
+Variable-length positional arguments can also be annotated.
+Example:
+def add_numbers(*numbers: int) -> int:
+    return sum(numbers)
+print(add_numbers(10, 20, 30))
+Output:
+60
+The annotation indicates that the values supplied through numbers are expected to be integers.
+----------------------------------------
+Type Hints with **kwargs
+----------------------------------------
+Keyword arguments can also be annotated.
+Example:
+def show_details(**details: str) -> None:
+    for key, value in details.items():
+        print(key, value)
+show_details(name="Rahul", city="Vijayawada")
+The values supplied through details are expected to be strings.
+----------------------------------------
+Function Variable Annotations
+----------------------------------------
+Type hints can also be used for variables.
+Example:
+age: int = 21
+name: str = "Rahul"
+gpa: float = 8.75
+active: bool = True
+These annotations describe the expected types of the variables.
+----------------------------------------
+Complex Function Signature
+----------------------------------------
+Type hints become especially useful when a function has several parameters.
+Example:
+def create_student(
+    name: str,
+    age: int,
+    gpa: float,
+    active: bool
+) -> dict:
+    return {
+        "name": name,
+        "age": age,
+        "gpa": gpa,
+        "active": active
+    }
+The signature immediately tells us what kind of data the function expects and what it returns.
+----------------------------------------
+Type Hints as Documentation
+----------------------------------------
+Compare:
+def calculate(a, b):
+    return a * b
+With:
+def calculate(price: float, quantity: int) -> float:
+    return price * quantity
+The second version communicates the intended usage directly in the function definition.
+This is especially valuable in large projects and team environments.
+----------------------------------------
+Type Hints and IDEs
+----------------------------------------
+Modern development environments can use type hints to provide:
+Autocomplete.
+Error highlighting.
+Parameter information.
+Navigation.
+Refactoring assistance.
+Documentation hints.
+For example:
+def calculate(price: float, quantity: int) -> float:
+    return price * quantity
+When another developer calls calculate(), their editor can show the expected parameter types.
+----------------------------------------
+Static Type Checking
+----------------------------------------
+Type hints can be analyzed by external tools such as static type checkers.
+For example, a type checker may identify a possible mismatch in:
+def add(a: int, b: int) -> int:
+    return a + b
+result = add("10", "20")
+The annotations communicate that integers are expected.
+The type checker can warn about the incompatible arguments even before the program is executed.
+----------------------------------------
+Type Hints and Runtime
+----------------------------------------
+It is important to understand that type hints and runtime type enforcement are different concepts.
+Type hint:
+def square(number: int) -> int:
+    return number * number
+The annotation documents the intended type.
+It does not automatically convert or validate every argument.
+If runtime validation is required, additional logic or specialized libraries may be needed.
+----------------------------------------
+Inspecting Function Annotations
+----------------------------------------
+Python stores function annotations and makes them available through __annotations__.
+Example:
+def add(a: int, b: int) -> int:
+    return a + b
+print(add.__annotations__)
+The result contains information about the annotations used by the function.
+The exact representation can depend on the Python version and annotation configuration.
+----------------------------------------
+Annotations Are Metadata
+----------------------------------------
+Function annotations can be viewed as metadata attached to a function.
+They communicate information about parameters and return values.
+Python allows this metadata to be used by tools and frameworks for different purposes.
+This is one reason annotations are useful beyond simple documentation.
+----------------------------------------
+Type Aliases
+----------------------------------------
+A type alias gives a reusable name to a type definition.
+Example:
+StudentScores = dict[str, int]
+def get_scores() -> StudentScores:
+    return {
+        "Rahul": 90,
+        "Anita": 85
+    }
+The alias makes complicated type definitions easier to read and reuse.
+----------------------------------------
+Type Hints in Large Applications
+----------------------------------------
+Type hints are especially useful in:
+Web applications.
+FastAPI projects.
+Data-processing systems.
+Machine-learning projects.
+API development.
+Large backend systems.
+Team-based software projects.
+For example, API functions can clearly describe the data they expect and return.
+----------------------------------------
+Type Hints in FastAPI
+----------------------------------------
+Type hints are particularly important in FastAPI applications.
+Example:
+from fastapi import FastAPI
+app = FastAPI()
+@app.get("/users/{user_id}")
+def get_user(user_id: int) -> dict:
+    return {"user_id": user_id}
+Here:
+user_id: int
+describes the expected path parameter type.
+-> dict
+describes the expected return type.
+FastAPI uses Python type information extensively to build validation, serialization, and API documentation.
+----------------------------------------
+Good Type Hinting Practice
+----------------------------------------
+Use type hints when they improve clarity.
+Prefer meaningful function signatures.
+Use accurate annotations.
+Keep complex annotations readable.
+Use None when a function intentionally returns no value.
+Use appropriate collection types.
+Use type aliases when a type becomes difficult to read.
+Do not add unnecessary annotations simply to make code longer.
+----------------------------------------
+Common Mistake
+----------------------------------------
+Do not assume that an annotation automatically converts a value.
+Example:
+def add(a: int, b: int) -> int:
+    return a + b
+Calling:
+add("10", "20")
+does not automatically convert the strings into integers.
+The annotation does not perform:
+int("10")
+and:
+int("20")
+automatically.
+----------------------------------------
+Type Hint vs Type Conversion
+----------------------------------------
+These are different concepts.
+Type hint:
+def add(a: int, b: int) -> int:
+    return a + b
+It describes the expected types.
+Type conversion:
+a = int("10")
+b = int("20")
+It actually converts the values.
+Type hints communicate intent.
+Type conversion changes data.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Type hints describe expected types.
+• Parameter annotations are written after parameter names.
+• Return type annotations are written after ->.
+• Type hints improve readability and maintainability.
+• Type hints help IDEs and static analysis tools.
+• Type hints normally do not enforce types at runtime.
+• list[int] describes a list of integers.
+• dict[str, int] describes string keys and integer values.
+• tuple[int, int] describes a tuple containing two integers.
+• str | None means a value may be a string or None.
+• int | str means a value may be an integer or string.
+• -> None indicates that a function does not return a meaningful value.
+• Type hints are different from type conversion.
+• Function annotations are available as metadata.
+• Type hints are especially valuable in large applications and APIs.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of type hints as labels on the inputs and output of a function.
+Without type hints:
+Input → ? → Function → ?
+With type hints:
+int + int → Function → int
+The labels tell developers and tools what the function is designed to receive and produce.
+They improve communication without changing the fundamental dynamic nature of Python.
+----------------------------------------
+Summary
+----------------------------------------
+Function annotations and type hints provide a clear way to describe the expected types of parameters, variables, and return values in Python. They improve readability, documentation, IDE support, and static analysis. Python normally does not enforce these annotations at runtime, so type hints should be understood as information about intended types rather than automatic type conversion or validation. Modern syntax supports collections such as list[int], dict[str, int], optional values such as str | None, and union types such as int | str. Type hints are especially valuable in large applications, APIs, and frameworks such as FastAPI.`,
+},
+{
+  heading: "Function Documentation — Docstrings",
+  body: `A docstring is a string written inside a function, class, or module to describe what it does.
+Docstrings are used to document code so that other developers can understand the purpose, inputs, outputs, and behavior of a program without reading every implementation detail.
+In Python, a docstring is usually written immediately after the function definition.
+----------------------------------------
+Basic Docstring
+----------------------------------------
+Example:
+def greet():
+    "Greet the user."
+    print("Hello")
+greet()
+The string:
+"Greet the user."
+is the function's docstring.
+A docstring explains what the function is designed to do.
+----------------------------------------
+Using Triple Quotes
+----------------------------------------
+For longer documentation, Python commonly uses triple-quoted strings.
+Example:
+def greet(name):
+    """
+    Greet a user by name.
+    """
+    print("Hello", name)
+The triple quotes allow the documentation to span multiple lines.
+----------------------------------------
+Docstring Must Be First
+----------------------------------------
+The docstring should be the first statement inside the function.
+Correct:
+def add(a, b):
+    """Add two numbers."""
+    return a + b
+The documentation is recognized as the function's docstring because it appears immediately after the function definition.
+----------------------------------------
+Docstring vs Normal Comment
+----------------------------------------
+A comment begins with #.
+Example:
+# This function adds two numbers
+def add(a, b):
+    return a + b
+A docstring is written as a string inside the function.
+Example:
+def add(a, b):
+    """Add two numbers."""
+    return a + b
+Both can explain code, but they serve different purposes.
+Docstrings are stored as function metadata and can be accessed programmatically.
+----------------------------------------
+Accessing a Docstring
+----------------------------------------
+Python provides the __doc__ attribute.
+Example:
+def greet():
+    """Display a greeting message."""
+    print("Hello")
+print(greet.__doc__)
+Output:
+Display a greeting message.
+The function stores its documentation in __doc__.
+----------------------------------------
+Using help()
+----------------------------------------
+Python's built-in help() function can display documentation.
+Example:
+def add(a, b):
+    """Return the sum of two numbers."""
+    return a + b
+help(add)
+Python displays information about the function, including its documentation.
+This makes docstrings useful when exploring unfamiliar code.
+----------------------------------------
+Documenting Parameters
+----------------------------------------
+A docstring can explain the parameters accepted by a function.
+Example:
+def greet(name):
+    """
+    Greet a user.
+
+    name is the user's name.
+    """
+    print("Hello", name)
+The documentation tells the reader what name represents.
+----------------------------------------
+Documenting Return Values
+----------------------------------------
+A docstring can also explain what a function returns.
+Example:
+def add(a, b):
+    """
+    Add two numbers and return the result.
+    """
+    return a + b
+The description clearly communicates the purpose and result of the function.
+----------------------------------------
+Detailed Function Documentation
+----------------------------------------
+A more detailed docstring can describe the function, parameters, return value, and possible behavior.
+Example:
+def calculate_area(length, width):
+    """
+    Calculate the area of a rectangle.
+
+    Parameters:
+        length: Length of the rectangle.
+        width: Width of the rectangle.
+
+    Returns:
+        The calculated area.
+    """
+    return length * width
+This style becomes especially useful in larger projects.
+----------------------------------------
+Google-Style Docstrings
+----------------------------------------
+One common documentation style is the Google style.
+Example:
+def add(a: int, b: int) -> int:
+    """
+    Add two integers.
+
+    Args:
+        a: First integer.
+        b: Second integer.
+
+    Returns:
+        The sum of a and b.
+    """
+    return a + b
+The sections clearly separate parameters and return information.
+----------------------------------------
+NumPy-Style Docstrings
+----------------------------------------
+Another common style is the NumPy documentation style.
+Example:
+def add(a: int, b: int) -> int:
+    """
+    Add two integers.
+
+    Parameters
+    ----------
+    a : int
+        First integer.
+    b : int
+        Second integer.
+
+    Returns
+    -------
+    int
+        The sum of a and b.
+    """
+    return a + b
+This style is widely seen in scientific Python and data-science projects.
+----------------------------------------
+reStructuredText-Style Docstrings
+----------------------------------------
+Python documentation can also use reStructuredText-style sections.
+Example:
+def add(a: int, b: int) -> int:
+    """
+    Add two integers.
+
+    :param a: First integer.
+    :param b: Second integer.
+    :return: The sum of a and b.
+    """
+    return a + b
+Different projects may choose different documentation conventions.
+----------------------------------------
+Docstrings with Type Hints
+----------------------------------------
+Docstrings and type hints work well together.
+Example:
+def calculate_area(length: float, width: float) -> float:
+    """
+    Calculate the area of a rectangle.
+
+    Args:
+        length: Rectangle length.
+        width: Rectangle width.
+
+    Returns:
+        Rectangle area.
+    """
+    return length * width
+Type hints describe expected types.
+The docstring explains the meaning and behavior.
+----------------------------------------
+Documenting Exceptions
+----------------------------------------
+A function may document exceptions that callers should know about.
+Example:
+def divide(a: float, b: float) -> float:
+    """
+    Divide a by b.
+
+    Args:
+        a: Numerator.
+        b: Denominator.
+
+    Returns:
+        The division result.
+
+    Raises:
+        ValueError: If b is zero.
+    """
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+The Raises section tells users what error they should expect under specific conditions.
+----------------------------------------
+Documenting Examples
+----------------------------------------
+A docstring can include examples.
+Example:
+def square(number: int) -> int:
+    """
+    Return the square of a number.
+
+    Example:
+        square(5) -> 25
+    """
+    return number * number
+Examples can make a function easier to understand.
+----------------------------------------
+Docstrings for Multiple Functions
+----------------------------------------
+Each function can have its own documentation.
+Example:
+def add(a, b):
+    """Return the sum of two values."""
+    return a + b
+def subtract(a, b):
+    """Return the difference between two values."""
+    return a - b
+def multiply(a, b):
+    """Return the product of two values."""
+    return a * b
+Good documentation allows developers to understand each function quickly.
+----------------------------------------
+Docstrings for Nested Functions
+----------------------------------------
+Nested functions can also have docstrings.
+Example:
+def calculate():
+    """Perform a calculation."""
+    def add(a, b):
+        """Return the sum of two values."""
+        return a + b
+    return add(10, 20)
+Both functions can contain their own documentation.
+----------------------------------------
+Docstrings and __doc__
+----------------------------------------
+Python automatically stores a function's docstring in its __doc__ attribute.
+Example:
+def greet():
+    """Display a greeting."""
+    print("Hello")
+print(greet.__doc__)
+Output:
+Display a greeting.
+This is one difference between a docstring and an ordinary comment.
+----------------------------------------
+Docstrings Are Not Just Comments
+----------------------------------------
+A docstring looks similar to a string literal, but when placed correctly at the beginning of a function, Python recognizes it as documentation.
+Example:
+def greet():
+    """Display a greeting."""
+    print("Hello")
+Python associates the string with greet().
+The documentation can then be accessed using:
+greet.__doc__
+----------------------------------------
+Empty Docstrings
+----------------------------------------
+A function can technically have an empty docstring.
+Example:
+def greet():
+    """"""
+    print("Hello")
+However, an empty docstring provides no useful information.
+A meaningful description is preferred.
+----------------------------------------
+One-Line Docstrings
+----------------------------------------
+For simple functions, a one-line docstring is usually enough.
+Example:
+def square(number):
+    """Return the square of a number."""
+    return number ** 2
+The description should be concise and describe the function's purpose.
+----------------------------------------
+Multi-Line Docstrings
+----------------------------------------
+For more complex functions, use a multi-line docstring.
+Example:
+def calculate_average(numbers):
+    """
+    Calculate the average of a collection of numbers.
+
+    The function returns the arithmetic mean
+    of the supplied values.
+    """
+    return sum(numbers) / len(numbers)
+Multi-line documentation allows more information to be provided without making the function definition difficult to read.
+----------------------------------------
+Docstrings for Modules
+----------------------------------------
+Docstrings are not limited to functions.
+A module can also have a docstring.
+Example:
+"""
+Utility functions for student calculations.
+"""
+def calculate_grade(score):
+    return score
+The module docstring describes the purpose of the Python file.
+----------------------------------------
+Docstrings for Classes
+----------------------------------------
+Classes can also have docstrings.
+Example:
+class Student:
+    """Represent a student."""
+    def __init__(self, name):
+        self.name = name
+The class docstring describes what the class represents.
+Functions and methods inside the class can have their own docstrings.
+----------------------------------------
+Method Docstrings
+----------------------------------------
+Methods are functions defined inside classes and can also be documented.
+Example:
+class Student:
+    def greet(self):
+        """Display a greeting for the student."""
+        print("Hello")
+The docstring belongs to the greet method.
+----------------------------------------
+Docstrings in Real Projects
+----------------------------------------
+Docstrings are useful in:
+Backend applications.
+FastAPI projects.
+Data-science projects.
+Machine-learning systems.
+Libraries.
+APIs.
+Utility modules.
+Team projects.
+Large Python applications.
+They help developers understand code without needing to inspect every implementation detail.
+----------------------------------------
+Docstrings in FastAPI
+----------------------------------------
+Docstrings can help document backend functions.
+Example:
+def calculate_salary(salary: float, bonus: float) -> float:
+    """
+    Calculate the total salary including the bonus.
+
+    Args:
+        salary: Base salary.
+        bonus: Additional bonus.
+
+    Returns:
+        Total salary.
+    """
+    return salary + bonus
+In frameworks and development tools, function metadata and documentation can be used to improve developer experience.
+----------------------------------------
+Good Documentation
+----------------------------------------
+A good docstring should:
+• Clearly describe what the function does.
+• Explain important parameters.
+• Describe the return value when relevant.
+• Mention important exceptions.
+• Include examples when useful.
+• Avoid unnecessary information.
+• Match the actual behavior of the function.
+----------------------------------------
+Poor Documentation
+----------------------------------------
+Avoid vague descriptions.
+Example:
+def calculate(a, b):
+    """Do something."""
+    return a + b
+"Do something" does not explain the function.
+A better version is:
+def calculate(a, b):
+    """Return the sum of two numbers."""
+    return a + b
+The second version immediately communicates the purpose.
+----------------------------------------
+Docstring Should Match the Code
+----------------------------------------
+Documentation must remain accurate.
+Example:
+def multiply(a, b):
+    """Return the sum of two numbers."""
+    return a * b
+The docstring is incorrect because the function multiplies rather than adds.
+Correct:
+def multiply(a, b):
+    """Return the product of two numbers."""
+    return a * b
+Incorrect documentation can be worse than no documentation because it can mislead developers.
+----------------------------------------
+Docstrings vs Type Hints
+----------------------------------------
+Type hints and docstrings provide different information.
+Type hint:
+def add(a: int, b: int) -> int:
+    return a + b
+Type hints communicate expected types.
+Docstring:
+def add(a: int, b: int) -> int:
+    """Return the sum of two integers."""
+    return a + b
+The docstring communicates purpose and behavior.
+Using both together often produces clearer functions.
+----------------------------------------
+Docstrings vs Comments
+----------------------------------------
+Comments explain implementation details to developers reading the source code.
+Docstrings document the public purpose and behavior of functions, classes, and modules.
+Example:
+def calculate_area(length, width):
+    """Return the area of a rectangle."""
+    # Multiply the two dimensions.
+    return length * width
+Docstring:
+Explains what the function does.
+Comment:
+Explains an implementation detail.
+----------------------------------------
+Important Rules
+----------------------------------------
+• A docstring documents a function, class, method, or module.
+• A function docstring should appear immediately after the function definition.
+• Triple quotes are commonly used for multi-line docstrings.
+• A docstring is available through the __doc__ attribute.
+• The help() function can display documentation.
+• Docstrings can describe parameters.
+• Docstrings can describe return values.
+• Docstrings can document exceptions.
+• Docstrings can include examples.
+• Type hints and docstrings complement each other.
+• Documentation should accurately describe the actual behavior.
+• Simple functions can use short one-line docstrings.
+• Complex functions can use structured multi-line docstrings.
+• Consistent documentation style is important in larger projects.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a function as a tool.
+The function is the tool itself.
+Type hints describe what kind of input the tool expects.
+The docstring is the instruction label explaining:
+What the tool does.
+What inputs it accepts.
+What it produces.
+What can go wrong.
+How it can be used.
+This makes the function easier for another developer to understand and use correctly.
+----------------------------------------
+Summary
+----------------------------------------
+Docstrings are Python's built-in way of documenting functions, methods, classes, and modules. A function docstring is placed immediately after the function definition and can describe the function's purpose, parameters, return value, exceptions, and examples. Python stores the documentation in the function's __doc__ attribute, and the help() function can display it. Docstrings are different from ordinary comments because they become accessible documentation metadata. Combined with type hints, good docstrings make Python functions easier to understand, maintain, test, reuse, and work with in professional projects.`,
+},
+{
+  heading: "Function Expressions & First-Class Functions",
+  body: `In Python, functions are first-class objects.
+This means a function can be treated like any other value in the program.
+A function can be stored in a variable, passed as an argument to another function, returned from a function, and stored inside collections such as lists and dictionaries.
+This concept is important because it forms the foundation for higher-order functions, callbacks, lambda functions, decorators, and many advanced Python programming techniques.
+----------------------------------------
+Functions as Objects
+----------------------------------------
+When you define a function, Python creates a function object.
+Example:
+def greet():
+    print("Hello")
+The name greet refers to that function object.
+You can verify this:
+print(greet)
+Python displays information showing that greet refers to a function object.
+The important idea is:
+Function name → Function object
+----------------------------------------
+Assigning a Function to a Variable
+----------------------------------------
+A function can be assigned to another variable.
+Example:
+def greet():
+    print("Hello")
+message = greet
+message()
+Output:
+Hello
+Here:
+greet → Original function reference
+message → Another reference to the same function
+message() calls the function.
+No new function was created.
+Both names refer to the same function object.
+----------------------------------------
+Do Not Use Parentheses When Assigning
+----------------------------------------
+There is an important difference between:
+message = greet
+and:
+message = greet()
+message = greet
+stores the function itself.
+message = greet()
+calls the function immediately and stores its return value.
+Example:
+def greet():
+    return "Hello"
+message = greet
+print(message)
+Output:
+<function greet ...>
+message refers to the function.
+Example:
+def greet():
+    return "Hello"
+message = greet()
+print(message)
+Output:
+Hello
+Here greet() was executed immediately and its returned value was stored.
+----------------------------------------
+Calling Through Another Variable
+----------------------------------------
+Once a function is stored in another variable, that variable can be used to call it.
+Example:
+def greet(name):
+    print("Hello", name)
+say_hello = greet
+say_hello("Rahul")
+Output:
+Hello Rahul
+The function can be accessed through either name:
+greet("Rahul")
+say_hello("Rahul")
+Both refer to the same function object.
+----------------------------------------
+Checking Function Identity
+----------------------------------------
+You can use is to check whether two variables refer to the same object.
+Example:
+def greet():
+    print("Hello")
+message = greet
+print(message is greet)
+Output:
+True
+Both names point to the same function object.
+----------------------------------------
+Passing a Function as an Argument
+----------------------------------------
+A function can be passed to another function as an argument.
+Example:
+def greet():
+    print("Hello")
+def execute(function):
+    function()
+execute(greet)
+Output:
+Hello
+Here:
+greet is passed as an argument.
+execute receives it through the parameter function.
+function() calls the received function.
+This is one of the most important examples of first-class functions.
+----------------------------------------
+Function Parameter Holding Another Function
+----------------------------------------
+Example:
+def add(a, b):
+    return a + b
+def calculate(operation, a, b):
+    return operation(a, b)
+result = calculate(add, 10, 20)
+print(result)
+Output:
+30
+The parameter operation contains a reference to the add function.
+calculate() can therefore execute whichever function it receives.
+----------------------------------------
+Passing Different Functions
+----------------------------------------
+The same function can work with different operations.
+Example:
+def add(a, b):
+    return a + b
+def multiply(a, b):
+    return a * b
+def calculate(operation, a, b):
+    return operation(a, b)
+print(calculate(add, 10, 20))
+print(calculate(multiply, 10, 20))
+Output:
+30
+200
+The calculate() function does not need to know how the operation works.
+It simply receives a function and calls it.
+----------------------------------------
+Returning a Function
+----------------------------------------
+A function can return another function.
+Example:
+def create_greeting():
+    def greet():
+        print("Hello")
+    return greet
+message = create_greeting()
+message()
+Output:
+Hello
+The outer function returns the inner function object.
+The returned function can then be called using message().
+----------------------------------------
+Function Factory
+----------------------------------------
+A function that creates and returns another function can be called a function factory.
+Example:
+def create_multiplier(factor):
+    def multiply(number):
+        return number * factor
+    return multiply
+double = create_multiplier(2)
+triple = create_multiplier(3)
+print(double(5))
+print(triple(5))
+Output:
+10
+15
+The factory creates customized functions based on the supplied factor.
+----------------------------------------
+Functions Inside Lists
+----------------------------------------
+Because functions are objects, they can be stored inside collections.
+Example:
+def add(a, b):
+    return a + b
+def multiply(a, b):
+    return a * b
+operations = [add, multiply]
+print(operations[0](10, 20))
+print(operations[1](10, 20))
+Output:
+30
+200
+The list contains function objects.
+----------------------------------------
+Functions Inside Dictionaries
+----------------------------------------
+Functions can also be stored in dictionaries.
+Example:
+def add(a, b):
+    return a + b
+def subtract(a, b):
+    return a - b
+operations = {
+    "add": add,
+    "subtract": subtract
+}
+print(operations["add"](10, 5))
+print(operations["subtract"](10, 5))
+Output:
+15
+5
+This pattern is useful for selecting behavior dynamically.
+----------------------------------------
+Function Selection with a Dictionary
+----------------------------------------
+Instead of writing many if-elif conditions, a dictionary can map names to functions.
+Example:
+def add(a, b):
+    return a + b
+def subtract(a, b):
+    return a - b
+def multiply(a, b):
+    return a * b
+operations = {
+    "+": add,
+    "-": subtract,
+    "*": multiply
+}
+operator = "+"
+result = operations[operator](10, 5)
+print(result)
+Output:
+15
+The dictionary selects which function should execute.
+----------------------------------------
+Callback Functions
+----------------------------------------
+A callback is a function passed to another function so that it can be called later.
+Example:
+def completed():
+    print("Task completed")
+def run_task(callback):
+    print("Running task...")
+    callback()
+run_task(completed)
+Output:
+Running task...
+Task completed
+The completed function is passed as a callback.
+Callbacks are common in event-driven programming and frameworks.
+----------------------------------------
+Functions and for Loops
+----------------------------------------
+A collection of functions can be processed using a loop.
+Example:
+def add(a, b):
+    return a + b
+def multiply(a, b):
+    return a * b
+operations = [add, multiply]
+for operation in operations:
+    print(operation(10, 5))
+Output:
+15
+50
+Each iteration retrieves a function object and calls it.
+----------------------------------------
+Functions as Data
+----------------------------------------
+First-class functions allow functions to be handled like data.
+For example, functions can be:
+Assigned to variables.
+Stored in lists.
+Stored in dictionaries.
+Passed as arguments.
+Returned from functions.
+Used as values in program logic.
+This allows programs to dynamically choose behavior.
+----------------------------------------
+First-Class Functions vs Function Calls
+----------------------------------------
+Remember the difference:
+greet
+means the function object.
+greet()
+means execute the function.
+Example:
+def greet():
+    return "Hello"
+function = greet
+result = greet()
+function_result = function()
+Here:
+function → function object
+result → returned value
+function_result → returned value
+Understanding this difference is essential for working with higher-order functions.
+----------------------------------------
+Functions Can Be Compared by Identity
+----------------------------------------
+Example:
+def greet():
+    print("Hello")
+a = greet
+b = greet
+print(a is b)
+Output:
+True
+Both variables refer to the same function object.
+----------------------------------------
+Functions Can Have Attributes
+----------------------------------------
+Functions are objects, so Python functions can have attributes.
+Example:
+def greet():
+    print("Hello")
+greet.language = "English"
+print(greet.language)
+Output:
+English
+This is an advanced feature and is not commonly required for everyday programming, but it demonstrates that functions are objects.
+----------------------------------------
+First-Class Functions and Scope
+----------------------------------------
+A function passed to another function keeps its own scope and behavior.
+Example:
+def create_message(name):
+    def message():
+        return "Hello " + name
+    return message
+greet = create_message("Rahul")
+print(greet())
+Output:
+Hello Rahul
+The returned function retains access to the name variable from its enclosing scope.
+This connects first-class functions with closures.
+----------------------------------------
+First-Class Functions and Higher-Order Functions
+----------------------------------------
+A higher-order function is a function that:
+Accepts another function as an argument.
+Or returns another function.
+Example:
+def apply(operation, value):
+    return operation(value)
+def square(number):
+    return number ** 2
+print(apply(square, 5))
+Output:
+25
+apply() is a higher-order function because it receives a function as an argument.
+----------------------------------------
+First-Class Functions and Lambda Functions
+----------------------------------------
+First-class functions make lambda functions useful.
+A lambda can be passed just like a normal function.
+Example:
+def calculate(operation, a, b):
+    return operation(a, b)
+result = calculate(lambda x, y: x + y, 10, 20)
+print(result)
+Output:
+30
+Lambda functions will be covered separately as a later topic.
+----------------------------------------
+First-Class Functions and Decorators
+----------------------------------------
+Decorators depend heavily on the idea that functions are objects.
+A decorator receives a function, adds or changes behavior, and returns another function.
+Conceptually:
+Function
+↓
+Decorator
+↓
+Modified Function
+Decorators are an advanced topic and should be learned after understanding first-class functions, higher-order functions, and closures.
+----------------------------------------
+Real-World Uses
+----------------------------------------
+First-class functions are useful in:
+Callbacks.
+Event handling.
+Function factories.
+Dynamic operation selection.
+Data processing.
+Sorting logic.
+API behavior selection.
+Validation systems.
+Decorators.
+Higher-order functions.
+Functional programming.
+Framework development.
+They allow programs to treat behavior as data and choose what code should execute dynamically.
+----------------------------------------
+Common Mistake
+----------------------------------------
+Incorrect:
+def greet():
+    print("Hello")
+execute(greet())
+This calls greet immediately and passes its return value to execute().
+Correct:
+execute(greet)
+This passes the function itself.
+The difference between function and function() is extremely important.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a normal value:
+number = 10
+You can store 10 in a variable.
+You can pass it to a function.
+You can return it from a function.
+You can store it in a list.
+Because functions are first-class objects, you can do the same thing with functions:
+function = greet
+You can pass greet to another function.
+You can return greet.
+You can store greet in a list.
+You can store greet in a dictionary.
+The only difference is that adding () executes the function.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Python functions are first-class objects.
+• A function can be stored in a variable.
+• A function can be passed as an argument.
+• A function can be returned from another function.
+• A function can be stored in a list.
+• A function can be stored in a dictionary.
+• function means the function object.
+• function() means execute the function.
+• Functions can be used as callbacks.
+• Functions can be used to dynamically select behavior.
+• Functions can create other functions.
+• Function factories can generate customized functions.
+• First-class functions are the foundation of higher-order functions.
+• First-class functions are important for understanding lambda functions and decorators.
+----------------------------------------
+Summary
+----------------------------------------
+Python treats functions as first-class objects, meaning functions can be stored, passed, returned, and manipulated like other values. A function can be assigned to a variable, passed as an argument, returned from another function, or stored in collections. This capability enables callbacks, function factories, dynamic operation selection, higher-order functions, closures, lambda functions, and decorators. The most important distinction to remember is that a function name such as greet refers to the function object, while greet() executes the function. Understanding first-class functions is an important step toward advanced and professional Python programming.`,
+},
+{
+  heading: "Higher-Order Functions",
+  body: `A higher-order function is a function that works with other functions.
+A function is called a higher-order function when it does at least one of these:
+1. Accepts another function as an argument.
+2. Returns another function as its result.
+Higher-order functions are built on Python's first-class function concept.
+Because Python functions are objects, they can be passed around and used as values.
+----------------------------------------
+Basic Example
+----------------------------------------
+def square(number):
+    return number ** 2
+def apply_function(function, value):
+    return function(value)
+result = apply_function(square, 5)
+print(result)
+Output:
+25
+Here:
+square → Function passed as an argument
+function → Parameter receiving the function
+value → Data passed to the function
+apply_function() → Higher-order function
+----------------------------------------
+How It Works
+----------------------------------------
+When we write:
+apply_function(square, 5)
+Python passes:
+square → function
+5 → value
+Inside apply_function():
+return function(value)
+becomes:
+return square(5)
+Therefore:
+5 ** 2 = 25
+----------------------------------------
+Passing Different Functions
+----------------------------------------
+A major advantage of higher-order functions is that the same function can work with different behaviors.
+Example:
+def add_one(number):
+    return number + 1
+def double(number):
+    return number * 2
+def apply_function(function, value):
+    return function(value)
+print(apply_function(add_one, 10))
+print(apply_function(double, 10))
+Output:
+11
+20
+apply_function() does not need to know what the supplied function does.
+It simply calls the function it receives.
+----------------------------------------
+Higher-Order Function That Returns a Function
+----------------------------------------
+A higher-order function can also return another function.
+Example:
+def create_multiplier(factor):
+    def multiply(number):
+        return number * factor
+    return multiply
+double = create_multiplier(2)
+print(double(5))
+Output:
+10
+create_multiplier() receives a value and returns a function.
+The returned function can then be called later.
+----------------------------------------
+Function Factory
+----------------------------------------
+A function that returns customized functions is often called a function factory.
+Example:
+def create_power(exponent):
+    def power(number):
+        return number ** exponent
+    return power
+square = create_power(2)
+cube = create_power(3)
+print(square(5))
+print(cube(5))
+Output:
+25
+125
+The same factory creates different functions depending on the supplied exponent.
+----------------------------------------
+Higher-Order Functions with Lists
+----------------------------------------
+Higher-order functions are commonly used to process collections.
+Example:
+def square(number):
+    return number ** 2
+def apply_to_list(function, numbers):
+    return [function(number) for number in numbers]
+numbers = [1, 2, 3, 4]
+result = apply_to_list(square, numbers)
+print(result)
+Output:
+[1, 4, 9, 16]
+The function is applied to every element of the list.
+----------------------------------------
+map() — Built-in Higher-Order Function
+----------------------------------------
+Python provides the built-in map() function.
+map() applies a function to every item in an iterable.
+Syntax:
+map(function, iterable)
+Example:
+def square(number):
+    return number ** 2
+numbers = [1, 2, 3, 4]
+result = map(square, numbers)
+print(list(result))
+Output:
+[1, 4, 9, 16]
+Here:
+square → Function
+numbers → Iterable
+map() → Higher-order function
+----------------------------------------
+map() with Lambda
+----------------------------------------
+map() is commonly combined with lambda functions.
+Example:
+numbers = [1, 2, 3, 4]
+result = map(lambda x: x * 2, numbers)
+print(list(result))
+Output:
+[2, 4, 6, 8]
+The lambda function is applied to every element.
+Lambda functions will be covered separately.
+----------------------------------------
+filter() — Filtering Data
+----------------------------------------
+Python's filter() function is another higher-order function.
+It keeps elements for which the supplied function returns True.
+Syntax:
+filter(function, iterable)
+Example:
+def is_even(number):
+    return number % 2 == 0
+numbers = [1, 2, 3, 4, 5, 6]
+result = filter(is_even, numbers)
+print(list(result))
+Output:
+[2, 4, 6]
+The function checks every number.
+If it returns True, the value remains in the result.
+----------------------------------------
+filter() with Lambda
+----------------------------------------
+Example:
+numbers = [1, 2, 3, 4, 5, 6]
+result = filter(lambda x: x % 2 == 0, numbers)
+print(list(result))
+Output:
+[2, 4, 6]
+This is a common functional-programming pattern in Python.
+----------------------------------------
+reduce() — Combining Values
+----------------------------------------
+reduce() is available through the functools module.
+It repeatedly combines values using a function.
+Example:
+from functools import reduce
+def add(a, b):
+    return a + b
+numbers = [1, 2, 3, 4]
+result = reduce(add, numbers)
+print(result)
+Output:
+10
+The calculation works conceptually like:
+((1 + 2) + 3) + 4
+----------------------------------------
+reduce() with Lambda
+----------------------------------------
+Example:
+from functools import reduce
+numbers = [1, 2, 3, 4]
+result = reduce(lambda a, b: a + b, numbers)
+print(result)
+Output:
+10
+reduce() combines the values step by step.
+----------------------------------------
+sorted() with a Function
+----------------------------------------
+The built-in sorted() function can accept a key function.
+Example:
+students = [
+    ("Rahul", 80),
+    ("Anita", 95),
+    ("Kiran", 70)
+]
+result = sorted(students, key=lambda student: student[1])
+print(result)
+Output:
+[('Kiran', 70), ('Rahul', 80), ('Anita', 95)]
+The key function tells sorted() what value should be used for comparison.
+This is another practical example of passing a function as an argument.
+----------------------------------------
+Custom Sorting Function
+----------------------------------------
+Instead of lambda, a normal function can be used.
+Example:
+def get_score(student):
+    return student[1]
+students = [
+    ("Rahul", 80),
+    ("Anita", 95),
+    ("Kiran", 70)
+]
+result = sorted(students, key=get_score)
+print(result)
+The function get_score() is passed to sorted().
+----------------------------------------
+any() and all()
+----------------------------------------
+Python's any() and all() are useful when working with conditions.
+Example:
+numbers = [2, 4, 6, 8]
+print(all(number % 2 == 0 for number in numbers))
+Output:
+True
+Example:
+numbers = [1, 3, 5, 8]
+print(any(number % 2 == 0 for number in numbers))
+Output:
+True
+These use expressions that produce Boolean results and are commonly used with functional-style processing.
+----------------------------------------
+Callbacks
+----------------------------------------
+A callback is a function passed to another function so that it can be executed at an appropriate point.
+Example:
+def on_complete():
+    print("Task completed")
+def run_task(callback):
+    print("Running task...")
+    callback()
+run_task(on_complete)
+Output:
+Running task...
+Task completed
+run_task() is a higher-order function because it receives another function.
+----------------------------------------
+Callback with Data
+----------------------------------------
+Callbacks can receive data.
+Example:
+def show_result(result):
+    print("Result:", result)
+def calculate(a, b, callback):
+    result = a + b
+    callback(result)
+calculate(10, 20, show_result)
+Output:
+Result: 30
+The callback receives the calculated result.
+----------------------------------------
+Returning a Function with a Closure
+----------------------------------------
+Higher-order functions can return functions that remember values from their enclosing scope.
+Example:
+def create_multiplier(factor):
+    def multiply(number):
+        return number * factor
+    return multiply
+double = create_multiplier(2)
+print(double(10))
+Output:
+20
+The returned multiply() function remembers factor.
+This is a closure.
+----------------------------------------
+Higher-Order Functions and Closures
+----------------------------------------
+These concepts are closely connected:
+First-class functions → Functions can be treated as objects.
+Higher-order functions → Functions can receive or return functions.
+Closures → Returned nested functions can remember enclosing values.
+Example:
+def create_discount(rate):
+    def apply_discount(price):
+        return price - (price * rate)
+    return apply_discount
+discount_10 = create_discount(0.10)
+print(discount_10(1000))
+Output:
+900.0
+The returned function remembers the rate.
+----------------------------------------
+Higher-Order Functions in Data Processing
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40]
+result = list(map(lambda x: x / 10, numbers))
+print(result)
+Output:
+[1.0, 2.0, 3.0, 4.0]
+The function describes the transformation.
+The collection contains the data.
+This separates the operation from the data being processed.
+----------------------------------------
+Combining map() and filter()
+----------------------------------------
+Higher-order functions can be combined.
+Example:
+numbers = [1, 2, 3, 4, 5, 6]
+even_numbers = filter(lambda x: x % 2 == 0, numbers)
+squared = map(lambda x: x ** 2, even_numbers)
+print(list(squared))
+Output:
+[4, 16, 36]
+First:
+filter() keeps even numbers.
+Then:
+map() squares them.
+----------------------------------------
+Higher-Order Functions in Real Applications
+----------------------------------------
+Higher-order functions are useful in:
+Data transformation.
+Data filtering.
+Sorting.
+Callbacks.
+Event handling.
+Validation.
+API processing.
+Function factories.
+Functional programming.
+Decorators.
+Machine-learning pipelines.
+Data-processing pipelines.
+They allow behavior to be passed into reusable functions instead of hard-coding every operation.
+----------------------------------------
+Advantages
+----------------------------------------
+Higher-order functions can:
+• Reduce repeated code.
+• Make functions reusable.
+• Separate data from behavior.
+• Make processing pipelines easier to build.
+• Allow dynamic behavior.
+• Support callbacks.
+• Enable function factories.
+• Form the foundation for decorators.
+• Make functional-style programming possible.
+----------------------------------------
+Things to Remember
+----------------------------------------
+A function is higher-order if it:
+Accepts a function.
+OR
+Returns a function.
+Example of accepting:
+def apply(function, value):
+    return function(value)
+Example of returning:
+def create_multiplier(factor):
+    def multiply(number):
+        return number * factor
+    return multiply
+Both are higher-order functions.
+----------------------------------------
+Common Mistake
+----------------------------------------
+Do not confuse:
+function
+with:
+function()
+Example:
+def greet():
+    print("Hello")
+def execute(callback):
+    callback()
+Correct:
+execute(greet)
+Incorrect:
+execute(greet())
+greet passes the function.
+greet() executes the function immediately.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a higher-order function as a machine that accepts another machine.
+Normal function:
+Data → Function → Result
+Higher-order function:
+Data + Function → Higher-Order Function → Result
+For example:
+Numbers + square function
+↓
+map()
+↓
+Squared numbers
+The higher-order function provides the framework, while the supplied function provides the behavior.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Higher-order functions work with other functions.
+• A function is higher-order when it accepts a function as an argument.
+• A function is also higher-order when it returns a function.
+• map() is a built-in higher-order function.
+• filter() is a built-in higher-order function.
+• reduce() from functools is a higher-order function.
+• sorted() can accept a function through its key parameter.
+• Callbacks are functions passed to other functions.
+• Function factories create customized functions.
+• Higher-order functions depend on first-class functions.
+• Closures often work together with higher-order functions.
+• Lambda functions are frequently used with higher-order functions.
+• Decorators are built on higher-order-function concepts.
+----------------------------------------
+Summary
+----------------------------------------
+Higher-order functions are functions that accept other functions as arguments or return functions as results. They are possible because Python treats functions as first-class objects. Higher-order functions allow behavior to be passed dynamically and are useful for callbacks, function factories, data transformation, filtering, sorting, and functional programming. Python provides useful higher-order functions such as map(), filter(), and reduce(). Understanding higher-order functions prepares you for lambda functions, functional programming patterns, and decorators.`,
+},
             ],
 
             code: `# Basic function
