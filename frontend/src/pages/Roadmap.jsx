@@ -19094,9 +19094,13680 @@ guessing_game()`,
         why: "These 4 structures are the backbone of every Python program. Know them inside-out.",
         topics: [
           {
-            title: "Lists — Ordered, Mutable",
+            title: "Lists — Ordered, Mutable Collections",
             type: "concept",
-            detail: "Python's most versatile structure. Ordered, mutable, allows duplicates, any types. Backed by a dynamic array internally.",
+            detail: "Python's most versatile built-in collection. Lists are ordered, mutable, allow duplicates, support mixed data types, and provide powerful indexing, slicing, and built-in methods. They are commonly used to store and process sequences of data.",
+            subsections:[
+                         {
+  heading: "Introduction to Lists",
+  body: `A list is one of Python's most important and versatile built-in collection data types.
+A list is used to store multiple values in a single variable.
+Instead of creating separate variables for related values, we can place them together inside a list and work with them as one collection.
+Example:
+students = ["Rahul", "Anita", "Kiran"]
+Here:
+students → List variable
+"Rahul", "Anita", "Kiran" → List elements
+[ ] → List brackets
+, → Separates elements
+A list can contain any number of elements, including zero elements.
+----------------------------------------
+Simple Definition
+----------------------------------------
+A list is an ordered, mutable collection that can store multiple values and allows duplicate elements.
+Example:
+numbers = [10, 20, 30, 40]
+The values are stored in a specific order, and each value can be accessed using its position.
+----------------------------------------
+Why Do We Use Lists?
+----------------------------------------
+Lists are useful when a program needs to store multiple related values.
+Examples:
+student names.
+employee records.
+product prices.
+marks.
+DSA data.
+API results.
+User inputs.
+Database records.
+Machine-learning datasets.
+Example:
+marks = [85, 92, 78, 90, 88]
+Instead of creating:
+mark1 = 85
+mark2 = 92
+mark3 = 78
+mark4 = 90
+mark5 = 88
+we can store all values in one list:
+marks = [85, 92, 78, 90, 88]
+----------------------------------------
+Creating a List
+----------------------------------------
+Lists are created using square brackets [ ].
+Example:
+numbers = [10, 20, 30, 40]
+names = ["Rahul", "Anita", "Kiran"]
+mixed = [10, "Python", 8.5, True]
+empty = []
+The empty list contains no elements.
+----------------------------------------
+Lists Are Ordered
+----------------------------------------
+Lists preserve the order in which elements are stored.
+Example:
+colors = ["red", "green", "blue"]
+The order is:
+red
+green
+blue
+If we create:
+colors = ["blue", "red", "green"]
+the order is different.
+Order matters in a list.
+----------------------------------------
+Lists Use Index Positions
+----------------------------------------
+Every element in a list has an index.
+Python uses zero-based indexing.
+Example:
+languages = ["Python", "Java", "C++"]
+Index:
+Python → 0
+Java → 1
+C++ → 2
+The first element always has index 0.
+The second element has index 1.
+The third element has index 2.
+----------------------------------------
+Accessing a List Element
+----------------------------------------
+Use the index inside square brackets.
+Example:
+languages = ["Python", "Java", "C++"]
+print(languages[0])
+Output:
+Python
+Example:
+print(languages[2])
+Output:
+C++
+The index tells Python which element to retrieve.
+----------------------------------------
+Lists Are Mutable
+----------------------------------------
+Mutable means that the contents of a list can be changed after the list is created.
+Example:
+numbers = [10, 20, 30]
+numbers[1] = 200
+print(numbers)
+Output:
+[10, 200, 30]
+The original list was modified.
+This is one of the major differences between lists and tuples.
+----------------------------------------
+Lists Allow Duplicate Values
+----------------------------------------
+A list can contain the same value multiple times.
+Example:
+numbers = [10, 20, 10, 30, 10]
+The value 10 appears three times.
+Python keeps all occurrences.
+Duplicates are completely valid in a list.
+----------------------------------------
+Lists Can Store Different Data Types
+----------------------------------------
+Python lists can contain different types of values.
+Example:
+data = [21, "Rahul", 8.75, True]
+This list contains:
+21 → int
+"Rahul" → str
+8.75 → float
+True → bool
+A list does not require every element to have the same type.
+----------------------------------------
+Lists Can Store Complex Objects
+----------------------------------------
+Lists can contain other Python objects such as:
+Lists.
+Tuples.
+Dictionaries.
+Sets.
+Functions.
+Objects created from classes.
+Example:
+student = [
+    "Rahul",
+    21,
+    [85, 90, 88],
+    {"city": "Vijayawada"}
+]
+This allows Python lists to represent complex structures.
+----------------------------------------
+Nested Lists
+----------------------------------------
+A list can contain another list.
+This is called a nested list.
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+Here:
+matrix → Outer list
+[1, 2, 3] → Inner list
+[4, 5, 6] → Inner list
+[7, 8, 9] → Inner list
+Nested lists are commonly used to represent tables, matrices, grids, and structured data.
+----------------------------------------
+Checking Whether Something Is a List
+----------------------------------------
+Use type():
+numbers = [10, 20, 30]
+print(type(numbers))
+Output:
+<class 'list'>
+You can also use isinstance():
+print(isinstance(numbers, list))
+Output:
+True
+isinstance() is generally preferred when checking whether a value belongs to a particular type.
+----------------------------------------
+List Length
+----------------------------------------
+The len() function returns the number of elements in a list.
+Example:
+numbers = [10, 20, 30, 40]
+print(len(numbers))
+Output:
+4
+The list contains four elements.
+----------------------------------------
+Empty Lists
+----------------------------------------
+An empty list contains no elements.
+Example:
+students = []
+print(students)
+Output:
+[]
+Check its length:
+print(len(students))
+Output:
+0
+Empty lists are commonly created first and populated later.
+----------------------------------------
+Lists and Memory
+----------------------------------------
+A list variable refers to a list object.
+Example:
+numbers = [10, 20, 30]
+The variable numbers refers to the list object containing the elements.
+Python manages the underlying memory automatically.
+You do not need to manually allocate or release memory for normal list usage.
+----------------------------------------
+List Variables Can Be Reassigned
+----------------------------------------
+A variable referring to a list can be assigned another list.
+Example:
+numbers = [10, 20, 30]
+numbers = [100, 200, 300]
+The variable now refers to the new list.
+The original list may later be removed from memory when it is no longer referenced.
+----------------------------------------
+Lists Can Be Iterated
+----------------------------------------
+A list can be processed element by element using a loop.
+Example:
+languages = ["Python", "Java", "C++"]
+for language in languages:
+    print(language)
+Output:
+Python
+Java
+C++
+This is one of the most common ways to work with lists.
+----------------------------------------
+Lists Can Be Modified
+----------------------------------------
+Because lists are mutable, elements can be changed.
+Example:
+fruits = ["apple", "banana", "orange"]
+fruits[0] = "mango"
+print(fruits)
+Output:
+["mango", "banana", "orange"]
+The list remains the same object while its contents change.
+----------------------------------------
+Lists Can Grow and Shrink
+----------------------------------------
+Lists are dynamic collections.
+Elements can be added or removed after creation.
+Example:
+numbers = [10, 20]
+numbers.append(30)
+print(numbers)
+Output:
+[10, 20, 30]
+An element can also be removed:
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 30]
+Adding and removing elements will be covered in detail in later List topics.
+----------------------------------------
+List Operators
+----------------------------------------
+Python supports useful operators with lists.
+Concatenation:
+[1, 2] + [3, 4]
+Output:
+[1, 2, 3, 4]
+Repetition:
+[1, 2] * 3
+Output:
+[1, 2, 1, 2, 1, 2]
+Membership:
+2 in [1, 2, 3]
+Output:
+True
+These operations allow lists to be combined, repeated, and searched.
+----------------------------------------
+Lists and Strings
+----------------------------------------
+Both strings and lists support indexing and slicing.
+Example:
+text = "Python"
+print(text[0])
+Output:
+P
+Example:
+languages = ["Python", "Java", "C++"]
+print(languages[0])
+Output:
+Python
+However, strings are immutable while lists are mutable.
+----------------------------------------
+Lists vs Individual Variables
+----------------------------------------
+Without a list:
+student1 = "Rahul"
+student2 = "Anita"
+student3 = "Kiran"
+With a list:
+students = ["Rahul", "Anita", "Kiran"]
+The list provides a single structure that can be processed using loops and list operations.
+This becomes much more useful when the amount of data grows.
+----------------------------------------
+Real-World Example
+----------------------------------------
+Suppose an application needs to store the skills of a CSE student.
+Example:
+skills = [
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "React",
+    "Git"
+]
+The application can then iterate over the skills, search for a particular skill, add new skills, remove old skills, or process the entire collection.
+This pattern appears throughout real-world Python applications.
+----------------------------------------
+Important Characteristics of Lists
+----------------------------------------
+• Ordered.
+• Mutable.
+• Allow duplicate values.
+• Can contain different data types.
+• Support indexing.
+• Support negative indexing.
+• Support slicing.
+• Can be nested.
+• Can grow and shrink dynamically.
+• Can be iterated.
+• Support many built-in methods.
+• Can contain complex Python objects.
+----------------------------------------
+List Syntax
+----------------------------------------
+The basic syntax is:
+list_name = [element1, element2, element3]
+Example:
+numbers = [10, 20, 30]
+For an empty list:
+numbers = []
+For mixed data:
+data = [10, "Python", 8.5, True]
+----------------------------------------
+Important Rules
+----------------------------------------
+• Lists are created using square brackets [ ].
+• Python uses zero-based indexing.
+• Lists are ordered collections.
+• Lists are mutable.
+• Lists allow duplicate values.
+• Lists can contain different data types.
+• Lists can contain other lists.
+• len() returns the number of elements.
+• type() can identify a list.
+• isinstance() can check whether a value is a list.
+• List elements can be accessed using indexes.
+• Lists can be modified after creation.
+• Lists can be iterated using loops.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a list as an organized row of storage boxes.
+Example:
+students = ["Rahul", "Anita", "Kiran"]
+Index:
+0 → Rahul
+1 → Anita
+2 → Kiran
+Each value has a position, and the list keeps those values together under one variable name.
+Because the list is mutable, you can replace, add, or remove values whenever the program needs to.
+----------------------------------------
+Summary
+----------------------------------------
+A list is an ordered and mutable Python collection used to store multiple values under one variable. Lists use square brackets, support zero-based indexing, allow duplicate values, can contain different data types, and can contain other collections. Because lists are mutable and dynamic, their contents can be changed, added to, or removed after creation. Lists are one of the most frequently used data structures in Python and form the foundation for working with collections of data in real-world applications.`,
+},
+{
+  heading: "Mutability in Python — Change, Add, and Remove",
+  body: `Mutability describes whether an object's contents can be changed after the object has been created.
+A mutable object can be modified without creating a completely new object.
+In Python, a list is mutable because its contents can be:
+1. Changed
+2. Added
+3. Removed
+----------------------------------------
+Simple Definition
+----------------------------------------
+A mutable object is an object whose contents can be changed, added to, or removed after it is created.
+Example:
+numbers = [10, 20, 30]
+The list can be modified after creation.
+----------------------------------------
+1. Change Existing Value
+----------------------------------------
+numbers = [10, 20, 30]
+numbers[1] = 200
+print(numbers)
+Output:
+[10, 200, 30]
+The existing value 20 was changed to 200.
+----------------------------------------
+2. Add a New Value
+----------------------------------------
+numbers = [10, 20, 30]
+numbers.append(40)
+print(numbers)
+Output:
+[10, 20, 30, 40]
+A new element was added to the existing list.
+----------------------------------------
+3. Remove a Value
+----------------------------------------
+numbers = [10, 20, 30]
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 30]
+An existing element was removed from the list.
+----------------------------------------
+Core Idea
+----------------------------------------
+Mutable means:
+CHANGE → Existing content can be modified.
+ADD → New content can be inserted.
+REMOVE → Existing content can be deleted.
+Therefore:
+List = Mutable
+----------------------------------------
+Important Clarification
+----------------------------------------
+Mutability refers to changing the contents of an existing object.
+It is different from reassigning a variable.
+Example:
+numbers = [10, 20, 30]
+numbers = [100, 200, 300]
+Here the variable numbers is simply made to refer to another list.
+That is reassignment, not an example of modifying the original list.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a mutable list as a whiteboard.
+You can:
+Change something already written.
+Add something new.
+Erase something.
+The same whiteboard remains, but its contents change.
+----------------------------------------
+Summary
+----------------------------------------
+Mutable means an object's contents can be changed after creation. For Python lists, this means existing values can be changed, new values can be added, and existing values can be removed. Lists are therefore mutable objects.`,
+},
+{
+  heading: "Creating Lists",
+  body: `Python provides several simple ways to create lists.
+The most common method is to use square brackets [ ] and place elements inside them separated by commas.
+----------------------------------------
+1. Creating a List with Values
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40]
+Here:
+numbers → List variable
+[ ] → Defines the list
+10, 20, 30, 40 → List elements
+Each element is stored in the order in which it is written.
+----------------------------------------
+2. Creating an Empty List
+----------------------------------------
+An empty list contains no elements.
+Example:
+numbers = []
+print(numbers)
+Output:
+[]
+You can add elements later.
+Example:
+numbers = []
+numbers.append(10)
+numbers.append(20)
+print(numbers)
+Output:
+[10, 20]
+----------------------------------------
+3. Creating a List of Strings
+----------------------------------------
+Example:
+languages = ["Python", "Java", "C++", "JavaScript"]
+Each element is a string.
+The elements remain in the order in which they were added.
+----------------------------------------
+4. Creating a List of Integers
+----------------------------------------
+Example:
+marks = [85, 90, 78, 92, 88]
+This is useful for storing numerical data such as marks, scores, quantities, or IDs.
+----------------------------------------
+5. Creating a List of Floats
+----------------------------------------
+Example:
+prices = [99.5, 120.75, 49.99, 250.0]
+A list can contain floating-point values.
+----------------------------------------
+6. Creating a Mixed-Type List
+----------------------------------------
+Python lists can contain values of different data types.
+Example:
+student = ["Rahul", 21, 8.75, True]
+Here:
+"Rahul" → str
+21 → int
+8.75 → float
+True → bool
+Python does not require all elements of a list to have the same type.
+----------------------------------------
+7. Creating a List with Another List
+----------------------------------------
+A list can contain another list.
+Example:
+numbers = [10, 20, [30, 40], 50]
+The inner list [30, 40] is itself an element of the outer list.
+This creates a nested list.
+----------------------------------------
+8. Creating a Nested List
+----------------------------------------
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+This structure can represent a 3 × 3 matrix or grid.
+Nested lists are useful for tables, matrices, grids, and hierarchical data.
+----------------------------------------
+9. Creating a List with list()
+----------------------------------------
+Python provides the list() constructor.
+Example:
+numbers = list()
+print(numbers)
+Output:
+[]
+This creates an empty list.
+It is equivalent to:
+numbers = []
+----------------------------------------
+10. Creating a List from a Tuple
+----------------------------------------
+The list() constructor can convert an iterable into a list.
+Example:
+data = (10, 20, 30)
+numbers = list(data)
+print(numbers)
+Output:
+[10, 20, 30]
+The tuple remains unchanged, while numbers is a new list.
+----------------------------------------
+11. Creating a List from a String
+----------------------------------------
+A string is iterable, so list() can convert it into a list of individual characters.
+Example:
+letters = list("Python")
+print(letters)
+Output:
+['P', 'y', 't', 'h', 'o', 'n']
+Each character becomes a separate list element.
+----------------------------------------
+12. Creating a List from a Range
+----------------------------------------
+The range() object can be converted into a list.
+Example:
+numbers = list(range(1, 6))
+print(numbers)
+Output:
+[1, 2, 3, 4, 5]
+This is useful when you need a list containing a sequence of numbers.
+----------------------------------------
+13. Creating a List with Repeated Values
+----------------------------------------
+The * operator can repeat a list.
+Example:
+zeros = [0] * 5
+print(zeros)
+Output:
+[0, 0, 0, 0, 0]
+This creates a list containing five zeros.
+Another example:
+values = ["Python"] * 3
+print(values)
+Output:
+['Python', 'Python', 'Python']
+----------------------------------------
+14. Creating Lists with Different Objects
+----------------------------------------
+A list can contain different Python objects.
+Example:
+data = [
+    100,
+    "Python",
+    8.75,
+    True,
+    None,
+    [1, 2, 3]
+]
+Each element can have a different type.
+----------------------------------------
+15. Creating a List with Variables
+----------------------------------------
+List elements can come from existing variables.
+Example:
+name = "Rahul"
+age = 21
+gpa = 8.75
+student = [name, age, gpa]
+print(student)
+Output:
+['Rahul', 21, 8.75]
+The list stores the values referenced by those variables.
+----------------------------------------
+16. Creating a List with Expressions
+----------------------------------------
+Expressions can also be used as list elements.
+Example:
+a = 10
+b = 20
+numbers = [a, b, a + b, b - a]
+print(numbers)
+Output:
+[10, 20, 30, 10]
+Python evaluates the expressions when creating the list.
+----------------------------------------
+17. Creating a List from User Input
+----------------------------------------
+input() returns a string, so multiple values can be collected and converted into a list.
+Example:
+names = input("Enter names: ").split()
+print(names)
+If the user enters:
+Rahul Anita Kiran
+Output:
+['Rahul', 'Anita', 'Kiran']
+The split() method separates the input into individual strings.
+----------------------------------------
+18. Creating a List of Integers from Input
+----------------------------------------
+Because input() produces strings, convert each value when integer data is required.
+Example:
+numbers = list(map(int, input("Enter numbers: ").split()))
+print(numbers)
+If the user enters:
+10 20 30
+Output:
+[10, 20, 30]
+Here:
+input() → Reads text
+split() → Separates the values
+map(int, ...) → Converts each value to int
+list(...) → Creates the final list
+----------------------------------------
+19. Creating a List with a Comprehension
+----------------------------------------
+Python provides list comprehensions for creating lists from expressions or loops.
+Example:
+squares = [x ** 2 for x in range(1, 6)]
+print(squares)
+Output:
+[1, 4, 9, 16, 25]
+List comprehensions will be covered in detail later.
+----------------------------------------
+20. Creating a List of Boolean Values
+----------------------------------------
+Example:
+status = [True, False, True, True]
+This can be useful for storing conditions or status information.
+----------------------------------------
+21. Creating a List Containing None
+----------------------------------------
+None can be used as an initial placeholder.
+Example:
+values = [None, None, None]
+print(values)
+Output:
+[None, None, None]
+This can be useful when values will be assigned later.
+----------------------------------------
+22. Important Difference: [] vs list()
+----------------------------------------
+Both create an empty list:
+numbers = []
+values = list()
+print(type(numbers))
+print(type(values))
+Output:
+<class 'list'>
+<class 'list'>
+The [] syntax is shorter and is generally preferred when simply creating an empty list.
+The list() constructor becomes particularly useful when converting an iterable into a list.
+----------------------------------------
+23. Creating a List from an Iterable
+----------------------------------------
+An iterable is an object that Python can process one element at a time.
+Examples include:
+Strings.
+Tuples.
+Sets.
+Dictionaries.
+Ranges.
+Example:
+numbers = list(range(5))
+print(numbers)
+Output:
+[0, 1, 2, 3, 4]
+The list() constructor collects the iterable's elements into a list.
+----------------------------------------
+Common Mistakes
+----------------------------------------
+Do not forget commas between elements.
+Correct:
+numbers = [10, 20, 30]
+Incorrect:
+numbers = [10 20 30]
+Do not use parentheses when you specifically want list syntax:
+numbers = (10, 20, 30)
+This creates a tuple, not a list.
+Use:
+numbers = [10, 20, 30]
+for a list.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Lists are normally created using square brackets [ ].
+• Elements are separated by commas.
+• An empty list is created with [] or list().
+• Lists can contain any Python data type.
+• Lists can contain duplicate values.
+• Lists can contain different data types.
+• Lists can contain other lists.
+• list() can convert an iterable into a list.
+• list() can convert strings, tuples, sets, ranges, and other iterables.
+• List multiplication can create repeated elements.
+• List comprehensions provide a compact way to create lists.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of creating a list as preparing a container for multiple pieces of data.
+Example:
+skills = ["Python", "FastAPI", "PostgreSQL"]
+The square brackets create the container.
+The commas separate the elements.
+The elements remain ordered and can later be accessed, changed, added, or removed.
+----------------------------------------
+Summary
+----------------------------------------
+Lists can be created using square brackets, the list() constructor, list repetition, iterable conversion, or list comprehensions. They can contain numbers, strings, Boolean values, None, other lists, and even complex Python objects. The most common syntax is list_name = [element1, element2, element3], while list() is especially useful when converting an iterable such as a range, tuple, string, or set into a list.`,
+},
+{
+  heading: "Accessing List Elements — Indexing",
+  body: `List indexing is the process of accessing an individual element from a list using its position, called an index.
+Python uses zero-based indexing, which means the first element has index 0, the second has index 1, the third has index 2, and so on.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+list_name[index]
+Example:
+languages = ["Python", "Java", "C++"]
+print(languages[0])
+Output:
+Python
+Here:
+languages → List
+[0] → Index
+"Python" → Element at index 0
+----------------------------------------
+Understanding Index Positions
+----------------------------------------
+Example:
+languages = ["Python", "Java", "C++", "JavaScript"]
+Index:
+0 → Python
+1 → Java
+2 → C++
+3 → JavaScript
+Therefore:
+languages[0] → Python
+languages[1] → Java
+languages[2] → C++
+languages[3] → JavaScript
+----------------------------------------
+First Element
+----------------------------------------
+The first element always has index 0.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[0])
+Output:
+10
+----------------------------------------
+Second Element
+----------------------------------------
+The second element has index 1.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[1])
+Output:
+20
+----------------------------------------
+Last Element Using Positive Index
+----------------------------------------
+For a list containing 4 elements, the last element has index 3.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[3])
+Output:
+40
+The general rule is:
+Last index = len(list) - 1
+----------------------------------------
+Negative Indexing
+----------------------------------------
+Python also supports negative indexes.
+Negative indexing starts from the end of the list.
+Example:
+numbers = [10, 20, 30, 40]
+Negative indexes:
+-1 → 40
+-2 → 30
+-3 → 20
+-4 → 10
+Therefore:
+print(numbers[-1])
+Output:
+40
+Negative indexing is useful when you want to access elements from the end without calculating the list length.
+----------------------------------------
+Positive vs Negative Indexing
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+Positive:
+0 → 10
+1 → 20
+2 → 30
+3 → 40
+4 → 50
+Negative:
+-5 → 10
+-4 → 20
+-3 → 30
+-2 → 40
+-1 → 50
+Both systems access the same elements from different directions.
+----------------------------------------
+Accessing Multiple Elements
+----------------------------------------
+Indexing accesses one element at a time.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[2])
+Output:
+30
+If you need multiple elements, use slicing.
+Example:
+print(numbers[1:4])
+Output:
+[20, 30, 40]
+Slicing will be covered separately.
+----------------------------------------
+Indexing with Variables
+----------------------------------------
+The index can be stored in a variable.
+Example:
+numbers = [10, 20, 30, 40]
+index = 2
+print(numbers[index])
+Output:
+30
+This is useful when the required position is determined dynamically.
+----------------------------------------
+Indexing Inside a Loop
+----------------------------------------
+Indexes can be used while iterating through a list.
+Example:
+numbers = [10, 20, 30]
+for index in range(len(numbers)):
+    print(index, numbers[index])
+Output:
+0 10
+1 20
+2 30
+Here:
+index → Position
+numbers[index] → Element at that position
+----------------------------------------
+Indexing and Modification
+----------------------------------------
+Because lists are mutable, indexing can also be used to change an element.
+Example:
+numbers = [10, 20, 30]
+numbers[1] = 200
+print(numbers)
+Output:
+[10, 200, 30]
+The index identifies which element should be changed.
+----------------------------------------
+Indexing Nested Lists
+----------------------------------------
+When a list contains another list, multiple indexes can be used.
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+To access 5:
+print(matrix[1][1])
+Output:
+5
+First:
+matrix[1] → [4, 5, 6]
+Then:
+matrix[1][1] → 5
+The first index selects the inner list.
+The second index selects an element inside that inner list.
+----------------------------------------
+Indexing Strings Inside a List
+----------------------------------------
+If a list contains strings, you can use another index to access characters inside a selected string.
+Example:
+names = ["Rahul", "Anita"]
+print(names[0])
+Output:
+Rahul
+print(names[0][1])
+Output:
+a
+First:
+names[0] → "Rahul"
+Then:
+"Rahul"[1] → "a"
+This is called chained indexing.
+----------------------------------------
+Indexing with Expressions
+----------------------------------------
+The index can be calculated using an expression.
+Example:
+numbers = [10, 20, 30, 40, 50]
+index = 1 + 2
+print(numbers[index])
+Output:
+40
+Python evaluates the expression first:
+1 + 2 = 3
+Then:
+numbers[3] → 40
+----------------------------------------
+Index Must Be an Integer
+----------------------------------------
+List indexes normally must be integers.
+Correct:
+numbers[1]
+Incorrect:
+numbers[1.5]
+This produces a TypeError because 1.5 is a float, not a valid list index.
+If an index comes from another source, make sure it is converted to an appropriate integer when necessary.
+----------------------------------------
+Index Out of Range
+----------------------------------------
+If you try to access an index that does not exist, Python raises IndexError.
+Example:
+numbers = [10, 20, 30]
+print(numbers[3])
+Output:
+IndexError
+Valid indexes are:
+0
+1
+2
+There is no index 3.
+----------------------------------------
+Negative Index Out of Range
+----------------------------------------
+Negative indexes also have limits.
+Example:
+numbers = [10, 20, 30]
+print(numbers[-4])
+Output:
+IndexError
+Valid negative indexes are:
+-1
+-2
+-3
+----------------------------------------
+Checking List Length Before Indexing
+----------------------------------------
+len() can help determine the valid index range.
+Example:
+numbers = [10, 20, 30, 40]
+print(len(numbers))
+Output:
+4
+Valid positive indexes:
+0 to 3
+Valid negative indexes:
+-1 to -4
+The general rule is:
+0 <= index < len(list)
+----------------------------------------
+Safe Indexing with Conditions
+----------------------------------------
+When the index may be uncertain, check the length first.
+Example:
+numbers = [10, 20, 30]
+index = 2
+if index < len(numbers):
+    print(numbers[index])
+Output:
+30
+This prevents an IndexError for valid non-negative indexes.
+For real applications, the index should also be checked for negative or invalid values as appropriate.
+----------------------------------------
+Indexing vs Searching
+----------------------------------------
+Indexing means accessing an element by its position.
+Example:
+numbers = [10, 20, 30]
+print(numbers[1])
+Output:
+20
+Searching means finding where a particular value occurs.
+Example:
+print(numbers.index(20))
+Output:
+1
+These are different operations:
+Indexing → You already know the position.
+Searching → You know the value and want its position.
+----------------------------------------
+Indexing vs Slicing
+----------------------------------------
+Indexing returns one element.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[1])
+Output:
+20
+Slicing returns a portion of the list.
+Example:
+print(numbers[1:3])
+Output:
+[20, 30]
+Indexing:
+list[index]
+Slicing:
+list[start:stop:step]
+Slicing will be covered in the next topic.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Python lists use zero-based indexing.
+• The first element has index 0.
+• The second element has index 1.
+• The last positive index is len(list) - 1.
+• Negative indexing starts from -1.
+• -1 refers to the last element.
+• -2 refers to the second-last element.
+• Indexing normally requires an integer index.
+• An invalid index raises IndexError.
+• Indexing can retrieve an element.
+• Indexing can also modify an element in a mutable list.
+• Nested lists can use multiple indexes.
+• Indexing one element is different from slicing multiple elements.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a list as numbered storage boxes.
+Example:
+numbers = [10, 20, 30, 40]
+          ↓   ↓   ↓   ↓
+Index →   0   1   2   3
+Value →  10  20  30  40
+When you write:
+numbers[2]
+Python goes directly to box number 2 and retrieves 30.
+From the opposite direction:
+Index →  -4  -3  -2  -1
+Value →  10  20  30  40
+So:
+numbers[-1] → 40
+----------------------------------------
+Summary
+----------------------------------------
+List indexing allows you to access individual elements using their positions. Python uses zero-based indexing, so the first element is at index 0. Negative indexing allows elements to be accessed from the end, with -1 representing the last element. Indexing can also be used to modify elements because lists are mutable. Understanding positive indexing, negative indexing, nested indexing, and IndexError is essential before learning list slicing.`,
+},
+{
+  heading: "Negative Indexing",
+  body: `Negative indexing is a Python feature that allows you to access list elements starting from the end of the list.
+Instead of starting with 0 from the beginning, negative indexing starts with -1 from the end.
+This is especially useful when you want to access the last element or elements near the end without calculating the list length.
+----------------------------------------
+Basic Example
+----------------------------------------
+numbers = [10, 20, 30, 40, 50]
+Negative indexes:
+-5 → 10
+-4 → 20
+-3 → 30
+-2 → 40
+-1 → 50
+Therefore:
+print(numbers[-1])
+Output:
+50
+----------------------------------------
+Why Does Negative Indexing Start at -1?
+----------------------------------------
+Python uses -1 for the last element because -0 would be the same as 0.
+Therefore, the negative indexing sequence is:
+-1 → Last element
+-2 → Second-last element
+-3 → Third-last element
+and so on.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[-1])
+print(numbers[-2])
+print(numbers[-3])
+print(numbers[-4])
+Output:
+40
+30
+20
+10
+----------------------------------------
+Positive vs Negative Indexing
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+Positive indexing:
+0 → 10
+1 → 20
+2 → 30
+3 → 40
+4 → 50
+Negative indexing:
+-5 → 10
+-4 → 20
+-3 → 30
+-2 → 40
+-1 → 50
+Both indexing systems access the same elements.
+They simply count from opposite directions.
+----------------------------------------
+Accessing the Last Element
+----------------------------------------
+The most common use of negative indexing is accessing the last element.
+Example:
+students = ["Rahul", "Anita", "Kiran"]
+print(students[-1])
+Output:
+Kiran
+This is often simpler than:
+print(students[len(students) - 1])
+Negative indexing provides a direct way to access the last element.
+----------------------------------------
+Accessing the Second-Last Element
+----------------------------------------
+Use -2.
+Example:
+students = ["Rahul", "Anita", "Kiran"]
+print(students[-2])
+Output:
+Anita
+----------------------------------------
+Accessing the Third-Last Element
+----------------------------------------
+Use -3.
+Example:
+students = ["Rahul", "Anita", "Kiran"]
+print(students[-3])
+Output:
+Rahul
+----------------------------------------
+Negative Index Formula
+----------------------------------------
+For a list with length n:
+-1 → Last element
+-2 → Second-last
+-3 → Third-last
+...
+-n → First element
+Example:
+numbers = [10, 20, 30, 40]
+Length = 4
+Therefore:
+-1 → 40
+-2 → 30
+-3 → 20
+-4 → 10
+The most negative valid index is:
+-len(list)
+----------------------------------------
+Negative Indexing with Strings
+----------------------------------------
+Negative indexing also works with strings.
+Example:
+word = "Python"
+print(word[-1])
+Output:
+n
+print(word[-2])
+Output:
+o
+The same concept applies:
+-1 → Last character
+-2 → Second-last character
+----------------------------------------
+Negative Indexing with Tuples
+----------------------------------------
+Tuples also support negative indexing.
+Example:
+values = (10, 20, 30, 40)
+print(values[-1])
+Output:
+40
+Negative indexing is not limited to lists.
+It works with many sequence types in Python.
+----------------------------------------
+Negative Indexing with Nested Lists
+----------------------------------------
+Negative indexes can be used with nested lists.
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+print(matrix[-1])
+Output:
+[7, 8, 9]
+Here:
+matrix[-1] → Last inner list
+To access the last element of the last inner list:
+print(matrix[-1][-1])
+Output:
+9
+The first -1 selects the last inner list.
+The second -1 selects its last element.
+----------------------------------------
+Negative Indexing for Modification
+----------------------------------------
+Because lists are mutable, negative indexes can also modify elements.
+Example:
+numbers = [10, 20, 30, 40]
+numbers[-1] = 100
+print(numbers)
+Output:
+[10, 20, 30, 100]
+The last element was changed from 40 to 100.
+----------------------------------------
+Negative Indexing with Variables
+----------------------------------------
+The negative index can be stored in a variable.
+Example:
+numbers = [10, 20, 30, 40]
+index = -2
+print(numbers[index])
+Output:
+30
+This is useful when the required position is determined dynamically.
+----------------------------------------
+Negative Index Out of Range
+----------------------------------------
+If the negative index is smaller than the valid range, Python raises IndexError.
+Example:
+numbers = [10, 20, 30]
+print(numbers[-4])
+Output:
+IndexError
+Valid negative indexes are:
+-1
+-2
+-3
+There is no -4.
+----------------------------------------
+Understanding the Boundary
+----------------------------------------
+For:
+numbers = [10, 20, 30]
+The indexes are:
+Positive:
+0 → 10
+1 → 20
+2 → 30
+Negative:
+-3 → 10
+-2 → 20
+-1 → 30
+Therefore, the valid negative range is:
+-len(numbers) through -1
+For this list:
+-3 through -1
+----------------------------------------
+Negative Indexing vs len()
+----------------------------------------
+Without negative indexing:
+numbers = [10, 20, 30, 40, 50]
+last = numbers[len(numbers) - 1]
+With negative indexing:
+last = numbers[-1]
+Both produce:
+50
+Negative indexing is shorter and easier to read when accessing elements from the end.
+----------------------------------------
+Negative Indexing in Real Applications
+----------------------------------------
+Negative indexing is useful when working with:
+File extensions.
+Last items in records.
+Recent data.
+Last characters of strings.
+End of API results.
+Latest entries.
+Stack-like data.
+Lists where the length changes dynamically.
+Example:
+filename = "report.pdf"
+extension = filename[-3:]
+print(extension)
+Output:
+pdf
+Here negative slicing is used to access characters near the end.
+Detailed slicing will be covered separately.
+----------------------------------------
+Common Mistake
+----------------------------------------
+Do not confuse:
+-1
+with:
+1
+Example:
+numbers = [10, 20, 30]
+print(numbers[1])
+Output:
+20
+print(numbers[-1])
+Output:
+30
+1 means the second element from the beginning.
+-1 means the last element from the end.
+----------------------------------------
+Another Common Mistake
+----------------------------------------
+There is no -0 index.
+Example:
+numbers = [10, 20, 30]
+numbers[-0]
+Output:
+10
+Why?
+Because:
+-0 == 0
+Therefore:
+numbers[-0]
+is exactly the same as:
+numbers[0]
+This is why negative indexing starts at -1.
+----------------------------------------
+Mental Model
+----------------------------------------
+Imagine standing at the end of a row and counting backward.
+Example:
+numbers = [10, 20, 30, 40, 50]
+From the beginning:
+0    1    2    3    4
+10   20   30   40   50
+From the end:
+-5  -4   -3   -2   -1
+10  20   30   40   50
+Positive indexing moves:
+START → END
+Negative indexing moves:
+END → START
+----------------------------------------
+Important Rules
+----------------------------------------
+• Negative indexing starts from the end.
+• -1 always represents the last element.
+• -2 represents the second-last element.
+• -3 represents the third-last element.
+• The most negative valid index is -len(list).
+• Negative indexing works with lists and other sequence types.
+• Negative indexes can be used for accessing list elements.
+• Negative indexes can modify list elements because lists are mutable.
+• An invalid negative index raises IndexError.
+• -0 is the same as 0.
+----------------------------------------
+Summary
+----------------------------------------
+Negative indexing allows Python programmers to access sequence elements from the end rather than from the beginning. The last element is accessed with -1, the second-last with -2, and the first element with -len(sequence). Negative indexing makes it easy to work with the end of lists, strings, tuples, and other sequence types without manually calculating their length.`,
+},
+{
+  heading: "List Slicing",
+  body: `List slicing is the process of extracting a portion of a list by specifying a range of indexes.
+Unlike indexing, which normally returns one element, slicing returns a new list containing multiple elements.
+Slicing is one of the most powerful and commonly used features of Python lists.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+The basic slicing syntax is:
+list[start:stop]
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[1:4])
+Output:
+[20, 30, 40]
+Here:
+start = 1
+stop = 4
+The element at index 1 is included.
+The element at index 4 is excluded.
+Therefore, indexes 1, 2, and 3 are selected.
+----------------------------------------
+The Important Rule — Start Included, Stop Excluded
+----------------------------------------
+Python slicing follows:
+[start:stop]
+Start → Included
+Stop → Excluded
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[1:4])
+Output:
+[20, 30, 40]
+Indexes:
+1 → 20 ✓
+2 → 30 ✓
+3 → 40 ✓
+4 → 50 ✗
+This is one of the most important rules to remember about slicing.
+----------------------------------------
+Visual Understanding
+----------------------------------------
+Consider:
+numbers = [10, 20, 30, 40, 50]
+Index:
+          0   1   2   3   4
+Value:
+         10  20  30  40  50
+Slice:
+numbers[1:4]
+Start at index 1.
+Move toward index 4.
+Stop before index 4.
+Result:
+[20, 30, 40]
+----------------------------------------
+Slicing from the Beginning
+----------------------------------------
+If start is omitted, Python starts from index 0.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[:3])
+Output:
+[10, 20, 30]
+This means:
+numbers[0:3]
+The first three elements are selected.
+----------------------------------------
+Slicing to the End
+----------------------------------------
+If stop is omitted, Python continues to the end.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[2:])
+Output:
+[30, 40, 50]
+This means:
+Start at index 2.
+Continue until the end.
+----------------------------------------
+Copying a List with Slicing
+----------------------------------------
+Using [:] creates a shallow copy of a list.
+Example:
+numbers = [10, 20, 30]
+copy_numbers = numbers[:]
+print(copy_numbers)
+Output:
+[10, 20, 30]
+The two lists contain the same elements but are separate list objects.
+----------------------------------------
+Slicing the Entire List
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40]
+result = numbers[:]
+print(result)
+Output:
+[10, 20, 30, 40]
+The omitted start and stop mean:
+Start → beginning
+Stop → end
+----------------------------------------
+Using Negative Indexes in Slicing
+----------------------------------------
+Negative indexes can also be used.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[-4:-1])
+Output:
+[20, 30, 40]
+Negative indexes:
+-5 → 10
+-4 → 20
+-3 → 30
+-2 → 40
+-1 → 50
+The stop index -1 is excluded.
+Therefore:
+-4, -3, -2
+are selected.
+----------------------------------------
+Getting the Last Few Elements
+----------------------------------------
+Negative slicing makes it easy to retrieve elements from the end.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[-3:])
+Output:
+[30, 40, 50]
+This means:
+Start at the third-last element.
+Continue to the end.
+----------------------------------------
+Removing the Last Few Elements from the Result
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[:-2])
+Output:
+[10, 20, 30]
+This selects everything except the last two elements.
+----------------------------------------
+Slicing with Step
+----------------------------------------
+Python slicing supports a third value called step.
+Syntax:
+list[start:stop:step]
+Example:
+numbers = [10, 20, 30, 40, 50, 60]
+print(numbers[0:6:2])
+Output:
+[10, 30, 50]
+The step is 2, so Python selects every second element.
+Indexes selected:
+0 → 10
+2 → 30
+4 → 50
+----------------------------------------
+Slicing with Step 1
+----------------------------------------
+Step 1 is the default.
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers[1:4:1])
+Output:
+[20, 30, 40]
+Therefore:
+numbers[1:4]
+and:
+numbers[1:4:1]
+produce the same result.
+----------------------------------------
+Slicing with Step 2
+----------------------------------------
+Example:
+numbers = [1, 2, 3, 4, 5, 6, 7, 8]
+print(numbers[::2])
+Output:
+[1, 3, 5, 7]
+Every second element is selected.
+----------------------------------------
+Slicing with Step 3
+----------------------------------------
+Example:
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(numbers[::3])
+Output:
+[1, 4, 7]
+Python moves three positions at a time.
+----------------------------------------
+Skipping the Start and Stop
+----------------------------------------
+You can omit both start and stop while providing a step.
+Example:
+numbers = [1, 2, 3, 4, 5, 6]
+print(numbers[::2])
+Output:
+[1, 3, 5]
+This means:
+Start → beginning
+Stop → end
+Step → 2
+----------------------------------------
+Reverse a List with Slicing
+----------------------------------------
+A negative step moves through the list from right to left.
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[::-1])
+Output:
+[50, 40, 30, 20, 10]
+The step -1 means:
+Move backward one position at a time.
+----------------------------------------
+Reverse a List with Explicit Indexes
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+print(numbers[4:0:-1])
+Output:
+[50, 40, 30, 20]
+Remember:
+The stop index is excluded.
+Index 0 is therefore not included.
+To include the entire list in reverse, use:
+numbers[::-1]
+----------------------------------------
+Negative Step
+----------------------------------------
+A negative step means Python moves backward.
+Example:
+numbers = [1, 2, 3, 4, 5]
+print(numbers[4:1:-1])
+Output:
+[5, 4, 3]
+Indexes:
+4 → 5 ✓
+3 → 4 ✓
+2 → 3 ✓
+1 → excluded
+----------------------------------------
+Changing a List Using Slice Assignment
+----------------------------------------
+Slicing can also be used to modify a list.
+Example:
+numbers = [10, 20, 30, 40]
+numbers[1:3] = [200, 300]
+print(numbers)
+Output:
+[10, 200, 300, 40]
+The elements at indexes 1 and 2 were replaced.
+----------------------------------------
+Slice Assignment Can Change List Length
+----------------------------------------
+The replacement does not have to contain the same number of elements.
+Example:
+numbers = [10, 20, 30, 40]
+numbers[1:3] = [200, 300, 400]
+print(numbers)
+Output:
+[10, 200, 300, 400, 40]
+Two elements were replaced by three.
+The list became longer.
+----------------------------------------
+Slice Assignment Can Remove Multiple Elements
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+numbers[1:4] = []
+print(numbers)
+Output:
+[10, 50]
+The selected portion was removed.
+This is different from simply creating a sliced copy.
+----------------------------------------
+Slice Assignment Can Insert Elements
+----------------------------------------
+A slice with equal start and stop indexes can insert values.
+Example:
+numbers = [10, 20, 30]
+numbers[1:1] = [15, 18]
+print(numbers)
+Output:
+[10, 15, 18, 20, 30]
+No existing element was replaced.
+The new values were inserted at index 1.
+----------------------------------------
+Slicing Does Not Modify the Original List
+----------------------------------------
+Normal slicing creates a new list.
+Example:
+numbers = [10, 20, 30, 40]
+part = numbers[1:3]
+print(numbers)
+print(part)
+Output:
+[10, 20, 30, 40]
+[20, 30]
+The original list remains unchanged.
+----------------------------------------
+Slicing vs Indexing
+----------------------------------------
+Indexing:
+numbers[2]
+returns one element:
+30
+Slicing:
+numbers[1:4]
+returns a new list:
+[20, 30, 40]
+Therefore:
+Indexing → Usually one element
+Slicing → A portion of a sequence
+----------------------------------------
+Slicing vs Slice Assignment
+----------------------------------------
+Normal slicing:
+part = numbers[1:3]
+creates a new list containing the selected elements.
+Slice assignment:
+numbers[1:3] = [100, 200]
+changes the original list.
+This distinction is extremely important.
+----------------------------------------
+Slicing Strings
+----------------------------------------
+Slicing is not limited to lists.
+Strings also support slicing.
+Example:
+text = "Python"
+print(text[1:4])
+Output:
+yth
+The same start-inclusive and stop-exclusive rule applies.
+----------------------------------------
+Slicing Tuples
+----------------------------------------
+Tuples also support slicing.
+Example:
+numbers = (10, 20, 30, 40, 50)
+print(numbers[1:4])
+Output:
+(20, 30, 40)
+Slicing works with many sequence types.
+----------------------------------------
+Slicing with Variables
+----------------------------------------
+Start, stop, and step can be stored in variables.
+Example:
+numbers = [10, 20, 30, 40, 50]
+start = 1
+stop = 4
+step = 1
+print(numbers[start:stop:step])
+Output:
+[20, 30, 40]
+This is useful when the slicing range is determined dynamically.
+----------------------------------------
+Common Slicing Patterns
+----------------------------------------
+First three:
+numbers[:3]
+Last three:
+numbers[-3:]
+Everything except the first element:
+numbers[1:]
+Everything except the last element:
+numbers[:-1]
+Every second element:
+numbers[::2]
+Reverse:
+numbers[::-1]
+Copy:
+numbers[:]
+These patterns appear frequently in real Python code.
+----------------------------------------
+Out-of-Range Slicing
+----------------------------------------
+Unlike indexing, slicing generally does not raise IndexError when the requested range extends beyond the list.
+Example:
+numbers = [10, 20, 30]
+print(numbers[0:100])
+Output:
+[10, 20, 30]
+Python simply stops at the available boundary.
+This is different from:
+numbers[100]
+which raises IndexError.
+----------------------------------------
+Empty Slices
+----------------------------------------
+A slice can produce an empty list.
+Example:
+numbers = [10, 20, 30]
+print(numbers[2:2])
+Output:
+[]
+The start and stop positions are the same, so there are no elements between them.
+----------------------------------------
+Step Cannot Be Zero
+----------------------------------------
+The step value cannot be zero.
+Example:
+numbers = [10, 20, 30]
+print(numbers[::0])
+Output:
+ValueError
+A step must be positive or negative, but never zero.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of slicing as cutting out a section of a list.
+Example:
+numbers = [10, 20, 30, 40, 50]
+          0   1   2   3   4
+numbers[1:4]
+          ↑       ↑
+        Start     Stop
+Start is included.
+Stop is excluded.
+Result:
+[20, 30, 40]
+Adding a step tells Python how far to move each time:
+[start : stop : step]
+----------------------------------------
+Important Rules
+----------------------------------------
+• Slicing uses start:stop:step.
+• Start is included.
+• Stop is excluded.
+• The default start is the beginning.
+• The default stop is the end.
+• The default step is 1.
+• A positive step moves forward.
+• A negative step moves backward.
+• [::-1] reverses a list.
+• Normal slicing creates a new list.
+• Slice assignment modifies the original list.
+• Slice assignment can add, replace, or remove elements.
+• Slicing can use negative indexes.
+• Slicing usually handles out-of-range boundaries without IndexError.
+• A step of zero raises ValueError.
+----------------------------------------
+Summary
+----------------------------------------
+List slicing allows you to extract, copy, reverse, or modify portions of a list using the start:stop:step syntax. The start position is included while the stop position is excluded. The step controls how Python moves through the list and can be negative for reverse traversal. Normal slicing creates a new list, while slice assignment can modify the original list by replacing, inserting, or removing multiple elements. Mastering slicing is essential for efficient Python list and sequence manipulation.`,
+},
+{
+  heading: "Modifying List Elements",
+  body: `Because lists are mutable, you can change their existing elements after the list has been created.
+The most direct way to modify a list element is to use its index and assign a new value.
+----------------------------------------
+Basic Syntax
+----------------------------------------
+list[index] = new_value
+Example:
+numbers = [10, 20, 30]
+numbers[1] = 200
+print(numbers)
+Output:
+[10, 200, 30]
+Here:
+numbers[1] → Selects the element at index 1.
+= 200 → Replaces its existing value.
+----------------------------------------
+Modifying the First Element
+----------------------------------------
+Example:
+languages = ["Python", "Java", "C++"]
+languages[0] = "JavaScript"
+print(languages)
+Output:
+["JavaScript", "Java", "C++"]
+Index 0 identifies the first element.
+----------------------------------------
+Modifying the Last Element
+----------------------------------------
+Negative indexing can also be used.
+Example:
+numbers = [10, 20, 30, 40]
+numbers[-1] = 400
+print(numbers)
+Output:
+[10, 20, 30, 400]
+Here -1 refers to the last element.
+----------------------------------------
+Modifying Multiple Elements
+----------------------------------------
+Use slice assignment to replace multiple elements.
+Example:
+numbers = [10, 20, 30, 40, 50]
+numbers[1:4] = [200, 300, 400]
+print(numbers)
+Output:
+[10, 200, 300, 400, 50]
+Indexes 1, 2, and 3 were replaced.
+----------------------------------------
+Replacing with More Elements
+----------------------------------------
+Slice assignment can replace a section with more values than it originally contained.
+Example:
+numbers = [10, 20, 30, 40]
+numbers[1:2] = [200, 300, 400]
+print(numbers)
+Output:
+[10, 200, 300, 400, 30, 40]
+One original element was replaced with three elements.
+The list became longer.
+----------------------------------------
+Replacing with Fewer Elements
+----------------------------------------
+You can also replace multiple elements with fewer values.
+Example:
+numbers = [10, 20, 30, 40, 50]
+numbers[1:4] = [200]
+print(numbers)
+Output:
+[10, 200, 50]
+Three elements were replaced by one.
+The list became shorter.
+----------------------------------------
+Replacing Elements with Different Data Types
+----------------------------------------
+A list can contain different data types, so an element can be replaced with a value of another type.
+Example:
+data = [10, 20, 30]
+data[1] = "Python"
+print(data)
+Output:
+[10, "Python", 30]
+The list can now contain both integers and strings.
+----------------------------------------
+Modifying Using a Variable
+----------------------------------------
+The new value can come from a variable.
+Example:
+numbers = [10, 20, 30]
+new_value = 200
+numbers[1] = new_value
+print(numbers)
+Output:
+[10, 200, 30]
+----------------------------------------
+Modifying Using an Expression
+----------------------------------------
+The replacement value can be calculated dynamically.
+Example:
+numbers = [10, 20, 30]
+numbers[1] = numbers[1] * 10
+print(numbers)
+Output:
+[10, 200, 30]
+Python first reads the existing value and then assigns the calculated result.
+----------------------------------------
+Modifying Elements in a Loop
+----------------------------------------
+You can modify list elements by working with their indexes.
+Example:
+numbers = [1, 2, 3, 4]
+for i in range(len(numbers)):
+    numbers[i] = numbers[i] * 2
+print(numbers)
+Output:
+[2, 4, 6, 8]
+The index allows the original list to be modified directly.
+----------------------------------------
+Important: for Value vs for Index
+----------------------------------------
+This does NOT modify the list:
+numbers = [1, 2, 3]
+for number in numbers:
+    number = number * 2
+print(numbers)
+Output:
+[1, 2, 3]
+The variable number only receives each value temporarily.
+To modify the list, use indexes:
+numbers = [1, 2, 3]
+for i in range(len(numbers)):
+    numbers[i] = numbers[i] * 2
+print(numbers)
+Output:
+[2, 4, 6]
+----------------------------------------
+Modifying with enumerate()
+----------------------------------------
+enumerate() provides both the index and value.
+Example:
+numbers = [10, 20, 30]
+for index, value in enumerate(numbers):
+    numbers[index] = value + 5
+print(numbers)
+Output:
+[15, 25, 35]
+This is often cleaner than manually using range(len(numbers)).
+----------------------------------------
+Modifying Nested List Elements
+----------------------------------------
+Nested lists can be modified using multiple indexes.
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+matrix[1][2] = 60
+print(matrix)
+Output:
+[
+    [1, 2, 3],
+    [4, 5, 60]
+]
+First:
+matrix[1] → [4, 5, 6]
+Then:
+matrix[1][2] → 6
+The value 6 is replaced with 60.
+----------------------------------------
+Modifying a List of Lists
+----------------------------------------
+Example:
+students = [
+    ["Rahul", 20],
+    ["Anita", 21]
+]
+students[0][1] = 22
+print(students)
+Output:
+[
+    ["Rahul", 22],
+    ["Anita", 21]
+]
+Multiple indexes allow you to reach deeply nested values.
+----------------------------------------
+Modifying Elements with Negative Indexes
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50]
+numbers[-2] = 400
+print(numbers)
+Output:
+[10, 20, 30, 400, 50]
+-2 refers to the second-last element.
+----------------------------------------
+Modifying a Section with Step
+----------------------------------------
+Slice assignment can also use a step.
+Example:
+numbers = [10, 20, 30, 40, 50, 60]
+numbers[::2] = [100, 300, 500]
+print(numbers)
+Output:
+[100, 20, 300, 40, 500, 60]
+The selected indexes are:
+0 → 10
+2 → 30
+4 → 50
+Because a step is specified, the replacement must contain the same number of elements.
+----------------------------------------
+Changing the Entire List
+----------------------------------------
+Slice assignment can replace the complete contents of a list.
+Example:
+numbers = [10, 20, 30]
+numbers[:] = [100, 200, 300, 400]
+print(numbers)
+Output:
+[100, 200, 300, 400]
+The existing list object is modified.
+This is different from:
+numbers = [100, 200, 300, 400]
+which reassigns the variable to another list object.
+----------------------------------------
+Modification vs Reassignment
+----------------------------------------
+This modifies the existing list:
+numbers = [10, 20, 30]
+numbers[0] = 100
+This reassigns the variable:
+numbers = [100, 200, 300]
+The first changes the contents of an existing list.
+The second makes the variable refer to another list.
+----------------------------------------
+Why This Difference Matters
+----------------------------------------
+Consider:
+numbers = [10, 20, 30]
+other = numbers
+numbers[0] = 100
+print(other)
+Output:
+[100, 20, 30]
+Both variables refer to the same list object, so modifying the list is visible through both names.
+But with reassignment:
+numbers = [10, 20, 30]
+other = numbers
+numbers = [100, 200, 300]
+print(other)
+Output:
+[10, 20, 30]
+numbers now refers to a different list.
+other still refers to the original list.
+----------------------------------------
+IndexError While Modifying
+----------------------------------------
+The index must exist.
+Example:
+numbers = [10, 20, 30]
+numbers[3] = 40
+Output:
+IndexError
+Valid indexes are:
+0
+1
+2
+You cannot modify an element at an index that does not exist.
+If you want to add a new element, use methods such as append() or insert().
+----------------------------------------
+Modifying vs Adding
+----------------------------------------
+These are different operations.
+Modify an existing element:
+numbers[1] = 200
+Add a new element:
+numbers.append(200)
+Modify:
+[10, 20, 30]
+→ [10, 200, 30]
+Add:
+[10, 20, 30]
+→ [10, 20, 30, 200]
+Modification replaces an existing position.
+Adding increases the number of elements.
+----------------------------------------
+Modifying vs Removing
+----------------------------------------
+Modify:
+numbers[1] = 200
+Remove:
+numbers.remove(20)
+Modification changes a value.
+Removal deletes an element and changes the list structure.
+Adding, removing, and modifying will be explored separately in the appropriate list-method topics.
+----------------------------------------
+Real-World Example
+----------------------------------------
+Suppose a student record contains marks:
+marks = [75, 82, 68, 90]
+If the third mark was entered incorrectly:
+marks[2] = 78
+print(marks)
+Output:
+[75, 82, 78, 90]
+The incorrect value was replaced without recreating the entire list.
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a list as a row of labeled storage positions.
+Example:
+numbers = [10, 20, 30]
+Index:
+0 → 10
+1 → 20
+2 → 30
+When you write:
+numbers[1] = 200
+Python goes to position 1 and replaces 20 with 200.
+The list remains a list, but its contents have changed.
+----------------------------------------
+Important Rules
+----------------------------------------
+• Lists are mutable.
+• Existing elements can be modified using indexes.
+• Syntax: list[index] = new_value.
+• Negative indexes can also modify elements.
+• Slice assignment can modify multiple elements.
+• Slice assignment can increase or decrease list length.
+• A stepped slice assignment must have a compatible number of replacement values.
+• enumerate() is useful when modifying elements inside a loop.
+• Invalid indexes raise IndexError.
+• Modifying a list is different from reassigning a variable.
+• Adding a new element is different from modifying an existing element.
+----------------------------------------
+Summary
+----------------------------------------
+Modifying list elements means changing the contents of an existing list after it has been created. Because lists are mutable, individual elements can be replaced using indexes, multiple elements can be changed using slice assignment, and nested elements can be modified using multiple indexes. The key operation is list[index] = new_value. Understanding the difference between modifying an existing list and reassigning a variable is especially important when multiple variables refer to the same list object.`,
+},
+{
+  heading: "Adding Elements to Lists — append(), insert(), extend()",
+  body: `Python provides several methods for adding elements to an existing list.
+The three most important methods are:
+append() → Adds one element at the end.
+insert() → Adds one element at a specific position.
+extend() → Adds multiple elements to the end.
+Understanding the difference between these three methods is essential for working with lists.
+----------------------------------------
+1. append() — Add One Element at the End
+----------------------------------------
+The append() method adds exactly one element to the end of a list.
+Syntax:
+list.append(element)
+Example:
+numbers = [10, 20, 30]
+numbers.append(40)
+print(numbers)
+Output:
+[10, 20, 30, 40]
+The new element 40 is added after the existing last element.
+----------------------------------------
+append() Always Adds at the End
+----------------------------------------
+Example:
+languages = ["Python", "Java"]
+languages.append("C++")
+print(languages)
+Output:
+["Python", "Java", "C++"]
+append() does not allow you to choose the insertion position.
+It always adds the new element at the end.
+----------------------------------------
+append() Returns None
+----------------------------------------
+append() modifies the original list and returns None.
+Example:
+numbers = [10, 20]
+result = numbers.append(30)
+print(numbers)
+print(result)
+Output:
+[10, 20, 30]
+None
+Do not write:
+numbers = numbers.append(30)
+This would replace the list variable with None.
+Correct:
+numbers.append(30)
+----------------------------------------
+append() with Different Data Types
+----------------------------------------
+A list can accept different types of elements.
+Example:
+data = [10, 20]
+data.append("Python")
+data.append(8.5)
+data.append(True)
+print(data)
+Output:
+[10, 20, "Python", 8.5, True]
+----------------------------------------
+append() Adds a List as One Element
+----------------------------------------
+This is an important behavior.
+Example:
+numbers = [1, 2, 3]
+numbers.append([4, 5])
+print(numbers)
+Output:
+[1, 2, 3, [4, 5]]
+The entire [4, 5] becomes one element.
+The result has four elements:
+1
+2
+3
+[4, 5]
+It does NOT produce:
+[1, 2, 3, 4, 5]
+For that behavior, use extend().
+----------------------------------------
+2. insert() — Add at a Specific Position
+----------------------------------------
+The insert() method adds one element at a specified index.
+Syntax:
+list.insert(index, element)
+Example:
+numbers = [10, 20, 30]
+numbers.insert(1, 15)
+print(numbers)
+Output:
+[10, 15, 20, 30]
+The element 15 is inserted at index 1.
+Existing elements are shifted to the right.
+----------------------------------------
+Understanding insert()
+----------------------------------------
+Before:
+[10, 20, 30]
+Indexes:
+0 → 10
+1 → 20
+2 → 30
+After:
+numbers.insert(1, 15)
+Result:
+[10, 15, 20, 30]
+The original 20 moves from index 1 to index 2.
+----------------------------------------
+insert() at the Beginning
+----------------------------------------
+Use index 0.
+Example:
+numbers = [20, 30, 40]
+numbers.insert(0, 10)
+print(numbers)
+Output:
+[10, 20, 30, 40]
+----------------------------------------
+insert() at the End
+----------------------------------------
+You can use an index equal to the current length.
+Example:
+numbers = [10, 20, 30]
+numbers.insert(len(numbers), 40)
+print(numbers)
+Output:
+[10, 20, 30, 40]
+However, when you simply want to add something at the end, append() is clearer.
+----------------------------------------
+insert() with Negative Index
+----------------------------------------
+Negative indexes can also be used.
+Example:
+numbers = [10, 20, 30, 40]
+numbers.insert(-1, 25)
+print(numbers)
+Output:
+[10, 20, 30, 25, 40]
+The negative index determines the insertion position according to Python's list insertion behavior.
+When precise placement matters, use a clear non-negative index when possible.
+----------------------------------------
+insert() with an Out-of-Range Index
+----------------------------------------
+Python does not raise IndexError for ordinary out-of-range insert positions.
+Example:
+numbers = [10, 20, 30]
+numbers.insert(100, 40)
+print(numbers)
+Output:
+[10, 20, 30, 40]
+A very large positive index places the element at the end.
+A sufficiently negative index places it at the beginning.
+----------------------------------------
+insert() Returns None
+----------------------------------------
+Like append(), insert() modifies the original list and returns None.
+Example:
+numbers = [10, 20]
+result = numbers.insert(1, 15)
+print(numbers)
+print(result)
+Output:
+[10, 15, 20]
+None
+----------------------------------------
+3. extend() — Add Multiple Elements
+----------------------------------------
+The extend() method adds each element from an iterable to the end of the list.
+Syntax:
+list.extend(iterable)
+Example:
+numbers = [1, 2, 3]
+numbers.extend([4, 5, 6])
+print(numbers)
+Output:
+[1, 2, 3, 4, 5, 6]
+Each element from [4, 5, 6] is added individually.
+----------------------------------------
+append() vs extend()
+----------------------------------------
+This is one of the most important differences.
+Using append():
+numbers = [1, 2, 3]
+numbers.append([4, 5])
+Result:
+[1, 2, 3, [4, 5]]
+The list [4, 5] becomes ONE element.
+Using extend():
+numbers = [1, 2, 3]
+numbers.extend([4, 5])
+Result:
+[1, 2, 3, 4, 5]
+The elements 4 and 5 are added individually.
+Remember:
+append() → Adds the object as one element.
+extend() → Adds elements from the iterable individually.
+----------------------------------------
+extend() with a Tuple
+----------------------------------------
+Example:
+numbers = [1, 2]
+numbers.extend((3, 4))
+print(numbers)
+Output:
+[1, 2, 3, 4]
+A tuple is iterable, so its elements are added individually.
+----------------------------------------
+extend() with a Set
+----------------------------------------
+Example:
+numbers = [1, 2]
+numbers.extend({3, 4})
+print(numbers)
+Output:
+[1, 2, 3, 4]
+The elements of the set are added to the list.
+Because sets are unordered, do not rely on a particular order when extending from a set.
+----------------------------------------
+extend() with a String
+----------------------------------------
+Strings are iterable.
+Therefore, extend() adds each character separately.
+Example:
+letters = ["A", "B"]
+letters.extend("CD")
+print(letters)
+Output:
+["A", "B", "C", "D"]
+The string "CD" is not added as one element.
+Its characters are processed individually.
+----------------------------------------
+append() vs extend() with a String
+----------------------------------------
+append():
+letters = ["A", "B"]
+letters.append("CD")
+Result:
+["A", "B", "CD"]
+extend():
+letters = ["A", "B"]
+letters.extend("CD")
+Result:
+["A", "B", "C", "D"]
+This difference is extremely important.
+----------------------------------------
+extend() with range()
+----------------------------------------
+range() is iterable.
+Example:
+numbers = [1, 2]
+numbers.extend(range(3, 6))
+print(numbers)
+Output:
+[1, 2, 3, 4, 5]
+----------------------------------------
+extend() with Another List
+----------------------------------------
+Example:
+first = [1, 2, 3]
+second = [4, 5, 6]
+first.extend(second)
+print(first)
+Output:
+[1, 2, 3, 4, 5, 6]
+The second list itself is not inserted as a nested list.
+Its elements are added to the first list.
+----------------------------------------
+Adding an Empty Iterable
+----------------------------------------
+Example:
+numbers = [1, 2, 3]
+numbers.extend([])
+print(numbers)
+Output:
+[1, 2, 3]
+Nothing is added because the iterable contains no elements.
+----------------------------------------
+All Three Methods Compared
+----------------------------------------
+append():
+numbers = [1, 2]
+numbers.append([3, 4])
+Result:
+[1, 2, [3, 4]]
+One object is added.
+insert():
+numbers = [1, 2]
+numbers.insert(1, 3)
+Result:
+[1, 3, 2]
+One object is inserted at a position.
+extend():
+numbers = [1, 2]
+numbers.extend([3, 4])
+Result:
+[1, 2, 3, 4]
+Multiple elements are added.
+----------------------------------------
+Choosing the Correct Method
+----------------------------------------
+Use append() when:
+You want to add one item at the end.
+Use insert() when:
+You want to add one item at a specific position.
+Use extend() when:
+You want to add multiple elements from an iterable.
+----------------------------------------
+Adding Elements in a Loop
+----------------------------------------
+append() can be used to build a list gradually.
+Example:
+squares = []
+for number in range(1, 6):
+    squares.append(number ** 2)
+print(squares)
+Output:
+[1, 4, 9, 16, 25]
+Each loop iteration calculates a value and appends it to the list.
+----------------------------------------
+Building a List from User Input
+----------------------------------------
+Example:
+numbers = []
+for i in range(3):
+    value = int(input("Enter number: "))
+    numbers.append(value)
+print(numbers)
+The list starts empty and grows as values are entered.
+----------------------------------------
+Adding Nested Data
+----------------------------------------
+append() is useful when you intentionally want nested structures.
+Example:
+students = []
+students.append(["Rahul", 21])
+students.append(["Anita", 22])
+print(students)
+Output:
+[["Rahul", 21], ["Anita", 22]]
+Each student record becomes one element of the outer list.
+----------------------------------------
+Adding Dictionaries to a List
+----------------------------------------
+Example:
+students = []
+students.append({"name": "Rahul", "age": 21})
+students.append({"name": "Anita", "age": 22})
+print(students)
+The dictionaries are stored as individual elements.
+This pattern is common when representing records in Python applications.
+----------------------------------------
+Combining Lists with +=
+----------------------------------------
+The += operator can also add elements from an iterable.
+Example:
+numbers = [1, 2, 3]
+numbers += [4, 5]
+print(numbers)
+Output:
+[1, 2, 3, 4, 5]
+This behaves similarly to extend() for a list iterable.
+However, extend() communicates the intention more explicitly.
+----------------------------------------
+Important Difference: + vs extend()
+----------------------------------------
+The + operator creates a new list.
+Example:
+numbers = [1, 2, 3]
+numbers = numbers + [4, 5]
+The original list object is replaced by a new list.
+extend() modifies the existing list.
+Example:
+numbers = [1, 2, 3]
+numbers.extend([4, 5])
+This distinction matters when multiple variables refer to the same list.
+----------------------------------------
+List Aliasing and Adding Elements
+----------------------------------------
+Example:
+numbers = [1, 2, 3]
+other = numbers
+numbers.append(4)
+print(other)
+Output:
+[1, 2, 3, 4]
+Both variables refer to the same list object.
+Because append() modifies that existing object, the change is visible through both names.
+----------------------------------------
+Return Value of Adding Methods
+----------------------------------------
+append(), insert(), and extend() modify the list in place and return None.
+Example:
+numbers = [1, 2]
+result = numbers.extend([3, 4])
+print(result)
+Output:
+None
+The correct pattern is:
+numbers.extend([3, 4])
+not:
+numbers = numbers.extend([3, 4])
+----------------------------------------
+Performance Concept
+----------------------------------------
+append() is generally efficient for adding items to the end of a list.
+insert() can be more expensive when inserting near the beginning or middle because existing elements may need to be shifted.
+extend() is useful when adding multiple elements because it adds the elements from the iterable directly.
+For everyday Python programming, focus first on the behavior and correct method selection rather than implementation-level optimization.
+----------------------------------------
+Common Mistakes
+----------------------------------------
+Mistake 1:
+numbers.append(4, 5)
+This raises TypeError because append() accepts one element.
+Correct:
+numbers.extend([4, 5])
+Mistake 2:
+numbers.append([4, 5])
+expecting:
+[1, 2, 3, 4, 5]
+Actual:
+[1, 2, 3, [4, 5]]
+Use extend() when you want the individual elements.
+Mistake 3:
+numbers = numbers.append(4)
+This makes numbers equal to None.
+Correct:
+numbers.append(4)
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a list as a container:
+append() → Put ONE box into the container.
+insert() → Put ONE box into a specific position.
+extend() → Open another collection and put EACH of its items into the container.
+Example:
+numbers = [1, 2]
+append([3, 4])
+→ [1, 2, [3, 4]]
+extend([3, 4])
+→ [1, 2, 3, 4]
+----------------------------------------
+Important Rules
+----------------------------------------
+• append() adds exactly one element at the end.
+• insert() adds one element at a specified position.
+• extend() adds elements from an iterable.
+• append() can add another list as a single nested element.
+• extend() adds the elements of another iterable individually.
+• Strings are iterable, so extend() adds their characters individually.
+• All three methods modify the original list.
+• append(), insert(), and extend() return None.
+• append() does not take multiple positional elements.
+• insert() can use an index to control the position.
+• extend() is useful for combining elements from another iterable.
+----------------------------------------
+Quick Comparison
+----------------------------------------
+append(x)
+→ Add one object at the end.
+insert(i, x)
+→ Add one object at index i.
+extend(iterable)
+→ Add each element from the iterable.
+Example:
+numbers = [1, 2]
+numbers.append([3, 4])
+→ [1, 2, [3, 4]]
+numbers = [1, 2]
+numbers.insert(1, 3)
+→ [1, 3, 2]
+numbers = [1, 2]
+numbers.extend([3, 4])
+→ [1, 2, 3, 4]
+----------------------------------------
+Summary
+----------------------------------------
+Python provides append(), insert(), and extend() for adding elements to lists. append() adds exactly one object to the end, insert() adds one object at a specific position, and extend() adds each element from an iterable to the end. The most important distinction is that append() treats its argument as one element, while extend() processes the argument as an iterable and adds its elements individually. All three methods modify the existing list and return None.`,
+},
+{
+  heading: "Removing Elements from Lists — remove(), pop(), del, clear()",
+  body: `Python provides several ways to remove elements from a list.
+The four important methods and statements are:
+remove() → Removes an element by value.
+pop() → Removes an element by index and returns it.
+del → Deletes an element, slice, or even the entire list variable.
+clear() → Removes all elements while keeping the list object.
+The correct choice depends on whether you know the value, the position, or want to remove everything.
+----------------------------------------
+1. remove() — Remove by Value
+----------------------------------------
+The remove() method searches for a value and removes its first occurrence.
+Syntax:
+list.remove(value)
+Example:
+numbers = [10, 20, 30, 20, 40]
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 30, 20, 40]
+Only the FIRST occurrence of 20 was removed.
+----------------------------------------
+remove() Works by Value, Not Index
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 30]
+Here:
+20 → Value being searched for.
+It is NOT saying:
+"Remove the element at index 20."
+----------------------------------------
+remove() with Duplicate Values
+----------------------------------------
+Example:
+numbers = [10, 20, 20, 30]
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 20, 30]
+Only the first matching 20 is removed.
+To remove all occurrences, you need a different approach, such as a loop or list comprehension.
+----------------------------------------
+remove() When Value Does Not Exist
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+numbers.remove(50)
+Output:
+ValueError
+Python raises ValueError because 50 does not exist in the list.
+----------------------------------------
+Safely Checking Before remove()
+----------------------------------------
+You can check whether the value exists first.
+Example:
+numbers = [10, 20, 30]
+if 20 in numbers:
+    numbers.remove(20)
+print(numbers)
+Output:
+[10, 30]
+This prevents ValueError when the value is absent.
+----------------------------------------
+remove() Returns None
+----------------------------------------
+remove() modifies the original list and returns None.
+Example:
+numbers = [10, 20, 30]
+result = numbers.remove(20)
+print(numbers)
+print(result)
+Output:
+[10, 30]
+None
+Correct:
+numbers.remove(20)
+Incorrect:
+numbers = numbers.remove(20)
+The second statement would make numbers equal to None.
+----------------------------------------
+2. pop() — Remove by Index
+----------------------------------------
+The pop() method removes an element by its index and returns the removed element.
+Syntax:
+list.pop(index)
+Example:
+numbers = [10, 20, 30, 40]
+removed = numbers.pop(2)
+print(numbers)
+print(removed)
+Output:
+[10, 20, 40]
+30
+Index 2 contained 30, so 30 was removed and returned.
+----------------------------------------
+pop() Without an Index
+----------------------------------------
+If no index is provided, pop() removes the last element.
+Example:
+numbers = [10, 20, 30]
+removed = numbers.pop()
+print(numbers)
+print(removed)
+Output:
+[10, 20]
+30
+This is one of the most common uses of pop().
+----------------------------------------
+pop() with Negative Index
+----------------------------------------
+Negative indexes are supported.
+Example:
+numbers = [10, 20, 30, 40]
+removed = numbers.pop(-2)
+print(numbers)
+print(removed)
+Output:
+[10, 20, 40]
+30
+-2 refers to the second-last element.
+----------------------------------------
+pop() Returns the Removed Element
+----------------------------------------
+This is the major difference between pop() and remove().
+Example:
+numbers = [10, 20, 30]
+value = numbers.pop()
+print(value)
+Output:
+30
+The removed value can immediately be stored in another variable.
+This makes pop() useful when the removed item still needs to be processed.
+----------------------------------------
+pop() with an Invalid Index
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+numbers.pop(5)
+Output:
+IndexError
+The specified index does not exist.
+----------------------------------------
+pop() on an Empty List
+----------------------------------------
+Example:
+numbers = []
+numbers.pop()
+Output:
+IndexError
+There is no element available to remove.
+----------------------------------------
+3. del — Delete by Index or Slice
+----------------------------------------
+del is a Python statement, not a list method.
+It can delete an individual element or a range of elements.
+Syntax:
+del list[index]
+Example:
+numbers = [10, 20, 30, 40]
+del numbers[1]
+print(numbers)
+Output:
+[10, 30, 40]
+The element at index 1 was deleted.
+----------------------------------------
+del with a Negative Index
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40]
+del numbers[-1]
+print(numbers)
+Output:
+[10, 20, 30]
+The last element was deleted.
+----------------------------------------
+del with a Slice
+----------------------------------------
+del can remove multiple elements at once.
+Example:
+numbers = [10, 20, 30, 40, 50]
+del numbers[1:4]
+print(numbers)
+Output:
+[10, 50]
+Indexes 1, 2, and 3 were deleted.
+----------------------------------------
+del with a Step
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40, 50, 60]
+del numbers[::2]
+print(numbers)
+Output:
+[20, 40, 60]
+Indexes 0, 2, and 4 were deleted.
+----------------------------------------
+del Can Delete the Entire Variable
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+del numbers
+After:
+print(numbers)
+Output:
+NameError
+The variable name numbers no longer exists.
+Important:
+del numbers
+does not simply empty the list.
+It removes the variable binding.
+This is different from:
+numbers.clear()
+----------------------------------------
+4. clear() — Remove Everything
+----------------------------------------
+The clear() method removes all elements from the list.
+Syntax:
+list.clear()
+Example:
+numbers = [10, 20, 30]
+numbers.clear()
+print(numbers)
+Output:
+[]
+The list becomes empty.
+----------------------------------------
+clear() Keeps the Same List Object
+----------------------------------------
+This is an important concept when multiple variables refer to the same list.
+Example:
+numbers = [10, 20, 30]
+other = numbers
+numbers.clear()
+print(numbers)
+print(other)
+Output:
+[]
+[]
+Both variables see the empty list because clear() modified the existing list object.
+----------------------------------------
+clear() vs Reassignment
+----------------------------------------
+Using clear():
+numbers = [10, 20, 30]
+other = numbers
+numbers.clear()
+print(other)
+Output:
+[]
+Using reassignment:
+numbers = [10, 20, 30]
+other = numbers
+numbers = []
+print(other)
+Output:
+[10, 20, 30]
+Why?
+clear() modifies the existing list.
+numbers = [] makes numbers refer to a new empty list.
+other still refers to the original list.
+----------------------------------------
+clear() Returns None
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+result = numbers.clear()
+print(numbers)
+print(result)
+Output:
+[]
+None
+----------------------------------------
+Removing All Elements with del
+----------------------------------------
+You can also empty a list using:
+numbers = [10, 20, 30]
+del numbers[:]
+print(numbers)
+Output:
+[]
+This removes all elements from the existing list object.
+Unlike:
+del numbers
+the variable itself still exists.
+----------------------------------------
+Removing All Elements with Slice Assignment
+----------------------------------------
+Another technique is:
+numbers = [10, 20, 30]
+numbers[:] = []
+print(numbers)
+Output:
+[]
+This also empties the existing list object.
+For readability, clear() is usually preferred when the intention is simply to empty a list.
+----------------------------------------
+remove() vs pop()
+----------------------------------------
+remove():
+numbers = [10, 20, 30]
+numbers.remove(20)
+Result:
+[10, 30]
+You know the VALUE.
+pop():
+numbers = [10, 20, 30]
+numbers.pop(1)
+Result:
+[10, 30]
+You know the INDEX.
+Main difference:
+remove(value)
+→ Search for a value and remove its first occurrence.
+pop(index)
+→ Remove the element at a position and return it.
+----------------------------------------
+remove() vs pop() with Duplicates
+----------------------------------------
+Example:
+numbers = [10, 20, 20, 30]
+numbers.remove(20)
+Result:
+[10, 20, 30]
+Only the first matching value is removed.
+Using pop():
+numbers = [10, 20, 20, 30]
+numbers.pop(1)
+Result:
+[10, 20, 30]
+Here the element at index 1 was removed.
+The decision is based on VALUE vs POSITION.
+----------------------------------------
+pop() vs del
+----------------------------------------
+Both can remove by index.
+pop():
+numbers = [10, 20, 30]
+value = numbers.pop(1)
+print(value)
+Output:
+20
+pop() returns the removed element.
+del:
+numbers = [10, 20, 30]
+del numbers[1]
+No removed value is returned.
+Therefore:
+pop() → Remove + return
+del → Delete
+----------------------------------------
+clear() vs del
+----------------------------------------
+clear():
+numbers = [10, 20, 30]
+numbers.clear()
+Result:
+[]
+The list still exists.
+del numbers:
+numbers = [10, 20, 30]
+del numbers
+The variable numbers is deleted.
+Therefore:
+clear() → Empty the list.
+del variable → Delete the variable binding.
+----------------------------------------
+Removing While Iterating
+----------------------------------------
+Be careful when removing elements from a list while looping through it.
+Example:
+numbers = [1, 2, 3, 4, 5]
+for number in numbers:
+    if number % 2 == 0:
+        numbers.remove(number)
+This can produce unexpected behavior because removing an element changes the list while the loop is traversing it.
+A safer and cleaner approach for filtering is often a list comprehension:
+numbers = [1, 2, 3, 4, 5]
+numbers = [number for number in numbers if number % 2 != 0]
+print(numbers)
+Output:
+[1, 3, 5]
+List comprehensions will be covered later.
+----------------------------------------
+Removing Elements from the Beginning
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+removed = numbers.pop(0)
+print(numbers)
+print(removed)
+Output:
+[20, 30]
+10
+This works, but repeatedly removing from the beginning of a list can be inefficient because remaining elements may need to shift.
+For queue-like behavior, collections.deque is usually more appropriate.
+----------------------------------------
+Removing the Last Element
+----------------------------------------
+For the last element:
+numbers = [10, 20, 30]
+numbers.pop()
+print(numbers)
+Output:
+[10, 20]
+This is generally the simplest choice when you need to remove the last item.
+----------------------------------------
+Removing a Specific Value
+----------------------------------------
+If you know the value:
+numbers = [10, 20, 30]
+numbers.remove(20)
+print(numbers)
+Output:
+[10, 30]
+Use remove() when your operation is value-based.
+----------------------------------------
+Removing at a Specific Position
+----------------------------------------
+If you know the index:
+numbers = [10, 20, 30]
+del numbers[1]
+print(numbers)
+Output:
+[10, 30]
+Use del when you simply want to delete by position and do not need the removed value.
+Use pop() when you also need the removed value.
+----------------------------------------
+Quick Decision Guide
+----------------------------------------
+Know the VALUE?
+→ remove(value)
+Know the INDEX and need the removed VALUE?
+→ pop(index)
+Know the INDEX but do not need the removed value?
+→ del list[index]
+Want to remove a RANGE?
+→ del list[start:stop]
+Want to empty the list?
+→ clear()
+Want to delete the variable itself?
+→ del list_name
+----------------------------------------
+Mental Model
+----------------------------------------
+Think of a list as a row of storage boxes.
+remove(value)
+→ Find a box containing this value and remove it.
+pop(index)
+→ Go directly to this numbered box, remove it, and hand its contents back to you.
+del
+→ Delete a box or a group of boxes.
+clear()
+→ Empty every box while keeping the container.
+----------------------------------------
+Important Rules
+----------------------------------------
+• remove() removes the first matching value.
+• remove() raises ValueError if the value does not exist.
+• pop() removes by index.
+• pop() without an index removes the last element.
+• pop() returns the removed element.
+• pop() raises IndexError for an invalid index.
+• del can remove an element or a slice.
+• del can delete the variable itself.
+• clear() removes all elements.
+• clear() keeps the list object.
+• remove(), pop(), and clear() modify the existing list.
+• del is a statement, not a list method.
+• Avoid modifying a list directly while iterating over it unless you understand the consequences.
+----------------------------------------
+Summary
+----------------------------------------
+Python provides several ways to remove list data. Use remove(value) when you know the value, pop(index) when you know the position and may need the removed value, del when you want to delete an element or range by position, and clear() when you want to empty the entire list. The key distinction is VALUE vs INDEX vs EVERYTHING, and understanding that distinction prevents many common list-manipulation errors.`,
+},
+{
+  heading: "Finding Elements in Lists — in, not in, index(), count()",
+  body: `Python provides several ways to check whether an element exists in a list and to find information about its occurrence.
+The four important tools are:
+in → Checks whether a value exists.
+not in → Checks whether a value does not exist.
+index() → Finds the position of the first matching value.
+count() → Counts how many times a value occurs.
+These are fundamental operations for searching and working with list data.
+----------------------------------------
+1. in — Check Whether an Element Exists
+----------------------------------------
+The in operator checks whether a value is present in a list.
+Syntax:
+value in list
+It returns either:
+True
+or:
+False
+Example:
+numbers = [10, 20, 30, 40]
+print(20 in numbers)
+Output:
+True
+Because 20 exists in the list.
+----------------------------------------
+Element Not Present
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+print(50 in numbers)
+Output:
+False
+50 does not exist in the list.
+----------------------------------------
+in with Strings
+----------------------------------------
+Example:
+languages = ["Python", "Java", "C++"]
+print("Python" in languages)
+Output:
+True
+The comparison checks the complete list element.
+----------------------------------------
+in is Case-Sensitive
+----------------------------------------
+Example:
+languages = ["Python", "Java"]
+print("python" in languages)
+Output:
+False
+"Python" and "python" are different strings.
+----------------------------------------
+Using in with if
+----------------------------------------
+The in operator is commonly used with conditional statements.
+Example:
+numbers = [10, 20, 30, 40]
+if 30 in numbers:
+    print("30 exists in the list")
+Output:
+30 exists in the list
+This allows your program to make decisions based on whether an element exists.
+----------------------------------------
+Real-World Example
+----------------------------------------
+Example:
+allowed_roles = ["admin", "developer", "manager"]
+role = "developer"
+if role in allowed_roles:
+    print("Access granted")
+Output:
+Access granted
+This pattern is common in validation and authorization logic.
+----------------------------------------
+2. not in — Check Whether an Element Does Not Exist
+----------------------------------------
+The not in operator is the opposite of in.
+Syntax:
+value not in list
+Example:
+numbers = [10, 20, 30]
+print(50 not in numbers)
+Output:
+True
+50 is not present.
+----------------------------------------
+Example with if
+----------------------------------------
+Example:
+users = ["Rahul", "Anita", "Kiran"]
+name = "John"
+if name not in users:
+    print("User not found")
+Output:
+User not found
+----------------------------------------
+in vs not in
+----------------------------------------
+in:
+20 in [10, 20, 30]
+→ True
+not in:
+50 not in [10, 20, 30]
+→ True
+Think:
+in → "Does it exist?"
+not in → "Does it NOT exist?"
+----------------------------------------
+3. index() — Find the Position of an Element
+----------------------------------------
+The index() method returns the index of the first matching element.
+Syntax:
+list.index(value)
+Example:
+numbers = [10, 20, 30, 40]
+print(numbers.index(30))
+Output:
+2
+30 is located at index 2.
+----------------------------------------
+Understanding index()
+----------------------------------------
+Consider:
+numbers = [10, 20, 30, 40]
+Indexes:
+0 → 10
+1 → 20
+2 → 30
+3 → 40
+Therefore:
+numbers.index(30)
+→ 2
+----------------------------------------
+index() with Duplicate Values
+----------------------------------------
+index() returns the FIRST occurrence.
+Example:
+numbers = [10, 20, 30, 20, 40]
+print(numbers.index(20))
+Output:
+1
+There are two 20s:
+index 1 → first 20
+index 3 → second 20
+index() returns 1.
+----------------------------------------
+Finding a Later Occurrence
+----------------------------------------
+index() accepts optional start and stop positions.
+Syntax:
+list.index(value, start)
+or:
+list.index(value, start, stop)
+Example:
+numbers = [10, 20, 30, 20, 40]
+print(numbers.index(20, 2))
+Output:
+3
+Python starts searching from index 2.
+The first 20 after index 2 is at index 3.
+----------------------------------------
+index() with Start and Stop
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 20, 40, 20]
+print(numbers.index(20, 2, 5))
+Output:
+3
+Python searches from index 2 up to, but not including, index 5.
+----------------------------------------
+index() with Negative Indexes
+----------------------------------------
+Start and stop can also use negative indexes.
+Example:
+numbers = [10, 20, 30, 20, 40]
+print(numbers.index(20, -3))
+Output:
+3
+The search begins from the position represented by -3.
+----------------------------------------
+index() When the Value Does Not Exist
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+print(numbers.index(50))
+Output:
+ValueError
+index() raises ValueError when the requested value cannot be found.
+----------------------------------------
+Safely Using index()
+----------------------------------------
+If you are not sure whether the value exists, check with in first.
+Example:
+numbers = [10, 20, 30]
+if 20 in numbers:
+    position = numbers.index(20)
+    print(position)
+Output:
+1
+This avoids ValueError.
+----------------------------------------
+4. count() — Count Occurrences
+----------------------------------------
+The count() method returns the number of times a value occurs in a list.
+Syntax:
+list.count(value)
+Example:
+numbers = [10, 20, 20, 30, 20]
+print(numbers.count(20))
+Output:
+3
+20 occurs three times.
+----------------------------------------
+Counting a Value That Does Not Exist
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+print(numbers.count(50))
+Output:
+0
+Unlike index(), count() does not raise an error when the value is absent.
+It simply returns 0.
+----------------------------------------
+count() with Strings
+----------------------------------------
+Example:
+languages = ["Python", "Java", "Python", "C++"]
+print(languages.count("Python"))
+Output:
+2
+----------------------------------------
+Combining in and count()
+----------------------------------------
+Example:
+numbers = [10, 20, 20, 30]
+if 20 in numbers:
+    print(numbers.count(20))
+Output:
+2
+However, count() itself already tells you whether a value exists:
+numbers.count(50)
+→ 0
+numbers.count(20)
+→ 2
+Use in when you only need a True/False answer.
+----------------------------------------
+in vs index()
+----------------------------------------
+in answers:
+"Does this value exist?"
+Example:
+numbers = [10, 20, 30]
+print(20 in numbers)
+Output:
+True
+index() answers:
+"Where is this value?"
+Example:
+print(numbers.index(20))
+Output:
+1
+Therefore:
+in → Boolean result
+index() → Position
+----------------------------------------
+in vs count()
+----------------------------------------
+in:
+numbers = [10, 20, 20, 30]
+print(20 in numbers)
+Output:
+True
+count():
+print(numbers.count(20))
+Output:
+2
+Use in when you only care about existence.
+Use count() when you need the number of occurrences.
+----------------------------------------
+index() vs count()
+----------------------------------------
+index():
+numbers = [10, 20, 20, 30]
+print(numbers.index(20))
+Output:
+1
+It tells you where the FIRST occurrence is.
+count():
+print(numbers.count(20))
+Output:
+2
+It tells you how many occurrences exist.
+----------------------------------------
+Searching in a List of Strings
+----------------------------------------
+Example:
+skills = ["Python", "SQL", "FastAPI", "React"]
+if "FastAPI" in skills:
+    print("Skill found")
+Output:
+Skill found
+----------------------------------------
+Searching in a List of Dictionaries
+----------------------------------------
+With complex structures, in checks for an entire object.
+Example:
+students = [
+    {"name": "Rahul", "age": 21},
+    {"name": "Anita", "age": 22}
+]
+print({"name": "Rahul", "age": 21} in students)
+Output:
+True
+The dictionary must match as an equal element.
+If you want to search based on one field such as name, you normally use a loop or another technique.
+----------------------------------------
+Searching in Nested Lists
+----------------------------------------
+Example:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+print(5 in matrix)
+Output:
+False
+Why?
+The direct elements of matrix are:
+[1, 2, 3]
+[4, 5, 6]
+The integer 5 is inside an inner list, not directly inside matrix.
+To search inside a particular inner list:
+print(5 in matrix[1])
+Output:
+True
+----------------------------------------
+Finding Multiple Positions
+----------------------------------------
+index() only gives the first matching position.
+If you need all positions, you can use a loop.
+Example:
+numbers = [10, 20, 20, 30, 20]
+positions = []
+for i, value in enumerate(numbers):
+    if value == 20:
+        positions.append(i)
+print(positions)
+Output:
+[1, 2, 4]
+This technique is useful when duplicate values matter.
+----------------------------------------
+Finding the Number of Occurrences with a Loop
+----------------------------------------
+You can manually count values:
+numbers = [10, 20, 20, 30]
+count = 0
+for number in numbers:
+    if number == 20:
+        count += 1
+print(count)
+Output:
+2
+But when you simply need the number of occurrences, the built-in list.count() method is clearer.
+----------------------------------------
+Searching with User Input
+----------------------------------------
+Example:
+numbers = [10, 20, 30, 40]
+value = int(input("Enter a number: "))
+if value in numbers:
+    print("Number found")
+else:
+    print("Number not found")
+This is a common pattern for validating user input.
+----------------------------------------
+Searching Before Removing
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+value = 20
+if value in numbers:
+    numbers.remove(value)
+print(numbers)
+Output:
+[10, 30]
+This prevents remove() from raising ValueError.
+----------------------------------------
+Searching Before Accessing index()
+----------------------------------------
+Example:
+numbers = [10, 20, 30]
+value = 20
+if value in numbers:
+    print(numbers.index(value))
+Output:
+1
+Again, the existence check prevents ValueError.
+----------------------------------------
+Performance Concept
+----------------------------------------
+For a normal Python list, in, not in, index(), and count() generally scan through elements when searching.
+That means searching can take linear time, commonly described as O(n) in the worst case.
+Example:
+numbers = [1, 2, 3, ..., 1000000]
+Searching for a value may require checking many elements.
+For very large-scale membership testing, other data structures such as sets or dictionaries can be more appropriate.
+----------------------------------------
+Important Difference: Value vs Position
+----------------------------------------
+Consider:
+numbers = [10, 20, 30, 20]
+The VALUE is:
+20
+The first POSITION is:
+1
+The second POSITION is:
+3
+Therefore:
+20 in numbers
+→ True
+numbers.index(20)
+→ 1
+numbers.count(20)
+→ 2
+These operations answer three different questions.
+----------------------------------------
+Mental Model
+----------------------------------------
+Imagine a teacher checking a classroom list.
+in:
+"Is Rahul present?"
+→ True/False
+not in:
+"Is Rahul absent?"
+→ True/False
+index():
+"Where is Rahul listed first?"
+→ Position
+count():
+"How many times is Rahul listed?"
+→ Number of occurrences
+----------------------------------------
+Quick Decision Guide
+----------------------------------------
+Want to know whether a value exists?
+→ value in list
+Want to know whether a value does not exist?
+→ value not in list
+Want the position of the first occurrence?
+→ list.index(value)
+Want the number of occurrences?
+→ list.count(value)
+Want all matching positions?
+→ Use a loop with enumerate()
+----------------------------------------
+Common Mistakes
+----------------------------------------
+Mistake 1:
+numbers.index(50)
+when 50 does not exist.
+Result:
+ValueError
+Use:
+if 50 in numbers:
+    numbers.index(50)
+Mistake 2:
+numbers.index(20)
+expecting all positions.
+index() only returns the first occurrence.
+Mistake 3:
+5 in [[1, 2], [3, 4]]
+expecting True.
+The integer 5 is not a direct element of the outer list.
+----------------------------------------
+Important Rules
+----------------------------------------
+• in returns True or False.
+• not in returns True or False.
+• index() returns the first matching index.
+• index() raises ValueError if the value is absent.
+• index() can accept start and stop boundaries.
+• count() returns the number of occurrences.
+• count() returns 0 when the value is absent.
+• Duplicate values are allowed in lists.
+• in, index(), and count() search based on equality.
+• Searching a normal list is generally O(n).
+• For nested structures, membership testing at one level does not automatically search recursively.
+----------------------------------------
+Summary
+----------------------------------------
+The in and not in operators are used for membership testing, index() finds the position of the first matching element, and count() determines how many times a value occurs. These tools form the basic searching toolkit for Python lists. The key distinction is simple: in answers whether something exists, index() tells where the first occurrence is, and count() tells how many occurrences there are.`,
+},
+{
+  heading: "Sorting Lists — sort() and sorted()",
+  body: `Sorting means arranging the elements of a list in a particular order.
+
+Python provides two important ways to sort data:
+
+sort() → Sorts the existing list in place.
+sorted() → Creates and returns a new sorted list.
+
+The most important difference is:
+
+sort() → modifies the original list.
+sorted() → does NOT modify the original list.
+
+----------------------------------------
+1. sort() — Sort the Original List
+----------------------------------------
+
+The sort() method rearranges the elements of the existing list.
+
+Syntax:
+
+list.sort()
+
+Example:
+
+numbers = [40, 10, 30, 20, 50]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[10, 20, 30, 40, 50]
+
+The original list has been modified.
+
+----------------------------------------
+Default Sorting Order
+----------------------------------------
+
+By default, sort() arranges values in ascending order.
+
+Ascending means:
+
+Small → Large
+
+Example:
+
+numbers = [5, 2, 8, 1, 3]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[1, 2, 3, 5, 8]
+
+----------------------------------------
+2. sorted() — Create a New Sorted List
+----------------------------------------
+
+sorted() is a built-in Python function.
+
+Syntax:
+
+sorted(iterable)
+
+Example:
+
+numbers = [40, 10, 30, 20, 50]
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30, 40, 50]
+
+The original list remains unchanged.
+
+print(numbers)
+
+Output:
+
+[40, 10, 30, 20, 50]
+
+----------------------------------------
+sort() vs sorted()
+----------------------------------------
+
+sort():
+
+numbers = [30, 10, 20]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[10, 20, 30]
+
+The original list changes.
+
+sorted():
+
+numbers = [30, 10, 20]
+
+result = sorted(numbers)
+
+print(numbers)
+
+Output:
+
+[30, 10, 20]
+
+print(result)
+
+Output:
+
+[10, 20, 30]
+
+A new sorted list is returned.
+
+----------------------------------------
+Very Important Difference
+----------------------------------------
+
+sort():
+
+list.sort()
+
+→ Modifies the existing list.
+→ Returns None.
+
+sorted():
+
+sorted(list)
+
+→ Does not modify the original list.
+→ Returns a new sorted list.
+
+Remember:
+
+sort = CHANGE
+
+sorted = COPY + SORT
+
+----------------------------------------
+sort() Returns None
+----------------------------------------
+
+Example:
+
+numbers = [30, 10, 20]
+
+result = numbers.sort()
+
+print(result)
+
+Output:
+
+None
+
+This is because sort() performs the operation directly on the list.
+
+Do NOT write:
+
+numbers = numbers.sort()
+
+After this:
+
+numbers
+
+will contain:
+
+None
+
+Correct:
+
+numbers.sort()
+
+----------------------------------------
+sorted() Returns a List
+----------------------------------------
+
+Example:
+
+numbers = [30, 10, 20]
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30]
+
+The returned sorted list can be stored in another variable.
+
+----------------------------------------
+Descending Order
+----------------------------------------
+
+Use:
+
+reverse=True
+
+Example:
+
+numbers = [10, 40, 20, 30]
+
+numbers.sort(reverse=True)
+
+print(numbers)
+
+Output:
+
+[40, 30, 20, 10]
+
+With sorted():
+
+numbers = [10, 40, 20, 30]
+
+result = sorted(numbers, reverse=True)
+
+print(result)
+
+Output:
+
+[40, 30, 20, 10]
+
+----------------------------------------
+Ascending vs Descending
+----------------------------------------
+
+Ascending:
+
+numbers.sort()
+
+Result:
+
+[10, 20, 30, 40]
+
+Descending:
+
+numbers.sort(reverse=True)
+
+Result:
+
+[40, 30, 20, 10]
+
+Therefore:
+
+reverse=False
+
+→ Ascending
+→ Default
+
+reverse=True
+
+→ Descending
+
+----------------------------------------
+Sorting Strings
+----------------------------------------
+
+Strings can also be sorted.
+
+Example:
+
+names = ["Charlie", "Alice", "Bob"]
+
+names.sort()
+
+print(names)
+
+Output:
+
+["Alice", "Bob", "Charlie"]
+
+Python sorts strings according to their ordering rules.
+
+----------------------------------------
+Sorting Strings in Reverse
+----------------------------------------
+
+Example:
+
+names = ["Charlie", "Alice", "Bob"]
+
+names.sort(reverse=True)
+
+print(names)
+
+Output:
+
+["Charlie", "Bob", "Alice"]
+
+----------------------------------------
+Case Sensitivity
+----------------------------------------
+
+String sorting is affected by character ordering and case.
+
+Example:
+
+names = ["apple", "Banana", "cherry"]
+
+print(sorted(names))
+
+The exact order follows Python's string comparison rules.
+
+Uppercase and lowercase characters are not treated as identical.
+
+----------------------------------------
+Sorting Numbers
+----------------------------------------
+
+Example:
+
+numbers = [100, 5, 25, 1, 50]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[1, 5, 25, 50, 100]
+
+Python sorts numeric values according to their numerical values.
+
+----------------------------------------
+Sorting Floats
+----------------------------------------
+
+Example:
+
+prices = [10.5, 2.75, 8.25, 4.5]
+
+prices.sort()
+
+print(prices)
+
+Output:
+
+[2.75, 4.5, 8.25, 10.5]
+
+----------------------------------------
+Sorting Tuples
+----------------------------------------
+
+sorted() can sort many iterable types, including tuples.
+
+Example:
+
+numbers = (30, 10, 20)
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30]
+
+Notice:
+
+The input is a tuple.
+
+The result is a list.
+
+This is an important difference.
+
+----------------------------------------
+Why Can't We Use sort() on a Tuple?
+----------------------------------------
+
+Tuples are immutable.
+
+Example:
+
+numbers = (30, 10, 20)
+
+numbers.sort()
+
+Output:
+
+AttributeError
+
+A tuple cannot be modified.
+
+But:
+
+numbers = (30, 10, 20)
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30]
+
+sorted() works because it creates a new list rather than modifying the tuple.
+
+----------------------------------------
+Sorting a String with sorted()
+----------------------------------------
+
+Example:
+
+word = "python"
+
+result = sorted(word)
+
+print(result)
+
+Output:
+
+['h', 'n', 'o', 'p', 't', 'y']
+
+The result is a list of characters.
+
+This demonstrates that sorted() accepts an iterable, not only lists.
+
+----------------------------------------
+sort() Parameters
+----------------------------------------
+
+The general form is:
+
+list.sort(key=None, reverse=False)
+
+There are two important optional parameters:
+
+key
+reverse
+
+Example:
+
+numbers.sort(reverse=True)
+
+----------------------------------------
+sorted() Parameters
+----------------------------------------
+
+The general form is:
+
+sorted(iterable, key=None, reverse=False)
+
+Example:
+
+result = sorted(numbers, reverse=True)
+
+The same key and reverse concepts can be used with sorted().
+
+----------------------------------------
+The key Parameter
+----------------------------------------
+
+The key parameter tells Python:
+
+"Use this rule to decide how the elements should be ordered."
+
+Syntax:
+
+list.sort(key=function)
+
+Example:
+
+names = ["John", "Alexander", "Bob", "Christopher"]
+
+names.sort(key=len)
+
+print(names)
+
+Output:
+
+["Bob", "John", "Alexander", "Christopher"]
+
+Python sorts according to string length.
+
+Lengths:
+
+John → 4
+Bob → 3
+Alexander → 9
+Christopher → 11
+
+Therefore:
+
+Bob → 3
+John → 4
+Alexander → 9
+Christopher → 11
+
+----------------------------------------
+key=len
+----------------------------------------
+
+This is a very common example.
+
+Example:
+
+words = ["Python", "AI", "Developer", "SQL"]
+
+result = sorted(words, key=len)
+
+print(result)
+
+Output:
+
+["AI", "SQL", "Python", "Developer"]
+
+Python calculates the length of each element and uses that value for sorting.
+
+----------------------------------------
+The key Function Does Not Replace the Values
+----------------------------------------
+
+Consider:
+
+words = ["Python", "AI", "SQL"]
+
+result = sorted(words, key=len)
+
+The values remain:
+
+"Python"
+"AI"
+"SQL"
+
+Python uses their lengths only for comparison.
+
+It does NOT replace the strings with:
+
+6
+2
+3
+
+The result still contains the original strings.
+
+----------------------------------------
+Sorting by Absolute Value
+----------------------------------------
+
+The key can be any function that produces a comparison value.
+
+Example:
+
+numbers = [-10, 3, -2, 8, -5]
+
+numbers.sort(key=abs)
+
+print(numbers)
+
+Output:
+
+[-2, 3, -5, 8, -10]
+
+Python compares:
+
+abs(-10) → 10
+abs(3) → 3
+abs(-2) → 2
+abs(8) → 8
+abs(-5) → 5
+
+So the ordering is based on:
+
+2, 3, 5, 8, 10
+
+while the original values remain unchanged.
+
+----------------------------------------
+Sorting Dictionaries by a Value
+----------------------------------------
+
+Suppose:
+
+students = [
+    {"name": "Rahul", "marks": 85},
+    {"name": "Anita", "marks": 92},
+    {"name": "Kiran", "marks": 78}
+]
+
+To sort by marks:
+
+students.sort(key=lambda student: student["marks"])
+
+print(students)
+
+Output:
+
+[
+    {"name": "Kiran", "marks": 78},
+    {"name": "Rahul", "marks": 85},
+    {"name": "Anita", "marks": 92}
+]
+
+Here the key determines which dictionary value should be used for comparison.
+
+Note:
+lambda is an advanced function topic and will be studied separately.
+For now, understand that key specifies the sorting rule.
+
+----------------------------------------
+Sorting by a Dictionary Field
+----------------------------------------
+
+Example:
+
+students = [
+    {"name": "Rahul", "marks": 85},
+    {"name": "Anita", "marks": 92},
+    {"name": "Kiran", "marks": 78}
+]
+
+students.sort(key=lambda student: student["name"])
+
+The dictionaries are sorted alphabetically according to name.
+
+----------------------------------------
+reverse with key
+----------------------------------------
+
+You can combine key and reverse.
+
+Example:
+
+names = ["John", "Alexander", "Bob", "Chris"]
+
+result = sorted(names, key=len, reverse=True)
+
+print(result)
+
+Output:
+
+["Alexander", "Chris", "John", "Bob"]
+
+The longest strings appear first.
+
+----------------------------------------
+Stable Sorting
+----------------------------------------
+
+Python's sorting algorithm is stable.
+
+Stable sorting means:
+
+If two elements have the same sorting key, their original relative order is preserved.
+
+Example:
+
+students = [
+    ("Rahul", 80),
+    ("Anita", 90),
+    ("Kiran", 80)
+]
+
+result = sorted(students, key=lambda student: student[1])
+
+print(result)
+
+Output:
+
+[
+    ("Rahul", 80),
+    ("Kiran", 80),
+    ("Anita", 90)
+]
+
+Rahul appeared before Kiran originally, and both have the same marks.
+
+Their relative order remains the same.
+
+----------------------------------------
+Sorting Objects by Multiple Criteria
+----------------------------------------
+
+A key can return multiple values, such as a tuple.
+
+Example:
+
+students = [
+    ("Rahul", 80),
+    ("Anita", 90),
+    ("Kiran", 80),
+    ("David", 90)
+]
+
+result = sorted(students, key=lambda student: (student[1], student[0]))
+
+print(result)
+
+Output:
+
+[
+    ("Kiran", 80),
+    ("Rahul", 80),
+    ("Anita", 90),
+    ("David", 90)
+]
+
+Python first compares marks.
+
+If marks are equal, it compares names.
+
+This is a more advanced use of the key parameter.
+
+----------------------------------------
+Sorting Does Not Mean Changing Element Values
+----------------------------------------
+
+Consider:
+
+numbers = [30, 10, 20]
+
+numbers.sort()
+
+The values are not changed.
+
+Only their positions are rearranged.
+
+Before:
+
+30  10  20
+
+After:
+
+10  20  30
+
+Sorting changes the order, not the individual values.
+
+----------------------------------------
+Sorting vs Modifying an Element
+----------------------------------------
+
+Modification:
+
+numbers[0] = 100
+
+Changes a value.
+
+Sorting:
+
+numbers.sort()
+
+Changes the positions of elements.
+
+These are different operations.
+
+----------------------------------------
+Sorting vs Reversing
+----------------------------------------
+
+Sorting:
+
+numbers = [30, 10, 20]
+
+numbers.sort()
+
+Result:
+
+[10, 20, 30]
+
+Reversing:
+
+numbers = [30, 10, 20]
+
+numbers.reverse()
+
+Result:
+
+[20, 10, 30]
+
+reverse() does NOT sort the values.
+
+It simply reverses their current order.
+
+This distinction is important.
+
+----------------------------------------
+sort() vs reverse()
+----------------------------------------
+
+sort():
+
+[30, 10, 20]
+
+→ [10, 20, 30]
+
+reverse():
+
+[30, 10, 20]
+
+→ [20, 10, 30]
+
+sort() determines order based on values.
+
+reverse() simply flips the current order.
+
+----------------------------------------
+Sorting and List Mutability
+----------------------------------------
+
+sort() works because lists are mutable.
+
+Example:
+
+numbers = [30, 10, 20]
+
+numbers.sort()
+
+The existing list object is changed.
+
+This would not work with a tuple:
+
+numbers = (30, 10, 20)
+
+numbers.sort()
+
+AttributeError
+
+----------------------------------------
+Copying Before Sorting
+----------------------------------------
+
+If you want to preserve the original list while using list.sort(), you can make a copy first.
+
+Example:
+
+numbers = [30, 10, 20]
+
+sorted_numbers = numbers.copy()
+
+sorted_numbers.sort()
+
+print(numbers)
+print(sorted_numbers)
+
+Output:
+
+[30, 10, 20]
+[10, 20, 30]
+
+However, if you simply want a sorted copy, sorted() is usually clearer:
+
+sorted_numbers = sorted(numbers)
+
+----------------------------------------
+Sorting a List of Numbers Without Changing It
+----------------------------------------
+
+Use:
+
+numbers = [40, 10, 30, 20]
+
+sorted_numbers = sorted(numbers)
+
+print(numbers)
+
+Output:
+
+[40, 10, 30, 20]
+
+print(sorted_numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+----------------------------------------
+Sorting Empty Lists
+----------------------------------------
+
+Example:
+
+numbers = []
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[]
+
+sorted() also works:
+
+numbers = []
+
+print(sorted(numbers))
+
+Output:
+
+[]
+
+----------------------------------------
+Sorting a Single-Element List
+----------------------------------------
+
+Example:
+
+numbers = [10]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[10]
+
+There is nothing to rearrange.
+
+----------------------------------------
+Sorting Mixed Numeric Types
+----------------------------------------
+
+Integers and floats can generally be compared numerically.
+
+Example:
+
+numbers = [10, 2.5, 7, 3.2]
+
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[2.5, 3.2, 7, 10]
+
+----------------------------------------
+Sorting Incompatible Types
+----------------------------------------
+
+Python cannot generally sort values that have no meaningful ordering relationship.
+
+Example:
+
+data = [10, "Python", 20]
+
+data.sort()
+
+This raises:
+
+TypeError
+
+The integer and string cannot be directly ordered against each other.
+
+Therefore, when sorting a list, the elements normally need to be mutually comparable under the chosen sorting rule.
+
+----------------------------------------
+Sorting None Values
+----------------------------------------
+
+Example:
+
+data = [10, None, 20]
+
+sorted(data)
+
+This raises a TypeError because None cannot normally be ordered with integers.
+
+If you need to sort such data, provide an appropriate key or preprocessing rule.
+
+----------------------------------------
+Performance Concept
+----------------------------------------
+
+Python's built-in sorting uses a highly optimized stable sorting algorithm called Timsort.
+
+For n elements, sorting has:
+
+Typical/worst-case time complexity:
+O(n log n)
+
+Python's sorting implementation is optimized for real-world data and can take advantage of existing order in the input.
+
+For everyday programming, the most important point is:
+
+Use Python's built-in sorting instead of manually implementing a sorting algorithm unless you are specifically learning algorithms or have a special requirement.
+
+----------------------------------------
+Common Mistake 1 — Assigning sort()
+----------------------------------------
+
+Wrong:
+
+numbers = [30, 10, 20]
+numbers = numbers.sort()
+
+print(numbers)
+
+Output:
+
+None
+
+Correct:
+
+numbers = [30, 10, 20]
+numbers.sort()
+
+print(numbers)
+
+Output:
+
+[10, 20, 30]
+
+----------------------------------------
+Common Mistake 2 — Expecting sorted() to Modify the Original
+----------------------------------------
+
+Example:
+
+numbers = [30, 10, 20]
+
+sorted(numbers)
+
+print(numbers)
+
+Output:
+
+[30, 10, 20]
+
+Why?
+
+sorted() returns a new sorted list.
+
+Correct:
+
+numbers = sorted(numbers)
+
+or:
+
+sorted_numbers = sorted(numbers)
+
+----------------------------------------
+Common Mistake 3 — Confusing reverse with sort
+----------------------------------------
+
+Wrong assumption:
+
+numbers.reverse()
+
+means:
+
+"Sort from largest to smallest."
+
+It does not.
+
+reverse() only reverses the current order.
+
+For descending sorting use:
+
+numbers.sort(reverse=True)
+
+----------------------------------------
+Common Mistake 4 — Forgetting key
+----------------------------------------
+
+Suppose:
+
+words = ["Python", "AI", "Developer"]
+
+If you want to sort by length:
+
+words.sort(key=len)
+
+Not simply:
+
+words.sort()
+
+The key determines what property Python should use for ordering.
+
+----------------------------------------
+Real-World Example — Sorting Salaries
+----------------------------------------
+
+Example:
+
+salaries = [45000, 30000, 75000, 50000]
+
+salaries.sort()
+
+print(salaries)
+
+Output:
+
+[30000, 45000, 50000, 75000]
+
+For highest salary first:
+
+salaries.sort(reverse=True)
+
+print(salaries)
+
+Output:
+
+[75000, 50000, 45000, 30000]
+
+----------------------------------------
+Real-World Example — Sorting Names
+----------------------------------------
+
+Example:
+
+employees = ["Rahul", "Anita", "Kiran", "David"]
+
+employees.sort()
+
+print(employees)
+
+Output:
+
+["Anita", "David", "Kiran", "Rahul"]
+
+----------------------------------------
+Real-World Example — Sorting by Name Length
+----------------------------------------
+
+Example:
+
+skills = ["Python", "SQL", "FastAPI", "React"]
+
+skills.sort(key=len)
+
+print(skills)
+
+Output:
+
+["SQL", "React", "Python", "FastAPI"]
+
+The sorting rule is:
+
+shortest → longest
+
+----------------------------------------
+Mental Model
+----------------------------------------
+
+Think of sort() as rearranging books already sitting on a shelf.
+
+sort():
+
+"Rearrange these same books."
+
+sorted():
+
+"Give me another shelf containing the books in sorted order while leaving the original shelf unchanged."
+
+key:
+
+"Tell me what property to use when deciding where each book belongs."
+
+reverse=True:
+
+"Arrange the final order in the opposite direction."
+
+----------------------------------------
+Quick Decision Guide
+----------------------------------------
+
+Want to change the original list?
+
+→ list.sort()
+
+Want a sorted copy?
+
+→ sorted(list)
+
+Want descending order?
+
+→ reverse=True
+
+Want custom sorting?
+
+→ key=function
+
+Want to sort by string length?
+
+→ key=len
+
+Want to sort a tuple or string?
+
+→ sorted()
+
+Want to preserve the original list?
+
+→ sorted()
+
+----------------------------------------
+Quick Comparison Table
+----------------------------------------
+
+Operation:
+sort()
+
+Type:
+List method
+
+Original list:
+Modified
+
+Return value:
+None
+
+Example:
+numbers.sort()
+
+----------------------------------------
+
+Operation:
+sorted()
+
+Type:
+Built-in function
+
+Original list:
+Unchanged
+
+Return value:
+New sorted list
+
+Example:
+sorted(numbers)
+
+----------------------------------------
+
+Operation:
+reverse()
+
+Type:
+List method
+
+Original list:
+Modified
+
+Return value:
+None
+
+Purpose:
+Reverse current order
+
+Example:
+numbers.reverse()
+
+----------------------------------------
+Important Rules
+----------------------------------------
+
+• sort() is a list method.
+• sorted() is a built-in function.
+• sort() modifies the original list.
+• sort() returns None.
+• sorted() creates and returns a new list.
+• sorted() does not modify the original list.
+• Both support reverse=True.
+• Both support a key function.
+• sort() requires a mutable list.
+• sorted() works with many iterable objects.
+• A tuple cannot be sorted using tuple.sort().
+• sorted(tuple) returns a list.
+• Python sorting is stable.
+• Incompatible element types can raise TypeError.
+• reverse() is not the same as descending sort.
+• Sorting changes element order, not the values themselves.
+• Python's built-in sorting uses Timsort.
+
+----------------------------------------
+Summary
+----------------------------------------
+
+Sorting arranges list elements into a defined order. Python provides sort() when you want to modify the existing list and sorted() when you want a new sorted result while preserving the original. Both support reverse=True for descending order and key for custom sorting rules. The most important distinction to remember is:
+
+sort() → modify the original list.
+
+sorted() → return a new sorted list.
+
+Once this distinction is clear, sorting lists becomes simple and predictable.`,
+},
+{
+  heading: "Reordering and Copying Lists — reverse() and copy()",
+  body: `Python provides useful methods for changing the order of list elements and creating independent list copies.
+
+The two important methods in this topic are:
+
+reverse() → Reverses the existing list in place.
+copy() → Creates a shallow copy of the list.
+
+These methods solve two very different problems:
+
+reverse() → Change the ORDER.
+copy() → Create another LIST OBJECT.
+
+----------------------------------------
+1. reverse() — Reverse the List
+----------------------------------------
+
+The reverse() method reverses the current order of elements in a list.
+
+Syntax:
+
+list.reverse()
+
+Example:
+
+numbers = [10, 20, 30, 40, 50]
+
+numbers.reverse()
+
+print(numbers)
+
+Output:
+
+[50, 40, 30, 20, 10]
+
+The original list itself is modified.
+
+----------------------------------------
+Understanding reverse() Visually
+----------------------------------------
+
+Before:
+
+[10, 20, 30, 40, 50]
+
+Position:
+
+10 → 20 → 30 → 40 → 50
+
+After:
+
+[50, 40, 30, 20, 10]
+
+Position:
+
+50 → 40 → 30 → 20 → 10
+
+The elements are not changed.
+
+Only their positions are reversed.
+
+----------------------------------------
+reverse() Does NOT Sort
+----------------------------------------
+
+This is extremely important.
+
+Example:
+
+numbers = [30, 10, 40, 20]
+
+numbers.reverse()
+
+print(numbers)
+
+Output:
+
+[20, 40, 10, 30]
+
+reverse() simply flips the existing order.
+
+It does NOT produce:
+
+[10, 20, 30, 40]
+
+If you want ascending order:
+
+numbers.sort()
+
+If you want descending order:
+
+numbers.sort(reverse=True)
+
+----------------------------------------
+reverse() vs sort(reverse=True)
+----------------------------------------
+
+Consider:
+
+numbers = [30, 10, 40, 20]
+
+Using:
+
+numbers.reverse()
+
+Result:
+
+[20, 40, 10, 30]
+
+Using:
+
+numbers.sort(reverse=True)
+
+Result:
+
+[40, 30, 20, 10]
+
+Therefore:
+
+reverse()
+→ Reverse current order.
+
+sort(reverse=True)
+→ Sort values from largest to smallest.
+
+----------------------------------------
+reverse() Returns None
+----------------------------------------
+
+Like several list methods, reverse() modifies the existing list and returns None.
+
+Example:
+
+numbers = [1, 2, 3]
+
+result = numbers.reverse()
+
+print(result)
+
+Output:
+
+None
+
+Correct:
+
+numbers.reverse()
+
+Incorrect:
+
+numbers = numbers.reverse()
+
+After the incorrect statement:
+
+numbers
+
+becomes:
+
+None
+
+----------------------------------------
+reverse() Works with Any List Elements
+----------------------------------------
+
+Example:
+
+data = ["Python", 100, True, 3.14]
+
+data.reverse()
+
+print(data)
+
+Output:
+
+[3.14, True, 100, "Python"]
+
+reverse() does not need to compare the elements.
+
+It only changes their positions.
+
+----------------------------------------
+reverse() with Strings Inside a List
+----------------------------------------
+
+Example:
+
+words = ["Python", "Java", "C++"]
+
+words.reverse()
+
+print(words)
+
+Output:
+
+["C++", "Java", "Python"]
+
+The strings themselves are not reversed.
+
+Only their positions change.
+
+For example:
+
+"Python"
+
+does NOT become:
+
+"nohtyP"
+
+----------------------------------------
+Reversing a List with Slicing
+----------------------------------------
+
+A list can also be reversed using:
+
+[::-1]
+
+Example:
+
+numbers = [10, 20, 30, 40]
+
+result = numbers[::-1]
+
+print(result)
+
+Output:
+
+[40, 30, 20, 10]
+
+There is an important difference:
+
+reverse()
+
+→ Modifies the original list.
+
+[::-1]
+
+→ Creates a new reversed list.
+
+----------------------------------------
+reverse() vs [::-1]
+----------------------------------------
+
+Using reverse():
+
+numbers = [1, 2, 3]
+
+numbers.reverse()
+
+print(numbers)
+
+Output:
+
+[3, 2, 1]
+
+Original list changed.
+
+Using slicing:
+
+numbers = [1, 2, 3]
+
+result = numbers[::-1]
+
+print(numbers)
+
+Output:
+
+[1, 2, 3]
+
+print(result)
+
+Output:
+
+[3, 2, 1]
+
+Original list remains unchanged.
+
+----------------------------------------
+2. copy() — Create a Shallow Copy
+----------------------------------------
+
+The copy() method creates a new list object containing the same elements.
+
+Syntax:
+
+new_list = old_list.copy()
+
+Example:
+
+numbers = [10, 20, 30]
+
+new_numbers = numbers.copy()
+
+print(new_numbers)
+
+Output:
+
+[10, 20, 30]
+
+At first, both lists contain the same values.
+
+But they are different list objects.
+
+----------------------------------------
+Why Do We Need copy()?
+----------------------------------------
+
+Consider:
+
+numbers = [10, 20, 30]
+
+other = numbers
+
+This does NOT create a new list.
+
+It creates another reference to the SAME list.
+
+Example:
+
+numbers = [10, 20, 30]
+
+other = numbers
+
+numbers.append(40)
+
+print(other)
+
+Output:
+
+[10, 20, 30, 40]
+
+Why?
+
+Because both variables point to the same list object.
+
+----------------------------------------
+copy() Creates a Separate List
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30]
+
+other = numbers.copy()
+
+numbers.append(40)
+
+print(numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+print(other)
+
+Output:
+
+[10, 20, 30]
+
+The two lists are independent at the outer level.
+
+----------------------------------------
+Visual Understanding
+----------------------------------------
+
+Using assignment:
+
+numbers = [10, 20, 30]
+
+other = numbers
+
+Memory concept:
+
+numbers ─────┐
+             ↓
+          [10, 20, 30]
+             ↑
+other ───────┘
+
+Both names point to the same list.
+
+Using copy():
+
+numbers = [10, 20, 30]
+
+other = numbers.copy()
+
+Memory concept:
+
+numbers ─────→ [10, 20, 30]
+
+other ───────→ [10, 20, 30]
+
+Two separate list objects.
+
+----------------------------------------
+Changing One Copy
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30]
+
+other = numbers.copy()
+
+other[0] = 100
+
+print(numbers)
+
+Output:
+
+[10, 20, 30]
+
+print(other)
+
+Output:
+
+[100, 20, 30]
+
+Changing one list does not change the other at the outer level.
+
+----------------------------------------
+copy() vs Assignment
+----------------------------------------
+
+Assignment:
+
+other = numbers
+
+→ Same list object.
+
+Copy:
+
+other = numbers.copy()
+
+→ New list object.
+
+Remember:
+
+=
+
+→ Reference assignment.
+
+copy()
+
+→ Creates a new outer list.
+
+----------------------------------------
+Checking with is
+----------------------------------------
+
+The is operator checks whether two variables refer to the exact same object.
+
+Example:
+
+numbers = [1, 2, 3]
+
+other = numbers
+
+print(numbers is other)
+
+Output:
+
+True
+
+Both refer to the same object.
+
+Now:
+
+numbers = [1, 2, 3]
+
+other = numbers.copy()
+
+print(numbers is other)
+
+Output:
+
+False
+
+They are separate list objects.
+
+----------------------------------------
+== vs is
+----------------------------------------
+
+This distinction is important.
+
+== checks whether values are equal.
+
+is checks whether objects are identical.
+
+Example:
+
+numbers = [1, 2, 3]
+
+other = numbers.copy()
+
+print(numbers == other)
+
+Output:
+
+True
+
+The contents are equal.
+
+print(numbers is other)
+
+Output:
+
+False
+
+They are different objects.
+
+Remember:
+
+== → Same value/content?
+
+is → Same object?
+
+----------------------------------------
+copy() Is a Shallow Copy
+----------------------------------------
+
+The copy() method creates a SHALLOW copy.
+
+This is an important concept when lists contain mutable objects such as other lists.
+
+Example:
+
+numbers = [[1, 2], [3, 4]]
+
+copy_numbers = numbers.copy()
+
+The outer list is copied.
+
+But the inner lists are still shared.
+
+----------------------------------------
+Shallow Copy Visual
+----------------------------------------
+
+Original:
+
+numbers
+   ↓
+[  ────────────────  ]
+   ↓             ↓
+ [1, 2]        [3, 4]
+
+After:
+
+copy_numbers
+   ↓
+[  ────────────────  ]
+   ↓             ↓
+ [1, 2]        [3, 4]
+
+The outer containers are different.
+
+But the inner lists are shared.
+
+Conceptually:
+
+numbers ─────→ outer list A
+                  ↓
+              inner list [1, 2]
+
+copy_numbers → outer list B
+                  ↓
+              same inner list [1, 2]
+
+----------------------------------------
+Shallow Copy Example
+----------------------------------------
+
+Example:
+
+numbers = [[1, 2], [3, 4]]
+
+copy_numbers = numbers.copy()
+
+copy_numbers[0][0] = 100
+
+print(numbers)
+
+Output:
+
+[[100, 2], [3, 4]]
+
+print(copy_numbers)
+
+Output:
+
+[[100, 2], [3, 4]]
+
+Why did the original change?
+
+Because the inner list [1, 2] is shared.
+
+The outer list was copied, but the nested objects were not recursively copied.
+
+----------------------------------------
+Changing the Outer List
+----------------------------------------
+
+Now consider:
+
+numbers = [[1, 2], [3, 4]]
+
+copy_numbers = numbers.copy()
+
+copy_numbers.append([5, 6])
+
+print(numbers)
+
+Output:
+
+[[1, 2], [3, 4]]
+
+print(copy_numbers)
+
+Output:
+
+[[1, 2], [3, 4], [5, 6]]
+
+The outer lists are independent.
+
+----------------------------------------
+copy() vs Nested Lists
+----------------------------------------
+
+For a simple list:
+
+numbers = [1, 2, 3]
+
+copy_numbers = numbers.copy()
+
+The copy is usually exactly what you need.
+
+For nested mutable structures:
+
+numbers = [[1, 2], [3, 4]]
+
+copy_numbers = numbers.copy()
+
+Only the outer list is independently copied.
+
+This is called a shallow copy.
+
+Deep copying is a separate advanced topic.
+
+----------------------------------------
+Other Ways to Make a Shallow Copy
+----------------------------------------
+
+A list can be shallow-copied in several ways.
+
+Using copy():
+
+new_list = old_list.copy()
+
+Using slicing:
+
+new_list = old_list[:]
+
+Using list():
+
+new_list = list(old_list)
+
+Example:
+
+numbers = [1, 2, 3]
+
+a = numbers.copy()
+b = numbers[:]
+c = list(numbers)
+
+All three create separate outer list objects.
+
+----------------------------------------
+copy() vs Slicing Copy
+----------------------------------------
+
+Both create shallow copies.
+
+Example:
+
+numbers = [1, 2, 3]
+
+a = numbers.copy()
+b = numbers[:]
+
+print(a == b)
+
+Output:
+
+True
+
+print(a is b)
+
+Output:
+
+False
+
+They contain the same values but are separate list objects.
+
+For readability, copy() clearly communicates:
+
+"I want a copy."
+
+----------------------------------------
+Copying Before Modification
+----------------------------------------
+
+Suppose you want to keep the original list unchanged.
+
+Example:
+
+numbers = [40, 10, 30, 20]
+
+sorted_numbers = numbers.copy()
+
+sorted_numbers.sort()
+
+print(numbers)
+
+Output:
+
+[40, 10, 30, 20]
+
+print(sorted_numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+This is useful when you want both the original and modified versions.
+
+----------------------------------------
+Copying Before Reversing
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30]
+
+reversed_numbers = numbers.copy()
+
+reversed_numbers.reverse()
+
+print(numbers)
+
+Output:
+
+[10, 20, 30]
+
+print(reversed_numbers)
+
+Output:
+
+[30, 20, 10]
+
+----------------------------------------
+copy() and append()
+----------------------------------------
+
+Example:
+
+original = [1, 2, 3]
+
+copy_list = original.copy()
+
+copy_list.append(4)
+
+print(original)
+
+Output:
+
+[1, 2, 3]
+
+print(copy_list)
+
+Output:
+
+[1, 2, 3, 4]
+
+The two outer lists are independent.
+
+----------------------------------------
+copy() and remove()
+----------------------------------------
+
+Example:
+
+original = [10, 20, 30]
+
+copy_list = original.copy()
+
+copy_list.remove(20)
+
+print(original)
+
+Output:
+
+[10, 20, 30]
+
+print(copy_list)
+
+Output:
+
+[10, 30]
+
+----------------------------------------
+copy() and clear()
+----------------------------------------
+
+Example:
+
+original = [10, 20, 30]
+
+copy_list = original.copy()
+
+copy_list.clear()
+
+print(original)
+
+Output:
+
+[10, 20, 30]
+
+print(copy_list)
+
+Output:
+
+[]
+
+Clearing the copy does not clear the original.
+
+----------------------------------------
+copy() and Assignment — Important Interview Concept
+----------------------------------------
+
+Consider:
+
+a = [1, 2, 3]
+
+b = a
+
+c = a.copy()
+
+Now:
+
+a is b
+
+→ True
+
+a is c
+
+→ False
+
+But:
+
+a == b
+
+→ True
+
+a == c
+
+→ True
+
+Therefore:
+
+a and b
+→ Same object.
+
+a and c
+→ Different objects with equal contents.
+
+----------------------------------------
+Reversing a List in a Loop
+----------------------------------------
+
+Although reverse() is the simplest way to reverse a list, you can also traverse a list backward using indexes.
+
+Example:
+
+numbers = [10, 20, 30]
+
+for i in range(len(numbers) - 1, -1, -1):
+    print(numbers[i])
+
+Output:
+
+30
+20
+10
+
+This does NOT modify the list.
+
+It only reads the elements in reverse order.
+
+----------------------------------------
+reverse() vs Reverse Traversal
+----------------------------------------
+
+reverse():
+
+numbers.reverse()
+
+→ Changes the list.
+
+Reverse traversal:
+
+for value in reversed(numbers):
+    print(value)
+
+→ Reads the list backward without changing it.
+
+This distinction becomes useful when processing data.
+
+----------------------------------------
+reversed() Function
+----------------------------------------
+
+Python also provides the built-in reversed() function.
+
+Example:
+
+numbers = [10, 20, 30]
+
+result = reversed(numbers)
+
+print(result)
+
+reversed() returns an iterator, not a list.
+
+To create a list:
+
+result = list(reversed(numbers))
+
+print(result)
+
+Output:
+
+[30, 20, 10]
+
+Therefore:
+
+list.reverse()
+
+→ Modify the list.
+
+reversed(list)
+
+→ Iterate backward without modifying the list.
+
+----------------------------------------
+reverse() vs reversed()
+----------------------------------------
+
+reverse():
+
+numbers = [1, 2, 3]
+
+numbers.reverse()
+
+print(numbers)
+
+Output:
+
+[3, 2, 1]
+
+Original changed.
+
+reversed():
+
+numbers = [1, 2, 3]
+
+result = list(reversed(numbers))
+
+print(numbers)
+
+Output:
+
+[1, 2, 3]
+
+print(result)
+
+Output:
+
+[3, 2, 1]
+
+Original unchanged.
+
+----------------------------------------
+reverse() vs [::-1] vs reversed()
+----------------------------------------
+
+There are three common ways to process a list backward.
+
+1. reverse()
+
+numbers.reverse()
+
+→ Changes original list.
+
+2. [::-1]
+
+numbers[::-1]
+
+→ Creates a new reversed list.
+
+3. reversed(numbers)
+
+→ Returns an iterator for reverse traversal.
+
+Example:
+
+numbers = [1, 2, 3]
+
+numbers.reverse()
+
+→ Original modified.
+
+numbers[::-1]
+
+→ New list.
+
+reversed(numbers)
+
+→ Reverse iterator.
+
+----------------------------------------
+Performance Concept
+----------------------------------------
+
+reverse() operates in place and does not need to create another list.
+
+Example:
+
+numbers.reverse()
+
+If you do not need the original order, this is usually appropriate.
+
+Slicing:
+
+numbers[::-1]
+
+creates a new list.
+
+reversed(numbers)
+
+returns an iterator and can be useful when you only need to iterate backward.
+
+The right choice depends on whether you need to modify, copy, or simply traverse the data.
+
+----------------------------------------
+Common Mistakes
+----------------------------------------
+
+Mistake 1:
+
+numbers = [1, 2, 3]
+
+numbers = numbers.reverse()
+
+Result:
+
+numbers becomes None.
+
+Correct:
+
+numbers.reverse()
+
+----------------------------------------
+Mistake 2:
+
+numbers = [1, 2, 3]
+
+other = numbers
+
+other.reverse()
+
+print(numbers)
+
+Output:
+
+[3, 2, 1]
+
+Why?
+
+Because other and numbers refer to the same list.
+
+----------------------------------------
+Mistake 3:
+
+numbers = [[1, 2], [3, 4]]
+
+other = numbers.copy()
+
+other[0][0] = 100
+
+Expecting the original to remain unchanged.
+
+Actual:
+
+numbers
+
+becomes:
+
+[[100, 2], [3, 4]]
+
+Because copy() is shallow.
+
+----------------------------------------
+Mistake 4:
+
+numbers = [3, 1, 2]
+
+numbers.reverse()
+
+Expecting:
+
+[1, 2, 3]
+
+Actual:
+
+[2, 1, 3]
+
+If you want sorting, use:
+
+numbers.sort()
+
+----------------------------------------
+Important Rules
+----------------------------------------
+
+• reverse() reverses the existing list in place.
+• reverse() returns None.
+• reverse() does not sort values.
+• sort(reverse=True) is different from reverse().
+• [::-1] creates a new reversed list.
+• reversed() returns an iterator for reverse traversal.
+• copy() creates a shallow copy of a list.
+• copy() creates a new outer list object.
+• Assignment using = does not create a copy.
+• == compares values.
+• is checks object identity.
+• Shallow copies do not recursively copy nested mutable objects.
+• copy() is useful when you need an independent outer list.
+• Nested structures may require deep copying for complete independence.
+
+----------------------------------------
+Quick Decision Guide
+----------------------------------------
+
+Want to reverse the existing list?
+
+→ list.reverse()
+
+Want a reversed copy?
+
+→ list[::-1]
+
+Want to iterate backward without modifying the list?
+
+→ reversed(list)
+
+Want an independent shallow copy?
+
+→ list.copy()
+
+Want another variable referring to the same list?
+
+→ other = list
+
+Want to check if two lists have the same contents?
+
+→ list1 == list2
+
+Want to check if two variables refer to the same object?
+
+→ list1 is list2
+
+----------------------------------------
+Quick Comparison
+----------------------------------------
+
+reverse()
+→ List method
+→ Changes original
+→ Returns None
+→ Reverses order
+
+[::-1]
+→ Slicing
+→ Original unchanged
+→ Returns a new list
+→ Reverses order
+
+reversed()
+→ Built-in function
+→ Original unchanged
+→ Returns an iterator
+→ Traverses backward
+
+copy()
+→ List method
+→ Original unchanged
+→ Returns a new shallow-copy list
+→ Creates a separate outer list
+
+----------------------------------------
+Mental Model
+----------------------------------------
+
+Think of a row of books.
+
+reverse()
+→ Turn the entire arrangement around.
+
+[::-1]
+→ Create another shelf with the books arranged backward.
+
+reversed()
+→ Walk past the same shelf from the last book to the first without moving anything.
+
+copy()
+→ Build another shelf containing the same books.
+
+But with nested boxes:
+
+copy()
+→ Copies the outer shelf, but the inner boxes can still be shared.
+
+----------------------------------------
+Summary
+----------------------------------------
+
+reverse() and copy() solve two different problems.
+
+reverse() changes the order of the existing list in place, while copy() creates a new shallow copy of the list. For reverse processing without modifying the original, Python also provides slicing with [::-1] and the reversed() function. The most important concept is understanding object identity: assigning one list to another variable does not create a copy, whereas copy() creates a separate outer list object. For nested lists, copy() is shallow, so inner mutable objects can still be shared.`,
+},
+{
+  heading: "List Comprehensions — Creating Lists with a Compact Expression",
+  body: `A list comprehension is a concise and powerful way to create a new list by applying an expression to each item of an iterable.
+
+Instead of writing multiple lines with a loop and append(), you can often create the same list in a single readable expression.
+
+The basic idea is:
+
+Take values
+→ Process each value
+→ Optionally apply a condition
+→ Build a new list
+
+----------------------------------------
+1. Why List Comprehensions?
+----------------------------------------
+
+Suppose you want to create a list containing the squares of numbers from 1 to 5.
+
+Using a normal for loop:
+
+squares = []
+
+for number in range(1, 6):
+    squares.append(number ** 2)
+
+print(squares)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+The same operation using a list comprehension:
+
+squares = [number ** 2 for number in range(1, 6)]
+
+print(squares)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+The result is the same.
+
+The comprehension simply expresses the logic more compactly.
+
+----------------------------------------
+2. Basic Syntax
+----------------------------------------
+
+The general syntax is:
+
+[expression for item in iterable]
+
+Read it from left to right as:
+
+"Create a list containing expression for every item in iterable."
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = [number ** 2 for number in numbers]
+
+print(squares)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+Here:
+
+expression:
+number ** 2
+
+item:
+number
+
+iterable:
+numbers
+
+----------------------------------------
+3. Visual Mental Model
+----------------------------------------
+
+Consider:
+
+numbers = [1, 2, 3, 4]
+
+squares = [number ** 2 for number in numbers]
+
+Think:
+
+1 → 1² → 1
+2 → 2² → 4
+3 → 3² → 9
+4 → 4² → 16
+
+Final list:
+
+[1, 4, 9, 16]
+
+So a list comprehension performs:
+
+INPUT
+↓
+Take one element
+↓
+Apply expression
+↓
+Put result into new list
+↓
+Repeat
+↓
+OUTPUT
+
+----------------------------------------
+4. Simple Transformation
+----------------------------------------
+
+List comprehensions are excellent for transforming existing data.
+
+Example:
+
+numbers = [10, 20, 30, 40]
+
+result = [number / 10 for number in numbers]
+
+print(result)
+
+Output:
+
+[1.0, 2.0, 3.0, 4.0]
+
+Every element is transformed independently.
+
+----------------------------------------
+5. Creating a List of Doubles
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+doubles = [number * 2 for number in numbers]
+
+print(doubles)
+
+Output:
+
+[2, 4, 6, 8, 10]
+
+The expression:
+
+number * 2
+
+is applied to every element.
+
+----------------------------------------
+6. Creating a List of Cubes
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3, 4]
+
+cubes = [number ** 3 for number in numbers]
+
+print(cubes)
+
+Output:
+
+[1, 8, 27, 64]
+
+----------------------------------------
+7. Working with Strings
+----------------------------------------
+
+List comprehensions are not limited to numbers.
+
+Example:
+
+names = ["rahul", "anita", "kiran"]
+
+upper_names = [name.upper() for name in names]
+
+print(upper_names)
+
+Output:
+
+["RAHUL", "ANITA", "KIRAN"]
+
+Each string is transformed using upper().
+
+----------------------------------------
+8. Extracting String Lengths
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Alexander"]
+
+lengths = [len(name) for name in names]
+
+print(lengths)
+
+Output:
+
+[5, 5, 9]
+
+The expression:
+
+len(name)
+
+is evaluated for every name.
+
+----------------------------------------
+9. Using range()
+----------------------------------------
+
+List comprehensions commonly work with range().
+
+Example:
+
+numbers = [number for number in range(1, 6)]
+
+print(numbers)
+
+Output:
+
+[1, 2, 3, 4, 5]
+
+This is equivalent to:
+
+numbers = []
+
+for number in range(1, 6):
+    numbers.append(number)
+
+----------------------------------------
+10. Creating Even Numbers
+----------------------------------------
+
+A condition can be added to a list comprehension.
+
+Syntax:
+
+[expression for item in iterable if condition]
+
+Example:
+
+numbers = range(1, 11)
+
+even_numbers = [number for number in numbers if number % 2 == 0]
+
+print(even_numbers)
+
+Output:
+
+[2, 4, 6, 8, 10]
+
+Read it as:
+
+"Create a list of number for every number in range(1, 11), but only if number is even."
+
+----------------------------------------
+11. Creating Odd Numbers
+----------------------------------------
+
+Example:
+
+numbers = range(1, 11)
+
+odd_numbers = [number for number in numbers if number % 2 != 0]
+
+print(odd_numbers)
+
+Output:
+
+[1, 3, 5, 7, 9]
+
+----------------------------------------
+12. Filtering a List
+----------------------------------------
+
+List comprehensions are useful for filtering.
+
+Example:
+
+numbers = [10, 15, 20, 25, 30]
+
+large_numbers = [number for number in numbers if number > 20]
+
+print(large_numbers)
+
+Output:
+
+[25, 30]
+
+Only values satisfying the condition are included.
+
+----------------------------------------
+13. Filter + Transform
+----------------------------------------
+
+You can filter values and transform the values that pass the condition.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+squares = [number ** 2 for number in numbers if number % 2 == 0]
+
+print(squares)
+
+Output:
+
+[4, 16, 36]
+
+Process:
+
+2 → 2² → 4
+4 → 4² → 16
+6 → 6² → 36
+
+Odd numbers are skipped.
+
+----------------------------------------
+14. Important Difference: Expression vs Condition
+----------------------------------------
+
+Consider:
+
+[number ** 2 for number in numbers if number % 2 == 0]
+
+There are two different parts.
+
+Expression:
+
+number ** 2
+
+This determines WHAT goes into the new list.
+
+Condition:
+
+number % 2 == 0
+
+This determines WHICH elements are included.
+
+Remember:
+
+Expression → What to produce.
+
+Condition → What to keep.
+
+----------------------------------------
+15. List Comprehension with Strings
+----------------------------------------
+
+Example:
+
+words = ["python", "java", "sql", "fastapi"]
+
+long_words = [word for word in words if len(word) > 3]
+
+print(long_words)
+
+Output:
+
+["python", "java", "fastapi"]
+
+----------------------------------------
+16. Transforming Strings
+----------------------------------------
+
+Example:
+
+words = ["python", "java", "sql"]
+
+result = [word.upper() for word in words]
+
+print(result)
+
+Output:
+
+["PYTHON", "JAVA", "SQL"]
+
+----------------------------------------
+17. Filtering Strings
+----------------------------------------
+
+Example:
+
+words = ["Python", "Java", "C", "FastAPI"]
+
+result = [word for word in words if len(word) > 3]
+
+print(result)
+
+Output:
+
+["Python", "Java", "FastAPI"]
+
+----------------------------------------
+18. Using if-else in a List Comprehension
+----------------------------------------
+
+There is an important difference between:
+
+if at the end
+
+and:
+
+if-else in the expression.
+
+With only a filter:
+
+[expression for item in iterable if condition]
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+result = [number for number in numbers if number % 2 == 0]
+
+Output:
+
+[2, 4]
+
+Only even numbers are included.
+
+With if-else:
+
+[expression_if_true if condition else expression_if_false for item in iterable]
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+result = [
+    "Even" if number % 2 == 0 else "Odd"
+    for number in numbers
+]
+
+print(result)
+
+Output:
+
+["Odd", "Even", "Odd", "Even", "Odd"]
+
+Now every element produces a result.
+
+The condition decides WHICH expression to use.
+
+----------------------------------------
+19. Filter vs if-else
+----------------------------------------
+
+Filter:
+
+[number for number in numbers if number % 2 == 0]
+
+Result:
+
+[2, 4]
+
+Odd values are removed.
+
+if-else:
+
+["Even" if number % 2 == 0 else "Odd" for number in numbers]
+
+Result:
+
+["Odd", "Even", "Odd", "Even", "Odd"]
+
+Every input produces an output.
+
+This distinction is extremely important.
+
+----------------------------------------
+20. Converting Values
+----------------------------------------
+
+Example:
+
+values = ["10", "20", "30", "40"]
+
+numbers = [int(value) for value in values]
+
+print(numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+This is useful when processing data received as strings.
+
+----------------------------------------
+21. Removing Extra Spaces
+----------------------------------------
+
+Example:
+
+names = [" Rahul ", " Anita ", " Kiran "]
+
+clean_names = [name.strip() for name in names]
+
+print(clean_names)
+
+Output:
+
+["Rahul", "Anita", "Kiran"]
+
+----------------------------------------
+22. Converting to Lowercase
+----------------------------------------
+
+Example:
+
+languages = ["PYTHON", "JAVA", "SQL"]
+
+result = [language.lower() for language in languages]
+
+print(result)
+
+Output:
+
+["python", "java", "sql"]
+
+----------------------------------------
+23. Converting to Uppercase
+----------------------------------------
+
+Example:
+
+languages = ["python", "java", "sql"]
+
+result = [language.upper() for language in languages]
+
+print(result)
+
+Output:
+
+["PYTHON", "JAVA", "SQL"]
+
+----------------------------------------
+24. Nested List Comprehensions
+----------------------------------------
+
+List comprehensions can also contain multiple for clauses.
+
+Example:
+
+result = [
+    (x, y)
+    for x in [1, 2]
+    for y in [10, 20]
+]
+
+print(result)
+
+Output:
+
+[
+    (1, 10),
+    (1, 20),
+    (2, 10),
+    (2, 20)
+]
+
+Conceptually:
+
+for x in [1, 2]:
+    for y in [10, 20]:
+        create (x, y)
+
+This is useful but should be introduced only after understanding basic comprehensions.
+
+----------------------------------------
+25. Nested Loops vs Nested Comprehension
+----------------------------------------
+
+Normal loops:
+
+result = []
+
+for x in [1, 2]:
+    for y in [10, 20]:
+        result.append((x, y))
+
+List comprehension:
+
+result = [
+    (x, y)
+    for x in [1, 2]
+    for y in [10, 20]
+]
+
+Both produce:
+
+[(1, 10), (1, 20), (2, 10), (2, 20)]
+
+----------------------------------------
+26. Creating a Matrix
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+You can flatten it using a nested comprehension:
+
+flat = [
+    value
+    for row in matrix
+    for value in row
+]
+
+print(flat)
+
+Output:
+
+[1, 2, 3, 4, 5, 6]
+
+Read the order carefully:
+
+for row in matrix
+    for value in row
+
+The second loop runs completely for each row.
+
+----------------------------------------
+27. Flattening Nested Lists
+----------------------------------------
+
+Example:
+
+numbers = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+result = [number for row in numbers for number in row]
+
+print(result)
+
+Output:
+
+[1, 2, 3, 4, 5, 6]
+
+----------------------------------------
+28. Conditional Transformation
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+result = [
+    number * 2 if number % 2 == 0 else number
+    for number in numbers
+]
+
+print(result)
+
+Output:
+
+[1, 4, 3, 8, 5]
+
+Even numbers are doubled.
+
+Odd numbers remain unchanged.
+
+----------------------------------------
+29. Combining Multiple Conditions
+----------------------------------------
+
+You can use logical operators.
+
+Example:
+
+numbers = range(1, 21)
+
+result = [
+    number
+    for number in numbers
+    if number % 2 == 0 and number > 10
+]
+
+print(result)
+
+Output:
+
+[12, 14, 16, 18, 20]
+
+----------------------------------------
+30. Using or
+----------------------------------------
+
+Example:
+
+numbers = range(1, 11)
+
+result = [
+    number
+    for number in numbers
+    if number == 3 or number == 7
+]
+
+print(result)
+
+Output:
+
+[3, 7]
+
+----------------------------------------
+31. Membership Conditions
+----------------------------------------
+
+Example:
+
+languages = ["Python", "Java", "C++", "JavaScript"]
+
+result = [
+    language
+    for language in languages
+    if language in ["Python", "Java"]
+]
+
+print(result)
+
+Output:
+
+["Python", "Java"]
+
+----------------------------------------
+32. Removing Empty Strings
+----------------------------------------
+
+Example:
+
+values = ["Python", "", "Java", "", "SQL"]
+
+result = [value for value in values if value]
+
+print(result)
+
+Output:
+
+["Python", "Java", "SQL"]
+
+Empty strings are false-like values, so they are filtered out.
+
+----------------------------------------
+33. Working with Dictionaries
+----------------------------------------
+
+List comprehensions can iterate over dictionary keys, values, or items.
+
+Example:
+
+students = {
+    "Rahul": 85,
+    "Anita": 92,
+    "Kiran": 78
+}
+
+names = [name for name in students]
+
+print(names)
+
+Output:
+
+["Rahul", "Anita", "Kiran"]
+
+By default, iterating over a dictionary gives its keys.
+
+----------------------------------------
+34. Dictionary Values
+----------------------------------------
+
+Example:
+
+students = {
+    "Rahul": 85,
+    "Anita": 92,
+    "Kiran": 78
+}
+
+marks = [mark for mark in students.values()]
+
+print(marks)
+
+Output:
+
+[85, 92, 78]
+
+----------------------------------------
+35. Dictionary Items
+----------------------------------------
+
+Example:
+
+students = {
+    "Rahul": 85,
+    "Anita": 92,
+    "Kiran": 78
+}
+
+result = [
+    (name, mark)
+    for name, mark in students.items()
+]
+
+print(result)
+
+Output:
+
+[
+    ("Rahul", 85),
+    ("Anita", 92),
+    ("Kiran", 78)
+]
+
+----------------------------------------
+36. Filtering Dictionary Data
+----------------------------------------
+
+Example:
+
+students = {
+    "Rahul": 85,
+    "Anita": 92,
+    "Kiran": 78
+}
+
+passed = [
+    name
+    for name, mark in students.items()
+    if mark >= 80
+]
+
+print(passed)
+
+Output:
+
+["Rahul", "Anita"]
+
+The comprehension:
+
+1. Gets each name and mark.
+2. Checks the mark.
+3. Keeps the name only when mark >= 80.
+
+----------------------------------------
+37. Working with Sets
+----------------------------------------
+
+List comprehensions can also process sets.
+
+Example:
+
+numbers = {1, 2, 3, 4, 5}
+
+squares = [number ** 2 for number in numbers]
+
+print(squares)
+
+Output:
+
+The result is a list.
+
+The input can be a set, but the comprehension creates a list.
+
+----------------------------------------
+38. List Comprehension with range() and Conditions
+----------------------------------------
+
+Example:
+
+multiples_of_5 = [
+    number
+    for number in range(1, 51)
+    if number % 5 == 0
+]
+
+print(multiples_of_5)
+
+Output:
+
+[5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
+
+----------------------------------------
+39. Creating a List of Squares
+----------------------------------------
+
+Example:
+
+squares = [number ** 2 for number in range(1, 11)]
+
+Output:
+
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+This is one of the most common beginner examples.
+
+----------------------------------------
+40. List Comprehension vs Normal Loop
+----------------------------------------
+
+Normal loop:
+
+result = []
+
+for number in numbers:
+    if number % 2 == 0:
+        result.append(number * 2)
+
+List comprehension:
+
+result = [
+    number * 2
+    for number in numbers
+    if number % 2 == 0
+]
+
+The comprehension combines:
+
+Loop
++
+Condition
++
+Transformation
++
+List creation
+
+into one expression.
+
+----------------------------------------
+41. Do Not Use Comprehensions Just to Look Short
+----------------------------------------
+
+List comprehensions are powerful, but shorter does not always mean better.
+
+Bad style:
+
+result = [
+    complicated_function(x)
+    for x in data
+    if condition_one(x)
+    if condition_two(x)
+    if condition_three(x)
+]
+
+If the logic becomes difficult to read, a normal for loop may be better.
+
+Professional Python code prioritizes readability.
+
+----------------------------------------
+42. A Good Rule
+----------------------------------------
+
+Use a list comprehension when:
+
+• The transformation is simple.
+• The condition is understandable.
+• The resulting expression remains readable.
+
+Use a normal loop when:
+
+• There are many steps.
+• Complex branching is required.
+• Multiple side effects are involved.
+• The comprehension becomes difficult to understand.
+
+The goal is not:
+
+"Use one line at any cost."
+
+The goal is:
+
+"Express simple data transformation clearly."
+
+----------------------------------------
+43. List Comprehension Does Not Modify the Original List
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3]
+
+squares = [number ** 2 for number in numbers]
+
+print(numbers)
+
+Output:
+
+[1, 2, 3]
+
+print(squares)
+
+Output:
+
+[1, 4, 9]
+
+A comprehension normally creates a new list.
+
+----------------------------------------
+44. List Comprehension Creates a New List
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3]
+
+squares = [number ** 2 for number in numbers]
+
+print(numbers is squares)
+
+Output:
+
+False
+
+They are separate list objects.
+
+----------------------------------------
+45. Empty Result
+----------------------------------------
+
+A condition may result in no matching elements.
+
+Example:
+
+numbers = [1, 3, 5, 7]
+
+result = [number for number in numbers if number % 2 == 0]
+
+print(result)
+
+Output:
+
+[]
+
+The result is an empty list.
+
+This is not an error.
+
+It simply means no elements satisfied the condition.
+
+----------------------------------------
+46. Important Syntax Pattern
+----------------------------------------
+
+Basic transformation:
+
+[expression for item in iterable]
+
+Filtering:
+
+[item for item in iterable if condition]
+
+Transformation + filtering:
+
+[expression for item in iterable if condition]
+
+Conditional expression:
+
+[value_if_true if condition else value_if_false for item in iterable]
+
+Nested iteration:
+
+[expression for item1 in iterable1 for item2 in iterable2]
+
+These patterns cover most beginner and intermediate list-comprehension usage.
+
+----------------------------------------
+47. The Most Important Reading Trick
+----------------------------------------
+
+When you see:
+
+result = [x * 2 for x in numbers]
+
+Do NOT try to read it like normal English immediately.
+
+Translate it mentally into:
+
+result = []
+
+for x in numbers:
+    result.append(x * 2)
+
+Once you can convert a comprehension into a normal loop, you understand what it is doing.
+
+----------------------------------------
+48. Example Conversion
+----------------------------------------
+
+Comprehension:
+
+even_squares = [
+    x ** 2
+    for x in numbers
+    if x % 2 == 0
+]
+
+Translate it:
+
+even_squares = []
+
+for x in numbers:
+    if x % 2 == 0:
+        even_squares.append(x ** 2)
+
+Both produce the same result.
+
+----------------------------------------
+49. Professional Data Processing Example
+----------------------------------------
+
+Suppose:
+
+scores = [45, 78, 92, 33, 88, 67]
+
+You want only passing scores:
+
+passing_scores = [
+    score
+    for score in scores
+    if score >= 50
+]
+
+Output:
+
+[78, 92, 88, 67]
+
+Now convert them to percentages:
+
+percentages = [
+    score / 100
+    for score in passing_scores
+]
+
+Output:
+
+[0.78, 0.92, 0.88, 0.67]
+
+This demonstrates the two main uses:
+
+Filtering
++
+Transformation
+
+----------------------------------------
+50. Real-World Example — Job Skills
+----------------------------------------
+
+Example:
+
+skills = [
+    "Python",
+    "SQL",
+    "React",
+    "FastAPI",
+    "Docker"
+]
+
+python_skills = [
+    skill
+    for skill in skills
+    if skill != "React"
+]
+
+print(python_skills)
+
+Output:
+
+["Python", "SQL", "FastAPI", "Docker"]
+
+----------------------------------------
+51. Real-World Example — Cleaning Data
+----------------------------------------
+
+Example:
+
+names = [
+    " Rahul ",
+    "",
+    " Anita ",
+    " Kiran ",
+    ""
+]
+
+clean_names = [
+    name.strip()
+    for name in names
+    if name.strip()
+]
+
+print(clean_names)
+
+Output:
+
+["Rahul", "Anita", "Kiran"]
+
+This combines:
+
+Filtering
++
+String cleaning
++
+Transformation
+
+----------------------------------------
+52. Important Difference: Comprehension vs Loop
+----------------------------------------
+
+A normal loop is a general control-flow structure.
+
+A list comprehension is primarily a concise way to construct a new list.
+
+Therefore:
+
+Loop:
+Can perform many kinds of operations.
+
+Comprehension:
+Best suited for producing a collection from another iterable.
+
+For example, a loop can:
+
+• Print values.
+• Modify external variables.
+• Perform multiple operations.
+• Break or continue.
+• Handle complex logic.
+
+A list comprehension is primarily intended to build a new list.
+
+----------------------------------------
+53. break and continue
+----------------------------------------
+
+List comprehensions do NOT directly support normal break and continue statements.
+
+If your logic requires:
+
+break
+
+or:
+
+continue
+
+a normal loop is usually the appropriate choice.
+
+Example:
+
+for number in numbers:
+    if number == 10:
+        break
+
+This cannot simply be translated into a normal list-comprehension condition without changing the logic.
+
+----------------------------------------
+54. Side Effects
+----------------------------------------
+
+Avoid using list comprehensions only to perform side effects.
+
+Poor style:
+
+[print(number) for number in numbers]
+
+This technically creates a list of None values while printing.
+
+Better:
+
+for number in numbers:
+    print(number)
+
+Use comprehensions to create data, not merely to execute actions.
+
+----------------------------------------
+55. List Comprehensions and Memory
+----------------------------------------
+
+A list comprehension creates the complete list in memory.
+
+Example:
+
+numbers = [x ** 2 for x in range(1000000)]
+
+The resulting list contains all one million values.
+
+For very large or lazy data processing, generators can be more memory-efficient.
+
+Generators are a more advanced Python topic and can be studied later.
+
+----------------------------------------
+56. Common Mistake — Wrong Position of if
+----------------------------------------
+
+Correct filter:
+
+[x for x in numbers if x > 5]
+
+Incorrect:
+
+[x if x > 5 for x in numbers]
+
+The second form is syntactically invalid because a filter condition belongs after the for clause.
+
+----------------------------------------
+57. Correct if-else Position
+----------------------------------------
+
+When using if-else as the expression:
+
+[x if x > 5 else 0 for x in numbers]
+
+This is correct.
+
+Notice:
+
+expression with if-else
+
+comes BEFORE:
+
+for x in numbers
+
+Compare:
+
+Filter:
+
+[x for x in numbers if x > 5]
+
+Conditional expression:
+
+[x if x > 5 else 0 for x in numbers]
+
+This difference is one of the most common list-comprehension mistakes.
+
+----------------------------------------
+58. Common Mistake — Forgetting the Expression
+----------------------------------------
+
+A list comprehension requires an expression.
+
+Correct:
+
+[x * 2 for x in numbers]
+
+Correct:
+
+[x for x in numbers]
+
+The second one simply copies the elements into a new list.
+
+----------------------------------------
+59. Copying a List with a Comprehension
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3]
+
+copy_numbers = [number for number in numbers]
+
+print(copy_numbers)
+
+Output:
+
+[1, 2, 3]
+
+This creates a new outer list.
+
+However, for simply copying a list, prefer:
+
+copy_numbers = numbers.copy()
+
+because it communicates the intention more clearly.
+
+----------------------------------------
+60. Key Concept Summary
+----------------------------------------
+
+List comprehension:
+
+[expression for item in iterable]
+
+means:
+
+1. Take an iterable.
+2. Get one item.
+3. Evaluate the expression.
+4. Put the result into a new list.
+5. Repeat.
+
+With filtering:
+
+[expression for item in iterable if condition]
+
+means:
+
+1. Take an item.
+2. Check the condition.
+3. If True, evaluate the expression.
+4. Add the result.
+5. If False, skip the item.
+
+With if-else:
+
+[value_if_true if condition else value_if_false for item in iterable]
+
+means:
+
+1. Take an item.
+2. Check the condition.
+3. Choose one of two expressions.
+4. Add the chosen result.
+5. Repeat.
+
+----------------------------------------
+Quick Decision Guide
+----------------------------------------
+
+Want to transform every element?
+
+→ [expression for item in iterable]
+
+Want to filter elements?
+
+→ [item for item in iterable if condition]
+
+Want to transform only selected elements?
+
+→ [expression for item in iterable if condition]
+
+Want every element to produce one of two results?
+
+→ [value1 if condition else value2 for item in iterable]
+
+Want nested iteration?
+
+→ [expression for item1 in iterable1 for item2 in iterable2]
+
+Want complex multi-step logic?
+
+→ Prefer a normal for loop.
+
+----------------------------------------
+Important Rules
+----------------------------------------
+
+• List comprehensions create new lists.
+• They provide a concise way to express simple loops.
+• The basic form is [expression for item in iterable].
+• A filter can be added using if.
+• The expression determines what goes into the result.
+• The condition determines which items are included.
+• if-else inside the expression is different from a trailing filter.
+• List comprehensions can transform data.
+• List comprehensions can filter data.
+• Nested comprehensions are possible.
+• They work with many iterables, not only lists.
+• They do not directly support break or continue.
+• Avoid using comprehensions only for side effects.
+• Very complex comprehensions can reduce readability.
+• A list comprehension creates the complete result in memory.
+• For very large lazy sequences, generators may be more appropriate.
+• List comprehensions do not automatically modify the original list.
+
+----------------------------------------
+Mental Model
+----------------------------------------
+
+Think of a list comprehension as a small data-processing pipeline:
+
+SOURCE
+↓
+Take one item
+↓
+Optional FILTER
+↓
+TRANSFORM
+↓
+Add result to NEW LIST
+↓
+Repeat
+↓
+RESULT
+
+For example:
+
+[x ** 2 for x in numbers if x % 2 == 0]
+
+means:
+
+Numbers
+↓
+Take each x
+↓
+Is x even?
+↓
+YES
+↓
+Calculate x²
+↓
+Put x² into new list
+
+This is the core idea behind list comprehensions.
+
+----------------------------------------
+Final Summary
+----------------------------------------
+
+A list comprehension is Python's compact syntax for creating a new list from an iterable. It can perform a transformation, apply a filtering condition, or both.
+
+The fundamental pattern is:
+
+[expression for item in iterable]
+
+For filtering:
+
+[expression for item in iterable if condition]
+
+For conditional transformation:
+
+[value_if_true if condition else value_if_false for item in iterable]
+
+The professional rule is simple:
+
+Use list comprehensions when they make simple data transformation clearer and more concise. Do not force complicated logic into one line.`,
+},
+{
+  heading: "Nested Lists — Lists Inside Lists",
+  body: `A nested list is a list that contains one or more other lists as its elements.
+
+Instead of storing only individual values:
+
+numbers = [10, 20, 30, 40]
+
+a nested list can store groups of values:
+
+numbers = [
+    [10, 20],
+    [30, 40],
+    [50, 60]
+]
+
+Here, the outer list contains three inner lists.
+
+Nested lists are extremely important because they are commonly used to represent:
+
+• Tables
+• Matrices
+• 2D data
+• Grids
+• Rows and columns
+• Groups of related values
+• Structured data
+
+----------------------------------------
+1. Basic Nested List
+----------------------------------------
+
+Example:
+
+numbers = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+The structure is:
+
+Outer list
+    ↓
+[ Row 1 ]
+[ Row 2 ]
+[ Row 3 ]
+
+Each row is itself a list.
+
+----------------------------------------
+2. Visual Representation
+----------------------------------------
+
+Consider:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+Think of it as a table:
+
+        Column
+        0    1    2
+
+Row 0  10   20   30
+Row 1  40   50   60
+Row 2  70   80   90
+
+This is why nested lists are often called:
+
+2D lists
+
+or:
+
+two-dimensional lists.
+
+----------------------------------------
+3. Creating a Nested List
+----------------------------------------
+
+Example:
+
+students = [
+    ["Rahul", 21],
+    ["Anita", 22],
+    ["Kiran", 20]
+]
+
+Each inner list contains information about one student.
+
+Conceptually:
+
+students
+    ↓
+    ├── ["Rahul", 21]
+    ├── ["Anita", 22]
+    └── ["Kiran", 20]
+
+----------------------------------------
+4. Outer List Indexing
+----------------------------------------
+
+The first index selects an inner list.
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+print(matrix[0])
+
+Output:
+
+[10, 20, 30]
+
+matrix[0] means:
+
+"Give me the first inner list."
+
+----------------------------------------
+5. Accessing the Second Row
+----------------------------------------
+
+Example:
+
+print(matrix[1])
+
+Output:
+
+[40, 50, 60]
+
+Because:
+
+matrix[0] → [10, 20, 30]
+matrix[1] → [40, 50, 60]
+matrix[2] → [70, 80, 90]
+
+Remember:
+
+The outer index selects the ROW.
+
+----------------------------------------
+6. Accessing an Individual Element
+----------------------------------------
+
+To access an individual value, use two indexes.
+
+Syntax:
+
+list[row][column]
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+print(matrix[1][2])
+
+Output:
+
+60
+
+Why?
+
+First:
+
+matrix[1]
+
+gives:
+
+[40, 50, 60]
+
+Then:
+
+[40, 50, 60][2]
+
+gives:
+
+60
+
+Therefore:
+
+matrix[1][2]
+
+means:
+
+Row 1
+→ Column 2
+→ 60
+
+----------------------------------------
+7. Understanding Double Indexing
+----------------------------------------
+
+Think of:
+
+matrix[row][column]
+
+as:
+
+First bracket:
+"Which inner list?"
+
+Second bracket:
+"Which element inside that inner list?"
+
+Example:
+
+matrix[2][1]
+
+First:
+
+matrix[2]
+
+→ [70, 80, 90]
+
+Then:
+
+[70, 80, 90][1]
+
+→ 80
+
+Therefore:
+
+matrix[2][1]
+
+→ 80
+
+----------------------------------------
+8. Visual Coordinate Model
+----------------------------------------
+
+For:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+You can visualize:
+
+matrix[0][0] → 10
+matrix[0][1] → 20
+matrix[0][2] → 30
+
+matrix[1][0] → 40
+matrix[1][1] → 50
+matrix[1][2] → 60
+
+matrix[2][0] → 70
+matrix[2][1] → 80
+matrix[2][2] → 90
+
+This is exactly like coordinates:
+
+[row][column]
+
+----------------------------------------
+9. Updating Nested List Elements
+----------------------------------------
+
+Nested lists are mutable.
+
+You can change an individual element.
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+matrix[1][0] = 100
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20],
+    [100, 40]
+]
+
+Only the selected element changed.
+
+----------------------------------------
+10. Updating an Entire Row
+----------------------------------------
+
+You can replace an entire inner list.
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+matrix[1] = [100, 200]
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20],
+    [100, 200]
+]
+
+The entire second row was replaced.
+
+----------------------------------------
+11. Updating Multiple Elements
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60]
+]
+
+matrix[0][1] = 200
+matrix[1][2] = 600
+
+print(matrix)
+
+Output:
+
+[
+    [10, 200, 30],
+    [40, 50, 600]
+]
+
+----------------------------------------
+12. Negative Indexing
+----------------------------------------
+
+Nested lists support negative indexes at every level.
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+print(matrix[-1])
+
+Output:
+
+[70, 80, 90]
+
+The last row is selected.
+
+----------------------------------------
+13. Negative Column Index
+----------------------------------------
+
+Example:
+
+print(matrix[-1][-1])
+
+Output:
+
+90
+
+First:
+
+matrix[-1]
+
+→ Last row:
+
+[70, 80, 90]
+
+Then:
+
+[-1]
+
+→ Last element:
+
+90
+
+Therefore:
+
+matrix[-1][-1]
+
+means:
+
+last row
++
+last element
+
+----------------------------------------
+14. Accessing the Last Element of Every Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+print(matrix[0][-1])
+print(matrix[1][-1])
+print(matrix[2][-1])
+
+Output:
+
+30
+60
+90
+
+----------------------------------------
+15. Slicing the Outer List
+----------------------------------------
+
+Slicing the outer list selects multiple rows.
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40],
+    [50, 60],
+    [70, 80]
+]
+
+print(matrix[1:3])
+
+Output:
+
+[
+    [30, 40],
+    [50, 60]
+]
+
+Rows 1 and 2 are selected.
+
+The stop index is excluded.
+
+----------------------------------------
+16. Slicing an Inner List
+----------------------------------------
+
+You can also slice an individual row.
+
+Example:
+
+matrix = [
+    [10, 20, 30, 40],
+    [50, 60, 70, 80]
+]
+
+print(matrix[0][1:3])
+
+Output:
+
+[20, 30]
+
+First:
+
+matrix[0]
+
+→ [10, 20, 30, 40]
+
+Then:
+
+[1:3]
+
+→ [20, 30]
+
+----------------------------------------
+17. Slicing Rows and Columns
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+print(matrix[:2])
+
+Output:
+
+[
+    [10, 20, 30],
+    [40, 50, 60]
+]
+
+This selects the first two rows.
+
+But remember:
+
+Normal list slicing does not provide direct matrix-style column slicing.
+
+For columns, you normally use a loop or comprehension.
+
+----------------------------------------
+18. Iterating Through a Nested List
+----------------------------------------
+
+A nested list usually requires nested loops.
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+for row in matrix:
+    for value in row:
+        print(value)
+
+Output:
+
+10
+20
+30
+40
+50
+60
+70
+80
+90
+
+The outer loop handles rows.
+
+The inner loop handles values inside each row.
+
+----------------------------------------
+19. Understanding the Nested Loop
+----------------------------------------
+
+Code:
+
+for row in matrix:
+    for value in row:
+        print(value)
+
+Think:
+
+Outer loop:
+    Get one row.
+
+Inner loop:
+    Get every value from that row.
+
+Then:
+
+Move to the next row.
+
+Visual flow:
+
+Row 1
+→ 10
+→ 20
+→ 30
+
+Row 2
+→ 40
+→ 50
+→ 60
+
+Row 3
+→ 70
+→ 80
+→ 90
+
+----------------------------------------
+20. Printing Rows
+----------------------------------------
+
+If you only need each row:
+
+for row in matrix:
+    print(row)
+
+Output:
+
+[10, 20, 30]
+[40, 50, 60]
+[70, 80, 90]
+
+The outer loop is enough.
+
+----------------------------------------
+21. Printing Elements with Formatting
+----------------------------------------
+
+Example:
+
+for row in matrix:
+    for value in row:
+        print(value, end=" ")
+
+Output:
+
+10 20 30 40 50 60 70 80 90
+
+To preserve rows:
+
+for row in matrix:
+    for value in row:
+        print(value, end=" ")
+    print()
+
+Output:
+
+10 20 30
+40 50 60
+70 80 90
+
+The inner print creates the row.
+
+The final print() moves to the next line.
+
+----------------------------------------
+22. Finding the Sum of All Elements
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+total = 0
+
+for row in matrix:
+    for value in row:
+        total += value
+
+print(total)
+
+Output:
+
+100
+
+Calculation:
+
+10 + 20 + 30 + 40 = 100
+
+----------------------------------------
+23. Finding the Maximum Element
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 80],
+    [30, 40]
+]
+
+maximum = matrix[0][0]
+
+for row in matrix:
+    for value in row:
+        if value > maximum:
+            maximum = value
+
+print(maximum)
+
+Output:
+
+80
+
+----------------------------------------
+24. Finding the Minimum Element
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 80],
+    [30, 40]
+]
+
+minimum = matrix[0][0]
+
+for row in matrix:
+    for value in row:
+        if value < minimum:
+            minimum = value
+
+print(minimum)
+
+Output:
+
+10
+
+----------------------------------------
+25. Using List Comprehension with Nested Lists
+----------------------------------------
+
+You can process nested lists using nested comprehensions.
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+result = [
+    value
+    for row in matrix
+    for value in row
+]
+
+print(result)
+
+Output:
+
+[1, 2, 3, 4, 5, 6]
+
+This converts the nested list into a flat list.
+
+----------------------------------------
+26. Flattening a Nested List
+----------------------------------------
+
+Flattening means converting:
+
+[
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+into:
+
+[1, 2, 3, 4, 5, 6]
+
+Using a loop:
+
+matrix = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+flat = []
+
+for row in matrix:
+    for value in row:
+        flat.append(value)
+
+print(flat)
+
+Output:
+
+[1, 2, 3, 4, 5, 6]
+
+Using comprehension:
+
+flat = [value for row in matrix for value in row]
+
+----------------------------------------
+27. Creating a Matrix
+----------------------------------------
+
+You can manually create a matrix:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+This is a 3 × 3 matrix.
+
+3 rows
+×
+3 columns
+
+= 9 elements
+
+----------------------------------------
+28. Matrix Dimensions
+----------------------------------------
+
+For:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+Number of rows:
+
+len(matrix)
+
+Output:
+
+2
+
+Number of columns in the first row:
+
+len(matrix[0])
+
+Output:
+
+3
+
+Therefore:
+
+2 rows × 3 columns
+
+----------------------------------------
+29. Checking Rows and Columns
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+rows = len(matrix)
+columns = len(matrix[0])
+
+print(rows)
+print(columns)
+
+Output:
+
+2
+3
+
+This works when the matrix has at least one row and is rectangular.
+
+----------------------------------------
+30. Empty Nested List
+----------------------------------------
+
+Example:
+
+matrix = []
+
+print(len(matrix))
+
+Output:
+
+0
+
+There are no rows.
+
+Be careful with:
+
+matrix[0]
+
+because no first row exists.
+
+That would raise:
+
+IndexError
+
+----------------------------------------
+31. Empty Inner List
+----------------------------------------
+
+A nested list can contain an empty list.
+
+Example:
+
+matrix = [
+    [1, 2],
+    [],
+    [3, 4]
+]
+
+The second row contains no elements.
+
+Therefore:
+
+matrix[1]
+
+returns:
+
+[]
+
+But:
+
+matrix[1][0]
+
+raises:
+
+IndexError
+
+because the inner list is empty.
+
+----------------------------------------
+32. Jagged Lists
+----------------------------------------
+
+A nested list does not have to have equal-length rows.
+
+Example:
+
+data = [
+    [1, 2],
+    [3, 4, 5],
+    [6],
+    [7, 8, 9, 10]
+]
+
+This is called a jagged or irregular nested list.
+
+The rows have different lengths.
+
+Python allows this because each inner list is independent.
+
+----------------------------------------
+33. Processing Jagged Lists
+----------------------------------------
+
+Example:
+
+data = [
+    [1, 2],
+    [3, 4, 5],
+    [6]
+]
+
+for row in data:
+    for value in row:
+        print(value)
+
+This works because the loop processes each row according to its actual length.
+
+Do not assume:
+
+len(row)
+
+is the same for every row.
+
+----------------------------------------
+34. Checking Whether a Value Exists
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+print(5 in matrix)
+
+Output:
+
+False
+
+Why?
+
+Because 5 is not a direct element of the outer list.
+
+The direct elements are:
+
+[1, 2, 3]
+[4, 5, 6]
+
+To search inside all rows:
+
+found = False
+
+for row in matrix:
+    if 5 in row:
+        found = True
+        break
+
+print(found)
+
+Output:
+
+True
+
+----------------------------------------
+35. Nested Membership
+----------------------------------------
+
+Important:
+
+5 in matrix
+
+checks:
+
+"Is [5] a direct element of matrix?"
+
+It does NOT recursively search every inner list.
+
+For nested data, you need to explicitly search the inner lists.
+
+----------------------------------------
+36. Adding a New Row
+----------------------------------------
+
+Because nested lists are mutable, you can append a new inner list.
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+matrix.append([5, 6])
+
+print(matrix)
+
+Output:
+
+[
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+A new row was added.
+
+----------------------------------------
+37. Adding an Element to a Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+matrix[0].append(5)
+
+print(matrix)
+
+Output:
+
+[
+    [1, 2, 5],
+    [3, 4]
+]
+
+First:
+
+matrix[0]
+
+selects the first row.
+
+Then:
+
+append(5)
+
+adds 5 to that row.
+
+----------------------------------------
+38. Inserting into a Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+matrix[1].insert(1, 35)
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20],
+    [30, 35, 40]
+]
+
+----------------------------------------
+39. Removing from a Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60]
+]
+
+matrix[0].remove(20)
+
+print(matrix)
+
+Output:
+
+[
+    [10, 30],
+    [40, 50, 60]
+]
+
+The remove() operation acts on the selected inner list.
+
+----------------------------------------
+40. Removing an Entire Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40],
+    [50, 60]
+]
+
+del matrix[1]
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20],
+    [50, 60]
+]
+
+The entire second row was deleted.
+
+----------------------------------------
+41. Removing the Last Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40],
+    [50, 60]
+]
+
+matrix.pop()
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20],
+    [30, 40]
+]
+
+The last inner list was removed.
+
+----------------------------------------
+42. Removing an Element from a Specific Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60]
+]
+
+matrix[1].pop(1)
+
+print(matrix)
+
+Output:
+
+[
+    [10, 20, 30],
+    [40, 60]
+]
+
+First:
+
+matrix[1]
+
+selects:
+
+[40, 50, 60]
+
+Then:
+
+pop(1)
+
+removes 50.
+
+----------------------------------------
+43. Clearing a Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+matrix[0].clear()
+
+print(matrix)
+
+Output:
+
+[
+    [],
+    [30, 40]
+]
+
+The first row still exists, but it is empty.
+
+----------------------------------------
+44. Replacing a Row
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+matrix[0] = [100, 200, 300]
+
+print(matrix)
+
+Output:
+
+[
+    [100, 200, 300],
+    [30, 40]
+]
+
+----------------------------------------
+45. Nested List and for Loop with Index
+----------------------------------------
+
+Sometimes you need both row index and row data.
+
+Use enumerate():
+
+matrix = [
+    [10, 20],
+    [30, 40],
+    [50, 60]
+]
+
+for row_index, row in enumerate(matrix):
+    print(row_index, row)
+
+Output:
+
+0 [10, 20]
+1 [30, 40]
+2 [50, 60]
+
+----------------------------------------
+46. Row and Column Indexes
+----------------------------------------
+
+You can use enumerate() twice.
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+for row_index, row in enumerate(matrix):
+    for column_index, value in enumerate(row):
+        print(row_index, column_index, value)
+
+Output:
+
+0 0 10
+0 1 20
+1 0 30
+1 1 40
+
+This gives:
+
+row index
+column index
+value
+
+----------------------------------------
+47. Accessing Matrix Diagonal
+----------------------------------------
+
+For a square matrix:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+Main diagonal:
+
+matrix[0][0] → 1
+matrix[1][1] → 5
+matrix[2][2] → 9
+
+Using a loop:
+
+for i in range(len(matrix)):
+    print(matrix[i][i])
+
+Output:
+
+1
+5
+9
+
+----------------------------------------
+48. Sum of Main Diagonal
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+total = 0
+
+for i in range(len(matrix)):
+    total += matrix[i][i]
+
+print(total)
+
+Output:
+
+15
+
+Calculation:
+
+1 + 5 + 9 = 15
+
+----------------------------------------
+49. Transpose Concept
+----------------------------------------
+
+A matrix transpose changes rows into columns and columns into rows.
+
+Original:
+
+[
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+Transpose:
+
+[
+    [1, 4],
+    [2, 5],
+    [3, 6]
+]
+
+Using zip():
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+transposed = [list(column) for column in zip(*matrix)]
+
+print(transposed)
+
+Output:
+
+[
+    [1, 4],
+    [2, 5],
+    [3, 6]
+]
+
+The * unpacking and zip() concepts are more advanced, but this is a common nested-list operation.
+
+----------------------------------------
+50. Copying Nested Lists — Important
+----------------------------------------
+
+Consider:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+copy_matrix = matrix.copy()
+
+The outer list is copied.
+
+But the inner lists are still shared.
+
+Therefore:
+
+copy_matrix[0][0] = 100
+
+can change the original:
+
+print(matrix)
+
+Output:
+
+[
+    [100, 2],
+    [3, 4]
+]
+
+This is because copy() performs a shallow copy.
+
+----------------------------------------
+51. Why Shallow Copy Causes Problems
+----------------------------------------
+
+Think:
+
+Original outer list
+        ↓
+   ┌─────────────┐
+   │ inner A     │
+   │ inner B     │
+   └─────────────┘
+
+After shallow copy:
+
+Original → outer A
+               ↓
+            inner A
+            inner B
+
+Copy → outer B
+            ↓
+         same inner A
+         same inner B
+
+So:
+
+Different outer lists
+BUT
+Shared inner lists
+
+----------------------------------------
+52. Creating an Independent Nested Copy
+----------------------------------------
+
+If you need all nested lists to be independent, use deepcopy().
+
+Example:
+
+import copy
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+copy_matrix = copy.deepcopy(matrix)
+
+copy_matrix[0][0] = 100
+
+print(matrix)
+
+Output:
+
+[
+    [1, 2],
+    [3, 4]
+]
+
+print(copy_matrix)
+
+Output:
+
+[
+    [100, 2],
+    [3, 4]
+]
+
+Now the nested elements are independent.
+
+Deep copying is a more advanced object-copying concept.
+
+----------------------------------------
+53. The Dangerous Multiplication Pattern
+----------------------------------------
+
+This is one of the most important nested-list mistakes.
+
+Consider:
+
+matrix = [[0] * 3] * 3
+
+It looks like:
+
+[
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+]
+
+But the three rows reference the same inner list.
+
+----------------------------------------
+54. Demonstrating the Problem
+----------------------------------------
+
+Example:
+
+matrix = [[0] * 3] * 3
+
+matrix[0][0] = 1
+
+print(matrix)
+
+Output:
+
+[
+    [1, 0, 0],
+    [1, 0, 0],
+    [1, 0, 0]
+]
+
+You changed row 0.
+
+But every row changed.
+
+Why?
+
+Because all three rows refer to the SAME inner list.
+
+----------------------------------------
+55. Correct Way to Create a Matrix
+----------------------------------------
+
+Use a list comprehension:
+
+matrix = [[0] * 3 for _ in range(3)]
+
+Now:
+
+matrix[0][0] = 1
+
+print(matrix)
+
+Output:
+
+[
+    [1, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0]
+]
+
+Only the first row changed.
+
+This is a critical Python concept.
+
+----------------------------------------
+56. Why List Comprehension Works
+----------------------------------------
+
+This:
+
+[[0] * 3 for _ in range(3)]
+
+creates a NEW inner list during every iteration.
+
+Conceptually:
+
+Iteration 1 → [0, 0, 0]
+Iteration 2 → [0, 0, 0]
+Iteration 3 → [0, 0, 0]
+
+Three independent rows.
+
+Whereas:
+
+[[0] * 3] * 3
+
+creates one inner list and repeats references to it.
+
+----------------------------------------
+57. Building a Dynamic Matrix
+----------------------------------------
+
+Example:
+
+rows = 3
+columns = 4
+
+matrix = [
+    [0] * columns
+    for _ in range(rows)
+]
+
+print(matrix)
+
+Output:
+
+[
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0]
+]
+
+This creates:
+
+3 rows
+×
+4 columns
+
+----------------------------------------
+58. Creating Sequential Values
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+You can generate this programmatically:
+
+matrix = []
+
+number = 1
+
+for row in range(3):
+    current_row = []
+
+    for column in range(3):
+        current_row.append(number)
+        number += 1
+
+    matrix.append(current_row)
+
+print(matrix)
+
+Output:
+
+[
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+----------------------------------------
+59. Matrix Using Nested Comprehension
+----------------------------------------
+
+The same idea can be expressed more compactly:
+
+matrix = [
+    [row * 3 + column + 1 for column in range(3)]
+    for row in range(3)
+]
+
+Output:
+
+[
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+This combines nested loops and list comprehensions.
+
+----------------------------------------
+60. Nested Lists with Different Data Types
+----------------------------------------
+
+Nested lists can contain any Python objects.
+
+Example:
+
+student = [
+    "Rahul",
+    21,
+    ["Python", "SQL", "FastAPI"],
+    True
+]
+
+Here:
+
+student[0] → "Rahul"
+student[1] → 21
+student[2] → ["Python", "SQL", "FastAPI"]
+student[3] → True
+
+To access "SQL":
+
+student[2][1]
+
+Output:
+
+"SQL"
+
+----------------------------------------
+61. Deeply Nested Lists
+----------------------------------------
+
+Lists can be nested multiple levels deep.
+
+Example:
+
+data = [
+    [
+        [1, 2],
+        [3, 4]
+    ],
+    [
+        [5, 6],
+        [7, 8]
+    ]
+]
+
+To access 7:
+
+data[1][1][0]
+
+Step by step:
+
+data[1]
+→ second outer element
+
+data[1][1]
+→ second inner list
+
+data[1][1][0]
+→ first element
+
+Result:
+
+7
+
+Although Python allows deep nesting, excessive nesting can make code difficult to understand.
+
+----------------------------------------
+62. Nested List vs 2D Array
+----------------------------------------
+
+In beginner Python, a nested list is often used as a 2D data structure.
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6]
+]
+
+But technically, Python's built-in list is not a specialized mathematical matrix type.
+
+For advanced numerical computing, libraries such as NumPy provide dedicated multidimensional arrays.
+
+For Python fundamentals, nested lists are sufficient for learning 2D data manipulation.
+
+----------------------------------------
+63. Common Real-World Uses
+----------------------------------------
+
+Nested lists are useful for:
+
+Student marks:
+
+marks = [
+    [80, 90, 75],
+    [70, 85, 88]
+]
+
+Grid:
+
+grid = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+]
+
+Table:
+
+employees = [
+    ["Rahul", "Python", 50000],
+    ["Anita", "Java", 60000]
+]
+
+Matrix:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+----------------------------------------
+64. Student Marks Example
+----------------------------------------
+
+Example:
+
+marks = [
+    [80, 90, 70],
+    [75, 85, 95],
+    [88, 92, 81]
+]
+
+marks[0][1]
+
+Output:
+
+90
+
+This means:
+
+Student 0
+→ Subject 1
+→ 90 marks
+
+----------------------------------------
+65. Calculating Each Student's Total
+----------------------------------------
+
+Example:
+
+marks = [
+    [80, 90, 70],
+    [75, 85, 95],
+    [88, 92, 81]
+]
+
+for student_marks in marks:
+    total = sum(student_marks)
+    print(total)
+
+Output:
+
+240
+255
+261
+
+Each inner list represents one student's marks.
+
+----------------------------------------
+66. Calculating Average
+----------------------------------------
+
+Example:
+
+marks = [
+    [80, 90, 70],
+    [75, 85, 95],
+    [88, 92, 81]
+]
+
+for student_marks in marks:
+    average = sum(student_marks) / len(student_marks)
+    print(average)
+
+Output:
+
+80.0
+85.0
+87.0
+
+----------------------------------------
+67. Finding Highest Mark
+----------------------------------------
+
+Example:
+
+marks = [
+    [80, 90, 70],
+    [75, 85, 95],
+    [88, 92, 81]
+]
+
+highest = max(max(row) for row in marks)
+
+print(highest)
+
+Output:
+
+95
+
+This combines nested iteration with max().
+
+----------------------------------------
+68. Grid Example
+----------------------------------------
+
+A nested list can represent a game board.
+
+Example:
+
+board = [
+    ["X", "O", "X"],
+    ["O", "X", "O"],
+    ["X", "X", "O"]
+]
+
+Access:
+
+board[0][0]
+
+Output:
+
+"X"
+
+board[2][1]
+
+Output:
+
+"X"
+
+----------------------------------------
+69. Changing a Grid Cell
+----------------------------------------
+
+Example:
+
+board = [
+    [".", ".", "."],
+    [".", ".", "."],
+    [".", ".", "."]
+]
+
+board[1][1] = "X"
+
+print(board)
+
+Output:
+
+[
+    [".", ".", "."],
+    [".", "X", "."],
+    [".", ".", "."]
+]
+
+This pattern is common in grid-based programming problems.
+
+----------------------------------------
+70. Searching a Nested List
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20, 30],
+    [40, 50, 60],
+    [70, 80, 90]
+]
+
+target = 50
+
+for row_index, row in enumerate(matrix):
+    if target in row:
+        column_index = row.index(target)
+        print(row_index, column_index)
+
+Output:
+
+1 1
+
+This tells us:
+
+50 is at:
+
+row 1
+column 1
+
+----------------------------------------
+71. Counting an Element in a Nested List
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 1],
+    [3, 1, 4],
+    [1, 5, 6]
+]
+
+count = 0
+
+for row in matrix:
+    count += row.count(1)
+
+print(count)
+
+Output:
+
+4
+
+Each row is searched separately.
+
+----------------------------------------
+72. Common Mistakes
+----------------------------------------
+
+Mistake 1:
+
+matrix[1]
+
+when you wanted a specific value.
+
+matrix[1]
+
+returns the entire second row.
+
+Use:
+
+matrix[1][0]
+
+to access its first value.
+
+----------------------------------------
+Mistake 2:
+
+matrix[3][0]
+
+when there are only three rows.
+
+Valid outer indexes:
+
+0
+1
+2
+
+Index 3 causes:
+
+IndexError
+
+----------------------------------------
+Mistake 3:
+
+matrix[0][5]
+
+when the first row has only three elements.
+
+This also causes:
+
+IndexError
+
+----------------------------------------
+Mistake 4:
+
+5 in matrix
+
+expecting Python to search every inner list.
+
+It only checks direct outer elements.
+
+----------------------------------------
+Mistake 5:
+
+matrix = [[0] * 3] * 3
+
+This creates shared inner-list references.
+
+Prefer:
+
+matrix = [[0] * 3 for _ in range(3)]
+
+----------------------------------------
+Mistake 6 — Assuming All Rows Have Equal Length
+----------------------------------------
+
+For:
+
+data = [
+    [1, 2],
+    [3, 4, 5]
+]
+
+This is valid Python.
+
+But:
+
+data[0][2]
+
+causes:
+
+IndexError
+
+because the first row has only two elements.
+
+----------------------------------------
+73. Nested Lists and Mutability
+----------------------------------------
+
+Nested lists are mutable at multiple levels.
+
+You can modify:
+
+The outer list.
+
+Example:
+
+matrix.append([7, 8])
+
+You can modify an inner list.
+
+Example:
+
+matrix[0].append(9)
+
+You can modify an individual value.
+
+Example:
+
+matrix[0][0] = 100
+
+This is why nested lists are powerful for changing structured data.
+
+----------------------------------------
+74. Nested Lists and Assignment
+----------------------------------------
+
+Consider:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+other = matrix
+
+other[0][0] = 100
+
+print(matrix)
+
+Output:
+
+[
+    [100, 2],
+    [3, 4]
+]
+
+Because:
+
+other
+
+and:
+
+matrix
+
+refer to the same outer list.
+
+----------------------------------------
+75. Nested Lists and Shallow Copy
+----------------------------------------
+
+Consider:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+other = matrix.copy()
+
+Now:
+
+matrix is other
+
+→ False
+
+But:
+
+matrix[0] is other[0]
+
+→ True
+
+The outer list is different.
+
+The inner lists are shared.
+
+This is the exact meaning of shallow copy.
+
+----------------------------------------
+76. Nested Lists and Deep Copy
+----------------------------------------
+
+For complete independent copying:
+
+import copy
+
+other = copy.deepcopy(matrix)
+
+Then:
+
+matrix[0] is other[0]
+
+→ False
+
+Changes to nested elements remain independent.
+
+----------------------------------------
+77. Nested List Comprehension — Filtering
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+even_numbers = [
+    value
+    for row in matrix
+    for value in row
+    if value % 2 == 0
+]
+
+print(even_numbers)
+
+Output:
+
+[2, 4, 6, 8]
+
+----------------------------------------
+78. Nested List Comprehension — Transformation
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+result = [
+    [value * 2 for value in row]
+    for row in matrix
+]
+
+print(result)
+
+Output:
+
+[
+    [2, 4],
+    [6, 8]
+]
+
+Notice that this preserves the nested structure.
+
+----------------------------------------
+79. Flattening vs Preserving Structure
+----------------------------------------
+
+Flatten:
+
+result = [
+    value
+    for row in matrix
+    for value in row
+]
+
+Result:
+
+[1, 2, 3, 4]
+
+Preserve:
+
+result = [
+    [value * 2 for value in row]
+    for row in matrix
+]
+
+Result:
+
+[
+    [2, 4],
+    [6, 8]
+]
+
+This distinction is important.
+
+----------------------------------------
+80. Nested Lists and Functions
+----------------------------------------
+
+You can pass nested lists to functions.
+
+Example:
+
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+print_matrix(matrix)
+
+Output:
+
+[1, 2]
+[3, 4]
+
+A function can receive the entire nested structure as one argument.
+
+----------------------------------------
+81. Returning a Nested List
+----------------------------------------
+
+Functions can also return nested lists.
+
+Example:
+
+def create_matrix():
+    return [
+        [1, 2],
+        [3, 4]
+    ]
+
+matrix = create_matrix()
+
+print(matrix)
+
+Output:
+
+[
+    [1, 2],
+    [3, 4]
+]
+
+----------------------------------------
+82. Passing a Row to a Function
+----------------------------------------
+
+Example:
+
+def row_sum(row):
+    return sum(row)
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+for row in matrix:
+    print(row_sum(row))
+
+Output:
+
+30
+70
+
+----------------------------------------
+83. Important Concept — Nested Does Not Mean Fixed Size
+----------------------------------------
+
+Python lists do not require a fixed number of rows or columns.
+
+You can have:
+
+matrix = [
+    [1, 2],
+    [3, 4, 5],
+    [6]
+]
+
+This is valid.
+
+Unlike some fixed-size array structures, Python lists are dynamic and mutable.
+
+----------------------------------------
+84. Nested List vs List of Tuples
+----------------------------------------
+
+Both can represent structured data.
+
+Nested lists:
+
+students = [
+    ["Rahul", 85],
+    ["Anita", 92]
+]
+
+The inner data can be modified.
+
+List of tuples:
+
+students = [
+    ("Rahul", 85),
+    ("Anita", 92)
+]
+
+The tuple elements cannot be modified.
+
+This is a useful design distinction.
+
+----------------------------------------
+85. Nested Lists as Tables
+----------------------------------------
+
+Example:
+
+employees = [
+    ["Rahul", "Python", 50000],
+    ["Anita", "Java", 60000],
+    ["Kiran", "React", 55000]
+]
+
+Think:
+
+Row 0:
+Name | Skill | Salary
+
+Row 1:
+Rahul | Python | 50000
+
+Row 2:
+Anita | Java | 60000
+
+Row 3:
+Kiran | React | 55000
+
+Access:
+
+employees[1][2]
+
+Output:
+
+60000
+
+----------------------------------------
+86. Modifying Table Data
+----------------------------------------
+
+Example:
+
+employees[1][2] = 65000
+
+Now:
+
+[
+    ["Rahul", "Python", 50000],
+    ["Anita", "Java", 65000],
+    ["Kiran", "React", 55000]
+]
+
+The salary value was updated.
+
+----------------------------------------
+87. Iterating Through Table Data
+----------------------------------------
+
+Example:
+
+for employee in employees:
+    name = employee[0]
+    skill = employee[1]
+    salary = employee[2]
+
+    print(name, skill, salary)
+
+This is a common way to process rows.
+
+----------------------------------------
+88. Nested List as a Grid
+----------------------------------------
+
+A grid is one of the most common uses.
+
+Example:
+
+grid = [
+    [0, 0, 0, 0],
+    [0, 0, 1, 0],
+    [0, 0, 0, 0]
+]
+
+The value 1 represents an occupied cell.
+
+Access:
+
+grid[1][2]
+
+→ 1
+
+Change:
+
+grid[1][2] = 0
+
+→ Cell becomes empty.
+
+----------------------------------------
+89. Professional Mental Model
+----------------------------------------
+
+Think of a nested list as:
+
+A container
+    ↓
+containing smaller containers
+    ↓
+each smaller container contains values.
+
+For example:
+
+matrix[1][2]
+
+means:
+
+1. Go to the outer container.
+2. Select inner container 1.
+3. Go inside that container.
+4. Select element 2.
+
+This mental model makes nested indexing much easier.
+
+----------------------------------------
+90. Quick Decision Guide
+----------------------------------------
+
+Want an entire row?
+
+→ matrix[row]
+
+Want one value?
+
+→ matrix[row][column]
+
+Want to change one value?
+
+→ matrix[row][column] = value
+
+Want to add a row?
+
+→ matrix.append(row)
+
+Want to add to a specific row?
+
+→ matrix[row].append(value)
+
+Want to remove a row?
+
+→ del matrix[row]
+
+Want to process every value?
+
+→ nested for loops
+
+Want to flatten the structure?
+
+→ nested list comprehension
+
+Want an independent outer copy?
+
+→ matrix.copy()
+
+Want completely independent nested objects?
+
+→ copy.deepcopy(matrix)
+
+----------------------------------------
+Important Rules
+----------------------------------------
+
+• A nested list is a list containing other lists.
+• matrix[row][column] is the standard indexing pattern.
+• The first index selects the inner list.
+• The second index selects an element inside that inner list.
+• Nested lists can represent 2D data.
+• Rows can have equal or different lengths.
+• Nested lists are mutable.
+• You can add, remove, update, and replace rows.
+• Nested loops are commonly used to process every element.
+• List comprehensions can process nested lists.
+• A normal in check on the outer list does not recursively search inner lists.
+• copy() creates only a shallow copy.
+• Nested mutable objects can remain shared after copy().
+• deepcopy() can create recursively independent copies.
+• [[0] * columns] * rows creates shared inner-list references.
+• Use [[0] * columns for _ in range(rows)] for independent rows.
+• Excessive nesting can make code harder to understand.
+
+----------------------------------------
+Common Interview Question
+----------------------------------------
+
+Why is this dangerous?
+
+matrix = [[0] * 3] * 3
+
+Because all three rows refer to the same inner list.
+
+Therefore:
+
+matrix[0][0] = 1
+
+changes all three rows.
+
+Correct:
+
+matrix = [[0] * 3 for _ in range(3)]
+
+Now every row is a separate list.
+
+----------------------------------------
+Final Summary
+----------------------------------------
+
+Nested lists are lists containing other lists and are one of Python's fundamental ways to represent structured, two-dimensional data.
+
+The key concept is:
+
+matrix[row][column]
+
+The first index selects the inner list, and the second index selects an element inside that list.
+
+Nested lists can be modified, traversed using nested loops, filtered and transformed using nested comprehensions, and used to represent tables, matrices, grids, marks, and other structured data.
+
+The most important advanced point is object referencing:
+
+matrix.copy()
+
+creates a shallow copy, so inner lists may still be shared.
+
+And when creating a matrix, avoid:
+
+[[0] * columns] * rows
+
+because it creates multiple references to the same inner list.
+
+Prefer:
+
+[[0] * columns for _ in range(rows)]
+
+The professional mental model is:
+
+Outer list
+→ selects the group/row
+
+Inner list
+→ contains the group's values
+
+[row][column]
+→ navigates from the outer structure into the exact value.`,
+},
+{
+  heading: "Iterating Through Lists — for Loops",
+  body: `List iteration means visiting the elements of a list one by one so that you can read, process, compare, calculate, or transform them.
+
+The most common way to iterate through a Python list is the for loop.
+
+----------------------------------------
+1. Basic List Iteration
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30, 40]
+
+for number in numbers:
+    print(number)
+
+Output:
+
+10
+20
+30
+40
+
+The for loop automatically takes each element from the list and assigns it to number.
+
+Conceptually:
+
+numbers
+↓
+10 → number
+20 → number
+30 → number
+40 → number
+
+----------------------------------------
+2. The Professional Mental Model
+----------------------------------------
+
+When you write:
+
+for item in items:
+
+read it as:
+
+"For every item inside items, execute this block."
+
+Example:
+
+languages = ["Python", "Java", "SQL"]
+
+for language in languages:
+    print(language)
+
+Python
+Java
+SQL
+
+The variable language represents the current element during each iteration.
+
+----------------------------------------
+3. The Iteration Variable
+----------------------------------------
+
+The variable name can be anything meaningful.
+
+Example:
+
+numbers = [10, 20, 30]
+
+for number in numbers:
+    print(number)
+
+You could also write:
+
+for value in numbers:
+    print(value)
+
+Or:
+
+for item in numbers:
+    print(item)
+
+All are valid.
+
+Prefer meaningful names:
+
+for student in students:
+    ...
+
+for employee in employees:
+    ...
+
+for score in scores:
+    ...
+
+----------------------------------------
+4. Processing Each Element
+----------------------------------------
+
+Iteration is not only for printing.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+for number in numbers:
+    square = number ** 2
+    print(square)
+
+Output:
+
+1
+4
+9
+16
+25
+
+Each element is processed independently.
+
+----------------------------------------
+5. Calculating a Total
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30, 40]
+
+total = 0
+
+for number in numbers:
+    total += number
+
+print(total)
+
+Output:
+
+100
+
+Mental process:
+
+total = 0
+
+10 → total = 10
+20 → total = 30
+30 → total = 60
+40 → total = 100
+
+----------------------------------------
+6. Finding the Maximum
+----------------------------------------
+
+Example:
+
+numbers = [10, 50, 20, 80, 30]
+
+maximum = numbers[0]
+
+for number in numbers:
+    if number > maximum:
+        maximum = number
+
+print(maximum)
+
+Output:
+
+80
+
+The loop compares every element with the current maximum.
+
+----------------------------------------
+7. Finding the Minimum
+----------------------------------------
+
+Example:
+
+numbers = [10, 50, 20, 80, 30]
+
+minimum = numbers[0]
+
+for number in numbers:
+    if number < minimum:
+        minimum = number
+
+print(minimum)
+
+Output:
+
+10
+
+----------------------------------------
+8. Counting Elements Matching a Condition
+----------------------------------------
+
+Example:
+
+numbers = [10, 15, 20, 25, 30]
+
+count = 0
+
+for number in numbers:
+    if number % 2 == 0:
+        count += 1
+
+print(count)
+
+Output:
+
+3
+
+The even numbers are:
+
+10
+20
+30
+
+----------------------------------------
+9. Building a New List While Iterating
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = []
+
+for number in numbers:
+    squares.append(number ** 2)
+
+print(squares)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+This is the normal-loop version of a list comprehension.
+
+----------------------------------------
+10. Filtering a List
+----------------------------------------
+
+Example:
+
+numbers = [10, 15, 20, 25, 30]
+
+even_numbers = []
+
+for number in numbers:
+    if number % 2 == 0:
+        even_numbers.append(number)
+
+print(even_numbers)
+
+Output:
+
+[10, 20, 30]
+
+----------------------------------------
+11. Transforming and Filtering Together
+----------------------------------------
+
+Example:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+squares_of_even = []
+
+for number in numbers:
+    if number % 2 == 0:
+        squares_of_even.append(number ** 2)
+
+print(squares_of_even)
+
+Output:
+
+[4, 16, 36]
+
+This is equivalent to:
+
+[number ** 2 for number in numbers if number % 2 == 0]
+
+----------------------------------------
+12. Iterating Through Strings in a List
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Kiran"]
+
+for name in names:
+    print(name.upper())
+
+Output:
+
+RAHUL
+ANITA
+KIRAN
+
+Each element is a string, so string methods can be used.
+
+----------------------------------------
+13. Checking Each String
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Alexander", "Kiran"]
+
+for name in names:
+    if len(name) > 5:
+        print(name)
+
+Output:
+
+Alexander
+
+----------------------------------------
+14. Iterating with Indexes — range(len())
+----------------------------------------
+
+Sometimes you need the position of each element.
+
+Example:
+
+numbers = [10, 20, 30, 40]
+
+for index in range(len(numbers)):
+    print(index, numbers[index])
+
+Output:
+
+0 10
+1 20
+2 30
+3 40
+
+Here:
+
+range(len(numbers))
+
+produces:
+
+0, 1, 2, 3
+
+Then:
+
+numbers[index]
+
+accesses the corresponding element.
+
+----------------------------------------
+15. Why range(len()) Is Sometimes Used
+----------------------------------------
+
+Use:
+
+for index in range(len(numbers)):
+
+when you specifically need the index to perform an operation.
+
+Example:
+
+numbers = [10, 20, 30]
+
+for index in range(len(numbers)):
+    numbers[index] *= 2
+
+print(numbers)
+
+Output:
+
+[20, 40, 60]
+
+Here the index is needed because we are updating elements by position.
+
+----------------------------------------
+16. enumerate() — Index + Value
+----------------------------------------
+
+Python provides a cleaner way to get both index and value:
+
+numbers = [10, 20, 30, 40]
+
+for index, number in enumerate(numbers):
+    print(index, number)
+
+Output:
+
+0 10
+1 20
+2 30
+3 40
+
+This is generally preferred over:
+
+for index in range(len(numbers)):
+    print(index, numbers[index])
+
+when you simply need both the position and value.
+
+----------------------------------------
+17. enumerate() with a Custom Starting Index
+----------------------------------------
+
+By default:
+
+enumerate(numbers)
+
+starts at 0.
+
+You can choose another starting number:
+
+numbers = [10, 20, 30]
+
+for index, number in enumerate(numbers, start=1):
+    print(index, number)
+
+Output:
+
+1 10
+2 20
+3 30
+
+This is useful when displaying human-friendly numbering.
+
+----------------------------------------
+18. enumerate() in Real-World Data
+----------------------------------------
+
+Example:
+
+students = ["Rahul", "Anita", "Kiran"]
+
+for position, student in enumerate(students, start=1):
+    print(f"{position}. {student}")
+
+Output:
+
+1. Rahul
+2. Anita
+3. Kiran
+
+----------------------------------------
+19. Updating List Elements
+----------------------------------------
+
+Remember:
+
+for number in numbers:
+    number = number * 2
+
+does NOT modify the original list.
+
+Example:
+
+numbers = [1, 2, 3]
+
+for number in numbers:
+    number *= 2
+
+print(numbers)
+
+Output:
+
+[1, 2, 3]
+
+Why?
+
+number is simply the loop variable. Reassigning it does not replace the list element.
+
+----------------------------------------
+20. Correctly Updating Elements by Index
+----------------------------------------
+
+If you need to modify the original list:
+
+numbers = [1, 2, 3]
+
+for index in range(len(numbers)):
+    numbers[index] *= 2
+
+print(numbers)
+
+Output:
+
+[2, 4, 6]
+
+Here the actual list positions are modified.
+
+----------------------------------------
+21. Another Good Way — enumerate()
+----------------------------------------
+
+You can also update using enumerate():
+
+numbers = [1, 2, 3]
+
+for index, number in enumerate(numbers):
+    numbers[index] = number * 2
+
+print(numbers)
+
+Output:
+
+[2, 4, 6]
+
+----------------------------------------
+22. Reading vs Modifying a List
+----------------------------------------
+
+If you only need to read/process values:
+
+for number in numbers:
+    print(number)
+
+If you need the position:
+
+for index, number in enumerate(numbers):
+    ...
+
+If you need to replace elements:
+
+for index, number in enumerate(numbers):
+    numbers[index] = ...
+
+This distinction is important.
+
+----------------------------------------
+23. break — Stop Iteration
+----------------------------------------
+
+break immediately terminates the loop.
+
+Example:
+
+numbers = [10, 20, 30, 40, 50]
+
+for number in numbers:
+    if number == 30:
+        break
+    print(number)
+
+Output:
+
+10
+20
+
+When number becomes 30, break stops the loop.
+
+40 and 50 are never processed.
+
+----------------------------------------
+24. continue — Skip Current Iteration
+----------------------------------------
+
+continue skips the rest of the current iteration and moves to the next one.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+for number in numbers:
+    if number % 2 == 0:
+        continue
+    print(number)
+
+Output:
+
+1
+3
+5
+
+Even numbers are skipped.
+
+----------------------------------------
+25. break vs continue
+----------------------------------------
+
+break:
+
+"Stop the entire loop."
+
+continue:
+
+"Skip this iteration and continue with the next one."
+
+Example:
+
+for number in numbers:
+
+    if number == 5:
+        break
+
+    if number % 2 == 0:
+        continue
+
+    print(number)
+
+The two statements control different levels of loop execution.
+
+----------------------------------------
+26. Searching for an Element
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Kiran"]
+
+target = "Anita"
+
+for name in names:
+    if name == target:
+        print("Found")
+        break
+
+Output:
+
+Found
+
+break is useful because there is no need to continue searching once the target is found.
+
+----------------------------------------
+27. Searching and Returning the Index
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Kiran"]
+
+target = "Anita"
+
+for index, name in enumerate(names):
+    if name == target:
+        print("Found at index:", index)
+        break
+
+Output:
+
+Found at index: 1
+
+----------------------------------------
+28. for...else with Lists
+----------------------------------------
+
+Python's for loop can have an else block.
+
+Example:
+
+numbers = [1, 3, 5, 7]
+
+target = 4
+
+for number in numbers:
+    if number == target:
+        print("Found")
+        break
+else:
+    print("Not found")
+
+Output:
+
+Not found
+
+The else block runs when the loop finishes normally without hitting break.
+
+----------------------------------------
+29. for...else — Important Mental Model
+----------------------------------------
+
+Do NOT think:
+
+"else belongs to the if."
+
+Instead think:
+
+for loop
+↓
+Did break happen?
+↓
+NO → execute else
+
+Example:
+
+for number in numbers:
+    if number == 10:
+        break
+else:
+    print("Loop completed without break")
+
+The else is associated with the loop.
+
+----------------------------------------
+30. for...else When Item Exists
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30]
+
+for number in numbers:
+    if number == 20:
+        print("Found")
+        break
+else:
+    print("Not found")
+
+Output:
+
+Found
+
+Because break happened, the else block is skipped.
+
+----------------------------------------
+31. Iterating Through Nested Lists
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:
+    for value in row:
+        print(value)
+
+Output:
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+
+Outer loop:
+
+for row in matrix
+
+handles each inner list.
+
+Inner loop:
+
+for value in row
+
+handles each value.
+
+----------------------------------------
+32. Printing a Matrix
+----------------------------------------
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+for row in matrix:
+    for value in row:
+        print(value, end=" ")
+    print()
+
+Output:
+
+1 2 3
+4 5 6
+7 8 9
+
+----------------------------------------
+33. Nested Iteration with Indexes
+----------------------------------------
+
+Example:
+
+matrix = [
+    [10, 20],
+    [30, 40]
+]
+
+for row_index, row in enumerate(matrix):
+    for column_index, value in enumerate(row):
+        print(row_index, column_index, value)
+
+Output:
+
+0 0 10
+0 1 20
+1 0 30
+1 1 40
+
+This is useful when you need exact row and column positions.
+
+----------------------------------------
+34. Iterating Through a List of Dictionaries
+----------------------------------------
+
+Example:
+
+students = [
+    {"name": "Rahul", "score": 85},
+    {"name": "Anita", "score": 92},
+    {"name": "Kiran", "score": 78}
+]
+
+for student in students:
+    print(student["name"], student["score"])
+
+Output:
+
+Rahul 85
+Anita 92
+Kiran 78
+
+This is extremely common in real Python applications.
+
+----------------------------------------
+35. Filtering a List of Dictionaries
+----------------------------------------
+
+Example:
+
+students = [
+    {"name": "Rahul", "score": 85},
+    {"name": "Anita", "score": 92},
+    {"name": "Kiran", "score": 78}
+]
+
+for student in students:
+    if student["score"] >= 80:
+        print(student["name"])
+
+Output:
+
+Rahul
+Anita
+
+----------------------------------------
+36. Iterating Through Dictionary Items Inside a List
+----------------------------------------
+
+Example:
+
+users = [
+    {"name": "Rahul", "skills": ["Python", "SQL"]},
+    {"name": "Anita", "skills": ["Java", "SQL"]}
+]
+
+for user in users:
+    print(user["name"])
+
+    for skill in user["skills"]:
+        print(skill)
+
+Output:
+
+Rahul
+Python
+SQL
+Anita
+Java
+SQL
+
+This demonstrates multiple levels of iteration.
+
+----------------------------------------
+37. Using zip() While Iterating
+----------------------------------------
+
+Suppose:
+
+names = ["Rahul", "Anita", "Kiran"]
+scores = [85, 92, 78]
+
+You can iterate over both lists together:
+
+for name, score in zip(names, scores):
+    print(name, score)
+
+Output:
+
+Rahul 85
+Anita 92
+Kiran 78
+
+zip() pairs elements based on their positions.
+
+----------------------------------------
+38. enumerate() vs zip()
+----------------------------------------
+
+enumerate():
+
+for index, value in enumerate(numbers):
+    ...
+
+Use it when you need:
+
+index + value
+
+zip():
+
+for name, score in zip(names, scores):
+    ...
+
+Use it when you need:
+
+value from one list + value from another list.
+
+----------------------------------------
+39. Iterating in Reverse
+----------------------------------------
+
+You can iterate through a list backwards using reversed():
+
+numbers = [10, 20, 30, 40]
+
+for number in reversed(numbers):
+    print(number)
+
+Output:
+
+40
+30
+20
+10
+
+reversed() returns a reverse iterator.
+
+It does not modify the original list.
+
+----------------------------------------
+40. Iterating Through Sorted Values
+----------------------------------------
+
+You can iterate over sorted values:
+
+numbers = [30, 10, 40, 20]
+
+for number in sorted(numbers):
+    print(number)
+
+Output:
+
+10
+20
+30
+40
+
+The original list remains unchanged.
+
+----------------------------------------
+41. Reverse Sorted Iteration
+----------------------------------------
+
+Example:
+
+numbers = [30, 10, 40, 20]
+
+for number in sorted(numbers, reverse=True):
+    print(number)
+
+Output:
+
+40
+30
+20
+10
+
+----------------------------------------
+42. Iterating with Conditions
+----------------------------------------
+
+Example:
+
+numbers = [10, 15, 20, 25, 30]
+
+for number in numbers:
+    if number > 20:
+        print(number)
+
+Output:
+
+25
+30
+
+This is one of the most common list-iteration patterns.
+
+----------------------------------------
+43. Multiple Conditions
+----------------------------------------
+
+Example:
+
+numbers = range(1, 21)
+
+for number in numbers:
+    if number % 2 == 0 and number > 10:
+        print(number)
+
+Output:
+
+12
+14
+16
+18
+20
+
+----------------------------------------
+44. Iterating Over a Copy
+----------------------------------------
+
+Be careful when modifying a list while iterating over it.
+
+Risky:
+
+numbers = [1, 2, 3, 4, 5]
+
+for number in numbers:
+    if number % 2 == 0:
+        numbers.remove(number)
+
+print(numbers)
+
+Modifying the list while iterating can cause elements to be skipped.
+
+----------------------------------------
+45. Why Modifying During Iteration Is Dangerous
+----------------------------------------
+
+When you remove an element, the remaining elements shift positions.
+
+Example:
+
+[1, 2, 3, 4, 5]
+
+Remove 2:
+
+[1, 3, 4, 5]
+
+The loop's internal position continues moving, which can cause unexpected behavior.
+
+Avoid changing the size of a list while directly iterating over it unless you fully understand the behavior.
+
+----------------------------------------
+46. Safe Filtering Approach
+----------------------------------------
+
+Instead of removing items during iteration, create a new list.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+odd_numbers = []
+
+for number in numbers:
+    if number % 2 != 0:
+        odd_numbers.append(number)
+
+print(odd_numbers)
+
+Output:
+
+[1, 3, 5]
+
+The original list is not changed during iteration.
+
+----------------------------------------
+47. Another Safe Approach — Iterate Over a Copy
+----------------------------------------
+
+If you specifically need to remove elements:
+
+numbers = [1, 2, 3, 4, 5]
+
+for number in numbers.copy():
+    if number % 2 == 0:
+        numbers.remove(number)
+
+print(numbers)
+
+Output:
+
+[1, 3, 5]
+
+The loop iterates over the copy while modifying the original.
+
+A filtering approach is often clearer when you are simply selecting elements.
+
+----------------------------------------
+48. Iteration Over an Empty List
+----------------------------------------
+
+Example:
+
+numbers = []
+
+for number in numbers:
+    print(number)
+
+Nothing happens.
+
+There is no error.
+
+The loop simply executes zero times.
+
+----------------------------------------
+49. Iterating Over a Single-Element List
+----------------------------------------
+
+Example:
+
+numbers = [100]
+
+for number in numbers:
+    print(number)
+
+Output:
+
+100
+
+The loop executes exactly once.
+
+----------------------------------------
+50. Nested break
+----------------------------------------
+
+In nested loops, break only exits the nearest loop.
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+for row in matrix:
+    for value in row:
+        if value == 2:
+            break
+        print(value)
+
+Output:
+
+1
+3
+4
+
+When value is 2, the inner loop stops.
+
+The outer loop continues with the next row.
+
+----------------------------------------
+51. Nested continue
+----------------------------------------
+
+Similarly, continue affects only the nearest loop.
+
+Example:
+
+matrix = [
+    [1, 2],
+    [3, 4]
+]
+
+for row in matrix:
+    for value in row:
+        if value == 2:
+            continue
+        print(value)
+
+Output:
+
+1
+3
+4
+
+Only the current inner-loop iteration is skipped.
+
+----------------------------------------
+52. Stopping All Nested Loops
+----------------------------------------
+
+A break inside an inner loop does NOT automatically stop the outer loop.
+
+If you need to stop processing completely, you may use a flag, return from a function, or structure the logic differently.
+
+Example using a flag:
+
+found = False
+
+for row in matrix:
+    for value in row:
+        if value == 5:
+            found = True
+            break
+
+    if found:
+        break
+
+This stops both loops.
+
+----------------------------------------
+53. return Inside a Loop
+----------------------------------------
+
+If the loop is inside a function, return can immediately leave the function.
+
+Example:
+
+def find_number(numbers, target):
+    for number in numbers:
+        if number == target:
+            return True
+
+    return False
+
+print(find_number([10, 20, 30], 20))
+
+Output:
+
+True
+
+Here return ends both:
+
+the loop
+
+and:
+
+the function.
+
+This is often cleaner than using flags.
+
+----------------------------------------
+54. Iterating with a Counter
+----------------------------------------
+
+Example:
+
+numbers = [10, 20, 30]
+
+count = 0
+
+for number in numbers:
+    count += 1
+    print(count, number)
+
+Output:
+
+1 10
+2 20
+3 30
+
+However, when you need a position, enumerate() is usually clearer.
+
+----------------------------------------
+55. enumerate() Is Usually Better
+----------------------------------------
+
+Instead of:
+
+count = 0
+
+for number in numbers:
+    count += 1
+    print(count, number)
+
+Prefer:
+
+for index, number in enumerate(numbers, start=1):
+    print(index, number)
+
+This directly expresses:
+
+"I need the position and value."
+
+----------------------------------------
+56. Iterating Over Multiple Lists
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Kiran"]
+ages = [21, 22, 20]
+
+for name, age in zip(names, ages):
+    print(name, age)
+
+Output:
+
+Rahul 21
+Anita 22
+Kiran 20
+
+----------------------------------------
+57. zip() Stops at the Shorter Iterable
+----------------------------------------
+
+Example:
+
+names = ["Rahul", "Anita", "Kiran"]
+ages = [21, 22]
+
+for name, age in zip(names, ages):
+    print(name, age)
+
+Output:
+
+Rahul 21
+Anita 22
+
+"Kiran" has no matching age, so it is not processed.
+
+----------------------------------------
+58. Iterating with zip(strict=True)
+----------------------------------------
+
+In modern Python, when equal lengths are required:
+
+for name, age in zip(names, ages, strict=True):
+    print(name, age)
+
+If the iterables have different lengths, Python raises an error instead of silently stopping.
+
+This is useful when mismatched data should be treated as a bug.
+
+----------------------------------------
+59. Iterating Over Characters in List Strings
+----------------------------------------
+
+Example:
+
+words = ["Python", "SQL"]
+
+for word in words:
+    for character in word:
+        print(character)
+
+Output:
+
+P
+y
+t
+h
+o
+n
+S
+Q
+L
+
+The outer loop processes each string.
+
+The inner loop processes each character.
+
+----------------------------------------
+60. Iterating Over Tuples Inside a List
+----------------------------------------
+
+Example:
+
+coordinates = [
+    (10, 20),
+    (30, 40),
+    (50, 60)
+]
+
+for x, y in coordinates:
+    print(x, y)
+
+Output:
+
+10 20
+30 40
+50 60
+
+Python automatically unpacks each tuple.
+
+----------------------------------------
+61. Iterating Over Lists of Lists with Unpacking
+----------------------------------------
+
+Example:
+
+students = [
+    ["Rahul", 85],
+    ["Anita", 92],
+    ["Kiran", 78]
+]
+
+for name, score in students:
+    print(name, score)
+
+Output:
+
+Rahul 85
+Anita 92
+Kiran 78
+
+Each inner list contains exactly two elements, so Python unpacks them into name and score.
+
+----------------------------------------
+62. Important: Unpacking Requires Matching Structure
+----------------------------------------
+
+This works:
+
+students = [
+    ["Rahul", 85],
+    ["Anita", 92]
+]
+
+for name, score in students:
+    print(name, score)
+
+But this:
+
+students = [
+    ["Rahul", 85, "Python"]
+]
+
+for name, score in students:
+    print(name, score)
+
+raises a ValueError because there are three values but only two variables.
+
+----------------------------------------
+63. List Iteration vs Indexing
+----------------------------------------
+
+If you only need a specific element:
+
+numbers[2]
+
+is better.
+
+If you need every element:
+
+for number in numbers:
+    ...
+
+If you need every element and its position:
+
+for index, number in enumerate(numbers):
+    ...
+
+Do not use a loop when direct indexing is enough.
+
+----------------------------------------
+64. List Iteration vs List Comprehension
+----------------------------------------
+
+Normal loop:
+
+squares = []
+
+for number in numbers:
+    squares.append(number ** 2)
+
+List comprehension:
+
+squares = [number ** 2 for number in numbers]
+
+Both are valid.
+
+Use a comprehension when the operation is simple and the goal is to create a new list.
+
+Use a normal loop when the logic is more complex or involves multiple steps/side effects.
+
+----------------------------------------
+65. Loop for Side Effects
+----------------------------------------
+
+A normal loop is appropriate when the goal is to perform an action.
+
+Example:
+
+for user in users:
+    send_email(user)
+
+You are not necessarily building a new list.
+
+A list comprehension would be inappropriate just because it is shorter.
+
+----------------------------------------
+66. Loop for Complex Logic
+----------------------------------------
+
+Example:
+
+for student in students:
+    if student["score"] >= 90:
+        grade = "A"
+    elif student["score"] >= 80:
+        grade = "B"
+    else:
+        grade = "C"
+
+    print(student["name"], grade)
+
+This is clearer as a normal loop than forcing everything into one comprehension.
+
+----------------------------------------
+67. Looping Through a Range Instead of a List
+----------------------------------------
+
+Iteration is not limited to lists.
+
+Example:
+
+for number in range(5):
+    print(number)
+
+Output:
+
+0
+1
+2
+3
+4
+
+Python's for loop works with iterables.
+
+Lists are just one type of iterable.
+
+----------------------------------------
+68. Why Python's for Loop Is Different
+----------------------------------------
+
+Python's for loop is essentially an iteration mechanism.
+
+It does not require:
+
+for (i = 0; i < length; i++)
+
+like many C-style loops.
+
+Instead:
+
+for item in iterable:
+
+Python asks the iterable for its next item.
+
+This is why the same style works with:
+
+• Lists
+• Tuples
+• Strings
+• Sets
+• Dictionaries
+• range()
+• Files
+• Generators
+• Many custom objects
+
+----------------------------------------
+69. List Iteration and Iterator Concept
+----------------------------------------
+
+When you write:
+
+for item in numbers:
+
+Python internally obtains an iterator and repeatedly requests the next value until the iterable is exhausted.
+
+Conceptually:
+
+iter(numbers)
+↓
+next(...)
+↓
+next(...)
+↓
+next(...)
+↓
+StopIteration
+
+The for loop handles this machinery automatically.
+
+You normally do not need to manually call next().
+
+Iterators and generators are deeper Python concepts that can be studied separately.
+
+----------------------------------------
+70. Iteration Order
+----------------------------------------
+
+For a normal list, iteration follows list order.
+
+Example:
+
+numbers = [30, 10, 20]
+
+for number in numbers:
+    print(number)
+
+Output:
+
+30
+10
+20
+
+The list is not automatically sorted.
+
+Iteration preserves the list's current order.
+
+----------------------------------------
+71. Mutating an Element's Contents
+----------------------------------------
+
+If a list contains mutable objects, you can sometimes modify the object through the loop variable.
+
+Example:
+
+data = [[1], [2], [3]]
+
+for row in data:
+    row.append(0)
+
+print(data)
+
+Output:
+
+[[1, 0], [2, 0], [3, 0]]
+
+Here row refers to each inner list object.
+
+This is different from reassigning the loop variable itself.
+
+----------------------------------------
+72. Reassignment vs Mutation
+----------------------------------------
+
+Reassignment:
+
+for row in data:
+    row = [100]
+
+This does not replace the list elements.
+
+Mutation:
+
+for row in data:
+    row.append(100)
+
+This modifies the inner list objects.
+
+This distinction is fundamental in Python because variables hold references to objects.
+
+----------------------------------------
+73. Safe Pattern for Replacing Elements
+----------------------------------------
+
+If you want to replace list elements:
+
+numbers = [1, 2, 3]
+
+for index, number in enumerate(numbers):
+    numbers[index] = number + 10
+
+print(numbers)
+
+Output:
+
+[11, 12, 13]
+
+Use the index when replacing elements in the original list.
+
+----------------------------------------
+74. Practical Example — Student Scores
+----------------------------------------
+
+scores = [45, 78, 92, 33, 88]
+
+for score in scores:
+    if score >= 50:
+        print(score, "Pass")
+    else:
+        print(score, "Fail")
+
+Output:
+
+45 Fail
+78 Pass
+92 Pass
+33 Fail
+88 Pass
+
+----------------------------------------
+75. Practical Example — Salary Processing
+----------------------------------------
+
+salaries = [30000, 45000, 50000]
+
+for salary in salaries:
+    increased_salary = salary * 1.10
+    print(increased_salary)
+
+Output:
+
+33000.0
+49500.0
+55000.0
+
+The original list is not modified.
+
+----------------------------------------
+76. Practical Example — Cleaning Names
+----------------------------------------
+
+names = [" Rahul ", " Anita ", " Kiran "]
+
+clean_names = []
+
+for name in names:
+    clean_names.append(name.strip())
+
+print(clean_names)
+
+Output:
+
+["Rahul", "Anita", "Kiran"]
+
+----------------------------------------
+77. Practical Example — Finding a Job Skill
+----------------------------------------
+
+skills = ["Python", "SQL", "React", "FastAPI"]
+
+target = "FastAPI"
+
+for skill in skills:
+    if skill == target:
+        print("Skill found")
+        break
+
+Output:
+
+Skill found
+
+----------------------------------------
+78. Practical Example — Nested Job Data
+----------------------------------------
+
+jobs = [
+    ["Python Developer", 4],
+    ["AI Engineer", 6],
+    ["Data Analyst", 3]
+]
+
+for role, experience in jobs:
+    print(role, "-", experience, "years")
+
+Output:
+
+Python Developer - 4 years
+AI Engineer - 6 years
+Data Analyst - 3 years
+
+----------------------------------------
+79. Common Mistake — Changing List Length
+----------------------------------------
+
+Avoid:
+
+for item in numbers:
+    numbers.remove(item)
+
+This can skip elements because the list is changing underneath the loop.
+
+Prefer creating a new list or iterating over a copy when necessary.
+
+----------------------------------------
+80. Common Mistake — Using range(len()) Unnecessarily
+----------------------------------------
+
+Avoid:
+
+for index in range(len(names)):
+    print(names[index])
+
+when you only need the values.
+
+Prefer:
+
+for name in names:
+    print(name)
+
+Use range(len()) only when the index itself is required.
+
+----------------------------------------
+81. Common Mistake — Using enumerate() When You Don't Need the Index
+----------------------------------------
+
+Avoid:
+
+for index, name in enumerate(names):
+    print(name)
+
+if index is never used.
+
+Prefer:
+
+for name in names:
+    print(name)
+
+Keep the loop as simple as the requirement.
+
+----------------------------------------
+82. Common Mistake — Forgetting Indentation
+----------------------------------------
+
+Incorrect:
+
+for number in numbers:
+print(number)
+
+Correct:
+
+for number in numbers:
+    print(number)
+
+Python uses indentation to define the loop body.
+
+----------------------------------------
+83. Common Mistake — Accidentally Modifying the Original List
+----------------------------------------
+
+Remember:
+
+numbers = [1, 2, 3]
+
+for number in numbers:
+    number *= 2
+
+does not modify numbers.
+
+But:
+
+for index, number in enumerate(numbers):
+    numbers[index] *= 2
+
+does modify numbers.
+
+Understand whether you are:
+
+Reading values
+
+or:
+
+Changing objects/list positions.
+
+----------------------------------------
+84. Common Mistake — Assuming break Affects Outer Loops
+----------------------------------------
+
+In nested loops:
+
+for row in matrix:
+    for value in row:
+        if value == 5:
+            break
+
+break stops only the inner loop.
+
+The outer loop continues.
+
+If you need to exit everything, use an appropriate control structure such as return from a function or a flag.
+
+----------------------------------------
+85. Performance Concept
+----------------------------------------
+
+Iterating over a list is generally O(n), where n is the number of elements.
+
+Example:
+
+for item in items:
+    ...
+
+If the list contains:
+
+10 elements → approximately 10 iterations
+
+1,000 elements → approximately 1,000 iterations
+
+1,000,000 elements → approximately 1,000,000 iterations
+
+Nested loops can multiply the work.
+
+For an n × n matrix:
+
+for row in matrix:
+    for value in row:
+        ...
+
+the work is approximately O(n²) for a square matrix.
+
+----------------------------------------
+86. List Iteration and Complexity
+----------------------------------------
+
+Common patterns:
+
+One complete pass:
+
+for item in items:
+    ...
+
+→ O(n)
+
+Nested pass through every pair in a square structure:
+
+for row in matrix:
+    for value in row:
+        ...
+
+→ O(n²), assuming n rows and n columns.
+
+Searching:
+
+for item in items:
+    if item == target:
+        ...
+
+→ O(n) worst case.
+
+Understanding this becomes important in DSA and coding interviews.
+
+----------------------------------------
+87. The Best Basic Patterns to Remember
+----------------------------------------
+
+Pattern 1 — Values:
+
+for value in items:
+    ...
+
+Pattern 2 — Index + value:
+
+for index, value in enumerate(items):
+    ...
+
+Pattern 3 — Filter:
+
+for value in items:
+    if condition:
+        ...
+
+Pattern 4 — Search:
+
+for value in items:
+    if value == target:
+        break
+
+Pattern 5 — Nested list:
+
+for row in matrix:
+    for value in row:
+        ...
+
+Pattern 6 — Multiple lists:
+
+for a, b in zip(list_a, list_b):
+    ...
+
+Pattern 7 — Reverse:
+
+for value in reversed(items):
+    ...
+
+Pattern 8 — Sorted:
+
+for value in sorted(items):
+    ...
+
+----------------------------------------
+88. Decision Guide
+----------------------------------------
+
+Need only values?
+
+→ for item in items
+
+Need index + value?
+
+→ enumerate(items)
+
+Need two lists together?
+
+→ zip(list1, list2)
+
+Need reverse order?
+
+→ reversed(items)
+
+Need sorted order without changing original?
+
+→ sorted(items)
+
+Need to stop early?
+
+→ break
+
+Need to skip current element?
+
+→ continue
+
+Need to build a new list?
+
+→ list comprehension or normal loop
+
+Need complex processing?
+
+→ normal for loop
+
+Need to process nested lists?
+
+→ nested for loops
+
+----------------------------------------
+89. Core Concept — Iterables
+----------------------------------------
+
+The most important conceptual point is:
+
+Python's for loop is not specifically a "list loop."
+
+It is an iteration mechanism.
+
+This works:
+
+for item in [1, 2, 3]:
+    ...
+
+This works:
+
+for character in "Python":
+    ...
+
+This works:
+
+for number in range(5):
+    ...
+
+This works:
+
+for key in {"a": 1, "b": 2}:
+    ...
+
+The object simply needs to be iterable.
+
+Lists are one of the most common iterables.
+
+----------------------------------------
+90. Final Mental Model
+----------------------------------------
+
+Think of:
+
+for item in items:
+
+as:
+
+SOURCE
+↓
+Get next item
+↓
+Assign it to item
+↓
+Run loop body
+↓
+Get next item
+↓
+Repeat
+↓
+Stop when source is exhausted
+
+If you need:
+
+value only
+
+→ for value in list
+
+position + value
+
+→ enumerate(list)
+
+multiple sources
+
+→ zip(...)
+
+early termination
+
+→ break
+
+skip one iteration
+
+→ continue
+
+nested data
+
+→ nested loops
+
+new transformed list
+
+→ list comprehension
+
+complex logic or side effects
+
+→ normal for loop
+
+----------------------------------------
+Final Summary
+----------------------------------------
+
+List iteration is the process of visiting list elements one by one.
+
+The fundamental pattern is:
+
+for item in items:
+    ...
+
+Use direct iteration when you only need values.
+
+Use enumerate() when you need both index and value.
+
+Use range(len(...)) when you specifically need index-based access or replacement.
+
+Use zip() when processing multiple sequences together.
+
+Use nested loops for nested lists.
+
+Use break to terminate a loop early.
+
+Use continue to skip the current iteration.
+
+Avoid changing the size of a list while directly iterating over it.
+
+Remember that assigning to the loop variable does not replace the original list element.
+
+For simple transformations that create a new list, list comprehensions are often cleaner.
+
+For complex logic, side effects, or multi-step processing, a normal for loop is usually the professional choice.
+
+Most importantly, Python's for loop works with iterables—not just lists.`,
+},
+{
+  heading: "List Comprehensions",
+  body: `List comprehensions provide a concise and readable way to create a new list by iterating over an iterable, transforming each element, and optionally filtering elements with conditions.
+
+Basic Syntax:
+
+[expression for item in iterable]
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = [number ** 2 for number in numbers]
+
+print(squares)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+The equivalent normal for loop is:
+
+squares = []
+
+for number in numbers:
+    squares.append(number ** 2)
+
+A list comprehension combines the iteration and list construction into a single expression.
+
+----------------------------------------
+1. Basic Transformation
+----------------------------------------
+
+A comprehension can transform every element.
+
+numbers = [1, 2, 3, 4]
+
+doubled = [number * 2 for number in numbers]
+
+print(doubled)
+
+Output:
+
+[2, 4, 6, 8]
+
+Each element is processed and the resulting values are collected into a new list.
+
+----------------------------------------
+2. Filtering with if
+----------------------------------------
+
+Use if at the end when you want to include only elements that satisfy a condition.
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+even_numbers = [
+    number
+    for number in numbers
+    if number % 2 == 0
+]
+
+print(even_numbers)
+
+Output:
+
+[2, 4, 6]
+
+Syntax:
+
+[expression for item in iterable if condition]
+
+The if condition determines whether the element is included.
+
+----------------------------------------
+3. Transformation + Filtering
+----------------------------------------
+
+You can filter an element and then transform it.
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = [
+    number ** 2
+    for number in numbers
+    if number % 2 == 0
+]
+
+print(result)
+
+Output:
+
+[4, 16, 36]
+
+The process is:
+
+element → condition → transformation → new list
+
+----------------------------------------
+4. if...else Inside a Comprehension
+----------------------------------------
+
+Use if...else when every element should produce a result, but the result depends on a condition.
+
+numbers = [1, 2, 3, 4, 5]
+
+labels = [
+    "Even" if number % 2 == 0 else "Odd"
+    for number in numbers
+]
+
+print(labels)
+
+Output:
+
+["Odd", "Even", "Odd", "Even", "Odd"]
+
+Important difference:
+
+[number for number in numbers if condition]
+
+filters elements.
+
+[expression_if_true if condition else expression_if_false
+ for number in numbers]
+
+chooses what value to produce for every element.
+
+----------------------------------------
+5. Using range()
+----------------------------------------
+
+List comprehensions work naturally with range().
+
+numbers = [number for number in range(1, 6)]
+
+print(numbers)
+
+Output:
+
+[1, 2, 3, 4, 5]
+
+Squares:
+
+squares = [number ** 2 for number in range(1, 6)]
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+----------------------------------------
+6. Working with Strings
+----------------------------------------
+
+Strings are iterable, so their characters can be processed.
+
+word = "Python"
+
+characters = [character.upper() for character in word]
+
+print(characters)
+
+Output:
+
+["P", "Y", "T", "H", "O", "N"]
+
+You can also filter characters:
+
+word = "programming"
+
+vowels = [
+    character
+    for character in word
+    if character in "aeiou"
+]
+
+print(vowels)
+
+Output:
+
+["o", "a", "i"]
+
+----------------------------------------
+7. Using enumerate()
+----------------------------------------
+
+enumerate() can provide both the index and value.
+
+names = ["Rahul", "Anita", "Kiran"]
+
+result = [
+    f"{index}: {name}"
+    for index, name in enumerate(names)
+]
+
+print(result)
+
+Output:
+
+["0: Rahul", "1: Anita", "2: Kiran"]
+
+You can also start indexing from 1:
+
+result = [
+    f"{index}. {name}"
+    for index, name in enumerate(names, start=1)
+]
+
+----------------------------------------
+8. Using zip()
+----------------------------------------
+
+zip() allows multiple iterables to be processed together.
+
+names = ["Rahul", "Anita", "Kiran"]
+scores = [85, 92, 78]
+
+result = [
+    f"{name}: {score}"
+    for name, score in zip(names, scores)
+]
+
+print(result)
+
+Output:
+
+["Rahul: 85", "Anita: 92", "Kiran: 78"]
+
+----------------------------------------
+9. Nested List Comprehensions
+----------------------------------------
+
+A comprehension can contain multiple for clauses.
+
+matrix = [
+    [1, 2],
+    [3, 4],
+    [5, 6]
+]
+
+values = [
+    value
+    for row in matrix
+    for value in row
+]
+
+print(values)
+
+Output:
+
+[1, 2, 3, 4, 5, 6]
+
+This is equivalent to:
+
+values = []
+
+for row in matrix:
+    for value in row:
+        values.append(value)
+
+The order of the for clauses follows the same order as the equivalent nested loops.
+
+----------------------------------------
+10. Creating Nested Lists
+----------------------------------------
+
+Comprehensions can also create nested lists.
+
+matrix = [
+    [0 for column in range(3)]
+    for row in range(2)
+]
+
+print(matrix)
+
+Output:
+
+[[0, 0, 0], [0, 0, 0]]
+
+This creates 2 rows and 3 columns.
+
+----------------------------------------
+11. Working with Dictionaries
+----------------------------------------
+
+Comprehensions are useful when processing lists containing dictionaries.
+
+students = [
+    {"name": "Rahul", "score": 85},
+    {"name": "Anita", "score": 92},
+    {"name": "Kiran", "score": 78}
+]
+
+names = [
+    student["name"]
+    for student in students
+]
+
+print(names)
+
+Output:
+
+["Rahul", "Anita", "Kiran"]
+
+Filtering:
+
+passed = [
+    student["name"]
+    for student in students
+    if student["score"] >= 80
+]
+
+Output:
+
+["Rahul", "Anita"]
+
+----------------------------------------
+12. Multiple Conditions
+----------------------------------------
+
+Multiple conditions can be combined.
+
+numbers = range(1, 21)
+
+result = [
+    number
+    for number in numbers
+    if number % 2 == 0 and number > 10
+]
+
+Output:
+
+[12, 14, 16, 18, 20]
+
+You can also use multiple if clauses when appropriate:
+
+result = [
+    number
+    for number in numbers
+    if number % 2 == 0
+    if number > 10
+]
+
+Both forms can express the same filtering logic.
+
+----------------------------------------
+13. Calling Functions
+----------------------------------------
+
+A comprehension can call a function for every element.
+
+def square(number):
+    return number ** 2
+
+numbers = [1, 2, 3, 4]
+
+result = [square(number) for number in numbers]
+
+print(result)
+
+Output:
+
+[1, 4, 9, 16]
+
+----------------------------------------
+14. Comprehensions vs Normal for Loops
+----------------------------------------
+
+Normal loop:
+
+squares = []
+
+for number in numbers:
+    squares.append(number ** 2)
+
+Comprehension:
+
+squares = [number ** 2 for number in numbers]
+
+Both produce the same result.
+
+Use a list comprehension when it makes the transformation or filtering easier to understand.
+
+Use a normal for loop when the logic requires multiple steps, complex conditions, debugging, side effects, exception handling, or other statements.
+
+----------------------------------------
+15. Important Readability Rule
+----------------------------------------
+
+Do not create extremely complicated comprehensions simply to make the code shorter.
+
+Less code does not always mean better code.
+
+Readable:
+
+even_squares = [
+    number ** 2
+    for number in numbers
+    if number % 2 == 0
+]
+
+If the logic becomes difficult to understand, use a normal for loop instead.
+
+----------------------------------------
+16. Common Mistakes
+----------------------------------------
+
+Mistake 1 — Confusing filtering with if...else.
+
+Filtering:
+
+[number for number in numbers if number > 5]
+
+Conditional value:
+
+["Big" if number > 5 else "Small" for number in numbers]
+
+Mistake 2 — Forgetting that a comprehension creates a new list.
+
+numbers = [1, 2, 3]
+
+squares = [number ** 2 for number in numbers]
+
+The original numbers list is unchanged.
+
+Mistake 3 — Making nested comprehensions unnecessarily complicated.
+
+If a nested comprehension is difficult to read, use normal nested for loops.
+
+----------------------------------------
+17. Performance and Memory
+----------------------------------------
+
+A list comprehension creates the complete list in memory.
+
+Example:
+
+squares = [number ** 2 for number in range(1000000)]
+
+The resulting list contains all one million values.
+
+For situations where you do not need all values stored at once, generator expressions can be more memory-efficient.
+
+Generator expressions and generators are a separate, more advanced topic.
+
+----------------------------------------
+18. Core Mental Model
+----------------------------------------
+
+Whenever you see:
+
+[expression for item in iterable if condition]
+
+read it as:
+
+"For each item in the iterable, check the condition. If it passes, evaluate the expression and place the result into a new list."
+
+Example:
+
+[number ** 2 for number in numbers if number % 2 == 0]
+
+Mental flow:
+
+iterate
+→ filter
+→ transform
+→ collect
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use list comprehensions primarily for:
+
+• Simple transformations
+• Simple filtering
+• Creating a new list
+• Concise and readable data processing
+
+Prefer normal for loops for:
+
+• Complex logic
+• Multiple statements
+• Side effects
+• Complicated nested operations
+• Debugging-heavy code
+
+List comprehensions are a core Python feature and should be mastered before moving into more advanced functional concepts such as map(), filter(), reduce(), and lambda functions.`,
+},
+{
+  heading: "Advanced List Concepts — Slicing, References, Unpacking & Performance",
+  body: `
+
+1. LIST SLICING — ADVANCED PATTERNS
+-----------------------------------
+
+List slicing extracts or modifies portions of a list using:
+
+list[start:stop:step]
+
+The start index is included, the stop index is excluded, and step controls the direction and spacing.
+
+Example:
+
+numbers = [10, 20, 30, 40, 50]
+
+print(numbers[1:4])
+
+Output:
+
+[20, 30, 40]
+
+Common patterns:
+
+numbers[:3]       # First 3 elements
+numbers[2:]       # From index 2 to the end
+numbers[-3:]      # Last 3 elements
+numbers[:-1]      # Everything except the last element
+numbers[::2]      # Every second element
+numbers[::-1]     # Reverse the list
+
+Slicing normally creates a new list:
+
+numbers = [1, 2, 3, 4]
+
+result = numbers[1:3]
+
+print(result)
+print(numbers)
+
+Output:
+
+[2, 3]
+[1, 2, 3, 4]
+
+Slicing can also modify a list through slice assignment:
+
+numbers[1:3] = [20, 30, 40]
+
+print(numbers)
+
+Output:
+
+[1, 20, 30, 40, 4]
+
+Slice assignment can therefore replace, insert, or remove multiple elements.
+
+To remove a range:
+
+numbers[1:4] = []
+
+The selected elements are removed.
+
+Extended slicing:
+
+numbers[::2] = [100, 200]
+
+With a step other than 1, the replacement must contain the correct number of elements.
+
+A negative step moves from right to left:
+
+numbers[::-1]
+
+This creates a reversed copy; it does not modify the original list.
+
+
+2. NESTED LISTS & 2D LISTS
+---------------------------
+
+A nested list is a list containing other lists.
+
+Example:
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+This can be viewed as a 2D structure:
+
+1  2  3
+4  5  6
+7  8  9
+
+Access an entire row:
+
+print(matrix[1])
+
+Output:
+
+[4, 5, 6]
+
+Access an individual element:
+
+print(matrix[1][2])
+
+Output:
+
+6
+
+The first index selects the row.
+
+The second index selects the column.
+
+matrix[row][column]
+
+Iterating through a 2D list:
+
+for row in matrix:
+    for value in row:
+        print(value)
+
+Nested list comprehensions can also create 2D lists:
+
+matrix = [
+    [0 for column in range(3)]
+    for row in range(2)
+]
+
+Output:
+
+[
+    [0, 0, 0],
+    [0, 0, 0]
+]
+
+Important reference issue:
+
+Avoid creating a matrix like this when you need independent rows:
+
+matrix = [[0] * 3] * 3
+
+The inner list is shared between all rows.
+
+Changing:
+
+matrix[0][0] = 1
+
+can unexpectedly change every row.
+
+Prefer:
+
+matrix = [
+    [0 for column in range(3)]
+    for row in range(3)
+]
+
+Each row is a separate list.
+
+
+3. LISTS WITH MUTABLE OBJECTS / REFERENCE BEHAVIOR
+---------------------------------------------------
+
+Python variables hold references to objects.
+
+When a list contains mutable objects such as other lists, dictionaries, or sets, those objects can be changed through any reference pointing to them.
+
+Example:
+
+inner = [1, 2]
+
+outer = [inner]
+
+inner.append(3)
+
+print(outer)
+
+Output:
+
+[[1, 2, 3]]
+
+The list inside outer is the same object referenced by inner.
+
+You can see this using id():
+
+print(id(inner))
+print(id(outer[0]))
+
+Both IDs refer to the same object.
+
+Another example:
+
+data = [[1, 2], [3, 4]]
+
+data[0].append(99)
+
+print(data)
+
+Output:
+
+[[1, 2, 99], [3, 4]]
+
+The inner list is mutable, so its contents can change.
+
+This becomes especially important when copying nested lists.
+
+A shallow copy copies only the outer list:
+
+copy_data = data.copy()
+
+The inner lists are still shared.
+
+For completely independent nested structures, use deepcopy():
+
+from copy import deepcopy
+
+copy_data = deepcopy(data)
+
+Now changes to nested objects do not affect the original structure.
+
+
+4. LIST UNPACKING
+-----------------
+
+List unpacking allows the elements of a list to be assigned to multiple variables.
+
+Example:
+
+numbers = [10, 20, 30]
+
+a, b, c = numbers
+
+print(a)
+print(b)
+print(c)
+
+Output:
+
+10
+20
+30
+
+The number of variables normally needs to match the number of elements.
+
+Python also supports starred unpacking:
+
+numbers = [10, 20, 30, 40, 50]
+
+first, *middle, last = numbers
+
+print(first)
+print(middle)
+print(last)
+
+Output:
+
+10
+[20, 30, 40]
+50
+
+The * variable collects the remaining elements into a list.
+
+Another example:
+
+first, *remaining = numbers
+
+first becomes:
+
+10
+
+remaining becomes:
+
+[20, 30, 40, 50]
+
+You can also use unpacking in function calls:
+
+numbers = [10, 20, 30]
+
+print(*numbers)
+
+Output:
+
+10 20 30
+
+Here * expands the list into separate positional arguments.
+
+List unpacking is useful when extracting values, processing sequences, and passing collections to functions.
+
+
+5. LIST ALIASING VS COPYING
+----------------------------
+
+Aliasing occurs when two variables refer to the same list object.
+
+Example:
+
+numbers = [10, 20, 30]
+
+alias = numbers
+
+alias.append(40)
+
+print(numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+Both variables refer to the same list.
+
+This is aliasing.
+
+You can check object identity using:
+
+numbers is alias
+
+Output:
+
+True
+
+Copying creates a separate outer list:
+
+numbers = [10, 20, 30]
+
+copy_numbers = numbers.copy()
+
+copy_numbers.append(40)
+
+print(numbers)
+
+Output:
+
+[10, 20, 30]
+
+print(copy_numbers)
+
+Output:
+
+[10, 20, 30, 40]
+
+Now:
+
+numbers is copy_numbers
+
+returns:
+
+False
+
+Important distinction:
+
+=
+
+creates another reference.
+
+.copy()
+creates a shallow copy.
+
+numbers[:]
+also creates a shallow copy.
+
+list(numbers)
+also creates a shallow copy.
+
+For nested mutable structures, shallow copying does not recursively copy inner objects.
+
+Use:
+
+from copy import deepcopy
+
+deep_copy = deepcopy(original)
+
+when complete independence is required.
+
+Mental model:
+
+aliasing
+→ same object
+
+shallow copy
+→ new outer object, shared nested objects
+
+deep copy
+→ recursively independent objects
+
+
+6. LIST PERFORMANCE & TIME COMPLEXITY
+-------------------------------------
+
+Python lists are implemented as dynamic arrays.
+
+This gives fast access by index but makes some operations expensive because elements may need to be shifted.
+
+Common complexity:
+
+Access by index:
+O(1)
+
+numbers[5]
+
+Python can directly locate the element.
+
+Append:
+O(1) amortized
+
+numbers.append(100)
+
+Appending is usually constant time, although occasional resizing can require additional work.
+
+Pop from the end:
+O(1)
+
+numbers.pop()
+
+Insert near the beginning:
+O(n)
+
+numbers.insert(0, value)
+
+Elements may need to be shifted.
+
+Remove by value:
+O(n)
+
+numbers.remove(value)
+
+Python may need to search for the value and then shift elements.
+
+Search using in:
+O(n)
+
+value in numbers
+
+Python may need to inspect many elements.
+
+index():
+O(n)
+
+numbers.index(value)
+
+count():
+O(n)
+
+numbers.count(value)
+
+Sorting:
+O(n log n)
+
+numbers.sort()
+
+Copying:
+O(n)
+
+numbers.copy()
+
+Slicing:
+O(k)
+
+numbers[start:stop]
+
+where k is the number of elements copied.
+
+Important practical rule:
+
+Lists are excellent for:
+
+• Fast indexing
+• Appending at the end
+• Iterating
+• Storing ordered collections
+
+Lists are less efficient for:
+
+• Frequent insertion at the beginning
+• Frequent deletion at the beginning
+• Queue operations using pop(0)
+
+For efficient queue operations, Python's collections.deque is usually preferred.
+
+
+7. LISTS IN REAL-WORLD PYTHON / DSA
+-----------------------------------
+
+Lists are one of the most commonly used structures in Python and form the foundation of many DSA concepts.
+
+Real-world examples include:
+
+Shopping cart:
+
+cart = ["Laptop", "Mouse", "Keyboard"]
+
+Task management:
+
+tasks = ["Study", "Practice", "Build Project"]
+
+User records:
+
+users = ["Rahul", "Anita", "Kiran"]
+
+Scores:
+
+scores = [85, 92, 78, 90]
+
+Configuration values:
+
+allowed_roles = ["admin", "developer", "student"]
+
+
+In DSA, lists are commonly used to implement or represent:
+
+• Arrays
+• Dynamic arrays
+• Stacks
+• Basic queues
+• Matrices
+• 2D grids
+• Adjacency lists
+• Sliding-window data
+• Two-pointer problems
+• Prefix/suffix arrays
+• Sorting problems
+• Searching problems
+• Frequency-based processing
+
+
+Stack example:
+
+stack = []
+
+stack.append("A")
+stack.append("B")
+stack.append("C")
+
+item = stack.pop()
+
+print(item)
+
+Output:
+
+C
+
+This follows:
+
+LIFO
+Last In, First Out
+
+
+For a simple queue:
+
+queue = ["A", "B", "C"]
+
+item = queue.pop(0)
+
+print(item)
+
+Output:
+
+A
+
+This follows:
+
+FIFO
+First In, First Out
+
+However, pop(0) is O(n), so for efficient queues use collections.deque.
+
+
+A common DSA pattern is traversal:
+
+numbers = [10, 20, 30, 40]
+
+for number in numbers:
+    print(number)
+
+Another is searching:
+
+target = 30
+
+if target in numbers:
+    print("Found")
+
+
+Another common pattern is transformation:
+
+squares = [number ** 2 for number in numbers]
+
+
+A 2D list can represent a matrix or grid:
+
+grid = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+]
+
+This representation appears in:
+
+• Matrix problems
+• Grid traversal
+• Graph-related problems
+• Game boards
+• Dynamic programming tables
+
+
+FINAL PROFESSIONAL MENTAL MODEL
+--------------------------------
+
+A Python list is:
+
+• Ordered
+• Mutable
+• Indexed
+• Allows duplicates
+• Can contain different object types
+• Dynamically sized
+• Optimized for fast index access and appending at the end
+
+
+The major skills you should now have are:
+
+1. Creating lists
+2. Indexing
+3. Slicing
+4. Modifying elements
+5. Adding elements
+6. Removing elements
+7. Searching
+8. Sorting
+9. Reversing
+10. Copying
+11. Nested lists
+12. Reference behavior
+13. Unpacking
+14. List comprehensions
+15. Performance and complexity
+16. Real-world and DSA usage
+
+
+At this point, the core Python List concept is essentially complete.
+
+The next major collection concept is:
+
+TUPLES — Ordered, Immutable Collections,
+`
+},
+            ],
             code: `nums = [3, 1, 4, 1, 5, 9, 2, 6]
 
 # Adding & removing
@@ -19134,92 +32805,20252 @@ flat   = [n for row in matrix for n in row]`,
             ],
           },
           {
-            title: "Dictionaries — Key-Value / O(1) Lookup",
+            title: "Sets — Unordered, Mutable & Unique",
             type: "concept",
-            detail: "Python's most powerful structure. Hash table backed → O(1) average lookup. Python 3.7+ preserves insertion order.",
-            code: `student = {"name": "Rahul", "age": 21, "gpa": 8.75}
+            detail: "Python's built-in collection for storing unique elements. Sets are mutable, do not support duplicate elements, and are optimized for fast membership testing and set operations such as union, intersection, difference, and symmetric difference.",
+            subsections: [
+                    {
+  heading: "Introduction to Sets",
+  body: `A set is a built-in Python collection used to store a group of unique elements.
 
-# Safe access
-print(student.get("phone", "N/A"))  # N/A — no KeyError
+Unlike a list, a set does not keep duplicate elements. If the same value is added multiple times, the set stores it only once.
 
-# Add / Update
-student["college"] = "IIT Bombay"
-student.update({"age": 22, "rank": 5})
+Example:
+
+numbers = {10, 20, 30, 20, 10}
+
+print(numbers)
+
+Output:
+
+{10, 20, 30}
+
+The duplicate values were automatically removed.
+
+----------------------------------------
+Key Characteristics of Sets
+----------------------------------------
+
+A Python set is:
+
+• Mutable — elements can be added and removed after creation.
+• Unique — duplicate elements are automatically eliminated.
+• Unordered — sets do not provide positional ordering like lists.
+• Not indexable — you cannot access elements using set[0].
+• Iterable — you can loop through its elements.
+• Hash-based — elements are stored using hashing, which enables efficient membership testing.
+• Heterogeneous — a set can contain different compatible hashable data types.
+
+Example:
+
+data = {10, "Python", 3.14, True}
+
+A set can contain these different values together.
+
+----------------------------------------
+Set vs List
+----------------------------------------
+
+List:
+
+numbers = [10, 20, 30, 20]
+
+Set:
+
+numbers = {10, 20, 30, 20}
+
+The list preserves duplicates:
+
+[10, 20, 30, 20]
+
+The set keeps only unique values:
+
+{10, 20, 30}
+
+Use a list when order and duplicates matter.
+
+Use a set when uniqueness and fast membership testing are more important.
+
+----------------------------------------
+Sets Are Mutable
+----------------------------------------
+
+A set can be changed after it is created.
+
+numbers = {10, 20, 30}
+
+numbers.add(40)
+
+print(numbers)
+
+The set now contains 40.
+
+You can also remove elements:
+
+numbers.remove(20)
+
+The set is therefore mutable.
+
+----------------------------------------
+Sets Do Not Support Indexing
+----------------------------------------
+
+This does not work:
+
+numbers = {10, 20, 30}
+
+print(numbers[0])
+
+A set has no positional indexing.
+
+Instead, use membership testing:
+
+if 20 in numbers:
+    print("20 exists")
+
+Or iterate:
+
+for number in numbers:
+    print(number)
+
+----------------------------------------
+Duplicate Elimination
+----------------------------------------
+
+One of the most useful properties of a set is automatic duplicate elimination.
+
+values = [10, 20, 10, 30, 20, 40, 10]
+
+unique_values = set(values)
+
+print(unique_values)
+
+The resulting set contains each value only once.
+
+This is commonly used to remove duplicates from data.
+
+----------------------------------------
+Fast Membership Testing
+----------------------------------------
+
+Sets are designed for efficient membership testing.
+
+numbers = {10, 20, 30, 40, 50}
+
+print(30 in numbers)
+
+Output:
+
+True
+
+print(100 in numbers)
+
+Output:
+
+False
+
+For large collections, set membership is generally much faster than searching through a list.
+
+----------------------------------------
+Important: Set Elements Must Be Hashable
+----------------------------------------
+
+Set elements must be hashable.
+
+Immutable types such as these can generally be set elements:
+
+• int
+• float
+• str
+• bool
+• tuple (when its contents are hashable)
+
+Example:
+
+data = {10, "Python", 3.14, (1, 2)}
+
+Mutable objects such as lists cannot be elements of a set:
+
+data = {[1, 2], [3, 4]}
+
+This raises:
+
+TypeError: unhashable type: 'list'
+
+The reason is that mutable objects can change, so they cannot safely be used as hash-based set elements.
+
+----------------------------------------
+Empty Set
+----------------------------------------
+
+This is an important Python syntax rule.
+
+{} does NOT create an empty set.
+
+It creates an empty dictionary.
+
+To create an empty set, use:
+
+empty_set = set()
+
+Example:
+
+print(type({}))
+
+Output:
+
+<class 'dict'>
+
+print(type(set()))
+
+Output:
+
+<class 'set'>
+
+----------------------------------------
+Creating a Set from an Iterable
+----------------------------------------
+
+The set() constructor can create a set from another iterable.
+
+Example:
+
+numbers = set([1, 2, 3, 2, 1])
+
+print(numbers)
+
+Duplicates are automatically removed.
+
+You can also create a set from a string:
+
+letters = set("hello")
+
+The resulting set contains the unique characters.
+
+----------------------------------------
+Core Mental Model
+----------------------------------------
+
+Think of a set as:
+
+"An unordered collection that keeps only unique hashable elements and is optimized for membership testing and mathematical set operations."
+
+Use a set when the main question is:
+
+"Does this value exist?"
+
+or:
+
+"Which values are unique/common/different between these collections?"
+
+Do not use a set when you need:
+
+• Positional indexing
+• Reliable element order as a core requirement
+• Duplicate values
+• Access by position
+
+For those cases, a list or another appropriate collection is usually better.`,
+},
+{
+  heading: "Creating Sets",
+  body: `Python provides several ways to create sets. The most common way is to use curly braces with comma-separated elements, or the set() constructor when creating an empty set or converting another iterable.
+
+----------------------------------------
+1. Creating a Set with Curly Braces
+----------------------------------------
+
+Use { } with elements separated by commas.
+
+numbers = {10, 20, 30, 40}
+
+print(numbers)
+
+Output:
+
+{10, 20, 30, 40}
+
+Each element appears only once.
+
+----------------------------------------
+2. Creating a Set with Duplicate Values
+----------------------------------------
+
+numbers = {10, 20, 10, 30, 20}
+
+print(numbers)
+
+Output:
+
+{10, 20, 30}
+
+Duplicate values are automatically removed.
+
+This is one of the fundamental properties of sets.
+
+----------------------------------------
+3. Creating an Empty Set
+----------------------------------------
+
+Do NOT use:
+
+empty = {}
+
+{} creates an empty dictionary.
+
+To create an empty set:
+
+empty = set()
+
+print(type(empty))
+
+Output:
+
+<class 'set'>
+
+Remember:
+
+{} → empty dictionary
+set() → empty set
+
+----------------------------------------
+4. Creating a Set with Different Data Types
+----------------------------------------
+
+A set can contain different hashable data types.
+
+data = {10, 3.14, "Python", True}
+
+The elements do not have to all be the same type.
+
+However, every element must be hashable.
+
+----------------------------------------
+5. Creating a Set from a List
+----------------------------------------
+
+The set() constructor can convert a list into a set.
+
+numbers = [10, 20, 30, 20, 10]
+
+unique_numbers = set(numbers)
+
+print(unique_numbers)
+
+Output:
+
+{10, 20, 30}
+
+This is a common way to remove duplicate values from a list.
+
+----------------------------------------
+6. Creating a Set from a Tuple
+----------------------------------------
+
+values = (10, 20, 30, 20)
+
+numbers = set(values)
+
+print(numbers)
+
+Output:
+
+{10, 20, 30}
+
+Any iterable can generally be passed to set().
+
+----------------------------------------
+7. Creating a Set from a String
+----------------------------------------
+
+A string is iterable, so set() extracts its unique characters.
+
+letters = set("hello")
+
+print(letters)
+
+The resulting set contains:
+
+h, e, l, o
+
+The repeated "l" appears only once.
+
+Important: the displayed order of a set should not be relied upon.
+
+----------------------------------------
+8. Creating a Set from range()
+----------------------------------------
+
+numbers = set(range(1, 6))
+
+print(numbers)
+
+Output:
+
+{1, 2, 3, 4, 5}
+
+This is useful when you want a set containing a sequence of unique integers.
+
+----------------------------------------
+9. Creating a Set with One Element
+----------------------------------------
+
+A single-element set requires a trailing comma:
+
+numbers = {10}
+
+print(type(numbers))
+
+Output:
+
+<class 'set'>
+
+Without the comma:
+
+value = {10}
+
+Here the braces already represent a set because there is an element.
+
+But remember that:
+
+{ }
+
+is an empty dictionary, not an empty set.
+
+----------------------------------------
+10. Mutable Elements Cannot Be Set Elements
+----------------------------------------
+
+Set elements must be hashable.
+
+This is invalid:
+
+numbers = {[1, 2], [3, 4]}
+
+It raises:
+
+TypeError: unhashable type: 'list'
+
+Lists are mutable and therefore cannot be elements of a set.
+
+----------------------------------------
+11. Tuples Can Be Set Elements
+----------------------------------------
+
+A tuple can be a set element if all of its contents are hashable.
+
+coordinates = {(10, 20), (30, 40)}
+
+This is valid.
+
+However, a tuple containing a mutable list is not hashable:
+
+data = {([1, 2], 3)}
+
+This raises a TypeError.
+
+----------------------------------------
+12. Set Constructor Mental Model
+----------------------------------------
+
+Think of:
+
+set(iterable)
+
+as:
+
+"Take each element from the iterable and create a collection containing only its unique hashable elements."
+
+Example:
+
+values = [1, 2, 2, 3, 3, 3]
+
+unique = set(values)
+
+Result:
+
+{1, 2, 3}
+
+----------------------------------------
+13. Important Syntax Summary
+----------------------------------------
+
+Non-empty set:
+
+numbers = {1, 2, 3}
+
+Empty set:
+
+numbers = set()
+
+Set from list:
+
+numbers = set([1, 2, 3])
+
+Set from tuple:
+
+numbers = set((1, 2, 3))
+
+Set from string:
+
+letters = set("Python")
+
+Set from range:
+
+numbers = set(range(5))
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use {element1, element2, ...} when directly defining a non-empty set.
+
+Use set() when creating an empty set or converting an iterable into a set.
+
+Most importantly, remember:
+
+{} → dictionary
+set() → empty set
+
+A set stores unique hashable elements and is designed primarily for membership testing and set operations.`,
+},
+{
+  heading: "Accessing and Iterating Through Sets",
+  body: `Sets are unordered collections, so unlike lists, they do not support indexing or slicing. You access set elements primarily through iteration and membership testing.
+
+----------------------------------------
+1. Sets Do Not Support Indexing
+----------------------------------------
+
+numbers = {10, 20, 30}
+
+print(numbers[0])
+
+This raises:
+
+TypeError
+
+A set does not have positional indexes.
+
+Do not think of a set as:
+
+element 0
+element 1
+element 2
+
+Instead, think of it as a collection of unique values.
+
+----------------------------------------
+2. Sets Do Not Support Slicing
+----------------------------------------
+
+This is also invalid:
+
+numbers[1:3]
+
+Sets do not support slicing because slicing depends on positional order.
+
+If you need positional access, use a list:
+
+numbers = list(my_set)
+
+Then indexing and slicing can be performed on that list.
+
+----------------------------------------
+3. Iterating Through a Set
+----------------------------------------
+
+Use a for loop to process each element.
+
+numbers = {10, 20, 30, 40}
+
+for number in numbers:
+    print(number)
+
+Each element is visited once.
+
+However, do not rely on the order in which the elements are displayed or iterated.
+
+----------------------------------------
+4. Membership Testing with in
+----------------------------------------
+
+The main way to check whether an element exists in a set is:
+
+numbers = {10, 20, 30, 40}
+
+print(20 in numbers)
+
+Output:
+
+True
+
+print(50 in numbers)
+
+Output:
+
+False
+
+Set membership testing is generally very efficient because sets use hashing internally.
+
+----------------------------------------
+5. not in
+----------------------------------------
+
+You can check whether an element does not exist:
+
+numbers = {10, 20, 30}
+
+if 50 not in numbers:
+    print("50 is not present")
+
+Output:
+
+50 is not present
+
+----------------------------------------
+6. Checking Membership in a List vs Set
+----------------------------------------
+
+List:
+
+numbers = [10, 20, 30, 40]
+
+20 in numbers
+
+Set:
+
+numbers = {10, 20, 30, 40}
+
+20 in numbers
+
+Both work, but set membership is generally O(1) average-case, while list membership is O(n) because a list may need to examine elements one by one.
+
+This is one of the main reasons sets are useful for fast membership checks.
+
+----------------------------------------
+7. Iterating with enumerate()
+----------------------------------------
+
+A set does not have meaningful positional indexes, so using enumerate() does not give you a stable set index.
+
+Example:
+
+numbers = {10, 20, 30}
+
+for index, number in enumerate(numbers):
+    print(index, number)
+
+Python can produce index-like counter values, but those numbers are only iteration counters. They are NOT set indexes.
+
+Do not use them as if the set had positional access.
+
+----------------------------------------
+8. Converting a Set to a List
+----------------------------------------
+
+If you need indexing or slicing:
+
+numbers = {10, 20, 30, 40}
+
+numbers_list = list(numbers)
+
+print(numbers_list[0])
+
+The conversion creates a list containing the set's elements.
+
+However, because the set is unordered, do not assume a particular element will appear at a particular index.
+
+----------------------------------------
+9. Sorting Set Elements
+----------------------------------------
+
+If you need the elements in a predictable sorted order, use sorted():
+
+numbers = {40, 10, 30, 20}
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30, 40]
+
+Notice that sorted() returns a LIST, not a set.
+
+This is useful when you need ordered output from a set.
+
+----------------------------------------
+10. Iterating in Sorted Order
+----------------------------------------
+
+You can directly write:
+
+numbers = {40, 10, 30, 20}
+
+for number in sorted(numbers):
+    print(number)
+
+Output:
+
+10
+20
+30
+40
+
+The set itself remains unordered; only the iteration result is sorted.
+
+----------------------------------------
+11. Do Not Modify a Set While Iterating
+----------------------------------------
+
+Avoid changing the size of a set during iteration.
+
+This can raise:
+
+RuntimeError: Set changed size during iteration
+
+For example:
+
+numbers = {1, 2, 3, 4}
+
+for number in numbers:
+    numbers.remove(number)
+
+Instead, create a separate collection or iterate over a copy when appropriate.
+
+Example:
+
+numbers = {1, 2, 3, 4}
+
+for number in numbers.copy():
+    numbers.remove(number)
+
+Now the iteration happens over the copy while the original set is modified.
+
+----------------------------------------
+12. Set Iteration Mental Model
+----------------------------------------
+
+For a list:
+
+for item in list:
+    process(item)
+
+The list has a meaningful position for each element.
+
+For a set:
+
+for item in set:
+    process(item)
+
+The focus is on the elements themselves, not their positions.
+
+This is why sets are excellent for:
+
+• Membership testing
+• Removing duplicates
+• Comparing collections
+• Mathematical set operations
+
+but not for:
+
+• Index-based access
+• Slicing
+• Position-dependent processing
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+When working with a set:
+
+Use:
+
+for item in my_set
+
+to iterate.
+
+Use:
+
+item in my_set
+
+to check membership.
+
+Use:
+
+sorted(my_set)
+
+when ordered output is required.
+
+Use:
+
+list(my_set)
+
+when you genuinely need list operations such as indexing or slicing.
+
+Never depend on the iteration order of a normal Python set.`,
+},
+{
+  heading: "Adding Elements to Sets — add() and update()",
+  body: `Python provides two primary methods for adding elements to an existing set: add() and update().
+
+add() adds one element to the set.
+
+update() adds multiple elements from an iterable.
+
+----------------------------------------
+1. add() — Add One Element
+----------------------------------------
+
+numbers = {10, 20, 30}
+
+numbers.add(40)
+
+print(numbers)
+
+Output:
+
+{10, 20, 30, 40}
+
+Syntax:
+
+set.add(element)
+
+The set itself is modified.
+
+----------------------------------------
+2. Adding a Duplicate with add()
+----------------------------------------
+
+A set cannot contain duplicates.
+
+numbers = {10, 20, 30}
+
+numbers.add(20)
+
+print(numbers)
+
+The set remains:
+
+{10, 20, 30}
+
+Adding an existing element does not create another copy.
+
+----------------------------------------
+3. add() Can Add Different Hashable Types
+----------------------------------------
+
+A set can contain different hashable objects.
+
+data = {10, "Python", 3.14}
+
+data.add(True)
+
+The new element is added if it is not already represented in the set.
+
+----------------------------------------
+4. update() — Add Multiple Elements
+----------------------------------------
+
+update() adds elements from an iterable.
+
+numbers = {10, 20}
+
+numbers.update([30, 40, 50])
+
+print(numbers)
+
+Result:
+
+{10, 20, 30, 40, 50}
+
+Syntax:
+
+set.update(iterable)
+
+----------------------------------------
+5. update() with a Tuple
+----------------------------------------
+
+numbers = {1, 2, 3}
+
+numbers.update((4, 5, 6))
+
+The elements of the tuple are added individually.
+
+----------------------------------------
+6. update() with Another Set
+----------------------------------------
+
+first = {1, 2, 3}
+second = {3, 4, 5}
+
+first.update(second)
+
+print(first)
+
+Result:
+
+{1, 2, 3, 4, 5}
+
+Duplicate elements are automatically ignored.
+
+----------------------------------------
+7. update() with a String
+----------------------------------------
+
+A string is iterable.
+
+letters = {"a", "b"}
+
+letters.update("python")
+
+The individual characters are added to the set.
+
+The string is NOT added as one single element.
+
+This is an important difference from add():
+
+letters.add("python")
+
+adds the entire string "python" as one element.
+
+But:
+
+letters.update("python")
+
+adds the characters:
+
+p, y, t, h, o, n
+
+----------------------------------------
+8. add() vs update()
+----------------------------------------
+
+add():
+
+numbers.add([4, 5])
+
+This would fail because a list is unhashable.
+
+But:
+
+numbers.update([4, 5])
+
+works because update() takes the elements from the list and adds them individually.
+
+Mental model:
+
+add(x)
+→ add x as ONE element
+
+update(iterable)
+→ take elements from the iterable and add them individually
+
+----------------------------------------
+9. Adding a Tuple with add()
+----------------------------------------
+
+A tuple can be a set element if it is hashable.
+
+data = {1, 2}
+
+data.add((3, 4))
+
+Result:
+
+{1, 2, (3, 4)}
+
+The tuple is stored as ONE element.
+
+But:
+
+data.update((3, 4))
+
+adds 3 and 4 separately.
+
+This distinction is fundamental.
+
+----------------------------------------
+10. add() and update() Modify the Existing Set
+----------------------------------------
+
+numbers = {1, 2, 3}
+
+result = numbers.add(4)
+
+print(result)
+
+Output:
+
+None
+
+The set itself has been changed.
+
+Similarly:
+
+result = numbers.update([5, 6])
+
+print(result)
+
+Output:
+
+None
+
+Mutating set methods modify the existing set rather than returning the modified set.
+
+----------------------------------------
+11. Practical Example — Collecting Unique Skills
+----------------------------------------
+
+skills = {"Python", "SQL"}
+
+skills.add("FastAPI")
+
+skills.update(["Git", "Docker", "PostgreSQL"])
+
+The set now contains all unique skills.
+
+Sets are useful when duplicate values should automatically be ignored.
+
+----------------------------------------
+12. Practical Example — Adding User Roles
+----------------------------------------
+
+roles = {"student", "developer"}
+
+roles.add("admin")
+
+roles.update(["tester", "manager"])
+
+The set maintains only unique role names.
+
+----------------------------------------
+13. Important Mental Model
+----------------------------------------
+
+add():
+
+ONE object
+    ↓
+set
+
+update():
+
+ITERABLE
+    ↓
+extract its elements
+    ↓
+add each element to the set
+
+Example:
+
+s = {1, 2}
+
+s.add([3, 4])       # invalid
+
+s.add((3, 4))       # adds tuple as one element
+
+s.update([3, 4])    # adds 3 and 4 separately
+
+s.update((5, 6))    # adds 5 and 6 separately
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use add() when you want to add exactly ONE hashable object.
+
+Use update() when you want to add MULTIPLE elements from an iterable.
+
+The most important distinction:
+
+add((1, 2))
+
+adds the tuple as one set element.
+
+update((1, 2))
+
+adds 1 and 2 as separate set elements.
+
+Both methods modify the existing set and return None.`,
+},
+{
+  heading: "Removing Elements from Sets — remove(), discard(), pop() and clear()",
+  body: `Python provides several methods for removing elements from a set. The main methods are remove(), discard(), pop(), and clear().
+
+----------------------------------------
+1. remove() — Remove a Specific Element
+----------------------------------------
+
+remove() removes the specified element from the set.
+
+numbers = {10, 20, 30, 40}
+
+numbers.remove(30)
+
+print(numbers)
+
+Output:
+
+{10, 20, 40}
+
+Syntax:
+
+set.remove(element)
+
+----------------------------------------
+2. remove() Raises an Error if Missing
+----------------------------------------
+
+If the specified element does not exist, remove() raises:
+
+KeyError
+
+Example:
+
+numbers = {10, 20, 30}
+
+numbers.remove(50)
+
+This raises:
+
+KeyError
+
+Therefore, remove() is appropriate when you expect the element to exist.
+
+----------------------------------------
+3. discard() — Remove Without an Error
+----------------------------------------
+
+discard() also removes a specified element.
+
+numbers = {10, 20, 30, 40}
+
+numbers.discard(30)
+
+print(numbers)
+
+Result:
+
+{10, 20, 40}
+
+----------------------------------------
+4. discard() When Element Is Missing
+----------------------------------------
+
+Unlike remove(), discard() does not raise an error if the element is absent.
+
+numbers = {10, 20, 30}
+
+numbers.discard(50)
+
+print(numbers)
+
+The set remains:
+
+{10, 20, 30}
+
+This makes discard() useful when the element may or may not exist.
+
+----------------------------------------
+5. remove() vs discard()
+----------------------------------------
+
+remove():
+
+numbers.remove(50)
+
+→ Raises KeyError if 50 does not exist.
+
+discard():
+
+numbers.discard(50)
+
+→ Does nothing if 50 does not exist.
+
+Mental model:
+
+remove()
+→ "This element should exist. Remove it."
+
+discard()
+→ "Remove this element if it exists."
+
+----------------------------------------
+6. pop() — Remove and Return an Element
+----------------------------------------
+
+pop() removes and returns an arbitrary element from the set.
+
+numbers = {10, 20, 30}
+
+value = numbers.pop()
+
+print(value)
+print(numbers)
+
+The exact value removed should NOT be assumed.
+
+Unlike list.pop(), set.pop() does not accept an index.
+
+----------------------------------------
+7. Set pop() Has No Index
+----------------------------------------
+
+This is invalid:
+
+numbers.pop(0)
+
+A set has no positional indexes.
+
+set.pop()
+
+takes no arguments and removes an arbitrary element.
+
+Compare:
+
+List:
+
+numbers.pop(0)
+
+→ removes the element at index 0.
+
+Set:
+
+numbers.pop()
+
+→ removes an arbitrary element.
+
+----------------------------------------
+8. clear() — Remove All Elements
+----------------------------------------
+
+clear() removes every element from the set.
+
+numbers = {10, 20, 30}
+
+numbers.clear()
+
+print(numbers)
+
+Output:
+
+set()
+
+The set still exists, but it contains no elements.
+
+----------------------------------------
+9. clear() vs del
+----------------------------------------
+
+clear():
+
+numbers.clear()
+
+removes all elements while keeping the set object.
+
+del:
+
+del numbers
+
+deletes the variable reference itself.
+
+After:
+
+del numbers
+
+trying to use numbers results in:
+
+NameError
+
+Therefore:
+
+clear()
+→ empty the set
+
+del
+→ remove the variable binding
+
+----------------------------------------
+10. Checking Before Removing
+----------------------------------------
+
+You can explicitly check membership:
+
+numbers = {10, 20, 30}
+
+if 20 in numbers:
+    numbers.remove(20)
+
+print(numbers)
+
+This avoids KeyError.
+
+However, if you simply want "remove if present", discard() is usually cleaner:
+
+numbers.discard(20)
+
+----------------------------------------
+11. Removing Multiple Elements
+----------------------------------------
+
+You can repeatedly remove elements:
+
+numbers = {10, 20, 30, 40, 50}
+
+for value in [20, 40]:
+    numbers.discard(value)
+
+print(numbers)
+
+Result:
+
+{10, 30, 50}
+
+discard() is convenient here because missing values do not cause an exception.
+
+----------------------------------------
+12. Do Not Modify a Set While Iterating Over It
+----------------------------------------
+
+Avoid:
+
+numbers = {1, 2, 3, 4}
+
+for number in numbers:
+    numbers.remove(number)
+
+This can raise:
+
+RuntimeError: Set changed size during iteration
+
+Instead, iterate over a copy:
+
+numbers = {1, 2, 3, 4}
+
+for number in numbers.copy():
+    numbers.remove(number)
+
+Now the original set can be safely modified while the loop iterates over the copy.
+
+----------------------------------------
+13. remove() vs pop()
+----------------------------------------
+
+remove():
+
+numbers.remove(20)
+
+→ Remove a specific value.
+
+pop():
+
+value = numbers.pop()
+
+→ Remove and return an arbitrary element.
+
+The key difference:
+
+remove()
+→ you choose the value.
+
+pop()
+→ Python chooses the element.
+
+----------------------------------------
+14. remove() vs discard() vs pop()
+----------------------------------------
+
+remove(value)
+
+→ Remove a specific value.
+→ Raises KeyError if missing.
+
+discard(value)
+
+→ Remove a specific value.
+→ Does nothing if missing.
+
+pop()
+
+→ Remove and return an arbitrary element.
+→ Takes no index.
+
+clear()
+
+→ Remove every element.
+
+----------------------------------------
+15. Return Values
+----------------------------------------
+
+Mutating methods behave differently.
+
+remove():
+
+result = numbers.remove(20)
+
+result is:
+
+None
+
+discard():
+
+result = numbers.discard(20)
+
+result is:
+
+None
+
+clear():
+
+result = numbers.clear()
+
+result is:
+
+None
+
+pop() is different:
+
+result = numbers.pop()
+
+result contains the removed element.
+
+----------------------------------------
+16. Practical Example — Active Users
+----------------------------------------
+
+active_users = {"Rahul", "Anita", "Kiran"}
+
+active_users.remove("Kiran")
+
+print(active_users)
+
+A specific user has been removed.
+
+If the user might not exist:
+
+active_users.discard("Kiran")
+
+This will not raise an error.
+
+----------------------------------------
+17. Practical Example — Processing Items
+----------------------------------------
+
+items = {"A", "B", "C"}
+
+while items:
+    item = items.pop()
+    print("Processing:", item)
+
+pop() can be useful when the exact order of processing does not matter.
+
+Because a set is unordered, do not rely on which item is removed first.
+
+----------------------------------------
+18. Professional Decision Guide
+----------------------------------------
+
+Need to remove a known value and expect it to exist?
+
+→ remove(value)
+
+Need to remove a value safely even if it may be absent?
+
+→ discard(value)
+
+Need to remove and retrieve an arbitrary element?
+
+→ pop()
+
+Need to empty the entire set?
+
+→ clear()
+
+Need to delete the variable itself?
+
+→ del
+
+----------------------------------------
+Final Mental Model
+----------------------------------------
+
+remove(value)
+→ specific value + error if missing
+
+discard(value)
+→ specific value + no error if missing
+
+pop()
+→ arbitrary value + returns it
+
+clear()
+→ remove everything
+
+These methods give you the complete basic toolkit for removing elements from a mutable Python set.`,
+},
+{
+  heading: "Set Operations — Union, Intersection, Difference & Symmetric Difference",
+  body: `Sets become especially powerful when comparing collections. Python provides operations for combining sets, finding common elements, finding differences, and identifying elements that exist in only one of the sets.
+
+----------------------------------------
+1. Union — Combine All Unique Elements
+----------------------------------------
+
+Union produces a new set containing every unique element from both sets.
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+result = A | B
+
+print(result)
+
+Output:
+
+{1, 2, 3, 4, 5}
+
+The duplicate 3 appears only once.
+
+You can also use:
+
+result = A.union(B)
+
+Both mean:
+
+"Give me all unique elements from A and B."
+
+----------------------------------------
+2. Intersection — Find Common Elements
+----------------------------------------
+
+Intersection returns elements that exist in both sets.
+
+A = {1, 2, 3}
+B = {2, 3, 4}
+
+result = A & B
+
+print(result)
+
+Output:
+
+{2, 3}
+
+You can also use:
+
+result = A.intersection(B)
+
+Mental model:
+
+A & B
+
+means:
+
+"What does A have in common with B?"
+
+----------------------------------------
+3. Difference — Elements Only in the First Set
+----------------------------------------
+
+Difference returns elements that exist in the first set but not in the second.
+
+A = {1, 2, 3, 4}
+B = {3, 4, 5}
+
+result = A - B
+
+print(result)
+
+Output:
+
+{1, 2}
+
+This means:
+
+"Elements in A that are not in B."
+
+----------------------------------------
+4. Difference Is Directional
+----------------------------------------
+
+This is important:
+
+A - B
+
+is not the same as:
+
+B - A
+
+Example:
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A - B)
+
+Output:
+
+{1, 2}
+
+print(B - A)
+
+Output:
+
+{4, 5}
+
+Difference depends on which set comes first.
+
+----------------------------------------
+5. Symmetric Difference — Elements in Either Set, But Not Both
+----------------------------------------
+
+Symmetric difference returns elements that belong to exactly one of the sets.
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+result = A ^ B
+
+print(result)
+
+Output:
+
+{1, 2, 4, 5}
+
+The common element 3 is excluded.
+
+You can also use:
+
+result = A.symmetric_difference(B)
+
+Mental model:
+
+A ^ B
+
+means:
+
+"Give me elements that are different between the two sets."
+
+----------------------------------------
+6. Operation Summary
+----------------------------------------
+
+Union:
+
+A | B
+
+All unique elements from both.
+
+Intersection:
+
+A & B
+
+Only common elements.
+
+Difference:
+
+A - B
+
+Elements only in A.
+
+Reverse difference:
+
+B - A
+
+Elements only in B.
+
+Symmetric difference:
+
+A ^ B
+
+Elements in either set, but not both.
+
+----------------------------------------
+7. Multiple Set Union
+----------------------------------------
+
+You can combine more than two sets.
+
+A = {1, 2}
+B = {2, 3}
+C = {3, 4}
+
+result = A | B | C
+
+Output:
+
+{1, 2, 3, 4}
+
+You can also use:
+
+A.union(B, C)
+
+----------------------------------------
+8. Multiple Set Intersection
+----------------------------------------
+
+A = {1, 2, 3, 4}
+B = {2, 3, 4}
+C = {3, 4, 5}
+
+result = A & B & C
+
+Output:
+
+{3, 4}
+
+Only elements common to all three sets remain.
+
+----------------------------------------
+9. Set Operations Create New Sets
+----------------------------------------
+
+Normal operators such as:
+
+A | B
+A & B
+A - B
+A ^ B
+
+do not modify A or B.
+
+Example:
+
+A = {1, 2, 3}
+B = {3, 4}
+
+result = A | B
+
+print(A)
+
+Output:
+
+{1, 2, 3}
+
+The original set is unchanged.
+
+----------------------------------------
+10. In-Place Union with update()
+----------------------------------------
+
+If you want to modify the original set:
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+A.update(B)
+
+print(A)
+
+Output:
+
+{1, 2, 3, 4, 5}
+
+update() performs an in-place union.
+
+----------------------------------------
+11. In-Place Intersection
+----------------------------------------
+
+intersection_update() keeps only elements that are common.
+
+A = {1, 2, 3, 4}
+B = {3, 4, 5}
+
+A.intersection_update(B)
+
+print(A)
+
+Output:
+
+{3, 4}
+
+The original A is modified.
+
+----------------------------------------
+12. In-Place Difference
+----------------------------------------
+
+difference_update() removes elements found in another set.
+
+A = {1, 2, 3, 4}
+B = {3, 4, 5}
+
+A.difference_update(B)
+
+print(A)
+
+Output:
+
+{1, 2}
+
+----------------------------------------
+13. In-Place Symmetric Difference
+----------------------------------------
+
+symmetric_difference_update() modifies the original set so that only elements belonging to exactly one of the sets remain.
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+A.symmetric_difference_update(B)
+
+print(A)
+
+Output:
+
+{1, 2, 4, 5}
+
+----------------------------------------
+14. Operator vs Method
+----------------------------------------
+
+Union:
+
+A | B
+A.union(B)
+
+Intersection:
+
+A & B
+A.intersection(B)
+
+Difference:
+
+A - B
+A.difference(B)
+
+Symmetric difference:
+
+A ^ B
+A.symmetric_difference(B)
+
+The operator notation is concise.
+
+The method notation can sometimes make the intention more explicit.
+
+----------------------------------------
+15. Real-World Example — Common Skills
+----------------------------------------
+
+python_skills = {"Python", "SQL", "Git", "FastAPI"}
+
+backend_skills = {"Python", "SQL", "FastAPI", "Docker"}
+
+common = python_skills & backend_skills
+
+print(common)
+
+The result contains skills shared by both collections.
+
+----------------------------------------
+16. Real-World Example — Missing Skills
+----------------------------------------
+
+required = {"Python", "SQL", "Git", "Docker"}
+
+candidate = {"Python", "SQL"}
+
+missing = required - candidate
+
+print(missing)
+
+Output:
+
+{"Git", "Docker"}
+
+This answers:
+
+"What required skills does the candidate not have?"
+
+----------------------------------------
+17. Real-World Example — Unique Items
+----------------------------------------
+
+A set is useful for finding unique values.
+
+users = ["Rahul", "Anita", "Rahul", "Kiran", "Anita"]
+
+unique_users = set(users)
+
+print(unique_users)
+
+Duplicate names are removed automatically.
+
+----------------------------------------
+18. Real-World Example — Common Courses
+----------------------------------------
+
+student_a = {"Python", "SQL", "Machine Learning"}
+student_b = {"Python", "Java", "Machine Learning"}
+
+common_courses = student_a & student_b
+
+print(common_courses)
+
+Output:
+
+{"Python", "Machine Learning"}
+
+----------------------------------------
+19. Visual Mental Model
+----------------------------------------
+
+Think of two sets:
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+Union:
+
+A | B
+→ {1, 2, 3, 4, 5}
+
+Intersection:
+
+A & B
+→ {3}
+
+A difference:
+
+A - B
+→ {1, 2}
+
+B difference:
+
+B - A
+→ {4, 5}
+
+Symmetric difference:
+
+A ^ B
+→ {1, 2, 4, 5}
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+UNION
+→ Everything from both
+
+INTERSECTION
+→ Common to both
+
+DIFFERENCE
+→ In the first, not the second
+
+SYMMETRIC DIFFERENCE
+→ In exactly one of them
+
+And remember:
+
+| → union
+& → intersection
+- → difference
+^ → symmetric difference
+
+These operations are the foundation of using Python sets for comparison, filtering, duplicate handling, and many DSA problems.`,
+},
+{
+  heading: "Set Comparisons — Subsets, Supersets & Disjoint Sets",
+  body: `Python provides operations and methods for checking relationships between sets. These are useful when you want to determine whether one set is completely contained inside another, whether two sets have no common elements, or whether two sets are exactly equal.
+
+----------------------------------------
+1. Subset — <=
+----------------------------------------
+
+A set A is a subset of B if every element of A is also present in B.
+
+A = {1, 2}
+B = {1, 2, 3, 4}
+
+print(A <= B)
+
+Output:
+
+True
+
+A is completely contained inside B.
+
+Method form:
+
+A.issubset(B)
+
+----------------------------------------
+2. Proper Subset — <
+----------------------------------------
+
+A is a proper subset of B when:
+
+• Every element of A is in B
+• A and B are not equal
+
+A = {1, 2}
+B = {1, 2, 3}
+
+print(A < B)
+
+Output:
+
+True
+
+But:
+
+A = {1, 2}
+B = {1, 2}
+
+print(A < B)
+
+Output:
+
+False
+
+Because the two sets are equal.
+
+----------------------------------------
+3. Superset — >=
+----------------------------------------
+
+A set A is a superset of B if A contains every element of B.
+
+A = {1, 2, 3, 4}
+B = {1, 2}
+
+print(A >= B)
+
+Output:
+
+True
+
+Method form:
+
+A.issuperset(B)
+
+Think:
+
+subset:
+→ smaller set is contained inside larger set
+
+superset:
+→ larger set contains the smaller set
+
+----------------------------------------
+4. Proper Superset — >
+----------------------------------------
+
+A is a proper superset of B when A contains every element of B and the sets are not equal.
+
+A = {1, 2, 3}
+B = {1, 2}
+
+print(A > B)
+
+Output:
+
+True
+
+But:
+
+A = {1, 2}
+B = {1, 2}
+
+print(A > B)
+
+Output:
+
+False
+
+----------------------------------------
+5. Set Equality — ==
+----------------------------------------
+
+Two sets are equal when they contain exactly the same elements.
+
+A = {1, 2, 3}
+B = {3, 2, 1}
+
+print(A == B)
+
+Output:
+
+True
+
+The order does not matter.
+
+This is different from lists:
+
+[1, 2, 3] == [3, 2, 1]
+
+Output:
+
+False
+
+For sets:
+
+{1, 2, 3} == {3, 2, 1}
+
+Output:
+
+True
+
+----------------------------------------
+6. Set Inequality — !=
+----------------------------------------
+
+Use != to check whether two sets contain different elements.
+
+A = {1, 2, 3}
+B = {1, 2, 4}
+
+print(A != B)
+
+Output:
+
+True
+
+----------------------------------------
+7. isdisjoint() — No Common Elements
+----------------------------------------
+
+Two sets are disjoint when they have no elements in common.
+
+A = {1, 2, 3}
+B = {4, 5, 6}
+
+print(A.isdisjoint(B))
+
+Output:
+
+True
+
+If they share even one element:
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+print(A.isdisjoint(B))
+
+Output:
+
+False
+
+Mental model:
+
+isdisjoint()
+→ "Do these two sets have zero elements in common?"
+
+----------------------------------------
+8. Subset Methods
+----------------------------------------
+
+Instead of operators, you can use methods.
+
+A <= B
+
+is equivalent to:
+
+A.issubset(B)
+
+Both check whether A is a subset of B.
+
+----------------------------------------
+9. Superset Methods
+----------------------------------------
+
+A >= B
+
+is equivalent to:
+
+A.issuperset(B)
+
+Both check whether A contains every element of B.
+
+----------------------------------------
+10. Comparison Summary
+----------------------------------------
+
+A == B
+
+→ Exactly the same elements
+
+A != B
+
+→ Different elements
+
+A <= B
+
+→ A is a subset of B
+
+A < B
+
+→ A is a proper subset of B
+
+A >= B
+
+→ A is a superset of B
+
+A > B
+
+→ A is a proper superset of B
+
+A.isdisjoint(B)
+
+→ A and B have no common elements
+
+----------------------------------------
+11. Example — Required Skills
+----------------------------------------
+
+required = {"Python", "SQL", "Git"}
+
+candidate = {"Python", "SQL", "Git", "FastAPI"}
+
+print(required <= candidate)
+
+Output:
+
+True
+
+The candidate has every required skill.
+
+The candidate has additional skills as well.
+
+----------------------------------------
+12. Example — Checking Exact Skill Sets
+----------------------------------------
+
+team_a = {"Python", "SQL", "Git"}
+team_b = {"Git", "SQL", "Python"}
+
+print(team_a == team_b)
+
+Output:
+
+True
+
+The order does not matter for sets.
+
+----------------------------------------
+13. Example — Checking for Completely Different Data
+----------------------------------------
+
+morning = {"Python", "SQL"}
+evening = {"Java", "C++"}
+
+print(morning.isdisjoint(evening))
+
+Output:
+
+True
+
+There are no common elements.
+
+----------------------------------------
+14. Important Difference: <= vs <
+----------------------------------------
+
+This distinction is important.
+
+<= allows equality:
+
+A = {1, 2}
+B = {1, 2}
+
+A <= B
+
+True
+
+But < requires A to be strictly smaller:
+
+A < B
+
+False
+
+Similarly:
+
+>= allows equality.
+
+> requires a proper superset.
+
+----------------------------------------
+15. Professional Mental Model
+----------------------------------------
+
+Think of the comparison operators as containment questions:
+
+A <= B
+→ "Is everything in A also inside B?"
+
+A < B
+→ "Is A completely inside B and smaller than B?"
+
+A >= B
+→ "Does A contain everything in B?"
+
+A > B
+→ "Does A contain B and have additional elements?"
+
+A == B
+→ "Do they contain exactly the same elements?"
+
+A.isdisjoint(B)
+→ "Do they have nothing in common?"
+
+These comparisons are especially useful for permissions, required skills, tags, categories, filtering, validation, and DSA problems.`,
+},
+{
+  heading: "Set Methods — copy(), len(), and Other Useful Operations",
+  body: `Python provides several useful operations for working with sets beyond adding, removing, and comparing elements.
+
+----------------------------------------
+1. copy() — Create a Shallow Copy
+----------------------------------------
+
+The copy() method creates a new set containing the same elements.
+
+numbers = {10, 20, 30}
+
+copy_numbers = numbers.copy()
+
+copy_numbers.add(40)
+
+print(numbers)
+print(copy_numbers)
+
+Output:
+
+{10, 20, 30}
+{10, 20, 30, 40}
+
+The two sets are separate objects.
+
+Check:
+
+print(numbers is copy_numbers)
+
+Output:
+
+False
+
+----------------------------------------
+2. len() — Count Set Elements
+----------------------------------------
+
+Use len() to find the number of unique elements in a set.
+
+numbers = {10, 20, 30, 40}
+
+print(len(numbers))
+
+Output:
+
+4
+
+Because sets automatically remove duplicates:
+
+numbers = {10, 20, 20, 30, 30}
+
+print(len(numbers))
+
+Output:
+
+3
+
+len() counts the elements that actually exist in the set.
+
+----------------------------------------
+3. Membership Testing — in
+----------------------------------------
+
+Use in to check whether an element exists.
+
+numbers = {10, 20, 30}
+
+print(20 in numbers)
+
+Output:
+
+True
+
+Membership testing is one of the most important uses of sets.
+
+----------------------------------------
+4. Membership Testing — not in
+----------------------------------------
+
+numbers = {10, 20, 30}
+
+print(50 not in numbers)
+
+Output:
+
+True
+
+This checks whether the element is absent.
+
+----------------------------------------
+5. Iterating Through a Set
+----------------------------------------
+
+Use a for loop:
+
+numbers = {10, 20, 30}
+
+for number in numbers:
+    print(number)
+
+Each element is processed once.
+
+Remember that normal sets do not provide a guaranteed positional order.
+
+----------------------------------------
+6. sorted() — Get Ordered Output
+----------------------------------------
+
+If you need sorted values:
+
+numbers = {40, 10, 30, 20}
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[10, 20, 30, 40]
+
+Important:
+
+sorted() returns a LIST.
+
+It does not convert the original set into an ordered set.
+
+----------------------------------------
+7. min() — Smallest Element
+----------------------------------------
+
+numbers = {40, 10, 30, 20}
+
+print(min(numbers))
+
+Output:
+
+10
+
+min() returns the smallest element according to the elements' ordering rules.
+
+----------------------------------------
+8. max() — Largest Element
+----------------------------------------
+
+numbers = {40, 10, 30, 20}
+
+print(max(numbers))
+
+Output:
+
+40
+
+max() returns the largest element.
+
+----------------------------------------
+9. sum() — Add Numeric Set Elements
+----------------------------------------
+
+numbers = {10, 20, 30}
+
+print(sum(numbers))
+
+Output:
+
+60
+
+sum() works when the set contains compatible numeric values.
+
+----------------------------------------
+10. any() — Check Whether Any Element Is Truthy
+----------------------------------------
+
+values = {0, 0, 5}
+
+print(any(values))
+
+Output:
+
+True
+
+At least one element is truthy.
+
+----------------------------------------
+11. all() — Check Whether Every Element Is Truthy
+----------------------------------------
+
+values = {1, 2, 3}
+
+print(all(values))
+
+Output:
+
+True
+
+But:
+
+values = {1, 0, 3}
+
+print(all(values))
+
+Output:
+
+False
+
+Because 0 is falsy.
+
+----------------------------------------
+12. clear() — Empty the Set
+----------------------------------------
+
+numbers = {10, 20, 30}
+
+numbers.clear()
+
+print(numbers)
+
+Output:
+
+set()
+
+The set object remains, but all its elements are removed.
+
+----------------------------------------
+13. set() — Create or Convert
+----------------------------------------
+
+The set() constructor can create an empty set:
+
+numbers = set()
+
+It can also convert an iterable:
+
+numbers = set([1, 2, 2, 3])
+
+Result:
+
+{1, 2, 3}
+
+----------------------------------------
+14. Set Methods Return Values
+----------------------------------------
+
+Most set methods that modify the set return None.
+
+Example:
+
+numbers = {1, 2, 3}
+
+result = numbers.add(4)
+
+print(result)
+
+Output:
+
+None
+
+The same applies to methods such as:
+
+add()
+update()
+remove()
+discard()
+clear()
+
+They modify the existing set.
+
+Methods such as:
+
+pop()
+
+are different because pop() returns the removed element.
+
+----------------------------------------
+15. Useful Built-in Functions Summary
+----------------------------------------
+
+len(set)
+
+→ Number of elements
+
+min(set)
+
+→ Smallest element
+
+max(set)
+
+→ Largest element
+
+sum(set)
+
+→ Sum of numeric elements
+
+sorted(set)
+
+→ Sorted list
+
+any(set)
+
+→ True if at least one element is truthy
+
+all(set)
+
+→ True if every element is truthy
+
+----------------------------------------
+16. Practical Example — Unique Scores
+----------------------------------------
+
+scores = {85, 90, 85, 95, 90}
+
+print(len(scores))
+
+Output:
+
+3
+
+print(min(scores))
+
+Output:
+
+85
+
+print(max(scores))
+
+Output:
+
+95
+
+print(sum(scores))
+
+Output:
+
+270
+
+The duplicate scores were removed when the set was created.
+
+----------------------------------------
+17. Practical Example — Unique User IDs
+----------------------------------------
+
+user_ids = {101, 102, 103, 101, 104}
+
+print(len(user_ids))
+
+Output:
+
+4
+
+if 103 in user_ids:
+    print("User exists")
+
+Sets are useful when uniqueness and fast membership checking are important.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+copy()
+→ independent shallow copy
+
+len()
+→ number of unique elements
+
+in
+→ membership test
+
+not in
+→ absence test
+
+sorted()
+→ sorted list from the set
+
+min()
+→ smallest element
+
+max()
+→ largest element
+
+sum()
+→ total of numeric elements
+
+any()
+→ at least one truthy element
+
+all()
+→ every element is truthy
+
+clear()
+→ remove everything
+
+These operations complete the essential everyday tools for working with Python sets.`,
+},
+{
+  heading: "Set Comprehensions",
+  body: `Set comprehensions provide a concise way to create sets from iterable data while automatically keeping only unique elements.
+
+The basic syntax is:
+
+{expression for item in iterable}
+
+----------------------------------------
+1. Basic Set Comprehension
+----------------------------------------
+
+numbers = {1, 2, 3, 4, 5}
+
+squares = {number ** 2 for number in numbers}
+
+print(squares)
+
+Output:
+
+{1, 4, 9, 16, 25}
+
+The expression is evaluated for every element and the results are collected into a set.
+
+----------------------------------------
+2. Set Comprehension vs List Comprehension
+----------------------------------------
+
+List comprehension:
+
+squares = [number ** 2 for number in range(5)]
+
+Creates a list.
+
+Set comprehension:
+
+squares = {number ** 2 for number in range(5)}
+
+Creates a set.
+
+The curly braces indicate a set comprehension when the expression contains a for clause.
+
+----------------------------------------
+3. Removing Duplicates Automatically
+----------------------------------------
+
+values = [1, 2, 2, 3, 3, 4]
+
+unique_squares = {number ** 2 for number in values}
+
+Output:
+
+{1, 4, 9, 16}
+
+Even though some input values appear multiple times, the resulting set contains each result only once.
+
+----------------------------------------
+4. Set Comprehension with a Condition
+----------------------------------------
+
+You can use if to filter elements.
+
+numbers = range(1, 11)
+
+even_numbers = {
+    number
+    for number in numbers
+    if number % 2 == 0
+}
+
+Output:
+
+{2, 4, 6, 8, 10}
+
+General pattern:
+
+{expression for item in iterable if condition}
+
+----------------------------------------
+5. Transform and Filter
+----------------------------------------
+
+You can transform values while filtering them.
+
+numbers = range(1, 11)
+
+squares = {
+    number ** 2
+    for number in numbers
+    if number % 2 == 0
+}
+
+Output:
+
+{4, 16, 36, 64, 100}
+
+The process is:
+
+1. Take each number.
+2. Check the condition.
+3. Keep only even numbers.
+4. Square them.
+5. Store the results as unique set elements.
+
+----------------------------------------
+6. Set Comprehension with Strings
+----------------------------------------
+
+word = "programming"
+
+unique_letters = {letter for letter in word}
+
+print(unique_letters)
+
+The result contains each character only once.
+
+This is a simple way to extract unique characters.
+
+----------------------------------------
+7. Converting and Transforming Strings
+----------------------------------------
+
+words = ["Python", "JAVA", "SQL"]
+
+lowercase_words = {
+    word.lower()
+    for word in words
+}
+
+Output:
+
+{"python", "java", "sql"}
+
+The expression transforms each element.
+
+----------------------------------------
+8. Filtering Strings
+----------------------------------------
+
+words = ["Python", "Java", "C", "JavaScript"]
+
+long_words = {
+    word
+    for word in words
+    if len(word) > 3
+}
+
+Output:
+
+{"Python", "Java", "JavaScript"}
+
+The condition determines which elements are included.
+
+----------------------------------------
+9. Set Comprehension from range()
+----------------------------------------
+
+numbers = {
+    number
+    for number in range(1, 6)
+}
+
+Output:
+
+{1, 2, 3, 4, 5}
+
+Although this works, it is usually clearer to use:
+
+set(range(1, 6))
+
+Use comprehensions when you need transformation or filtering.
+
+----------------------------------------
+10. Nested Set Comprehension
+----------------------------------------
+
+Set comprehensions can contain nested loops.
+
+pairs = {
+    (x, y)
+    for x in range(2)
+    for y in range(2)
+}
+
+Output:
+
+{(0, 0), (0, 1), (1, 0), (1, 1)}
+
+This is useful for generating combinations or coordinate pairs.
+
+----------------------------------------
+11. Conditional Transformation
+----------------------------------------
+
+You can use a conditional expression inside the expression part.
+
+numbers = range(1, 6)
+
+result = {
+    "even" if number % 2 == 0 else "odd"
+    for number in numbers
+}
+
+Output:
+
+{"even", "odd"}
+
+Notice that duplicates are automatically removed, so only the two unique strings remain.
+
+----------------------------------------
+12. Important: Set Comprehension Does Not Preserve Duplicates
+----------------------------------------
+
+values = [1, 1, 2, 2, 3, 3]
+
+result = {number for number in values}
+
+Output:
+
+{1, 2, 3}
+
+The purpose of the resulting structure is still a set, so duplicates disappear.
+
+----------------------------------------
+13. Set Comprehension Mental Model
+----------------------------------------
+
+Think of:
+
+{
+    expression
+    for item in iterable
+    if condition
+}
+
+as:
+
+ITERABLE
+    ↓
+take each item
+    ↓
+check condition
+    ↓
+transform item
+    ↓
+store result
+    ↓
+automatically remove duplicates
+    ↓
+SET
+
+----------------------------------------
+14. Practical Example — Unique Even Numbers
+----------------------------------------
+
+values = [10, 15, 20, 20, 25, 30, 30]
+
+even_values = {
+    value
+    for value in values
+    if value % 2 == 0
+}
+
+Output:
+
+{10, 20, 30}
+
+----------------------------------------
+15. Practical Example — Unique Word Lengths
+----------------------------------------
+
+words = ["Python", "Java", "C", "JavaScript"]
+
+lengths = {
+    len(word)
+    for word in words
+}
+
+Output:
+
+{1, 4, 6, 10}
+
+Only unique lengths are retained.
+
+----------------------------------------
+16. When to Use Set Comprehensions
+----------------------------------------
+
+Use a set comprehension when you need to:
+
+• Transform elements
+• Filter elements
+• Automatically remove duplicates
+• Create a set in a concise way
+
+Example:
+
+unique_even_squares = {
+    n ** 2
+    for n in numbers
+    if n % 2 == 0
+}
+
+----------------------------------------
+17. When NOT to Use Them
+----------------------------------------
+
+Do not use a set comprehension when:
+
+• You need duplicate values.
+• You need reliable ordering.
+• The expression becomes difficult to understand.
+• A simple set() conversion is clearer.
+
+For example:
+
+set(numbers)
+
+is clearer than:
+
+{number for number in numbers}
+
+when no transformation or filtering is needed.
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Set comprehension follows this pattern:
+
+{expression for item in iterable if condition}
+
+Remember:
+
+LIST comprehension
+→ []
+
+SET comprehension
+→ {}
+
+DICTIONARY comprehension
+→ {key: value}
+
+The defining feature of set comprehension is that the final result contains only unique elements.`,
+},
+{
+  heading: "frozenset — Immutable Sets",
+  body: `A frozenset is the immutable version of a Python set.
+
+It has the same core set behavior as set — unique elements, membership testing, union, intersection, difference, and other set operations — but its contents cannot be changed after creation.
+
+----------------------------------------
+1. Creating a frozenset
+----------------------------------------
+
+numbers = frozenset([10, 20, 30, 20])
+
+print(numbers)
+
+The duplicate 20 is automatically removed.
+
+The result is an immutable collection of unique elements.
+
+----------------------------------------
+2. frozenset Cannot Be Modified
+----------------------------------------
+
+A normal set is mutable:
+
+numbers = {10, 20, 30}
+
+numbers.add(40)
+
+This works.
+
+A frozenset is immutable:
+
+numbers = frozenset([10, 20, 30])
+
+numbers.add(40)
+
+This raises:
+
+AttributeError
+
+frozenset does not provide mutating methods such as:
+
+add()
+remove()
+discard()
+pop()
+clear()
+update()
+
+----------------------------------------
+3. Why Use frozenset?
+----------------------------------------
+
+The main reason to use frozenset is when you need a set-like collection that must remain unchanged.
+
+Because a frozenset is immutable and hashable, it can be used in places where a normal set cannot.
+
+For example, a frozenset can be an element of another set:
+
+permissions = {
+    frozenset({"read", "write"}),
+    frozenset({"read"})
+}
+
+A normal set cannot be placed inside another set because a normal set is mutable and unhashable.
+
+----------------------------------------
+4. frozenset as a Dictionary Key
+----------------------------------------
+
+A frozenset can also be used as a dictionary key.
+
+permissions = frozenset({"read", "write"})
+
+data = {
+    permissions: "Editor"
+}
+
+print(data[permissions])
+
+Output:
+
+Editor
+
+A normal set cannot be used as a dictionary key.
+
+----------------------------------------
+5. Set Operations Still Work
+----------------------------------------
+
+frozenset supports normal set operations.
+
+A = frozenset([1, 2, 3])
+B = frozenset([3, 4, 5])
+
+print(A | B)
+
+Output:
+
+frozenset({1, 2, 3, 4, 5})
+
+Intersection:
+
+print(A & B)
+
+Output:
+
+frozenset({3})
+
+Difference:
+
+print(A - B)
+
+Output:
+
+frozenset({1, 2})
+
+Symmetric difference:
+
+print(A ^ B)
+
+Output:
+
+frozenset({1, 2, 4, 5})
+
+The operations create new set-like results rather than modifying the original frozenset.
+
+----------------------------------------
+6. Membership Testing
+----------------------------------------
+
+frozenset supports fast membership testing:
+
+numbers = frozenset([10, 20, 30])
+
+print(20 in numbers)
+
+Output:
+
+True
+
+----------------------------------------
+7. Subset and Superset Comparisons
+----------------------------------------
+
+frozenset supports the same comparison operations as set.
+
+A = frozenset([1, 2])
+B = frozenset([1, 2, 3])
+
+print(A <= B)
+
+Output:
+
+True
+
+print(B >= A)
+
+Output:
+
+True
+
+You can also use:
+
+A.issubset(B)
+
+and:
+
+B.issuperset(A)
+
+----------------------------------------
+8. set vs frozenset
+----------------------------------------
+
+set:
+
+numbers = {1, 2, 3}
+
+Mutable:
+→ Yes
+
+Hashable:
+→ No
+
+Can be dictionary key:
+→ No
+
+Can be element of another set:
+→ No
+
+Can add/remove elements:
+→ Yes
+
+frozenset:
+
+numbers = frozenset([1, 2, 3])
+
+Mutable:
+→ No
+
+Hashable:
+→ Yes
+
+Can be dictionary key:
+→ Yes
+
+Can be element of another set:
+→ Yes
+
+Can add/remove elements:
+→ No
+
+----------------------------------------
+9. Converting Between set and frozenset
+----------------------------------------
+
+Set → frozenset:
+
+numbers = {1, 2, 3}
+
+frozen = frozenset(numbers)
+
+frozenset → set:
+
+numbers = frozenset([1, 2, 3])
+
+normal_set = set(numbers)
+
+This is useful when you need to temporarily make a set mutable or immutable.
+
+----------------------------------------
+10. Practical Example — Fixed Permissions
+----------------------------------------
+
+permissions = frozenset({"read", "write"})
+
+A permission group should not accidentally change during program execution.
+
+You can safely compare it:
+
+required = frozenset({"read"})
+
+print(required <= permissions)
+
+Output:
+
+True
+
+----------------------------------------
+11. Practical Example — Unique Combination as a Key
+----------------------------------------
+
+Suppose a relationship depends on a combination of unique values:
+
+combination = frozenset({"Python", "SQL"})
+
+data = {
+    combination: "Backend Skills"
+}
+
+Because the frozenset is hashable, it can be used as a dictionary key.
+
+----------------------------------------
+12. Important Mental Model
+----------------------------------------
+
+set:
+
+"Unique collection that I can change."
+
+frozenset:
+
+"Unique collection that I must keep unchanged."
+
+Both support:
+
+• Membership testing
+• Union
+• Intersection
+• Difference
+• Symmetric difference
+• Subset checks
+• Superset checks
+• Disjoint checks
+
+The major difference is mutability.
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use set when:
+
+• You need to add or remove elements.
+• The collection needs to change.
+
+Use frozenset when:
+
+• The collection should never change.
+• You need a set as a dictionary key.
+• You need a set as an element inside another set.
+• You want immutable set semantics.
+
+Core concept:
+
+set → mutable + unhashable
+
+frozenset → immutable + hashable
+
+This completes the important distinction between Python's mutable set and immutable frozenset.`,
+},
+
+{
+  heading: "Set Performance & Time Complexity",
+  body: `Python sets are implemented using hash tables. This makes membership testing and many basic set operations very efficient, especially compared with searching through a list.
+
+----------------------------------------
+1. Membership Testing — in
+----------------------------------------
+
+numbers = {10, 20, 30, 40, 50}
+
+print(30 in numbers)
+
+Average time complexity:
+
+O(1)
+
+Python uses hashing to locate the element efficiently.
+
+----------------------------------------
+2. Adding an Element — add()
+----------------------------------------
+
+numbers.add(60)
+
+Average:
+
+O(1)
+
+The operation is generally constant time, although occasional resizing can require additional work.
+
+----------------------------------------
+3. Removing an Element
+----------------------------------------
+
+numbers.remove(30)
+
+Average:
+
+O(1)
+
+Similarly:
+
+numbers.discard(30)
+
+Average:
+
+O(1)
+
+----------------------------------------
+4. pop()
+----------------------------------------
+
+numbers.pop()
+
+Average:
+
+O(1)
+
+It removes an arbitrary element.
+
+Remember that set.pop() does not remove an element by index.
+
+----------------------------------------
+5. Union — |
+----------------------------------------
+
+A | B
+
+Time complexity is approximately:
+
+O(len(A) + len(B))
+
+The elements from both sets need to be considered.
+
+----------------------------------------
+6. Intersection — &
+----------------------------------------
+
+A & B
+
+Typically:
+
+O(min(len(A), len(B)))
+
+Python can iterate through the smaller set and test membership in the other.
+
+----------------------------------------
+7. Difference — -
+----------------------------------------
+
+A - B
+
+Approximately:
+
+O(len(A))
+
+The elements of A need to be examined.
+
+----------------------------------------
+8. Symmetric Difference — ^
+----------------------------------------
+
+A ^ B
+
+Approximately:
+
+O(len(A) + len(B))
+
+Elements from both sets need to be considered.
+
+----------------------------------------
+9. Subset Checking
+----------------------------------------
+
+A <= B
+
+The complexity is generally related to the size of A:
+
+O(len(A))
+
+Every element of A must be checked against B.
+
+----------------------------------------
+10. len()
+----------------------------------------
+
+len(numbers)
+
+Time complexity:
+
+O(1)
+
+Python maintains the size information for the set, so it does not need to count every element each time.
+
+----------------------------------------
+11. Copying a Set
+----------------------------------------
+
+copy_numbers = numbers.copy()
+
+Time complexity:
+
+O(n)
+
+where n is the number of elements copied.
+
+----------------------------------------
+12. Set vs List Membership
+----------------------------------------
+
+List:
+
+numbers = [10, 20, 30, 40, 50]
+
+30 in numbers
+
+Average/worst-case:
+
+O(n)
+
+Python may need to scan the list.
+
+Set:
+
+numbers = {10, 20, 30, 40, 50}
+
+30 in numbers
+
+Average:
+
+O(1)
+
+This is one of the biggest practical advantages of sets.
+
+----------------------------------------
+13. Hashing Is the Reason
+----------------------------------------
+
+A set uses hash-based storage.
+
+Conceptually:
+
+element
+   ↓
+hash()
+   ↓
+hash value
+   ↓
+location lookup
+   ↓
+element found
+
+This avoids scanning every element in the average case.
+
+----------------------------------------
+14. Worst-Case Complexity
+----------------------------------------
+
+Although set membership is usually O(1), the theoretical worst case can become:
+
+O(n)
+
+This can occur because of hash collisions or other implementation-level conditions.
+
+Therefore, the professional way to describe set lookup is:
+
+Average:
+O(1)
+
+Worst case:
+O(n)
+
+----------------------------------------
+15. Memory Consideration
+----------------------------------------
+
+Sets generally use more memory than lists because they maintain hash-table structures internally.
+
+Therefore:
+
+Use a set when you need:
+
+• Fast membership testing
+• Unique elements
+• Set operations
+
+Use a list when you need:
+
+• Ordering
+• Indexing
+• Lower memory overhead for simple sequential storage
+
+----------------------------------------
+16. DSA Importance
+----------------------------------------
+
+Sets are extremely important in algorithmic problem solving.
+
+Common patterns include:
+
+Duplicate detection:
+
+seen = set()
+
+for value in numbers:
+    if value in seen:
+        print("Duplicate")
+    seen.add(value)
+
+This can reduce duplicate-checking from a potentially O(n²) approach to approximately O(n) average time.
+
+----------------------------------------
+17. Example — Duplicate Detection
+----------------------------------------
+
+numbers = [10, 20, 30, 20, 40]
+
+seen = set()
+
+for number in numbers:
+    if number in seen:
+        print("Duplicate:", number)
+    else:
+        seen.add(number)
+
+Output:
+
+Duplicate: 20
+
+Membership checking is O(1) average, making the overall approach approximately O(n).
+
+----------------------------------------
+18. Professional Complexity Table
+----------------------------------------
+
+Operation                  Average       Worst Case
+
+x in set                   O(1)          O(n)
+add(x)                     O(1)          O(n)
+remove(x)                  O(1)          O(n)
+discard(x)                 O(1)          O(n)
+pop()                      O(1)          O(n)
+len(set)                   O(1)          O(1)
+copy()                     O(n)          O(n)
+A | B                      O(n+m)        O(n+m)
+A & B                      O(min(n,m))   implementation-dependent
+A - B                      O(n)          O(n)
+A ^ B                      O(n+m)        O(n+m)
+
+Here n and m represent the sizes of the participating sets.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+List:
+
+Fast indexing
+→ O(1)
+
+Slow membership search
+→ O(n)
+
+Set:
+
+No indexing
+→ Not supported
+
+Fast average membership search
+→ O(1)
+
+Fast average add/remove
+→ O(1)
+
+This is why sets are commonly used when the primary operation is:
+
+"Have I seen this value before?"
+
+rather than:
+
+"What is the element at index i?"
+
+This completes the important performance and complexity concepts for Python sets.`,
+},  
+{
+  heading: "Sets in Real-World Python & DSA",
+  body: `Sets are especially useful when the main requirement is uniqueness, fast membership testing, or comparing collections.
+
+----------------------------------------
+1. Removing Duplicates
+----------------------------------------
+
+One of the most common uses of a set is removing duplicate values.
+
+numbers = [10, 20, 10, 30, 20, 40]
+
+unique_numbers = set(numbers)
+
+print(unique_numbers)
+
+The resulting set contains each value only once.
+
+If you need a list again:
+
+unique_numbers = list(set(numbers))
+
+Important:
+This removes duplicates, but it does not preserve the original list order.
+
+----------------------------------------
+2. Checking Whether an Item Exists
+----------------------------------------
+
+Set membership is generally O(1) average-case.
+
+registered_users = {"Rahul", "Anita", "Kiran"}
+
+if "Anita" in registered_users:
+    print("User is registered")
+
+This is much more efficient than repeatedly scanning a large list for membership checks.
+
+----------------------------------------
+3. Tracking Already-Seen Values
+----------------------------------------
+
+A set is commonly used in DSA to remember which values have already been encountered.
+
+numbers = [10, 20, 30, 20, 40]
+
+seen = set()
+
+for number in numbers:
+    if number in seen:
+        print("Duplicate:", number)
+    else:
+        seen.add(number)
+
+Output:
+
+Duplicate: 20
+
+Average complexity:
+
+O(n)
+
+----------------------------------------
+4. Finding Common Elements
+----------------------------------------
+
+Use intersection to find values shared by two collections.
+
+python_students = {"Rahul", "Anita", "Kiran"}
+sql_students = {"Anita", "Kiran", "Arjun"}
+
+common = python_students & sql_students
+
+print(common)
+
+The result contains students who belong to both groups.
+
+----------------------------------------
+5. Finding Missing Elements
+----------------------------------------
+
+Sets are useful for finding required values that are absent.
+
+required = {"Python", "SQL", "Git", "Docker"}
+
+completed = {"Python", "SQL"}
+
+missing = required - completed
+
+print(missing)
+
+Result:
+
+{"Git", "Docker"}
+
+This pattern is useful for:
+
+• Skill validation
+• Permission checking
+• Configuration validation
+• Required-field checking
+
+----------------------------------------
+6. Comparing User Permissions
+----------------------------------------
+
+required_permissions = {"read", "write"}
+
+user_permissions = {"read", "write", "delete"}
+
+if required_permissions <= user_permissions:
+    print("Access granted")
+
+The subset relationship makes permission checking concise.
+
+----------------------------------------
+7. Finding Unique Characters
+----------------------------------------
+
+text = "programming"
+
+unique_characters = set(text)
+
+print(unique_characters)
+
+This is useful for problems involving:
+
+• Character uniqueness
+• Duplicate detection
+• Character frequency preprocessing
+• String validation
+
+----------------------------------------
+8. Detecting Duplicate Characters
+----------------------------------------
+
+text = "python"
+
+if len(text) == len(set(text)):
+    print("All characters are unique")
+else:
+    print("Duplicates exist")
+
+For:
+
+text = "hello"
+
+len(text)
+
+is 5.
+
+len(set(text))
+
+is 4.
+
+Therefore duplicates exist.
+
+----------------------------------------
+9. Two-Sum Style DSA Pattern
+----------------------------------------
+
+A set can help solve problems where you need to determine whether a required value has already been encountered.
+
+numbers = [2, 7, 11, 15]
+target = 9
+
+seen = set()
+
+for number in numbers:
+    required = target - number
+
+    if required in seen:
+        print("Pair found")
+        break
+
+    seen.add(number)
+
+The set provides fast average membership testing.
+
+----------------------------------------
+10. Finding Common Values Between Lists
+----------------------------------------
+
+list_a = [1, 2, 3, 4, 5]
+list_b = [4, 5, 6, 7]
+
+common = set(list_a) & set(list_b)
+
+print(common)
+
+Output:
+
+{4, 5}
+
+This is often cleaner than manually comparing every pair of elements.
+
+----------------------------------------
+11. Finding Values Unique to Each Collection
+----------------------------------------
+
+A = {1, 2, 3}
+B = {3, 4, 5}
+
+different = A ^ B
+
+print(different)
+
+Output:
+
+{1, 2, 4, 5}
+
+These values occur in exactly one of the two sets.
+
+----------------------------------------
+12. Graph Algorithms
+----------------------------------------
+
+Sets are commonly used to track visited nodes in graph and tree problems.
+
+visited = set()
+
+visited.add("A")
+
+if "A" in visited:
+    print("Already visited")
+
+This prevents repeatedly processing the same node.
+
+Common applications include:
+
+• DFS
+• BFS
+• Graph traversal
+• Cycle-related checks
+• State-space search
+
+----------------------------------------
+13. BFS Example
+----------------------------------------
+
+A simplified graph traversal might use:
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["D"],
+    "C": ["D"],
+    "D": []
+}
+
+visited = set()
+
+def visit(node):
+    if node in visited:
+        return
+
+    visited.add(node)
+
+    for neighbour in graph[node]:
+        visit(neighbour)
+
+The visited set prevents processing the same node multiple times.
+
+----------------------------------------
+14. Duplicate Detection in Data Processing
+----------------------------------------
+
+records = [101, 102, 103, 101, 104, 102]
+
+seen = set()
+duplicates = set()
+
+for record in records:
+    if record in seen:
+        duplicates.add(record)
+    else:
+        seen.add(record)
+
+print(duplicates)
+
+Output:
+
+{101, 102}
+
+This pattern is useful for data validation and preprocessing.
+
+----------------------------------------
+15. Tags and Categories
+----------------------------------------
+
+article_tags = {
+    "python",
+    "backend",
+    "fastapi",
+    "database"
+}
+
+Sets are useful when the order of tags does not matter and duplicates should not exist.
+
+You can easily compare tags:
+
+required_tags = {"python", "backend"}
+
+if required_tags <= article_tags:
+    print("Article has all required tags")
+
+----------------------------------------
+16. Filtering Against a Blacklist
+----------------------------------------
+
+blocked_users = {"user101", "user205", "user310"}
+
+users = {
+    "user101",
+    "user102",
+    "user205",
+    "user400"
+}
+
+allowed_users = users - blocked_users
+
+print(allowed_users)
+
+The blacklist is removed using set difference.
+
+----------------------------------------
+17. Set as a Fast Lookup Structure
+----------------------------------------
+
+Suppose you have many values that need to be checked repeatedly.
+
+Instead of:
+
+values = [1001, 1002, 1003, 1004]
+
+Use:
+
+values = {1001, 1002, 1003, 1004}
+
+Then:
+
+if user_id in values:
+    ...
+
+For large collections and repeated membership tests, this can be significantly more efficient.
+
+----------------------------------------
+18. Important Limitation
+----------------------------------------
+
+Do not use a set when you need:
+
+• Index-based access
+• Duplicate values
+• Reliable positional order
+• Elements that are themselves unhashable
+
+For those situations, consider:
+
+list
+tuple
+dict
+or another appropriate structure.
+
+----------------------------------------
+19. List vs Set — Practical Decision
+----------------------------------------
+
+Use a LIST when:
+
+"I care about order and position."
+
+Example:
+
+students = ["Rahul", "Anita", "Kiran"]
+
+Use a SET when:
+
+"I care about uniqueness and membership."
+
+Example:
+
+students = {"Rahul", "Anita", "Kiran"}
+
+Use a DICTIONARY when:
+
+"I need a key associated with a value."
+
+Example:
+
+student = {
+    "name": "Rahul",
+    "age": 22
+}
+
+----------------------------------------
+20. Professional DSA Mental Model
+----------------------------------------
+
+When you see a DSA problem asking:
+
+"Have I seen this value before?"
+
+Think:
+
+→ set
+
+"When did I last see this value?"
+
+Think:
+
+→ dictionary
+
+"Do I need values in a particular order?"
+
+Think:
+
+→ list
+
+"Do I need unique values?"
+
+Think:
+
+→ set
+
+"Do I need to compare two collections?"
+
+Think:
+
+→ set operations
+
+"Do I need to track visited nodes?"
+
+Think:
+
+→ set
+
+----------------------------------------
+Set Section — Core Complete
+----------------------------------------
+
+You should now understand:
+
+1. Introduction to Sets
+2. Creating Sets
+3. Accessing and Iterating Sets
+4. Adding Elements — add(), update()
+5. Removing Elements — remove(), discard(), pop(), clear()
+6. Set Operations — union, intersection, difference, symmetric difference
+7. Set Comparisons — subset, superset, disjoint
+8. Useful Set Operations — copy(), len(), sorted(), min(), max(), sum()
+9. Set Comprehensions
+10. frozenset
+11. Set Performance & Time Complexity
+12. Sets in Real-World Python / DSA`,
+},          ],
+            code: `
+# Creating a Set
+
+skills = {"Python", "SQL", "FastAPI", "Python"}
+
+print(skills)
+# {"Python", "SQL", "FastAPI"} — duplicates are removed automatically
+
+
+# Safe Membership Check
+
+print("Python" in skills)
+# True
+
+print("Java" in skills)
+# False
+
+
+# Add
+
+skills.add("Docker")
+
+# Add Multiple Elements
+
+skills.update({"Git", "PostgreSQL", "Docker"})
+
+print(skills)
+# Docker is added only once even if it already exists
+
 
 # Remove
-del student["rank"]
-gpa = student.pop("gpa")   # Remove and return value
+
+skills.remove("Git")       # Raises KeyError if Git does not exist
+skills.discard("Java")     # Does nothing if Java does not exist
+
+removed = skills.pop()     # Removes and returns an arbitrary element
+
+print(removed)
+
 
 # Iteration
-for key in student:             # Keys
+
+for skill in skills:
+    print(skill)
+
+
+# Set Operations
+
+backend = {"Python", "SQL", "FastAPI", "PostgreSQL"}
+devops = {"Python", "Docker", "Git", "PostgreSQL"}
+
+common = backend & devops
+print(common)
+# {"Python", "PostgreSQL"}
+
+all_skills = backend | devops
+print(all_skills)
+
+backend_only = backend - devops
+print(backend_only)
+
+different = backend ^ devops
+print(different)
+
+
+# Set Comprehension
+
+squares = {x ** 2 for x in range(1, 6)}
+print(squares)
+
+even_squares = {
+    x ** 2
+    for x in range(1, 11)
+    if x % 2 == 0
+}
+
+
+# Duplicate Removal — Classic Use Case
+
+numbers = [10, 20, 10, 30, 20, 40, 30]
+
+unique_numbers = set(numbers)
+
+print(unique_numbers)
+# {10, 20, 30, 40}
+
+
+# Duplicate Detection — Classic DSA Pattern
+
+numbers = [10, 20, 30, 20, 40, 10]
+
+seen = set()
+
+for number in numbers:
+    if number in seen:
+        print("Duplicate:", number)
+    else:
+        seen.add(number)
+
+
+# Common Elements — DSA Pattern
+
+list_a = [1, 2, 3, 4, 5]
+list_b = [4, 5, 6, 7]
+
+common = set(list_a) & set(list_b)
+
+print(common)
+# {4, 5}
+
+
+# Required vs Available Skills
+
+required = {"Python", "SQL", "Git", "Docker"}
+available = {"Python", "SQL", "Git"}
+
+missing = required - available
+
+print(missing)
+# {"Docker"}
+`,
+resources: [
+  {
+    label: "Python Sets (Real Python)",
+    url: "https://realpython.com/python-sets/",
+    type: "article"
+  }
+],
+          },
+          {
+           title: "Dictionaries — Key-Value / O(1) Lookup",
+           type: "concept",
+           detail: "Dictionaries: mutable key-value mappings, unique hashable keys, fast average O(1) lookup, insertion, and deletion. Ideal for structured data, caching, counting, configuration, and mapping one value to another.",
+           subsections: [
+            {
+  heading: "Introduction to Dictionaries",
+  body: `A dictionary is a built-in Python collection that stores data as key-value pairs.
+
+Instead of accessing data by a numeric position like a list, a dictionary uses a key to identify its corresponding value.
+
+Example:
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+Here:
+
+"name" → key
+"Rahul" → value
+
+"age" → key
+21 → value
+
+"gpa" → key
+8.75 → value
+
+----------------------------------------
+Key Characteristics
+----------------------------------------
+
+A Python dictionary is:
+
+• Mutable — entries can be added, modified, and removed.
+• Key-value based — every entry associates a key with a value.
+• Keys are unique — a key can appear only once.
+• Keys must be hashable — commonly strings, numbers, tuples containing hashable elements, etc.
+• Values can be any Python object.
+• Insertion ordered — dictionaries preserve insertion order in modern Python.
+• Fast lookup — key lookup is O(1) average-case because dictionaries use hashing.
+
+----------------------------------------
+Dictionary vs List
+----------------------------------------
+
+List:
+
+students = ["Rahul", "Anita", "Kiran"]
+
+Access by position:
+
+students[0]
+
+Dictionary:
+
+students = {
+    101: "Rahul",
+    102: "Anita",
+    103: "Kiran"
+}
+
+Access by key:
+
+students[101]
+
+The key identifies the value directly.
+
+----------------------------------------
+Dictionary Mental Model
+----------------------------------------
+
+Think of a dictionary as:
+
+KEY
+  ↓
+VALUE
+
+"name" → "Rahul"
+"age"  → 21
+"gpa"  → 8.75
+
+The key is used to find the associated value.
+
+----------------------------------------
+Keys Must Be Unique
+----------------------------------------
+
+If the same key is written multiple times, the later value replaces the earlier value.
+
+student = {
+    "name": "Rahul",
+    "name": "Anita"
+}
+
+The resulting dictionary contains:
+
+"name": "Anita"
+
+A dictionary cannot store two separate values under the same key.
+
+----------------------------------------
+Values Can Be Duplicated
+----------------------------------------
+
+Different keys can have the same value.
+
+students = {
+    101: "Rahul",
+    102: "Rahul",
+    103: "Anita"
+}
+
+This is valid.
+
+Keys must be unique, but values do not have to be.
+
+----------------------------------------
+Dictionary Values Can Be Any Type
+----------------------------------------
+
+A value can be:
+
+• String
+• Integer
+• Float
+• List
+• Tuple
+• Set
+• Another dictionary
+• Custom object
+
+Example:
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "skills": ["Python", "SQL"],
+    "marks": {"math": 90, "python": 95}
+}
+
+This allows dictionaries to represent complex structured data.
+
+----------------------------------------
+Dictionary Keys Must Be Hashable
+----------------------------------------
+
+Valid keys:
+
+data = {
+    "name": "Rahul",
+    101: "Student",
+    (10, 20): "Coordinates"
+}
+
+A list cannot be a dictionary key:
+
+data = {
+    [1, 2]: "value"
+}
+
+This raises:
+
+TypeError: unhashable type: 'list'
+
+Mutable objects such as lists cannot be dictionary keys.
+
+----------------------------------------
+Dictionary Lookup
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student["name"])
+
+Output:
+
+Rahul
+
+The key "name" is used to retrieve its value.
+
+Average lookup complexity:
+
+O(1)
+
+----------------------------------------
+Dictionary Is Mutable
+----------------------------------------
+
+You can modify an existing value:
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student["age"] = 22
+
+The dictionary is changed in place.
+
+You can also add a new key:
+
+student["city"] = "Mumbai"
+
+----------------------------------------
+Dictionary Order
+----------------------------------------
+
+Modern Python dictionaries preserve insertion order.
+
+data = {}
+
+data["a"] = 1
+data["b"] = 2
+data["c"] = 3
+
+When iterated, the keys appear in insertion order.
+
+However, dictionaries should primarily be thought of as mappings from keys to values, not as positional collections.
+
+----------------------------------------
+Dictionary Membership
+----------------------------------------
+
+The in operator checks keys by default.
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print("name" in student)
+
+Output:
+
+True
+
+print("Rahul" in student)
+
+Output:
+
+False
+
+"Rahul" is a value, not a key.
+
+----------------------------------------
+Dictionary vs Set
+----------------------------------------
+
+Set:
+
+{"Python", "SQL", "Git"}
+
+Stores unique values.
+
+Dictionary:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+Stores key-value mappings.
+
+Mental model:
+
+Set:
+→ "Does this value exist?"
+
+Dictionary:
+→ "What value is associated with this key?"
+
+----------------------------------------
+Real-World Uses
+----------------------------------------
+
+Dictionaries are commonly used for:
+
+• User profiles
+• API responses
+• JSON data
+• Configuration
+• Caching
+• Counting frequencies
+• Database-like records
+• Lookup tables
+• Grouping data
+• Mapping IDs to objects
+
+Example:
+
+employee = {
+    "id": 101,
+    "name": "Rahul",
+    "department": "Engineering",
+    "skills": ["Python", "FastAPI"]
+}
+
+----------------------------------------
+Professional Definition
+----------------------------------------
+
+A Python dictionary is a mutable, insertion-ordered mapping that stores unique hashable keys associated with arbitrary values, providing average O(1) key-based lookup.
+
+This is the core mental model to remember:
+
+Dictionary
+→ Key → Value
+→ Unique hashable keys
+→ Mutable
+→ Average O(1) lookup
+→ Ideal for mappings and structured data.`,
+},
+{
+  heading: "Creating Dictionaries",
+  body: `Python provides several ways to create dictionaries. The most common approach is using curly braces with key-value pairs.
+
+----------------------------------------
+1. Creating a Dictionary with Curly Braces
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+print(student)
+
+Each entry follows:
+
+key: value
+
+Example:
+
+"name": "Rahul"
+
+----------------------------------------
+2. Creating an Empty Dictionary
+----------------------------------------
+
+Use:
+
+student = {}
+
+or:
+
+student = dict()
+
+Both create an empty dictionary.
+
+Important:
+
+{} → empty dictionary
+
+set() → empty set
+
+----------------------------------------
+3. Creating a Dictionary with One Key-Value Pair
+----------------------------------------
+
+student = {
+    "name": "Rahul"
+}
+
+This creates a dictionary containing one entry.
+
+----------------------------------------
+4. Creating a Dictionary with Different Value Types
+----------------------------------------
+
+Values can have different types:
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75,
+    "skills": ["Python", "SQL"],
+    "active": True
+}
+
+This is completely valid.
+
+----------------------------------------
+5. Creating a Dictionary with Integer Keys
+----------------------------------------
+
+student_marks = {
+    101: 85,
+    102: 90,
+    103: 78
+}
+
+Here the student IDs are keys.
+
+Access:
+
+print(student_marks[101])
+
+Output:
+
+85
+
+----------------------------------------
+6. Creating a Dictionary with Tuple Keys
+----------------------------------------
+
+Hashable tuples can be used as keys.
+
+locations = {
+    (10, 20): "Point A",
+    (30, 40): "Point B"
+}
+
+print(locations[(10, 20)])
+
+Output:
+
+Point A
+
+----------------------------------------
+7. Using dict()
+----------------------------------------
+
+The dict() constructor can create a dictionary.
+
+student = dict(name="Rahul", age=21, gpa=8.75)
+
+print(student)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+This syntax is convenient when the keys are valid Python identifiers.
+
+----------------------------------------
+8. Creating a Dictionary from a List of Pairs
+----------------------------------------
+
+dict() can convert an iterable containing key-value pairs.
+
+data = [
+    ("name", "Rahul"),
+    ("age", 21),
+    ("gpa", 8.75)
+]
+
+student = dict(data)
+
+print(student)
+
+The pairs become dictionary entries.
+
+----------------------------------------
+9. Creating a Dictionary from Two Lists
+----------------------------------------
+
+Use zip() to combine keys and values.
+
+keys = ["name", "age", "gpa"]
+values = ["Rahul", 21, 8.75]
+
+student = dict(zip(keys, values))
+
+print(student)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+----------------------------------------
+10. Creating a Dictionary with fromkeys()
+----------------------------------------
+
+fromkeys() creates a dictionary using a sequence of keys and one common initial value.
+
+keys = ["name", "age", "gpa"]
+
+student = dict.fromkeys(keys, None)
+
+print(student)
+
+Result:
+
+{
+    "name": None,
+    "age": None,
+    "gpa": None
+}
+
+This is useful when you need to initialize multiple keys.
+
+----------------------------------------
+11. Creating a Dictionary from a Set of Keys
+----------------------------------------
+
+keys = {"Python", "SQL", "Git"}
+
+skills = dict.fromkeys(keys, False)
+
+The resulting dictionary contains each key with False as its initial value.
+
+----------------------------------------
+12. Dictionary Comprehension
+----------------------------------------
+
+A dictionary can be created using comprehension syntax.
+
+squares = {
+    x: x ** 2
+    for x in range(1, 6)
+}
+
+Result:
+
+{
+    1: 1,
+    2: 4,
+    3: 9,
+    4: 16,
+    5: 25
+}
+
+General pattern:
+
+{key_expression: value_expression for item in iterable}
+
+----------------------------------------
+13. Creating a Dictionary with a Condition
+----------------------------------------
+
+You can filter entries while creating the dictionary.
+
+squares = {
+    x: x ** 2
+    for x in range(1, 11)
+    if x % 2 == 0
+}
+
+Result:
+
+{
+    2: 4,
+    4: 16,
+    6: 36,
+    8: 64,
+    10: 100
+}
+
+----------------------------------------
+14. Duplicate Keys
+----------------------------------------
+
+Dictionary keys must be unique.
+
+data = {
+    "name": "Rahul",
+    "name": "Anita"
+}
+
+The later value replaces the earlier value.
+
+Final result:
+
+{
+    "name": "Anita"
+}
+
+Values, however, can be duplicated.
+
+----------------------------------------
+15. Nested Dictionaries
+----------------------------------------
+
+A dictionary can contain another dictionary as a value.
+
+students = {
+    "student1": {
+        "name": "Rahul",
+        "age": 21
+    },
+    "student2": {
+        "name": "Anita",
+        "age": 22
+    }
+}
+
+This is called a nested dictionary.
+
+It is commonly used for structured data and JSON-like objects.
+
+----------------------------------------
+16. Real-World Example
+----------------------------------------
+
+employee = {
+    "id": 101,
+    "name": "Rahul",
+    "role": "Python Developer",
+    "skills": ["Python", "FastAPI", "PostgreSQL"],
+    "experience": 1
+}
+
+This represents a structured employee record.
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use:
+
+{} or dict()
+
+to create dictionaries.
+
+Use:
+
+dict(iterable)
+
+to convert key-value pairs into a dictionary.
+
+Use:
+
+dict.fromkeys()
+
+to initialize multiple keys.
+
+Use:
+
+{key: value for ...}
+
+when transformation or filtering is required.
+
+Core mental model:
+
+dictionary = {
+    key: value
+}
+
+Keys identify the data.
+
+Values store the data.
+
+Keys must be unique and hashable, while values can be any Python object.`,
+},
+{
+  heading: "Accessing Dictionary Elements — Key Lookup",
+  body: `Dictionary elements are accessed using their keys rather than numeric indexes.
+
+----------------------------------------
+1. Access a Value Using []
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+print(student["name"])
+
+Output:
+
+Rahul
+
+The key "name" is used to retrieve its associated value.
+
+----------------------------------------
+2. Access Numeric-Keyed Dictionaries
+----------------------------------------
+
+marks = {
+    101: 85,
+    102: 90,
+    103: 78
+}
+
+print(marks[101])
+
+Output:
+
+85
+
+Here 101 is a dictionary key, not a list index.
+
+----------------------------------------
+3. Missing Key with []
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student["phone"])
+
+This raises:
+
+KeyError
+
+Use [] when you expect the key to exist.
+
+----------------------------------------
+4. Safe Access with get()
+----------------------------------------
+
+get() allows you to access a value without raising KeyError when the key is missing.
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student.get("name"))
+
+Output:
+
+Rahul
+
+print(student.get("phone"))
+
+Output:
+
+None
+
+----------------------------------------
+5. get() with a Default Value
+----------------------------------------
+
+You can provide a fallback value:
+
+print(student.get("phone", "N/A"))
+
+Output:
+
+N/A
+
+The syntax is:
+
+dictionary.get(key, default)
+
+If the key exists:
+→ return its value.
+
+If the key does not exist:
+→ return the default value.
+
+----------------------------------------
+6. [] vs get()
+----------------------------------------
+
+Using []:
+
+student["phone"]
+
+Missing key:
+
+→ KeyError
+
+Using get():
+
+student.get("phone")
+
+Missing key:
+
+→ None
+
+Using:
+
+student.get("phone", "N/A")
+
+Missing key:
+
+→ "N/A"
+
+Professional rule:
+
+Use [] when the key is required.
+
+Use get() when the key may be missing.
+
+----------------------------------------
+7. Checking a Key Before Access
+----------------------------------------
+
+You can use in:
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+if "name" in student:
+    print(student["name"])
+
+Output:
+
+Rahul
+
+This explicitly checks whether the key exists.
+
+----------------------------------------
+8. Important: in Checks Keys
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print("name" in student)
+
+Output:
+
+True
+
+But:
+
+print("Rahul" in student)
+
+Output:
+
+False
+
+The in operator checks dictionary keys by default, not values.
+
+----------------------------------------
+9. Checking for a Value
+----------------------------------------
+
+To check values, use values():
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print("Rahul" in student.values())
+
+Output:
+
+True
+
+----------------------------------------
+10. Accessing Nested Dictionaries
+----------------------------------------
+
+Dictionaries can contain other dictionaries.
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 8.75
+    }
+}
+
+print(student["details"]["gpa"])
+
+Output:
+
+8.75
+
+The lookup happens in two stages:
+
+student["details"]
+        ↓
+nested dictionary
+
+["gpa"]
+        ↓
+8.75
+
+----------------------------------------
+11. Accessing Nested Lists
+----------------------------------------
+
+A dictionary value can also be a list.
+
+student = {
+    "name": "Rahul",
+    "skills": ["Python", "SQL", "FastAPI"]
+}
+
+print(student["skills"][0])
+
+Output:
+
+Python
+
+First access the dictionary key:
+
+student["skills"]
+
+Then access the list index:
+
+[0]
+
+----------------------------------------
+12. Chained Access
+----------------------------------------
+
+Complex structures can combine dictionaries and lists.
+
+data = {
+    "students": [
+        {"name": "Rahul", "age": 21},
+        {"name": "Anita", "age": 22}
+    ]
+}
+
+print(data["students"][1]["name"])
+
+Output:
+
+Anita
+
+The access path is:
+
+data
+ ↓
+"students"
+ ↓
+index 1
+ ↓
+"name"
+ ↓
+"Anita"
+
+----------------------------------------
+13. Dictionary Keys Can Be Variables
+----------------------------------------
+
+key = "name"
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student[key])
+
+Output:
+
+Rahul
+
+This is useful when the key is determined dynamically.
+
+----------------------------------------
+14. Dynamic Key Lookup
+----------------------------------------
+
+field = input("Enter field: ")
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student.get(field, "Field not found"))
+
+This allows the program to determine which dictionary field to access at runtime.
+
+----------------------------------------
+15. Accessing All Keys
+----------------------------------------
+
+Use keys():
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+print(student.keys())
+
+This provides a dynamic view of the dictionary's keys.
+
+----------------------------------------
+16. Accessing All Values
+----------------------------------------
+
+Use values():
+
+print(student.values())
+
+This provides a dynamic view containing the dictionary's values.
+
+----------------------------------------
+17. Accessing Key-Value Pairs
+----------------------------------------
+
+Use items():
+
+print(student.items())
+
+This provides key-value pairs that can be iterated over.
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+List:
+
+list[0]
+
+→ access by position.
+
+Dictionary:
+
+dictionary["key"]
+
+→ access by key.
+
+Set:
+
+value in set
+
+→ membership testing.
+
+The key difference:
+
+List
+→ Position → Value
+
+Dictionary
+→ Key → Value
+
+Set
+→ Value → Membership
+
+----------------------------------------
+Professional Rule
+----------------------------------------
+
+Use:
+
+dictionary[key]
+
+when the key is expected to exist.
+
+Use:
+
+dictionary.get(key)
+
+when the key may not exist.
+
+Use:
+
+dictionary.get(key, default)
+
+when you want a safe fallback.
+
+Use:
+
+key in dictionary
+
+when you need to explicitly check key existence.
+
+The most important dictionary access pattern is:
+
+value = dictionary.get(key, default)
+
+because real-world data such as API responses, JSON, configuration files, and user input may not always contain every expected key.`,
+},
+{
+  heading: "Adding & Updating Dictionary Elements — Assignment and update()",
+  body: `Dictionaries are mutable, so you can add new key-value pairs and modify existing values after the dictionary has been created.
+
+----------------------------------------
+1. Add a New Key-Value Pair
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student["gpa"] = 8.75
+
+print(student)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+If the key does not exist, assignment creates a new entry.
+
+----------------------------------------
+2. Update an Existing Value
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student["age"] = 22
+
+print(student["age"])
+
+Output:
+
+22
+
+If the key already exists, assignment replaces its value.
+
+----------------------------------------
+3. Same Syntax, Two Behaviors
+----------------------------------------
+
+student["city"] = "Mumbai"
+
+→ New key → adds an entry.
+
+student["age"] = 22
+
+→ Existing key → updates its value.
+
+Therefore:
+
+dictionary[key] = value
+
+means:
+
+"If the key exists → update it.
+
+If the key does not exist → add it."
+
+----------------------------------------
+4. Adding Multiple Entries with update()
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student.update({
+    "gpa": 8.75,
+    "city": "Mumbai"
+})
+
+print(student)
+
+The new keys are added to the dictionary.
+
+----------------------------------------
+5. update() Can Modify Existing Keys
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student.update({
+    "age": 22,
+    "gpa": 8.75
+})
+
+"age" already exists, so its value becomes 22.
+
+"gpa" does not exist, so it is added.
+
+----------------------------------------
+6. update() with Keyword Arguments
+----------------------------------------
+
+You can also write:
+
+student.update(
+    age=22,
+    city="Mumbai"
+)
+
+This works when the keys are valid Python identifiers.
+
+----------------------------------------
+7. update() with Another Dictionary
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+details = {
+    "age": 22,
+    "gpa": 8.75
+}
+
+student.update(details)
+
+The values from details are added or replace existing values.
+
+----------------------------------------
+8. update() with Key-Value Pairs
+----------------------------------------
+
+student.update([
+    ("city", "Mumbai"),
+    ("experience", 1)
+])
+
+This also adds the specified entries.
+
+----------------------------------------
+9. Updating from Another Mapping
+----------------------------------------
+
+Dictionaries can be updated from another mapping-like object.
+
+student.update({
+    "role": "Python Developer"
+})
+
+The dictionary is modified in place.
+
+----------------------------------------
+10. Updating Multiple Values Individually
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.0
+}
+
+student["age"] = 22
+student["gpa"] = 8.75
+student["city"] = "Mumbai"
+
+This is useful when each value is calculated independently.
+
+----------------------------------------
+11. Updating Nested Dictionary Values
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 8.0
+    }
+}
+
+student["details"]["gpa"] = 8.75
+
+Only the nested "gpa" value is changed.
+
+----------------------------------------
+12. Adding to a Nested Dictionary
+----------------------------------------
+
+student["details"]["city"] = "Mumbai"
+
+Now the nested dictionary contains:
+
+{
+    "age": 21,
+    "gpa": 8.75,
+    "city": "Mumbai"
+}
+
+----------------------------------------
+13. Updating a Dictionary Inside a List
+----------------------------------------
+
+students = [
+    {"name": "Rahul", "age": 21},
+    {"name": "Anita", "age": 22}
+]
+
+students[0]["age"] = 22
+
+The first student's age is updated.
+
+----------------------------------------
+14. update() Does Not Return the Dictionary
+----------------------------------------
+
+student = {"name": "Rahul"}
+
+result = student.update({"age": 21})
+
+print(result)
+
+Output:
+
+None
+
+The dictionary itself is modified.
+
+This is important:
+
+student.update(...)
+
+is a mutation operation.
+
+Do not expect update() to return the updated dictionary.
+
+----------------------------------------
+15. Assignment vs update()
+----------------------------------------
+
+Use assignment when changing or adding one entry:
+
+student["age"] = 22
+
+Use update() when changing or adding multiple entries:
+
+student.update({
+    "age": 22,
+    "gpa": 8.75,
+    "city": "Mumbai"
+})
+
+----------------------------------------
+16. Important Key Behavior
+----------------------------------------
+
+Dictionary keys remain unique.
+
+student = {
+    "name": "Rahul"
+}
+
+student["name"] = "Anita"
+
+The dictionary does NOT contain two "name" entries.
+
+The old value is replaced:
+
+{
+    "name": "Anita"
+}
+
+----------------------------------------
+17. Real-World Example — API Data
+----------------------------------------
+
+user = {
+    "id": 101,
+    "name": "Rahul"
+}
+
+user.update({
+    "email": "rahul@example.com",
+    "active": True
+})
+
+This pattern is common when constructing or enriching structured data.
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+dictionary[key] = value
+
+→ Add if key is new.
+
+→ Update if key already exists.
+
+dictionary.update({...})
+
+→ Add or update multiple key-value pairs.
+
+Remember:
+
+ADD:
+student["gpa"] = 8.75
+
+UPDATE:
+student["age"] = 22
+
+MULTIPLE:
+student.update({
+    "age": 22,
+    "gpa": 8.75
+})
+
+This is the fundamental mutation pattern for Python dictionaries.`,
+},
+{
+  heading: "Removing Dictionary Elements — del, pop(), popitem() and clear()",
+  body: `Python provides several ways to remove entries from a dictionary. The main methods are del, pop(), popitem(), and clear().
+
+----------------------------------------
+1. del — Remove a Specific Key
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+del student["gpa"]
+
+print(student)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+del removes the key-value pair completely.
+
+----------------------------------------
+2. del with a Missing Key
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+del student["phone"]
+
+This raises:
+
+KeyError
+
+Use del when you expect the key to exist.
+
+----------------------------------------
+3. pop() — Remove and Return a Value
+----------------------------------------
+
+pop() removes a specified key and returns its value.
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+gpa = student.pop("gpa")
+
+print(gpa)
+
+Output:
+
+8.75
+
+The dictionary no longer contains "gpa".
+
+----------------------------------------
+4. pop() with a Default Value
+----------------------------------------
+
+You can provide a default value when the key might not exist.
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+phone = student.pop("phone", "N/A")
+
+print(phone)
+
+Output:
+
+N/A
+
+No KeyError is raised.
+
+Syntax:
+
+dictionary.pop(key, default)
+
+----------------------------------------
+5. pop() Without a Default
+----------------------------------------
+
+If the key does not exist and no default is provided:
+
+student.pop("phone")
+
+Python raises:
+
+KeyError
+
+Therefore:
+
+pop(key)
+→ error if missing
+
+pop(key, default)
+→ safe fallback if missing
+
+----------------------------------------
+6. popitem() — Remove the Last Inserted Pair
+----------------------------------------
+
+popitem() removes and returns the last inserted key-value pair.
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+item = student.popitem()
+
+print(item)
+
+Output:
+
+("gpa", 8.75)
+
+The returned object is a tuple:
+
+(key, value)
+
+----------------------------------------
+7. popitem() and Dictionary Order
+----------------------------------------
+
+Modern Python dictionaries preserve insertion order.
+
+Therefore popitem() removes the last inserted entry.
+
+student = {}
+
+student["a"] = 10
+student["b"] = 20
+student["c"] = 30
+
+print(student.popitem())
+
+Output:
+
+("c", 30)
+
+The dictionary now contains:
+
+{
+    "a": 10,
+    "b": 20
+}
+
+----------------------------------------
+8. popitem() on an Empty Dictionary
+----------------------------------------
+
+student = {}
+
+student.popitem()
+
+This raises:
+
+KeyError
+
+because there is no item to remove.
+
+----------------------------------------
+9. clear() — Remove Everything
+----------------------------------------
+
+clear() removes all key-value pairs.
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+student.clear()
+
+print(student)
+
+Output:
+
+{}
+
+The dictionary still exists, but it is empty.
+
+----------------------------------------
+10. clear() vs del
+----------------------------------------
+
+clear():
+
+student.clear()
+
+→ Removes all entries.
+
+The dictionary object still exists.
+
+del:
+
+del student
+
+→ Deletes the variable binding itself.
+
+After:
+
+del student
+
+using student causes:
+
+NameError
+
+Mental model:
+
+clear()
+→ Empty the dictionary.
+
+del dictionary
+→ Delete the variable reference.
+
+----------------------------------------
+11. del vs pop()
+----------------------------------------
+
+del:
+
+del student["age"]
+
+→ Removes the key-value pair.
+→ Does not return the removed value.
+
+pop():
+
+age = student.pop("age")
+
+→ Removes the key-value pair.
+→ Returns the removed value.
+
+Use pop() when you need the value.
+
+----------------------------------------
+12. pop() vs popitem()
+----------------------------------------
+
+pop():
+
+student.pop("age")
+
+→ You specify the key.
+
+popitem():
+
+student.popitem()
+
+→ Python removes the last inserted pair.
+
+pop() returns:
+
+value
+
+popitem() returns:
+
+(key, value)
+
+----------------------------------------
+13. Removing Multiple Known Keys
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75,
+    "city": "Mumbai"
+}
+
+for key in ["gpa", "city"]:
+    student.pop(key, None)
+
+print(student)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+Using a default prevents KeyError if a key is missing.
+
+----------------------------------------
+14. Do Not Modify Dictionary Size During Iteration
+----------------------------------------
+
+Avoid:
+
+student = {
+    "a": 1,
+    "b": 2,
+    "c": 3
+}
+
+for key in student:
+    del student[key]
+
+This can raise:
+
+RuntimeError: dictionary changed size during iteration
+
+Instead, iterate over a separate list of keys:
+
+for key in list(student):
+    del student[key]
+
+----------------------------------------
+15. Practical Example — Removing Temporary Data
+----------------------------------------
+
+user = {
+    "id": 101,
+    "name": "Rahul",
+    "temporary_token": "ABC123"
+}
+
+token = user.pop("temporary_token", None)
+
+print(token)
+
+The temporary value is removed while still being available through token.
+
+----------------------------------------
+16. Removal Methods Summary
+----------------------------------------
+
+del dictionary[key]
+
+→ Remove a specific key.
+→ Returns nothing.
+→ KeyError if missing.
+
+dictionary.pop(key)
+
+→ Remove a specific key.
+→ Returns its value.
+→ KeyError if missing.
+
+dictionary.pop(key, default)
+
+→ Remove a specific key safely.
+→ Returns default if missing.
+
+dictionary.popitem()
+
+→ Remove and return the last inserted (key, value) pair.
+
+dictionary.clear()
+
+→ Remove all entries.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Need to remove a specific key?
+
+→ del dictionary[key]
+
+Need the removed value?
+
+→ dictionary.pop(key)
+
+Key may not exist?
+
+→ dictionary.pop(key, default)
+
+Need the last inserted pair?
+
+→ dictionary.popitem()
+
+Need to empty everything?
+
+→ dictionary.clear()
+
+The key distinction to remember:
+
+del
+→ delete
+
+pop()
+→ delete + return value
+
+popitem()
+→ delete last pair + return pair
+
+clear()
+→ delete everything`,
+},
+{
+  heading: "Dictionary Iteration — keys(), values(), items() and for Loops",
+  body: `Dictionaries can be iterated in several ways depending on whether you need keys, values, or both key-value pairs.
+
+----------------------------------------
+1. Iterating Over a Dictionary
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+for key in student:
     print(key)
-for val in student.values():    # Values
-    print(val)
-for k, v in student.items():   # Both
-    print(f"{k}: {v}")
 
-# Dict comprehension
-squares = {x: x**2 for x in range(1, 6)}
-filtered = {k: v for k, v in squares.items() if v > 4}
+Output:
 
-# Word frequency — classic interview problem
-text = "the cat sat on the mat the cat"
+name
+age
+gpa
+
+By default, iterating over a dictionary gives its keys.
+
+----------------------------------------
+2. Iterating Over Keys — keys()
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+for key in student.keys():
+    print(key)
+
+This explicitly asks for the dictionary's keys.
+
+----------------------------------------
+3. Iterating Over Values — values()
+----------------------------------------
+
+for value in student.values():
+    print(value)
+
+Output:
+
+Rahul
+21
+8.75
+
+Use values() when you do not need the keys.
+
+----------------------------------------
+4. Iterating Over Key-Value Pairs — items()
+----------------------------------------
+
+for key, value in student.items():
+    print(key, value)
+
+Output:
+
+name Rahul
+age 21
+gpa 8.75
+
+items() provides each entry as a key-value pair.
+
+----------------------------------------
+5. Unpacking items()
+----------------------------------------
+
+Each item behaves like:
+
+(key, value)
+
+So:
+
+for key, value in student.items():
+
+automatically unpacks the pair into two variables.
+
+Example:
+
+for key, value in student.items():
+    print(f"{key}: {value}")
+
+Output:
+
+name: Rahul
+age: 21
+gpa: 8.75
+
+----------------------------------------
+6. Iterating with Conditions
+----------------------------------------
+
+You can filter dictionary entries while iterating.
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+for key, value in student.items():
+    if isinstance(value, (int, float)):
+        print(key, value)
+
+This processes only numeric values.
+
+----------------------------------------
+7. Checking Keys During Iteration
+----------------------------------------
+
+for key in student:
+    if key == "age":
+        print(student[key])
+
+Output:
+
+21
+
+----------------------------------------
+8. Modifying Values During Iteration
+----------------------------------------
+
+You can update existing values while iterating over a dictionary's keys, provided you are not changing the dictionary's size.
+
+scores = {
+    "Rahul": 80,
+    "Anita": 90,
+    "Kiran": 75
+}
+
+for name in scores:
+    scores[name] += 5
+
+print(scores)
+
+Result:
+
+{
+    "Rahul": 85,
+    "Anita": 95,
+    "Kiran": 80
+}
+
+The number of dictionary entries remains unchanged.
+
+----------------------------------------
+9. Do Not Add or Remove Keys During Direct Iteration
+----------------------------------------
+
+Avoid:
+
+for key in student:
+    student["new_key"] = 10
+
+Changing the dictionary's size during iteration can raise:
+
+RuntimeError: dictionary changed size during iteration
+
+If you need to add or remove entries, iterate over a separate list or create a new dictionary.
+
+----------------------------------------
+10. Safe Filtering During Iteration
+----------------------------------------
+
+Instead of deleting directly:
+
+data = {
+    "a": 10,
+    "b": 20,
+    "c": 30
+}
+
+keys_to_remove = [
+    key for key, value in data.items()
+    if value < 25
+]
+
+for key in keys_to_remove:
+    del data[key]
+
+The dictionary can now be safely modified.
+
+----------------------------------------
+11. Iterating in Insertion Order
+----------------------------------------
+
+Modern Python dictionaries preserve insertion order.
+
+data = {
+    "first": 1,
+    "second": 2,
+    "third": 3
+}
+
+for key, value in data.items():
+    print(key, value)
+
+Output follows the insertion order:
+
+first 1
+second 2
+third 3
+
+----------------------------------------
+12. Iterating in Sorted Key Order
+----------------------------------------
+
+You can explicitly sort keys:
+
+student = {
+    "z": 10,
+    "a": 20,
+    "m": 30
+}
+
+for key in sorted(student):
+    print(key, student[key])
+
+Output:
+
+a 20
+m 30
+z 10
+
+sorted() returns the keys in sorted order.
+
+----------------------------------------
+13. Iterating in Reverse Order
+----------------------------------------
+
+Use reversed():
+
+for key in reversed(student):
+    print(key)
+
+This iterates through the dictionary's keys in reverse insertion order.
+
+----------------------------------------
+14. Enumerating Dictionary Items
+----------------------------------------
+
+You can combine enumerate() with items():
+
+for index, (key, value) in enumerate(student.items()):
+    print(index, key, value)
+
+Example output:
+
+0 name Rahul
+1 age 21
+2 gpa 8.75
+
+This is useful when you need both an iteration counter and the dictionary data.
+
+----------------------------------------
+15. Creating a List of Keys
+----------------------------------------
+
+keys = list(student.keys())
+
+print(keys)
+
+This creates a separate list containing the keys.
+
+----------------------------------------
+16. Creating a List of Values
+----------------------------------------
+
+values = list(student.values())
+
+print(values)
+
+This creates a list containing the values.
+
+----------------------------------------
+17. Creating a List of Key-Value Pairs
+----------------------------------------
+
+items = list(student.items())
+
+print(items)
+
+The result looks like:
+
+[
+    ("name", "Rahul"),
+    ("age", 21),
+    ("gpa", 8.75)
+]
+
+----------------------------------------
+18. Real-World Example — Employee Data
+----------------------------------------
+
+employee = {
+    "name": "Rahul",
+    "department": "Engineering",
+    "experience": 2,
+    "skills": ["Python", "FastAPI"]
+}
+
+for key, value in employee.items():
+    print(f"{key}: {value}")
+
+This is useful when displaying or processing structured records.
+
+----------------------------------------
+19. The Three Main Iteration Patterns
+----------------------------------------
+
+Keys only:
+
+for key in dictionary:
+    ...
+
+or:
+
+for key in dictionary.keys():
+    ...
+
+Values only:
+
+for value in dictionary.values():
+    ...
+
+Keys + values:
+
+for key, value in dictionary.items():
+    ...
+
+Professional rule:
+
+Need the key?
+→ keys()
+
+Need only the value?
+→ values()
+
+Need both?
+→ items()
+
+----------------------------------------
+20. Complexity
+----------------------------------------
+
+Iterating through:
+
+dictionary
+
+dictionary.keys()
+
+dictionary.values()
+
+dictionary.items()
+
+is generally:
+
+O(n)
+
+because each dictionary entry may need to be visited.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Dictionary:
+
+{
+    key1: value1,
+    key2: value2,
+    key3: value3
+}
+
+Iteration:
+
+for key in dictionary
+→ keys
+
+for value in dictionary.values()
+→ values
+
+for key, value in dictionary.items()
+→ key + value
+
+The most important pattern to remember is:
+
+for key, value in dictionary.items():
+    print(key, value)
+
+This is the standard pattern for processing dictionary records in Python.`,
+},
+{
+  heading: "Dictionary Methods — keys(), values(), items(), get() and setdefault()",
+  body: `Python dictionaries provide built-in methods for safely accessing, inspecting, and managing key-value data.
+
+----------------------------------------
+1. keys() — Get All Keys
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+print(student.keys())
+
+The result is a dynamic view of the dictionary's keys.
+
+You can iterate over it:
+
+for key in student.keys():
+    print(key)
+
+----------------------------------------
+2. values() — Get All Values
+----------------------------------------
+
+print(student.values())
+
+Iterate through values:
+
+for value in student.values():
+    print(value)
+
+Use values() when the keys are not needed.
+
+----------------------------------------
+3. items() — Get Key-Value Pairs
+----------------------------------------
+
+print(student.items())
+
+Iterate through both:
+
+for key, value in student.items():
+    print(key, value)
+
+Each item behaves like:
+
+(key, value)
+
+----------------------------------------
+4. get() — Safe Key Access
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(student.get("name"))
+
+Output:
+
+Rahul
+
+Missing key:
+
+print(student.get("phone"))
+
+Output:
+
+None
+
+----------------------------------------
+5. get() with a Default
+----------------------------------------
+
+print(student.get("phone", "N/A"))
+
+Output:
+
+N/A
+
+Syntax:
+
+dictionary.get(key, default)
+
+This is useful when a key may not exist.
+
+----------------------------------------
+6. setdefault() — Get or Create a Key
+----------------------------------------
+
+setdefault() checks whether a key exists.
+
+If the key exists:
+
+→ return its existing value.
+
+If the key does not exist:
+
+→ create the key with the supplied default value
+→ return that default value.
+
+Example:
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+result = student.setdefault("gpa", 8.75)
+
+print(result)
+
+Output:
+
+8.75
+
+The dictionary now contains:
+
+"gpa": 8.75
+
+----------------------------------------
+7. setdefault() When Key Already Exists
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+result = student.setdefault("age", 25)
+
+print(result)
+
+Output:
+
+21
+
+The existing value is preserved.
+
+The default value 25 does NOT replace 21.
+
+----------------------------------------
+8. get() vs setdefault()
+----------------------------------------
+
+get():
+
+student.get("gpa", 8.75)
+
+→ Reads the value.
+
+→ Does NOT add "gpa".
+
+setdefault():
+
+student.setdefault("gpa", 8.75)
+
+→ Reads the value.
+
+→ Adds "gpa" if it does not exist.
+
+This distinction is very important.
+
+----------------------------------------
+9. setdefault() — Classic Counting Pattern
+----------------------------------------
+
+setdefault() can initialize a value when a key is missing.
+
+data = {}
+
+data.setdefault("Python", 0)
+data["Python"] += 1
+
+print(data)
+
+Output:
+
+{"Python": 1}
+
+However, for simple frequency counting, get() is often clearer:
+
+data["Python"] = data.get("Python", 0) + 1
+
+----------------------------------------
+10. setdefault() — Grouping Data
+----------------------------------------
+
+students = {}
+
+students.setdefault("Python", []).append("Rahul")
+students.setdefault("Python", []).append("Anita")
+students.setdefault("SQL", []).append("Kiran")
+
+print(students)
+
+Result:
+
+{
+    "Python": ["Rahul", "Anita"],
+    "SQL": ["Kiran"]
+}
+
+This is a useful real-world and DSA pattern.
+
+----------------------------------------
+11. Dynamic Views
+----------------------------------------
+
+keys():
+
+student.keys()
+
+values():
+
+student.values()
+
+items():
+
+student.items()
+
+These are view objects rather than ordinary lists.
+
+If you need a list:
+
+list(student.keys())
+
+list(student.values())
+
+list(student.items())
+
+----------------------------------------
+12. keys() View Updates with the Dictionary
+----------------------------------------
+
+student = {
+    "name": "Rahul"
+}
+
+keys = student.keys()
+
+student["age"] = 21
+
+print(keys)
+
+The keys view reflects the updated dictionary.
+
+This is why dictionary views are called dynamic views.
+
+----------------------------------------
+13. Checking Whether a Key Exists
+----------------------------------------
+
+Use:
+
+if "name" in student:
+    print("Key exists")
+
+This is usually clearer than converting keys to a list.
+
+Avoid unnecessarily doing:
+
+if "name" in list(student.keys()):
+
+The direct membership test is simpler.
+
+----------------------------------------
+14. Checking Whether a Value Exists
+----------------------------------------
+
+Use values():
+
+if "Rahul" in student.values():
+    print("Value exists")
+
+Remember:
+
+"name" in student
+
+checks keys.
+
+"Rahul" in student.values()
+
+checks values.
+
+----------------------------------------
+15. Checking Whether a Key-Value Pair Exists
+----------------------------------------
+
+Use items():
+
+if ("name", "Rahul") in student.items():
+    print("Pair exists")
+
+This checks the complete key-value pair.
+
+----------------------------------------
+16. Method Summary
+----------------------------------------
+
+keys()
+
+→ Dictionary keys
+
+values()
+
+→ Dictionary values
+
+items()
+
+→ Key-value pairs
+
+get(key)
+
+→ Safe lookup
+
+get(key, default)
+
+→ Safe lookup with fallback
+
+setdefault(key, default)
+
+→ Get existing value or create the key
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+keys()
+→ "What keys exist?"
+
+values()
+→ "What values exist?"
+
+items()
+→ "What key-value pairs exist?"
+
+get()
+→ "Give me this value safely."
+
+setdefault()
+→ "Give me this value; if the key doesn't exist, create it with this default."
+
+The most important distinction:
+
+get()
+→ READ safely
+
+setdefault()
+→ READ + potentially CREATE
+
+These methods form the core toolkit for accessing and managing dictionary data efficiently.`,
+},
+{
+  heading: "Dictionary Comprehensions",
+  body: `Dictionary comprehensions provide a concise way to create dictionaries from iterables.
+
+They are especially useful when you need to transform, filter, or generate key-value pairs.
+
+----------------------------------------
+1. Basic Syntax
+----------------------------------------
+
+The general syntax is:
+
+{key_expression: value_expression for item in iterable}
+
+Example:
+
+squares = {
+    x: x ** 2
+    for x in range(1, 6)
+}
+
+print(squares)
+
+Output:
+
+{
+    1: 1,
+    2: 4,
+    3: 9,
+    4: 16,
+    5: 25
+}
+
+----------------------------------------
+2. Creating Key-Value Mappings
+----------------------------------------
+
+numbers = range(1, 6)
+
+cubes = {
+    x: x ** 3
+    for x in numbers
+}
+
+Result:
+
+{
+    1: 1,
+    2: 8,
+    3: 27,
+    4: 64,
+    5: 125
+}
+
+The expression before : becomes the key.
+
+The expression after : becomes the value.
+
+----------------------------------------
+3. Dictionary Comprehension with a Condition
+----------------------------------------
+
+You can filter entries using if.
+
+even_squares = {
+    x: x ** 2
+    for x in range(1, 11)
+    if x % 2 == 0
+}
+
+Output:
+
+{
+    2: 4,
+    4: 16,
+    6: 36,
+    8: 64,
+    10: 100
+}
+
+General pattern:
+
+{key: value for item in iterable if condition}
+
+----------------------------------------
+4. Transforming an Existing Dictionary
+----------------------------------------
+
+prices = {
+    "laptop": 50000,
+    "phone": 30000,
+    "tablet": 20000
+}
+
+discounted = {
+    product: price * 0.9
+    for product, price in prices.items()
+}
+
+The keys remain the same while the values are transformed.
+
+----------------------------------------
+5. Filtering an Existing Dictionary
+----------------------------------------
+
+prices = {
+    "laptop": 50000,
+    "phone": 30000,
+    "tablet": 20000
+}
+
+expensive = {
+    product: price
+    for product, price in prices.items()
+    if price >= 30000
+}
+
+Result:
+
+{
+    "laptop": 50000,
+    "phone": 30000
+}
+
+----------------------------------------
+6. Transforming Keys
+----------------------------------------
+
+student_marks = {
+    "rahul": 90,
+    "anita": 85,
+    "kiran": 95
+}
+
+uppercase = {
+    name.upper(): marks
+    for name, marks in student_marks.items()
+}
+
+Result:
+
+{
+    "RAHUL": 90,
+    "ANITA": 85,
+    "KIRAN": 95
+}
+
+----------------------------------------
+7. Transforming Both Keys and Values
+----------------------------------------
+
+student_marks = {
+    "rahul": 90,
+    "anita": 85
+}
+
+result = {
+    name.upper(): marks + 5
+    for name, marks in student_marks.items()
+}
+
+Result:
+
+{
+    "RAHUL": 95,
+    "ANITA": 90
+}
+
+Both the key and value are transformed.
+
+----------------------------------------
+8. Conditional Expression
+----------------------------------------
+
+You can use an if-else expression inside the value.
+
+numbers = range(1, 6)
+
+result = {
+    x: "even" if x % 2 == 0 else "odd"
+    for x in numbers
+}
+
+Result:
+
+{
+    1: "odd",
+    2: "even",
+    3: "odd",
+    4: "even",
+    5: "odd"
+}
+
+Notice the difference:
+
+Filtering:
+
+if condition
+
+Conditional value:
+
+value_if_true if condition else value_if_false
+
+----------------------------------------
+9. Dictionary Comprehension from Two Lists
+----------------------------------------
+
+keys = ["name", "age", "city"]
+values = ["Rahul", 21, "Mumbai"]
+
+student = {
+    key: value
+    for key, value in zip(keys, values)
+}
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21,
+    "city": "Mumbai"
+}
+
+----------------------------------------
+10. Swapping Keys and Values
+----------------------------------------
+
+data = {
+    "Python": "Programming",
+    "SQL": "Database",
+    "FastAPI": "Backend"
+}
+
+swapped = {
+    value: key
+    for key, value in data.items()
+}
+
+Result:
+
+{
+    "Programming": "Python",
+    "Database": "SQL",
+    "Backend": "FastAPI"
+}
+
+This is safe only when the new keys are unique and hashable.
+
+----------------------------------------
+11. Set-Based Example
+----------------------------------------
+
+skills = {"Python", "SQL", "Git"}
+
+skill_lengths = {
+    skill: len(skill)
+    for skill in skills
+}
+
+Result:
+
+{
+    "Python": 6,
+    "SQL": 3,
+    "Git": 3
+}
+
+----------------------------------------
+12. Nested Dictionary Comprehension
+----------------------------------------
+
+You can generate nested dictionaries.
+
+matrix = {
+    i: {
+        j: i * j
+        for j in range(1, 4)
+    }
+    for i in range(1, 4)
+}
+
+Result:
+
+{
+    1: {1: 1, 2: 2, 3: 3},
+    2: {1: 2, 2: 4, 3: 6},
+    3: {1: 3, 2: 6, 3: 9}
+}
+
+Nested comprehensions are powerful but should remain readable.
+
+----------------------------------------
+13. Dictionary Comprehension vs Loop
+----------------------------------------
+
+Traditional loop:
+
+squares = {}
+
+for x in range(1, 6):
+    squares[x] = x ** 2
+
+Dictionary comprehension:
+
+squares = {
+    x: x ** 2
+    for x in range(1, 6)
+}
+
+Both produce the same result.
+
+The comprehension is more concise.
+
+----------------------------------------
+14. Real-World Example — Employee Salaries
+----------------------------------------
+
+employees = {
+    "Rahul": 40000,
+    "Anita": 50000,
+    "Kiran": 35000
+}
+
+high_salary = {
+    name: salary
+    for name, salary in employees.items()
+    if salary >= 40000
+}
+
+Result:
+
+{
+    "Rahul": 40000,
+    "Anita": 50000
+}
+
+----------------------------------------
+15. Real-World Example — Converting Data
+----------------------------------------
+
+names = ["Rahul", "Anita", "Kiran"]
+
+name_lengths = {
+    name: len(name)
+    for name in names
+}
+
+Result:
+
+{
+    "Rahul": 5,
+    "Anita": 5,
+    "Kiran": 5
+}
+
+----------------------------------------
+16. Important: Duplicate Keys
+----------------------------------------
+
+Dictionary comprehensions still follow normal dictionary rules.
+
+data = [1, 2, 3, 4]
+
+result = {
+    x % 2: x
+    for x in data
+}
+
+The possible keys are only:
+
+0
+1
+
+Therefore later values overwrite earlier values.
+
+A dictionary cannot contain duplicate keys.
+
+----------------------------------------
+17. When to Use Dictionary Comprehensions
+----------------------------------------
+
+Use them when you need to:
+
+• Create key-value mappings
+• Transform dictionary data
+• Filter dictionary entries
+• Convert one collection into a dictionary
+• Generate structured lookup data
+
+----------------------------------------
+18. When NOT to Use Them
+----------------------------------------
+
+Avoid very complicated comprehensions.
+
+If the comprehension contains multiple nested loops, complicated conditions, or difficult expressions, a normal for loop may be easier to read and maintain.
+
+Readable code is more important than making everything a one-liner.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+List comprehension:
+
+[expression for item in iterable]
+
+Set comprehension:
+
+{expression for item in iterable}
+
+Dictionary comprehension:
+
+{key: value for item in iterable}
+
+The key difference is:
+
+List
+→ one output value
+
+Set
+→ one unique output value
+
+Dictionary
+→ key + value
+
+Core pattern:
+
+{
+    key_expression: value_expression
+    for item in iterable
+    if condition
+}
+
+Dictionary comprehensions are one of the most useful Python tools for concise data transformation and filtering.`,
+},
+{
+  heading: "Dictionary Unpacking & Merging — **",
+  body: `Python provides the ** operator for unpacking dictionary key-value pairs. It is useful for combining dictionaries, creating new dictionaries from existing data, and passing dictionary data into functions.
+
+----------------------------------------
+1. Basic Dictionary Unpacking
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+data = {
+    **student
+}
+
+print(data)
+
+Output:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+The ** operator takes all key-value pairs from student and places them into the new dictionary.
+
+----------------------------------------
+2. Merging Two Dictionaries
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+details = {
+    "city": "Mumbai",
+    "gpa": 8.75
+}
+
+combined = {
+    **student,
+    **details
+}
+
+print(combined)
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 21,
+    "city": "Mumbai",
+    "gpa": 8.75
+}
+
+----------------------------------------
+3. Duplicate Keys During Merging
+----------------------------------------
+
+If dictionaries contain the same key, the value appearing later wins.
+
+first = {
+    "name": "Rahul",
+    "age": 21
+}
+
+second = {
+    "age": 22,
+    "city": "Mumbai"
+}
+
+combined = {
+    **first,
+    **second
+}
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 22,
+    "city": "Mumbai"
+}
+
+The later "age": 22 replaces "age": 21.
+
+----------------------------------------
+4. Order of Unpacking Matters
+----------------------------------------
+
+first = {"role": "Developer"}
+second = {"role": "Engineer"}
+
+result = {
+    **first,
+    **second
+}
+
+print(result)
+
+Output:
+
+{
+    "role": "Engineer"
+}
+
+Reverse them:
+
+result = {
+    **second,
+    **first
+}
+
+Now:
+
+{
+    "role": "Developer"
+}
+
+Professional rule:
+
+Later values override earlier values when keys collide.
+
+----------------------------------------
+5. Creating a New Dictionary Without Modifying Originals
+----------------------------------------
+
+base = {
+    "name": "Rahul",
+    "age": 21
+}
+
+updated = {
+    **base,
+    "age": 22,
+    "city": "Mumbai"
+}
+
+print(base)
+
+Output:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+print(updated)
+
+Output:
+
+{
+    "name": "Rahul",
+    "age": 22,
+    "city": "Mumbai"
+}
+
+The original dictionary is unchanged.
+
+This is useful when you want to create modified data without mutating the original object.
+
+----------------------------------------
+6. Merging Multiple Dictionaries
+----------------------------------------
+
+personal = {
+    "name": "Rahul"
+}
+
+education = {
+    "degree": "B.Tech",
+    "branch": "CSE"
+}
+
+career = {
+    "role": "Python Developer",
+    "experience": 1
+}
+
+profile = {
+    **personal,
+    **education,
+    **career
+}
+
+This creates one combined dictionary.
+
+----------------------------------------
+7. Dictionary Union Operator — |
+----------------------------------------
+
+Python also provides the dictionary union operator:
+
+|
+
+Example:
+
+a = {
+    "name": "Rahul",
+    "age": 21
+}
+
+b = {
+    "age": 22,
+    "city": "Mumbai"
+}
+
+result = a | b
+
+Result:
+
+{
+    "name": "Rahul",
+    "age": 22,
+    "city": "Mumbai"
+}
+
+Like ** unpacking, the right-hand dictionary wins when keys overlap.
+
+----------------------------------------
+8. Updating an Existing Dictionary with |=
+----------------------------------------
+
+The |= operator updates an existing dictionary in place.
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student |= {
+    "age": 22,
+    "city": "Mumbai"
+}
+
+The dictionary becomes:
+
+{
+    "name": "Rahul",
+    "age": 22,
+    "city": "Mumbai"
+}
+
+Difference:
+
+a | b
+
+→ creates a new dictionary.
+
+a |= b
+
+→ updates a.
+
+----------------------------------------
+9. ** vs update()
+----------------------------------------
+
+Using **:
+
+result = {
+    **a,
+    **b
+}
+
+Creates a new dictionary.
+
+Using update():
+
+a.update(b)
+
+Modifies a directly.
+
+Mental model:
+
+**
+
+→ unpack into a new dictionary.
+
+update()
+
+→ modify an existing dictionary.
+
+----------------------------------------
+10. Passing Dictionary Data to Functions
+----------------------------------------
+
+Suppose a function expects named arguments:
+
+def introduce(name, age):
+    print(f"{name} is {age} years old")
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+introduce(**student)
+
+Output:
+
+Rahul is 21 years old
+
+The dictionary keys become the function's keyword argument names.
+
+----------------------------------------
+11. Function Example with More Arguments
+----------------------------------------
+
+def create_profile(name, age, city):
+    print(name, age, city)
+
+profile = {
+    "name": "Rahul",
+    "age": 21,
+    "city": "Mumbai"
+}
+
+create_profile(**profile)
+
+This is useful when structured data already exists in dictionary form.
+
+----------------------------------------
+12. Keys Must Match Function Parameters
+----------------------------------------
+
+def greet(name, age):
+    print(name, age)
+
+data = {
+    "name": "Rahul",
+    "age": 21
+}
+
+greet(**data)
+
+Works.
+
+But:
+
+data = {
+    "username": "Rahul",
+    "age": 21
+}
+
+greet(**data)
+
+This raises a TypeError because username does not match the function parameter name name.
+
+----------------------------------------
+13. Building Configuration Data
+----------------------------------------
+
+default_config = {
+    "debug": False,
+    "port": 8000
+}
+
+user_config = {
+    "debug": True
+}
+
+config = {
+    **default_config,
+    **user_config
+}
+
+Result:
+
+{
+    "debug": True,
+    "port": 8000
+}
+
+This pattern is common for configuration systems.
+
+----------------------------------------
+14. Building API Response Data
+----------------------------------------
+
+user = {
+    "id": 101,
+    "name": "Rahul"
+}
+
+extra = {
+    "role": "Developer",
+    "active": True
+}
+
+response = {
+    **user,
+    **extra
+}
+
+This creates a combined structured response.
+
+----------------------------------------
+15. Nested Dictionary Unpacking
+----------------------------------------
+
+Unpacking is shallow.
+
+user = {
+    "name": "Rahul",
+    "details": {
+        "age": 21
+    }
+}
+
+copy_user = {
+    **user
+}
+
+The top-level dictionary is copied into a new dictionary, but nested objects are still shared references.
+
+This is important when working with nested mutable data.
+
+----------------------------------------
+16. Professional Mental Model
+----------------------------------------
+
+**
+
+→ "Take all key-value pairs from this dictionary."
+
+Dictionary merging:
+
+{
+    **a,
+    **b
+}
+
+→ Combine a and b.
+
+If keys collide:
+
+a → first value
+
+b → later value wins
+
+Dictionary union:
+
+a | b
+
+→ New merged dictionary.
+
+In-place union:
+
+a |= b
+
+→ Update a.
+
+Function unpacking:
+
+function(**dictionary)
+
+→ Convert dictionary keys and values into keyword arguments.
+
+----------------------------------------
+17. Quick Comparison
+----------------------------------------
+
+**dictionary
+
+→ Unpack dictionary.
+
+{**a, **b}
+
+→ Create merged dictionary.
+
+a | b
+
+→ Create merged dictionary.
+
+a |= b
+
+→ Update existing dictionary.
+
+a.update(b)
+
+→ Update existing dictionary.
+
+function(**data)
+
+→ Pass dictionary as keyword arguments.
+
+This is an important dictionary concept because it connects dictionaries with function arguments, configuration, API data, and modern Python data-processing patterns.`,
+},
+{
+  heading: "Dictionary Copying — Assignment, copy() and Deep Copy",
+  body: `When working with dictionaries, it is important to understand the difference between assigning a dictionary, creating a shallow copy, and creating a deep copy.
+
+This becomes especially important when dictionaries contain lists, dictionaries, or other mutable objects.
+
+----------------------------------------
+1. Assignment Does NOT Create a Copy
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student2 = student
+
+student2["age"] = 22
+
+print(student["age"])
+
+Output:
+
+22
+
+Why?
+
+Both variables refer to the same dictionary object.
+
+Conceptually:
+
+student ─────┐
+             ↓
+        {name, age}
+             ↑
+student2 ────┘
+
+Check:
+
+print(student is student2)
+
+Output:
+
+True
+
+----------------------------------------
+2. copy() — Shallow Copy
+----------------------------------------
+
+Use copy() to create a new top-level dictionary.
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student2 = student.copy()
+
+student2["age"] = 22
+
+print(student["age"])
+
+Output:
+
+21
+
+print(student2["age"])
+
+Output:
+
+22
+
+Now they are separate top-level dictionaries.
+
+print(student is student2)
+
+Output:
+
+False
+
+----------------------------------------
+3. dict() Can Also Create a Shallow Copy
+----------------------------------------
+
+student2 = dict(student)
+
+This also creates a new top-level dictionary.
+
+Example:
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+student2 = dict(student)
+
+student2["age"] = 22
+
+The original student remains unchanged.
+
+----------------------------------------
+4. The Important Problem — Nested Mutable Objects
+----------------------------------------
+
+Consider:
+
+student = {
+    "name": "Rahul",
+    "skills": ["Python", "SQL"]
+}
+
+student2 = student.copy()
+
+student2["skills"].append("FastAPI")
+
+print(student["skills"])
+
+Output:
+
+[
+    "Python",
+    "SQL",
+    "FastAPI"
+]
+
+Why did the original change?
+
+Because copy() creates a shallow copy.
+
+The outer dictionary is copied, but the nested list is still the same object.
+
+Conceptually:
+
+student
+   ↓
+dictionary
+   ↓
+skills ───────→ same list ←────── skills
+                                      ↑
+                                   student2
+
+----------------------------------------
+5. Demonstrating the Shared Nested Object
+----------------------------------------
+
+student = {
+    "skills": ["Python", "SQL"]
+}
+
+student2 = student.copy()
+
+print(student["skills"] is student2["skills"])
+
+Output:
+
+True
+
+The two dictionaries contain references to the same nested list.
+
+----------------------------------------
+6. Replacing a Nested Value vs Modifying It
+----------------------------------------
+
+This does NOT modify the original nested list:
+
+student2["skills"] = ["Python", "SQL", "FastAPI"]
+
+Now student2 has a new list.
+
+But this modifies the shared list:
+
+student2["skills"].append("FastAPI")
+
+This difference is important when working with nested dictionaries.
+
+----------------------------------------
+7. Deep Copy
+----------------------------------------
+
+Use copy.deepcopy() when you need independent copies of nested mutable objects.
+
+import copy
+
+student = {
+    "name": "Rahul",
+    "skills": ["Python", "SQL"]
+}
+
+student2 = copy.deepcopy(student)
+
+student2["skills"].append("FastAPI")
+
+print(student["skills"])
+
+Output:
+
+[
+    "Python",
+    "SQL"
+]
+
+print(student2["skills"])
+
+Output:
+
+[
+    "Python",
+    "SQL",
+    "FastAPI"
+]
+
+Now even the nested list is independent.
+
+----------------------------------------
+8. Shallow vs Deep Copy
+----------------------------------------
+
+Shallow copy:
+
+student2 = student.copy()
+
+Copies:
+
+→ Outer dictionary
+
+Shares:
+
+→ Nested mutable objects
+
+Deep copy:
+
+student2 = copy.deepcopy(student)
+
+Copies:
+
+→ Outer dictionary
+
+Copies:
+
+→ Nested mutable objects
+
+----------------------------------------
+9. Assignment vs Shallow Copy vs Deep Copy
+----------------------------------------
+
+Assignment:
+
+student2 = student
+
+Same dictionary object.
+
+student2 is student
+
+→ True
+
+Shallow copy:
+
+student2 = student.copy()
+
+Different outer dictionary.
+
+student2 is student
+
+→ False
+
+But nested mutable objects may still be shared.
+
+Deep copy:
+
+student2 = copy.deepcopy(student)
+
+Different outer dictionary.
+
+Nested mutable objects are also independently copied.
+
+----------------------------------------
+10. Example with Nested Dictionary
+----------------------------------------
+
+employee = {
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "city": "Mumbai"
+    }
+}
+
+employee2 = employee.copy()
+
+employee2["details"]["age"] = 22
+
+print(employee["details"]["age"])
+
+Output:
+
+22
+
+The nested dictionary is shared.
+
+----------------------------------------
+11. Deep Copy of Nested Dictionary
+----------------------------------------
+
+import copy
+
+employee2 = copy.deepcopy(employee)
+
+employee2["details"]["age"] = 25
+
+The nested details dictionary is now independent from the original.
+
+----------------------------------------
+12. When to Use copy()
+----------------------------------------
+
+Use:
+
+dictionary.copy()
+
+when:
+
+• You need a new top-level dictionary.
+• Nested mutable objects do not need to be independent.
+• You understand that nested references may be shared.
+
+----------------------------------------
+13. When to Use deepcopy()
+----------------------------------------
+
+Use:
+
+copy.deepcopy(dictionary)
+
+when:
+
+• The dictionary contains nested mutable objects.
+• You need a completely independent structure.
+• Changes to nested objects should not affect the original.
+
+----------------------------------------
+14. Real-World Example — Configuration
+----------------------------------------
+
+default_config = {
+    "server": {
+        "host": "localhost",
+        "port": 8000
+    }
+}
+
+config = default_config.copy()
+
+config["server"]["port"] = 9000
+
+The original server configuration may also be changed because the nested dictionary is shared.
+
+For independent configuration:
+
+import copy
+
+config = copy.deepcopy(default_config)
+
+----------------------------------------
+15. Professional Mental Model
+----------------------------------------
+
+Assignment:
+
+b = a
+
+→ Same object.
+
+Shallow copy:
+
+b = a.copy()
+
+→ New outer dictionary.
+→ Nested mutable objects may be shared.
+
+Deep copy:
+
+b = copy.deepcopy(a)
+
+→ New outer dictionary.
+→ Nested mutable objects are recursively copied.
+
+Think:
+
+Assignment
+→ SAME
+
+copy()
+→ NEW OUTSIDE
+
+deepcopy()
+→ NEW OUTSIDE + NEW NESTED OBJECTS
+
+----------------------------------------
+16. Quick Comparison
+----------------------------------------
+
+Operation:
+
+b = a
+
+Same dictionary:
+→ Yes
+
+Nested objects shared:
+→ Yes
+
+Use when:
+→ You intentionally want another reference.
+
+----------------------------------------
+
+Operation:
+
+b = a.copy()
+
+Same dictionary:
+→ No
+
+Nested objects shared:
+→ Potentially yes
+
+Use when:
+→ A shallow copy is sufficient.
+
+----------------------------------------
+
+Operation:
+
+b = copy.deepcopy(a)
+
+Same dictionary:
+→ No
+
+Nested objects shared:
+→ No, mutable nested structures are copied
+
+Use when:
+→ Complete independence is required.
+
+Understanding dictionary copying is essential before working with nested data, APIs, JSON structures, configuration objects, and mutable Python data.`,
+},
+{
+  heading: "Dictionary Performance & Time Complexity",
+  body: `Python dictionaries are implemented using hash tables. This makes key-based lookup, insertion, and deletion very efficient on average.
+
+----------------------------------------
+1. Key Lookup — dictionary[key]
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+print(student["name"])
+
+Average time complexity:
+
+O(1)
+
+Python hashes the key and uses that information to locate the corresponding value.
+
+----------------------------------------
+2. Membership Testing — in
+----------------------------------------
+
+if "name" in student:
+    print("Found")
+
+Average:
+
+O(1)
+
+Remember that:
+
+"name" in student
+
+checks keys, not values.
+
+----------------------------------------
+3. get()
+----------------------------------------
+
+student.get("age")
+
+Average:
+
+O(1)
+
+get() performs a key lookup just like dictionary[key], while providing a safe fallback for missing keys.
+
+----------------------------------------
+4. Adding / Updating
+----------------------------------------
+
+student["city"] = "Mumbai"
+
+Average:
+
+O(1)
+
+Updating an existing key is also:
+
+O(1) average
+
+----------------------------------------
+5. update()
+----------------------------------------
+
+student.update({
+    "age": 22,
+    "gpa": 9.0
+})
+
+For k entries being added or updated:
+
+Approximately:
+
+O(k)
+
+----------------------------------------
+6. Removing with pop()
+----------------------------------------
+
+student.pop("age")
+
+Average:
+
+O(1)
+
+The key is hashed and its entry is removed.
+
+----------------------------------------
+7. del
+----------------------------------------
+
+del student["gpa"]
+
+Average:
+
+O(1)
+
+Removing a specific key is generally constant time.
+
+----------------------------------------
+8. popitem()
+----------------------------------------
+
+student.popitem()
+
+Average:
+
+O(1)
+
+It removes the last inserted key-value pair.
+
+----------------------------------------
+9. len()
+----------------------------------------
+
+len(student)
+
+Time complexity:
+
+O(1)
+
+Python maintains the dictionary's size, so it does not need to count all entries.
+
+----------------------------------------
+10. keys(), values(), items()
+----------------------------------------
+
+student.keys()
+student.values()
+student.items()
+
+Creating these view objects is generally:
+
+O(1)
+
+However, iterating through them is:
+
+O(n)
+
+Example:
+
+for key in student:
+    print(key)
+
+This visits n entries:
+
+O(n)
+
+----------------------------------------
+11. Iterating Through a Dictionary
+----------------------------------------
+
+for key, value in student.items():
+    print(key, value)
+
+Time complexity:
+
+O(n)
+
+Every dictionary entry is visited.
+
+----------------------------------------
+12. copy()
+----------------------------------------
+
+student2 = student.copy()
+
+Time complexity:
+
+O(n)
+
+Every top-level key-value entry must be copied.
+
+----------------------------------------
+13. Dictionary Comprehension
+----------------------------------------
+
+squares = {
+    x: x ** 2
+    for x in range(1, 1001)
+}
+
+If n elements are processed:
+
+O(n)
+
+The exact cost can also depend on the complexity of the key and value expressions.
+
+----------------------------------------
+14. Dictionary vs List Lookup
+----------------------------------------
+
+List:
+
+users = ["Rahul", "Anita", "Kiran"]
+
+"Anita" in users
+
+Average:
+
+O(n)
+
+The list may need to scan elements one by one.
+
+Dictionary:
+
+users = {
+    "Rahul": 101,
+    "Anita": 102,
+    "Kiran": 103
+}
+
+"Anita" in users
+
+Average:
+
+O(1)
+
+This is one of the biggest reasons dictionaries are important in DSA.
+
+----------------------------------------
+15. Dictionary vs Set
+----------------------------------------
+
+Both use hash-based structures.
+
+Set:
+
+value → membership
+
+Dictionary:
+
+key → value
+
+Typical average operations:
+
+Set membership:
+O(1)
+
+Dictionary key lookup:
+O(1)
+
+Both are extremely useful when fast lookup is required.
+
+----------------------------------------
+16. Worst-Case Complexity
+----------------------------------------
+
+Dictionary operations are usually described as:
+
+Average:
+
+O(1)
+
+Worst case:
+
+O(n)
+
+Worst-case behavior can occur because of hash collisions or resizing-related implementation details.
+
+For normal DSA analysis, dictionary lookup is generally treated as O(1) average.
+
+----------------------------------------
+17. Memory Complexity
+----------------------------------------
+
+Dictionaries require additional memory for their hash-table structure.
+
+If a dictionary contains n entries:
+
+Space complexity:
+
+O(n)
+
+This is an important trade-off:
+
+More memory
+→ Faster average lookup
+
+----------------------------------------
+18. Classic DSA Pattern — Frequency Counting
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 3]
+
+frequency = {}
+
+for number in numbers:
+    frequency[number] = frequency.get(number, 0) + 1
+
+print(frequency)
+
+Result:
+
+{
+    1: 1,
+    2: 2,
+    3: 3
+}
+
+Time:
+
+O(n) average
+
+Space:
+
+O(k)
+
+where k is the number of unique values.
+
+----------------------------------------
+19. Classic DSA Pattern — Fast Lookup
+----------------------------------------
+
+numbers = [10, 20, 30, 40]
+
+lookup = {
+    number: True
+    for number in numbers
+}
+
+if 30 in lookup:
+    print("Found")
+
+The lookup is:
+
+O(1) average
+
+This pattern is common when solving problems involving repeated membership checks.
+
+----------------------------------------
+20. Two-Sum Pattern
+----------------------------------------
+
+numbers = [2, 7, 11, 15]
+target = 9
+
+seen = {}
+
+for i, number in enumerate(numbers):
+    required = target - number
+
+    if required in seen:
+        print(seen[required], i)
+        break
+
+    seen[number] = i
+
+Average time:
+
+O(n)
+
+Space:
+
+O(n)
+
+Without a hash-based dictionary, a straightforward pair-search solution can take:
+
+O(n²)
+
+----------------------------------------
+21. Professional Complexity Table
+----------------------------------------
+
+Operation                     Average        Worst Case
+
+dictionary[key]              O(1)           O(n)
+key in dictionary             O(1)           O(n)
+get(key)                      O(1)           O(n)
+set/update one key            O(1)           O(n)
+pop(key)                      O(1)           O(n)
+del dictionary[key]           O(1)           O(n)
+popitem()                     O(1)           O(n)
+len(dictionary)               O(1)           O(1)
+update(k entries)             O(k)           O(k)
+copy()                        O(n)           O(n)
+iteration                     O(n)           O(n)
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+List:
+
+index lookup
+→ O(1)
+
+membership lookup
+→ O(n)
+
+Dictionary:
+
+key lookup
+→ O(1) average
+
+Set:
+
+membership lookup
+→ O(1) average
+
+Therefore, when a DSA problem repeatedly asks:
+
+"Have I seen this value?"
+
+or:
+
+"What information belongs to this key?"
+
+Think:
+
+→ Hash-based structure
+
+Python:
+
+set
+→ value → lookup
+
+dict
+→ key → value → lookup
+
+This performance model is essential for optimizing Python programs and solving hash-table-based DSA problems.`,
+},
+{
+  heading: "Dictionary Views & Advanced Patterns",
+  body: `Python dictionaries provide dynamic view objects through keys(), values(), and items(). These views are useful for iteration, membership testing, comparisons, and data processing.
+
+----------------------------------------
+1. Dictionary Views
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+keys = student.keys()
+values = student.values()
+items = student.items()
+
+These are view objects, not ordinary lists.
+
+----------------------------------------
+2. Views Reflect Dictionary Changes
+----------------------------------------
+
+student = {
+    "name": "Rahul"
+}
+
+keys = student.keys()
+
+student["age"] = 21
+
+print(keys)
+
+The keys view automatically reflects the new key.
+
+This happens because the view is connected to the dictionary.
+
+----------------------------------------
+3. Convert Views to Lists
+----------------------------------------
+
+keys = list(student.keys())
+values = list(student.values())
+items = list(student.items())
+
+This creates independent list objects containing the current data.
+
+----------------------------------------
+4. Dictionary Keys View Supports Set Operations
+----------------------------------------
+
+Keys are unique and hashable, so dictionary key views support set-like operations.
+
+a = {
+    "name": "Rahul",
+    "age": 21,
+    "city": "Mumbai"
+}
+
+b = {
+    "age": 22,
+    "city": "Delhi",
+    "gpa": 8.75
+}
+
+print(a.keys() & b.keys())
+
+Common keys:
+
+{
+    "age",
+    "city"
+}
+
+----------------------------------------
+5. Keys Intersection
+----------------------------------------
+
+common = a.keys() & b.keys()
+
+This finds keys present in both dictionaries.
+
+Concept:
+
+A.keys() ∩ B.keys()
+
+→ common keys
+
+----------------------------------------
+6. Keys Union
+----------------------------------------
+
+all_keys = a.keys() | b.keys()
+
+This produces the set of keys present in either dictionary.
+
+Concept:
+
+A.keys() ∪ B.keys()
+
+----------------------------------------
+7. Keys Difference
+----------------------------------------
+
+only_a = a.keys() - b.keys()
+
+This finds keys that exist in a but not b.
+
+Example:
+
+a:
+
+name
+age
+city
+
+b:
+
+age
+city
+gpa
+
+Result:
+
+{
+    "name"
+}
+
+----------------------------------------
+8. Keys Symmetric Difference
+----------------------------------------
+
+different = a.keys() ^ b.keys()
+
+This finds keys that belong to one dictionary but not both.
+
+Result:
+
+{
+    "name",
+    "gpa"
+}
+
+----------------------------------------
+9. Comparing Dictionary Keys
+----------------------------------------
+
+a = {"name": "Rahul", "age": 21}
+b = {"name": "Anita", "age": 22}
+
+print(a.keys() == b.keys())
+
+Output:
+
+True
+
+The values do not matter when comparing the keys views.
+
+----------------------------------------
+10. Comparing Complete Dictionaries
+----------------------------------------
+
+a = {
+    "name": "Rahul",
+    "age": 21
+}
+
+b = {
+    "name": "Rahul",
+    "age": 21
+}
+
+print(a == b)
+
+Output:
+
+True
+
+Dictionary equality compares both:
+
+keys
++
+values
+
+----------------------------------------
+11. Dictionary Order
+----------------------------------------
+
+Modern Python dictionaries preserve insertion order.
+
+data = {}
+
+data["a"] = 10
+data["b"] = 20
+data["c"] = 30
+
+for key in data:
+    print(key)
+
+Output:
+
+a
+b
+c
+
+Insertion order is preserved during iteration.
+
+----------------------------------------
+12. Updating an Existing Key Does Not Move It
+----------------------------------------
+
+data = {
+    "a": 10,
+    "b": 20,
+    "c": 30
+}
+
+data["b"] = 200
+
+for key in data:
+    print(key)
+
+Output:
+
+a
+b
+c
+
+Updating the value does not change the key's position.
+
+----------------------------------------
+13. Delete and Reinsert a Key
+----------------------------------------
+
+data = {
+    "a": 10,
+    "b": 20,
+    "c": 30
+}
+
+del data["b"]
+
+data["b"] = 200
+
+Now the insertion order becomes:
+
+a
+c
+b
+
+The deleted key is inserted again at the end.
+
+----------------------------------------
+14. Reverse Dictionary Iteration
+----------------------------------------
+
+data = {
+    "a": 10,
+    "b": 20,
+    "c": 30
+}
+
+for key in reversed(data):
+    print(key)
+
+Output:
+
+c
+b
+a
+
+----------------------------------------
+15. Sorting Dictionary Data by Key
+----------------------------------------
+
+scores = {
+    "Rahul": 85,
+    "Anita": 95,
+    "Kiran": 75
+}
+
+for name in sorted(scores):
+    print(name, scores[name])
+
+Output:
+
+Anita 95
+Kiran 75
+Rahul 85
+
+sorted() sorts the keys.
+
+----------------------------------------
+16. Sorting by Values
+----------------------------------------
+
+scores = {
+    "Rahul": 85,
+    "Anita": 95,
+    "Kiran": 75
+}
+
+sorted_scores = sorted(
+    scores.items(),
+    key=lambda item: item[1]
+)
+
+Result:
+
+[
+    ("Kiran", 75),
+    ("Rahul", 85),
+    ("Anita", 95)
+]
+
+Use reverse=True for descending order:
+
+sorted_scores = sorted(
+    scores.items(),
+    key=lambda item: item[1],
+    reverse=True
+)
+
+----------------------------------------
+17. Creating a Dictionary After Sorting
+----------------------------------------
+
+sorted_scores = dict(
+    sorted(
+        scores.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )
+)
+
+The result is a dictionary whose insertion order follows the sorted order.
+
+----------------------------------------
+18. \`items()\` with \`max()\`
+----------------------------------------
+
+scores = {
+    "Rahul": 85,
+    "Anita": 95,
+    "Kiran": 75
+}
+
+top_student = max(
+    scores.items(),
+    key=lambda item: item[1]
+)
+
+print(top_student)
+
+Output:
+
+("Anita", 95)
+
+This is a common pattern for finding the entry with the maximum value.
+
+----------------------------------------
+19. \`items()\` with \`min()\`
+----------------------------------------
+
+lowest = min(
+    scores.items(),
+    key=lambda item: item[1]
+)
+
+Output:
+
+("Kiran", 75)
+
+----------------------------------------
+20. Finding Maximum and Minimum Keys by Value
+----------------------------------------
+
+best = max(scores, key=scores.get)
+
+print(best)
+
+Output:
+
+Anita
+
+This is a concise and useful Python pattern.
+
+Similarly:
+
+worst = min(scores, key=scores.get)
+
+----------------------------------------
+21. Real-World Example — Highest Salary
+----------------------------------------
+
+employees = {
+    "Rahul": 45000,
+    "Anita": 60000,
+    "Kiran": 40000
+}
+
+highest = max(
+    employees,
+    key=employees.get
+)
+
+print(highest)
+
+Output:
+
+Anita
+
+print(employees[highest])
+
+Output:
+
+60000
+
+----------------------------------------
+22. Dictionary Filtering
+----------------------------------------
+
+scores = {
+    "Rahul": 85,
+    "Anita": 95,
+    "Kiran": 75
+}
+
+passed = {
+    name: score
+    for name, score in scores.items()
+    if score >= 80
+}
+
+Result:
+
+{
+    "Rahul": 85,
+    "Anita": 95
+}
+
+This combines:
+
+items()
++
+dictionary comprehension
++
+condition
+
+----------------------------------------
+23. Professional Mental Model
+----------------------------------------
+
+keys()
+
+→ Dynamic view of keys.
+
+values()
+
+→ Dynamic view of values.
+
+items()
+
+→ Dynamic view of key-value pairs.
+
+keys() supports:
+
+&
+|
+-
+^
+
+because dictionary keys are unique and hashable.
+
+Dictionary iteration:
+
+for key in dictionary
+
+→ keys
+
+for value in dictionary.values()
+
+→ values
+
+for key, value in dictionary.items()
+
+→ key + value
+
+For advanced data processing:
+
+max(dictionary, key=dictionary.get)
+
+→ key with maximum value
+
+min(dictionary, key=dictionary.get)
+
+→ key with minimum value
+
+sorted(dictionary.items(), key=lambda item: item[1])
+
+→ sort entries by value
+
+These patterns are especially useful in Python data processing and DSA problems.`,
+},
+{
+  heading: "Nested Dictionaries & Complex JSON-Like Data",
+  body: `A dictionary can contain other dictionaries, lists, tuples, sets, and other Python objects as values.
+
+Nested dictionaries are heavily used for JSON data, API responses, configuration files, databases, and real-world structured information.
+
+----------------------------------------
+1. Basic Nested Dictionary
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 8.75
+    }
+}
+
+Access the nested value:
+
+print(student["details"]["gpa"])
+
+Output:
+
+8.75
+
+Access happens in two stages:
+
+student["details"]
+        ↓
+nested dictionary
+        ↓
+["gpa"]
+        ↓
+8.75
+
+----------------------------------------
+2. Updating Nested Values
+----------------------------------------
+
+student["details"]["gpa"] = 9.0
+
+print(student["details"]["gpa"])
+
+Output:
+
+9.0
+
+The outer dictionary remains the same; only the nested value changes.
+
+----------------------------------------
+3. Adding to a Nested Dictionary
+----------------------------------------
+
+student["details"]["city"] = "Mumbai"
+
+Now:
+
+{
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 9.0,
+        "city": "Mumbai"
+    }
+}
+
+----------------------------------------
+4. Removing Nested Values
+----------------------------------------
+
+del student["details"]["city"]
+
+This removes only the nested "city" entry.
+
+----------------------------------------
+5. Dictionary Containing Lists
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "skills": [
+        "Python",
+        "SQL",
+        "FastAPI"
+    ]
+}
+
+Access:
+
+print(student["skills"][0])
+
+Output:
+
+Python
+
+The first lookup accesses the dictionary.
+
+The second lookup accesses the list.
+
+----------------------------------------
+6. Dictionary Containing a List of Dictionaries
+----------------------------------------
+
+students = {
+    "students": [
+        {
+            "name": "Rahul",
+            "age": 21
+        },
+        {
+            "name": "Anita",
+            "age": 22
+        }
+    ]
+}
+
+Access Anita's name:
+
+print(students["students"][1]["name"])
+
+Output:
+
+Anita
+
+Access path:
+
+dictionary
+→ "students"
+→ list index 1
+→ "name"
+
+----------------------------------------
+7. Complex JSON-Like Structure
+----------------------------------------
+
+company = {
+    "name": "TechCorp",
+    "location": {
+        "city": "Mumbai",
+        "country": "India"
+    },
+    "employees": [
+        {
+            "id": 101,
+            "name": "Rahul",
+            "skills": ["Python", "SQL"]
+        },
+        {
+            "id": 102,
+            "name": "Anita",
+            "skills": ["Java", "Spring"]
+        }
+    ]
+}
+
+This structure is similar to data received from a JSON API.
+
+----------------------------------------
+8. Accessing Deeply Nested Data
+----------------------------------------
+
+print(company["employees"][0]["skills"][1])
+
+Output:
+
+SQL
+
+Access path:
+
+company
+→ employees
+→ index 0
+→ skills
+→ index 1
+
+----------------------------------------
+9. Iterating Through Nested Dictionaries
+----------------------------------------
+
+for employee in company["employees"]:
+    print(employee["name"])
+
+Output:
+
+Rahul
+Anita
+
+This is a common pattern for processing API response data.
+
+----------------------------------------
+10. Iterating Through Nested Key-Value Pairs
+----------------------------------------
+
+for employee in company["employees"]:
+    for key, value in employee.items():
+        print(key, value)
+
+This processes each employee dictionary individually.
+
+----------------------------------------
+11. Safe Access with get()
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21
+    }
+}
+
+print(student.get("details", {}).get("gpa", "N/A"))
+
+Output:
+
+N/A
+
+Using {} as the fallback prevents an immediate error if "details" is missing.
+
+----------------------------------------
+12. Nested get() Pattern
+----------------------------------------
+
+The pattern:
+
+data.get("outer", {}).get("inner")
+
+means:
+
+1. Get the outer key.
+2. If missing, use an empty dictionary.
+3. Then safely access the inner key.
+
+Example:
+
+gpa = student.get("details", {}).get("gpa", 0)
+
+----------------------------------------
+13. Building Nested Dictionaries Dynamically
+----------------------------------------
+
+students = {}
+
+students["Rahul"] = {
+    "age": 21,
+    "gpa": 8.75
+}
+
+students["Anita"] = {
+    "age": 22,
+    "gpa": 9.1
+}
+
+Now:
+
+{
+    "Rahul": {
+        "age": 21,
+        "gpa": 8.75
+    },
+    "Anita": {
+        "age": 22,
+        "gpa": 9.1
+    }
+}
+
+----------------------------------------
+14. setdefault() for Nested Data
+----------------------------------------
+
+groups = {}
+
+groups.setdefault("Python", []).append("Rahul")
+groups.setdefault("Python", []).append("Anita")
+groups.setdefault("Java", []).append("Kiran")
+
+Result:
+
+{
+    "Python": ["Rahul", "Anita"],
+    "Java": ["Kiran"]
+}
+
+This is a classic grouping pattern.
+
+----------------------------------------
+15. Nested Dictionary Comprehension
+----------------------------------------
+
+matrix = {
+    i: {
+        j: i * j
+        for j in range(1, 4)
+    }
+    for i in range(1, 4)
+}
+
+Result:
+
+{
+    1: {1: 1, 2: 2, 3: 3},
+    2: {1: 2, 2: 4, 3: 6},
+    3: {1: 3, 2: 6, 3: 9}
+}
+
+Nested comprehensions should be used only when they remain readable.
+
+----------------------------------------
+16. Nested Dictionary with Real API Data
+----------------------------------------
+
+response = {
+    "status": "success",
+    "data": {
+        "user": {
+            "id": 101,
+            "name": "Rahul",
+            "role": "Python Developer"
+        }
+    }
+}
+
+role = response["data"]["user"]["role"]
+
+print(role)
+
+Output:
+
+Python Developer
+
+This structure is common in REST API responses.
+
+----------------------------------------
+17. JSON Relationship
+----------------------------------------
+
+JSON objects map naturally to Python dictionaries.
+
+JSON:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+Python:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+JSON arrays map naturally to Python lists.
+
+Therefore:
+
+JSON object
+→ Python dict
+
+JSON array
+→ Python list
+
+JSON string
+→ Python str
+
+JSON number
+→ Python int / float
+
+JSON true
+→ Python True
+
+JSON false
+→ Python False
+
+JSON null
+→ Python None
+
+----------------------------------------
+18. Converting JSON to Python
+----------------------------------------
+
+import json
+
+text = '{"name": "Rahul", "age": 21}'
+
+data = json.loads(text)
+
+print(data["name"])
+
+Output:
+
+Rahul
+
+json.loads():
+
+JSON string
+→ Python object
+
+----------------------------------------
+19. Converting Python Dictionary to JSON
+----------------------------------------
+
+import json
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+text = json.dumps(student)
+
+print(text)
+
+Output:
+
+{"name": "Rahul", "age": 21}
+
+json.dumps():
+
+Python object
+→ JSON string
+
+----------------------------------------
+20. Real-World DSA Pattern — Nested Lookup
+----------------------------------------
+
+users = {
+    101: {
+        "name": "Rahul",
+        "role": "Developer"
+    },
+    102: {
+        "name": "Anita",
+        "role": "Tester"
+    }
+}
+
+user_id = 101
+
+print(users[user_id]["role"])
+
+Output:
+
+Developer
+
+This provides fast top-level lookup followed by nested access.
+
+----------------------------------------
+21. Important Reference Behavior
+----------------------------------------
+
+Nested dictionaries contain mutable objects.
+
+Therefore:
+
+user = {
+    "details": {
+        "age": 21
+    }
+}
+
+copy = user.copy()
+
+copy["details"]["age"] = 25
+
+The original nested value can also change because the nested dictionary is shared.
+
+For completely independent nested data:
+
+import copy
+
+copy = copy.deepcopy(user)
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Nested dictionaries represent hierarchical data.
+
+Example:
+
+company
+ ↓
+employees
+ ↓
+employee
+ ↓
+skills
+ ↓
+skill
+
+Common structures:
+
+dict → dict
+
+dict → list
+
+dict → list → dict
+
+dict → dict → list
+
+These structures appear constantly in:
+
+• JSON
+• REST APIs
+• Configuration
+• Database results
+• Web applications
+• AI/ML data
+• DSA problems
+
+The most important skill is learning to follow the access path:
+
+data["key"]["nested_key"][index]["another_key"]
+
+and knowing when to use get() for safer access.`
+},
+{
+  heading: "Nested Dictionaries & Complex JSON-Like Data",
+  body: `A dictionary can contain other dictionaries, lists, tuples, sets, and other Python objects as values.
+
+Nested dictionaries are heavily used for JSON data, API responses, configuration files, databases, and real-world structured information.
+
+----------------------------------------
+1. Basic Nested Dictionary
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 8.75
+    }
+}
+
+Access the nested value:
+
+print(student["details"]["gpa"])
+
+Output:
+
+8.75
+
+Access happens in two stages:
+
+student["details"]
+        ↓
+nested dictionary
+        ↓
+["gpa"]
+        ↓
+8.75
+
+----------------------------------------
+2. Updating Nested Values
+----------------------------------------
+
+student["details"]["gpa"] = 9.0
+
+print(student["details"]["gpa"])
+
+Output:
+
+9.0
+
+The outer dictionary remains the same; only the nested value changes.
+
+----------------------------------------
+3. Adding to a Nested Dictionary
+----------------------------------------
+
+student["details"]["city"] = "Mumbai"
+
+Now:
+
+{
+    "name": "Rahul",
+    "details": {
+        "age": 21,
+        "gpa": 9.0,
+        "city": "Mumbai"
+    }
+}
+
+----------------------------------------
+4. Removing Nested Values
+----------------------------------------
+
+del student["details"]["city"]
+
+This removes only the nested "city" entry.
+
+----------------------------------------
+5. Dictionary Containing Lists
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "skills": [
+        "Python",
+        "SQL",
+        "FastAPI"
+    ]
+}
+
+Access:
+
+print(student["skills"][0])
+
+Output:
+
+Python
+
+The first lookup accesses the dictionary.
+
+The second lookup accesses the list.
+
+----------------------------------------
+6. Dictionary Containing a List of Dictionaries
+----------------------------------------
+
+students = {
+    "students": [
+        {
+            "name": "Rahul",
+            "age": 21
+        },
+        {
+            "name": "Anita",
+            "age": 22
+        }
+    ]
+}
+
+Access Anita's name:
+
+print(students["students"][1]["name"])
+
+Output:
+
+Anita
+
+Access path:
+
+dictionary
+→ "students"
+→ list index 1
+→ "name"
+
+----------------------------------------
+7. Complex JSON-Like Structure
+----------------------------------------
+
+company = {
+    "name": "TechCorp",
+    "location": {
+        "city": "Mumbai",
+        "country": "India"
+    },
+    "employees": [
+        {
+            "id": 101,
+            "name": "Rahul",
+            "skills": ["Python", "SQL"]
+        },
+        {
+            "id": 102,
+            "name": "Anita",
+            "skills": ["Java", "Spring"]
+        }
+    ]
+}
+
+This structure is similar to data received from a JSON API.
+
+----------------------------------------
+8. Accessing Deeply Nested Data
+----------------------------------------
+
+print(company["employees"][0]["skills"][1])
+
+Output:
+
+SQL
+
+Access path:
+
+company
+→ employees
+→ index 0
+→ skills
+→ index 1
+
+----------------------------------------
+9. Iterating Through Nested Dictionaries
+----------------------------------------
+
+for employee in company["employees"]:
+    print(employee["name"])
+
+Output:
+
+Rahul
+Anita
+
+This is a common pattern for processing API response data.
+
+----------------------------------------
+10. Iterating Through Nested Key-Value Pairs
+----------------------------------------
+
+for employee in company["employees"]:
+    for key, value in employee.items():
+        print(key, value)
+
+This processes each employee dictionary individually.
+
+----------------------------------------
+11. Safe Access with get()
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "details": {
+        "age": 21
+    }
+}
+
+print(student.get("details", {}).get("gpa", "N/A"))
+
+Output:
+
+N/A
+
+Using {} as the fallback prevents an immediate error if "details" is missing.
+
+----------------------------------------
+12. Nested get() Pattern
+----------------------------------------
+
+The pattern:
+
+data.get("outer", {}).get("inner")
+
+means:
+
+1. Get the outer key.
+2. If missing, use an empty dictionary.
+3. Then safely access the inner key.
+
+Example:
+
+gpa = student.get("details", {}).get("gpa", 0)
+
+----------------------------------------
+13. Building Nested Dictionaries Dynamically
+----------------------------------------
+
+students = {}
+
+students["Rahul"] = {
+    "age": 21,
+    "gpa": 8.75
+}
+
+students["Anita"] = {
+    "age": 22,
+    "gpa": 9.1
+}
+
+Now:
+
+{
+    "Rahul": {
+        "age": 21,
+        "gpa": 8.75
+    },
+    "Anita": {
+        "age": 22,
+        "gpa": 9.1
+    }
+}
+
+----------------------------------------
+14. setdefault() for Nested Data
+----------------------------------------
+
+groups = {}
+
+groups.setdefault("Python", []).append("Rahul")
+groups.setdefault("Python", []).append("Anita")
+groups.setdefault("Java", []).append("Kiran")
+
+Result:
+
+{
+    "Python": ["Rahul", "Anita"],
+    "Java": ["Kiran"]
+}
+
+This is a classic grouping pattern.
+
+----------------------------------------
+15. Nested Dictionary Comprehension
+----------------------------------------
+
+matrix = {
+    i: {
+        j: i * j
+        for j in range(1, 4)
+    }
+    for i in range(1, 4)
+}
+
+Result:
+
+{
+    1: {1: 1, 2: 2, 3: 3},
+    2: {1: 2, 2: 4, 3: 6},
+    3: {1: 3, 2: 6, 3: 9}
+}
+
+Nested comprehensions should be used only when they remain readable.
+
+----------------------------------------
+16. Nested Dictionary with Real API Data
+----------------------------------------
+
+response = {
+    "status": "success",
+    "data": {
+        "user": {
+            "id": 101,
+            "name": "Rahul",
+            "role": "Python Developer"
+        }
+    }
+}
+
+role = response["data"]["user"]["role"]
+
+print(role)
+
+Output:
+
+Python Developer
+
+This structure is common in REST API responses.
+
+----------------------------------------
+17. JSON Relationship
+----------------------------------------
+
+JSON objects map naturally to Python dictionaries.
+
+JSON:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+Python:
+
+{
+    "name": "Rahul",
+    "age": 21
+}
+
+JSON arrays map naturally to Python lists.
+
+Therefore:
+
+JSON object
+→ Python dict
+
+JSON array
+→ Python list
+
+JSON string
+→ Python str
+
+JSON number
+→ Python int / float
+
+JSON true
+→ Python True
+
+JSON false
+→ Python False
+
+JSON null
+→ Python None
+
+----------------------------------------
+18. Converting JSON to Python
+----------------------------------------
+
+import json
+
+text = '{"name": "Rahul", "age": 21}'
+
+data = json.loads(text)
+
+print(data["name"])
+
+Output:
+
+Rahul
+
+json.loads():
+
+JSON string
+→ Python object
+
+----------------------------------------
+19. Converting Python Dictionary to JSON
+----------------------------------------
+
+import json
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+text = json.dumps(student)
+
+print(text)
+
+Output:
+
+{"name": "Rahul", "age": 21}
+
+json.dumps():
+
+Python object
+→ JSON string
+
+----------------------------------------
+20. Real-World DSA Pattern — Nested Lookup
+----------------------------------------
+
+users = {
+    101: {
+        "name": "Rahul",
+        "role": "Developer"
+    },
+    102: {
+        "name": "Anita",
+        "role": "Tester"
+    }
+}
+
+user_id = 101
+
+print(users[user_id]["role"])
+
+Output:
+
+Developer
+
+This provides fast top-level lookup followed by nested access.
+
+----------------------------------------
+21. Important Reference Behavior
+----------------------------------------
+
+Nested dictionaries contain mutable objects.
+
+Therefore:
+
+user = {
+    "details": {
+        "age": 21
+    }
+}
+
+copy = user.copy()
+
+copy["details"]["age"] = 25
+
+The original nested value can also change because the nested dictionary is shared.
+
+For completely independent nested data:
+
+import copy
+
+copy = copy.deepcopy(user)
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Nested dictionaries represent hierarchical data.
+
+Example:
+
+company
+ ↓
+employees
+ ↓
+employee
+ ↓
+skills
+ ↓
+skill
+
+Common structures:
+
+dict → dict
+
+dict → list
+
+dict → list → dict
+
+dict → dict → list
+
+These structures appear constantly in:
+
+• JSON
+• REST APIs
+• Configuration
+• Database results
+• Web applications
+• AI/ML data
+• DSA problems
+
+The most important skill is learning to follow the access path:
+
+data["key"]["nested_key"][index]["another_key"]
+
+and knowing when to use get() for safer access.`,
+},
+{
+  heading: "Dictionary as a DSA Hash Table — Frequency, Lookup and Grouping",
+  body: `Python dictionaries are one of the most important tools in DSA because they provide average O(1) key-based lookup.
+
+They are commonly used for frequency counting, fast membership, indexing, grouping, caching, and solving problems such as Two Sum.
+
+----------------------------------------
+1. Frequency Counting
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 3]
+
 freq = {}
+
+for number in numbers:
+    freq[number] = freq.get(number, 0) + 1
+
+print(freq)
+
+Output:
+
+{
+    1: 1,
+    2: 2,
+    3: 3
+}
+
+Pattern:
+
+freq[x] = freq.get(x, 0) + 1
+
+This is one of the most important dictionary patterns in DSA.
+
+----------------------------------------
+2. Character Frequency
+----------------------------------------
+
+text = "banana"
+
+freq = {}
+
+for char in text:
+    freq[char] = freq.get(char, 0) + 1
+
+Result:
+
+{
+    "b": 1,
+    "a": 3,
+    "n": 2
+}
+
+----------------------------------------
+3. Word Frequency
+----------------------------------------
+
+text = "cat dog cat dog cat"
+
+freq = {}
+
 for word in text.split():
     freq[word] = freq.get(word, 0) + 1
 
+Result:
+
+{
+    "cat": 3,
+    "dog": 2
+}
+
+----------------------------------------
+4. Using Counter
+----------------------------------------
+
+Python also provides Counter for frequency counting.
+
+from collections import Counter
+
+numbers = [1, 2, 2, 3, 3, 3]
+
+freq = Counter(numbers)
+
+print(freq)
+
+Output:
+
+Counter({
+    3: 3,
+    2: 2,
+    1: 1
+})
+
+For basic DSA understanding, however, you should know the dictionary implementation first.
+
+----------------------------------------
+5. Fast Membership Lookup
+----------------------------------------
+
+numbers = [10, 20, 30, 40]
+
+seen = {}
+
+for number in numbers:
+    seen[number] = True
+
+if 30 in seen:
+    print("Found")
+
+Average lookup:
+
+O(1)
+
+This is useful when repeatedly checking whether a value has already appeared.
+
+----------------------------------------
+6. Two Sum — Classic Interview Problem
+----------------------------------------
+
+numbers = [2, 7, 11, 15]
+target = 9
+
+seen = {}
+
+for i, number in enumerate(numbers):
+    required = target - number
+
+    if required in seen:
+        print(seen[required], i)
+        break
+
+    seen[number] = i
+
+Output:
+
+0 1
+
+Why?
+
+At index 1:
+
+number = 7
+
+required = 9 - 7
+
+required = 2
+
+2 already exists in seen.
+
+Therefore the pair is:
+
+2 + 7 = 9
+
+Time:
+
+O(n) average
+
+Space:
+
+O(n)
+
+----------------------------------------
+7. Removing Duplicates
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 4]
+
+seen = {}
+
+for number in numbers:
+    seen[number] = True
+
+unique = list(seen)
+
+Result:
+
+[
+    1,
+    2,
+    3,
+    4
+]
+
+For simple uniqueness checking, a set is usually more direct:
+
+unique = set(numbers)
+
+----------------------------------------
+8. Grouping Values
+----------------------------------------
+
+students = [
+    ("Rahul", "Python"),
+    ("Anita", "Java"),
+    ("Kiran", "Python"),
+    ("Arjun", "Java")
+]
+
+groups = {}
+
+for name, language in students:
+    groups.setdefault(language, []).append(name)
+
+Result:
+
+{
+    "Python": ["Rahul", "Kiran"],
+    "Java": ["Anita", "Arjun"]
+}
+
+This is a classic dictionary grouping pattern.
+
+----------------------------------------
+9. Index Mapping
+----------------------------------------
+
+words = ["apple", "banana", "orange"]
+
+index = {}
+
+for i, word in enumerate(words):
+    index[word] = i
+
+Result:
+
+{
+    "apple": 0,
+    "banana": 1,
+    "orange": 2
+}
+
+Now:
+
+index["orange"]
+
+returns:
+
+2
+
+Average lookup:
+
+O(1)
+
+----------------------------------------
+10. First Repeated Element
+----------------------------------------
+
+numbers = [4, 2, 7, 2, 9]
+
+seen = {}
+
+for number in numbers:
+    if number in seen:
+        print("First repeated:", number)
+        break
+
+    seen[number] = True
+
+Output:
+
+First repeated: 2
+
+The dictionary acts as a fast memory of previously seen values.
+
+----------------------------------------
+11. First Non-Repeating Character
+----------------------------------------
+
+text = "swiss"
+
+freq = {}
+
+for char in text:
+    freq[char] = freq.get(char, 0) + 1
+
+for char in text:
+    if freq[char] == 1:
+        print(char)
+        break
+
+Output:
+
+w
+
+Two passes:
+
+First pass:
+→ Count characters.
+
+Second pass:
+→ Find the first character whose count is 1.
+
+Time:
+
+O(n)
+
+Space:
+
+O(k)
+
+where k is the number of distinct characters.
+
+----------------------------------------
+12. Counting with Conditions
+----------------------------------------
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+freq = {}
+
+for number in numbers:
+    category = "even" if number % 2 == 0 else "odd"
+    freq[category] = freq.get(category, 0) + 1
+
+Result:
+
+{
+    "odd": 3,
+    "even": 3
+}
+
+----------------------------------------
+13. Caching / Memoization
+----------------------------------------
+
+cache = {}
+
+def square(n):
+    if n not in cache:
+        cache[n] = n * n
+
+    return cache[n]
+
+print(square(10))
+print(square(10))
+
+The second call can reuse the stored result.
+
+This basic idea is called memoization.
+
+It is heavily used in:
+
+• Dynamic Programming
+• Recursive algorithms
+• API caching
+• Expensive computations
+
+----------------------------------------
+14. Dictionary for Graph Representation
+----------------------------------------
+
+A graph can be represented using an adjacency list.
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A"],
+    "D": ["B"]
+}
+
+This means:
+
+A → B, C
+
+B → A, D
+
+C → A
+
+D → B
+
+Dictionaries are commonly used to represent graphs in Python.
+
+----------------------------------------
+15. Weighted Graph
+----------------------------------------
+
+A dictionary can also store edge weights.
+
+graph = {
+    "A": {
+        "B": 5,
+        "C": 2
+    },
+    "B": {
+        "A": 5,
+        "D": 3
+    }
+}
+
+Here:
+
+A → B = 5
+
+A → C = 2
+
+B → D = 3
+
+This structure is useful for graph algorithms such as Dijkstra's algorithm.
+
+----------------------------------------
+16. Dictionary for Dynamic Programming
+----------------------------------------
+
+memo = {}
+
+def fib(n):
+    if n <= 1:
+        return n
+
+    if n in memo:
+        return memo[n]
+
+    memo[n] = fib(n - 1) + fib(n - 2)
+
+    return memo[n]
+
+The dictionary stores previously calculated results.
+
+Without memoization, recursive Fibonacci has exponential behavior.
+
+With memoization:
+
+Time:
+O(n)
+
+Space:
+O(n)
+
+----------------------------------------
+17. Dictionary for Coordinate Lookup
+----------------------------------------
+
+points = {
+    (0, 0): "A",
+    (1, 2): "B",
+    (3, 4): "C"
+}
+
+print(points[(1, 2)])
+
+Output:
+
+B
+
+Tuple keys are useful because tuples are hashable when their elements are hashable.
+
+----------------------------------------
+18. Important Dictionary Key Rule
+----------------------------------------
+
+Dictionary keys must be hashable.
+
+Valid examples:
+
+int
+str
+float
+tuple of hashable values
+frozenset
+
+Example:
+
+data = {
+    1: "one",
+    "name": "Rahul",
+    (1, 2): "point"
+}
+
+Invalid:
+
+data = {
+    [1, 2]: "list"
+}
+
+This raises:
+
+TypeError: unhashable type: 'list'
+
+Lists cannot be dictionary keys because they are mutable and unhashable.
+
+----------------------------------------
+19. Common DSA Complexity Pattern
+----------------------------------------
+
+Suppose:
+
+n = number of input elements
+
+Dictionary-based solution:
+
+Build dictionary:
+O(n)
+
+Perform n lookups:
+O(n)
+
+Total:
+
+O(n)
+
+This is why dictionaries can turn many O(n²) brute-force solutions into O(n) average solutions.
+
+----------------------------------------
+20. Dictionary vs Brute Force
+----------------------------------------
+
+Problem:
+
+Find whether two numbers sum to target.
+
+Brute force:
+
+Check every pair.
+
+Time:
+
+O(n²)
+
+Dictionary approach:
+
+Store previously seen numbers.
+
+Time:
+
+O(n) average
+
+The dictionary trades:
+
+Space → O(n)
+
+for:
+
+Faster lookup → O(1) average
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Whenever a DSA problem contains phrases like:
+
+"Have I seen this before?"
+
+→ Dictionary / Set
+
+"How many times does each value occur?"
+
+→ Dictionary / Counter
+
+"Find a value associated with a key."
+
+→ Dictionary
+
+"Group elements by category."
+
+→ Dictionary
+
+"Remember previously calculated results."
+
+→ Dictionary / memoization
+
+"Map an item to its index."
+
+→ Dictionary
+
+"Find a pair efficiently."
+
+→ Dictionary
+
+The core DSA idea is:
+
+Input
+↓
+Hash key
+↓
+Dictionary
+↓
+O(1) average lookup
+
+This is why Python dictionaries are fundamental for interview problems and algorithm optimization.`,
+},
+{
+  heading: "defaultdict — Automatic Default Values",
+  body: `Python's defaultdict is a specialized dictionary from the collections module.
+
+Unlike a normal dictionary, defaultdict automatically creates a default value when a missing key is accessed.
+
+It is especially useful for grouping, counting, and building nested data structures.
+
+----------------------------------------
+1. Import defaultdict
+----------------------------------------
+
+from collections import defaultdict
+
+----------------------------------------
+2. Basic defaultdict
+----------------------------------------
+
+from collections import defaultdict
+
+data = defaultdict(int)
+
+print(data["count"])
+
+Output:
+
+0
+
+The key did not exist, but defaultdict automatically created it with the default value 0.
+
+----------------------------------------
+3. defaultdict(int) for Counting
+----------------------------------------
+
+from collections import defaultdict
+
+numbers = [1, 2, 2, 3, 3, 3]
+
+freq = defaultdict(int)
+
+for number in numbers:
+    freq[number] += 1
+
+print(freq)
+
+Result:
+
+{
+    1: 1,
+    2: 2,
+    3: 3
+}
+
+Compare this with a normal dictionary:
+
+freq[number] = freq.get(number, 0) + 1
+
+defaultdict removes the need for get().
+
+----------------------------------------
+4. defaultdict(list) for Grouping
+----------------------------------------
+
+from collections import defaultdict
+
+students = [
+    ("Rahul", "Python"),
+    ("Anita", "Java"),
+    ("Kiran", "Python"),
+    ("Arjun", "Java")
+]
+
+groups = defaultdict(list)
+
+for name, language in students:
+    groups[language].append(name)
+
+print(groups)
+
+Result:
+
+{
+    "Python": ["Rahul", "Kiran"],
+    "Java": ["Anita", "Arjun"]
+}
+
+No need for:
+
+if language not in groups:
+    groups[language] = []
+
+----------------------------------------
+5. defaultdict(set)
+----------------------------------------
+
+from collections import defaultdict
+
+groups = defaultdict(set)
+
+groups["Python"].add("Rahul")
+groups["Python"].add("Rahul")
+groups["Python"].add("Anita")
+
+print(groups)
+
+Result:
+
+{
+    "Python": {"Rahul", "Anita"}
+}
+
+The set automatically removes duplicates.
+
+----------------------------------------
+6. defaultdict with a Custom Default
+----------------------------------------
+
+def default_user():
+    return {
+        "count": 0,
+        "active": False
+    }
+
+users = defaultdict(default_user)
+
+print(users["Rahul"])
+
+Output:
+
+{
+    "count": 0,
+    "active": False
+}
+
+The function is called whenever a missing key is accessed.
+
+----------------------------------------
+7. defaultdict for Nested Data
+----------------------------------------
+
+from collections import defaultdict
+
+data = defaultdict(lambda: defaultdict(list))
+
+data["Python"]["beginner"].append("Rahul")
+data["Python"]["advanced"].append("Anita")
+
+Result:
+
+{
+    "Python": {
+        "beginner": ["Rahul"],
+        "advanced": ["Anita"]
+    }
+}
+
+This can simplify deeply nested data construction.
+
+----------------------------------------
+8. defaultdict vs Normal Dictionary
+----------------------------------------
+
+Normal dictionary:
+
+data = {}
+
+data["Python"] = data.get("Python", [])
+data["Python"].append("Rahul")
+
+defaultdict:
+
+data = defaultdict(list)
+
+data["Python"].append("Rahul")
+
+Both work.
+
+defaultdict is cleaner when the same default-initialization pattern happens repeatedly.
+
+----------------------------------------
+9. Important Behavior
+----------------------------------------
+
+Accessing a missing key creates it.
+
+data = defaultdict(int)
+
+print(data)
+
+Output:
+
+defaultdict(<class 'int'>, {})
+
+Now:
+
+print(data["score"])
+
+print(data)
+
+The dictionary now contains:
+
+{
+    "score": 0
+}
+
+This is different from normal dict.get().
+
+----------------------------------------
+10. defaultdict vs get()
+----------------------------------------
+
+Normal dictionary:
+
+data = {}
+
+print(data.get("score", 0))
+
+The dictionary remains:
+
+{}
+
+defaultdict:
+
+data = defaultdict(int)
+
+print(data["score"])
+
+The dictionary becomes:
+
+{
+    "score": 0
+}
+
+Important distinction:
+
+get()
+→ safely reads without creating the key.
+
+defaultdict
+→ automatically creates the missing key when accessed.
+
+----------------------------------------
+11. defaultdict in DSA
+----------------------------------------
+
+defaultdict is especially useful for:
+
+• Frequency counting
+• Grouping
+• Graph representation
+• Adjacency lists
+• Nested structures
+• Bucketing data
+
+Example — graph:
+
+from collections import defaultdict
+
+graph = defaultdict(list)
+
+graph["A"].append("B")
+graph["A"].append("C")
+graph["B"].append("D")
+
+Result:
+
+{
+    "A": ["B", "C"],
+    "B": ["D"]
+}
+
+This is a common graph representation in DSA.
+
+----------------------------------------
+12. Converting defaultdict to dict
+----------------------------------------
+
+data = defaultdict(list)
+
+data["Python"].append("Rahul")
+
+normal_dict = dict(data)
+
+print(normal_dict)
+
+Result:
+
+{
+    "Python": ["Rahul"]
+}
+
+----------------------------------------
+13. Complexity
+----------------------------------------
+
+Normal dictionary and defaultdict both use hash-table-based lookup.
+
+Typical average:
+
+Lookup:
+O(1)
+
+Insertion:
+O(1)
+
+Update:
+O(1)
+
+Therefore defaultdict generally has the same expected time complexity as dict.
+
+----------------------------------------
+14. Professional Mental Model
+----------------------------------------
+
+dict:
+
+"Does this key exist?"
+
+→ Check it yourself.
+
+defaultdict:
+
+"If this key does not exist, automatically create its default value."
+
+Common patterns:
+
+defaultdict(int)
+→ default 0
+
+defaultdict(list)
+→ default []
+
+defaultdict(set)
+→ default set()
+
+defaultdict(custom_function)
+→ custom default object
+
+The most important patterns to remember:
+
+defaultdict(int)
+→ counting
+
+defaultdict(list)
+→ grouping
+
+defaultdict(set)
+→ grouping without duplicates
+
+defaultdict(list) is particularly common in DSA for building adjacency lists and grouping problems.`,
+},
+{
+  heading: "Counter — Frequency Counting & Most Common Elements",
+  body: `Counter is a specialized dictionary from the collections module designed for counting hashable objects.
+
+It is one of the most useful tools for frequency-based problems in Python and DSA.
+
+----------------------------------------
+1. Import Counter
+----------------------------------------
+
+from collections import Counter
+
+----------------------------------------
+2. Basic Counter
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 3]
+
+freq = Counter(numbers)
+
+print(freq)
+
+Output:
+
+Counter({
+    3: 3,
+    2: 2,
+    1: 1
+})
+
+Each element becomes a key.
+
+Its frequency becomes the value.
+
+Conceptually:
+
+element → count
+
+----------------------------------------
+3. Counting Characters
+----------------------------------------
+
+text = "banana"
+
+freq = Counter(text)
+
+print(freq)
+
+Result:
+
+Counter({
+    "a": 3,
+    "n": 2,
+    "b": 1
+})
+
+----------------------------------------
+4. Counting Words
+----------------------------------------
+
+text = "cat dog cat dog cat"
+
+freq = Counter(text.split())
+
+print(freq)
+
+Result:
+
+Counter({
+    "cat": 3,
+    "dog": 2
+})
+
+----------------------------------------
+5. Accessing a Count
+----------------------------------------
+
+freq = Counter("banana")
+
+print(freq["a"])
+
+Output:
+
+3
+
+You can access counts just like dictionary values.
+
+----------------------------------------
+6. Missing Elements
+----------------------------------------
+
+freq = Counter("banana")
+
+print(freq["z"])
+
+Output:
+
+0
+
+Unlike a normal dictionary, Counter returns 0 for a missing element.
+
+It does not raise a KeyError.
+
+----------------------------------------
+7. most_common()
+----------------------------------------
+
+freq = Counter("banana")
+
+print(freq.most_common())
+
+Output:
+
+[
+    ("a", 3),
+    ("n", 2),
+    ("b", 1)
+]
+
+The result is ordered from highest frequency to lowest frequency.
+
+----------------------------------------
+8. Getting the Top N Elements
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 3, 4, 4]
+
+freq = Counter(numbers)
+
+print(freq.most_common(2))
+
+Output:
+
+[
+    (3, 3),
+    (2, 2)
+]
+
+This returns the two most frequent elements.
+
+----------------------------------------
+9. elements()
+----------------------------------------
+
+freq = Counter({
+    "a": 3,
+    "b": 2
+})
+
+print(list(freq.elements()))
+
+Output:
+
+[
+    "a",
+    "a",
+    "a",
+    "b",
+    "b"
+]
+
+elements() expands the counts back into individual elements.
+
+----------------------------------------
+10. Update Counts
+----------------------------------------
+
+freq = Counter("banana")
+
+freq.update("apple")
+
+print(freq)
+
+update() adds the new frequencies to the existing counts.
+
+It does NOT replace the existing counts.
+
+----------------------------------------
+11. Subtract Counts
+----------------------------------------
+
+a = Counter({
+    "apple": 5,
+    "banana": 3
+})
+
+b = Counter({
+    "apple": 2,
+    "banana": 1
+})
+
+a.subtract(b)
+
+print(a)
+
+Result:
+
+Counter({
+    "apple": 3,
+    "banana": 2
+})
+
+subtract() decreases the counts.
+
+----------------------------------------
+12. Counter Addition
+----------------------------------------
+
+a = Counter({
+    "apple": 3,
+    "banana": 2
+})
+
+b = Counter({
+    "apple": 2,
+    "orange": 4
+})
+
+result = a + b
+
+Result:
+
+Counter({
+    "orange": 4,
+    "apple": 5,
+    "banana": 2
+})
+
+Counts for matching keys are added.
+
+----------------------------------------
+13. Counter Intersection
+----------------------------------------
+
+a = Counter({
+    "apple": 5,
+    "banana": 3
+})
+
+b = Counter({
+    "apple": 2,
+    "banana": 5
+})
+
+result = a & b
+
+Result:
+
+Counter({
+    "apple": 2,
+    "banana": 3
+})
+
+The smaller count is kept.
+
+----------------------------------------
+14. Counter Union
+----------------------------------------
+
+result = a | b
+
+The larger count for each key is kept.
+
+This is different from normal dictionary union.
+
+Counter:
+
+a | b
+
+→ maximum count for each key.
+
+Dictionary:
+
+a | b
+
+→ right-hand value replaces the left-hand value for duplicate keys.
+
+----------------------------------------
+15. Counter as a Dictionary
+----------------------------------------
+
+Counter is a subclass of dict.
+
+Therefore you can use:
+
+freq.keys()
+freq.values()
+freq.items()
+
+Example:
+
+freq = Counter("banana")
+
+for char, count in freq.items():
+    print(char, count)
+
+----------------------------------------
+16. Classic DSA — Frequency Check
+----------------------------------------
+
+text = "aabbcc"
+
+freq = Counter(text)
+
+if freq["a"] == 2:
+    print("a appears twice")
+
+This makes frequency-based conditions very concise.
+
+----------------------------------------
+17. Classic DSA — Most Frequent Element
+----------------------------------------
+
+numbers = [1, 2, 2, 3, 3, 3]
+
+freq = Counter(numbers)
+
+element, count = freq.most_common(1)[0]
+
+print(element)
+print(count)
+
+Output:
+
+3
+3
+
+The most frequent element is 3.
+
+----------------------------------------
+18. Anagram Checking
+----------------------------------------
+
+Two strings are anagrams if they contain the same characters with the same frequencies.
+
+s1 = "listen"
+s2 = "silent"
+
+if Counter(s1) == Counter(s2):
+    print("Anagrams")
+
+Output:
+
+Anagrams
+
+This is a classic interview problem.
+
+----------------------------------------
+19. Finding the Unique Character
+----------------------------------------
+
+text = "aabbc"
+
+freq = Counter(text)
+
+for char in text:
+    if freq[char] == 1:
+        print(char)
+        break
+
+Output:
+
+c
+
+This finds the first character that appears exactly once.
+
+----------------------------------------
+20. Counter vs Normal Dictionary
+----------------------------------------
+
+Normal dictionary:
+
+freq = {}
+
+for x in numbers:
+    freq[x] = freq.get(x, 0) + 1
+
+Counter:
+
+freq = Counter(numbers)
+
+Both solve frequency counting.
+
+Normal dict:
+
+→ More fundamental.
+
+Counter:
+
+→ More concise and specialized.
+
+----------------------------------------
+21. Counter vs defaultdict(int)
+----------------------------------------
+
+defaultdict:
+
+from collections import defaultdict
+
+freq = defaultdict(int)
+
+for x in numbers:
+    freq[x] += 1
+
+Counter:
+
+from collections import Counter
+
+freq = Counter(numbers)
+
+Both are useful for counting.
+
+Mental model:
+
+defaultdict(int)
+→ Build the counting logic yourself.
+
+Counter
+→ Ready-made frequency counter.
+
+----------------------------------------
+22. Important: Counter Can Store Zero or Negative Counts
+----------------------------------------
+
+freq = Counter()
+
+freq["a"] = 3
+freq["b"] = 0
+freq["c"] = -1
+
+print(freq)
+
+Counter can contain zero and negative counts.
+
+However, some Counter operations such as `+`, `-`, `&`, and `|` have special behavior around non-positive counts.
+
+----------------------------------------
+23. Professional DSA Patterns
+----------------------------------------
+
+Frequency counting:
+
+Counter(data)
+
+Most frequent:
+
+Counter(data).most_common(1)
+
+Top K:
+
+Counter(data).most_common(k)
+
+Character frequency:
+
+Counter(string)
+
+Word frequency:
+
+Counter(text.split())
+
+Anagram:
+
+Counter(s1) == Counter(s2)
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+dict
+
+→ key → value
+
+defaultdict
+
+→ missing key automatically gets a default
+
+Counter
+
+→ element → frequency
+
+The three important patterns are:
+
+dict
+→ General mapping
+
+defaultdict
+→ Automatic initialization
+
+Counter
+→ Frequency counting
+
+Counter is one of the most important Python dictionary-based tools for coding interviews, frequency problems, anagrams, top-K problems, and data analysis.`,
+},
+{
+  heading: "ChainMap — Combining Multiple Dictionaries",
+  body: `ChainMap is a dictionary-like class from the collections module that allows you to work with multiple dictionaries as a single mapping.
+
+It is useful when you want to search through multiple dictionaries without actually merging or copying them.
+
+----------------------------------------
+1. Import ChainMap
+----------------------------------------
+
+from collections import ChainMap
+
+----------------------------------------
+2. Basic ChainMap
+----------------------------------------
+
+defaults = {
+    "theme": "light",
+    "language": "English",
+    "timeout": 30
+}
+
+user = {
+    "theme": "dark"
+}
+
+config = ChainMap(user, defaults)
+
+print(config["theme"])
+
+Output:
+
+dark
+
+ChainMap searches dictionaries from left to right.
+
+user
+  ↓
+defaults
+
+The first matching key wins.
+
+----------------------------------------
+3. Fallback Behavior
+----------------------------------------
+
+defaults = {
+    "theme": "light",
+    "language": "English"
+}
+
+user = {
+    "theme": "dark"
+}
+
+config = ChainMap(user, defaults)
+
+print(config["theme"])
+print(config["language"])
+
+Output:
+
+dark
+English
+
+"theme" is found in user.
+
+"language" is not found in user, so ChainMap searches defaults.
+
+----------------------------------------
+4. Lookup Order
+----------------------------------------
+
+a = {
+    "x": 10,
+    "y": 20
+}
+
+b = {
+    "y": 200,
+    "z": 30
+}
+
+data = ChainMap(a, b)
+
+print(data["x"])
+print(data["y"])
+print(data["z"])
+
+Output:
+
+10
+20
+30
+
+For "y", both dictionaries contain the key.
+
+The first dictionary wins:
+
+a["y"] → 20
+
+b["y"] → 200
+
+Result:
+
+20
+
+----------------------------------------
+5. ChainMap Does NOT Merge Dictionaries
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "y": 20
+}
+
+data = ChainMap(a, b)
+
+The original dictionaries remain separate.
+
+ChainMap simply provides a combined view for lookup.
+
+This is different from:
+
+merged = {
+    **a,
+    **b
+}
+
+The ** approach creates a new dictionary.
+
+ChainMap does not create a combined copy.
+
+----------------------------------------
+6. Accessing the Original Dictionaries
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "y": 20
+}
+
+data = ChainMap(a, b)
+
+print(data.maps)
+
+Output conceptually:
+
+[
+    {"x": 10},
+    {"y": 20}
+]
+
+maps contains the dictionaries being searched.
+
+----------------------------------------
+7. Changes Are Reflected
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "y": 20
+}
+
+data = ChainMap(a, b)
+
+a["x"] = 100
+
+print(data["x"])
+
+Output:
+
+100
+
+Because ChainMap references the original dictionaries instead of copying them.
+
+----------------------------------------
+8. Adding a New Value
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "y": 20
+}
+
+data = ChainMap(a, b)
+
+data["z"] = 30
+
+print(a)
+
+Result:
+
+{
+    "x": 10,
+    "z": 30
+}
+
+By default, new assignments are made to the first dictionary.
+
+----------------------------------------
+9. Updating an Existing Key
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "x": 100
+}
+
+data = ChainMap(a, b)
+
+data["x"] = 50
+
+print(a)
+print(b)
+
+Result:
+
+a:
+
+{
+    "x": 50
+}
+
+b:
+
+{
+    "x": 100
+}
+
+Updates happen in the first mapping.
+
+----------------------------------------
+10. new_child()
+----------------------------------------
+
+ChainMap provides new_child() to create a new layer.
+
+defaults = {
+    "theme": "light",
+    "language": "English"
+}
+
+config = ChainMap(defaults)
+
+user_config = config.new_child({
+    "theme": "dark"
+})
+
+print(user_config["theme"])
+
+Output:
+
+dark
+
+The new dictionary becomes the first layer.
+
+----------------------------------------
+11. parents
+----------------------------------------
+
+You can remove the first layer using parents.
+
+defaults = {
+    "theme": "light"
+}
+
+config = ChainMap(
+    {"theme": "dark"},
+    defaults
+)
+
+print(config["theme"])
+
+Output:
+
+dark
+
+print(config.parents["theme"])
+
+Output:
+
+light
+
+parents represents the ChainMap without its first mapping.
+
+----------------------------------------
+12. Real-World Example — Configuration
+----------------------------------------
+
+default_config = {
+    "debug": False,
+    "port": 8000,
+    "host": "localhost"
+}
+
+environment_config = {
+    "debug": True
+}
+
+user_config = {
+    "port": 9000
+}
+
+config = ChainMap(
+    user_config,
+    environment_config,
+    default_config
+)
+
+print(config["debug"])
+print(config["port"])
+print(config["host"])
+
+Output:
+
+True
+9000
+localhost
+
+Priority:
+
+user_config
+    ↓
+environment_config
+    ↓
+default_config
+
+----------------------------------------
+13. ChainMap vs Dictionary Merge
+----------------------------------------
+
+ChainMap:
+
+config = ChainMap(user, defaults)
+
+→ No copying.
+
+→ Searches multiple dictionaries.
+
+→ Changes to original dictionaries are visible.
+
+Dictionary merge:
+
+config = {
+    **defaults,
+    **user
+}
+
+→ Creates a new dictionary.
+
+→ Data is copied into the new dictionary.
+
+Mental model:
+
+ChainMap
+→ "Search these dictionaries together."
+
+Merge
+→ "Create one new dictionary."
+
+----------------------------------------
+14. Iteration
+----------------------------------------
+
+a = {
+    "x": 10
+}
+
+b = {
+    "y": 20
+}
+
+data = ChainMap(a, b)
+
+for key, value in data.items():
+    print(key, value)
+
+ChainMap behaves similarly to a mapping during iteration.
+
+----------------------------------------
+15. Useful Methods
+----------------------------------------
+
+keys()
+
+→ Available keys across the mappings.
+
+values()
+
+→ Values associated with the visible keys.
+
+items()
+
+→ Key-value pairs.
+
+get()
+
+→ Safe lookup.
+
+new_child()
+
+→ Add a new front layer.
+
+parents
+
+→ Remove the first layer.
+
+----------------------------------------
+16. DSA / Practical Use
+----------------------------------------
+
+ChainMap is less common in algorithmic DSA than:
+
+dict
+defaultdict
+Counter
+set
+
+But it is useful when data has multiple priority levels.
+
+Examples:
+
+• Configuration systems
+• Environment overrides
+• Default settings
+• Scoped variables
+• Layered application settings
+
+----------------------------------------
+17. Professional Mental Model
+----------------------------------------
+
+ChainMap:
+
+ChainMap(A, B, C)
+
+means:
+
+Search A
+    ↓
+If not found → search B
+    ↓
+If not found → search C
+
+First matching key wins.
+
+For example:
+
+user settings
+      ↓
+environment settings
+      ↓
+default settings
+
+This makes ChainMap useful whenever you need hierarchical or fallback-based dictionary lookup without physically merging the dictionaries.`,
+},
+{
+  heading: "OrderedDict — Specialized Ordered Dictionary",
+  body: `OrderedDict is a specialized dictionary from the collections module.
+
+Modern Python dictionaries already preserve insertion order, so OrderedDict is mainly useful when you need additional ordering operations such as moving keys or removing the first/last item.
+
+----------------------------------------
+1. Import OrderedDict
+----------------------------------------
+
+from collections import OrderedDict
+
+----------------------------------------
+2. Creating an OrderedDict
+----------------------------------------
+
+students = OrderedDict()
+
+students["Rahul"] = 85
+students["Anita"] = 95
+students["Kiran"] = 75
+
+print(students)
+
+The entries remain in insertion order.
+
+----------------------------------------
+3. Iteration
+----------------------------------------
+
+for name, score in students.items():
+    print(name, score)
+
+Output:
+
+Rahul 85
+Anita 95
+Kiran 75
+
+----------------------------------------
+4. Modern dict vs OrderedDict
+----------------------------------------
+
+Modern Python:
+
+student = {
+    "Rahul": 85,
+    "Anita": 95
+}
+
+The normal dict already preserves insertion order.
+
+Therefore, for simple insertion-order preservation:
+
+dict
+
+is usually enough.
+
+OrderedDict becomes useful when you need its specialized ordering methods.
+
+----------------------------------------
+5. move_to_end()
+----------------------------------------
+
+from collections import OrderedDict
+
+data = OrderedDict([
+    ("a", 1),
+    ("b", 2),
+    ("c", 3)
+])
+
+data.move_to_end("a")
+
+print(data)
+
+Result:
+
+{
+    "b": 2,
+    "c": 3,
+    "a": 1
+}
+
+The key "a" moves to the end.
+
+----------------------------------------
+6. Move a Key to the Beginning
+----------------------------------------
+
+data.move_to_end("c", last=False)
+
+Result:
+
+{
+    "c": 3,
+    "b": 2,
+    "a": 1
+}
+
+last=False moves the key to the beginning.
+
+----------------------------------------
+7. popitem()
+----------------------------------------
+
+data = OrderedDict([
+    ("a", 1),
+    ("b", 2),
+    ("c", 3)
+])
+
+item = data.popitem()
+
+print(item)
+
+Output:
+
+("c", 3)
+
+By default, popitem() removes the last item.
+
+----------------------------------------
+8. Remove the First Item
+----------------------------------------
+
+data = OrderedDict([
+    ("a", 1),
+    ("b", 2),
+    ("c", 3)
+])
+
+item = data.popitem(last=False)
+
+print(item)
+
+Output:
+
+("a", 1)
+
+This is one of the useful differences between OrderedDict and a normal dictionary.
+
+----------------------------------------
+9. Reordering Example
+----------------------------------------
+
+tasks = OrderedDict([
+    ("task1", "Study"),
+    ("task2", "Practice"),
+    ("task3", "Project")
+])
+
+tasks.move_to_end("task1")
+
+Now:
+
+task2
+task3
+task1
+
+This can be useful when implementing priority or ordering behavior.
+
+----------------------------------------
+10. OrderedDict Equality
+----------------------------------------
+
+a = OrderedDict([
+    ("a", 1),
+    ("b", 2)
+])
+
+b = OrderedDict([
+    ("b", 2),
+    ("a", 1)
+])
+
+print(a == b)
+
+Output:
+
+False
+
+For OrderedDict objects, order can matter when comparing them.
+
+----------------------------------------
+11. Normal Dictionary Equality
+----------------------------------------
+
+a = {
+    "a": 1,
+    "b": 2
+}
+
+b = {
+    "b": 2,
+    "a": 1
+}
+
+print(a == b)
+
+Output:
+
+True
+
+Normal dictionary equality focuses on key-value pairs rather than insertion order.
+
+----------------------------------------
+12. Creating from a List of Tuples
+----------------------------------------
+
+data = OrderedDict([
+    ("name", "Rahul"),
+    ("age", 21),
+    ("city", "Mumbai")
+])
+
+This is a convenient way to explicitly define the order.
+
+----------------------------------------
+13. Real-World Use — LRU Cache Concept
+----------------------------------------
+
+OrderedDict is historically important for implementing an LRU
+(Least Recently Used) cache.
+
+Example:
+
+from collections import OrderedDict
+
+cache = OrderedDict()
+
+cache["A"] = 100
+cache["B"] = 200
+cache["C"] = 300
+
+When an item is accessed, it can be moved to the end:
+
+value = cache.pop("A")
+cache["A"] = value
+
+Now the order becomes:
+
+B
+C
+A
+
+A is treated as the most recently used item.
+
+Python also provides functools.lru_cache for many caching tasks, but OrderedDict helps explain how an LRU cache can be implemented manually.
+
+----------------------------------------
+14. Complexity
+----------------------------------------
+
+Important OrderedDict operations such as:
+
+move_to_end()
+popitem()
+
+are designed to be efficient.
+
+Typical complexity:
+
+Lookup:
+O(1) average
+
+Insertion:
+O(1) average
+
+Deletion:
+O(1) average
+
+Move to end:
+O(1)
+
+----------------------------------------
+15. When Should You Use OrderedDict?
+----------------------------------------
+
+Use normal dict when:
+
+• You only need insertion order.
+• You need normal dictionary behavior.
+• You are writing modern Python code.
+
+Use OrderedDict when:
+
+• You need move_to_end().
+• You need efficient first/last item operations.
+• You are implementing ordering-based structures.
+• You are studying or implementing LRU-style caches.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+dict
+
+→ Normal modern mapping
+→ Preserves insertion order
+
+OrderedDict
+
+→ Specialized ordered mapping
+→ Provides extra ordering operations
+
+Most important methods:
+
+move_to_end(key)
+
+→ Move a key to the beginning/end.
+
+popitem()
+
+→ Remove an item.
+
+popitem(last=False)
+
+→ Remove the first item.
+
+For modern Python development, remember:
+
+Use dict by default.
+
+Use OrderedDict when you specifically need its additional ordering behavior.`,
+},
+            ],
+            code:`# ── DICTIONARIES — key-value pairs, O(1) average lookup ──────────
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "gpa": 8.75
+}
+
+# Access values
+print(student["name"])       # Rahul
+print(student.get("phone", "N/A"))  # Safe access
+
+# Add / Update
+student["college"] = "IIT Bombay"
+student["age"] = 22
+student.update({"rank": 5, "city": "Mumbai"})
+
+# Remove
+del student["rank"]
+gpa = student.pop("gpa")     # Remove and return value
+
+# Dictionary iteration
+for key in student:          # Keys
+    print(key)
+
+for value in student.values():  # Values
+    print(value)
+
+for key, value in student.items():  # Key + Value
+    print(f"{key}: {value}")
+
+# Dictionary comprehension
+squares = {x: x**2 for x in range(1, 6)}
+filtered = {k: v for k, v in squares.items() if v > 4}
+
+# Frequency counting — classic DSA use
+text = "the cat sat on the mat the cat"
+freq = {}
+
+for word in text.split():
+    freq[word] = freq.get(word, 0) + 1
+
+print(freq)
+
 # Shorter with Counter
 from collections import Counter
+
 freq2 = Counter(text.split())
-print(freq2.most_common(3))`,
-            resources: [
-              { label: "Python Dictionaries (Real Python)", url: "https://realpython.com/python-dicts/", type: "article" },
+print(freq2.most_common(3))
+
+# Fast lookup — O(1) average
+users = {
+    101: "Rahul",
+    102: "Anita",
+    103: "Kiran"
+}
+
+print(users[102])            # Anita
+
+# Dictionary as an index
+index = {
+    "python": 0,
+    "java": 1,
+    "sql": 2
+}
+
+print(index["python"])       # 0
+
+# Nested dictionary
+employees = {
+    101: {
+        "name": "Rahul",
+        "role": "Python Developer"
+    },
+    102: {
+        "name": "Anita",
+        "role": "Backend Developer"
+    }
+}
+
+print(employees[101]["role"])
+
+# Two Sum — classic interview pattern
+nums = [2, 7, 11, 15]
+target = 9
+seen = {}
+
+for i, num in enumerate(nums):
+    required = target - num
+
+    if required in seen:
+        print(seen[required], i)
+        break
+
+    seen[num] = i
+
+# Dictionary membership — O(1) average
+"python" in index
+102 in users
+
+# Important:
+# Dictionary keys must be hashable.
+# Common keys: str, int, float, tuple
+# Lists and dictionaries cannot be dictionary keys.
+`,
+resources: [
+  { label: "Python Dictionaries (Real Python)", url: "https://realpython.com/python-dicts/", type: "article" },
             ],
           },
           {
-            title: "Tuples & Sets",
+           title: "Tuples — Ordered & Immutable",
             type: "concept",
-            detail: "Tuples: immutable sequences, great for multiple return values and dict keys. Sets: unordered unique elements, O(1) membership testing.",
-            code: `# ── TUPLES — immutable lists ───────────────────────────────────
+            detail: "Python's built-in immutable sequence type for storing ordered elements. Tuples preserve insertion order, support indexing and slicing, and are useful for fixed collections of values, multiple return values, and dictionary keys when their elements are hashable.",
+            subsections: [
+                {
+  heading: "Introduction to Tuples",
+  body: `A tuple is a collection of values stored in a single variable, very similar to a list. The key difference is that a tuple is immutable. Once created, you cannot change, add, or remove its elements.A tuple is an ordered collection in Python, similar to a list.
+
+The key difference is that a list can be changed after creation, while a tuple cannot be modified, added to, or have elements removed after creation.
+
+----------------------------------------
+1. List — Can Be Changed
+----------------------------------------
+
+cities_list = ["Delhi", "Mumbai", "Pune"]
+
+cities_list[0] = "Chennai"
+
+print(cities_list)
+
+Output:
+
+["Chennai", "Mumbai", "Pune"]
+
+The element was successfully changed because lists are mutable.
+
+----------------------------------------
+2. Tuple — Cannot Be Changed
+----------------------------------------
+
+cities_tuple = ("Delhi", "Mumbai", "Pune")
+
+cities_tuple[0] = "Chennai"
+
+This raises:
+
+TypeError
+
+Tuples are immutable, so their elements cannot be changed after creation.
+
+----------------------------------------
+3. Key Properties of Tuples
+----------------------------------------
+
+Ordered:
+Items stay in the order in which they were added.
+
+Allows duplicates:
+The same value can appear more than once.
+
+Immutable:
+Elements cannot be modified, added, or removed after creation.
+
+Can hold different data types:
+A tuple can contain integers, strings, floats, booleans, lists, and other Python objects.
+
+Example:
+
+data = (10, "Python", 8.5, True)
+
+----------------------------------------
+4. Common Uses of Tuples
+----------------------------------------
+
+Tuples are useful when data should remain fixed.
+
+Common examples include:
+
+• Coordinates
+• RGB colour values
+• Database records
+• Multiple return values from functions
+• Fixed configuration values
+
+Example:
+
 coords = (10.5, 20.3)
-rgb    = (255, 128, 0)
-single = (42,)          # ← comma required for single element!
 
-# Unpacking — most common tuple use
-x, y = (10, 20)
-a, b = b, a             # Swap!
-first, *rest = (1, 2, 3, 4, 5)  # first=1, rest=[2,3,4,5]
+rgb = (255, 128, 0)
 
-# Multiple return values use tuples
-def min_max(nums):
-    return min(nums), max(nums)
+Because tuples are immutable, they are suitable for representing data whose structure and values should not change.`,
+},
 
-lo, hi = min_max([3, 1, 4, 1, 5])
+ {
+      heading: "Creating Tuples",
+      body: `Tuples can be created using parentheses.
 
-# ── SETS — unique elements, O(1) membership ──────────────────────
-s1 = {1, 2, 3, 4, 5}
-s2 = {4, 5, 6, 7, 8}
+numbers = (10, 20, 30)
 
-# Set operations
-print(s1 | s2)   # Union:        {1,2,3,4,5,6,7,8}
-print(s1 & s2)   # Intersection: {4, 5}
-print(s1 - s2)   # Difference:   {1, 2, 3}
-print(s1 ^ s2)   # Symmetric:    {1,2,3,6,7,8}
+An empty tuple:
 
-# Remove duplicates — classic use
-data = [1, 3, 2, 3, 1, 4, 5, 4]
-unique = list(set(data))        # Order NOT preserved
+empty = ()
 
-# Membership testing — O(1) vs list O(n)
-big_set  = set(range(1000000))
-999999 in big_set               # INSTANT
-999999 in list(range(1000000))  # SLOW`,
-            resources: [
-              { label: "Python Sets (Real Python)", url: "https://realpython.com/python-sets/", type: "article" },
+A single-element tuple requires a trailing comma:
+
+single = (42,)
+
+Without the comma:
+
+single = (42)
+
+Python treats this as an integer, not a tuple.`,
+    },
+
+    {
+      heading: "Accessing Tuple Elements",
+      body: `Tuples support indexing just like lists.
+
+numbers = (10, 20, 30, 40)
+
+print(numbers[0])
+print(numbers[2])
+print(numbers[-1])
+
+Output:
+
+10
+30
+40
+
+Indexing starts from 0.
+
+Tuples also support negative indexing.`,
+    },
+        {
+      heading: "Tuple Slicing",
+      body: `Tuples support slicing using the same syntax as lists.
+
+numbers = (0, 1, 2, 3, 4, 5)
+
+print(numbers[1:4])
+print(numbers[:3])
+print(numbers[3:])
+print(numbers[::-1])
+
+Slicing creates a new tuple.
+
+Important:
+
+Tuples are immutable, but slicing is still allowed because slicing does not modify the original tuple.`,
+    },
+    {
+      heading: "Tuple Immutability",
+      body: `Tuples cannot be modified after creation.
+
+numbers = (10, 20, 30)
+
+numbers[0] = 100
+
+This raises:
+
+TypeError
+
+You cannot:
+
+• Change an element
+• Add an element
+• Remove an element
+
+If you need a mutable sequence, use a list instead.`,
+    },
+        {
+      heading: "Tuple Packing & Unpacking",
+      body: `Tuple packing means placing multiple values into one tuple.
+
+data = 10, 20, 30
+
+print(data)
+
+Result:
+
+(10, 20, 30)
+Note: Parentheses are optional during packing. Python automatically creates a tuple.
+
+Tuple unpacking assigns tuple elements to multiple variables.
+
+x, y, z = (10, 20, 30)
+
+print(x)
+print(y)
+print(z)
+
+Output:
+
+10
+20
+30
+
+The number of variables normally must match the number of values.`,
+    },
+      {
+      heading: "Extended Tuple Unpacking",
+      body: `Python supports * for collecting multiple values during unpacking.
+
+numbers = (1, 2, 3, 4, 5)
+
+first, *rest = numbers
+
+print(first)
+print(rest)
+
+Output:
+
+1
+[2, 3, 4, 5]
+
+The starred variable receives the remaining values as a list.
+
+Another example:
+
+first, *middle, last = numbers
+
+Now:
+first = 1
+middle = [2, 3, 4]
+last = 5`,
+    },
+     {
+      heading: "Tuple Methods — count() and index()",
+      body: `Tuples have fewer methods than lists because they are immutable.
+
+count() returns how many times a value occurs.
+
+numbers = (1, 2, 2, 3, 2)
+
+print(numbers.count(2))
+
+Output:
+
+3
+
+index() returns the first position of a value.
+
+print(numbers.index(3))
+
+Output:
+
+3
+
+The main built-in tuple methods are:
+
+count()
+index()`,
+    },
+     {
+      heading: "Tuple Operations",
+      body: `Tuples support concatenation and repetition.
+
+a = (1, 2)
+b = (3, 4)
+
+print(a + b)
+
+Output:
+
+(1, 2, 3, 4)
+
+Repetition:
+
+print(a * 3)
+
+Output:
+
+(1, 2, 1, 2, 1, 2)
+
+Tuples also support membership testing:
+
+print(2 in a)
+
+Output:
+
+True`,
+    },
+    {
+      heading: "Nested Tuples",
+      body: `A tuple can contain other tuples.
+
+points = (
+    (10, 20),
+    (30, 40),
+    (50, 60)
+)
+
+Access nested values:
+
+print(points[0][1])
+
+Output:
+
+20
+
+Nested tuples are useful for representing fixed structures such as coordinates and matrix-like data.`,
+    },
+
+    {
+      heading: "Tuples with Mutable Objects",
+      body: `A tuple itself is immutable, but it can contain mutable objects such as lists.
+
+data = ([1, 2], [3, 4])
+
+data[0].append(3)
+
+print(data)
+
+Result:
+
+([1, 2, 3], [3, 4])
+
+The tuple structure did not change.
+
+The list inside the tuple changed.
+
+Important distinction:
+
+Tuple → immutable
+
+Contained mutable object → can still be modified`,
+    },
+       {
+      heading: "Tuples as Dictionary Keys",
+      body: `Tuples can be used as dictionary keys when all their elements are hashable.
+
+locations = {
+    (10, 20): "Point A",
+    (30, 40): "Point B"
+}
+
+print(locations[(10, 20)])
+
+Output:
+
+Point A
+
+This is useful for coordinate-based lookup and graph or grid problems.
+
+A tuple containing a list cannot be used as a dictionary key because the list is unhashable.`,
+    },
+     {
+      heading: "Multiple Return Values",
+      body: `Python functions can return multiple values using a tuple.
+
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+result = min_max([3, 1, 4, 1, 5])
+
+print(result)
+
+Output:
+
+(1, 5)
+
+The returned values can be unpacked:
+
+low, high = min_max([3, 1, 4, 1, 5])
+
+print(low)
+print(high)
+
+Output:
+
+1
+5
+
+This is one of the most common practical uses of tuples.`,
+    },
+
+   {
+      heading: "Tuple vs List",
+      body: `Both tuples and lists are ordered sequences, but they have different purposes.
+
+List:
+
+numbers = [1, 2, 3]
+
+→ Mutable
+→ Can be changed
+→ Supports append(), remove(), etc.
+
+Tuple:
+
+numbers = (1, 2, 3)
+
+→ Immutable
+→ Cannot be changed
+→ Fewer methods
+
+Use a list when the collection needs to change.
+
+Use a tuple when the collection represents fixed data.`,
+    },
+     {
+      heading: "Tuple Performance & Memory",
+      body: `Tuples are generally smaller and can be slightly faster to iterate than lists because tuples are immutable.
+
+Common operations:
+
+Indexing:
+O(1)
+
+Membership:
+O(n)
+
+Iteration:
+O(n)
+
+Length:
+O(1)
+
+Tuples should not be chosen solely for performance, but their immutability makes them useful for fixed data.`,
+    },
+      {
+      heading: "Tuples in Real-World Python & DSA",
+      body: `Tuples appear frequently in real Python programs and DSA.
+
+Common uses include:
+
+• Coordinates
+• RGB colors
+• Database records
+• Multiple return values
+• Dictionary keys
+• Graph edges
+• Priority queues
+• Fixed configuration values
+• Sorting key-value pairs
+
+Example — graph edge:
+
+edge = ("A", "B")
+
+Weighted edge:
+
+edge = ("A", "B", 5)
+
+Example — sorting pairs:
+
+students = [
+    ("Rahul", 85),
+    ("Anita", 95),
+    ("Kiran", 75)
+    ]
+
+students.sort(key=lambda item: item[1])
+
+Tuples are especially useful when each record has a fixed structure.`
+    },
             ],
-          },
+            code: `# ── TUPLES — ordered, immutable sequences ───────────────────────
+
+coords = (10.5, 20.3)
+rgb = (255, 128, 0)
+student = ("Rahul", 21, 8.75)
+
+# Single-element tuple — comma is required
+single = (42,)
+
+# Access elements
+print(coords[0])       # 10.5
+print(coords[-1])      # 20.3
+
+# Slicing
+numbers = (0, 1, 2, 3, 4, 5)
+
+print(numbers[1:4])    # (1, 2, 3)
+print(numbers[:3])     # (0, 1, 2)
+print(numbers[3:])     # (3, 4, 5)
+
+# Tuples are immutable
+# numbers[0] = 100     # TypeError
+
+# Tuple packing
+data = 10, 20, 30
+print(data)            # (10, 20, 30)
+
+# Tuple unpacking
+x, y, z = (10, 20, 30)
+
+print(x)               # 10
+print(y)               # 20
+print(z)               # 30
+
+# Extended unpacking
+first, *rest = (1, 2, 3, 4, 5)
+
+print(first)           # 1
+print(rest)            # [2, 3, 4, 5]
+
+# Unpacking with first and last
+first, *middle, last = (1, 2, 3, 4, 5)
+
+print(first)           # 1
+print(middle)          # [2, 3, 4]
+print(last)            # 5
+
+# Swap values using tuple unpacking
+a = 10
+b = 20
+
+a, b = b, a
+
+print(a, b)            # 20 10
+
+# Tuple methods
+values = (1, 2, 2, 3, 2, 4)
+
+print(values.count(2)) # 3
+print(values.index(3)) # 3
+
+# Tuple concatenation
+a = (1, 2)
+b = (3, 4)
+
+print(a + b)           # (1, 2, 3, 4)
+
+# Tuple repetition
+print(a * 3)           # (1, 2, 1, 2, 1, 2)
+
+# Membership testing
+print(2 in a)          # True
+print(5 in a)          # False
+
+# Nested tuples
+points = (
+    (10, 20),
+    (30, 40),
+    (50, 60)
+)
+
+print(points[0])       # (10, 20)
+print(points[0][1])    # 20
+
+# Tuple containing a mutable list
+data = ([1, 2], [3, 4])
+
+data[0].append(3)
+
+print(data)            # ([1, 2, 3], [3, 4])
+
+# Multiple return values
+def min_max(numbers):
+    return min(numbers), max(numbers)
+
+low, high = min_max([3, 1, 4, 1, 5])
+
+print(low, high)       # 1 5
+
+# Tuples as dictionary keys
+locations = {
+    (10, 20): "Point A",
+    (30, 40): "Point B"
+}
+
+print(locations[(10, 20)])  # Point A
+
+# Useful with sorting
+students = [
+    ("Rahul", 85),
+    ("Anita", 95),
+    ("Kiran", 75)
+]
+
+students.sort(key=lambda item: item[1])
+
+print(students)
+
+# Tuple length
+print(len(coords))     # 2
+
+# Iteration
+for value in rgb:
+    print(value)
+
+# Tuple comparison
+print((1, 2) == (1, 2))   # True
+print((1, 2) < (2, 1))     # True
+
+# Common tuple use cases:
+# Coordinates
+# RGB values
+# Database records
+# Multiple return values
+# Dictionary keys
+# Graph edges
+# Fixed configuration data
+
+# Complexity:
+# Indexing: O(1)
+# Length: O(1)
+# Membership: O(n)
+# Iteration: O(n)
+`,
+resources: [
+  { label: "Python Tuples (Real Python)", url: "https://realpython.com/python-tuples/", type: "article" }
+]
+         },
+        {
+  title: "Strings — Ordered & Immutable Text",
+  type: "concept",
+  detail: "Python's built-in immutable sequence type for storing and manipulating text. Strings are ordered, support indexing, slicing, iteration, searching, formatting, and many useful methods for processing text. They are widely used for user input, file handling, data processing, APIs, and text-based DSA problems.",
+  subsections:[
+    {
+  heading: "Introduction to Strings",
+  body: `A string is an ordered and immutable sequence of characters in Python.
+
+Strings are used to represent text such as names, messages, sentences, file paths, usernames, and other textual data.
+
+----------------------------------------
+1. Creating Strings
+----------------------------------------
+
+name = "Rahul"
+
+message = 'Hello Python'
+
+text = """This is
+a multi-line
+string."""
+
+Python supports:
+
+• Single quotes
+• Double quotes
+• Triple quotes
+
+----------------------------------------
+2. Strings Are Ordered
+----------------------------------------
+
+Characters in a string have a fixed position called an index.
+
+text = "Python"
+
+Index:
+
+P → 0
+y → 1
+t → 2
+h → 3
+o → 4
+n → 5
+
+print(text[0])
+
+Output:
+
+P
+
+----------------------------------------
+3. Negative Indexing
+----------------------------------------
+
+Negative indexes start from the end.
+
+text = "Python"
+
+print(text[-1])
+print(text[-2])
+
+Output:
+
+n
+o
+
+Index:
+
+P  y  t  h  o  n
+0  1  2  3  4  5
+-6 -5 -4 -3 -2 -1
+
+----------------------------------------
+4. Strings Are Immutable
+----------------------------------------
+
+Once a string is created, its individual characters cannot be changed.
+
+text = "Python"
+
+text[0] = "J"
+
+This raises:
+
+TypeError
+
+You cannot directly modify a character inside an existing string.
+
+Instead, create a new string:
+
+text = "J" + text[1:]
+
+print(text)
+
+Output:
+
+Jython
+
+----------------------------------------
+5. Strings Can Contain Duplicate Characters
+----------------------------------------
+
+text = "banana"
+
+The character "a" appears multiple times.
+
+Strings preserve every character and its position.
+
+print(text)
+
+Output:
+
+banana
+
+----------------------------------------
+6. String Length
+----------------------------------------
+
+Use len() to find the number of characters.
+
+text = "Python"
+
+print(len(text))
+
+Output:
+
+6
+
+Spaces are also counted.
+
+text = "Hello World"
+
+print(len(text))
+
+The space between Hello and World is included in the length.
+
+----------------------------------------
+7. Strings Can Contain Different Characters
+----------------------------------------
+
+text = "Python 3.12!"
+
+A string can contain:
+
+• Letters
+• Numbers
+• Spaces
+• Symbols
+• Special characters
+• Unicode characters
+
+Example:
+
+message = "Hello, Rahul! 123"
+
+----------------------------------------
+8. Empty String
+----------------------------------------
+
+An empty string contains zero characters.
+
+text = ""
+
+print(len(text))
+
+Output:
+
+0
+
+An empty string is commonly used as an initial value when building text.
+
+----------------------------------------
+9. String Type
+----------------------------------------
+
+Use type() to check the data type.
+
+text = "Python"
+
+print(type(text))
+
+Output:
+
+<class 'str'>
+
+Python's string type is:
+
+str
+
+----------------------------------------
+10. Why Strings Are Important
+----------------------------------------
+
+Strings are used everywhere in Python.
+
+Common applications include:
+
+• User input
+• Names and addresses
+• File paths
+• CSV and JSON data
+• API responses
+• Web development
+• Text processing
+• Regular expressions
+• Natural language processing
+• Coding interview problems
+
+Professional mental model:
+
+String
+↓
+Ordered characters
+↓
+Indexing / slicing / iteration
+↓
+Text processing
+
+The most important property to remember is:
+
+Strings are immutable.
+
+Operations that appear to modify a string actually create a new string.`,
+},
+{
+  heading: "String Indexing & Slicing",
+  body: `Python strings are ordered sequences, so you can access individual characters using indexes and extract portions of a string using slicing.
+
+----------------------------------------
+1. String Indexing
+----------------------------------------
+
+text = "Python"
+
+print(text[0])
+print(text[1])
+print(text[2])
+
+Output:
+
+P
+y
+t
+
+Indexes start from 0.
+
+----------------------------------------
+2. Negative Indexing
+----------------------------------------
+
+text = "Python"
+
+print(text[-1])
+print(text[-2])
+print(text[-3])
+
+Output:
+
+n
+o
+h
+
+Negative indexes count from the end of the string.
+
+----------------------------------------
+3. Basic Slicing
+----------------------------------------
+
+Syntax:
+
+string[start:stop]
+
+The start index is included.
+
+The stop index is excluded.
+
+text = "Python"
+
+print(text[0:3])
+
+Output:
+
+Pyt
+
+Indexes 0, 1, and 2 are included.
+
+----------------------------------------
+4. Omitting Start
+----------------------------------------
+
+text = "Python"
+
+print(text[:3])
+
+Output:
+
+Pyt
+
+When start is omitted, Python starts from index 0.
+
+----------------------------------------
+5. Omitting Stop
+----------------------------------------
+
+text = "Python"
+
+print(text[3:])
+
+Output:
+
+hon
+
+When stop is omitted, slicing continues to the end.
+
+----------------------------------------
+6. Copying the Entire String
+----------------------------------------
+
+text = "Python"
+
+copy = text[:]
+
+print(copy)
+
+Output:
+
+Python
+
+----------------------------------------
+7. Negative Slicing
+----------------------------------------
+
+text = "Python"
+
+print(text[-3:])
+
+Output:
+
+hon
+
+print(text[:-2])
+
+Output:
+
+Pyth
+
+Negative indexes can be used with slicing just like normal indexing.
+
+----------------------------------------
+8. Slicing with a Step
+----------------------------------------
+
+Syntax:
+
+string[start:stop:step]
+
+Example:
+
+text = "Python"
+
+print(text[0:6:2])
+
+Output:
+
+Pto
+
+Indexes selected:
+
+0 → P
+2 → t
+4 → o
+
+----------------------------------------
+9. Every Second Character
+----------------------------------------
+
+text = "Python"
+
+print(text[::2])
+
+Output:
+
+Pto
+
+The step is 2.
+
+----------------------------------------
+10. Reverse a String
+----------------------------------------
+
+text = "Python"
+
+print(text[::-1])
+
+Output:
+
+nohtyP
+
+A step of -1 moves through the string backwards.
+
+This is a very common Python pattern.
+
+----------------------------------------
+11. Reverse Part of a String
+----------------------------------------
+
+text = "Python Programming"
+
+print(text[6::-1])
+
+This reverses the selected portion of the string.
+
+----------------------------------------
+12. Out-of-Range Slicing
+----------------------------------------
+
+Unlike direct indexing, slicing does not raise an error when the boundary is outside the string.
+
+text = "Python"
+
+print(text[0:100])
+
+Output:
+
+Python
+
+However:
+
+print(text[100])
+
+raises:
+
+IndexError
+
+Important distinction:
+
+Indexing
+→ invalid index can raise IndexError.
+
+Slicing
+→ out-of-range boundaries are safely handled.
+
+----------------------------------------
+13. Immutability and Slicing
+----------------------------------------
+
+Slicing does not modify the original string.
+
+text = "Python"
+
+part = text[:3]
+
+print(text)
+print(part)
+
+Output:
+
+Python
+Pyt
+
+The original string remains unchanged.
+
+----------------------------------------
+14. Common Slicing Patterns
+----------------------------------------
+
+text = "Python"
+
+text[:]       → entire string
+text[:3]      → first 3 characters
+text[3:]      → from index 3 to end
+text[-3:]     → last 3 characters
+text[:-2]     → everything except last 2
+text[::2]     → every second character
+text[::-1]    → reversed string
+
+----------------------------------------
+15. Practical Example
+----------------------------------------
+
+email = "rahul@example.com"
+
+username = email[:email.index("@")]
+
+print(username)
+
+Output:
+
+rahul
+
+Slicing can be combined with string methods to extract useful parts of text.
+
+----------------------------------------
+16. Complexity
+----------------------------------------
+
+Indexing:
+
+text[i]
+
+→ O(1)
+
+Slicing:
+
+text[start:stop]
+
+→ O(k)
+
+where k is the number of characters copied into the new string.
+
+This is because strings are immutable, so slicing creates a new string.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Indexing:
+
+string[i]
+
+→ Get one character.
+
+Slicing:
+
+string[start:stop:step]
+
+→ Create a new substring.
+
+Remember:
+
+start → included
+
+stop → excluded
+
+step → movement between indexes
+
+The most important patterns are:
+
+text[0]
+text[-1]
+text[:n]
+text[n:]
+text[-n:]
+text[::2]
+text[::-1]`,
+},
+
+{
+  heading: "String Operators & Concatenation",
+  body: `Python provides simple operators for combining and repeating strings.
+
+----------------------------------------
+1. String Concatenation — +
+----------------------------------------
+
+The + operator joins two or more strings.
+
+first = "Hello"
+second = "Python"
+
+result = first + " " + second
+
+print(result)
+
+Output:
+
+Hello Python
+
+The + operator creates a new string because strings are immutable.
+
+----------------------------------------
+2. String Repetition — *
+----------------------------------------
+
+The * operator repeats a string.
+
+text = "Hi "
+
+print(text * 3)
+
+Output:
+
+Hi Hi Hi
+
+The number must be an integer.
+
+----------------------------------------
+3. Concatenating Multiple Strings
+----------------------------------------
+
+first = "Python"
+second = "is"
+third = "easy"
+
+sentence = first + " " + second + " " + third
+
+print(sentence)
+
+Output:
+
+Python is easy
+
+----------------------------------------
+4. Concatenating Strings with Numbers
+----------------------------------------
+
+You cannot directly concatenate a string and an integer.
+
+age = 21
+
+print("Age: " + age)
+
+This raises:
+
+TypeError
+
+Convert the number to a string first:
+
+print("Age: " + str(age))
+
+Output:
+
+Age: 21
+
+----------------------------------------
+5. Using f-Strings
+----------------------------------------
+
+A cleaner approach is to use f-strings.
+
+name = "Rahul"
+age = 21
+
+message = f"My name is {name} and I am {age} years old."
+
+print(message)
+
+Output:
+
+My name is Rahul and I am 21 years old.
+
+f-strings are generally preferred for readable string formatting.
+
+----------------------------------------
+6. String Membership — in
+----------------------------------------
+
+The in operator checks whether a substring or character exists.
+
+text = "Python Programming"
+
+print("Python" in text)
+
+Output:
+
+True
+
+print("Java" in text)
+
+Output:
+
+False
+
+----------------------------------------
+7. String Membership — not in
+----------------------------------------
+
+text = "Python"
+
+print("Java" not in text)
+
+Output:
+
+True
+
+Membership testing is case-sensitive.
+
+----------------------------------------
+8. String Comparison
+----------------------------------------
+
+Strings can be compared using:
+
+==
+!=
+<
+>
+<=
+>=
+
+Example:
+
+print("apple" == "apple")
+
+Output:
+
+True
+
+print("apple" == "Apple")
+
+Output:
+
+False
+
+String comparisons are case-sensitive.
+
+----------------------------------------
+9. Lexicographical Comparison
+----------------------------------------
+
+Python compares strings based on their character ordering.
+
+print("apple" < "banana")
+
+Output:
+
+True
+
+print("cat" > "car")
+
+Output:
+
+True
+
+This is similar to dictionary/alphabetical ordering, based on Unicode character values.
+
+----------------------------------------
+10. Combining Operators
+----------------------------------------
+
+name = "Rahul"
+
+print("Hello " + name)
+
+print(name * 2)
+
+print("Python" in name)
+
+These operators are commonly used when processing text.
+
+----------------------------------------
+11. Useful Practical Example
+----------------------------------------
+
+username = "rahul"
+domain = "example.com"
+
+email = username + "@" + domain
+
+print(email)
+
+Output:
+
+rahul@example.com
+
+----------------------------------------
+12. Important Difference
+----------------------------------------
+
++
+
+→ Concatenates strings.
+
+*
+
+→ Repeats strings.
+
+in
+
+→ Checks membership.
+
+not in
+
+→ Checks absence.
+
+==
+
+→ Checks equality.
+
+!=
+
+→ Checks inequality.
+
+Remember:
+
+Strings are immutable, so these operations create new strings rather than modifying the original string.`,
+},
+
+{
+  heading: "String Methods — Case Conversion",
+  body: `Python provides several built-in methods for changing the letter case of a string.
+
+These methods return a new string because strings are immutable.
+
+----------------------------------------
+1. upper()
+----------------------------------------
+
+Converts all letters to uppercase.
+
+text = "Python Programming"
+
+print(text.upper())
+
+Output:
+
+PYTHON PROGRAMMING
+
+----------------------------------------
+2. lower()
+----------------------------------------
+
+Converts all letters to lowercase.
+
+text = "Python Programming"
+
+print(text.lower())
+
+Output:
+
+python programming
+
+----------------------------------------
+3. capitalize()
+----------------------------------------
+
+Converts the first character to uppercase and the remaining characters to lowercase.
+
+text = "python PROGRAMMING"
+
+print(text.capitalize())
+
+Output:
+
+Python programming
+
+----------------------------------------
+4. title()
+----------------------------------------
+
+Converts the first character of each word to uppercase.
+
+text = "python programming language"
+
+print(text.title())
+
+Output:
+
+Python Programming Language
+
+----------------------------------------
+5. swapcase()
+----------------------------------------
+
+Swaps uppercase characters to lowercase and lowercase characters to uppercase.
+
+text = "Python Programming"
+
+print(text.swapcase())
+
+Output:
+
+pYTHON pROGRAMMING
+
+----------------------------------------
+6. casefold()
+----------------------------------------
+
+Converts a string to a normalized lowercase form.
+
+It is mainly useful for case-insensitive comparisons.
+
+a = "Python"
+b = "PYTHON"
+
+print(a.casefold() == b.casefold())
+
+Output:
+
+True
+
+casefold() is generally more aggressive than lower() for Unicode text.
+
+----------------------------------------
+7. Checking Case
+----------------------------------------
+
+Python also provides methods for checking the case of a string.
+
+isupper()
+
+text = "PYTHON"
+
+print(text.isupper())
+
+Output:
+
+True
+
+islower()
+
+text = "python"
+
+print(text.islower())
+
+Output:
+
+True
+
+istitle()
+
+text = "Python Programming"
+
+print(text.istitle())
+
+Output:
+
+True
+
+----------------------------------------
+8. Important: These Methods Do Not Modify the Original
+----------------------------------------
+
+text = "python"
+
+text.upper()
+
+print(text)
+
+Output:
+
+python
+
+The original string remains unchanged.
+
+To store the result:
+
+text = text.upper()
+
+print(text)
+
+Output:
+
+PYTHON
+
+----------------------------------------
+9. Practical Example — Case-Insensitive Input
+----------------------------------------
+
+user_input = "YES"
+
+if user_input.casefold() == "yes":
+    print("Confirmed")
+
+This allows different capitalization styles such as:
+
+YES
+Yes
+yes
+yEs
+
+to be treated as equivalent.
+
+----------------------------------------
+10. Common Methods to Remember
+----------------------------------------
+
+upper()
+→ Convert to uppercase.
+
+lower()
+→ Convert to lowercase.
+
+capitalize()
+→ Capitalize the first character.
+
+title()
+→ Capitalize each word.
+
+swapcase()
+→ Reverse the case.
+
+casefold()
+→ Strong case normalization for comparisons.
+
+isupper()
+→ Check whether letters are uppercase.
+
+islower()
+→ Check whether letters are lowercase.
+
+istitle()
+→ Check title case.
+
+Professional mental model:
+
+Transformation methods
+→ upper(), lower(), capitalize(), title(), swapcase(), casefold()
+
+Checking methods
+→ isupper(), islower(), istitle()
+
+All string transformations return a new string because Python strings are immutable.`,
+},
+
+{
+  heading: "String Methods — Searching & Finding",
+  body: `Python provides several methods for searching inside strings.
+
+These methods are useful for checking whether text exists, finding its position, and counting occurrences.
+
+----------------------------------------
+1. find()
+----------------------------------------
+
+find() returns the index of the first occurrence of a substring.
+
+text = "Python Programming"
+
+print(text.find("Python"))
+
+Output:
+
+0
+
+print(text.find("Programming"))
+
+Output:
+
+7
+
+If the substring is not found, find() returns:
+
+-1
+
+print(text.find("Java"))
+
+Output:
+
+-1
+
+----------------------------------------
+2. rfind()
+----------------------------------------
+
+rfind() searches from the right side and returns the index of the last occurrence.
+
+text = "banana"
+
+print(text.rfind("a"))
+
+Output:
+
+5
+
+----------------------------------------
+3. index()
+----------------------------------------
+
+index() works similarly to find() when the substring exists.
+
+text = "Python Programming"
+
+print(text.index("Python"))
+
+Output:
+
+0
+
+The important difference:
+
+find()
+→ Returns -1 if not found.
+
+index()
+→ Raises ValueError if not found.
+
+Example:
+
+text.find("Java")
+
+Output:
+
+-1
+
+text.index("Java")
+
+Raises:
+
+ValueError
+
+----------------------------------------
+4. rindex()
+----------------------------------------
+
+rindex() returns the position of the last occurrence.
+
+text = "banana"
+
+print(text.rindex("a"))
+
+Output:
+
+5
+
+Like index(), rindex() raises ValueError if the substring is not found.
+
+----------------------------------------
+5. count()
+----------------------------------------
+
+count() returns the number of non-overlapping occurrences of a substring.
+
+text = "banana"
+
+print(text.count("a"))
+
+Output:
+
+3
+
+print(text.count("an"))
+
+Output:
+
+2
+
+----------------------------------------
+6. startswith()
+----------------------------------------
+
+Checks whether a string begins with a specified substring.
+
+text = "Python Programming"
+
+print(text.startswith("Python"))
+
+Output:
+
+True
+
+print(text.startswith("Java"))
+
+Output:
+
+False
+
+----------------------------------------
+7. endswith()
+----------------------------------------
+
+Checks whether a string ends with a specified substring.
+
+filename = "report.pdf"
+
+print(filename.endswith(".pdf"))
+
+Output:
+
+True
+
+print(filename.endswith(".txt"))
+
+Output:
+
+False
+
+----------------------------------------
+8. Using startswith() with Multiple Options
+----------------------------------------
+
+filename = "photo.jpg"
+
+if filename.endswith((".jpg", ".png", ".gif")):
+    print("Image file")
+
+startswith() and endswith() can accept a tuple of possible strings.
+
+----------------------------------------
+9. Searching with Start and End Positions
+----------------------------------------
+
+text = "Python Python Python"
+
+print(text.find("Python", 7))
+
+The search begins from index 7.
+
+You can also specify both start and end positions:
+
+text.find("Python", 7, 15)
+
+This searches only within the specified range.
+
+----------------------------------------
+10. Practical Example — Find @ in Email
+----------------------------------------
+
+email = "rahul@example.com"
+
+position = email.find("@")
+
+print(position)
+
+Output:
+
+5
+
+You can then use the position to separate the username and domain.
+
+----------------------------------------
+11. Practical Example — File Extension
+----------------------------------------
+
+filename = "report.pdf"
+
+if filename.endswith(".pdf"):
+    print("PDF file")
+
+This is a common real-world use of endswith().
+
+----------------------------------------
+12. Practical Example — Counting Characters
+----------------------------------------
+
+text = "programming"
+
+print(text.count("m"))
+
+Output:
+
+2
+
+Frequency counting can also be done using Counter, but count() is convenient when checking one specific substring.
+
+----------------------------------------
+13. Important Difference
+----------------------------------------
+
+find()
+→ Search from the left.
+→ Returns -1 when not found.
+
+rfind()
+→ Search from the right.
+→ Returns -1 when not found.
+
+index()
+→ Search from the left.
+→ Raises ValueError when not found.
+
+rindex()
+→ Search from the right.
+→ Raises ValueError when not found.
+
+count()
+→ Count occurrences.
+
+startswith()
+→ Check beginning.
+
+endswith()
+→ Check ending.
+
+----------------------------------------
+Professional Mental Model
+----------------------------------------
+
+Need the position?
+
+→ find()
+→ rfind()
+→ index()
+→ rindex()
+
+Need the number of occurrences?
+
+→ count()
+
+Need to check the beginning?
+
+→ startswith()
+
+Need to check the ending?
+
+→ endswith()
+
+For safe searching where a missing substring is expected, find() is often convenient because it returns -1 instead of raising an exception.`,
+},
+{
+  heading: "String Methods — Whitespace & Trimming",
+  body: `Python provides string methods for removing unwanted whitespace from the beginning and end of text.
+
+These methods are especially useful when processing user input, files, CSV data, and API data.
+
+----------------------------------------
+1. strip()
+----------------------------------------
+
+strip() removes whitespace from both the beginning and the end of a string.
+
+text = "   Python   "
+
+print(text.strip())
+
+Output:
+
+Python
+
+The original string is unchanged because strings are immutable.
+
+----------------------------------------
+2. lstrip()
+----------------------------------------
+
+lstrip() removes whitespace from the left side.
+
+text = "   Python   "
+
+print(text.lstrip())
+
+Output:
+
+Python   
+
+Only the leading spaces are removed.
+
+----------------------------------------
+3. rstrip()
+----------------------------------------
+
+rstrip() removes whitespace from the right side.
+
+text = "   Python   "
+
+print(text.rstrip())
+
+Output:
+
+   Python
+
+Only the trailing spaces are removed.
+
+----------------------------------------
+4. Removing Specific Characters
+----------------------------------------
+
+strip(), lstrip(), and rstrip() can also receive characters to remove.
+
+text = "---Python---"
+
+print(text.strip("-"))
+
+Output:
+
+Python
+
+The specified characters are removed from the ends.
+
+----------------------------------------
+5. strip() Does NOT Remove Characters from the Middle
+----------------------------------------
+
+text = "---Py-thon---"
+
+print(text.strip("-"))
+
+Output:
+
+Py-thon
+
+Only the beginning and ending characters are affected.
+
+The "-" in the middle remains.
+
+----------------------------------------
+6. Removing Multiple Characters
+----------------------------------------
+
+text = "...###Python###..."
+
+print(text.strip(".#"))
+
+Output:
+
+Python
+
+The argument represents a set of characters to remove from both ends.
+
+It does not mean that the exact string ".#" must appear.
+
+----------------------------------------
+7. Practical Example — User Input
+----------------------------------------
+
+name = input("Enter your name: ")
+
+name = name.strip()
+
+print(f"Hello, {name}!")
+
+If the user enters:
+
+   Rahul   
+
+strip() removes the unnecessary spaces.
+
+----------------------------------------
+8. Practical Example — Cleaning File Data
+----------------------------------------
+
+line = "   Rahul,21,Python   "
+
+clean_line = line.strip()
+
+print(clean_line)
+
+Output:
+
+Rahul,21,Python
+
+This is commonly used when processing lines from files.
+
+----------------------------------------
+9. Practical Example — Checking Input
+----------------------------------------
+
+answer = input("Continue? ")
+
+if answer.strip().lower() == "yes":
+    print("Continuing...")
+
+This handles inputs such as:
+
+yes
+YES
+ Yes
+ yes
+
+----------------------------------------
+10. Important Difference
+----------------------------------------
+
+strip()
+→ Removes from both sides.
+
+lstrip()
+→ Removes from the left.
+
+rstrip()
+→ Removes from the right.
+
+None of these methods modify the original string.
+
+----------------------------------------
+11. Whitespace Includes More Than Spaces
+----------------------------------------
+
+By default, strip() removes common surrounding whitespace such as:
+
+• Spaces
+• Tabs
+• Newline characters
+
+Example:
+
+text = "\\n\\tPython\\n"
+
+print(text.strip())
+
+Output:
+
+Python
+
+----------------------------------------
+12. Professional Mental Model
+----------------------------------------
+
+Raw input:
+
+"   Python   "
+
+strip()
+↓
+"Python"
+
+lstrip()
+↓
+"Python   "
+
+rstrip()
+↓
+"   Python"
+
+These methods are essential for cleaning text before comparison, validation, storage, or further processing.`,
+},
+
+{
+  heading: "String Methods — Splitting & Joining",
+  body: `Python provides split() and join() for converting between strings and sequences of strings.
+
+These methods are extremely important for text processing, CSV data, user input, and DSA problems.
+
+----------------------------------------
+1. split()
+----------------------------------------
+
+split() divides a string into a list of smaller strings.
+
+text = "Python is easy"
+
+words = text.split()
+
+print(words)
+
+Output:
+
+["Python", "is", "easy"]
+
+By default, split() uses whitespace as the separator.
+
+----------------------------------------
+2. Splitting with a Specific Separator
+----------------------------------------
+
+text = "apple,banana,orange"
+
+fruits = text.split(",")
+
+print(fruits)
+
+Output:
+
+["apple", "banana", "orange"]
+
+The separator can be specified as an argument.
+
+----------------------------------------
+3. split() with a Maximum Number of Splits
+----------------------------------------
+
+text = "Python is very easy"
+
+result = text.split(" ", 2)
+
+print(result)
+
+Output:
+
+["Python", "is", "very easy"]
+
+The second argument specifies the maximum number of splits.
+
+----------------------------------------
+4. splitlines()
+----------------------------------------
+
+splitlines() separates a string at line boundaries.
+
+text = """Python
+Java
+C++"""
+
+languages = text.splitlines()
+
+print(languages)
+
+Output:
+
+["Python", "Java", "C++"]
+
+This is useful when processing multi-line text.
+
+----------------------------------------
+5. join()
+----------------------------------------
+
+join() combines multiple strings into one string.
+
+words = ["Python", "is", "easy"]
+
+sentence = " ".join(words)
+
+print(sentence)
+
+Output:
+
+Python is easy
+
+The string before .join() becomes the separator.
+
+----------------------------------------
+6. Joining with a Comma
+----------------------------------------
+
+fruits = ["apple", "banana", "orange"]
+
+result = ", ".join(fruits)
+
+print(result)
+
+Output:
+
+apple, banana, orange
+
+----------------------------------------
+7. Joining with No Separator
+----------------------------------------
+
+letters = ["P", "y", "t", "h", "o", "n"]
+
+result = "".join(letters)
+
+print(result)
+
+Output:
+
+Python
+
+----------------------------------------
+8. join() Requires Strings
+----------------------------------------
+
+numbers = [1, 2, 3]
+
+",".join(numbers)
+
+This raises:
+
+TypeError
+
+Convert the values to strings first:
+
+numbers = [1, 2, 3]
+
+result = ",".join(map(str, numbers))
+
+print(result)
+
+Output:
+
+1,2,3
+
+----------------------------------------
+9. Practical Example — CSV Data
+----------------------------------------
+
+line = "Rahul,21,Python"
+
+name, age, skill = line.split(",")
+
+print(name)
+print(age)
+print(skill)
+
+Output:
+
+Rahul
+21
+Python
+
+----------------------------------------
+10. Practical Example — Creating CSV Data
+----------------------------------------
+
+data = ["Rahul", "21", "Python"]
+
+line = ",".join(data)
+
+print(line)
+
+Output:
+
+Rahul,21,Python
+
+----------------------------------------
+11. Practical Example — Word Processing
+----------------------------------------
+
+text = "Python makes programming easy"
+
+words = text.split()
+
+print(len(words))
+
+Output:
+
+4
+
+split() is commonly used in text-based interview problems.
+
+----------------------------------------
+12. Reverse Conversion
+----------------------------------------
+
+String → List:
+
+text = "Python is easy"
+
+words = text.split()
+
+List → String:
+
+sentence = " ".join(words)
+
+This gives:
+
+Python is easy
+
+----------------------------------------
+13. Important Difference
+----------------------------------------
+
+split()
+
+→ String → List
+
+join()
+
+→ List/sequence of strings → String
+
+Example:
+
+"Python is easy"
+        ↓
+     split()
+        ↓
+["Python", "is", "easy"]
+        ↓
+     join()
+        ↓
+"Python is easy"
+
+----------------------------------------
+14. Practical DSA Example — Reverse Words
+----------------------------------------
+
+text = "Python is powerful"
+
+words = text.split()
+
+reversed_text = " ".join(words[::-1])
+
+print(reversed_text)
+
+Output:
+
+powerful is Python
+
+----------------------------------------
+15. Professional Mental Model
+----------------------------------------
+
+split()
+→ Break text apart.
+
+splitlines()
+→ Break multi-line text into lines.
+
+join()
+→ Combine strings together.
+
+The most common pattern is:
+
+text.split()
+
+and:
+
+" ".join(words)
+
+These three methods/patterns are fundamental for Python text processing and coding interview problems.`,
+},
+
+{
+  heading: "String Methods — Replace & Translate",
+  body: `Python provides replace() and translate() for modifying text by replacing substrings, translating characters, and removing unwanted characters.
+
+----------------------------------------
+1. replace()
+----------------------------------------
+
+replace() replaces occurrences of one substring with another.
+
+text = "I like Java"
+
+result = text.replace("Java", "Python")
+
+print(result)
+
+Output:
+
+I like Python
+
+The original string is not modified because strings are immutable.
+
+----------------------------------------
+2. Replacing Multiple Occurrences
+----------------------------------------
+
+text = "cat cat cat"
+
+result = text.replace("cat", "dog")
+
+print(result)
+
+Output:
+
+dog dog dog
+
+By default, replace() replaces all matching occurrences.
+
+----------------------------------------
+3. Limiting Replacements
+----------------------------------------
+
+text = "cat cat cat"
+
+result = text.replace("cat", "dog", 2)
+
+print(result)
+
+Output:
+
+dog dog cat
+
+The third argument specifies the maximum number of replacements.
+
+----------------------------------------
+4. Multiple Replacements with replace().replace()
+----------------------------------------
+
+You can chain multiple replace() calls together to replace different values in the same string.
+
+text = "I like Java, C++, and PHP"
+
+result = (
+    text
+    .replace("Java", "Python")
+    .replace("C++", "Java")
+    .replace("PHP", "FastAPI")
+)
+
+print(result)
+
+Output:
+
+I like Python, Java, and FastAPI
+
+Each replace() operates on the result returned by the previous replace().
+
+----------------------------------------
+5. Simple Chained Replacement
+----------------------------------------
+
+text = "apple banana orange"
+
+result = (
+    text
+    .replace("apple", "mango")
+    .replace("banana", "grape")
+    .replace("orange", "watermelon")
+)
+
+print(result)
+
+Output:
+
+mango grape watermelon
+
+This is useful when several known values need to be replaced.
+
+----------------------------------------
+6. Multiple Character Replacements
+----------------------------------------
+
+text = "Python-Java-C++"
+
+result = (
+    text
+    .replace("-", " ")
+    .replace("C++", "C Plus Plus")
+)
+
+print(result)
+
+Output:
+
+Python Java C Plus Plus
+
+----------------------------------------
+7. Removing a Substring
+----------------------------------------
+
+replace() can remove text by replacing it with an empty string.
+
+text = "Python is very easy"
+
+result = text.replace("very ", "")
+
+print(result)
+
+Output:
+
+Python is easy
+
+----------------------------------------
+8. Replacement Order Matters
+----------------------------------------
+
+text = "abc"
+
+result = (
+    text
+    .replace("a", "b")
+    .replace("b", "c")
+)
+
+print(result)
+
+Output:
+
+ccc
+
+Why?
+
+First replacement:
+
+abc
+↓
+bbc
+
+Second replacement:
+
+bbc
+↓
+ccc
+
+The second replace() works on the result produced by the first replace().
+
+----------------------------------------
+9. replace() Is Case-Sensitive
+----------------------------------------
+
+text = "Python python PYTHON"
+
+result = text.replace("python", "Java")
+
+print(result)
+
+Output:
+
+Python Java PYTHON
+
+Only the exact matching case is replaced.
+
+----------------------------------------
+10. Replacing Characters
+----------------------------------------
+
+text = "2026-08-15"
+
+result = text.replace("-", "/")
+
+print(result)
+
+Output:
+
+2026/08/15
+
+This is useful for simple text normalization.
+
+----------------------------------------
+11. Cleaning Text with Chained replace()
+----------------------------------------
+
+text = "Hello!!!   Python---Programming"
+
+clean = (
+    text
+    .replace("!!!", "")
+    .replace("---", " ")
+    .replace("  ", " ")
+)
+
+print(clean)
+
+Output:
+
+Hello Python Programming
+
+Chained replace() can be useful for simple text-cleaning pipelines.
+
+----------------------------------------
+12. maketrans()
+----------------------------------------
+
+str.maketrans() creates a translation table for character-level replacements.
+
+table = str.maketrans("abc", "123")
+
+text = "abc cab"
+
+result = text.translate(table)
+
+print(result)
+
+Output:
+
+123 312
+
+The mapping is:
+
+a → 1
+b → 2
+c → 3
+
+----------------------------------------
+13. translate()
+----------------------------------------
+
+translate() applies a translation table to a string.
+
+table = str.maketrans({
+    "a": "4",
+    "e": "3",
+    "i": "1"
+})
+
+text = "Python is amazing"
+
+result = text.translate(table)
+
+print(result)
+
+translate() replaces characters according to the translation table.
+
+----------------------------------------
+14. Removing Characters with translate()
+----------------------------------------
+
+Use None in the translation table to remove characters.
+
+table = str.maketrans({
+    "!": None,
+    "?": None
+})
+
+text = "Hello! How are you?"
+
+result = text.translate(table)
+
+print(result)
+
+Output:
+
+Hello How are you
+
+----------------------------------------
+15. Removing Punctuation
+----------------------------------------
+
+import string
+
+text = "Hello, Python!"
+
+table = str.maketrans("", "", string.punctuation)
+
+clean = text.translate(table)
+
+print(clean)
+
+Output:
+
+Hello Python
+
+This is useful in text processing and NLP tasks.
+
+----------------------------------------
+16. Multiple Character Replacements with translate()
+----------------------------------------
+
+table = str.maketrans({
+    "a": "4",
+    "e": "3",
+    "i": "1",
+    "o": "0"
+})
+
+text = "Python is awesome"
+
+result = text.translate(table)
+
+print(result)
+
+Characters are replaced according to the mapping.
+
+----------------------------------------
+17. replace() vs translate()
+----------------------------------------
+
+replace()
+
+→ Best for replacing substrings.
+
+Example:
+
+text.replace("Python", "Java")
+
+translate()
+
+→ Best for character-by-character replacement or removal.
+
+Example:
+
+text.translate(table)
+
+----------------------------------------
+18. Chained replace() vs translate()
+----------------------------------------
+
+For a few specific replacements:
+
+text = "Python-Java-C++"
+
+result = (
+    text
+    .replace("Python", "Django")
+    .replace("Java", "Spring")
+    .replace("C++", "CPP")
+)
+
+For many character-level replacements:
+
+table = str.maketrans({
+    "a": "1",
+    "b": "2",
+    "c": "3"
+})
+
+result = text.translate(table)
+
+Mental model:
+
+replace()
+→ Replace specific substrings.
+
+replace().replace().replace()
+→ Perform multiple sequential replacements.
+
+translate()
+→ Perform many character-level replacements/removals using a mapping.
+
+----------------------------------------
+19. Immutability
+----------------------------------------
+
+Neither replace() nor translate() modifies the original string.
+
+text = "Python"
+
+text.replace("Python", "Java")
+
+print(text)
+
+Output:
+
+Python
+
+Store the returned value if you need the changed string.
+
+text = text.replace("Python", "Java")
+
+print(text)
+
+Output:
+
+Java
+
+----------------------------------------
+20. Professional Mental Model
+----------------------------------------
+
+replace(old, new)
+
+→ Replace all matching occurrences.
+
+replace(old, new, count)
+
+→ Replace a limited number of occurrences.
+
+replace().replace().replace()
+
+→ Perform multiple replacements sequentially.
+
+str.maketrans()
+
+→ Create a character translation table.
+
+translate()
+
+→ Apply character-level replacements or removals.
+
+Use replace() for straightforward substring changes.
+
+Use chained replace() calls when you have a small number of different replacement rules.
+
+Use translate() when you need many character-level transformations or removals.
+Professional mental model:
+
+replace(old, new)
+→ Replace one substring everywhere.
+
+replace(old, new, count)
+→ Replace only a limited number of occurrences.
+
+replace().replace().replace()
+→ Perform multiple replacements sequentially.
+
+str.maketrans()
+→ Create a character translation table.
+
+translate()
+→ Apply multiple character-level replacements/removals.`,
+},
+{
+  heading: "String Methods — Validation & Character Checking",
+  body: `Python provides several is...() methods for checking whether a string contains a particular type of characters.
+
+These methods return True or False and are useful for input validation, form processing, authentication, and text-based DSA problems.
+
+----------------------------------------
+1. isalpha()
+----------------------------------------
+
+Returns True if all characters are alphabetic and the string is not empty.
+
+text = "Python"
+
+print(text.isalpha())
+
+Output:
+
+True
+
+text = "Python3"
+
+print(text.isalpha())
+
+Output:
+
+False
+
+Numbers and spaces cause isalpha() to return False.
+
+----------------------------------------
+2. isdigit()
+----------------------------------------
+
+Returns True if all characters are digits.
+
+text = "12345"
+
+print(text.isdigit())
+
+Output:
+
+True
+
+text = "123abc"
+
+print(text.isdigit())
+
+Output:
+
+False
+
+----------------------------------------
+3. isalnum()
+----------------------------------------
+
+Returns True if all characters are alphabetic or numeric.
+
+text = "Python123"
+
+print(text.isalnum())
+
+Output:
+
+True
+
+text = "Python 123"
+
+print(text.isalnum())
+
+Output:
+
+False
+
+The space is not alphanumeric.
+
+----------------------------------------
+4. isspace()
+----------------------------------------
+
+Returns True if all characters are whitespace.
+
+text = "   "
+
+print(text.isspace())
+
+Output:
+
+True
+
+text = "Python"
+
+print(text.isspace())
+
+Output:
+
+False
+
+Whitespace can include spaces, tabs, and newline characters.
+
+----------------------------------------
+5. isdecimal()
+----------------------------------------
+
+Checks whether all characters are decimal characters.
+
+text = "12345"
+
+print(text.isdecimal())
+
+Output:
+
+True
+
+It is stricter than some other numeric-checking methods.
+
+----------------------------------------
+6. isnumeric()
+----------------------------------------
+
+Checks whether all characters are numeric characters.
+
+text = "12345"
+
+print(text.isnumeric())
+
+Output:
+
+True
+
+isnumeric() supports a broader range of Unicode numeric characters than isdigit().
+
+----------------------------------------
+7. islower()
+----------------------------------------
+
+Checks whether the string contains cased characters and all of them are lowercase.
+
+text = "python"
+
+print(text.islower())
+
+Output:
+
+True
+
+----------------------------------------
+8. isupper()
+----------------------------------------
+
+Checks whether the string contains cased characters and all of them are uppercase.
+
+text = "PYTHON"
+
+print(text.isupper())
+
+Output:
+
+True
+
+----------------------------------------
+9. istitle()
+----------------------------------------
+
+Checks whether the string follows title-case rules.
+
+text = "Python Programming"
+
+print(text.istitle())
+
+Output:
+
+True
+
+text = "python programming"
+
+print(text.istitle())
+
+Output:
+
+False
+
+----------------------------------------
+10. isidentifier()
+----------------------------------------
+
+Checks whether a string is a valid Python identifier.
+
+name = "student_name"
+
+print(name.isidentifier())
+
+Output:
+
+True
+
+invalid = "student-name"
+
+print(invalid.isidentifier())
+
+Output:
+
+False
+
+This can be useful when validating variable-like names.
+
+----------------------------------------
+11. isprintable()
+----------------------------------------
+
+Checks whether all characters are printable.
+
+text = "Hello Python"
+
+print(text.isprintable())
+
+Output:
+
+True
+
+text = "Hello\\nPython"
+
+print(text.isprintable())
+
+Output:
+
+False
+
+The newline character is not printable.
+
+----------------------------------------
+12. startswith() and endswith()
+----------------------------------------
+
+These methods are also useful for validation.
+
+filename = "report.pdf"
+
+print(filename.endswith(".pdf"))
+
+Output:
+
+True
+
+url = "https://example.com"
+
+print(url.startswith("https://"))
+
+Output:
+
+True
+
+----------------------------------------
+13. Practical Example — Username Validation
+----------------------------------------
+
+username = "rahul123"
+
+if username.isalnum():
+    print("Valid username")
+
+Output:
+
+Valid username
+
+This accepts letters and numbers but not spaces or special characters.
+
+----------------------------------------
+14. Practical Example — Numeric Input
+----------------------------------------
+
+value = "12345"
+
+if value.isdigit():
+    number = int(value)
+    print(number)
+
+Output:
+
+12345
+
+This is useful before converting user input to an integer.
+
+----------------------------------------
+15. Practical Example — Alphabetic Input
+----------------------------------------
+
+name = "Rahul"
+
+if name.isalpha():
+    print("Valid name")
+
+Output:
+
+Valid name
+
+A value such as:
+
+"Rahul123"
+
+would fail the check.
+
+----------------------------------------
+16. Practical Example — Empty String
+----------------------------------------
+
+text = ""
+
+print(text.isalpha())
+print(text.isdigit())
+print(text.isalnum())
+print(text.isspace())
+
+All of these return:
+
+False
+
+The is...() methods generally require at least one character.
+
+----------------------------------------
+17. Important Differences
+----------------------------------------
+
+isalpha()
+→ Letters only.
+
+isdigit()
+→ Digit characters.
+
+isdecimal()
+→ Decimal characters.
+
+isnumeric()
+→ Numeric characters, including a broader Unicode set.
+
+isalnum()
+→ Letters + numbers.
+
+isspace()
+→ Whitespace only.
+
+islower()
+→ Lowercase cased text.
+
+isupper()
+→ Uppercase cased text.
+
+istitle()
+→ Title case.
+
+isidentifier()
+→ Valid Python identifier.
+
+isprintable()
+→ Printable characters.
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+String validation:
+
+"Python".isalpha()
+→ Are these letters?
+
+"123".isdigit()
+→ Are these digits?
+
+"Python123".isalnum()
+→ Are these letters/numbers?
+
+"   ".isspace()
+→ Is this whitespace?
+
+"student_name".isidentifier()
+→ Is this a valid Python identifier?
+
+These methods are especially useful when validating user input before processing or converting it.`,
+},
+
+{
+  heading: "String Formatting & f-Strings",
+  body: `Python provides several ways to insert values into strings. The most modern and readable approach is the f-string.
+
+----------------------------------------
+1. Basic f-Strings
+----------------------------------------
+
+name = "Rahul"
+age = 21
+
+message = f"My name is {name} and I am {age} years old."
+
+print(message)
+
+Output:
+
+My name is Rahul and I am 21 years old.
+
+----------------------------------------
+2. Expressions Inside f-Strings
+----------------------------------------
+
+a = 10
+b = 20
+
+print(f"Sum = {a + b}")
+
+Output:
+
+Sum = 30
+
+You can place valid Python expressions inside {}.
+
+----------------------------------------
+3. Calling Functions Inside f-Strings
+----------------------------------------
+
+name = "rahul"
+
+print(f"Name: {name.upper()}")
+
+Output:
+
+Name: RAHUL
+
+----------------------------------------
+4. Number Formatting
+----------------------------------------
+
+price = 1250.5678
+
+print(f"Price: {price:.2f}")
+
+Output:
+
+Price: 1250.57
+
+:.2f means:
+
+2 → two decimal places
+f → floating-point format
+
+----------------------------------------
+5. Comma Number Formatting
+----------------------------------------
+
+salary = 1500000
+
+print(f"Salary: ₹{salary:,}")
+
+Output:
+
+Salary: ₹1,500,000
+
+The comma makes large numbers easier to read.
+
+----------------------------------------
+6. Percentage Formatting
+----------------------------------------
+
+score = 0.875
+
+print(f"Score: {score:.1%}")
+
+Output:
+
+Score: 87.5%
+
+----------------------------------------
+7. Width and Alignment
+----------------------------------------
+
+name = "Python"
+
+print(f"{name:<10}")
+
+Left aligned.
+
+print(f"{name:>10}")
+
+Right aligned.
+
+print(f"{name:^10}")
+
+Center aligned.
+
+----------------------------------------
+8. Padding Numbers
+----------------------------------------
+
+number = 42
+
+print(f"{number:05d}")
+
+Output:
+
+00042
+
+The 0 fills the unused positions.
+
+----------------------------------------
+9. Formatting Dates
+----------------------------------------
+
+from datetime import date
+
+today = date.today()
+
+print(f"Today: {today:%d-%m-%Y}")
+
+This allows dates to be formatted directly inside an f-string.
+
+----------------------------------------
+10. Debugging with f"{variable=}"
+----------------------------------------
+
+Python provides a convenient debugging syntax.
+
+name = "Rahul"
+age = 21
+
+print(f"{name=}")
+print(f"{age=}")
+
+Output:
+
+name='Rahul'
+age=21
+
+This is useful when debugging code.
+
+----------------------------------------
+11. Expressions with Formatting
+----------------------------------------
+
+price = 99.999
+
+print(f"Total: ₹{price * 2:.2f}")
+
+Output:
+
+Total: ₹200.00
+
+The expression is calculated first and then formatted.
+
+----------------------------------------
+12. Escape Braces
+----------------------------------------
+
+If you need literal curly braces inside an f-string, use double braces.
+
+name = "Rahul"
+
+print(f"Hello {{name}}")
+
+Output:
+
+Hello {name}
+
+Single braces are used for expressions.
+
+Double braces produce literal braces.
+
+----------------------------------------
+13. Formatting with format()
+----------------------------------------
+
+Python also provides the format() method.
+
+name = "Rahul"
+age = 21
+
+message = "My name is {} and I am {} years old.".format(name, age)
+
+print(message)
+
+Output:
+
+My name is Rahul and I am 21 years old.
+
+----------------------------------------
+14. Positional Arguments with format()
+----------------------------------------
+
+message = "Name: {}, Age: {}".format("Rahul", 21)
+
+print(message)
+
+Output:
+
+Name: Rahul, Age: 21
+
+----------------------------------------
+15. Named Arguments with format()
+----------------------------------------
+
+message = "Name: {name}, Age: {age}".format(
+    name="Rahul",
+    age=21
+)
+
+print(message)
+
+Output:
+
+Name: Rahul, Age: 21
+
+----------------------------------------
+16. Old %-Style Formatting
+----------------------------------------
+
+Python also supports the older % formatting style.
+
+name = "Rahul"
+age = 21
+
+print("Name: %s, Age: %d" % (name, age))
+
+Output:
+
+Name: Rahul, Age: 21
+
+This style is still seen in older Python code, but f-strings are generally preferred in modern Python.
+
+----------------------------------------
+17. f-String vs format()
+----------------------------------------
+
+f-string:
+
+name = "Rahul"
+age = 21
+
+f"{name} is {age} years old"
+
+format():
+
+"{} is {} years old".format(name, age)
+
+Modern Python code generally prefers f-strings because they are concise and readable.
+
+----------------------------------------
+18. Practical Example — Employee Information
+----------------------------------------
+
+name = "Rahul"
+role = "Python Developer"
+salary = 65000
+
+message = (
+    f"Name: {name}\\n"
+    f"Role: {role}\\n"
+    f"Salary: ₹{salary:,}"
+)
+
+print(message)
+
+Output:
+
+Name: Rahul
+Role: Python Developer
+Salary: ₹65,000
+
+----------------------------------------
+19. Practical Example — API Response
+----------------------------------------
+
+name = "Rahul"
+status = "Active"
+
+message = f"User {name} is currently {status}."
+
+print(message)
+
+Output:
+
+User Rahul is currently Active.
+
+----------------------------------------
+20. Professional Mental Model
+----------------------------------------
+
+f"{value}"
+
+→ Insert a value.
+
+f"{expression}"
+
+→ Evaluate an expression.
+
+f"{number:.2f}"
+
+→ Format a number.
+
+f"{number:,}"
+
+→ Add thousands separators.
+
+f"{number:05d}"
+
+→ Add zero padding.
+
+f"{text:<10}"
+
+→ Left align.
+
+f"{text:>10}"
+
+→ Right align.
+
+f"{text:^10}"
+
+→ Center align.
+
+f"{variable=}"
+
+→ Show variable name and value for debugging.
+
+format()
+
+→ Older but still useful formatting approach.
+
+%
+
+→ Legacy formatting style.
+
+For modern Python development:
+
+f-strings
+→ Preferred choice for most string formatting tasks.`,
+},
+
+{
+  heading: "String Escape Sequences & Raw Strings",
+  body: `Python uses backslash escape sequences to represent special characters inside strings.
+
+----------------------------------------
+1. Newline — \\n
+----------------------------------------
+
+The \\n escape sequence creates a new line.
+
+text = "Hello\\nPython"
+
+print(text)
+
+Output:
+
+Hello
+Python
+
+----------------------------------------
+2. Tab — \\t
+----------------------------------------
+
+The \\t escape sequence creates a horizontal tab.
+
+text = "Name:\\tRahul"
+
+print(text)
+
+Output:
+
+Name:   Rahul
+
+Tabs are useful for simple text alignment.
+
+----------------------------------------
+3. Backslash — \\\\
+----------------------------------------
+
+Use \\\\ when you need an actual backslash character.
+
+path = "C:\\\\Users\\\\Rahul\\\\Documents"
+
+print(path)
+
+Output:
+
+C:\\Users\\Rahul\\Documents
+
+----------------------------------------
+4. Single Quote — \\'
+----------------------------------------
+
+Use \\' to include a single quote inside a single-quoted string.
+
+text = 'It\\'s Python'
+
+print(text)
+
+Output:
+
+It's Python
+
+Alternatively, use double quotes:
+
+text = "It's Python"
+
+----------------------------------------
+5. Double Quote — \\"
+----------------------------------------
+
+Use \\" to include a double quote inside a double-quoted string.
+
+text = "He said, \\"Hello\\""
+
+print(text)
+
+Output:
+
+He said, "Hello"
+
+----------------------------------------
+6. Carriage Return — \\r
+----------------------------------------
+
+\\r moves the cursor back to the beginning of the current line.
+
+text = "Hello\\rPython"
+
+print(text)
+
+The visible result can depend on the environment because the carriage return moves the cursor position.
+
+----------------------------------------
+7. Backspace — \\b
+----------------------------------------
+
+\\b represents a backspace character.
+
+text = "Helloo\\b"
+
+print(text)
+
+Its visible behavior can vary depending on the terminal or environment.
+
+----------------------------------------
+8. Unicode Escape — \\u
+----------------------------------------
+
+Unicode characters can be represented using hexadecimal Unicode values.
+
+text = "\\u2764"
+
+print(text)
+
+Output:
+
+❤
+
+Another example:
+
+text = "\\u03A9"
+
+print(text)
+
+Output:
+
+Ω
+
+----------------------------------------
+9. Hexadecimal Character — \\x
+----------------------------------------
+
+\\x can represent a character using a two-digit hexadecimal value.
+
+text = "\\x41"
+
+print(text)
+
+Output:
+
+A
+
+----------------------------------------
+10. Raw Strings — r"..."
+----------------------------------------
+
+A raw string treats backslashes mostly as literal characters instead of interpreting common escape sequences.
+
+path = r"C:\\Users\\Rahul\\Documents"
+
+print(path)
+
+Output:
+
+C:\\Users\\Rahul\\Documents
+
+Raw strings are especially useful for Windows paths and regular expressions.
+
+----------------------------------------
+11. Raw String vs Normal String
+----------------------------------------
+
+normal = "C:\\\\new\\\\test"
+
+raw = r"C:\\new\\test"
+
+print(normal)
+print(raw)
+
+Both are useful when working with paths, but raw strings can make backslash-heavy text easier to write.
+
+----------------------------------------
+12. Raw Strings and Regular Expressions
+----------------------------------------
+
+Regular expressions frequently contain backslashes.
+
+import re
+
+pattern = r"\\d+"
+
+text = "Age: 21"
+
+result = re.search(pattern, text)
+
+print(result.group())
+
+Output:
+
+21
+
+Using a raw string avoids having to double many backslashes in the regular expression pattern.
+
+----------------------------------------
+13. Triple-Quoted Strings
+----------------------------------------
+
+Triple quotes can contain multiple lines without explicitly using \\n.
+
+text = """Python
+is
+easy"""
+
+print(text)
+
+Output:
+
+Python
+is
+easy
+
+Both triple single quotes and triple double quotes can be used.
+
+----------------------------------------
+14. Escape Sequences in f-Strings
+----------------------------------------
+
+Escape sequences can also be used in f-strings.
+
+name = "Rahul"
+age = 21
+
+message = f"Name: {name}\\nAge: {age}"
+
+print(message)
+
+Output:
+
+Name: Rahul
+Age: 21
+
+----------------------------------------
+15. Practical Example — File Path
+----------------------------------------
+
+path = r"C:\\Users\\Rahul\\Projects\\Python"
+
+print(path)
+
+Raw strings make Windows paths easier to read.
+
+----------------------------------------
+16. Practical Example — Multiline Message
+----------------------------------------
+
+message = (
+    "Hello Rahul!\\n"
+    "Welcome to Python.\\n"
+    "Keep learning."
+)
+
+print(message)
+
+Output:
+
+Hello Rahul!
+Welcome to Python.
+Keep learning.
+
+----------------------------------------
+17. Common Escape Sequences
+----------------------------------------
+
+\\n
+→ Newline
+
+\\t
+→ Tab
+
+\\\\
+→ Backslash
+
+\\'
+→ Single quote
+
+\\"
+→ Double quote
+
+\\r
+→ Carriage return
+
+\\b
+→ Backspace
+
+\\uXXXX
+→ Unicode character
+
+\\xXX
+→ Character from hexadecimal value
+
+----------------------------------------
+18. Important Raw String Rule
+----------------------------------------
+
+A raw string cannot normally end with a single backslash.
+
+This is invalid:
+
+r"C:\\Users\\"
+
+because the final backslash escapes the closing quote.
+
+Use another approach when a path must end with a backslash, for example:
+
+path = r"C:\\Users" + "\\"
+
+----------------------------------------
+19. Professional Mental Model
+----------------------------------------
+
+Normal string:
+
+"Hello\\nPython"
+
+→ Escape sequences are interpreted.
+
+Raw string:
+
+r"Hello\\nPython"
+
+→ Backslash sequences are generally kept literal.
+
+Use normal strings for ordinary text containing escapes.
+
+Use raw strings when working with:
+
+• Windows file paths
+• Regular expressions
+• Backslash-heavy text
+
+The key idea:
+
+\\\\ → one literal backslash
+
+\\n → newline
+
+\\t → tab
+
+r"..." → convenient representation for backslash-heavy text.`,
+},
+
+{
+  heading: "String Methods — Alignment & Padding",
+  body: `Python provides string methods for controlling the alignment and padding of text.
+
+These methods are useful for console output, tables, reports, logs, and formatted text.
+
+----------------------------------------
+1. center()
+----------------------------------------
+
+center() returns a centered string with the specified total width.
+
+text = "Python"
+
+print(text.center(12))
+
+Output:
+
+   Python
+
+The total width is 12 characters.
+
+----------------------------------------
+2. center() with a Custom Fill Character
+----------------------------------------
+
+text = "Python"
+
+print(text.center(12, "-"))
+
+Output:
+
+---Python---
+
+The second argument specifies the character used for padding.
+
+----------------------------------------
+3. ljust()
+----------------------------------------
+
+ljust() left-aligns the string and adds padding to the right.
+
+text = "Python"
+
+print(text.ljust(12, "-"))
+
+Output:
+
+Python------
+
+----------------------------------------
+4. rjust()
+----------------------------------------
+
+rjust() right-aligns the string and adds padding to the left.
+
+text = "Python"
+
+print(text.rjust(12, "-"))
+
+Output:
+
+------Python
+
+----------------------------------------
+5. zfill()
+----------------------------------------
+
+zfill() pads a numeric-looking string with zeros on the left.
+
+number = "42"
+
+print(number.zfill(5))
+
+Output:
+
+00042
+
+----------------------------------------
+6. zfill() with a Negative Number
+----------------------------------------
+
+number = "-42"
+
+print(number.zfill(5))
+
+Output:
+
+-0042
+
+The sign is kept at the beginning while zeros are inserted after it.
+
+----------------------------------------
+7. Padding Text
+----------------------------------------
+
+name = "Rahul"
+
+print(name.ljust(10, "."))
+
+Output:
+
+Rahul.....
+
+This is useful for simple console-based tables.
+
+----------------------------------------
+8. Creating a Simple Table
+----------------------------------------
+
+name = "Rahul"
+age = "21"
+role = "Developer"
+
+print(name.ljust(12), age.rjust(5), role.ljust(15))
+
+Output:
+
+Rahul           21 Developer
+
+Alignment methods make columns easier to read.
+
+----------------------------------------
+9. Combining Alignment Methods
+----------------------------------------
+
+name = "Rahul"
+score = "95"
+
+print(name.ljust(15, "."), score.rjust(5, "0"))
+
+Example output:
+
+Rahul.......... 00095
+
+Multiple string formatting techniques can be combined.
+
+----------------------------------------
+10. Alignment with f-Strings
+----------------------------------------
+
+name = "Python"
+
+print(f"{name:<12}")
+
+Left aligned.
+
+print(f"{name:>12}")
+
+Right aligned.
+
+print(f"{name:^12}")
+
+Centered.
+
+The equivalent string methods are:
+
+ljust()
+→ Left alignment
+
+rjust()
+→ Right alignment
+
+center()
+→ Center alignment
+
+----------------------------------------
+11. fill Characters
+----------------------------------------
+
+text = "Python"
+
+print(text.center(12, "*"))
+
+Output:
+
+***Python***
+
+The fill character must be a single character.
+
+----------------------------------------
+12. Width Smaller Than String Length
+----------------------------------------
+
+text = "Python"
+
+print(text.center(3))
+
+The string is longer than the requested width, so Python returns the original string rather than cutting it.
+
+Similarly:
+
+text.ljust(3)
+
+text.rjust(3)
+
+do not truncate the string.
+
+----------------------------------------
+13. Practical Example — Number Formatting
+----------------------------------------
+
+numbers = ["1", "25", "300", "4500"]
+
+for number in numbers:
+    print(number.zfill(5))
+
+Output:
+
+00001
+00025
+00300
+04500
+
+This is useful when fixed-width numeric identifiers are required.
+
+----------------------------------------
+14. Practical Example — Console Menu
+----------------------------------------
+
+title = "PYTHON MENU"
+
+print(title.center(30, "="))
+
+Output:
+
+=========PYTHON MENU=========
+
+This can make command-line applications easier to read.
+
+----------------------------------------
+15. Important Differences
+----------------------------------------
+
+center(width, fillchar)
+
+→ Center the string.
+
+ljust(width, fillchar)
+
+→ Align left and pad right.
+
+rjust(width, fillchar)
+
+→ Align right and pad left.
+
+zfill(width)
+
+→ Pad with zeros on the left.
+
+----------------------------------------
+16. String Methods vs f-String Formatting
+----------------------------------------
+
+String methods:
+
+text.ljust(10)
+text.rjust(10)
+text.center(10)
+text.zfill(5)
+
+f-string formatting:
+
+f"{text:<10}"
+f"{text:>10}"
+f"{text:^10}"
+f"{number:05d}"
+
+Both approaches are useful.
+
+f-strings are often more convenient when formatting values inside larger strings.
+
+----------------------------------------
+17. Immutability
+----------------------------------------
+
+These methods do not modify the original string.
+
+text = "Python"
+
+text.center(20)
+
+print(text)
+
+Output:
+
+Python
+
+Store the result if you need the formatted string:
+
+text = text.center(20)
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+center()
+→ Center text within a fixed width.
+
+ljust()
+→ Left-align text.
+
+rjust()
+→ Right-align text.
+
+zfill()
+→ Add leading zeros.
+
+These methods are especially useful for:
+
+• Console tables
+• Reports
+• Logs
+• CLI applications
+• Fixed-width identifiers
+• Formatted output
+
+Remember:
+
+Alignment methods control text position.
+
+Padding methods add characters to reach the requested width.`,
+},
+
+{
+  heading: "String Methods — Prefix & Suffix Removal",
+  body: `Python provides removeprefix() and removesuffix() for safely removing a specific prefix or suffix from a string.
+
+These methods were introduced in Python 3.9 and are useful when processing filenames, URLs, identifiers, and structured text.
+
+----------------------------------------
+1. removeprefix()
+----------------------------------------
+
+removeprefix() removes a specified prefix if the string starts with it.
+
+text = "Python Programming"
+
+result = text.removeprefix("Python ")
+
+print(result)
+
+Output:
+
+Programming
+
+----------------------------------------
+2. Prefix Not Present
+----------------------------------------
+
+text = "Python Programming"
+
+result = text.removeprefix("Java ")
+
+print(result)
+
+Output:
+
+Python Programming
+
+If the specified prefix is not present, the original string is returned unchanged.
+
+----------------------------------------
+3. removesuffix()
+----------------------------------------
+
+removesuffix() removes a specified suffix if the string ends with it.
+
+filename = "report.pdf"
+
+result = filename.removesuffix(".pdf")
+
+print(result)
+
+Output:
+
+report
+
+----------------------------------------
+4. Suffix Not Present
+----------------------------------------
+
+filename = "report.pdf"
+
+result = filename.removesuffix(".txt")
+
+print(result)
+
+Output:
+
+report.pdf
+
+If the specified suffix is not present, the string remains unchanged.
+
+----------------------------------------
+5. Practical Example — File Extension
+----------------------------------------
+
+filename = "data.csv"
+
+name = filename.removesuffix(".csv")
+
+print(name)
+
+Output:
+
+data
+
+This is useful when working with filenames.
+
+----------------------------------------
+6. Practical Example — URL Prefix
+----------------------------------------
+
+url = "https://example.com"
+
+domain = url.removeprefix("https://")
+
+print(domain)
+
+Output:
+
+example.com
+
+----------------------------------------
+7. Practical Example — Identifier Prefix
+----------------------------------------
+
+employee_id = "EMP-1025"
+
+number = employee_id.removeprefix("EMP-")
+
+print(number)
+
+Output:
+
+1025
+
+----------------------------------------
+8. Chaining Prefix and Suffix Removal
+----------------------------------------
+
+text = "https://example.com/"
+
+result = (
+    text
+    .removeprefix("https://")
+    .removesuffix("/")
+)
+
+print(result)
+
+Output:
+
+example.com
+
+Multiple string transformations can be chained together.
+
+----------------------------------------
+9. Difference from strip()
+----------------------------------------
+
+strip() removes characters from the ends.
+
+text = "---Python---"
+
+print(text.strip("-"))
+
+Output:
+
+Python
+
+removeprefix() removes one exact prefix.
+
+text = "---Python---"
+
+print(text.removeprefix("---"))
+
+Output:
+
+Python---
+
+removesuffix() removes one exact suffix.
+
+print(text.removesuffix("---"))
+
+Output:
+
+---Python
+
+Important:
+
+strip()
+→ Removes matching characters from the edges.
+
+removeprefix()
+→ Removes one exact prefix.
+
+removesuffix()
+→ Removes one exact suffix.
+
+----------------------------------------
+10. Difference from replace()
+----------------------------------------
+
+replace() can replace text anywhere.
+
+text = "Python Python"
+
+print(text.replace("Python", "Java"))
+
+Output:
+
+Java Java
+
+removeprefix() only checks the beginning:
+
+text = "Python Python"
+
+print(text.removeprefix("Python "))
+
+Output:
+
+Python
+
+removesuffix() only checks the ending.
+
+----------------------------------------
+11. Older Python Alternative
+----------------------------------------
+
+Before Python 3.9, developers commonly used slicing or conditional checks.
+
+text = "Python Programming"
+
+if text.startswith("Python "):
+    text = text[len("Python "):]
+
+print(text)
+
+Output:
+
+Programming
+
+Modern Python can simply use:
+
+text = text.removeprefix("Python ")
+
+----------------------------------------
+12. Important Property
+----------------------------------------
+
+These methods do not modify the original string.
+
+text = "Python"
+
+result = text.removeprefix("Py")
+
+print(text)
+print(result)
+
+Output:
+
+Python
+thon
+
+Strings remain immutable.
+
+----------------------------------------
+13. Professional Mental Model
+----------------------------------------
+
+removeprefix(prefix)
+
+→ Remove an exact prefix if present.
+
+removesuffix(suffix)
+
+→ Remove an exact suffix if present.
+
+startswith(prefix)
+
+→ Check whether a prefix exists.
+
+endswith(suffix)
+
+→ Check whether a suffix exists.
+
+strip(chars)
+
+→ Remove matching characters from both ends.
+
+replace(old, new)
+
+→ Replace matching text anywhere.
+
+Use removeprefix() and removesuffix() when you specifically want to remove one known prefix or suffix without accidentally removing similar characters elsewhere.`,
+},
+
+{
+  heading: "String Methods — Partitioning & Splitting",
+  body: `Python provides partition(), rpartition(), split(), splitlines(), and related methods for breaking strings into smaller parts.
+
+These methods are useful for parsing text, filenames, URLs, user input, and structured data.
+
+----------------------------------------
+1. partition()
+----------------------------------------
+
+partition() splits a string into exactly three parts:
+
+1. Text before the separator
+2. The separator itself
+3. Text after the separator
+
+text = "name=Rahul"
+
+result = text.partition("=")
+
+print(result)
+
+Output:
+
+("name", "=", "Rahul")
+
+----------------------------------------
+2. partition() When Separator Is Missing
+----------------------------------------
+
+text = "name=Rahul"
+
+result = text.partition(":")
+
+print(result)
+
+Output:
+
+("name=Rahul", "", "")
+
+If the separator is not found, the entire string is returned as the first element.
+
+----------------------------------------
+3. rpartition()
+----------------------------------------
+
+rpartition() searches for the separator from the right side.
+
+text = "folder/subfolder/file.txt"
+
+result = text.rpartition("/")
+
+print(result)
+
+Output:
+
+("folder/subfolder", "/", "file.txt")
+
+This is useful when you need the final occurrence of a separator.
+
+----------------------------------------
+4. partition() vs rpartition()
+----------------------------------------
+
+text = "user@example.com"
+
+print(text.partition("@"))
+
+Output:
+
+("user", "@", "example.com")
+
+rpartition() searches from the right:
+
+text = "a/b/c"
+
+print(text.rpartition("/"))
+
+Output:
+
+("a/b", "/", "c")
+
+Mental model:
+
+partition()
+→ First occurrence.
+
+rpartition()
+→ Last occurrence.
+
+----------------------------------------
+5. split()
+----------------------------------------
+
+split() breaks a string into a list.
+
+text = "Python is easy"
+
+words = text.split()
+
+print(words)
+
+Output:
+
+["Python", "is", "easy"]
+
+By default, whitespace is used as the separator.
+
+----------------------------------------
+6. split() with a Separator
+----------------------------------------
+
+text = "apple,banana,orange"
+
+fruits = text.split(",")
+
+print(fruits)
+
+Output:
+
+["apple", "banana", "orange"]
+
+----------------------------------------
+7. split() with maxsplit
+----------------------------------------
+
+text = "Python is very easy"
+
+result = text.split(" ", 2)
+
+print(result)
+
+Output:
+
+["Python", "is", "very easy"]
+
+The second argument controls the maximum number of splits.
+
+----------------------------------------
+8. rsplit()
+----------------------------------------
+
+rsplit() performs splitting from the right.
+
+text = "folder/subfolder/file.txt"
+
+result = text.rsplit("/", 1)
+
+print(result)
+
+Output:
+
+["folder/subfolder", "file.txt"]
+
+This is useful when you only need to separate the final component.
+
+----------------------------------------
+9. splitlines()
+----------------------------------------
+
+splitlines() separates a string into individual lines.
+
+text = """Python
+Java
+C++
+JavaScript"""
+
+languages = text.splitlines()
+
+print(languages)
+
+Output:
+
+["Python", "Java", "C++", "JavaScript"]
+
+----------------------------------------
+10. Practical Example — Key-Value Data
+----------------------------------------
+
+data = "name=Rahul"
+
+key, separator, value = data.partition("=")
+
+print(key)
+print(value)
+
+Output:
+
+name
+Rahul
+
+partition() is convenient because the separator is returned separately.
+
+----------------------------------------
+11. Practical Example — File Path
+----------------------------------------
+
+path = "C:/Users/Rahul/Documents/report.pdf"
+
+folder, separator, filename = path.rpartition("/")
+
+print(folder)
+print(filename)
+
+Output:
+
+C:/Users/Rahul/Documents
+report.pdf
+
+----------------------------------------
+12. Practical Example — Email
+----------------------------------------
+
+email = "rahul@example.com"
+
+username, separator, domain = email.partition("@")
+
+print(username)
+print(domain)
+
+Output:
+
+rahul
+example.com
+
+----------------------------------------
+13. Practical Example — URL
+----------------------------------------
+
+url = "https://example.com"
+
+protocol, separator, domain = url.partition("://")
+
+print(protocol)
+print(domain)
+
+Output:
+
+https
+example.com
+
+----------------------------------------
+14. split() vs partition()
+----------------------------------------
+
+split()
+
+→ Returns a list.
+
+text = "name=Rahul"
+
+print(text.split("="))
+
+Output:
+
+["name", "Rahul"]
+
+partition()
+
+→ Always returns a 3-element tuple.
+
+print(text.partition("="))
+
+Output:
+
+("name", "=", "Rahul")
+
+Use split() when you want multiple pieces.
+
+Use partition() when you specifically want:
+
+before
+separator
+after
+
+----------------------------------------
+15. split() vs rsplit()
+----------------------------------------
+
+text = "a-b-c-d"
+
+print(text.split("-", 1))
+
+Output:
+
+["a", "b-c-d"]
+
+print(text.rsplit("-", 1))
+
+Output:
+
+["a-b-c", "d"]
+
+split()
+→ Starts from the left.
+
+rsplit()
+→ Starts from the right.
+
+----------------------------------------
+16. Important Property
+----------------------------------------
+
+These methods do not modify the original string.
+
+text = "Python Programming"
+
+words = text.split()
+
+print(text)
+
+Output:
+
+Python Programming
+
+The original string remains unchanged.
+
+----------------------------------------
+17. Professional Mental Model
+----------------------------------------
+
+partition(separator)
+→ Split at the first separator and keep the separator.
+
+rpartition(separator)
+→ Split at the last separator and keep the separator.
+
+split(separator)
+→ Break into a list from the left.
+
+rsplit(separator)
+→ Break into a list from the right.
+
+splitlines()
+→ Break multi-line text into lines.
+
+Use partition()/rpartition() when you need the separator preserved.
+
+Use split()/rsplit() when you need a list of pieces.`,
+},
+
+{
+  heading: "String Methods — Encoding & Decoding",
+  body: `Python strings are Unicode text. When text needs to be stored, transmitted, or processed as raw bytes, you can encode the string into bytes and later decode those bytes back into a string.
+
+----------------------------------------
+1. encode()
+----------------------------------------
+
+encode() converts a string into a bytes object.
+
+text = "Python"
+
+data = text.encode()
+
+print(data)
+
+Output:
+
+b'Python'
+
+The default encoding is UTF-8.
+
+----------------------------------------
+2. UTF-8 Encoding
+----------------------------------------
+
+UTF-8 is the most commonly used encoding for Python text.
+
+text = "Hello Python"
+
+data = text.encode("utf-8")
+
+print(data)
+
+Output:
+
+b'Hello Python'
+
+----------------------------------------
+3. Encoding Unicode Characters
+----------------------------------------
+
+UTF-8 can represent characters from many languages and symbol sets.
+
+text = "Python ❤️"
+
+data = text.encode("utf-8")
+
+print(data)
+
+The result is a bytes object containing the UTF-8 representation of the text.
+
+----------------------------------------
+4. decode()
+----------------------------------------
+
+decode() converts bytes back into a string.
+
+data = b"Python"
+
+text = data.decode()
+
+print(text)
+
+Output:
+
+Python
+
+----------------------------------------
+5. Encoding and Decoding Together
+----------------------------------------
+
+text = "Python"
+
+encoded = text.encode("utf-8")
+decoded = encoded.decode("utf-8")
+
+print(encoded)
+print(decoded)
+
+Output:
+
+b'Python'
+Python
+
+Mental model:
+
+str
+↓
+encode()
+↓
+bytes
+↓
+decode()
+↓
+str
+
+----------------------------------------
+6. Checking the Data Types
+----------------------------------------
+
+text = "Python"
+
+encoded = text.encode()
+
+print(type(text))
+print(type(encoded))
+
+Output:
+
+<class 'str'>
+<class 'bytes'>
+
+A Python string and bytes object are different types.
+
+----------------------------------------
+7. Why Encoding Is Needed
+----------------------------------------
+
+Computers ultimately store and transmit data as bytes.
+
+For example:
+
+Python string
+→ Text representation
+
+UTF-8 encoded bytes
+→ Data representation suitable for storage/transmission
+
+This distinction is important when working with:
+
+• Files
+• Network connections
+• APIs
+• Databases
+• HTTP requests
+• Cryptography
+• Binary data
+
+----------------------------------------
+8. File Encoding
+----------------------------------------
+
+When working with text files, specifying UTF-8 is a common practice.
+
+with open("data.txt", "w", encoding="utf-8") as file:
+    file.write("Hello Python")
+
+The encoding determines how characters are converted into bytes when written to the file.
+
+----------------------------------------
+9. Reading UTF-8 Text
+----------------------------------------
+
+with open("data.txt", "r", encoding="utf-8") as file:
+    text = file.read()
+
+print(text)
+
+Python decodes the stored bytes into a string when reading the text file.
+
+----------------------------------------
+10. Different Encodings
+----------------------------------------
+
+Python supports many character encodings.
+
+Example:
+
+text = "Python"
+
+data = text.encode("utf-8")
+
+print(data)
+
+UTF-8 is generally preferred for modern applications.
+
+Other encodings may be encountered when working with legacy systems or external data.
+
+----------------------------------------
+11. UnicodeDecodeError
+----------------------------------------
+
+If bytes are decoded using an incompatible encoding, Python may raise:
+
+UnicodeDecodeError
+
+Example concept:
+
+data.decode("ascii")
+
+may fail when the bytes contain characters that ASCII cannot represent.
+
+Use the encoding that was originally used to create the bytes.
+
+----------------------------------------
+12. UnicodeEncodeError
+----------------------------------------
+
+Some encodings cannot represent every Unicode character.
+
+For example, ASCII only supports a limited character set.
+
+text = "café"
+
+text.encode("ascii")
+
+This can raise:
+
+UnicodeEncodeError
+
+UTF-8 is usually a better choice when Unicode text is expected.
+
+----------------------------------------
+13. errors Parameter
+----------------------------------------
+
+encode() and decode() support error-handling options.
+
+Example:
+
+text = "café"
+
+data = text.encode("ascii", errors="replace")
+
+print(data)
+
+Characters that cannot be represented are replaced according to the selected error strategy.
+
+Common strategies include:
+
+strict
+→ Raise an exception.
+
+ignore
+→ Skip characters that cannot be encoded/decoded.
+
+replace
+→ Replace problematic characters.
+
+----------------------------------------
+14. Practical Example — Network Data
+----------------------------------------
+
+message = "Hello Server"
+
+data = message.encode("utf-8")
+
+# A network API may transmit the bytes here.
+
+received = data.decode("utf-8")
+
+print(received)
+
+Output:
+
+Hello Server
+
+This illustrates the common text → bytes → text workflow.
+
+----------------------------------------
+15. String vs Bytes
+----------------------------------------
+
+String:
+
+text = "Python"
+
+Type:
+
+str
+
+Bytes:
+
+data = b"Python"
+
+Type:
+
+bytes
+
+A string represents text.
+
+Bytes represent raw byte data.
+
+You should not treat them as interchangeable.
+
+----------------------------------------
+16. Common Error
+----------------------------------------
+
+This is invalid:
+
+text = "Python"
+
+text.decode()
+
+A str object does not need decoding.
+
+Similarly:
+
+data = b"Python"
+
+data.upper()
+
+Bytes have their own methods, but when you need normal text processing, decode the bytes into a string first.
+
+----------------------------------------
+17. Professional Mental Model
+----------------------------------------
+
+String:
+
+"Python"
+
+↓ encode("utf-8")
+
+Bytes:
+
+b'Python'
+
+↓ decode("utf-8")
+
+String:
+
+"Python"
+
+Remember:
+
+encode()
+→ str → bytes
+
+decode()
+→ bytes → str
+
+UTF-8
+→ Common modern text encoding
+
+Use encoding/decoding when Python text crosses a boundary such as a file, network, API, or other byte-oriented system.`,
+},
+
+{
+  heading: "String Methods — Advanced Text Cleanup",
+  body: `Python provides several useful methods for handling tabs, prefixes, suffixes, and structured text cleanup.
+
+----------------------------------------
+1. expandtabs()
+----------------------------------------
+
+expandtabs() replaces tab characters (\\t) with spaces.
+
+text = "Name:\\tRahul\\nAge:\\t21"
+
+print(text.expandtabs(12))
+
+The number passed to expandtabs() specifies the tab size.
+
+----------------------------------------
+2. Default Tab Size
+----------------------------------------
+
+text = "Python\\tProgramming"
+
+print(text.expandtabs())
+
+By default, Python uses a tab size of 8.
+
+----------------------------------------
+3. Custom Tab Size
+----------------------------------------
+
+text = "Name:\\tRahul"
+
+print(text.expandtabs(4))
+
+A smaller tab size can be useful when formatting console output.
+
+----------------------------------------
+4. Practical Example — Cleaning Tab-Separated Text
+----------------------------------------
+
+data = "Name:\\tRahul\\nRole:\\tPython Developer"
+
+clean = data.expandtabs(4)
+
+print(clean)
+
+This converts tab characters into spaces while preserving the text structure.
+
+----------------------------------------
+5. removeprefix()
+----------------------------------------
+
+removeprefix() removes an exact prefix when it occurs at the beginning of a string.
+
+text = "Python Programming"
+
+result = text.removeprefix("Python ")
+
+print(result)
+
+Output:
+
+Programming
+
+If the prefix does not exist, the original string is returned.
+
+----------------------------------------
+6. removesuffix()
+----------------------------------------
+
+removesuffix() removes an exact suffix when it occurs at the end of a string.
+
+filename = "report.pdf"
+
+result = filename.removesuffix(".pdf")
+
+print(result)
+
+Output:
+
+report
+
+----------------------------------------
+7. Prefix + Suffix Cleanup
+----------------------------------------
+
+url = "https://example.com/"
+
+clean = (
+    url
+    .removeprefix("https://")
+    .removesuffix("/")
+)
+
+print(clean)
+
+Output:
+
+example.com
+
+----------------------------------------
+8. Prefix/Suffix vs strip()
+----------------------------------------
+
+text = "---Python---"
+
+print(text.strip("-"))
+
+Output:
+
+Python
+
+strip() removes matching characters from both ends.
+
+removeprefix() removes one exact prefix:
+
+print(text.removeprefix("---"))
+
+Output:
+
+Python---
+
+removesuffix() removes one exact suffix:
+
+print(text.removesuffix("---"))
+
+Output:
+
+---Python
+
+----------------------------------------
+9. Prefix/Suffix vs replace()
+----------------------------------------
+
+replace() can replace matching text anywhere.
+
+text = "Python Python"
+
+print(text.replace("Python", "Java"))
+
+Output:
+
+Java Java
+
+removeprefix() only affects the beginning:
+
+text = "Python Python"
+
+print(text.removeprefix("Python "))
+
+Output:
+
+Python
+
+Use removeprefix() when you specifically want to remove a known beginning.
+
+----------------------------------------
+10. Chaining Cleanup Methods
+----------------------------------------
+
+text = "  https://example.com/  "
+
+clean = (
+    text
+    .strip()
+    .removeprefix("https://")
+    .removesuffix("/")
+)
+
+print(clean)
+
+Output:
+
+example.com
+
+Multiple string methods can be chained because each method returns a new string.
+
+----------------------------------------
+11. Strings Remain Immutable
+----------------------------------------
+
+text = "Python"
+
+text.removeprefix("Py")
+
+print(text)
+
+Output:
+
+Python
+
+The original string is unchanged.
+
+Store the result:
+
+text = text.removeprefix("Py")
+
+print(text)
+
+Output:
+
+thon
+
+----------------------------------------
+12. Professional Mental Model
+----------------------------------------
+
+expandtabs(size)
+→ Convert \\t into spaces.
+
+removeprefix(prefix)
+→ Remove one exact prefix.
+
+removesuffix(suffix)
+→ Remove one exact suffix.
+
+strip(chars)
+→ Remove matching characters from both ends.
+
+replace(old, new)
+→ Replace matching text anywhere.
+
+These methods are useful when cleaning and normalizing text before validation, storage, searching, or further processing.`,
+},
+
+{
+  heading: "String Methods — format_map() & Advanced Formatting",
+  body: `Python provides format_map() for formatting strings directly from a dictionary or mapping object.
+
+It is useful when formatting dynamic text using named values.
+
+----------------------------------------
+1. format_map()
+----------------------------------------
+
+format_map() replaces named placeholders using values from a mapping.
+
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "course": "Python"
+}
+
+message = "Name: {name}, Age: {age}, Course: {course}".format_map(student)
+
+print(message)
+
+Output:
+
+Name: Rahul, Age: 21, Course: Python
+
+----------------------------------------
+2. format_map() vs format()
+----------------------------------------
+
+Using format():
+
+student = {
+    "name": "Rahul",
+    "age": 21
+}
+
+message = "Name: {name}, Age: {age}".format(
+    name=student["name"],
+    age=student["age"]
+)
+
+Using format_map():
+
+message = "Name: {name}, Age: {age}".format_map(student)
+
+format_map() is convenient when the values are already stored in a dictionary.
+
+----------------------------------------
+3. Dynamic Templates
+----------------------------------------
+
+template = "Hello {name}, welcome to {course}!"
+
+data = {
+    "name": "Rahul",
+    "course": "Python"
+}
+
+message = template.format_map(data)
+
+print(message)
+
+Output:
+
+Hello Rahul, welcome to Python!
+
+This is useful for reusable text templates.
+
+----------------------------------------
+4. Missing Keys
+----------------------------------------
+
+data = {
+    "name": "Rahul"
+}
+
+message = "Name: {name}, Age: {age}"
+
+message.format_map(data)
+
+This raises:
+
+KeyError
+
+The required key must exist in the mapping.
+
+----------------------------------------
+5. format_map() with Default Values
+----------------------------------------
+
+You can use collections.defaultdict when missing values should have a default.
+
+from collections import defaultdict
+
+data = defaultdict(lambda: "N/A")
+
+data["name"] = "Rahul"
+
+message = "Name: {name}, Phone: {phone}".format_map(data)
+
+print(message)
+
+Output:
+
+Name: Rahul, Phone: N/A
+
+----------------------------------------
+6. Formatting Numbers with format_map()
+----------------------------------------
+
+data = {
+    "name": "Rahul",
+    "salary": 65000.456
+}
+
+message = "Employee: {name}, Salary: ₹{salary:,.2f}".format_map(data)
+
+print(message)
+
+Output:
+
+Employee: Rahul, Salary: ₹65,000.46
+
+Formatting specifications work with format_map() just like format().
+
+----------------------------------------
+7. Nested Dictionary Values
+----------------------------------------
+
+student = {
+    "name": "Rahul",
+    "marks": {
+        "python": 95,
+        "sql": 88
+    }
+}
+
+message = (
+    "Student: {name}, "
+    "Python: {marks[python]}, "
+    "SQL: {marks[sql]}"
+).format_map(student)
+
+print(message)
+
+Output:
+
+Student: Rahul, Python: 95, SQL: 88
+
+----------------------------------------
+8. casefold() for Case-Insensitive Comparison
+----------------------------------------
+
+casefold() converts text to a normalized lowercase form.
+
+a = "Python"
+b = "PYTHON"
+
+print(a.casefold() == b.casefold())
+
+Output:
+
+True
+
+casefold() is preferred over lower() when you need robust case-insensitive comparisons, especially with Unicode text.
+
+----------------------------------------
+9. Practical Example — Login Check
+----------------------------------------
+
+stored_role = "Admin"
+
+user_role = "ADMIN"
+
+if user_role.casefold() == stored_role.casefold():
+    print("Role matched")
+
+Output:
+
+Role matched
+
+----------------------------------------
+10. Combining Cleanup and casefold()
+----------------------------------------
+
+user_input = "   YES   "
+
+answer = user_input.strip().casefold()
+
+if answer == "yes":
+    print("Confirmed")
+
+Output:
+
+Confirmed
+
+This is a common pattern:
+
+strip()
+→ Remove surrounding whitespace.
+
+casefold()
+→ Normalize case.
+
+comparison
+→ Compare normalized values.
+
+----------------------------------------
+11. Reusable String Processing Pipeline
+----------------------------------------
+
+text = "   Python Programming!!!   "
+
+clean = (
+    text
+    .strip()
+    .casefold()
+    .replace("!!!", "")
+)
+
+print(clean)
+
+Output:
+
+python programming
+
+String methods can be chained to create simple text-processing pipelines.
+
+----------------------------------------
+12. Professional Mental Model
+----------------------------------------
+
+format_map(mapping)
+→ Format a string using dictionary/mapping values.
+
+casefold()
+→ Normalize text for case-insensitive comparison.
+
+strip()
+→ Remove surrounding whitespace.
+
+replace()
+→ Replace specific text.
+
+split()
+→ Break text into pieces.
+
+join()
+→ Combine pieces into a string.
+
+A common real-world pipeline is:
+
+raw input
+↓
+strip()
+↓
+casefold()
+↓
+replace()
+↓
+split()
+↓
+process
+↓
+join()
+
+This pattern is widely useful in input validation, text processing, APIs, and coding interview problems.
+
+----------------------------------------
+13. String Topic Completion
+----------------------------------------
+
+At this point, the major Python String topics are covered:
+
+• Creating strings
+• Indexing
+• Negative indexing
+• Slicing
+• Concatenation
+• Repetition
+• Membership
+• String comparison
+• Case conversion
+• Searching and finding
+• Counting
+• Whitespace cleanup
+• Splitting and joining
+• Replacement
+• Translation
+• Character validation
+• Formatting and f-strings
+• Escape sequences
+• Raw strings
+• Alignment and padding
+• Prefix and suffix handling
+• Partitioning
+• Encoding and decoding
+• Advanced cleanup
+• format_map()
+• Case-insensitive processing
+
+Strings are therefore considered complete at the core Python level.`,
+},
+
+{
+  heading: "Strings in Real-World Python & DSA",
+  body: `Strings are one of the most frequently used data types in Python. Beyond individual methods, strings are commonly combined with loops, dictionaries, sets, lists, and algorithms to solve practical problems.
+
+----------------------------------------
+1. Reverse a String
+----------------------------------------
+
+text = "Python"
+
+reversed_text = text[::-1]
+
+print(reversed_text)
+
+Output:
+
+nohtyP
+
+This is one of the most common string interview patterns.
+
+----------------------------------------
+2. Check for Palindrome
+----------------------------------------
+
+A palindrome reads the same forwards and backwards.
+
+text = "madam"
+
+if text == text[::-1]:
+    print("Palindrome")
+
+Output:
+
+Palindrome
+
+----------------------------------------
+3. Count Character Frequency
+----------------------------------------
+
+text = "banana"
+
+freq = {}
+
+for char in text:
+    freq[char] = freq.get(char, 0) + 1
+
+print(freq)
+
+Output:
+
+{'b': 1, 'a': 3, 'n': 2}
+
+This is a classic dictionary + string problem.
+
+----------------------------------------
+4. Find Duplicate Characters
+----------------------------------------
+
+text = "programming"
+
+seen = set()
+duplicates = set()
+
+for char in text:
+    if char in seen:
+        duplicates.add(char)
+    else:
+        seen.add(char)
+
+print(duplicates)
+
+The set provides fast membership testing.
+
+----------------------------------------
+5. Remove Duplicate Characters
+----------------------------------------
+
+text = "programming"
+
+result = ""
+
+for char in text:
+    if char not in result:
+        result += char
+
+print(result)
+
+For larger inputs, using a set for membership checking is generally more efficient.
+
+----------------------------------------
+6. Count Words
+----------------------------------------
+
+text = "Python is easy to learn"
+
+words = text.split()
+
+print(len(words))
+
+Output:
+
+5
+
+split() converts the sentence into a list of words.
+
+----------------------------------------
+7. Find the Longest Word
+----------------------------------------
+
+text = "Python makes programming powerful"
+
+words = text.split()
+
+longest = max(words, key=len)
+
+print(longest)
+
+Output:
+
+programming
+
+The key=len argument tells max() to compare words by their length.
+
+----------------------------------------
+8. Word Frequency
+----------------------------------------
+
+text = "python is easy python is powerful"
+
+freq = {}
+
+for word in text.split():
+    freq[word] = freq.get(word, 0) + 1
+
+print(freq)
+
+This is a very common interview and text-processing pattern.
+
+----------------------------------------
+9. Using Counter
+----------------------------------------
+
+from collections import Counter
+
+text = "banana"
+
+freq = Counter(text)
+
+print(freq)
+
+Output:
+
+Counter({'a': 3, 'n': 2, 'b': 1})
+
+Counter is convenient when frequency counting is the main task.
+
+----------------------------------------
+10. Check Anagrams
+----------------------------------------
+
+Two strings are anagrams if they contain the same characters with the same frequencies.
+
+a = "listen"
+b = "silent"
+
+if sorted(a) == sorted(b):
+    print("Anagrams")
+
+Output:
+
+Anagrams
+
+For larger or more complex cases, Counter can also be used.
+
+----------------------------------------
+11. Normalize Before Comparison
+----------------------------------------
+
+a = "  Python "
+b = "python"
+
+if a.strip().casefold() == b.strip().casefold():
+    print("Same text")
+
+Output:
+
+Same text
+
+This is a practical pattern for user input.
+
+----------------------------------------
+12. Extract Information from Structured Text
+----------------------------------------
+
+email = "rahul@example.com"
+
+username, separator, domain = email.partition("@")
+
+print(username)
+print(domain)
+
+Output:
+
+rahul
+example.com
+
+String methods can be combined to parse structured data.
+
+----------------------------------------
+13. Process Every Character
+----------------------------------------
+
+text = "Python"
+
+for char in text:
+    print(char)
+
+Output:
+
+P
+y
+t
+h
+o
+n
+
+Strings are iterable, so they can be processed character by character.
+
+----------------------------------------
+14. String with enumerate()
+----------------------------------------
+
+text = "Python"
+
+for index, char in enumerate(text):
+    print(index, char)
+
+Output:
+
+0 P
+1 y
+2 t
+3 h
+4 o
+5 n
+
+enumerate() is useful when both the position and character are required.
+
+----------------------------------------
+15. DSA Pattern — Two Pointers
+----------------------------------------
+
+Two pointers can be used to compare characters from both ends.
+
+text = "madam"
+
+left = 0
+right = len(text) - 1
+
+is_palindrome = True
+
+while left < right:
+    if text[left] != text[right]:
+        is_palindrome = False
+        break
+
+    left += 1
+    right -= 1
+
+print(is_palindrome)
+
+Output:
+
+True
+
+This demonstrates an important DSA technique without creating a reversed copy.
+
+----------------------------------------
+16. DSA Pattern — Frequency Counting
+----------------------------------------
+
+from collections import Counter
+
+text = "aabbccaa"
+
+freq = Counter(text)
+
+print(freq["a"])
+
+Output:
+
+4
+
+Frequency maps are useful for:
+
+• Anagrams
+• Duplicate detection
+• Character counting
+• Most frequent character
+• Window-based problems
+
+----------------------------------------
+17. DSA Pattern — Membership Checking
+----------------------------------------
+
+text = "programming"
+
+characters = set(text)
+
+print("g" in characters)
+
+Output:
+
+True
+
+Sets provide average O(1) membership testing.
+
+----------------------------------------
+18. Important String Complexity
+----------------------------------------
+
+Indexing:
+
+text[i]
+
+→ O(1)
+
+Length:
+
+len(text)
+
+→ O(1)
+
+Membership:
+
+substring in text
+
+→ Generally O(n) for ordinary substring searching.
+
+Slicing:
+
+text[start:stop]
+
+→ O(k), where k is the size of the resulting substring.
+
+Concatenating strings repeatedly in a loop can become expensive because strings are immutable.
+
+For building many pieces of text, prefer:
+
+parts = []
+
+parts.append("Python")
+parts.append("Programming")
+
+result = " ".join(parts)
+
+----------------------------------------
+19. Real-World String Processing Pipeline
+----------------------------------------
+
+Raw input:
+
+"   PYTHON, Django, FastAPI   "
+
+Typical processing:
+
+text = text.strip()
+text = text.casefold()
+parts = text.split(",")
+
+result = [item.strip() for item in parts]
+
+print(result)
+
+Output:
+
+['python', 'django', 'fastapi']
+
+This combines several fundamental string techniques.
+
+----------------------------------------
+20. Professional Mental Model
+----------------------------------------
+
+Strings are:
+
+→ Ordered
+→ Immutable
+→ Iterable
+→ Unicode-based
+→ Indexable
+→ Sliceable
+
+Common real-world operations:
+
+Input
+↓
+strip()
+↓
+casefold()
+↓
+replace()
+↓
+split()
+↓
+process
+↓
+join()
+
+Common DSA patterns:
+
+String
+↓
+Indexing / Two Pointers
+↓
+Frequency Map
+↓
+Set Membership
+↓
+Sorting
+↓
+Sliding Window
+↓
+Pattern Matching
+
+At this level, strings are not just a collection of methods. They become a foundation for text processing and many Python DSA problems.`,
+},
+
+{
+  heading: "Advanced Strings — Sliding Window & Pattern Matching",
+  body: `String problems in DSA often require more than basic string methods. Sliding windows, frequency maps, and pattern matching are important techniques for solving substring problems efficiently.
+
+----------------------------------------
+1. What is a Sliding Window?
+----------------------------------------
+
+A sliding window maintains a range of characters inside a string.
+
+Instead of repeatedly checking every possible substring, we expand and shrink a window while moving through the string.
+
+Example:
+
+text = "abcabcbb"
+
+A window can represent:
+
+"a"
+"ab"
+"abc"
+"bca"
+"cab"
+...
+
+The window moves through the string instead of restarting from every position.
+
+----------------------------------------
+2. Longest Substring Without Repeating Characters
+----------------------------------------
+
+text = "abcabcbb"
+
+seen = set()
+left = 0
+longest = 0
+
+for right in range(len(text)):
+    while text[right] in seen:
+        seen.remove(text[left])
+        left += 1
+
+    seen.add(text[right])
+
+    longest = max(longest, right - left + 1)
+
+print(longest)
+
+Output:
+
+3
+
+The longest substring is:
+
+"abc"
+
+This is a classic sliding-window problem.
+
+----------------------------------------
+3. Why the Sliding Window Is Useful
+----------------------------------------
+
+A brute-force approach may examine many possible substrings.
+
+Sliding window allows us to maintain only the relevant portion of the string.
+
+General pattern:
+
+left = 0
+
+for right in range(len(text)):
+
+    # Add text[right]
+
+    while window_is_invalid:
+        # Remove text[left]
+        left += 1
+
+    # Update answer
+
+This pattern appears frequently in string and array DSA problems.
+
+----------------------------------------
+4. Frequency Map with a Sliding Window
+----------------------------------------
+
+from collections import Counter
+
+text = "aabdec"
+
+window = Counter()
+
+for char in text:
+    window[char] += 1
+
+print(window)
+
+Output:
+
+Counter({'a': 2, 'b': 1, 'd': 1, 'e': 1, 'c': 1})
+
+A frequency dictionary or Counter can track the characters currently inside a window.
+
+----------------------------------------
+5. Fixed-Size Sliding Window
+----------------------------------------
+
+Sometimes the window must have a fixed length.
+
+text = "abcdef"
+k = 3
+
+for i in range(len(text) - k + 1):
+    window = text[i:i + k]
+    print(window)
+
+Output:
+
+abc
+bcd
+cde
+def
+
+Each window contains exactly 3 characters.
+
+----------------------------------------
+6. Find Every Occurrence of a Substring
+----------------------------------------
+
+text = "banana"
+pattern = "ana"
+
+start = 0
+
+while True:
+    index = text.find(pattern, start)
+
+    if index == -1:
+        break
+
+    print(index)
+
+    start = index + 1
+
+Output:
+
+1
+3
+
+The search is continued after each occurrence.
+
+----------------------------------------
+7. startswith() for Prefix Matching
+----------------------------------------
+
+text = "Python Programming"
+
+print(text.startswith("Python"))
+
+Output:
+
+True
+
+Prefix checking is useful when validating commands, URLs, filenames, and identifiers.
+
+----------------------------------------
+8. endswith() for Suffix Matching
+----------------------------------------
+
+filename = "resume.pdf"
+
+if filename.endswith(".pdf"):
+    print("PDF document")
+
+Output:
+
+PDF document
+
+This is common in file-processing applications.
+
+----------------------------------------
+9. Basic Pattern Matching with in
+----------------------------------------
+
+text = "Python Programming"
+
+if "Python" in text:
+    print("Pattern found")
+
+Output:
+
+Pattern found
+
+For simple substring existence checks, in is concise and readable.
+
+----------------------------------------
+10. Regular Expressions
+----------------------------------------
+
+Python's re module provides more powerful pattern matching.
+
+import re
+
+text = "My phone number is 9876543210"
+
+match = re.search(r"\\d+", text)
+
+if match:
+    print(match.group())
+
+Output:
+
+9876543210
+
+Regular expressions are useful when the pattern is more complex than a fixed substring.
+
+----------------------------------------
+11. findall()
+----------------------------------------
+
+re.findall() returns all matching occurrences.
+
+import re
+
+text = "Numbers: 10, 20, 30"
+
+numbers = re.findall(r"\\d+", text)
+
+print(numbers)
+
+Output:
+
+['10', '20', '30']
+
+----------------------------------------
+12. Pattern Matching vs String Methods
+----------------------------------------
+
+For simple fixed text:
+
+"Python" in text
+
+or:
+
+text.find("Python")
+
+For prefix:
+
+text.startswith("Python")
+
+For suffix:
+
+text.endswith(".py")
+
+For complex patterns:
+
+re.search()
+re.findall()
+re.match()
+
+Use the simplest tool that solves the problem.
+
+----------------------------------------
+13. Important DSA Pattern — Character Frequency
+----------------------------------------
+
+text = "aabbcc"
+
+freq = {}
+
+for char in text:
+    freq[char] = freq.get(char, 0) + 1
+
+print(freq)
+
+Output:
+
+{'a': 2, 'b': 2, 'c': 2}
+
+Frequency maps are often combined with sliding windows.
+
+----------------------------------------
+14. Anagram Pattern
+----------------------------------------
+
+a = "listen"
+b = "silent"
+
+from collections import Counter
+
+if Counter(a) == Counter(b):
+    print("Anagrams")
+
+Output:
+
+Anagrams
+
+This avoids explicitly sorting the strings.
+
+----------------------------------------
+15. Palindrome Pattern
+----------------------------------------
+
+text = "racecar"
+
+left = 0
+right = len(text) - 1
+
+is_palindrome = True
+
+while left < right:
+    if text[left] != text[right]:
+        is_palindrome = False
+        break
+
+    left += 1
+    right -= 1
+
+print(is_palindrome)
+
+Output:
+
+True
+
+This is the two-pointer technique.
+
+----------------------------------------
+16. Common String DSA Techniques
+----------------------------------------
+
+Two Pointers
+→ Compare characters from both ends.
+
+Frequency Map
+→ Count characters or maintain frequencies.
+
+Set
+→ Fast membership checking.
+
+Sliding Window
+→ Solve substring/subarray problems.
+
+Sorting
+→ Compare character arrangements.
+
+Prefix/Suffix Checks
+→ Validate beginning or ending patterns.
+
+Regular Expressions
+→ Match complex text patterns.
+
+----------------------------------------
+17. Complexity Awareness
+----------------------------------------
+
+For a string of length n:
+
+Single pass:
+
+for char in text:
+    ...
+
+→ O(n)
+
+Index access:
+
+text[i]
+
+→ O(1)
+
+Creating a substring of length k:
+
+text[i:i+k]
+
+→ O(k)
+
+Sorting characters:
+
+sorted(text)
+
+→ O(n log n)
+
+A well-designed sliding-window solution can often achieve:
+
+→ O(n)
+
+instead of repeatedly examining all possible substrings.
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+Basic string processing:
+
+String methods
+↓
+Clean
+↓
+Split
+↓
+Search
+↓
+Transform
+
+DSA string processing:
+
+String
+↓
+Two Pointers
+↓
+Frequency Map
+↓
+Set
+↓
+Sliding Window
+↓
+Pattern Matching
+
+The key idea is to avoid repeatedly scanning the same characters when a single-pass or sliding-window approach can solve the problem efficiently.`,
+},
+
+{
+  heading: "Advanced Strings — Regular Expressions",
+  body: `Regular expressions (regex) are used to search, match, extract, validate, and replace text based on patterns.
+
+Python provides regular expressions through the built-in re module.
+
+----------------------------------------
+1. Import re
+----------------------------------------
+
+import re
+
+The re module provides functions such as:
+
+re.search()
+re.match()
+re.findall()
+re.finditer()
+re.sub()
+re.split()
+
+----------------------------------------
+2. re.search()
+----------------------------------------
+
+search() looks for a pattern anywhere in the string.
+
+import re
+
+text = "My phone number is 9876543210"
+
+match = re.search(r"\\d+", text)
+
+if match:
+    print(match.group())
+
+Output:
+
+9876543210
+
+\\d means a digit.
+
++ means one or more occurrences.
+
+----------------------------------------
+3. re.match()
+----------------------------------------
+
+match() checks only from the beginning of the string.
+
+import re
+
+text = "Python Programming"
+
+match = re.match(r"Python", text)
+
+if match:
+    print("Matched")
+
+Output:
+
+Matched
+
+If the pattern does not occur at the beginning, match() returns None.
+
+----------------------------------------
+4. search() vs match()
+----------------------------------------
+
+text = "I love Python"
+
+re.search(r"Python", text)
+
+→ Finds Python.
+
+re.match(r"Python", text)
+
+→ Does not match because Python is not at the beginning.
+
+Mental model:
+
+search()
+→ Search anywhere.
+
+match()
+→ Match from the beginning.
+
+----------------------------------------
+5. re.findall()
+----------------------------------------
+
+findall() returns all matching occurrences.
+
+import re
+
+text = "Numbers: 10, 20, 30"
+
+numbers = re.findall(r"\\d+", text)
+
+print(numbers)
+
+Output:
+
+['10', '20', '30']
+
+----------------------------------------
+6. re.finditer()
+----------------------------------------
+
+finditer() returns match objects containing information about each match.
+
+import re
+
+text = "cat bat rat"
+
+for match in re.finditer(r"\\w+at", text):
+    print(match.group(), match.start())
+
+This can provide both the matched text and its position.
+
+----------------------------------------
+7. Common Regex Patterns
+----------------------------------------
+
+\\d
+→ Digit
+
+\\D
+→ Non-digit
+
+\\w
+→ Word character
+
+\\W
+→ Non-word character
+
+\\s
+→ Whitespace
+
+\\S
+→ Non-whitespace
+
+.
+→ Any character except newline in the usual regex mode
+
+----------------------------------------
+8. Quantifiers
+----------------------------------------
+
++ 
+→ One or more
+
+*
+→ Zero or more
+
+?
+→ Zero or one
+
+{n}
+→ Exactly n occurrences
+
+{n,m}
+→ Between n and m occurrences
+
+Example:
+
+r"\\d{10}"
+
+matches a sequence containing exactly 10 digits.
+
+----------------------------------------
+9. Character Classes
+----------------------------------------
+
+A character class uses [].
+
+pattern = r"[aeiou]"
+
+This matches one vowel.
+
+text = "Python"
+
+print(re.findall(pattern, text))
+
+Output:
+
+['o']
+
+Another example:
+
+r"[A-Z]"
+
+→ One uppercase English letter.
+
+r"[0-9]"
+
+→ One digit.
+
+----------------------------------------
+10. Alternation
+----------------------------------------
+
+The | symbol means OR.
+
+pattern = r"Python|Java"
+
+text = "Python and Java"
+
+print(re.findall(pattern, text))
+
+Output:
+
+['Python', 'Java']
+
+----------------------------------------
+11. re.sub()
+----------------------------------------
+
+sub() replaces text matching a pattern.
+
+import re
+
+text = "Python 123"
+
+result = re.sub(r"\\d+", "NUMBER", text)
+
+print(result)
+
+Output:
+
+Python NUMBER
+
+----------------------------------------
+12. re.sub() — Remove Digits
+----------------------------------------
+
+text = "Python123"
+
+result = re.sub(r"\\d", "", text)
+
+print(result)
+
+Output:
+
+Python
+
+----------------------------------------
+13. re.split()
+----------------------------------------
+
+re.split() splits text using a regex pattern.
+
+import re
+
+text = "apple,banana;orange"
+
+result = re.split(r"[,;]", text)
+
+print(result)
+
+Output:
+
+['apple', 'banana', 'orange']
+
+This is useful when multiple separators are possible.
+
+----------------------------------------
+14. Practical Example — Extract Email Addresses
+----------------------------------------
+
+import re
+
+text = "Contact us at hello@example.com or admin@test.com"
+
+emails = re.findall(
+    r"[\\w.-]+@[\\w.-]+\\.\\w+",
+    text
+)
+
+print(emails)
+
+Output:
+
+['hello@example.com', 'admin@test.com']
+
+----------------------------------------
+15. Practical Example — Extract Numbers
+----------------------------------------
+
+import re
+
+text = "Price: ₹1500, Quantity: 25"
+
+numbers = re.findall(r"\\d+", text)
+
+print(numbers)
+
+Output:
+
+['1500', '25']
+
+----------------------------------------
+16. Practical Example — Phone Number Validation
+----------------------------------------
+
+import re
+
+phone = "9876543210"
+
+if re.fullmatch(r"\\d{10}", phone):
+    print("Valid phone number")
+
+Output:
+
+Valid phone number
+
+fullmatch() requires the entire string to match the pattern.
+
+----------------------------------------
+17. fullmatch()
+----------------------------------------
+
+fullmatch() checks the complete string.
+
+import re
+
+text = "12345"
+
+match = re.fullmatch(r"\\d+", text)
+
+if match:
+    print("Only digits")
+
+Output:
+
+Only digits
+
+This is useful for validation.
+
+----------------------------------------
+18. Raw Strings with Regex
+----------------------------------------
+
+Regex patterns often contain backslashes.
+
+Instead of:
+
+"\\d+"
+
+you will commonly see:
+
+r"\\d+"
+
+The r prefix creates a raw string and makes regex patterns easier to read.
+
+----------------------------------------
+19. Compiling a Pattern
+----------------------------------------
+
+For a pattern that is reused, you can compile it.
+
+import re
+
+pattern = re.compile(r"\\d+")
+
+text = "10 20 30"
+
+numbers = pattern.findall(text)
+
+print(numbers)
+
+Output:
+
+['10', '20', '30']
+
+----------------------------------------
+20. Important Regex Functions
+----------------------------------------
+
+re.search()
+→ Find a pattern anywhere.
+
+re.match()
+→ Match from the beginning.
+
+re.fullmatch()
+→ Match the entire string.
+
+re.findall()
+→ Return all matches.
+
+re.finditer()
+→ Iterate through match objects.
+
+re.sub()
+→ Replace matching patterns.
+
+re.split()
+→ Split using a pattern.
+
+re.compile()
+→ Create a reusable regex pattern.
+
+----------------------------------------
+21. Regex vs Normal String Methods
+----------------------------------------
+
+For simple fixed text:
+
+"Python" in text
+
+or:
+
+text.find("Python")
+
+For a prefix:
+
+text.startswith("Python")
+
+For a suffix:
+
+text.endswith(".py")
+
+For complex patterns:
+
+re.search()
+re.findall()
+re.sub()
+
+Professional rule:
+
+Use normal string methods when the problem is simple.
+
+Use regex when you need pattern-based matching.
+
+----------------------------------------
+22. Professional Mental Model
+----------------------------------------
+
+Regex workflow:
+
+Raw text
+↓
+Define pattern
+↓
+Search / Match
+↓
+Extract / Validate
+↓
+Replace / Process
+
+Common DSA/string tools:
+
+String methods
+→ Simple text operations.
+
+Regex
+→ Pattern-based text operations.
+
+Dictionary / Counter
+→ Frequency problems.
+
+Set
+→ Membership and uniqueness.
+
+Two pointers
+→ Character comparison.
+
+Sliding window
+→ Substring optimization.
+
+Regex is powerful, but it should not automatically replace simpler string methods when a simple method is clearer.`,
+},
+
+{
+  heading: "Advanced Strings — Unicode & Character Handling",
+  body: `Python 3 strings use Unicode by default. This allows a single string to contain characters from many languages, mathematical symbols, emojis, and other writing systems.
+
+----------------------------------------
+1. Unicode Strings
+----------------------------------------
+
+text = "Hello, नमस्ते, 你好, مرحبا"
+
+print(text)
+
+Python can store all of these characters in the same string.
+
+----------------------------------------
+2. ord()
+----------------------------------------
+
+ord() returns the Unicode code point of a single character.
+
+print(ord("A"))
+
+Output:
+
+65
+
+print(ord("₹"))
+
+Output:
+
+8377
+
+Each Unicode character has a numeric code point.
+
+----------------------------------------
+3. chr()
+----------------------------------------
+
+chr() converts a Unicode code point into a character.
+
+print(chr(65))
+
+Output:
+
+A
+
+print(chr(8377))
+
+Output:
+
+₹
+
+ord() and chr() are opposites.
+
+ord("A")
+↓
+65
+
+chr(65)
+↓
+"A"
+
+----------------------------------------
+4. Unicode Escape Sequences
+----------------------------------------
+
+Unicode characters can also be written using \\u.
+
+text = "\\u2764"
+
+print(text)
+
+Output:
+
+❤
+
+Another example:
+
+text = "\\u20B9"
+
+print(text)
+
+Output:
+
+₹
+
+----------------------------------------
+5. Unicode with Different Languages
+----------------------------------------
+
+text = "Python नमस्ते 世界"
+
+print(text)
+
+Python strings can contain multilingual text without needing a separate string type for each language.
+
+----------------------------------------
+6. len() Counts Unicode Characters
+----------------------------------------
+
+text = "Python"
+
+print(len(text))
+
+Output:
+
+6
+
+For ordinary Unicode text, len() counts Unicode code points rather than the number of bytes used by the encoded representation.
+
+----------------------------------------
+7. Unicode vs Bytes
+----------------------------------------
+
+text = "₹"
+
+print(len(text))
+
+Output:
+
+1
+
+encoded = text.encode("utf-8")
+
+print(len(encoded))
+
+The string and its UTF-8 byte representation can have different lengths.
+
+This is why:
+
+str length
+≠
+byte length
+
+for many Unicode characters.
+
+----------------------------------------
+8. ASCII vs Unicode
+----------------------------------------
+
+ASCII represents a limited set of characters.
+
+Examples:
+
+A
+B
+C
+0
+1
+2
+
+Unicode supports a much larger character set, including:
+
+₹
+€
+©
+❤
+न
+中
+
+Python 3 strings are Unicode by default.
+
+----------------------------------------
+9. isascii()
+----------------------------------------
+
+isascii() checks whether all characters belong to the ASCII character set.
+
+text = "Python"
+
+print(text.isascii())
+
+Output:
+
+True
+
+text = "Python ₹"
+
+print(text.isascii())
+
+Output:
+
+False
+
+----------------------------------------
+10. Unicode Character Categories
+----------------------------------------
+
+Python's unicodedata module provides information about Unicode characters.
+
+import unicodedata
+
+print(unicodedata.name("A"))
+
+Output:
+
+LATIN CAPITAL LETTER A
+
+Another example:
+
+print(unicodedata.name("₹"))
+
+This returns the Unicode name of the character.
+
+----------------------------------------
+11. Unicode Normalization
+----------------------------------------
+
+Visually identical Unicode text can sometimes have different internal representations.
+
+The unicodedata.normalize() function can normalize text.
+
+import unicodedata
+
+text = "café"
+
+normalized = unicodedata.normalize("NFC", text)
+
+print(normalized)
+
+Output:
+
+café
+
+Common normalization forms include:
+
+NFC
+NFD
+NFKC
+NFKD
+
+Normalization can be important when comparing Unicode text reliably.
+
+----------------------------------------
+12. Case Handling with Unicode
+----------------------------------------
+
+For case-insensitive comparisons, casefold() is generally better than lower().
+
+a = "Python"
+b = "PYTHON"
+
+print(a.casefold() == b.casefold())
+
+Output:
+
+True
+
+This is especially useful for internationalized text.
+
+----------------------------------------
+13. Unicode-Aware Validation
+----------------------------------------
+
+text = "नमस्ते"
+
+print(text.isalpha())
+
+Python's character-checking methods work with Unicode characters.
+
+This means validation is not limited to English letters.
+
+----------------------------------------
+14. Encoding Unicode Text
+----------------------------------------
+
+text = "Hello ₹"
+
+data = text.encode("utf-8")
+
+print(data)
+
+UTF-8 converts the Unicode string into bytes.
+
+----------------------------------------
+15. Decoding Back to String
+----------------------------------------
+
+data = "Hello ₹".encode("utf-8")
+
+text = data.decode("utf-8")
+
+print(text)
+
+Output:
+
+Hello ₹
+
+The complete process is:
+
+Unicode string
+↓
+encode("utf-8")
+↓
+bytes
+↓
+decode("utf-8")
+↓
+Unicode string
+
+----------------------------------------
+16. Practical Example — Unicode Character Information
+----------------------------------------
+
+import unicodedata
+
+char = "₹"
+
+print("Character:", char)
+print("Code point:", ord(char))
+print("Unicode name:", unicodedata.name(char))
+
+This can be useful when investigating unusual characters in input data.
+
+----------------------------------------
+17. Practical Example — Unicode-Safe Comparison
+----------------------------------------
+
+a = "café"
+b = "CAFÉ"
+
+if a.casefold() == b.casefold():
+    print("Same text ignoring case")
+
+Output:
+
+Same text ignoring case
+
+For more complex Unicode equivalence, normalization may also be required.
+
+----------------------------------------
+18. Important Unicode Concepts
+----------------------------------------
+
+str
+→ Unicode text.
+
+bytes
+→ Raw byte data.
+
+ord()
+→ Character → Unicode code point.
+
+chr()
+→ Unicode code point → Character.
+
+encode()
+→ String → bytes.
+
+decode()
+→ bytes → string.
+
+isascii()
+→ Check for ASCII-only characters.
+
+unicodedata
+→ Inspect and normalize Unicode characters.
+
+----------------------------------------
+19. Professional Mental Model
+----------------------------------------
+
+Python text:
+
+str
+↓
+Unicode characters
+
+When communicating with byte-based systems:
+
+str
+↓ encode()
+bytes
+↓ decode()
+str
+
+When handling Unicode comparisons:
+
+normalize()
+↓
+casefold()
+↓
+compare
+
+Unicode awareness is especially important for:
+
+• International applications
+• APIs
+• Databases
+• File processing
+• User input
+• Web applications
+• Search systems
+• NLP/text processing
+
+The key idea:
+
+Python strings represent Unicode text, while bytes represent encoded data.`,
+},
+  ],
+
+code: `# ── STRINGS — ordered, immutable Unicode text ─────────────────────
+
+text = "Python Programming"
+
+# Indexing
+print(text[0])       # P
+print(text[-1])      # g
+
+# Slicing
+print(text[0:6])     # Python
+print(text[::-1])    # gnimmargorP nohtyP
+
+# Membership
+print("Python" in text)       # True
+print("Java" not in text)     # True
+
+# Length
+print(len(text))              # 18
+
+# Case conversion
+print(text.upper())
+print(text.lower())
+print(text.title())
+print(text.capitalize())
+print(text.casefold())
+
+# Searching
+print(text.find("Python"))
+print(text.count("m"))
+print(text.startswith("Python"))
+print(text.endswith("ing"))
+
+# Replace
+text2 = "Python Python Java"
+print(text2.replace("Python", "Django"))
+
+# Multiple replacements
+clean = (
+    "Python!!!"
+    .replace("Python", "Django")
+    .replace("!!!", "")
+    .replace("Django", "Django Framework")
+)
+
+print(clean)
+
+# Translation
+table = str.maketrans({
+    "a": "@",
+    "e": "3",
+    "i": "1"
+})
+
+print("python is amazing".translate(table))
+
+# Validation
+print("Python".isalpha())       # True
+print("12345".isdigit())        # True
+print("Python123".isalnum())    # True
+print("   ".isspace())          # True
+print("python".islower())       # True
+print("PYTHON".isupper())       # True
+print("student_name".isidentifier())  # True
+
+# Alignment and padding
+print("Python".center(12, "-"))
+print("Python".ljust(12, "."))
+print("Python".rjust(12, "."))
+print("42".zfill(5))
+
+# Prefix and suffix removal
+url = "https://example.com/"
+print(url.removeprefix("https://"))
+print(url.removesuffix("/"))
+
+clean_url = (
+    url
+    .removeprefix("https://")
+    .removesuffix("/")
+)
+
+print(clean_url)
+
+# Splitting
+text = "Python, Django, FastAPI"
+
+print(text.split(","))
+print(text.split(",", 1))
+print(text.rsplit(",", 1))
+
+# Joining
+languages = ["Python", "Django", "FastAPI"]
+
+print(" - ".join(languages))
+
+# Partitioning
+email = "rahul@example.com"
+
+username, separator, domain = email.partition("@")
+
+print(username)
+print(domain)
+
+# rpartition()
+path = "folder/subfolder/report.pdf"
+
+folder, separator, filename = path.rpartition("/")
+
+print(folder)
+print(filename)
+
+# Split lines
+data = """Python
+Django
+FastAPI"""
+
+print(data.splitlines())
+
+# f-strings
+name = "Rahul"
+age = 21
+salary = 65000.456
+
+print(f"Name: {name}")
+print(f"Age: {age}")
+print(f"Salary: ₹{salary:,.2f}")
+
+# f-string expressions
+a = 10
+b = 20
+
+print(f"Sum = {a + b}")
+
+# f-string debugging
+print(f"{name=}")
+print(f"{age=}")
+
+# format()
+message = "Name: {}, Age: {}".format(name, age)
+print(message)
+
+# format_map()
+student = {
+    "name": "Rahul",
+    "age": 21,
+    "course": "Python"
+}
+
+message = "Name: {name}, Age: {age}, Course: {course}"
+print(message.format_map(student))
+
+# Escape sequences
+print("Hello\\nPython")
+print("Name:\\tRahul")
+
+# Raw strings
+path = r"C:\\Users\\Rahul\\Documents"
+print(path)
+
+# Reverse string
+text = "Python"
+print(text[::-1])
+
+# Palindrome
+word = "madam"
+
+if word == word[::-1]:
+    print("Palindrome")
+
+# Character frequency
+text = "banana"
+
+freq = {}
+
+for char in text:
+    freq[char] = freq.get(char, 0) + 1
+
+print(freq)
+
+# Counter
+from collections import Counter
+
+freq2 = Counter("banana")
+
+print(freq2)
+print(freq2.most_common(2))
+
+# Anagram
+a = "listen"
+b = "silent"
+
+if Counter(a) == Counter(b):
+    print("Anagrams")
+
+# Find longest word
+sentence = "Python makes programming powerful"
+
+words = sentence.split()
+
+longest = max(words, key=len)
+
+print(longest)
+
+# Two-pointer palindrome
+text = "racecar"
+
+left = 0
+right = len(text) - 1
+
+is_palindrome = True
+
+while left < right:
+    if text[left] != text[right]:
+        is_palindrome = False
+        break
+
+    left += 1
+    right -= 1
+
+print(is_palindrome)
+
+# Sliding window — longest substring without duplicates
+text = "abcabcbb"
+
+seen = set()
+left = 0
+longest = 0
+
+for right in range(len(text)):
+    while text[right] in seen:
+        seen.remove(text[left])
+        left += 1
+
+    seen.add(text[right])
+
+    longest = max(longest, right - left + 1)
+
+print(longest)       # 3
+
+# Regular expressions
+import re
+
+text = "My phone number is 9876543210"
+
+match = re.search(r"\\d+", text)
+
+if match:
+    print(match.group())
+
+# Find all numbers
+text = "Prices: 100, 250, 500"
+
+numbers = re.findall(r"\\d+", text)
+
+print(numbers)
+
+# Regex replacement
+text = "Python123"
+
+clean = re.sub(r"\\d+", "", text)
+
+print(clean)
+
+# Unicode
+print(ord("A"))       # 65
+print(chr(65))        # A
+
+print(ord("₹"))       # 8377
+
+# Encoding / Decoding
+text = "Hello ₹"
+
+encoded = text.encode("utf-8")
+decoded = encoded.decode("utf-8")
+
+print(encoded)
+print(decoded)
+
+# Unicode normalization
+import unicodedata
+
+text = "café"
+
+normalized = unicodedata.normalize("NFC", text)
+
+print(normalized)
+
+# ASCII check
+print("Python".isascii())
+print("Python ₹".isascii())`,
+resources: [
+  {
+    label: "Python Strings — Official Documentation",
+    url: "https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str",
+    type: "documentation"
+  },
+  {
+    label: "Python String Formatting — Official Documentation",
+    url: "https://docs.python.org/3/tutorial/inputoutput.html#fancier-output-formatting",
+    type: "documentation"
+  },
+  {
+    label: "Python Regular Expressions — Official Documentation",
+    url: "https://docs.python.org/3/library/re.html",
+    type: "documentation"
+  },
+  {
+    label: "Python Unicode HOWTO — Official Documentation",
+    url: "https://docs.python.org/3/howto/unicode.html",
+    type: "documentation"
+  },
+  {
+    label: "Python Strings — Google for Developers",
+    url: "https://developers.google.com/edu/python/strings",
+    type: "tutorial"
+  }
+],
+},
+
         ],
-      },
+    },
+
       {
         id: "l2-oop",
         title: "Object-Oriented Programming",
@@ -19227,150 +53058,760 @@ big_set  = set(range(1000000))
         why: "OOP is how you build big programs. Every Django model, FastAPI schema, and ML pipeline uses OOP.",
         topics: [
           {
-            title: "Classes & Objects",
-            type: "concept",
-            detail: "A class is a blueprint. An object is the actual thing built from that blueprint. Python makes OOP much simpler than Java.",
-            code: `class Student:
-    """A student in our university."""
-    
-    # Class variable — shared by ALL instances
-    school = "CSE Academy"
-    count = 0
-    
-    def __init__(self, name, age, gpa):
-        # Instance variables — unique to each object
-        self.name = name
-        self.age  = age
-        self.gpa  = gpa
-        self.courses = []
-        Student.count += 1
-    
-    def introduce(self):
-        return f"Hi, I'm {self.name}, GPA: {self.gpa}"
-    
-    def enroll(self, course):
-        self.courses.append(course)
-    
-    def get_grade(self):
-        if self.gpa >= 9: return "A+"
-        if self.gpa >= 8: return "A"
-        if self.gpa >= 7: return "B"
-        return "C"
-    
-    @classmethod
-    def get_count(cls):
-        return f"Total students: {cls.count}"
-    
-    @staticmethod
-    def valid_gpa(gpa):
-        return 0.0 <= gpa <= 10.0
-    
-    def __repr__(self):
-        return f"Student('{self.name}', {self.gpa})"
-    
+ title: "OOPS — Object-Oriented Programming System",
+  type: "concept",
+  detail: "OOPS organizes software around objects that combine data (attributes) and behavior (methods). Python's OOPS model is built on four pillars — Encapsulation, Inheritance, Polymorphism, and Abstraction — making code reusable, modular, and easier to maintain at scale.",
+  subsections: [
+    {
+      heading: "What is OOPS?",
+      body: `OOPS stands for Object-Oriented Programming System.
+ 
+It is a programming paradigm where you design your program around real-world entities called OBJECTS.
+ 
+Full Form:
+O → Object
+O → Oriented
+P → Programming
+S → System
+ 
+Before OOPS: Procedural programming — code is a sequence of instructions (functions calling functions). Hard to manage as programs grow.
+ 
+After OOPS: Code is organized into objects — each object has its own data and behavior. Easier to scale, debug, and reuse.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Real-World Analogy:
+ 
+Think of a CAR:
+• Attributes (data) → color, brand, speed, fuel
+• Methods (behavior) → start(), accelerate(), brake(), stop()
+ 
+In OOPS, you model this as a Car class.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+4 Pillars of OOPS:
+ 
+1. Encapsulation   → Wrapping data + methods together
+2. Inheritance     → Child class reuses parent class
+3. Polymorphism    → Same method, different behavior
+4. Abstraction     → Hide complexity, show only interface
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Why OOPS in Python?
+ 
+• Python is a fully object-oriented language
+• Even int, str, list are objects in Python
+• Real projects (Django, FastAPI, ML frameworks) use OOPS heavily
+• Interview questions heavily test OOPS concepts`,
+    },
+    {
+      heading: "Class and Object",
+      body: `CLASS → A blueprint or template for creating objects.
+OBJECT → An actual instance created from a class.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Analogy:
+• Class = Blueprint of a house (design on paper)
+• Object = Actual house built from that blueprint
+ 
+You can build many houses from one blueprint.
+Similarly, you can create many objects from one class.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Syntax:
+ 
+class ClassName:
+    def __init__(self, params):   # constructor
+        self.attribute = value    # instance variable
+ 
+    def method(self):             # instance method
+        return self.attribute
+ 
+object_name = ClassName(args)     # creating object
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Key Terms:
+ 
+• class       → keyword to define a class
+• __init__    → special method called automatically when object is created
+• self        → refers to the current object (like 'this' in Java/C++)
+• attribute   → variable inside a class
+• method      → function inside a class
+• instance    → another word for object
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Memory:
+Each object gets its own copy of attributes in memory.
+Methods are shared — only one copy exists for all objects.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+"Class is a logical entity. Object is a physical entity."
+Class takes no memory. Object takes memory.`,
+    },
+     {
+      heading: "Constructor — __init__",
+      body: `CONSTRUCTOR is a special method that runs automatically when an object is created.
+ 
+In Python, the constructor is __init__()
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Purpose of Constructor:
+→ Initialize the attributes of an object
+→ Set default values when an object is born
+→ Run setup code automatically
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Types of Constructors in Python:
+ 
+1. Default Constructor
+   → No parameters (except self)
+   → Used when all objects have same default values
+ 
+2. Parameterized Constructor
+   → Takes parameters
+   → Used when each object needs different values
+ 
+3. No Constructor
+   → Python provides a default __init__ automatically
+   → If you don't define one, Python uses object.__init__
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+self parameter:
+• self is the first parameter of every method
+• self refers to the current object being created
+• Python automatically passes the object as self
+• You never pass self manually when calling methods
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+__init__ vs __new__:
+• __new__ creates the object in memory (rarely overridden)
+• __init__ initializes the object (commonly used)
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+"Constructor is not called explicitly. It runs when object = ClassName() is executed."`,
+    },
+    {
+      heading: "Instance vs Class vs Static Variables",
+      body: `Python has 3 types of variables inside a class:
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. INSTANCE VARIABLE
+   → Defined inside __init__ using self.variable
+   → Each object gets its OWN copy
+   → Values can differ per object
+   → Most commonly used
+ 
+   example:
+   self.name = name  ← belongs to each object separately
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+2. CLASS VARIABLE
+   → Defined directly inside class body (not in any method)
+   → Shared by ALL objects of the class
+   → One copy exists for the whole class
+   → Used for data common to all instances
+ 
+   example:
+   class Student:
+       school = "Delhi Public School"  ← shared by all students
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+3. LOCAL VARIABLE
+   → Defined inside a method without self
+   → Exists only during that method's execution
+   → Destroyed after method ends
+   → Not accessible outside the method
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Access Rules:
+• Instance variable  → self.var  OR  object.var
+• Class variable     → ClassName.var  OR  self.var (if not overridden)
+• Local variable     → only inside the method
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+If you modify a class variable via an object (self.school = "X"),
+Python creates a NEW instance variable for that object.
+The original class variable stays unchanged for all other objects.`,
+    },
+    {
+      heading: "Instance vs Class vs Static Methods",
+      body: `Python has 3 types of methods inside a class:
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. INSTANCE METHOD
+   → First parameter: self
+   → Can access and modify instance variables
+   → Called on an object: obj.method()
+   → Most common type
+ 
+   def greet(self):
+       return f"Hello, {self.name}"
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+2. CLASS METHOD
+   → Decorated with @classmethod
+   → First parameter: cls (class itself, not instance)
+   → Can access and modify CLASS variables
+   → Cannot access instance variables
+   → Called on class OR object
+ 
+   @classmethod
+   def get_school(cls):
+       return cls.school
+ 
+   Use cases:
+   → Factory methods (alternative constructors)
+   → Modifying class-level data
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+3. STATIC METHOD
+   → Decorated with @staticmethod
+   → No self, no cls parameter
+   → Cannot access class or instance variables
+   → Just a regular function inside a class namespace
+   → Called on class OR object
+ 
+   @staticmethod
+   def validate_age(age):
+       return age >= 0
+ 
+   Use cases:
+   → Utility/helper functions related to the class
+   → When you need grouping but no class/instance data
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Quick Comparison:
+         self?   cls?   access instance?  access class?
+Instance   ✅     ❌          ✅               ✅
+Class      ❌     ✅          ❌               ✅
+Static     ❌     ❌          ❌               ❌`
+    },
+    {
+      heading: "Encapsulation",
+      body: `ENCAPSULATION means bundling data (attributes) and methods that operate on that data inside a single unit (class), and restricting direct access to some of the object's components.
+ 
+Analogy: A capsule (medicine) — the contents are hidden inside. You take the capsule, not the raw chemicals.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Two parts of Encapsulation:
+1. Data Hiding     → Restrict access to internal data
+2. Data Bundling   → Keep related data + methods together
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Access Modifiers in Python (by convention):
+ 
+Public:    self.name      → accessible everywhere (default)
+Protected: self._name     → accessible within class and subclasses (convention)
+Private:   self.__name    → name-mangled, not directly accessible outside
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Name Mangling:
+When you write self.__balance, Python internally renames it to:
+_ClassName__balance
+ 
+So you CAN still access it as obj._BankAccount__balance
+But you SHOULD NOT — it breaks encapsulation.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Getters and Setters:
+To safely expose private data, use getter/setter methods:
+ 
+def get_balance(self):      # getter
+    return self.__balance
+ 
+def set_balance(self, amt): # setter
+    if amt >= 0:
+        self.__balance = amt
+ 
+Or use @property decorator for Pythonic style.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Benefits:
+• Prevents accidental data corruption
+• You control what outside code can read/modify
+• Easier to maintain and debug
+• Real-world example: bank balance — you can't directly change it`
+    },
+    {
+      heading: "Inheritance",
+      body: `INHERITANCE allows a child class to acquire properties and methods of a parent class without rewriting them.
+ 
+Analogy: A child inherits traits (eyes, height) from parents. Similarly, a child class inherits attributes and methods from parent class.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Key Terms:
+• Parent class   = Base class = Super class
+• Child class    = Derived class = Sub class
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Syntax:
+class Parent:
+    def method(self):
+        pass
+ 
+class Child(Parent):    ← inherits from Parent
+    pass
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Types of Inheritance in Python:
+ 
+1. Single Inheritance
+   One parent → One child
+   class Dog(Animal): ...
+ 
+2. Multiple Inheritance
+   Two or more parents → One child
+   class C(A, B): ...
+ 
+3. Multilevel Inheritance
+   Grandparent → Parent → Child
+   class C(B): ...  where class B(A): ...
+ 
+4. Hierarchical Inheritance
+   One parent → Multiple children
+   class Dog(Animal): ...
+   class Cat(Animal): ...
+ 
+5. Hybrid Inheritance
+   Combination of above types
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+super() keyword:
+• Used to call parent class methods from child class
+• super().__init__() — calls parent constructor
+• Avoids hardcoding parent class name
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Method Resolution Order (MRO):
+Python uses C3 Linearization algorithm to decide which parent's method to call in multiple inheritance.
+Check with: ClassName.__mro__ or ClassName.mro()
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Benefits:
+• Code reuse — write once, use in many classes
+• Extensibility — add new features to child without touching parent
+• Real example: Django's View inherits from object; ListView from View`
+    },
+    {
+      heading: "Polymorphism",
+      body: `POLYMORPHISM means "many forms." The same method name behaves differently based on the object calling it.
+ 
+Analogy: The + operator behaves differently:
+• 2 + 3 = 5 (addition)
+• "Hello" + " World" = "Hello World" (concatenation)
+Same operator, different behavior.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Types of Polymorphism in Python:
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. METHOD OVERRIDING (Runtime Polymorphism)
+   Child class defines a method with SAME name as parent.
+   Python calls the child's version at runtime.
+ 
+   class Animal:
+       def speak(self): return "..."
+   class Dog(Animal):
+       def speak(self): return "Woof"  ← overrides parent
+ 
+   Decided at RUNTIME → also called Dynamic Dispatch
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+2. METHOD OVERLOADING (Compile-time Polymorphism)
+   Python does NOT support traditional overloading.
+   But you can simulate it using default parameters or *args.
+ 
+   def add(a, b, c=0):
+       return a + b + c
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+3. OPERATOR OVERLOADING
+   Redefine operators for custom classes using dunder methods:
+ 
+   __add__   → +
+   __sub__   → -
+   __mul__   → *
+   __str__   → str()
+   __len__   → len()
+   __eq__    → ==
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+4. DUCK TYPING
+   Python's most powerful form of polymorphism.
+   "If it walks like a duck and quacks like a duck, it is a duck."
+ 
+   Python doesn't check TYPE — it checks BEHAVIOR.
+   If an object has the method you need, it works — regardless of its class.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Benefits:
+• Write generic code that works with different types
+• Flexibility and extensibility
+• Real example: len() works on str, list, dict, tuple — polymorphism!`
+    },
+    {
+      heading: "Abstraction",
+      body: `ABSTRACTION means hiding the internal implementation and showing only the necessary interface to the user.
+ 
+Analogy:
+• You drive a car — press accelerator, it speeds up.
+• You DON'T need to know: how the engine mixes fuel, how spark plugs fire, how the transmission works.
+• The complexity is hidden. The interface (pedal) is simple.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Abstraction in Python:
+Python achieves abstraction using:
+1. Abstract Base Classes (ABC)
+2. Abstract Methods
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Abstract Class:
+• A class that CANNOT be instantiated directly
+• Contains at least one abstract method
+• Forces child classes to implement the abstract methods
+ 
+from abc import ABC, abstractmethod
+ 
+class Shape(ABC):           ← abstract class
+    @abstractmethod
+    def area(self):         ← abstract method — no body
+        pass
+ 
+class Circle(Shape):        ← must implement area()
+    def area(self):
+        return 3.14 * self.r ** 2
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Abstract Method:
+• Has @abstractmethod decorator
+• Has no body (just pass or ...)
+• Any child class MUST override it
+• If child doesn't implement it → TypeError on instantiation
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Abstraction vs Encapsulation:
+Encapsulation → HIDES DATA (using private variables)
+Abstraction   → HIDES IMPLEMENTATION (using abstract classes)
+ 
+Encapsulation is about HOW data is stored.
+Abstraction is about WHAT the user needs to know.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Real Use Cases:
+• Django ORM — you call .save(), .filter() — internal SQL is abstracted
+• FastAPI — you define routes — HTTP handling is abstracted
+• PyTorch — you call .forward() — GPU computation is abstracted`
+    },
+    {
+      heading: "Dunder / Magic Methods",
+      body: `DUNDER METHODS (Double UNDERscore) are special methods with __ prefix and suffix. Python calls them automatically in specific situations.
+ 
+Also called: Magic methods, Special methods
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Most Important Dunder Methods:
+ 
+__init__(self)       → Constructor. Called when object is created.
+__str__(self)        → Called when str(obj) or print(obj) is used.
+__repr__(self)       → Called in REPL / debugging. Should be unambiguous.
+__len__(self)        → Called when len(obj) is used.
+__add__(self, other) → Called when obj1 + obj2 is used.
+__eq__(self, other)  → Called when obj1 == obj2 is used.
+__lt__(self, other)  → Called when obj1 < obj2 is used.
+__del__(self)        → Destructor. Called when object is garbage collected.
+__call__(self)       → Called when obj() is used — makes object callable.
+__getitem__(self, k) → Called when obj[key] is used.
+__setitem__(self, k) → Called when obj[key] = value is used.
+__contains__(self, x)→ Called when x in obj is used.
+__iter__(self)       → Called when iter(obj) is used.
+__next__(self)       → Called when next(obj) is used.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+__str__ vs __repr__:
+• __str__  → Human-readable. Used for end users. print(obj)
+• __repr__ → Developer-readable. Used for debugging. repr(obj)
+ 
+Rule: If only one is defined, Python falls back to __repr__.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Why They Matter:
+• Make your custom class work with Python built-ins
+• len(obj), print(obj), obj + obj, obj[key] — all need dunders
+• Real frameworks heavily use dunders (Django models, NumPy arrays)
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+"Dunder methods allow operator overloading and make custom objects behave like built-in types."`,
+    },
+    {
+      heading: "@property Decorator",
+      body: `@property is a built-in decorator that lets you define a method that is accessed like an attribute — without parentheses.
+ 
+It is Python's Pythonic way to implement getters, setters, and deleters.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Without @property (old way):
+obj.get_name()   ← must call like a method
+ 
+With @property (Pythonic way):
+obj.name         ← accessed like an attribute ✅
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Three decorators:
+ 
+@property          → GETTER — read the value
+@name.setter       → SETTER — set the value with validation
+@name.deleter      → DELETER — delete the attribute
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Benefits:
+• Clean interface — looks like attribute, works like method
+• Add validation logic when setting values
+• Make read-only attributes (define only getter, no setter)
+• Backward compatibility — change internal implementation without changing interface
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Read-only property:
+If you only define @property (no setter), the attribute becomes read-only.
+Trying to set it raises AttributeError.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Real Example:
+class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+ 
+    @property
+    def fahrenheit(self):           ← computed property
+        return self._celsius * 9/5 + 32
+ 
+t = Temperature(100)
+print(t.fahrenheit)                 ← 212.0 (no parentheses!)
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+"@property converts a method to a managed attribute. It is the Pythonic alternative to getter/setter methods."`,
+    },
+    {
+      heading: "Class Relationships — Association, Aggregation, Composition",
+      body: `Classes can be related to each other in different ways. Understanding these relationships is key for system design and LLD interviews.
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+1. ASSOCIATION (HAS-A, loosely)
+   Two classes are related but INDEPENDENT.
+   One class uses another, but neither owns the other.
+ 
+   Example: Teacher and Student
+   • A teacher teaches students
+   • Both can exist independently
+ 
+   class Teacher:
+       def teach(self, student):
+           print(f"Teaching {student.name}")
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+2. AGGREGATION (HAS-A, weak ownership)
+   One class contains another, but the contained object
+   can EXIST INDEPENDENTLY.
+ 
+   Example: Department and Professor
+   • A department has professors
+   • If department is deleted, professors still exist
+ 
+   class Department:
+       def __init__(self, professor):
+           self.professor = professor   ← passed in from outside
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+3. COMPOSITION (HAS-A, strong ownership)
+   One class OWNS another. The contained object
+   CANNOT exist without the owner.
+ 
+   Example: House and Room
+   • A house has rooms
+   • If house is destroyed, rooms are destroyed too
+ 
+   class House:
+       def __init__(self):
+           self.room = Room()   ← created INSIDE — owned
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+4. INHERITANCE (IS-A)
+   Child IS a type of parent.
+ 
+   class Dog(Animal): ...    ← Dog IS-AN Animal
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Quick Reference:
+Relationship    Keyword   Lifetime dependency?
+Association     uses-a    None
+Aggregation     has-a     Weak (can exist alone)
+Composition     has-a     Strong (cannot exist alone)
+Inheritance     is-a      N/A
+ 
+━━━━━━━━━━━━━━━━━━━━━━━━
+Interview Tip:
+Prefer Composition over Inheritance for flexibility.
+"Favor composition over inheritance" — Gang of Four design principle.`,
+    }
+  ],
+  code: `# ═══════════════════════════════════════════════
+# OOPS — Complete Python Example
+# Demonstrates all 4 pillars with one real example
+# ═══════════════════════════════════════════════
+ 
+from abc import ABC, abstractmethod
+ 
+# ── Abstraction ─────────────────────────────────
+class BankAccount(ABC):
+    """Abstract base class — cannot be instantiated"""
+ 
+    # Class variable — shared by all accounts
+    bank_name = "ProCode Bank"
+    total_accounts = 0
+ 
+    def __init__(self, owner: str, balance: float = 0):
+        # Encapsulation — private attributes
+        self._owner = owner           # protected
+        self.__balance = balance      # private (name-mangled)
+        BankAccount.total_accounts += 1
+ 
+    # ── @property (Pythonic getter) ──────────────
+    @property
+    def balance(self):
+        return self.__balance
+ 
+    @balance.setter
+    def balance(self, amount):
+        if amount < 0:
+            raise ValueError("Balance cannot be negative")
+        self.__balance = amount
+ 
+    # ── Abstract method — must be implemented ────
+    @abstractmethod
+    def account_type(self) -> str:
+        pass
+ 
+    # ── Instance method ──────────────────────────
+    def deposit(self, amount: float):
+        if amount <= 0:
+            raise ValueError("Deposit must be positive")
+        self.__balance += amount
+        return f"Deposited ₹{amount}. New balance: ₹{self.__balance}"
+ 
+    def withdraw(self, amount: float):
+        if amount > self.__balance:
+            raise ValueError("Insufficient funds")
+        self.__balance -= amount
+        return f"Withdrew ₹{amount}. Remaining: ₹{self.__balance}"
+ 
+    # ── Dunder methods ───────────────────────────
     def __str__(self):
-        return f"{self.name} ({self.gpa})"
-
-s1 = Student("Rahul", 21, 8.75)
-s1.enroll("Data Structures")
-print(s1.get_grade())       # A
-print(Student.get_count())  # Total students: 1`,
+        return f"{self.account_type()} | {self._owner} | ₹{self.__balance}"
+ 
+    def __repr__(self):
+        return f"BankAccount(owner={self._owner!r}, balance={self.__balance})"
+ 
+    def __add__(self, other):
+        """Merge balances of two accounts"""
+        return self.__balance + other.balance
+ 
+    # ── Class method ─────────────────────────────
+    @classmethod
+    def get_bank_name(cls):
+        return cls.bank_name
+ 
+    # ── Static method ────────────────────────────
+    @staticmethod
+    def validate_amount(amount):
+        return isinstance(amount, (int, float)) and amount > 0
+ 
+ 
+# ── Inheritance ──────────────────────────────────
+class SavingsAccount(BankAccount):
+    """Child class — inherits from BankAccount"""
+ 
+    def __init__(self, owner: str, balance: float = 0):
+        super().__init__(owner, balance)  # call parent constructor
+        self.interest_rate = 0.04         # 4% annual interest
+ 
+    # ── Method Overriding (Polymorphism) ─────────
+    def account_type(self) -> str:
+        return "Savings Account"
+ 
+    def add_interest(self):
+        interest = self.balance * self.interest_rate
+        self.balance += interest
+        return f"Interest ₹{interest:.2f} added. Balance: ₹{self.balance:.2f}"
+ 
+ 
+class CurrentAccount(BankAccount):
+    """Another child class"""
+ 
+    def __init__(self, owner: str, balance: float = 0, overdraft: float = 5000):
+        super().__init__(owner, balance)
+        self._overdraft_limit = overdraft
+ 
+    def account_type(self) -> str:
+        return "Current Account"
+ 
+    # ── Method Overriding — extended behavior ────
+    def withdraw(self, amount: float):
+        if amount > self.balance + self._overdraft_limit:
+            raise ValueError("Exceeds overdraft limit")
+        # call parent withdraw if within normal balance
+        if amount <= self.balance:
+            return super().withdraw(amount)
+        # use overdraft
+        overdraft_used = amount - self.balance
+        self.balance = 0
+        return f"Overdraft used: ₹{overdraft_used}. Balance: ₹0"
+ 
+ 
+# ── Duck Typing (Polymorphism) ───────────────────
+def print_account_info(account):
+    """Works for ANY account type — duck typing"""
+    print(account)              # calls __str__
+    print(f"Type: {account.account_type()}")
+    print(f"Bank: {BankAccount.get_bank_name()}")
+    print(f"Valid? {BankAccount.validate_amount(100)}")
+    print("-" * 40)
+ 
+ 
+# ── MAIN ─────────────────────────────────────────
+if __name__ == "__main__":
+ 
+    # Create objects
+    savings = SavingsAccount("Priya", 10000)
+    current = CurrentAccount("Rahul", 5000, overdraft=10000)
+ 
+    # Polymorphism — same function, different objects
+    print_account_info(savings)
+    print_account_info(current)
+ 
+    # Encapsulation in action
+    print(savings.deposit(2000))
+    print(savings.add_interest())
+ 
+    # Operator overloading (__add__)
+    total = savings + current
+    print(f"Combined balance: ₹{total}")
+ 
+    # Class variable access
+    print(f"Total accounts: {BankAccount.total_accounts}")
+ 
+    # This would raise TypeError — cannot instantiate abstract class
+    # account = BankAccount("Test")  ← ERROR`,
+},
+ 
+],
             resources: [
               { label: "OOP in Python (Real Python)", url: "https://realpython.com/python3-object-oriented-programming/", type: "article" },
               { label: "Corey Schafer OOP Series", url: "https://youtube.com/watch?v=ZDa-Z5JzLYM", type: "video" },
             ],
           },
-          {
-            title: "Inheritance & Polymorphism",
-            type: "concept",
-            detail: "Inheritance = reuse parent code. Polymorphism = same method name, different behavior. These two together are why OOP exists.",
-            code: `class Animal:
-    def __init__(self, name, sound):
-        self.name  = name
-        self.sound = sound
-    
-    def speak(self):
-        return f"{self.name} says {self.sound}"
-    
-    def __repr__(self):
-        return f"{type(self).__name__}('{self.name}')"
-
-class Dog(Animal):
-    def __init__(self, name):
-        super().__init__(name, "Woof")
-    
-    def fetch(self, item):
-        return f"{self.name} fetches the {item}!"
-
-class Cat(Animal):
-    def __init__(self, name):
-        super().__init__(name, "Meow")
-    
-    def speak(self):             # OVERRIDE parent method
-        return f"{self.name} gracefully meows"
-
-class GuideDog(Dog):            # Multi-level inheritance
-    def __init__(self, name, owner):
-        super().__init__(name)
-        self.owner = owner
-    
-    def guide(self):
-        return f"{self.name} guides {self.owner}"
-
-# Polymorphism — same call, different behavior
-animals = [Dog("Rex"), Cat("Whiskers"), Dog("Buddy")]
-for animal in animals:
-    print(animal.speak())  # Each calls its OWN speak()
-
-print(isinstance(GuideDog("Max", "Alice"), Dog))    # True
-print(isinstance(GuideDog("Max", "Alice"), Animal)) # True`,
-            resources: [
-              { label: "Python Inheritance (Programiz)", url: "https://www.programiz.com/python-programming/inheritance", type: "article" },
-            ],
-          },
-          {
-            title: "Properties & Encapsulation",
-            type: "concept",
-            detail: "@property makes attributes smart — run logic when getting or setting. This is Python's version of getters/setters, but much cleaner.",
-            code: `class BankAccount:
-    def __init__(self, owner, balance):
-        self.owner    = owner       # Public
-        self._name    = "PyBank"    # Protected (convention only)
-        self.__balance = balance    # Private (name-mangled)
-    
-    @property
-    def balance(self):              # Getter
-        return self.__balance
-    
-    @balance.setter
-    def balance(self, amount):      # Setter with validation
-        if amount < 0:
-            raise ValueError("Balance cannot be negative")
-        self.__balance = amount
-    
-    def deposit(self, amount):
-        if amount <= 0:
-            raise ValueError("Deposit must be positive")
-        self.__balance += amount
-        return f"Deposited ₹{amount}. Balance: ₹{self.__balance}"
-    
-    def withdraw(self, amount):
-        if amount > self.__balance:
-            raise ValueError("Insufficient funds")
-        self.__balance -= amount
-        return f"Withdrawn ₹{amount}. Balance: ₹{self.__balance}"
-
-acc = BankAccount("Rahul", 10000)
-print(acc.deposit(5000))       # Clean method call
-print(acc.balance)             # Uses @property getter
-acc.balance = 20000            # Uses @property setter
-# acc.__balance                # AttributeError — private!`,
-            resources: [
-              { label: "Python Properties (Real Python)", url: "https://realpython.com/python-property/", type: "article" },
-            ],
-          },
-        ],
-      },
       {
         id: "l2-stdlib",
         title: "Standard Library Must-Knows",
@@ -19681,42 +54122,12179 @@ mgr.report()`,
         why: "These features separate Python beginners from Python professionals.",
         topics: [
           {
-            title: "Generators & Iterators",
+            title: "Advanced Functions",
             type: "concept",
-            detail: "Generators produce values LAZILY — one at a time. They use O(1) memory regardless of sequence size. Critical for processing large datasets.",
-            code: `# Generator function — uses yield
-def fibonacci():
-    a, b = 0, 1
+            detail: "Advanced functions extend Python's basic function capabilities with flexible arguments, higher-order functions, closures, lambda expressions, and functional programming techniques.",
+            subsections: [
+    {
+      heading: "Introduction to Advanced Functions",
+      body: `Python functions can do much more than simply accept fixed parameters and return a value.
+
+Advanced functions allow you to:
+
+• Accept a variable number of arguments
+• Pass functions as values
+• Return functions from other functions
+• Create anonymous functions with lambda
+• Build closures
+• Use functions such as map(), filter(), and reduce()
+• Control how arguments are passed to functions
+
+These features are especially useful for reusable code, callbacks, APIs, data processing, and functional programming.
+
+Example:
+
+def greet(name):
+    return f"Hello, {name}!"
+    message = greet
+
+print(message("Rahul"))
+
+Output:
+
+Hello, Rahul!
+
+Here, the function itself is stored in a variable.
+
+Python treats functions as first-class objects, which means functions can be stored, passed to other functions, and returned from functions.`,
+    },
+
+    {
+      heading: "First-Class Functions",
+      body: `In Python, functions are first-class objects.
+
+This means a function can be:
+
+• Stored in a variable
+• Passed as an argument
+• Returned from another function
+• Stored inside collections
+
+Example:
+def square(x):
+    return x ** 2
+
+operation = square
+
+print(operation(5))
+
+Output:
+
+25
+
+The variable operation now refers to the same function as square.`
+    },
+
+    {
+      heading: "Passing Functions as Arguments",
+      body: `A function can be passed to another function as an argument.
+
+Example:
+
+def square(x):
+    return x ** 2
+
+def apply_operation(func, value):
+    return func(value)
+result = apply_operation(square, 5)
+
+print(result)
+
+Output:
+
+25
+
+This pattern is called a higher-order function.
+
+It is useful when the operation should be configurable or supplied by the caller.`,
+    },
+
+{
+  heading: "*args — Variable-Length Positional Arguments",
+  body: `Normally, a function expects a fixed number of positional arguments.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+
+But sometimes we do not know how many positional arguments the caller will provide.
+
+Python provides *args for this situation.
+
+----------------------------------------
+1. Basic *args
+----------------------------------------
+
+def add(*args):
+    print(args)
+
+add(10, 20, 30)
+
+Output:
+
+(10, 20, 30)
+
+Inside the function, args is a tuple containing all positional arguments.
+
+----------------------------------------
+2. Sum Using *args
+----------------------------------------
+
+def add(*args):
+    return sum(args)
+
+print(add(10, 20))
+print(add(10, 20, 30, 40))
+
+Output:
+
+30
+100
+
+The function can accept any number of positional arguments.
+
+----------------------------------------
+3. Loop Through *args
+----------------------------------------
+
+def show_numbers(*args):
+    for number in args:
+        print(number)
+
+show_numbers(10, 20, 30, 40)
+
+Output:
+
+10
+20
+30
+40
+
+----------------------------------------
+4. *args Is a Tuple
+----------------------------------------
+
+def demo(*args):
+    print(type(args))
+    print(args)
+
+demo(1, 2, 3)
+
+Output:
+
+<class 'tuple'>
+(1, 2, 3)
+
+The name args is only a convention.
+
+The important part is the *.
+
+You can technically write:
+
+def demo(*numbers):
+    print(numbers)
+
+demo(1, 2, 3)
+
+----------------------------------------
+5. Combining Normal Parameters with *args
+----------------------------------------
+
+def greet(greeting, *names):
+    for name in names:
+        print(f"{greeting}, {name}!")
+
+greet("Hello", "Rahul", "Amit", "Priya")
+
+Output:
+
+Hello, Rahul!
+Hello, Amit!
+Hello, Priya!
+
+The first argument goes to greeting.
+
+The remaining positional arguments go into names.
+
+----------------------------------------
+6. *args Must Come After Normal Positional Parameters
+----------------------------------------
+
+def calculate(operation, *numbers):
+    print(operation)
+    print(numbers)
+
+calculate("sum", 10, 20, 30)
+
+Output:
+
+sum
+(10, 20, 30)
+
+----------------------------------------
+7. Practical Example — Find Maximum
+----------------------------------------
+
+def find_max(*numbers):
+    if not numbers:
+        return None
+
+    return max(numbers)
+
+print(find_max(10, 5, 25, 15))
+
+Output:
+
+25
+
+----------------------------------------
+8. Unpacking a Sequence into *args
+----------------------------------------
+
+def add(a, b, c):
+    return a + b + c
+
+numbers = [10, 20, 30]
+
+print(add(*numbers))
+
+Output:
+
+60
+
+The * here unpacks the list:
+
+[10, 20, 30]
+
+into:
+
+10, 20, 30
+
+Do not confuse this with defining *args.
+
+Definition:
+
+def add(*args):
+    ...
+
+Calling with *:
+
+add(*numbers)
+
+----------------------------------------
+9. *args with Other Arguments
+----------------------------------------
+
+def calculate(base, *numbers):
+    return base + sum(numbers)
+
+print(calculate(10, 20, 30, 40))
+
+Output:
+
+100
+
+base = 10
+
+numbers = (20, 30, 40)
+
+----------------------------------------
+10. Important Rule
+----------------------------------------
+
+*args collects only extra positional arguments.
+
+Example:
+
+def demo(a, *args):
+    print(a)
+    print(args)
+
+demo(10, 20, 30, 40)
+
+Output:
+
+10
+(20, 30, 40)
+
+The first positional argument goes to a.
+
+The remaining positional arguments go to args.
+
+----------------------------------------
+11. *args vs Normal Parameters
+----------------------------------------
+
+Fixed parameters:
+
+def add(a, b):
+    return a + b
+
+add(10, 20)
+
+Requires exactly two positional arguments.
+
+Variable positional parameters:
+
+def add(*args):
+    return sum(args)
+
+add(10, 20)
+add(10, 20, 30)
+add(10, 20, 30, 40)
+
+Can accept any number of positional arguments.
+
+----------------------------------------
+12. Professional Mental Model
+----------------------------------------
+
+*args
+
+↓
+Collect extra positional arguments
+
+↓
+Store them in a tuple
+
+↓
+Process them inside the function
+
+Example:
+
+def function(*args):
+    ...
+
+function(10, 20, 30)
+
+Inside:
+
+args = (10, 20, 30)
+
+Remember:
+
+*args → variable positional arguments
+
+args → tuple
+
+*args when calling → unpack an iterable into positional arguments.`,
+},
+
+{
+  heading: "**kwargs — Variable-Length Keyword Arguments",
+  body: `Python provides **kwargs when a function needs to accept an unknown number of keyword arguments.
+
+Keyword arguments are arguments passed using a parameter name.
+
+Example:
+
+def student(name, age):
+    print(name, age)
+
+student(name="Rahul", age=21)
+
+Here:
+
+name="Rahul"
+age=21
+
+are keyword arguments.
+
+----------------------------------------
+1. Basic **kwargs
+----------------------------------------
+
+def show_details(**kwargs):
+    print(kwargs)
+
+show_details(name="Rahul", age=21, course="Python")
+
+Output:
+
+{'name': 'Rahul', 'age': 21, 'course': 'Python'}
+
+Inside the function, kwargs is a dictionary.
+
+----------------------------------------
+2. **kwargs Is a Dictionary
+----------------------------------------
+
+def demo(**kwargs):
+    print(type(kwargs))
+    print(kwargs)
+
+demo(name="Rahul", age=21)
+
+Output:
+
+<class 'dict'>
+{'name': 'Rahul', 'age': 21}
+
+The name kwargs is only a convention.
+
+You can also write:
+
+def demo(**details):
+    print(details)
+
+demo(name="Rahul", age=21)
+
+----------------------------------------
+3. Loop Through **kwargs
+----------------------------------------
+
+def show_details(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+show_details(
+    name="Rahul",
+    age=21,
+    course="Python"
+)
+
+Output:
+
+name: Rahul
+age: 21
+course: Python
+
+----------------------------------------
+4. Combining Normal Parameters with **kwargs
+----------------------------------------
+
+def student(name, **details):
+    print("Name:", name)
+    print("Details:", details)
+
+student(
+    "Rahul",
+    age=21,
+    course="Python",
+    city="Mumbai"
+)
+
+Output:
+
+Name: Rahul
+Details: {'age': 21, 'course': 'Python', 'city': 'Mumbai'}
+
+The normal parameter receives its value first.
+
+The remaining keyword arguments are collected into kwargs.
+
+----------------------------------------
+5. Combining *args and **kwargs
+----------------------------------------
+
+def display(*args, **kwargs):
+    print("Positional:", args)
+    print("Keyword:", kwargs)
+
+display(
+    10,
+    20,
+    name="Rahul",
+    age=21
+)
+
+Output:
+
+Positional: (10, 20)
+Keyword: {'name': 'Rahul', 'age': 21}
+
+So:
+
+*args
+→ extra positional arguments
+→ tuple
+
+**kwargs
+→ extra keyword arguments
+→ dictionary
+
+----------------------------------------
+6. Argument Order
+----------------------------------------
+
+When using all major parameter types, the general order is:
+
+def function(
+    positional,
+    /,
+    *args,
+    keyword_only,
+    **kwargs
+):
+    ...
+
+For example:
+
+def demo(a, *args, option=True, **kwargs):
+    print(a)
+    print(args)
+    print(option)
+    print(kwargs)
+
+demo(
+    10,
+    20,
+    30,
+    option=False,
+    name="Rahul"
+)
+
+Output:
+
+10
+(20, 30)
+False
+{'name': 'Rahul'}
+
+----------------------------------------
+7. Unpacking a Dictionary with **
+----------------------------------------
+
+A dictionary can be unpacked into keyword arguments.
+
+def student(name, age, course):
+    print(name, age, course)
+
+data = {
+    "name": "Rahul",
+    "age": 21,
+    "course": "Python"
+}
+
+student(**data)
+
+Output:
+
+Rahul 21 Python
+
+The ** operator maps dictionary keys to parameter names.
+
+----------------------------------------
+8. **kwargs with Dictionaries
+----------------------------------------
+
+def create_profile(**kwargs):
+    profile = {}
+
+    for key, value in kwargs.items():
+        profile[key] = value
+
+    return profile
+
+student = create_profile(
+    name="Rahul",
+    age=21,
+    course="Python"
+)
+
+print(student)
+
+Output:
+
+{'name': 'Rahul', 'age': 21, 'course': 'Python'}
+
+----------------------------------------
+9. Practical Example — Flexible Configuration
+----------------------------------------
+
+def connect(**config):
+    for key, value in config.items():
+        print(f"{key} = {value}")
+
+connect(
+    host="localhost",
+    port=5432,
+    database="company",
+    debug=True
+)
+
+Output:
+
+host = localhost
+port = 5432
+database = company
+debug = True
+
+This pattern is useful for configuration-style functions.
+
+----------------------------------------
+10. *args vs **kwargs
+----------------------------------------
+
+*args
+
+→ Variable number of positional arguments
+→ Stored as tuple
+
+Example:
+
+def demo(*args):
+    print(args)
+
+demo(10, 20, 30)
+
+Output:
+
+(10, 20, 30)
+
+----------------------------------------
+
+**kwargs
+
+→ Variable number of keyword arguments
+→ Stored as dictionary
+
+Example:
+
+def demo(**kwargs):
+    print(kwargs)
+
+demo(name="Rahul", age=21)
+
+Output:
+
+{'name': 'Rahul', 'age': 21}
+
+----------------------------------------
+11. Important Difference When Calling
+----------------------------------------
+
+* is used to unpack positional values.
+
+numbers = [10, 20, 30]
+
+def add(a, b, c):
+    return a + b + c
+
+print(add(*numbers))
+
+----------------------------------------
+
+** is used to unpack keyword values.
+
+data = {
+    "name": "Rahul",
+    "age": 21
+}
+
+def student(name, age):
+    print(name, age)
+
+student(**data)
+
+----------------------------------------
+12. Real-World Usage
+----------------------------------------
+
+**kwargs is commonly useful when:
+
+• Building flexible functions
+• Passing configuration options
+• Wrapping another function
+• Forwarding keyword arguments
+• Working with APIs
+• Creating reusable utilities
+• Working with frameworks such as Django and FastAPI
+
+Example:
+
+def log_event(event, **metadata):
+    print("Event:", event)
+
+    for key, value in metadata.items():
+        print(f"{key}: {value}")
+
+log_event(
+    "login",
+    user="Rahul",
+    ip="127.0.0.1",
+    success=True
+)
+
+----------------------------------------
+13. Forwarding **kwargs
+----------------------------------------
+
+def create_user(**kwargs):
+    save_user(**kwargs)
+
+def save_user(name, age, city):
+    print(name, age, city)
+
+create_user(
+    name="Rahul",
+    age=21,
+    city="Mumbai"
+)
+
+Here **kwargs collects the values and ** passes them to another function.
+
+This forwarding pattern is very common in Python libraries and frameworks.
+
+----------------------------------------
+14. Professional Mental Model
+----------------------------------------
+
+**kwargs
+
+↓
+Collect extra keyword arguments
+
+↓
+Store them in a dictionary
+
+↓
+Process or forward them
+
+Example:
+
+def function(**kwargs):
+    ...
+
+function(
+    name="Rahul",
+    age=21
+)
+
+Inside:
+
+kwargs = {
+    "name": "Rahul",
+    "age": 21
+}
+
+Remember:
+
+*args → positional → tuple
+
+**kwargs → keyword → dictionary
+
+* when calling → unpack iterable
+
+** when calling → unpack dictionary`,
+},
+
+{
+  heading: "Positional vs Keyword Arguments",
+  body: `Python allows function arguments to be passed in different ways.
+
+The two most common forms are:
+
+• Positional arguments
+• Keyword arguments
+
+Understanding how Python matches arguments to parameters is important before learning keyword-only and positional-only parameters.
+
+----------------------------------------
+1. Positional Arguments
+----------------------------------------
+
+Positional arguments are matched according to their position.
+
+def student(name, age, course):
+    print(name, age, course)
+
+student("Rahul", 21, "Python")
+
+Output:
+
+Rahul 21 Python
+
+The values are matched like this:
+
+name  → "Rahul"
+age   → 21
+course → "Python"
+
+----------------------------------------
+2. Keyword Arguments
+----------------------------------------
+
+Keyword arguments are passed using parameter names.
+
+def student(name, age, course):
+    print(name, age, course)
+
+student(
+    name="Rahul",
+    age=21,
+    course="Python"
+)
+
+The order can be changed because the parameter names identify the values.
+
+student(
+    course="Python",
+    name="Rahul",
+    age=21
+)
+
+Output:
+
+Rahul 21 Python
+
+----------------------------------------
+3. Mixing Positional and Keyword Arguments
+----------------------------------------
+
+You can combine positional and keyword arguments.
+
+def student(name, age, course):
+    print(name, age, course)
+
+student(
+    "Rahul",
+    age=21,
+    course="Python"
+)
+
+This is valid.
+
+The positional argument must come before keyword arguments.
+
+----------------------------------------
+4. Invalid Argument Order
+----------------------------------------
+
+This is invalid:
+
+student(
+    name="Rahul",
+    21,
+    "Python"
+)
+
+A positional argument cannot appear after a keyword argument.
+
+General rule:
+
+Positional arguments
+↓
+Keyword arguments
+
+----------------------------------------
+5. Default Arguments
+----------------------------------------
+
+A function parameter can have a default value.
+
+def greet(name, message="Hello"):
+    print(f"{message}, {name}!")
+
+greet("Rahul")
+
+Output:
+
+Hello, Rahul!
+
+If a value is provided, it replaces the default.
+
+greet("Rahul", "Welcome")
+
+Output:
+
+Welcome, Rahul!
+
+----------------------------------------
+6. Default Arguments with Positional Values
+----------------------------------------
+
+def student(name, age=21, course="Python"):
+    print(name, age, course)
+
+student("Rahul")
+
+Output:
+
+Rahul 21 Python
+
+Only the first parameter was supplied.
+
+The other parameters use their default values.
+
+----------------------------------------
+7. Override a Default Argument
+----------------------------------------
+
+def student(name, age=21, course="Python"):
+    print(name, age, course)
+
+student("Rahul", 22)
+
+Output:
+
+Rahul 22 Python
+
+The supplied value replaces the default age.
+
+----------------------------------------
+8. Override Defaults Using Keywords
+----------------------------------------
+
+def student(name, age=21, course="Python"):
+    print(name, age, course)
+
+student(
+    "Rahul",
+    course="Django"
+)
+
+Output:
+
+Rahul 21 Django
+
+The age remains 21 because its default value is used.
+
+----------------------------------------
+9. Default Arguments Must Follow Required Arguments
+----------------------------------------
+
+Correct:
+
+def student(name, age=21):
+    print(name, age)
+
+Incorrect:
+
+def student(age=21, name):
+    print(name, age)
+
+Python does not allow a required parameter after a default parameter.
+
+General rule:
+
+Required parameters
+↓
+Default parameters
+
+----------------------------------------
+10. Keyword Arguments Improve Readability
+----------------------------------------
+
+Compare:
+
+create_user("Rahul", 21, "Python", True)
+
+with:
+
+create_user(
+    name="Rahul",
+    age=21,
+    course="Python",
+    active=True
+)
+
+The keyword version clearly communicates what each value represents.
+
+This is especially useful when a function has many parameters.
+
+----------------------------------------
+11. Positional vs Keyword — Quick Comparison
+----------------------------------------
+
+Positional:
+
+student("Rahul", 21, "Python")
+
+Matching happens by position.
+
+Keyword:
+
+student(
+    name="Rahul",
+    age=21,
+    course="Python"
+)
+
+Matching happens by parameter name.
+
+----------------------------------------
+12. Function Argument Matching
+----------------------------------------
+
+Consider:
+
+def profile(name, age=21, city="Mumbai"):
+    print(name, age, city)
+
+Call:
+
+profile("Rahul")
+
+Python matches:
+
+name → "Rahul"
+
+age → 21
+
+city → "Mumbai"
+
+Another call:
+
+profile("Rahul", 22)
+
+Matches:
+
+name → "Rahul"
+
+age → 22
+
+city → "Mumbai"
+
+Another:
+
+profile(
+    "Rahul",
+    city="Delhi"
+)
+
+Matches:
+
+name → "Rahul"
+
+age → 21
+
+city → "Delhi"
+
+----------------------------------------
+13. Positional Arguments Are Order-Sensitive
+----------------------------------------
+
+def divide(a, b):
+    return a / b
+
+print(divide(10, 2))
+
+Output:
+
+5.0
+
+Changing the order changes the result:
+
+print(divide(2, 10))
+
+Output:
+
+0.2
+
+----------------------------------------
+14. Keyword Arguments Are Name-Sensitive
+----------------------------------------
+
+def divide(a, b):
+    return a / b
+
+print(divide(a=10, b=2))
+
+Output:
+
+5.0
+
+print(divide(b=2, a=10))
+
+Output:
+
+5.0
+
+The order does not matter when the correct parameter names are used.
+
+----------------------------------------
+15. Argument Unpacking Review
+----------------------------------------
+
+Positional unpacking uses *.
+
+numbers = [10, 20]
+
+def add(a, b):
+    return a + b
+
+print(add(*numbers))
+
+Output:
+
+30
+
+Keyword unpacking uses **.
+
+data = {
+    "a": 10,
+    "b": 20
+}
+
+print(add(**data))
+
+Output:
+
+30
+
+Remember:
+
+* → positional unpacking
+
+** → keyword unpacking
+
+----------------------------------------
+16. Common Error
+----------------------------------------
+
+def student(name, age):
+    print(name, age)
+
+student("Rahul", name="Amit")
+
+This causes:
+
+TypeError
+
+because name receives two values:
+
+"Rahul"
+and
+"Amit"
+
+A parameter should receive only one value.
+
+----------------------------------------
+17. Professional Mental Model
+----------------------------------------
+
+Python function call:
+
+Arguments
+↓
+Match positional parameters
+↓
+Match keyword parameters
+↓
+Apply default values
+↓
+Execute function
+
+The basic hierarchy is:
+
+Required positional parameters
+↓
+Default parameters
+↓
+*args
+↓
+Keyword-only parameters
+↓
+**kwargs
+
+The next topics will explain how to control this behavior explicitly with:
+
+/
+→ Positional-only parameters
+
+*
+→ Keyword-only parameters
+
+These features are important when designing clean and predictable APIs.`,
+},
+
+{
+  heading: "Keyword-Only Arguments",
+  body: `Keyword-only arguments are parameters that must be passed using their parameter names.
+
+Python uses * in a function definition to mark the beginning of keyword-only parameters.
+
+This is useful when you want function calls to be explicit and readable.
+
+----------------------------------------
+1. Basic Keyword-Only Argument
+----------------------------------------
+
+def create_user(name, *, age):
+    print(name, age)
+
+create_user("Rahul", age=21)
+
+Output:
+
+Rahul 21
+
+Here:
+
+name → positional or keyword
+age → keyword-only
+
+----------------------------------------
+2. Positional Value Is Not Allowed
+----------------------------------------
+
+def create_user(name, *, age):
+    print(name, age)
+
+create_user("Rahul", 21)
+
+This raises:
+
+TypeError
+
+because age must be provided using its name.
+
+Correct:
+
+create_user("Rahul", age=21)
+
+----------------------------------------
+3. Multiple Keyword-Only Arguments
+----------------------------------------
+
+def student(name, *, age, course, city):
+    print(name, age, course, city)
+
+student(
+    "Rahul",
+    age=21,
+    course="Python",
+    city="Mumbai"
+)
+
+All parameters after * are keyword-only.
+
+----------------------------------------
+4. Keyword-Only Arguments with Defaults
+----------------------------------------
+
+def connect(host, *, port=5432, timeout=30):
+    print(host, port, timeout)
+
+connect("localhost")
+
+Output:
+
+localhost 5432 30
+
+The keyword-only parameters can also have default values.
+
+----------------------------------------
+5. Override Keyword-Only Defaults
+----------------------------------------
+
+def connect(host, *, port=5432, timeout=30):
+    print(host, port, timeout)
+
+connect(
+    "localhost",
+    port=3306,
+    timeout=60
+)
+
+Output:
+
+localhost 3306 60
+
+----------------------------------------
+6. Why Keyword-Only Arguments Are Useful
+----------------------------------------
+
+Consider:
+
+def create_user(name, age, active, admin):
+    ...
+
+A call like this is difficult to understand:
+
+create_user("Rahul", 21, True, False)
+
+Keyword-only parameters make the call clearer:
+
+def create_user(
+    name,
+    *,
+    age,
+    active=True,
+    admin=False
+):
+    ...
+
+create_user(
+    "Rahul",
+    age=21,
+    active=True,
+    admin=False
+)
+
+The meaning of each argument is immediately visible.
+
+----------------------------------------
+7. Keyword-Only Arguments with *args
+----------------------------------------
+
+If a function already has *args, everything after *args is automatically keyword-only.
+
+def process(name, *values, debug=False):
+    print(name)
+    print(values)
+    print(debug)
+
+process(
+    "numbers",
+    10,
+    20,
+    30,
+    debug=True
+)
+
+Output:
+
+numbers
+(10, 20, 30)
+True
+
+Here:
+
+name → positional
+
+values → variable positional arguments
+
+debug → keyword-only argument
+
+----------------------------------------
+8. *args vs Explicit *
+----------------------------------------
+
+Explicit *:
+
+def function(a, *, option):
+    ...
+
+Here option is keyword-only.
+
+With *args:
+
+def function(a, *args, option):
+    ...
+
+Everything after *args is keyword-only.
+
+Both mechanisms help control how arguments are passed.
+
+----------------------------------------
+9. Keyword-Only Arguments with **kwargs
+----------------------------------------
+
+def create_user(name, *, role="user", **extra):
+    print(name)
+    print(role)
+    print(extra)
+
+create_user(
+    "Rahul",
+    role="admin",
+    city="Mumbai",
+    active=True
+)
+
+Output:
+
+Rahul
+admin
+{'city': 'Mumbai', 'active': True}
+
+Here:
+
+name → positional
+
+role → keyword-only
+
+extra → additional keyword arguments
+
+----------------------------------------
+10. Practical API Example
+----------------------------------------
+
+def request(
+    url,
+    *,
+    method="GET",
+    timeout=30,
+    headers=None
+):
+    print(url)
+    print(method)
+    print(timeout)
+    print(headers)
+
+request(
+    "https://example.com",
+    method="POST",
+    timeout=10
+)
+
+This style is common in libraries and APIs because optional configuration becomes explicit.
+
+----------------------------------------
+11. Preventing Ambiguous Calls
+----------------------------------------
+
+Without keyword-only arguments:
+
+def search(query, 10, True)
+
+The meaning of the values can be unclear.
+
+Instead:
+
+def search(
+    query,
+    *,
+    limit=10,
+    case_sensitive=False
+):
+    ...
+
+search(
+    "python",
+    limit=10,
+    case_sensitive=True
+)
+
+The function call is easier to read and harder to misuse.
+
+----------------------------------------
+12. Keyword-Only Arguments Can Be Required
+----------------------------------------
+
+A keyword-only parameter does not need to have a default.
+
+def register(username, *, email):
+    print(username, email)
+
+register(
+    "rahul",
+    email="rahul@example.com"
+)
+
+Here email is:
+
+• Keyword-only
+• Required
+
+This is different from:
+
+def register(username, *, email=None):
+    ...
+
+where email is optional.
+
+----------------------------------------
+13. Required vs Optional Keyword-Only
+----------------------------------------
+
+Required:
+
+def connect(host, *, port):
+    ...
+
+connect("localhost", port=5432)
+
+Optional:
+
+def connect(host, *, port=5432):
+    ...
+
+connect("localhost")
+
+The difference is whether the keyword-only parameter has a default value.
+
+----------------------------------------
+14. Argument Structure
+----------------------------------------
+
+A function can be structured like this:
+
+def function(
+    positional,
+    /,
+    normal,
+    *args,
+    keyword_only,
+    **kwargs
+):
+    ...
+
+The symbols control how callers can provide arguments.
+
+/
+
+→ Everything before it is positional-only.
+
+*
+
+→ Everything after it is keyword-only.
+
+*args
+
+→ Collects extra positional arguments.
+
+**kwargs
+
+→ Collects extra keyword arguments.
+
+----------------------------------------
+15. Professional Mental Model
+----------------------------------------
+
+Keyword-only arguments:
+
+*
+↓
+Marks the boundary
+↓
+Parameters after * must use names
+↓
+Improves readability and API design
+
+Example:
+
+def create_user(
+    name,
+    *,
+    age,
+    role="user"
+):
+    ...
+
+Valid:
+
+create_user(
+    "Rahul",
+    age=21,
+    role="admin"
+)
+
+Invalid:
+
+create_user("Rahul", 21, "admin")
+
+The key idea:
+
+Use keyword-only arguments when an argument's meaning should be explicit at the call site.`,
+},
+
+{
+  heading: "Positional-Only Arguments",
+  body: `Positional-only arguments are parameters that must be passed by position, not by keyword.
+
+Python uses / in a function definition to mark the end of positional-only parameters.
+
+This feature is useful when designing clear and stable APIs.
+
+----------------------------------------
+1. Basic Positional-Only Argument
+----------------------------------------
+
+def greet(name, /):
+    print(f"Hello, {name}!")
+
+greet("Rahul")
+
+Output:
+
+Hello, Rahul
+
+The / means name is positional-only.
+
+----------------------------------------
+2. Keyword Usage Is Not Allowed
+----------------------------------------
+
+def greet(name, /):
+    print(f"Hello, {name}!")
+
+greet(name="Rahul")
+
+This raises:
+
+TypeError
+
+because name must be supplied positionally.
+
+Correct:
+
+greet("Rahul")
+
+----------------------------------------
+3. Positional-Only with Normal Parameters
+----------------------------------------
+
+def divide(a, /, b):
+    return a / b
+
+print(divide(10, 2))
+
+Output:
+
+5.0
+
+Here:
+
+a → positional-only
+b → positional or keyword
+
+This is controlled by the / marker.
+
+----------------------------------------
+4. Positional-Only with Keyword Arguments
+----------------------------------------
+
+def divide(a, /, b):
+    return a / b
+
+print(divide(10, b=2))
+
+Output:
+
+5.0
+
+This is valid because b is not positional-only.
+
+But:
+
+divide(a=10, b=2)
+
+is invalid because a must be passed positionally.
+
+----------------------------------------
+5. Multiple Positional-Only Parameters
+----------------------------------------
+
+def student(name, age, /, course):
+    print(name, age, course)
+
+student(
+    "Rahul",
+    21,
+    course="Python"
+)
+
+Output:
+
+Rahul 21 Python
+
+Here:
+
+name → positional-only
+age → positional-only
+course → positional or keyword
+
+----------------------------------------
+6. Why Use Positional-Only Arguments?
+----------------------------------------
+
+Positional-only arguments can make an API easier to maintain.
+
+Example:
+
+def calculate(x, y, /):
+    return x + y
+
+calculate(10, 20)
+
+The caller does not depend on the parameter names.
+
+This allows the implementation to change parameter names internally without breaking keyword-based callers.
+
+----------------------------------------
+7. Built-in Python Functions Use This
+----------------------------------------
+
+Many Python built-in functions use positional-only parameters.
+
+For example:
+
+print(len("Python"))
+
+The documentation may represent the signature conceptually as:
+
+len(obj, /)
+
+The / means obj must be passed positionally.
+
+So this is valid:
+
+len("Python")
+
+But this is not:
+
+len(obj="Python")
+
+----------------------------------------
+8. Positional-Only + Keyword-Only
+----------------------------------------
+
+Python allows both / and * in the same function.
+
+Example:
+
+def request(url, /, *, method="GET", timeout=30):
+    print(url)
+    print(method)
+    print(timeout)
+
+request(
+    "https://example.com",
+    method="POST",
+    timeout=10
+)
+
+Here:
+
+url
+→ positional-only
+
+method
+→ keyword-only
+
+timeout
+→ keyword-only
+
+----------------------------------------
+9. Full Argument Control
+----------------------------------------
+
+A function can use all major argument styles:
+
+def function(
+    positional_only,
+    /,
+    normal,
+    *args,
+    keyword_only,
+    **kwargs
+):
+    ...
+
+Each part has a different purpose.
+
+Before /:
+
+→ Positional-only
+
+Between / and *:
+
+→ Positional or keyword
+
+*args:
+
+→ Extra positional arguments
+
+After *args:
+
+→ Keyword-only
+
+**kwargs:
+
+→ Extra keyword arguments
+
+----------------------------------------
+10. Example with All Rules
+----------------------------------------
+
+def create_user(
+    username,
+    /,
+    age,
+    *skills,
+    active=True,
+    **metadata
+):
+    print("Username:", username)
+    print("Age:", age)
+    print("Skills:", skills)
+    print("Active:", active)
+    print("Metadata:", metadata)
+
+create_user(
+    "Rahul",
+    21,
+    "Python",
+    "SQL",
+    active=True,
+    city="Mumbai"
+)
+
+Output:
+
+Username: Rahul
+Age: 21
+Skills: ('Python', 'SQL')
+Active: True
+Metadata: {'city': 'Mumbai'}
+
+Here:
+
+username
+→ positional-only
+
+age
+→ positional or keyword
+
+skills
+→ extra positional arguments
+
+active
+→ keyword-only
+
+metadata
+→ extra keyword arguments
+
+----------------------------------------
+11. / vs *
+----------------------------------------
+
+/ means:
+
+Everything before / is positional-only.
+
+Example:
+
+def function(a, /):
+    ...
+
+Correct:
+
+function(10)
+
+Incorrect:
+
+function(a=10)
+
+----------------------------------------
+
+* means:
+
+Everything after * is keyword-only.
+
+Example:
+
+def function(*, a):
+    ...
+
+Correct:
+
+function(a=10)
+
+Incorrect:
+
+function(10)
+
+----------------------------------------
+12. / and * Together
+----------------------------------------
+
+def function(a, /, b, *, c):
+    ...
+
+a
+→ positional-only
+
+b
+→ positional or keyword
+
+c
+→ keyword-only
+
+Valid:
+
+function(10, 20, c=30)
+
+Also valid:
+
+function(10, b=20, c=30)
+
+Invalid:
+
+function(a=10, b=20, c=30)
+
+because a is positional-only.
+
+Invalid:
+
+function(10, 20, 30)
+
+because c is keyword-only.
+
+----------------------------------------
+13. API Design Example
+----------------------------------------
+
+def connect(host, /, *, port=5432, timeout=30):
+    print(host, port, timeout)
+
+connect(
+    "localhost",
+    port=5432,
+    timeout=10
+)
+
+This clearly communicates:
+
+host
+→ required positional input
+
+port
+→ optional configuration
+
+timeout
+→ optional configuration
+
+This style is useful when designing library and API functions.
+
+----------------------------------------
+14. Professional Mental Model
+----------------------------------------
+
+Python argument controls:
+
+/ 
+↓
+Positional-only boundary
+
+normal parameters
+↓
+Positional OR keyword
+
+*
+↓
+Keyword-only boundary
+
+*args
+↓
+Extra positional arguments
+
+**kwargs
+↓
+Extra keyword arguments
+
+A useful complete pattern is:
+
+def function(
+    positional_only,
+    /,
+    normal,
+    *args,
+    keyword_only,
+    **kwargs
+):
+    ...
+
+Once you understand /, *, *args, and **kwargs, you can precisely control how callers interact with a Python function.`,
+},
+
+{
+  heading: "Lambda Functions",
+  body: `A lambda function is a small anonymous function in Python.
+
+It is called "anonymous" because it is usually created without giving the function a name using def.
+
+Lambda functions are mainly used when a short function is needed temporarily, especially when passing a function to another function such as sorted(), map(), filter(), or reduce().
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+A lambda function is a function written using the lambda keyword that contains arguments followed by a single expression.
+
+The expression is automatically returned.
+
+Unlike a normal function created with def, a lambda function does not use an explicit return statement.
+
+Example:
+
+square = lambda x: x ** 2
+
+print(square(5))
+
+Output:
+
+25
+
+Here:
+
+lambda
+→ keyword used to create the function
+
+x
+→ parameter
+
+x ** 2
+→ expression
+
+25
+→ returned result
+
+----------------------------------------
+2. Syntax
+----------------------------------------
+
+The basic syntax is:
+
+lambda arguments: expression
+
+Example:
+
+lambda x: x + 10
+
+The equivalent normal function is:
+
+def add_ten(x):
+    return x + 10
+
+Lambda version:
+
+add_ten = lambda x: x + 10
+
+print(add_ten(5))
+
+Output:
+
+15
+
+----------------------------------------
+3. Lambda Syntax Breakdown
+----------------------------------------
+
+Consider:
+
+multiply = lambda a, b: a * b
+
+The syntax can be understood as:
+
+lambda
+↓
+Keyword
+
+a, b
+↓
+Parameters
+
+:
+↓
+Separates parameters from expression
+
+a * b
+↓
+Expression
+
+The expression result is returned automatically.
+
+----------------------------------------
+4. Lambda with One Parameter
+----------------------------------------
+
+square = lambda x: x ** 2
+
+print(square(6))
+
+Output:
+
+36
+
+Another example:
+
+double = lambda x: x * 2
+
+print(double(10))
+
+Output:
+
+20
+
+----------------------------------------
+5. Lambda with Multiple Parameters
+----------------------------------------
+
+add = lambda a, b: a + b
+
+print(add(10, 20))
+
+Output:
+
+30
+
+Another example:
+
+multiply = lambda a, b, c: a * b * c
+
+print(multiply(2, 3, 4))
+
+Output:
+
+24
+
+----------------------------------------
+6. Lambda with No Parameters
+----------------------------------------
+
+A lambda can also have no parameters.
+
+get_message = lambda: "Hello Python"
+
+print(get_message())
+
+Output:
+
+Hello Python
+
+Syntax:
+
+lambda: expression
+
+----------------------------------------
+7. Lambda Automatically Returns the Expression
+----------------------------------------
+
+With def:
+
+def square(x):
+    return x ** 2
+
+With lambda:
+
+square = lambda x: x ** 2
+
+The lambda does not need:
+
+return
+
+This:
+
+lambda x: x ** 2
+
+automatically returns the result of:
+
+x ** 2
+
+----------------------------------------
+8. Lambda Can Contain Expressions
+----------------------------------------
+
+A lambda can contain an expression.
+
+Example:
+
+calculate = lambda x: x * 10 + 5
+
+print(calculate(3))
+
+Output:
+
+35
+
+The expression is:
+
+x * 10 + 5
+
+----------------------------------------
+9. Lambda with Conditional Expression
+----------------------------------------
+
+Lambda functions can use conditional expressions.
+
+check_number = lambda x: "Even" if x % 2 == 0 else "Odd"
+
+print(check_number(10))
+print(check_number(7))
+
+Output:
+
+Even
+Odd
+
+The syntax is:
+
+lambda x: value_if_true if condition else value_if_false
+
+----------------------------------------
+10. Lambda Cannot Contain Multiple Statements
+----------------------------------------
+
+Lambda functions are designed for a single expression.
+
+Good:
+
+square = lambda x: x ** 2
+
+Not appropriate:
+
+lambda x:
+    y = x ** 2
+    return y
+
+For multiple statements, use def:
+
+def square(x):
+    y = x ** 2
+    return y
+
+----------------------------------------
+11. Lambda Stored in a Variable
+----------------------------------------
+
+Functions are first-class objects in Python.
+
+Therefore, a lambda can be stored in a variable.
+
+square = lambda x: x ** 2
+
+print(square(5))
+
+The variable square now refers to the lambda function.
+
+----------------------------------------
+12. Lambda as an Argument
+----------------------------------------
+
+A lambda becomes especially useful when passing a small function to another function.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+result = list(
+    map(lambda x: x ** 2, numbers)
+)
+
+print(result)
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+Here:
+
+map()
+→ receives the lambda function
+
+lambda x: x ** 2
+→ operation performed on each element
+
+----------------------------------------
+13. Lambda with sorted()
+----------------------------------------
+
+Lambda functions are commonly used with sorted().
+
+students = [
+    ("Rahul", 85),
+    ("Amit", 92),
+    ("Priya", 78)
+]
+
+students.sort(
+    key=lambda student: student[1]
+)
+
+print(students)
+
+Output:
+
+[
+    ('Priya', 78),
+    ('Rahul', 85),
+    ('Amit', 92)
+]
+
+The lambda tells Python to use the second value of each tuple for sorting.
+
+----------------------------------------
+14. Lambda with max()
+----------------------------------------
+
+students = [
+    ("Rahul", 85),
+    ("Amit", 92),
+    ("Priya", 78)
+]
+
+top_student = max(
+    students,
+    key=lambda student: student[1]
+)
+
+print(top_student)
+
+Output:
+
+('Amit', 92)
+
+Here the lambda determines which value max() should compare.
+
+----------------------------------------
+15. Lambda with min()
+----------------------------------------
+
+lowest_student = min(
+    students,
+    key=lambda student: student[1]
+)
+
+print(lowest_student)
+
+Output:
+
+('Priya', 78)
+
+----------------------------------------
+16. Lambda with filter()
+----------------------------------------
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+even_numbers = list(
+    filter(lambda x: x % 2 == 0, numbers)
+)
+
+print(even_numbers)
+
+Output:
+
+[2, 4, 6]
+
+The lambda returns True for values that should remain in the result.
+
+----------------------------------------
+17. Lambda with reduce()
+----------------------------------------
+
+from functools import reduce
+
+numbers = [1, 2, 3, 4]
+
+total = reduce(
+    lambda a, b: a + b,
+    numbers
+)
+
+print(total)
+
+Output:
+
+10
+
+reduce() repeatedly applies the lambda and produces one final value.
+
+----------------------------------------
+18. Lambda vs Normal Function
+----------------------------------------
+
+Normal function:
+
+def square(x):
+    return x ** 2
+
+Lambda:
+
+square = lambda x: x ** 2
+
+Both produce the same result.
+
+Use lambda when the operation is short and simple.
+
+Use def when the function contains complex logic or needs documentation and reuse.
+
+----------------------------------------
+19. When Should You Use Lambda?
+----------------------------------------
+
+Lambda functions are useful when:
+
+• The function is very small
+• The function is needed temporarily
+• A function must be passed as an argument
+• A sorting key is required
+• map(), filter(), or reduce() needs a short operation
+
+Common examples:
+
+sorted(
+    data,
+    key=lambda x: x[1]
+)
+
+map(
+    lambda x: x ** 2,
+    numbers
+)
+
+filter(
+    lambda x: x > 10,
+    numbers
+)
+
+----------------------------------------
+20. When Should You NOT Use Lambda?
+----------------------------------------
+
+Avoid lambda when:
+
+• The logic is complicated
+• Multiple statements are required
+• The function needs detailed documentation
+• The function will be reused frequently
+• A normal def function is easier to understand
+
+For example:
+
+def calculate_salary(employee):
+    basic = employee["basic"]
+    bonus = employee["bonus"]
+    tax = employee["tax"]
+
+    return basic + bonus - tax
+
+This is much clearer than trying to force the logic into a lambda.
+
+----------------------------------------
+21. Lambda with Default Arguments
+----------------------------------------
+
+Lambda functions can have default parameter values.
+
+power = lambda x, exponent=2: x ** exponent
+
+print(power(5))
+print(power(5, 3))
+
+Output:
+
+25
+125
+
+Here:
+
+exponent=2
+
+is the default argument.
+
+----------------------------------------
+22. Lambda with *args
+----------------------------------------
+
+A lambda can also accept variable positional arguments.
+
+total = lambda *args: sum(args)
+
+print(total(10, 20, 30))
+
+Output:
+
+60
+
+Here args is a tuple.
+
+----------------------------------------
+23. Lambda with **kwargs
+----------------------------------------
+
+A lambda can accept variable keyword arguments.
+
+get_name = lambda **kwargs: kwargs.get("name", "Unknown")
+
+print(get_name(name="Rahul"))
+
+Output:
+
+Rahul
+
+Here kwargs is a dictionary.
+
+----------------------------------------
+24. Important Lambda Rules
+----------------------------------------
+
+Rule 1:
+
+Use the lambda keyword.
+
+Rule 2:
+
+Parameters come before the colon.
+
+Rule 3:
+
+The expression comes after the colon.
+
+Rule 4:
+
+The expression is automatically returned.
+
+Rule 5:
+
+A lambda is limited to a single expression.
+
+Rule 6:
+
+Use def for complex functions.
+
+----------------------------------------
+25. Professional Mental Model
+----------------------------------------
+
+lambda
+
+↓
+Anonymous function
+
+↓
+parameters
+
+↓
+
+single expression
+
+↓
+
+automatic return
+
+Typical usage:
+
+sorted()
+    ↓
+key=lambda ...
+
+map()
+    ↓
+lambda ...
+
+filter()
+    ↓
+lambda ...
+
+reduce()
+    ↓
+lambda ...
+
+max()/min()
+    ↓
+key=lambda ...
+
+The key idea:
+
+Lambda is not a replacement for normal functions.
+
+It is a convenient way to create a small function when defining a full def function would be unnecessary.`,
+},
+
+{
+  heading: "Higher-Order Functions",
+  body: `A higher-order function is a function that does at least one of these two things:
+
+• Accepts another function as an argument
+• Returns another function as its result
+
+Higher-order functions are possible because Python treats functions as first-class objects.
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+A higher-order function is a function that works with other functions.
+
+Example:
+
+def apply_operation(func, value):
+    return func(value)
+
+def square(x):
+    return x ** 2
+
+result = apply_operation(square, 5)
+
+print(result)
+
+Output:
+
+25
+
+Here:
+
+square
+→ function passed as an argument
+
+apply_operation()
+→ higher-order function
+
+----------------------------------------
+2. Basic Syntax
+----------------------------------------
+
+A higher-order function that accepts a function:
+
+def function_name(func, value):
+    return func(value)
+
+A higher-order function that returns a function:
+
+def function_name():
+    def inner():
+        ...
+    return inner
+
+----------------------------------------
+3. Passing a Function as an Argument
+----------------------------------------
+
+def square(x):
+    return x ** 2
+
+def apply(func, value):
+    return func(value)
+
+print(apply(square, 5))
+
+Output:
+
+25
+
+The function square is passed without parentheses.
+
+Correct:
+
+apply(square, 5)
+
+Not:
+
+apply(square(), 5)
+
+Why?
+
+square
+→ function object
+
+square()
+→ result of calling the function
+
+----------------------------------------
+4. Passing Lambda Functions
+----------------------------------------
+
+Higher-order functions work especially well with lambda.
+
+def apply(func, value):
+    return func(value)
+
+result = apply(
+    lambda x: x * 10,
+    5
+)
+
+print(result)
+
+Output:
+
+50
+
+The lambda is created and passed directly to apply().
+
+----------------------------------------
+5. Function Returning Another Function
+----------------------------------------
+
+A function can return another function.
+
+def create_multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+double = create_multiplier(2)
+
+print(double(10))
+
+Output:
+
+20
+
+Here:
+
+create_multiplier()
+→ returns multiply()
+
+double
+→ now refers to multiply()
+
+----------------------------------------
+6. Multiple Functions from One Factory
+----------------------------------------
+
+def create_multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+double = create_multiplier(2)
+triple = create_multiplier(3)
+ten_times = create_multiplier(10)
+
+print(double(5))
+print(triple(5))
+print(ten_times(5))
+
+Output:
+
+10
+15
+50
+
+The same outer function creates different behaviors.
+
+----------------------------------------
+7. Higher-Order Functions with map()
+----------------------------------------
+
+map() is a built-in higher-order function.
+
+numbers = [1, 2, 3, 4]
+
+result = map(
+    lambda x: x ** 2,
+    numbers
+)
+
+print(list(result))
+
+Output:
+
+[1, 4, 9, 16]
+
+map() receives a function as its first argument.
+
+----------------------------------------
+8. Higher-Order Functions with filter()
+----------------------------------------
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = filter(
+    lambda x: x % 2 == 0,
+    numbers
+)
+
+print(list(result))
+
+Output:
+
+[2, 4, 6]
+
+filter() receives a function that decides whether each value should remain.
+
+----------------------------------------
+9. Higher-Order Functions with sorted()
+----------------------------------------
+
+students = [
+    ("Rahul", 85),
+    ("Amit", 92),
+    ("Priya", 78)
+]
+
+result = sorted(
+    students,
+    key=lambda student: student[1]
+)
+
+print(result)
+
+Output:
+
+[
+    ('Priya', 78),
+    ('Rahul', 85),
+    ('Amit', 92)
+]
+
+sorted() accepts a function through its key parameter.
+
+----------------------------------------
+10. Higher-Order Functions with max()
+----------------------------------------
+
+employees = [
+    {"name": "Rahul", "salary": 65000},
+    {"name": "Amit", "salary": 75000},
+    {"name": "Priya", "salary": 60000}
+]
+
+highest = max(
+    employees,
+    key=lambda employee: employee["salary"]
+)
+
+print(highest)
+
+Output:
+
+{'name': 'Amit', 'salary': 75000}
+
+----------------------------------------
+11. Building a Custom Higher-Order Function
+----------------------------------------
+
+def calculate(operation, a, b):
+    return operation(a, b)
+
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+print(calculate(add, 10, 20))
+print(calculate(multiply, 10, 20))
+
+Output:
+
+30
+200
+
+The calculation function does not need to know how the operation works.
+
+It simply receives the required function.
+
+----------------------------------------
+12. Why This Is Useful
+----------------------------------------
+
+Without higher-order functions:
+
+def add_numbers(a, b):
+    return a + b
+
+def multiply_numbers(a, b):
+    return a * b
+
+def subtract_numbers(a, b):
+    return a - b
+
+With a higher-order function:
+
+def calculate(operation, a, b):
+    return operation(a, b)
+
+Now the behavior can be supplied dynamically.
+
+----------------------------------------
+13. Function as a Configuration
+----------------------------------------
+
+def process_numbers(numbers, operation):
+    return [operation(number) for number in numbers]
+
+numbers = [1, 2, 3, 4]
+
+squares = process_numbers(
+    numbers,
+    lambda x: x ** 2
+)
+
+doubles = process_numbers(
+    numbers,
+    lambda x: x * 2
+)
+
+print(squares)
+print(doubles)
+
+Output:
+
+[1, 4, 9, 16]
+[2, 4, 6, 8]
+
+The same processing function can perform different operations.
+
+----------------------------------------
+14. Function Returning a Function
+----------------------------------------
+
+def create_greeting(greeting):
+
+    def greet(name):
+        return f"{greeting}, {name}!"
+
+    return greet
+
+hello = create_greeting("Hello")
+welcome = create_greeting("Welcome")
+
+print(hello("Rahul"))
+print(welcome("Rahul"))
+
+Output:
+
+Hello, Rahul!
+Welcome, Rahul!
+
+The returned functions remember the greeting value.
+
+This leads directly to the concept of closures.
+
+----------------------------------------
+15. Higher-Order Functions vs First-Class Functions
+----------------------------------------
+
+These concepts are related but different.
+
+First-class functions mean:
+
+Python allows functions to be treated like values.
+
+They can be:
+
+• Stored
+• Passed
+• Returned
+• Used in data structures
+
+Higher-order function means:
+
+A function accepts or returns another function.
+
+So:
+
+First-class functions
+→ Python capability
+
+Higher-order functions
+→ Functions that use that capability
+
+----------------------------------------
+16. Common Built-in Higher-Order Functions
+----------------------------------------
+
+map()
+→ Transform elements
+
+filter()
+→ Select elements
+
+sorted()
+→ Accept custom sorting logic
+
+min()
+→ Accept custom comparison key
+
+max()
+→ Accept custom comparison key
+
+sum()
+→ Works with iterables but does not accept a function
+
+reduce()
+→ Repeatedly applies a function
+
+----------------------------------------
+17. Practical Example — Custom Sorting
+----------------------------------------
+
+products = [
+    {"name": "Laptop", "price": 70000},
+    {"name": "Mouse", "price": 1500},
+    {"name": "Keyboard", "price": 3000}
+]
+
+products.sort(
+    key=lambda product: product["price"]
+)
+
+for product in products:
+    print(product)
+
+The sorting algorithm does not need to know the structure of each product.
+
+The key function provides the value to compare.
+
+----------------------------------------
+18. Professional Mental Model
+----------------------------------------
+
+Higher-order function:
+
+Function
+↓
+Receives another function
+↓
+Uses that function
+↓
+Returns result
+
+OR:
+
+Function
+↓
+Creates another function
+↓
+Returns that function
+
+Example:
+
+apply(square, 5)
+
+apply()
+↓
+square()
+↓
+25
+
+This concept is the foundation for:
+
+• map()
+• filter()
+• reduce()
+• decorators
+• callbacks
+• closures
+• functional programming
+
+The key idea:
+
+A higher-order function allows behavior to be passed around just like data.`,
+},
+
+{
+  heading: "Closures",
+  body: `A closure is a function that remembers and can access variables from its enclosing function even after the enclosing function has finished executing.
+
+Closures are created when:
+
+• A nested function is defined inside another function
+• The inner function uses a variable from the outer function
+• The outer function returns the inner function
+
+Closures are useful for data hiding, maintaining state, function factories, decorators, and callbacks.
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+A closure is a returned inner function that retains access to variables from its enclosing scope.
+
+Example:
+
+def outer():
+    message = "Hello"
+
+    def inner():
+        print(message)
+
+    return inner
+
+greet = outer()
+
+greet()
+
+Output:
+
+Hello
+
+Even though outer() has already finished executing, inner() still remembers message.
+
+----------------------------------------
+2. Basic Syntax
+----------------------------------------
+
+The general structure is:
+
+def outer():
+    variable = value
+
+    def inner():
+        use(variable)
+
+    return inner
+
+Example:
+
+def outer(x):
+
+    def inner():
+        return x * 2
+
+    return inner
+
+double = outer(10)
+
+print(double())
+
+Output:
+
+20
+
+----------------------------------------
+3. Closure Creation Step by Step
+----------------------------------------
+
+Consider:
+
+def outer(x):
+
+    def inner():
+        return x * 2
+
+    return inner
+
+Step 1:
+
+outer(10)
+
+The outer function receives:
+
+x = 10
+
+Step 2:
+
+inner() is created.
+
+Step 3:
+
+inner() uses x.
+
+Step 4:
+
+outer() returns inner.
+
+Step 5:
+
+double stores the returned function.
+
+double = outer(10)
+
+Step 6:
+
+double()
+
+The inner function still remembers:
+
+x = 10
+
+Result:
+
+20
+
+----------------------------------------
+4. Why Does the Variable Still Exist?
+----------------------------------------
+
+Normally, local variables belong to the function call.
+
+But when an inner function refers to an outer variable, Python keeps that variable available for the returned function.
+
+Example:
+
+def create_multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+double = create_multiplier(2)
+
+print(double(5))
+
+Output:
+
+10
+
+The multiply function remembers:
+
+factor = 2
+
+This remembered environment is what makes the closure possible.
+
+----------------------------------------
+5. Closure with Different Values
+----------------------------------------
+
+def create_multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+double = create_multiplier(2)
+triple = create_multiplier(3)
+five_times = create_multiplier(5)
+
+print(double(10))
+print(triple(10))
+print(five_times(10))
+
+Output:
+
+20
+30
+50
+
+Each returned function remembers its own factor.
+
+----------------------------------------
+6. Closure with Multiple Outer Variables
+----------------------------------------
+
+def create_profile(name, age):
+
+    def profile():
+        return f"{name} is {age} years old"
+
+    return profile
+
+person = create_profile("Rahul", 21)
+
+print(person())
+
+Output:
+
+Rahul is 21 years old
+
+The inner function remembers both:
+
+name
+age
+
+----------------------------------------
+7. Checking Whether a Function Is a Closure
+----------------------------------------
+
+Python functions can expose their captured variables through:
+
+__closure__
+
+Example:
+
+def outer(message):
+
+    def inner():
+        print(message)
+
+    return inner
+
+greet = outer("Hello")
+
+print(greet.__closure__)
+
+The result shows that the function contains closure information.
+
+You can inspect the captured value using:
+
+print(greet.__closure__[0].cell_contents)
+
+Output:
+
+Hello
+
+This is mainly useful for understanding and debugging closures.
+
+----------------------------------------
+8. Closure with State
+----------------------------------------
+
+Closures can maintain state between function calls.
+
+Example:
+
+def counter():
+
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment
+
+counter1 = counter()
+
+print(counter1())
+print(counter1())
+print(counter1())
+
+Output:
+
+1
+2
+3
+
+The variable count remains available between calls.
+
+----------------------------------------
+9. The nonlocal Keyword
+----------------------------------------
+
+An inner function can read an outer variable directly.
+
+But if it needs to modify that variable, Python requires nonlocal.
+
+Example:
+
+def counter():
+
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment
+
+counter1 = counter()
+
+print(counter1())
+print(counter1())
+
+Output:
+
+1
+2
+
+Without nonlocal:
+
+def counter():
+
+    count = 0
+
+    def increment():
+        count += 1
+
+    return increment
+
+This causes an error because Python treats count as a local variable inside increment().
+
+----------------------------------------
+10. Closure vs Global Variable
+----------------------------------------
+
+Global approach:
+
+count = 0
+
+def increment():
+    global count
+    count += 1
+    return count
+
+Closure approach:
+
+def counter():
+
+    count = 0
+
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+
+    return increment
+
+The closure keeps the state inside the outer function instead of exposing it as a global variable.
+
+----------------------------------------
+11. Data Hiding with Closures
+----------------------------------------
+
+Closures can hide internal data.
+
+Example:
+
+def bank_account(initial_balance):
+
+    balance = initial_balance
+
+    def get_balance():
+        return balance
+
+    def deposit(amount):
+        nonlocal balance
+        balance += amount
+        return balance
+
+    return get_balance, deposit
+
+get_balance, deposit = bank_account(1000)
+
+print(get_balance())
+
+deposit(500)
+
+print(get_balance())
+
+Output:
+
+1000
+1500
+
+The balance cannot be directly accessed through a normal variable outside the closure.
+
+----------------------------------------
+12. Closure as a Function Factory
+----------------------------------------
+
+A function factory creates functions with customized behavior.
+
+Example:
+
+def create_power(exponent):
+
+    def power(number):
+        return number ** exponent
+
+    return power
+
+square = create_power(2)
+cube = create_power(3)
+
+print(square(5))
+print(cube(5))
+
+Output:
+
+25
+125
+
+create_power() is a function factory.
+
+It creates different functions depending on exponent.
+
+----------------------------------------
+13. Closures and Higher-Order Functions
+----------------------------------------
+
+Closures are closely related to higher-order functions.
+
+Higher-order function:
+
+A function accepts or returns another function.
+
+Closure:
+
+The returned function remembers variables from its enclosing scope.
+
+Example:
+
+def create_multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+Here:
+
+create_multiplier()
+→ higher-order function
+
+multiply()
+→ returned inner function
+
+factor
+→ remembered variable
+
+multiply()
+→ closure
+
+----------------------------------------
+14. Closures with Lambda
+----------------------------------------
+
+A lambda can also capture an outer variable.
+
+Example:
+
+def create_multiplier(factor):
+    return lambda number: number * factor
+
+double = create_multiplier(2)
+
+print(double(10))
+
+Output:
+
+20
+
+The lambda remembers factor.
+
+----------------------------------------
+15. Closures in Loops — Important Example
+----------------------------------------
+
+A common closure issue occurs when creating functions inside a loop.
+
+Example:
+
+functions = []
+
+for i in range(3):
+    functions.append(lambda: i)
+
+for function in functions:
+    print(function())
+
+Output:
+
+2
+2
+2
+
+All functions refer to the same final value of i.
+
+One solution is to capture the current value using a default argument:
+
+functions = []
+
+for i in range(3):
+    functions.append(lambda i=i: i)
+
+for function in functions:
+    print(function())
+
+Output:
+
+0
+1
+2
+
+This is an important behavior to understand when working with closures.
+
+----------------------------------------
+16. Practical Example — Configurable Logger
+----------------------------------------
+
+def create_logger(prefix):
+
+    def log(message):
+        print(f"[{prefix}] {message}")
+
+    return log
+
+info = create_logger("INFO")
+error = create_logger("ERROR")
+
+info("Application started")
+error("Database connection failed")
+
+Output:
+
+[INFO] Application started
+[ERROR] Database connection failed
+
+Each logger remembers its own prefix.
+
+----------------------------------------
+17. Practical Example — Tax Calculator
+----------------------------------------
+
+def create_tax_calculator(rate):
+
+    def calculate(price):
+        return price + (price * rate)
+
+    return calculate
+
+gst_5 = create_tax_calculator(0.05)
+gst_18 = create_tax_calculator(0.18)
+
+print(gst_5(1000))
+print(gst_18(1000))
+
+Output:
+
+1050.0
+1180.0
+
+The rate is remembered by each returned function.
+
+----------------------------------------
+18. Important Closure Rules
+----------------------------------------
+
+Rule 1:
+
+A closure usually involves a nested function.
+
+Rule 2:
+
+The inner function must reference an outer variable.
+
+Rule 3:
+
+The outer function normally returns the inner function.
+
+Rule 4:
+
+The inner function remembers the outer variable.
+
+Rule 5:
+
+Use nonlocal when modifying an enclosing variable.
+
+Rule 6:
+
+Each closure can maintain its own state.
+
+----------------------------------------
+19. Closure vs Normal Nested Function
+----------------------------------------
+
+Nested function:
+
+def outer():
+
+    def inner():
+        print("Hello")
+
+    inner()
+
+Here inner() is simply called inside outer().
+
+Closure:
+
+def outer():
+
+    message = "Hello"
+
+    def inner():
+        print(message)
+
+    return inner
+
+greet = outer()
+
+greet()
+
+Here inner() is returned and remembers message.
+
+Therefore:
+
+Nested function
+→ function defined inside another function
+
+Closure
+→ nested function that retains access to enclosing variables after the outer function has returned
+
+----------------------------------------
+20. Professional Mental Model
+----------------------------------------
+
+Closure:
+
+Outer function
+↓
+Creates variable
+↓
+Defines inner function
+↓
+Inner function uses outer variable
+↓
+Outer function returns inner function
+↓
+Returned function remembers the variable
+↓
+Function can be called later
+
+Example:
+
+def outer(value):
+
+    def inner():
+        return value
+
+    return inner
+
+Remember:
+
+Closure = function + remembered enclosing environment
+
+Closures are an important foundation for:
+
+• Decorators
+• Function factories
+• Callbacks
+• Stateful functions
+• Data hiding
+• Functional programming`,
+},
+{
+  heading: "Recursion",
+  body: `Recursion is a programming technique where a function calls itself to solve a problem.
+
+A recursive function solves a problem by breaking it into smaller versions of the same problem.
+
+Every recursive function must have:
+
+• A base case — stops the recursion
+• A recursive case — calls the function again with a smaller or simpler input
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+Recursion is the process in which a function calls itself directly or indirectly.
+
+Example:
+
+def countdown(n):
+    if n == 0:
+        return
+
+    print(n)
+    countdown(n - 1)
+
+countdown(5)
+
+Output:
+
+5
+4
+3
+2
+1
+
+The function keeps calling itself until n becomes 0.
+
+----------------------------------------
+2. Basic Syntax
+----------------------------------------
+
+The general structure is:
+
+def function(parameter):
+
+    if base_condition:
+        return result
+
+    return function(smaller_parameter)
+
+The two important parts are:
+
+Base case
+→ Stops recursion
+
+Recursive case
+→ Calls the same function again
+
+----------------------------------------
+3. Base Case
+----------------------------------------
+
+The base case is the condition that stops the recursive calls.
+
+Example:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    print(n)
+    countdown(n - 1)
+
+Here:
+
+if n == 0:
+    return
+
+is the base case.
+
+Without a base case, the function would continue calling itself indefinitely.
+
+----------------------------------------
+4. Recursive Case
+----------------------------------------
+
+The recursive case is the part where the function calls itself.
+
+Example:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    print(n)
+    countdown(n - 1)
+
+The recursive case is:
+
+countdown(n - 1)
+
+The value becomes smaller each time.
+
+----------------------------------------
+5. How Recursion Works
+----------------------------------------
+
+Consider:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    print(n)
+    countdown(n - 1)
+
+countdown(3)
+
+Execution:
+
+countdown(3)
+↓
+print(3)
+↓
+countdown(2)
+↓
+print(2)
+↓
+countdown(1)
+↓
+print(1)
+↓
+countdown(0)
+↓
+return
+
+Output:
+
+3
+2
+1
+
+----------------------------------------
+6. Factorial Using Recursion
+----------------------------------------
+
+The factorial of n is:
+
+n! = n × (n - 1) × (n - 2) × ... × 1
+
+Example:
+
+5! = 5 × 4 × 3 × 2 × 1
+
+= 120
+
+Recursive implementation:
+
+def factorial(n):
+
+    if n == 0 or n == 1:
+        return 1
+
+    return n * factorial(n - 1)
+
+print(factorial(5))
+
+Output:
+
+120
+
+----------------------------------------
+7. Factorial Step by Step
+----------------------------------------
+
+factorial(5)
+
+↓
+
+5 × factorial(4)
+
+↓
+
+5 × 4 × factorial(3)
+
+↓
+
+5 × 4 × 3 × factorial(2)
+
+↓
+
+5 × 4 × 3 × 2 × factorial(1)
+
+↓
+
+5 × 4 × 3 × 2 × 1
+
+↓
+
+120
+
+The base case is:
+
+factorial(1) = 1
+
+----------------------------------------
+8. Sum of Numbers Using Recursion
+----------------------------------------
+
+Calculate:
+
+1 + 2 + 3 + 4 + 5
+
+Example:
+
+def sum_numbers(n):
+
+    if n == 0:
+        return 0
+
+    return n + sum_numbers(n - 1)
+
+print(sum_numbers(5))
+
+Output:
+
+15
+
+Execution:
+
+sum_numbers(5)
+= 5 + sum_numbers(4)
+= 5 + 4 + sum_numbers(3)
+= 5 + 4 + 3 + sum_numbers(2)
+= 5 + 4 + 3 + 2 + sum_numbers(1)
+= 5 + 4 + 3 + 2 + 1
+= 15
+
+----------------------------------------
+9. Fibonacci Using Recursion
+----------------------------------------
+
+The Fibonacci sequence begins:
+
+0, 1, 1, 2, 3, 5, 8, 13...
+
+Each number is the sum of the previous two numbers.
+
+Recursive implementation:
+
+def fibonacci(n):
+
+    if n <= 1:
+        return n
+
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+print(fibonacci(6))
+
+Output:
+
+8
+
+The recursive definition is:
+
+F(n) = F(n - 1) + F(n - 2)
+
+with:
+
+F(0) = 0
+F(1) = 1
+
+----------------------------------------
+10. Recursion with Strings
+----------------------------------------
+
+A recursive function can process strings.
+
+Example:
+
+def reverse_string(text):
+
+    if len(text) <= 1:
+        return text
+
+    return reverse_string(text[1:]) + text[0]
+
+print(reverse_string("Python"))
+
+Output:
+
+nohtyP
+
+The function repeatedly removes the first character and processes the remaining string.
+
+----------------------------------------
+11. Recursion with Lists
+----------------------------------------
+
+Example:
+
+def sum_list(numbers):
+
+    if not numbers:
+        return 0
+
+    return numbers[0] + sum_list(numbers[1:])
+
+print(sum_list([1, 2, 3, 4]))
+
+Output:
+
+10
+
+Base case:
+
+if not numbers:
+    return 0
+
+Recursive case:
+
+numbers[0] + sum_list(numbers[1:])
+
+----------------------------------------
+12. Recursion and the Call Stack
+----------------------------------------
+
+Each recursive function call is placed on Python's call stack.
+
+Example:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    print(n)
+    countdown(n - 1)
+
+countdown(3)
+
+The stack grows like:
+
+countdown(3)
+countdown(2)
+countdown(1)
+countdown(0)
+
+When the base case is reached, the functions return in reverse order.
+
+The call stack then becomes:
+
+countdown(0)
+↓
+countdown(1)
+↓
+countdown(2)
+↓
+countdown(3)
+
+----------------------------------------
+13. Recursion Must Move Toward the Base Case
+----------------------------------------
+
+Correct:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    countdown(n - 1)
+
+The value moves:
+
+5 → 4 → 3 → 2 → 1 → 0
+
+Incorrect:
+
+def countdown(n):
+
+    if n == 0:
+        return
+
+    countdown(n + 1)
+
+The value moves away from 0:
+
+5 → 6 → 7 → 8 → ...
+
+This eventually causes:
+
+RecursionError
+
+----------------------------------------
+14. RecursionError
+----------------------------------------
+
+Python limits how deeply functions can recursively call themselves.
+
+Example:
+
+def infinite_recursion():
+    infinite_recursion()
+
+infinite_recursion()
+
+Eventually Python raises:
+
+RecursionError:
+maximum recursion depth exceeded
+
+This happens because there is no valid base case.
+
+----------------------------------------
+15. Recursion vs Iteration
+----------------------------------------
+
+Recursion:
+
+def factorial(n):
+
+    if n <= 1:
+        return 1
+
+    return n * factorial(n - 1)
+
+Iteration:
+
+def factorial(n):
+
+    result = 1
+
+    for i in range(2, n + 1):
+        result *= i
+
+    return result
+
+Both can solve the same problem.
+
+----------------------------------------
+16. When Recursion Is Useful
+----------------------------------------
+
+Recursion is particularly useful for problems that naturally contain smaller versions of themselves.
+
+Common examples:
+
+• Tree traversal
+• File-system traversal
+• Graph algorithms
+• Divide-and-conquer algorithms
+• Binary search
+• Merge sort
+• Quick sort
+• Backtracking
+• Nested data structures
+
+----------------------------------------
+17. Example — Directory Traversal Concept
+----------------------------------------
+
+A directory can contain:
+
+folder
+├── file
+├── file
+└── subfolder
+    ├── file
+    └── subfolder
+        └── file
+
+Each folder can contain another folder.
+
+This naturally fits the recursive pattern:
+
+def explore(folder):
+
+    for item in folder:
+
+        if item_is_file(item):
+            process(item)
+
+        elif item_is_folder(item):
+            explore(item)
+
+The function handles a folder and then recursively handles its subfolders.
+
+----------------------------------------
+18. Recursion with a Base Case and Recursive Case
+----------------------------------------
+
+A good recursive function can usually be identified using this structure:
+
+def solve(problem):
+
+    if problem_is_small_enough:
+        return answer
+
+    smaller_problem = reduce_problem(problem)
+
+    return solve(smaller_problem)
+
+Think:
+
+Large problem
+↓
+Smaller problem
+↓
+Smaller problem
+↓
+Base case
+↓
+Return results
+↓
+Final answer
+
+----------------------------------------
+19. Important Recursion Rules
+----------------------------------------
+
+Rule 1:
+
+A recursive function calls itself.
+
+Rule 2:
+
+Every recursion must have a base case.
+
+Rule 3:
+
+The recursive call must move toward the base case.
+
+Rule 4:
+
+Recursive calls use the call stack.
+
+Rule 5:
+
+Too many recursive calls can cause RecursionError.
+
+Rule 6:
+
+Recursion is useful when a problem naturally contains smaller versions of itself.
+
+----------------------------------------
+20. Recursion vs Loop
+----------------------------------------
+
+Use recursion when:
+
+• The problem has a recursive structure
+• Working with trees or nested structures
+• Using divide-and-conquer
+• Implementing backtracking
+• Recursive definition makes the solution clearer
+
+Use loops when:
+
+• The problem is simple repetition
+• Performance and memory are important
+• Recursion would make the code unnecessarily complicated
+
+Python does not optimize tail recursion, so recursion should not automatically replace a simple loop.
+
+----------------------------------------
+21. Professional Mental Model
+----------------------------------------
+
+Recursive function:
+
+Call function
+↓
+Check base case
+↓
+If finished → return
+↓
+Otherwise simplify problem
+↓
+Call itself
+↓
+Repeat
+↓
+Reach base case
+↓
+Return through the call stack
+
+The essential pattern is:
+
+def function(value):
+
+    if base_case:
+        return result
+
+    return function(smaller_value)
+
+Remember:
+
+Base case
+→ STOP
+
+Recursive case
+→ CONTINUE
+
+Smaller input
+→ MOVE TOWARD STOP
+
+Call stack
+→ REMEMBERS ACTIVE CALLS
+
+Recursion is especially important for algorithms, trees, graphs, searching, sorting, and backtracking.`,
+},
+
+{
+  heading: "Decorators",
+  body: `A decorator is a function that modifies or extends the behavior of another function without changing the original function's source code.
+
+Decorators are built on two concepts:
+
+• Higher-order functions
+• Closures
+
+Python provides special @ syntax to apply decorators.
+
+Decorators are commonly used for logging, authentication, authorization, timing, caching, validation, and access control.
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+A decorator is a function that accepts another function, adds some behavior around it, and returns a new function.
+
+Example:
+
+def decorator(func):
+
+    def wrapper():
+        print("Before function")
+        func()
+        print("After function")
+
+    return wrapper
+
+@decorator
+def greet():
+    print("Hello!")
+
+greet()
+
+Output:
+
+Before function
+Hello!
+After function
+
+The decorator adds behavior before and after greet().
+
+----------------------------------------
+2. Basic Decorator Syntax
+----------------------------------------
+
+The general structure is:
+
+def decorator(func):
+
+    def wrapper():
+        # Extra behavior
+        func()
+        # Extra behavior
+
+    return wrapper
+
+Then apply it using:
+
+@decorator
+def function():
+    ...
+
+The @ syntax is called decorator syntax.
+
+----------------------------------------
+3. How the @ Syntax Works
+----------------------------------------
+
+This:
+
+@decorator
+def greet():
+    print("Hello")
+
+is equivalent to:
+
+def greet():
+    print("Hello")
+
+greet = decorator(greet)
+
+So Python passes the original greet function to decorator().
+
+The decorator returns a new function.
+
+The name greet then refers to the wrapped function.
+
+----------------------------------------
+4. Simple Logging Decorator
+----------------------------------------
+
+def logger(func):
+
+    def wrapper():
+        print("Function started")
+        func()
+        print("Function finished")
+
+    return wrapper
+
+@logger
+def greet():
+    print("Hello Rahul")
+
+greet()
+
+Output:
+
+Function started
+Hello Rahul
+Function finished
+
+The original greet() function was not changed.
+
+The decorator added logging behavior around it.
+
+----------------------------------------
+5. Decorator with Function Arguments
+----------------------------------------
+
+The previous wrapper only works with functions that take no arguments.
+
+For general-purpose decorators, use *args and **kwargs.
+
+def logger(func):
+
+    def wrapper(*args, **kwargs):
+        print("Function started")
+        result = func(*args, **kwargs)
+        print("Function finished")
+        return result
+
+    return wrapper
+
+@logger
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+
+Output:
+
+Function started
+Function finished
+30
+
+Here:
+
+*args
+→ captures positional arguments
+
+**kwargs
+→ captures keyword arguments
+
+----------------------------------------
+6. Why *args and **kwargs Are Used
+----------------------------------------
+
+A decorator should ideally work with many different function signatures.
+
+Example:
+
+@logger
+def greet(name):
+    ...
+
+@logger
+def add(a, b):
+    ...
+
+@logger
+def create_user(name, age, city="Mumbai"):
+    ...
+
+Using:
+
+def wrapper(*args, **kwargs):
+
+allows the decorator to accept all these argument styles.
+
+----------------------------------------
+7. Decorator That Modifies the Result
+----------------------------------------
+
+A decorator can change the returned value.
+
+def double_result(func):
+
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return result * 2
+
+    return wrapper
+
+@double_result
+def add(a, b):
+    return a + b
+
+print(add(10, 20))
+
+Output:
+
+60
+
+Original result:
+
+30
+
+Decorator changes it to:
+
+30 × 2 = 60
+
+----------------------------------------
+8. Decorator That Checks Permission
+----------------------------------------
+
+Decorators are commonly used for access control.
+
+def admin_only(func):
+
+    def wrapper(user_role, *args, **kwargs):
+
+        if user_role != "admin":
+            print("Access denied")
+            return
+
+        return func(user_role, *args, **kwargs)
+
+    return wrapper
+
+@admin_only
+def delete_user(user_role, username):
+    print(f"Deleting {username}")
+
+delete_user("admin", "Rahul")
+
+Output:
+
+Deleting Rahul
+
+Another call:
+
+delete_user("user", "Rahul")
+
+Output:
+
+Access denied
+
+This pattern is commonly used in web applications.
+
+----------------------------------------
+9. Timing Decorator
+----------------------------------------
+
+A decorator can measure how long a function takes.
+
+import time
+
+def timer(func):
+
+    def wrapper(*args, **kwargs):
+
+        start = time.perf_counter()
+
+        result = func(*args, **kwargs)
+
+        end = time.perf_counter()
+
+        print(
+            f"Execution time: {end - start:.6f} seconds"
+        )
+
+        return result
+
+    return wrapper
+
+@timer
+def calculate():
+    total = 0
+
+    for i in range(1_000_000):
+        total += i
+
+    return total
+
+print(calculate())
+
+The decorator measures execution time without modifying calculate().
+
+----------------------------------------
+10. Decorator with @wraps
+----------------------------------------
+
+A decorator normally replaces the original function with wrapper.
+
+This can cause metadata such as:
+
+__name__
+__doc__
+
+to refer to wrapper instead of the original function.
+
+Use functools.wraps to preserve the original function metadata.
+
+from functools import wraps
+
+def logger(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("Calling function...")
+        return func(*args, **kwargs)
+
+    return wrapper
+
+@logger
+def greet(name):
+    """Greet a user."""
+
+    return f"Hello, {name}!"
+
+print(greet.__name__)
+print(greet.__doc__)
+
+Output:
+
+greet
+Greet a user.
+
+----------------------------------------
+11. Why functools.wraps Is Important
+----------------------------------------
+
+Without @wraps:
+
+def decorator(func):
+
+    def wrapper(*args, **kwargs):
+        return func(*args, **kwargs)
+
+    return wrapper
+
+The decorated function's metadata may show:
+
+wrapper
+
+instead of:
+
+greet
+
+With:
+
+from functools import wraps
+
+the original metadata is preserved.
+
+Professional decorators should generally use @wraps.
+
+----------------------------------------
+12. Decorator with Return Values
+----------------------------------------
+
+A decorator should return the result when the original function returns something.
+
+def logger(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("Calling...")
+        result = func(*args, **kwargs)
+        return result
+
+    return wrapper
+
+@logger
+def multiply(a, b):
+    return a * b
+
+result = multiply(5, 4)
+
+print(result)
+
+Output:
+
+Calling...
+20
+
+If wrapper does not return result, the decorated function may unexpectedly return None.
+
+----------------------------------------
+13. Multiple Decorators
+----------------------------------------
+
+Python allows multiple decorators on one function.
+
+def first(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("First")
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+def second(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("Second")
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@first
+@second
+def greet():
+    print("Hello")
+
+greet()
+
+Output:
+
+First
+Second
+Hello
+
+Decorators are applied from the bottom upward.
+
+Conceptually:
+
+greet
+↓
+second(greet)
+↓
+first(second(greet))
+
+But when called, the outer decorator runs first.
+
+----------------------------------------
+14. Decorator with Arguments
+----------------------------------------
+
+Sometimes you want to configure the decorator itself.
+
+Example:
+
+def repeat(times):
+
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            for _ in range(times):
+                result = func(*args, **kwargs)
+
+            return result
+
+        return wrapper
+
+    return decorator
+
+@repeat(3)
+def greet():
+    print("Hello")
+
+greet()
+
+Output:
+
+Hello
+Hello
+Hello
+
+Here there are three levels:
+
+repeat()
+→ receives decorator configuration
+
+decorator()
+→ receives the function
+
+wrapper()
+→ executes the function
+
+----------------------------------------
+15. Decorator with a Configuration Value
+----------------------------------------
+
+Example:
+
+def require_role(required_role):
+
+    def decorator(func):
+
+        @wraps(func)
+        def wrapper(user_role, *args, **kwargs):
+
+            if user_role != required_role:
+                print("Access denied")
+                return None
+
+            return func(
+                user_role,
+                *args,
+                **kwargs
+            )
+
+        return wrapper
+
+    return decorator
+
+@require_role("admin")
+def delete_user(user_role, username):
+    print(f"Deleting {username}")
+
+delete_user("admin", "Rahul")
+
+Output:
+
+Deleting Rahul
+
+----------------------------------------
+16. Practical API Example
+----------------------------------------
+
+A web API may need authentication before executing a function.
+
+def login_required(func):
+
+    @wraps(func)
+    def wrapper(user, *args, **kwargs):
+
+        if not user:
+            return "Please login first"
+
+        return func(user, *args, **kwargs)
+
+    return wrapper
+
+@login_required
+def dashboard(user):
+    return f"Welcome, {user}"
+
+print(dashboard("Rahul"))
+
+Output:
+
+Welcome, Rahul
+
+print(dashboard(None))
+
+Output:
+
+Please login first
+
+This is conceptually similar to decorators used by web frameworks.
+
+----------------------------------------
+17. Decorators Can Be Used for Validation
+----------------------------------------
+
+def positive_only(func):
+
+    @wraps(func)
+    def wrapper(x):
+        if x <= 0:
+            raise ValueError("Value must be positive")
+
+        return func(x)
+
+    return wrapper
+
+@positive_only
+def square_root_value(x):
+    return x ** 0.5
+
+print(square_root_value(25))
+
+Output:
+
+5.0
+
+The decorator validates the input before calling the original function.
+
+----------------------------------------
+18. Decorators Do Not Modify the Original Source
+----------------------------------------
+
+Original:
+
+def greet():
+    print("Hello")
+
+Decorator:
+
+def decorator(func):
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        print("Before")
+        result = func(*args, **kwargs)
+        print("After")
+        return result
+
+    return wrapper
+
+The decorator adds behavior around the function.
+
+This is why decorators are often described as:
+
+"Wrapping a function with additional behavior."
+
+----------------------------------------
+19. Common Uses of Decorators
+----------------------------------------
+
+Decorators are commonly used for:
+
+• Logging
+• Authentication
+• Authorization
+• Input validation
+• Performance measurement
+• Caching
+• Retry logic
+• Rate limiting
+• Access control
+• Transaction handling
+• Debugging
+• Permission checking
+
+Popular Python decorators include:
+
+@property
+
+@staticmethod
+
+@classmethod
+
+@functools.lru_cache
+
+These are all important examples of decorator-based functionality.
+
+----------------------------------------
+20. Important Decorator Rules
+----------------------------------------
+
+Rule 1:
+
+A decorator receives a function.
+
+Rule 2:
+
+It usually defines a wrapper function.
+
+Rule 3:
+
+The wrapper adds extra behavior.
+
+Rule 4:
+
+The wrapper calls the original function.
+
+Rule 5:
+
+The decorator returns the wrapper.
+
+Rule 6:
+
+Use @decorator to apply it.
+
+Rule 7:
+
+Use *args and **kwargs for flexible decorators.
+
+Rule 8:
+
+Use functools.wraps to preserve function metadata.
+
+----------------------------------------
+21. Decorator Execution Model
+----------------------------------------
+
+When Python sees:
+
+@decorator
+def greet():
+    ...
+
+It effectively performs:
+
+greet = decorator(greet)
+
+Then when:
+
+greet()
+
+is called:
+
+greet
+↓
+wrapper
+↓
+additional behavior
+↓
+original function
+↓
+result
+↓
+return to caller
+
+----------------------------------------
+22. Professional Mental Model
+----------------------------------------
+
+Decorator:
+
+Original function
+↓
+Pass function to decorator
+↓
+Decorator creates wrapper
+↓
+Wrapper adds behavior
+↓
+Decorator returns wrapper
+↓
+Function name now refers to wrapper
+
+Conceptually:
+
+@decorator
+def function():
+    ...
+
+means:
+
+function = decorator(function)
+
+The key idea:
+
+A decorator lets you add reusable behavior to functions without modifying the function's original implementation.`,
+},
+
+{
+  heading: "Context Managers & the with Statement",
+  body: `A context manager is a Python object that manages the setup and cleanup of a resource automatically.
+
+Context managers are commonly used with:
+
+• Files
+• Database connections
+• Locks
+• Network connections
+• Temporary resources
+
+The with statement is the most common way to use a context manager.
+
+----------------------------------------
+1. Definition
+----------------------------------------
+
+A context manager controls what happens when a block of code starts and when it finishes.
+
+It automatically performs:
+
+Setup
+↓
+Run code
+↓
+Cleanup
+
+The with statement makes this process safe and readable.
+
+Example:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+print(content)
+
+When the with block finishes, Python automatically closes the file.
+
+----------------------------------------
+2. Syntax
+----------------------------------------
+
+The basic syntax is:
+
+with expression as variable:
+    # code using the resource
+
+Example:
+
+with open("data.txt", "r") as file:
+    data = file.read()
+
+The expression:
+
+open("data.txt", "r")
+
+creates the resource.
+
+The as variable part stores the resource in file.
+
+----------------------------------------
+3. Why Use with?
+----------------------------------------
+
+Without a context manager:
+
+file = open("data.txt", "r")
+
+try:
+    data = file.read()
+finally:
+    file.close()
+
+The file must be closed manually.
+
+With:
+
+with open("data.txt", "r") as file:
+    data = file.read()
+
+Python handles the cleanup automatically.
+
+This makes the code shorter and safer.
+
+----------------------------------------
+4. File Handling with with
+----------------------------------------
+
+Example:
+
+with open("example.txt", "w") as file:
+    file.write("Hello Python")
+
+The file is automatically closed after the block.
+
+You do not need:
+
+file.close()
+
+----------------------------------------
+5. Reading a File
+----------------------------------------
+
+with open("example.txt", "r") as file:
+    content = file.read()
+
+print(content)
+
+The file is automatically closed after leaving the with block.
+
+----------------------------------------
+6. Writing a File
+----------------------------------------
+
+with open("example.txt", "w") as file:
+    file.write("Python is powerful.")
+
+The with statement ensures that the file is properly closed after writing.
+
+----------------------------------------
+7. Multiple Context Managers
+----------------------------------------
+
+Python allows multiple resources in one with statement.
+
+Example:
+
+with open("input.txt", "r") as source, \
+     open("output.txt", "w") as destination:
+
+    data = source.read()
+    destination.write(data)
+
+Both files are automatically cleaned up.
+
+----------------------------------------
+8. Context Managers and Exceptions
+----------------------------------------
+
+One major advantage of context managers is that cleanup happens even when an exception occurs.
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    data = file.read()
+
+    result = 10 / 0
+
+Even though an exception occurs, Python still performs the context manager's cleanup.
+
+The file is closed.
+
+This is much safer than relying on manual cleanup.
+
+----------------------------------------
+9. The Context Manager Protocol
+----------------------------------------
+
+A custom context manager normally implements two special methods:
+
+__enter__()
+
+__exit__()
+
+Example:
+
+class MyContext:
+
+    def __enter__(self):
+        print("Entering context")
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Leaving context")
+
+with MyContext():
+    print("Inside context")
+
+Output:
+
+Entering context
+Inside context
+Leaving context
+
+----------------------------------------
+10. __enter__()
+----------------------------------------
+
+__enter__() runs when the with block starts.
+
+Example:
+
+class MyContext:
+
+    def __enter__(self):
+        print("Setup")
+        return self
+
+The value returned by __enter__() is assigned to the variable after as.
+
+Example:
+
+class MyContext:
+
+    def __enter__(self):
+        print("Setup")
+        return "Resource"
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Cleanup")
+
+with MyContext() as value:
+    print(value)
+
+Output:
+
+Setup
+Resource
+Cleanup
+
+----------------------------------------
+11. __exit__()
+----------------------------------------
+
+__exit__() runs when the with block finishes.
+
+It receives three exception-related values:
+
+exc_type
+→ Exception type
+
+exc_value
+→ Exception object/value
+
+traceback
+→ Traceback information
+
+Example:
+
+class MyContext:
+
+    def __enter__(self):
+        print("Start")
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Cleanup")
+
+with MyContext():
+    print("Work")
+
+Output:
+
+Start
+Work
+Cleanup
+
+----------------------------------------
+12. Context Manager with an Exception
+----------------------------------------
+
+class MyContext:
+
+    def __enter__(self):
+        print("Start")
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Cleanup")
+        print("Exception:", exc_type)
+
+with MyContext():
+    print("Before error")
+    raise ValueError("Something went wrong")
+
+Output includes:
+
+Start
+Before error
+Cleanup
+Exception: <class 'ValueError'>
+
+The cleanup still happens.
+
+----------------------------------------
+13. Suppressing an Exception
+----------------------------------------
+
+__exit__() can return True to suppress an exception.
+
+Example:
+
+class IgnoreError:
+
+    def __enter__(self):
+        print("Start")
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        print("Error handled")
+        return True
+
+with IgnoreError():
+    raise ValueError("Something went wrong")
+
+print("Program continues")
+
+Output:
+
+Start
+Error handled
+Program continues
+
+Because __exit__() returned True, the exception was suppressed.
+
+Normally, return False or None so the exception continues to propagate.
+
+----------------------------------------
+14. Using contextlib
+----------------------------------------
+
+Python provides the contextlib module to make custom context managers easier to create.
+
+The @contextmanager decorator can turn a generator function into a context manager.
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def my_context():
+
+    print("Entering")
+
+    try:
+        yield
+    finally:
+        print("Exiting")
+
+with my_context():
+    print("Inside")
+
+Output:
+
+Entering
+Inside
+Exiting
+
+----------------------------------------
+15. Understanding yield in a Context Manager
+----------------------------------------
+
+Consider:
+
+@contextmanager
+def my_context():
+
+    print("Before")
+
+    try:
+        yield
+    finally:
+        print("After")
+
+The code before yield runs when entering the with block.
+
+The code after yield runs when leaving the with block.
+
+Conceptually:
+
+Before yield
+↓
+Enter context
+↓
+with block executes
+↓
+yield resumes
+↓
+finally cleanup
+↓
+Exit context
+
+----------------------------------------
+16. Returning a Resource from @contextmanager
+----------------------------------------
+
+A context manager can provide a resource using yield.
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def database_connection():
+
+    print("Connecting")
+
+    connection = "Database Connection"
+
+    try:
+        yield connection
+    finally:
+        print("Closing connection")
+
+with database_connection() as connection:
+    print(connection)
+
+Output:
+
+Connecting
+Database Connection
+Closing connection
+
+----------------------------------------
+17. Practical Example — Timer Context Manager
+----------------------------------------
+
+import time
+from contextlib import contextmanager
+
+@contextmanager
+def timer():
+
+    start = time.perf_counter()
+
+    try:
+        yield
+    finally:
+        end = time.perf_counter()
+        print(
+            f"Elapsed: {end - start:.6f} seconds"
+        )
+
+with timer():
+
+    total = sum(range(1_000_000))
+
+The context manager automatically measures the block's execution time.
+
+----------------------------------------
+18. Practical Example — Temporary State
+----------------------------------------
+
+A context manager can temporarily change some state and restore it afterward.
+
+Conceptually:
+
+with temporary_setting():
+
+    # setting is changed
+
+# original setting restored
+
+This pattern is useful when a resource or configuration should only be changed for a limited section of code.
+
+----------------------------------------
+19. Context Manager vs try/finally
+----------------------------------------
+
+Manual resource management:
+
+resource = acquire()
+
+try:
+    use(resource)
+finally:
+    release(resource)
+
+Context manager:
+
+with acquire() as resource:
+    use(resource)
+
+Both can provide cleanup.
+
+The context manager version packages the setup and cleanup behavior into a reusable abstraction.
+
+----------------------------------------
+20. Common Built-in Context Managers
+----------------------------------------
+
+Python provides many context-manager-based operations.
+
+Examples:
+
+open()
+
+→ File management
+
+threading.Lock()
+
+→ Lock management
+
+Temporary resources
+
+→ Resource cleanup
+
+Database libraries
+
+→ Connection or transaction management
+
+The exact behavior depends on the object being used.
+
+----------------------------------------
+21. Important Context Manager Rules
+----------------------------------------
+
+Rule 1:
+
+A context manager manages setup and cleanup.
+
+Rule 2:
+
+The with statement is the normal way to use one.
+
+Rule 3:
+
+Custom class-based context managers implement:
+
+__enter__()
+__exit__()
+
+Rule 4:
+
+contextlib.contextmanager can create context managers using generators.
+
+Rule 5:
+
+Cleanup should be placed where it will execute even if an exception occurs.
+
+Rule 6:
+
+Context managers make resource management safer and easier to read.
+
+----------------------------------------
+22. Professional Mental Model
+----------------------------------------
+
+with resource:
+
+↓
+
+__enter__()
+
+↓
+
+Resource becomes available
+
+↓
+
+with block executes
+
+↓
+
+Block finishes or raises an exception
+
+↓
+
+__exit__()
+
+↓
+
+Cleanup
+
+The core idea:
+
+Context manager = automatic resource setup + controlled usage + guaranteed cleanup.
+
+Remember:
+
+with
+→ uses a context manager
+
+__enter__()
+→ setup / acquire
+
+yield
+→ pause and run the with block when using @contextmanager
+
+__exit__()
+→ cleanup / release
+
+contextlib
+→ tools for creating and managing context managers`,
+},
+
+{
+  heading: "Modules & Packages",
+  body: `Modules and packages are used to organize Python code into reusable and maintainable components.
+
+A module is usually a single Python file.
+
+A package is a collection of related Python modules organized in a directory.
+
+They help you:
+
+• Reuse code
+• Organize large projects
+• Avoid repeating code
+• Separate functionality
+• Maintain cleaner applications
+• Share code between files
+
+----------------------------------------
+1. What Is a Module?
+----------------------------------------
+
+A module is a Python file containing code such as:
+
+• Variables
+• Functions
+• Classes
+• Constants
+
+For example, suppose we create:
+
+math_utils.py
+
+Contents:
+
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+The file math_utils.py is a module.
+
+----------------------------------------
+2. Basic Module Structure
+----------------------------------------
+
+Project:
+
+project/
+│
+├── main.py
+└── math_utils.py
+
+math_utils.py:
+
+def add(a, b):
+    return a + b
+
+def multiply(a, b):
+    return a * b
+
+main.py can import and use these functions.
+
+----------------------------------------
+3. import Statement
+----------------------------------------
+
+Use import to load a module.
+
+Example:
+
+import math_utils
+
+print(math_utils.add(10, 20))
+print(math_utils.multiply(5, 4))
+
+Output:
+
+30
+20
+
+Syntax:
+
+import module_name
+
+Access members using:
+
+module_name.member
+
+----------------------------------------
+4. from ... import
+----------------------------------------
+
+You can import specific members from a module.
+
+Example:
+
+from math_utils import add
+
+print(add(10, 20))
+
+Now add() can be used directly.
+
+Syntax:
+
+from module_name import member
+
+----------------------------------------
+5. Import Multiple Members
+----------------------------------------
+
+You can import multiple functions.
+
+from math_utils import add, multiply
+
+print(add(10, 20))
+print(multiply(5, 4))
+
+Syntax:
+
+from module_name import member1, member2
+
+----------------------------------------
+6. Import Everything with *
+----------------------------------------
+
+Python allows:
+
+from math_utils import *
+
+Then members can be accessed directly.
+
+Example:
+
+from math_utils import *
+
+print(add(10, 20))
+
+However, this style is generally discouraged in professional code because it can make it unclear where names came from and may cause naming conflicts.
+
+Prefer:
+
+import math_utils
+
+or:
+
+from math_utils import add
+
+----------------------------------------
+7. Import with an Alias
+----------------------------------------
+
+You can give a module a shorter name using as.
+
+Example:
+
+import math_utils as mu
+
+print(mu.add(10, 20))
+
+Syntax:
+
+import module_name as alias
+
+Another common example:
+
+import numpy as np
+
+import pandas as pd
+
+Aliases make commonly used modules shorter to reference.
+
+----------------------------------------
+8. from ... import ... as
+----------------------------------------
+
+You can also give an imported member an alias.
+
+Example:
+
+from math_utils import multiply as mul
+
+print(mul(5, 4))
+
+Syntax:
+
+from module_name import member as alias
+
+----------------------------------------
+9. Python Standard Library Modules
+----------------------------------------
+
+Python comes with many built-in modules.
+
+Examples:
+
+math
+→ Mathematical functions
+
+random
+→ Random number generation
+
+datetime
+→ Date and time handling
+
+os
+→ Operating-system functionality
+
+sys
+→ Python runtime/system information
+
+json
+→ JSON encoding and decoding
+
+re
+→ Regular expressions
+
+pathlib
+→ File-system paths
+
+collections
+→ Specialized collection types
+
+itertools
+→ Iterator-building tools
+
+----------------------------------------
+10. Using the math Module
+----------------------------------------
+
+import math
+
+print(math.sqrt(25))
+print(math.pi)
+print(math.ceil(4.2))
+print(math.floor(4.8))
+
+Output:
+
+5.0
+3.141592...
+5
+4
+
+The math module provides mathematical constants and functions.
+
+----------------------------------------
+11. Using the random Module
+----------------------------------------
+
+import random
+
+number = random.randint(1, 10)
+
+print(number)
+
+randint() generates a random integer within the specified range.
+
+Another example:
+
+items = ["Python", "Java", "C++"]
+
+print(random.choice(items))
+
+choice() selects a random element.
+
+----------------------------------------
+12. Using the datetime Module
+----------------------------------------
+
+from datetime import datetime
+
+now = datetime.now()
+
+print(now)
+
+This gives the current date and time.
+
+You can also access individual components:
+
+print(now.year)
+print(now.month)
+print(now.day)
+
+----------------------------------------
+13. Creating Your Own Module
+----------------------------------------
+
+Create:
+
+calculator.py
+
+Code:
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+Then create:
+
+main.py
+
+Code:
+
+import calculator
+
+print(calculator.add(20, 10))
+print(calculator.subtract(20, 10))
+
+Output:
+
+30
+10
+
+This allows functionality to be separated into reusable files.
+
+----------------------------------------
+14. Module-Level Variables
+----------------------------------------
+
+A module can contain variables.
+
+settings.py:
+
+APP_NAME = "Python App"
+VERSION = "1.0"
+
+main.py:
+
+import settings
+
+print(settings.APP_NAME)
+print(settings.VERSION)
+
+Output:
+
+Python App
+1.0
+
+Modules can therefore contain data as well as functions and classes.
+
+----------------------------------------
+15. Classes Inside Modules
+----------------------------------------
+
+A module can contain classes.
+
+user.py:
+
+class User:
+
+    def __init__(self, name):
+        self.name = name
+
+    def greet(self):
+        return f"Hello, {self.name}"
+
+main.py:
+
+from user import User
+
+user = User("Rahul")
+
+print(user.greet())
+
+Output:
+
+Hello, Rahul
+
+----------------------------------------
+16. What Is a Package?
+----------------------------------------
+
+A package is a directory used to organize related Python modules.
+
+Example:
+
+project/
+│
+├── main.py
+│
+└── utilities/
+    ├── __init__.py
+    ├── math_utils.py
+    └── string_utils.py
+
+Here:
+
+utilities
+→ package
+
+math_utils.py
+→ module
+
+string_utils.py
+→ module
+
+----------------------------------------
+17. __init__.py
+----------------------------------------
+
+A package traditionally contains:
+
+__init__.py
+
+Example:
+
+utilities/
+│
+├── __init__.py
+├── math_utils.py
+└── string_utils.py
+
+The file can be empty or contain package initialization code.
+
+Modern Python also supports namespace packages that do not require __init__.py, but regular application packages commonly still use it.
+
+----------------------------------------
+18. Importing from a Package
+----------------------------------------
+
+Suppose:
+
+utilities/
+├── __init__.py
+└── math_utils.py
+
+math_utils.py:
+
+def add(a, b):
+    return a + b
+
+You can import it using:
+
+from utilities import math_utils
+
+print(math_utils.add(10, 20))
+
+Or:
+
+from utilities.math_utils import add
+
+print(add(10, 20))
+
+----------------------------------------
+19. Nested Packages
+----------------------------------------
+
+Packages can contain subpackages.
+
+Example:
+
+project/
+│
+├── main.py
+│
+└── app/
+    ├── __init__.py
+    │
+    ├── models/
+    │   ├── __init__.py
+    │   └── user.py
+    │
+    └── services/
+        ├── __init__.py
+        └── auth.py
+
+This structure is common in larger applications.
+
+----------------------------------------
+20. Absolute Imports
+----------------------------------------
+
+An absolute import specifies the complete package path.
+
+Example:
+
+from app.models.user import User
+
+This is generally clear because the import shows exactly where the module comes from.
+
+----------------------------------------
+21. Relative Imports
+----------------------------------------
+
+Inside a package, you can use relative imports.
+
+Example:
+
+from .models import User
+
+The dot means:
+
+current package
+
+Another example:
+
+from ..utils import helpers
+
+The two dots mean:
+
+parent package
+
+Relative imports are mainly useful inside package code.
+
+----------------------------------------
+22. __name__ == "__main__"
+----------------------------------------
+
+A Python module has a special variable:
+
+__name__
+
+When a file is executed directly, Python sets:
+
+__name__ == "__main__"
+
+Example:
+
+def greet():
+    print("Hello")
+
+if __name__ == "__main__":
+    greet()
+
+If this file is run directly:
+
+python main.py
+
+greet() executes.
+
+If the module is imported by another file:
+
+import main
+
+the code inside:
+
+if __name__ == "__main__":
+
+does not execute.
+
+----------------------------------------
+23. Why Use __name__ == "__main__"?
+----------------------------------------
+
+It allows a file to work both as:
+
+• An executable script
+• An importable module
+
+Example:
+
+calculator.py:
+
+def add(a, b):
+    return a + b
+
+if __name__ == "__main__":
+    print(add(10, 20))
+
+When run directly:
+
+python calculator.py
+
+Output:
+
+30
+
+When imported:
+
+from calculator import add
+
+The test code does not automatically run.
+
+----------------------------------------
+24. Module Search Path
+----------------------------------------
+
+When Python imports a module, it searches locations available through:
+
+sys.path
+
+Example:
+
+import sys
+
+print(sys.path)
+
+This shows directories Python searches for modules.
+
+The search path can include:
+
+• Current project directory
+• Standard library directories
+• Installed package directories
+• Environment-specific directories
+
+----------------------------------------
+25. Third-Party Packages
+----------------------------------------
+
+Python also supports packages created by other developers.
+
+Examples:
+
+requests
+→ HTTP requests
+
+numpy
+→ Numerical computing
+
+pandas
+→ Data analysis
+
+fastapi
+→ Web APIs
+
+django
+→ Web applications
+
+These packages are normally installed using pip.
+
+Example:
+
+pip install requests
+
+Then:
+
+import requests
+
+----------------------------------------
+26. pip
+----------------------------------------
+
+pip is Python's standard package-management tool.
+
+Install a package:
+
+pip install requests
+
+Upgrade:
+
+pip install --upgrade requests
+
+Uninstall:
+
+pip uninstall requests
+
+Show installed packages:
+
+pip list
+
+Show package information:
+
+pip show requests
+
+----------------------------------------
+27. requirements.txt
+----------------------------------------
+
+A project can store its dependencies in:
+
+requirements.txt
+
+Example:
+
+requests==2.32.3
+fastapi==0.115.0
+pandas==2.2.3
+
+Install them with:
+
+pip install -r requirements.txt
+
+This makes it easier for another developer to recreate the project's dependencies.
+
+----------------------------------------
+28. Virtual Environments
+----------------------------------------
+
+A virtual environment creates an isolated Python environment for a project.
+
+Create:
+
+python -m venv .venv
+
+Activate on Windows:
+
+.venv\\Scripts\\activate
+
+Activate on Linux/macOS:
+
+source .venv/bin/activate
+
+Then install packages:
+
+pip install requests
+
+The project's packages remain isolated from other Python projects.
+
+----------------------------------------
+29. Module vs Package
+----------------------------------------
+
+Module:
+
+→ Usually one .py file
+
+Example:
+
+math_utils.py
+
+Package:
+
+→ Directory containing related modules
+
+Example:
+
+utilities/
+├── __init__.py
+├── math_utils.py
+└── string_utils.py
+
+Simple mental model:
+
+Module
+→ One Python file
+
+Package
+→ Group of Python modules
+
+Library
+→ Reusable collection of modules/packages
+
+----------------------------------------
+30. Import Flow
+----------------------------------------
+
+Consider:
+
+from app.services.auth import login
+
+Python conceptually resolves:
+
+app
+↓
+package
+
+services
+↓
+subpackage
+
+auth
+↓
+module
+
+login
+↓
+function
+
+Then login can be used directly:
+
+login()
+
+----------------------------------------
+31. Avoiding Circular Imports
+----------------------------------------
+
+A circular import occurs when modules depend on each other.
+
+Example:
+
+module_a.py
+→ imports module_b
+
+module_b.py
+→ imports module_a
+
+This can cause import errors or partially initialized modules.
+
+A better design is often:
+
+module_a
+      ↓
+common module
+      ↑
+module_b
+
+Move shared functionality into a separate module when appropriate.
+
+----------------------------------------
+32. Important Module & Package Rules
+----------------------------------------
+
+Rule 1:
+
+A module is usually a .py file.
+
+Rule 2:
+
+Use import to load modules.
+
+Rule 3:
+
+Use from ... import to import specific members.
+
+Rule 4:
+
+Use as to create an alias.
+
+Rule 5:
+
+A package organizes related modules.
+
+Rule 6:
+
+Use __name__ == "__main__" for code that should run only when a file is executed directly.
+
+Rule 7:
+
+Use virtual environments to isolate project dependencies.
+
+Rule 8:
+
+Use requirements.txt to record project dependencies.
+
+Rule 9:
+
+Avoid unnecessary wildcard imports.
+
+Rule 10:
+
+Organize large applications into logical packages and modules.
+
+----------------------------------------
+33. Professional Project Structure
+----------------------------------------
+
+A Python application might look like:
+
+project/
+│
+├── .venv/
+├── main.py
+├── requirements.txt
+│
+└── app/
+    ├── __init__.py
+    │
+    ├── models/
+    │   ├── __init__.py
+    │   └── user.py
+    │
+    ├── services/
+    │   ├── __init__.py
+    │   └── auth.py
+    │
+    └── utils/
+        ├── __init__.py
+        └── helpers.py
+
+This structure separates:
+
+models
+→ Data structures
+
+services
+→ Business logic
+
+utils
+→ Reusable utilities
+
+main.py
+→ Application entry point
+
+----------------------------------------
+34. Professional Mental Model
+----------------------------------------
+
+Python project:
+
+Application
+↓
+Packages
+↓
+Modules
+↓
+Functions / Classes / Variables
+↓
+Reusable functionality
+
+Example:
+
+project
+↓
+app package
+↓
+services package
+↓
+auth module
+↓
+login() function
+
+The key idea:
+
+Modules help organize code into reusable files.
+
+Packages help organize related modules into structured components.
+
+Together, modules and packages are the foundation for building maintainable Python applications.`,
+},
+
+{
+  heading: "Exception Handling",
+  body: `Exception handling is the process of detecting and handling runtime errors so a Python program can continue safely or fail in a controlled way.
+
+Python provides:
+
+• try
+• except
+• else
+• finally
+• raise
+• Custom exceptions
+
+Exception handling is important for building reliable applications, APIs, database systems, file processing, and production software.
+
+----------------------------------------
+1. What Is an Exception?
+----------------------------------------
+
+An exception is an error that occurs while a program is running.
+
+Example:
+
+number = 10
+result = number / 0
+
+This produces:
+
+ZeroDivisionError
+
+The program cannot continue normally from that statement unless the exception is handled.
+
+----------------------------------------
+2. Syntax of try and except
+----------------------------------------
+
+The basic syntax is:
+
+try:
+    # Code that may cause an exception
+
+except:
+    # Code that handles the exception
+
+Example:
+
+try:
+    result = 10 / 0
+
+except:
+    print("Something went wrong")
+
+Output:
+
+Something went wrong
+
+----------------------------------------
+3. Handling a Specific Exception
+----------------------------------------
+
+It is better to catch a specific exception.
+
+Example:
+
+try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+Output:
+
+Cannot divide by zero
+
+This is better than using a broad except because it handles the expected error specifically.
+
+----------------------------------------
+4. Multiple Exception Types
+----------------------------------------
+
+A program can handle different exceptions separately.
+
+try:
+    number = int(input("Enter a number: "))
+    result = 100 / number
+
+except ValueError:
+    print("Please enter a valid integer")
+
+except ZeroDivisionError:
+    print("Number cannot be zero")
+
+This allows different errors to receive different responses.
+
+----------------------------------------
+5. One except for Multiple Exceptions
+----------------------------------------
+
+Multiple exception types can also be handled together.
+
+try:
+    value = int("abc")
+
+except (ValueError, TypeError):
+    print("Invalid value")
+
+Syntax:
+
+except (ExceptionType1, ExceptionType2):
+    ...
+
+----------------------------------------
+6. Getting the Exception Object
+----------------------------------------
+
+Use as to store the exception object.
+
+try:
+    number = int("abc")
+
+except ValueError as error:
+    print("Error:", error)
+
+Output:
+
+Error: invalid literal for int() with base 10: 'abc'
+
+The variable error contains information about the exception.
+
+----------------------------------------
+7. try with else
+----------------------------------------
+
+The else block executes only when no exception occurs.
+
+Example:
+
+try:
+    number = int("100")
+
+except ValueError:
+    print("Invalid number")
+
+else:
+    print("Conversion successful")
+
+Output:
+
+Conversion successful
+
+Execution flow:
+
+try
+↓
+No exception
+↓
+else
+
+If an exception occurs:
+
+try
+↓
+Exception
+↓
+except
+
+----------------------------------------
+8. try with finally
+----------------------------------------
+
+The finally block runs whether an exception occurs or not.
+
+Example:
+
+try:
+    print("Working")
+
+finally:
+    print("Cleanup")
+
+Output:
+
+Working
+Cleanup
+
+finally is commonly used for cleanup operations.
+
+----------------------------------------
+9. Complete try-except-else-finally
+----------------------------------------
+
+Python allows all four blocks together.
+
+try:
+    number = int(input("Enter number: "))
+    result = 100 / number
+
+except ValueError:
+    print("Invalid number")
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+else:
+    print("Result:", result)
+
+finally:
+    print("Operation finished")
+
+Execution structure:
+
+try
+↓
+Exception?
+├── Yes → except
+└── No  → else
+↓
+finally
+
+The finally block executes in both cases.
+
+----------------------------------------
+10. Why finally Is Important
+----------------------------------------
+
+finally is useful when something must be cleaned up.
+
+Examples:
+
+• Closing files
+• Closing database connections
+• Releasing locks
+• Cleaning temporary resources
+• Restoring application state
+
+Example:
+
+file = None
+
+try:
+    file = open("data.txt", "r")
+    data = file.read()
+
+finally:
+    if file is not None:
+        file.close()
+
+However, for files, the preferred approach is usually:
+
+with open("data.txt") as file:
+    data = file.read()
+
+The with statement uses context-manager behavior to handle cleanup automatically.
+
+----------------------------------------
+11. Raising an Exception
+----------------------------------------
+
+Use raise when you want to deliberately generate an exception.
+
+Example:
+
+age = -5
+
+if age < 0:
+    raise ValueError("Age cannot be negative")
+
+The program raises:
+
+ValueError
+
+with the message:
+
+Age cannot be negative
+
+----------------------------------------
+12. raise with a Function
+----------------------------------------
+
+Example:
+
+def withdraw(balance, amount):
+
+    if amount < 0:
+        raise ValueError("Amount cannot be negative")
+
+    if amount > balance:
+        raise ValueError("Insufficient balance")
+
+    return balance - amount
+
+print(withdraw(5000, 1000))
+
+Output:
+
+4000
+
+Invalid input raises an exception instead of silently producing an incorrect result.
+
+----------------------------------------
+13. Re-raising an Exception
+----------------------------------------
+
+An exception can be caught and then raised again.
+
+Example:
+
+try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    print("Logging error")
+    raise
+
+The exception is logged or processed and then allowed to propagate.
+
+This is useful when lower-level code needs to record an error but higher-level code should still handle it.
+
+----------------------------------------
+14. Exception Hierarchy
+----------------------------------------
+
+Python exceptions are organized into a hierarchy.
+
+A simplified structure is:
+
+BaseException
+│
+├── SystemExit
+├── KeyboardInterrupt
+└── Exception
+    │
+    ├── ValueError
+    ├── TypeError
+    ├── ArithmeticError
+    │   └── ZeroDivisionError
+    ├── LookupError
+    │   ├── IndexError
+    │   └── KeyError
+    └── OSError
+
+Most application errors inherit from:
+
+Exception
+
+----------------------------------------
+15. Exception Inheritance
+----------------------------------------
+
+Because exceptions use inheritance, a parent exception can catch child exceptions.
+
+Example:
+
+try:
+    result = 10 / 0
+
+except ArithmeticError:
+    print("Arithmetic error")
+
+Output:
+
+Arithmetic error
+
+ZeroDivisionError is a subclass of ArithmeticError.
+
+A more specific exception should generally be caught before a broader one when both are being handled separately.
+
+----------------------------------------
+16. Common Python Exceptions
+----------------------------------------
+
+ValueError
+→ Correct type but invalid value
+
+Example:
+
+int("hello")
+
+TypeError
+→ Invalid operation or incompatible type
+
+Example:
+
+"10" + 5
+
+IndexError
+→ Invalid sequence index
+
+Example:
+
+numbers = [1, 2]
+numbers[5]
+
+KeyError
+→ Missing dictionary key
+
+Example:
+
+user = {"name": "Rahul"}
+user["age"]
+
+ZeroDivisionError
+→ Division by zero
+
+Example:
+
+10 / 0
+
+FileNotFoundError
+→ Requested file does not exist
+
+Example:
+
+open("missing.txt")
+
+AttributeError
+→ Object does not have requested attribute
+
+Example:
+
+"hello".append("!")
+
+NameError
+→ Variable/name does not exist
+
+Example:
+
+print(username)
+
+----------------------------------------
+17. Handling File Errors
+----------------------------------------
+
+Example:
+
+try:
+    with open("data.txt", "r") as file:
+        data = file.read()
+
+except FileNotFoundError:
+    print("File does not exist")
+
+If the file is missing, the program handles the problem instead of terminating unexpectedly.
+
+----------------------------------------
+18. Handling Dictionary Errors
+----------------------------------------
+
+Example:
+
+user = {
+    "name": "Rahul",
+    "age": 21
+}
+
+try:
+    print(user["email"])
+
+except KeyError:
+    print("Email key does not exist")
+
+Output:
+
+Email key does not exist
+
+Alternatively, when appropriate, use:
+
+print(user.get("email"))
+
+which returns None when the key is absent.
+
+----------------------------------------
+19. Handling Input Errors
+----------------------------------------
+
+Example:
+
+try:
+    age = int(input("Enter your age: "))
+
+except ValueError:
+    print("Please enter a valid number")
+
+The program does not crash when the user enters:
+
+abc
+
+----------------------------------------
+20. Custom Exceptions
+----------------------------------------
+
+You can create your own exception classes.
+
+Example:
+
+class InsufficientBalanceError(Exception):
+    pass
+
+Then raise it:
+
+def withdraw(balance, amount):
+
+    if amount > balance:
+        raise InsufficientBalanceError(
+            "Insufficient balance"
+        )
+
+    return balance - amount
+
+try:
+    print(withdraw(1000, 5000))
+
+except InsufficientBalanceError as error:
+    print(error)
+
+Output:
+
+Insufficient balance
+
+----------------------------------------
+21. Custom Exception with Data
+----------------------------------------
+
+A custom exception can store additional information.
+
+class InvalidAgeError(Exception):
+
+    def __init__(self, age):
+        self.age = age
+        super().__init__(
+            f"Invalid age: {age}"
+        )
+
+try:
+    raise InvalidAgeError(-10)
+
+except InvalidAgeError as error:
+    print(error)
+
+Output:
+
+Invalid age: -10
+
+Custom exceptions are useful when an application has domain-specific error conditions.
+
+----------------------------------------
+22. Exception Chaining
+----------------------------------------
+
+Python allows one exception to be connected to another.
+
+Example:
+
+try:
+    number = int("abc")
+
+except ValueError as error:
+    raise RuntimeError(
+        "Failed to process number"
+    ) from error
+
+The original ValueError is preserved as the cause of the RuntimeError.
+
+This is useful when converting low-level errors into higher-level application errors.
+
+----------------------------------------
+23. Exception Handling in Functions
+----------------------------------------
+
+A function can handle an exception internally.
+
+def divide(a, b):
+
+    try:
+        return a / b
+
+    except ZeroDivisionError:
+        return None
+
+print(divide(10, 2))
+print(divide(10, 0))
+
+Output:
+
+5.0
+None
+
+However, silently returning None is not always appropriate.
+
+For important failures, raising an exception may be better.
+
+----------------------------------------
+24. Letting Exceptions Propagate
+----------------------------------------
+
+An exception does not have to be handled at the exact location where it occurs.
+
+Example:
+
+def calculate():
+    return 10 / 0
+
+def process():
+    return calculate()
+
+try:
+    process()
+
+except ZeroDivisionError:
+    print("Handled at a higher level")
+
+Output:
+
+Handled at a higher level
+
+The exception propagates through the call stack until a matching handler is found.
+
+----------------------------------------
+25. Exception Propagation
+----------------------------------------
+
+The flow can be:
+
+function_a()
+↓
+function_b()
+↓
+function_c()
+↓
+Exception occurs
+↓
+No handler in function_c
+↓
+Return to function_b
+↓
+No handler
+↓
+Return to function_a
+↓
+Handler found
+↓
+Exception handled
+
+This is called exception propagation.
+
+----------------------------------------
+26. Bare except — Avoid When Possible
+----------------------------------------
+
+This works:
+
+try:
+    risky_operation()
+
+except:
+    print("Error")
+
+But it is usually too broad.
+
+It can catch exceptions you did not intend to handle, including system-exit-related exceptions depending on the hierarchy being caught.
+
+Prefer:
+
+try:
+    risky_operation()
+
+except ValueError:
+    print("Invalid value")
+
+Catch the exceptions you actually expect.
+
+----------------------------------------
+27. Exception Handling Best Practice
+----------------------------------------
+
+Bad:
+
+try:
+    process_data()
+
+except Exception:
+    pass
+
+This silently ignores the problem.
+
+Better:
+
+try:
+    process_data()
+
+except ValueError as error:
+    print(f"Invalid data: {error}")
+
+Handle the expected error and preserve useful information.
+
+----------------------------------------
+28. Logging Exceptions
+----------------------------------------
+
+Production applications commonly use the logging module.
+
+import logging
+
+try:
+    result = 10 / 0
+
+except ZeroDivisionError:
+    logging.exception("Calculation failed")
+
+logging.exception() records the exception information along with the traceback.
+
+This is generally more useful in production than simply printing the error.
+
+----------------------------------------
+29. Exception Handling and APIs
+----------------------------------------
+
+Backend applications often need to convert internal errors into appropriate responses.
+
+Conceptually:
+
+Request
+↓
+Validate input
+↓
+Execute operation
+↓
+Exception?
+├── No → Return result
+└── Yes → Handle error
+          ↓
+          Return appropriate response
+
+For example:
+
+Invalid input
+→ validation error
+
+Missing record
+→ not-found response
+
+Unauthorized request
+→ authentication/authorization error
+
+Unexpected failure
+→ internal server error + logging
+
+----------------------------------------
+30. Exception Handling vs Syntax Errors
+----------------------------------------
+
+A syntax error happens when Python cannot parse the code.
+
+Example:
+
+if True
+    print("Hello")
+
+This produces a SyntaxError.
+
+A runtime exception happens after valid Python code starts executing.
+
+Example:
+
+number = 10
+result = number / 0
+
+This produces ZeroDivisionError.
+
+The distinction is important:
+
+SyntaxError
+→ Python cannot correctly parse the program
+
+Exception
+→ An error occurs while the program is running
+
+----------------------------------------
+31. Important Exception Handling Rules
+----------------------------------------
+
+Rule 1:
+
+Use try for code that may raise an exception.
+
+Rule 2:
+
+Use except to handle specific exceptions.
+
+Rule 3:
+
+Use else for code that should run only when try succeeds.
+
+Rule 4:
+
+Use finally for cleanup that should happen regardless of success or failure.
+
+Rule 5:
+
+Use raise to deliberately generate an exception.
+
+Rule 6:
+
+Create custom exception classes for application-specific errors.
+
+Rule 7:
+
+Avoid unnecessary bare except blocks.
+
+Rule 8:
+
+Do not silently ignore important exceptions.
+
+Rule 9:
+
+Use logging for production error information.
+
+Rule 10:
+
+Let exceptions propagate when a lower-level function cannot meaningfully handle them.
+
+----------------------------------------
+32. Professional Mental Model
+----------------------------------------
+
+Exception handling:
+
+try
+↓
+Run risky operation
+↓
+Exception?
+├── Yes → except
+│         ↓
+│       Handle/log/raise
+│
+└── No → else
+          ↓
+        Successful code
+
+Both paths
+↓
+finally
+↓
+Cleanup
+
+The key idea:
+
+Exception handling allows programs to respond to failures in a controlled and predictable way instead of crashing unexpectedly.`,
+},
+
+{
+  heading: "File Handling",
+  body: `File handling is the process of creating, reading, writing, updating, and managing files using Python.
+
+Python provides built-in functions and objects for working with files.
+
+File handling is commonly used for:
+
+• Reading configuration files
+• Storing application data
+• Processing CSV files
+• Processing text files
+• Working with logs
+• Importing and exporting data
+• Reading uploaded files
+• Saving generated results
+
+The most important function is:
+
+open()
+
+----------------------------------------
+1. Opening a File
+----------------------------------------
+
+The basic syntax is:
+
+file = open("filename", "mode")
+
+Example:
+
+file = open("data.txt", "r")
+
+Here:
+
+data.txt
+→ File name
+
+"r"
+→ Read mode
+
+The open() function returns a file object.
+
+----------------------------------------
+2. File Modes
+----------------------------------------
+
+Common file modes:
+
+"r"
+→ Read
+
+"w"
+→ Write
+
+"a"
+→ Append
+
+"x"
+→ Create a new file
+
+"b"
+→ Binary mode
+
+"t"
+→ Text mode
+
+"+"
+→ Read and write
+
+Common combinations:
+
+"rb"
+→ Read binary
+
+"wb"
+→ Write binary
+
+"r+"
+→ Read and write
+
+"w+"
+→ Write and read
+
+----------------------------------------
+3. Read Mode — "r"
+----------------------------------------
+
+Use "r" when you want to read an existing file.
+
+Example:
+
+file = open("data.txt", "r")
+
+content = file.read()
+
+print(content)
+
+file.close()
+
+If the file does not exist, Python raises:
+
+FileNotFoundError
+
+----------------------------------------
+4. Using with for Files
+----------------------------------------
+
+The preferred way to work with files is:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+print(content)
+
+The file is automatically closed after the with block.
+
+You normally do not need:
+
+file.close()
+
+when using with.
+
+----------------------------------------
+5. read()
+----------------------------------------
+
+read() reads the contents of the file.
+
+Example:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+print(content)
+
+It reads the entire file into a string.
+
+For a very large file, reading everything at once may consume significant memory.
+
+----------------------------------------
+6. read(size)
+----------------------------------------
+
+You can specify how many characters to read.
+
+Example:
+
+with open("data.txt", "r") as file:
+    content = file.read(10)
+
+print(content)
+
+This reads up to 10 characters.
+
+----------------------------------------
+7. readline()
+----------------------------------------
+
+readline() reads one line at a time.
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    line1 = file.readline()
+    line2 = file.readline()
+
+print(line1)
+print(line2)
+
+Each call advances the file position.
+
+----------------------------------------
+8. readlines()
+----------------------------------------
+
+readlines() reads all lines and returns them as a list.
+
+Example:
+
+with open("data.txt", "r") as file:
+    lines = file.readlines()
+
+print(lines)
+
+Example result:
+
+[
+    "Python\\n",
+    "Java\\n",
+    "C++\\n"
+]
+
+Each list element represents one line.
+
+----------------------------------------
+9. Iterating Through a File
+----------------------------------------
+
+For line-by-line processing, you can iterate directly over the file.
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    for line in file:
+        print(line.strip())
+
+This is memory-efficient because Python processes the file incrementally.
+
+For large text files, this is generally preferable to readlines() when you do not need all lines at once.
+
+----------------------------------------
+10. strip()
+----------------------------------------
+
+Lines read from a text file often contain a newline character:
+
+\\n
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    for line in file:
+        print(line.strip())
+
+strip() removes leading and trailing whitespace.
+
+You can also use:
+
+line.rstrip("\\n")
+
+when you specifically want to remove newline characters without removing other surrounding whitespace.
+
+----------------------------------------
+11. Write Mode — "w"
+----------------------------------------
+
+Use "w" to write data to a file.
+
+Example:
+
+with open("data.txt", "w") as file:
+    file.write("Hello Python")
+
+If the file does not exist, Python creates it.
+
+If the file already exists, "w" normally replaces its existing contents.
+
+Important:
+
+"w" can overwrite existing data.
+
+----------------------------------------
+12. Writing Multiple Lines
+----------------------------------------
+
+Example:
+
+lines = [
+    "Python\\n",
+    "Django\\n",
+    "FastAPI\\n"
+]
+
+with open("skills.txt", "w") as file:
+    file.writelines(lines)
+
+The newline characters are included in the strings.
+
+----------------------------------------
+13. writelines()
+----------------------------------------
+
+writelines() writes multiple strings.
+
+Example:
+
+with open("data.txt", "w") as file:
+
+    file.writelines([
+        "Apple\\n",
+        "Banana\\n",
+        "Orange\\n"
+    ])
+
+writelines() does not automatically add newline characters.
+
+You must include them when needed.
+
+----------------------------------------
+14. Append Mode — "a"
+----------------------------------------
+
+Use "a" to add content to the end of a file.
+
+Example:
+
+with open("log.txt", "a") as file:
+    file.write("New log entry\\n")
+
+Existing content remains.
+
+New content is added at the end.
+
+----------------------------------------
+15. Write vs Append
+----------------------------------------
+
+Write:
+
+with open("data.txt", "w") as file:
+    file.write("New data")
+
+Existing content
+→ Replaced
+
+Append:
+
+with open("data.txt", "a") as file:
+    file.write("More data")
+
+Existing content
+→ Preserved
+
+New content
+→ Added at the end
+
+----------------------------------------
+16. Exclusive Creation — "x"
+----------------------------------------
+
+"x" creates a new file.
+
+Example:
+
+with open("new_file.txt", "x") as file:
+    file.write("Created successfully")
+
+If the file already exists, Python raises:
+
+FileExistsError
+
+This can prevent accidental overwriting.
+
+----------------------------------------
+17. Checking Whether a File Exists
+----------------------------------------
+
+Use pathlib for modern file-system operations.
+
+from pathlib import Path
+
+path = Path("data.txt")
+
+if path.exists():
+    print("File exists")
+else:
+    print("File does not exist")
+
+----------------------------------------
+18. Pathlib
+----------------------------------------
+
+pathlib provides an object-oriented way to work with file-system paths.
+
+Example:
+
+from pathlib import Path
+
+path = Path("data.txt")
+
+print(path.name)
+print(path.suffix)
+print(path.exists())
+
+Possible output:
+
+data.txt
+.txt
+True
+
+----------------------------------------
+19. Reading with pathlib
+----------------------------------------
+
+For simple text files:
+
+from pathlib import Path
+
+path = Path("data.txt")
+
+content = path.read_text()
+
+print(content)
+
+This is convenient when you simply need the entire text.
+
+----------------------------------------
+20. Writing with pathlib
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+path = Path("data.txt")
+
+path.write_text("Hello Python")
+
+The file is created or overwritten.
+
+----------------------------------------
+21. File Position — tell()
+----------------------------------------
+
+A file object keeps track of its current position.
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    print(file.tell())
+
+    file.read(5)
+
+    print(file.tell())
+
+tell() returns the current file position.
+
+----------------------------------------
+22. Moving the File Position — seek()
+----------------------------------------
+
+seek() moves the file position.
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    file.seek(0)
+
+    content = file.read()
+
+seek(0) moves back to the beginning of the file.
+
+----------------------------------------
+23. Reading from a Specific Position
+----------------------------------------
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    file.seek(5)
+
+    content = file.read()
+
+print(content)
+
+The read starts from the specified file position.
+
+----------------------------------------
+24. Encoding
+----------------------------------------
+
+Text files use character encodings.
+
+A common choice is UTF-8.
+
+Example:
+
+with open(
+    "data.txt",
+    "r",
+    encoding="utf-8"
+) as file:
+
+    content = file.read()
+
+Specifying encoding explicitly helps make text processing predictable across environments.
+
+----------------------------------------
+25. Writing with UTF-8
+----------------------------------------
+
+Example:
+
+with open(
+    "data.txt",
+    "w",
+    encoding="utf-8"
+) as file:
+
+    file.write("Python — Programming")
+
+UTF-8 supports a wide range of characters.
+
+----------------------------------------
+26. Binary Files
+----------------------------------------
+
+Not every file is text.
+
+Images, PDFs, audio, videos, and many other files contain binary data.
+
+Use binary modes:
+
+"rb"
+→ Read binary
+
+"wb"
+→ Write binary
+
+Example:
+
+with open("image.jpg", "rb") as file:
+    data = file.read()
+
+data contains bytes.
+
+----------------------------------------
+27. Copying a Binary File
+----------------------------------------
+
+Example:
+
+with open("source.jpg", "rb") as source:
+    data = source.read()
+
+with open("copy.jpg", "wb") as destination:
+    destination.write(data)
+
+This copies the binary contents.
+
+For very large files, processing in chunks is preferable to loading the entire file into memory.
+
+----------------------------------------
+28. Reading Binary Data in Chunks
+----------------------------------------
+
+Example:
+
+with open("large_file.bin", "rb") as source:
+    while chunk := source.read(8192):
+        process(chunk)
+
+The file is processed in chunks of up to 8192 bytes.
+
+This is useful for large files.
+
+----------------------------------------
+29. File Exceptions
+----------------------------------------
+
+File operations can raise exceptions.
+
+Common examples:
+
+FileNotFoundError
+→ File does not exist
+
+PermissionError
+→ Insufficient permissions
+
+IsADirectoryError
+→ Expected a file but found a directory
+
+NotADirectoryError
+→ Expected a directory but found a file
+
+FileExistsError
+→ File already exists, often with "x"
+
+----------------------------------------
+30. Handling File Errors
+----------------------------------------
+
+Example:
+
+try:
+
+    with open("data.txt", "r") as file:
+        content = file.read()
+
+except FileNotFoundError:
+    print("File not found")
+
+except PermissionError:
+    print("Permission denied")
+
+This prevents expected file-related failures from crashing the application.
+
+----------------------------------------
+31. File Handling with finally
+----------------------------------------
+
+Manual file management can use finally:
+
+file = None
+
+try:
+
+    file = open("data.txt", "r")
+    content = file.read()
+
+finally:
+
+    if file is not None:
+        file.close()
+
+However, the preferred approach is:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+The context manager handles cleanup automatically.
+
+----------------------------------------
+32. Working with Directories
+----------------------------------------
+
+pathlib can also manage directories.
+
+Example:
+
+from pathlib import Path
+
+folder = Path("reports")
+
+folder.mkdir(exist_ok=True)
+
+This creates the directory if it does not already exist.
+
+----------------------------------------
+33. Creating Nested Directories
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+path = Path("data/reports/2026")
+
+path.mkdir(parents=True, exist_ok=True)
+
+parents=True
+→ Creates missing parent directories
+
+exist_ok=True
+→ Does not raise an error if the directory already exists
+
+----------------------------------------
+34. Listing Files in a Directory
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+folder = Path("data")
+
+for item in folder.iterdir():
+    print(item)
+
+This lists files and directories inside data.
+
+----------------------------------------
+35. Finding Files with glob()
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+folder = Path("data")
+
+for file in folder.glob("*.txt"):
+    print(file)
+
+This finds .txt files in the directory.
+
+For recursive searching:
+
+for file in folder.rglob("*.txt"):
+    print(file)
+
+rglob() searches nested directories as well.
+
+----------------------------------------
+36. Renaming a File
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+old = Path("old.txt")
+new = Path("new.txt")
+
+old.rename(new)
+
+The file is renamed.
+
+----------------------------------------
+37. Deleting a File
+----------------------------------------
+
+Example:
+
+from pathlib import Path
+
+path = Path("old.txt")
+
+if path.exists():
+    path.unlink()
+
+unlink() removes the file.
+
+Use file deletion carefully because it can permanently remove data.
+
+----------------------------------------
+38. CSV Files
+----------------------------------------
+
+Python provides the csv module for comma-separated values.
+
+Example:
+
+import csv
+
+with open(
+    "employees.csv",
+    "r",
+    newline="",
+    encoding="utf-8"
+) as file:
+
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)
+
+Each row is returned as a list.
+
+----------------------------------------
+39. Writing CSV Files
+----------------------------------------
+
+Example:
+
+import csv
+
+rows = [
+    ["Name", "Age"],
+    ["Rahul", 21],
+    ["Anu", 22]
+]
+
+with open(
+    "employees.csv",
+    "w",
+    newline="",
+    encoding="utf-8"
+) as file:
+
+    writer = csv.writer(file)
+    writer.writerows(rows)
+
+----------------------------------------
+40. JSON Files
+----------------------------------------
+
+JSON is commonly used for configuration and API data.
+
+Python provides the json module.
+
+Example:
+
+import json
+
+data = {
+    "name": "Rahul",
+    "age": 21,
+    "skills": ["Python", "SQL"]
+}
+
+with open(
+    "user.json",
+    "w",
+    encoding="utf-8"
+) as file:
+
+    json.dump(data, file, indent=4)
+
+----------------------------------------
+41. Reading JSON
+----------------------------------------
+
+Example:
+
+import json
+
+with open(
+    "user.json",
+    "r",
+    encoding="utf-8"
+) as file:
+
+    data = json.load(file)
+
+print(data["name"])
+
+Output:
+
+Rahul
+
+----------------------------------------
+42. Text File vs Binary File
+----------------------------------------
+
+Text file:
+
+Contains characters.
+
+Examples:
+
+.txt
+.csv
+.json
+.py
+
+Use:
+
+"r"
+"w"
+"a"
+
+Binary file:
+
+Contains bytes.
+
+Examples:
+
+.jpg
+.png
+.pdf
+.mp3
+.mp4
+
+Use:
+
+"rb"
+"wb"
+
+----------------------------------------
+43. Large File Processing
+----------------------------------------
+
+Avoid:
+
+with open("huge.log", "r") as file:
+    data = file.read()
+
+if the entire file is extremely large and you do not need all its contents simultaneously.
+
+Prefer:
+
+with open("huge.log", "r") as file:
+
+    for line in file:
+        process(line)
+
+This processes the file incrementally and uses less memory.
+
+----------------------------------------
+44. File Handling Best Practices
+----------------------------------------
+
+Use:
+
+with open(...)
+
+instead of manually opening and closing files whenever practical.
+
+Specify:
+
+encoding="utf-8"
+
+for predictable text processing.
+
+Use:
+
+pathlib.Path
+
+for modern path operations.
+
+Use:
+
+csv
+
+for CSV files.
+
+Use:
+
+json
+
+for JSON files.
+
+Use binary modes for binary data.
+
+Process large files incrementally when possible.
+
+Handle expected file-related exceptions.
+
+Avoid accidentally using "w" when you intend to preserve existing content.
+
+----------------------------------------
+45. Important File Handling Rules
+----------------------------------------
+
+Rule 1:
+
+open() opens a file.
+
+Rule 2:
+
+"r" reads.
+
+Rule 3:
+
+"w" writes and can overwrite.
+
+Rule 4:
+
+"a" appends.
+
+Rule 5:
+
+"x" creates a new file and fails if it already exists.
+
+Rule 6:
+
+"b" selects binary mode.
+
+Rule 7:
+
+"t" selects text mode.
+
+Rule 8:
+
+with automatically handles context-manager cleanup.
+
+Rule 9:
+
+read() reads the entire requested content.
+
+Rule 10:
+
+readline() reads one line.
+
+Rule 11:
+
+readlines() returns lines as a list.
+
+Rule 12:
+
+Iterating over a file processes it line by line.
+
+Rule 13:
+
+seek() changes the current file position.
+
+Rule 14:
+
+tell() returns the current file position.
+
+Rule 15:
+
+pathlib is useful for modern file and directory operations.
+
+----------------------------------------
+46. Professional Mental Model
+----------------------------------------
+
+File handling:
+
+Path
+↓
+Open file
+↓
+Choose mode
+↓
+Read / Write / Append
+↓
+Process data
+↓
+Close / Cleanup
+
+Preferred pattern:
+
+with open(
+    "data.txt",
+    "r",
+    encoding="utf-8"
+) as file:
+
+    for line in file:
+        process(line)
+
+The key idea:
+
+Python file handling allows applications to safely read, create, modify, and process persistent data stored outside the running program.`,
+},
+
+{
+  heading: "Regular Expressions",
+  body: `Regular expressions, commonly called regex, are patterns used to search, match, extract, validate, and replace text.
+
+Python provides the built-in re module for regular expressions.
+
+Regex is commonly used for:
+
+• Searching text
+• Extracting information
+• Validating input
+• Finding patterns
+• Replacing text
+• Splitting text
+• Processing logs
+• Validating emails, phone numbers, and IDs
+
+----------------------------------------
+1. Importing re
+----------------------------------------
+
+import re
+
+The re module provides Python's regular-expression functionality.
+
+----------------------------------------
+2. Basic Pattern Matching
+----------------------------------------
+
+Example:
+
+import re
+
+text = "Python is powerful"
+
+match = re.search("Python", text)
+
+if match:
+    print("Found")
+
+Output:
+
+Found
+
+re.search() searches the entire string for the first matching location.
+
+----------------------------------------
+3. re.search()
+----------------------------------------
+
+Syntax:
+
+re.search(pattern, string)
+
+Example:
+
+import re
+
+text = "My phone number is 9876543210"
+
+match = re.search(r"\\d+", text)
+
+if match:
+    print(match.group())
+
+Output:
+
+9876543210
+
+Here:
+
+\\d
+→ Digit
+
++
+→ One or more
+
+----------------------------------------
+4. re.match()
+----------------------------------------
+
+re.match() checks only from the beginning of the string.
+
+Example:
+
+import re
+
+text = "Python programming"
+
+match = re.match(r"Python", text)
+
+if match:
+    print("Matched")
+
+Output:
+
+Matched
+
+Another example:
+
+text = "I like Python"
+
+match = re.match(r"Python", text)
+
+if match:
+    print("Matched")
+else:
+    print("No match")
+
+Output:
+
+No match
+
+Python is not at the beginning.
+
+----------------------------------------
+5. re.fullmatch()
+----------------------------------------
+
+re.fullmatch() requires the entire string to match the pattern.
+
+Example:
+
+import re
+
+text = "12345"
+
+match = re.fullmatch(r"\\d+", text)
+
+if match:
+    print("Only digits")
+
+Output:
+
+Only digits
+
+Example:
+
+text = "12345abc"
+
+match = re.fullmatch(r"\\d+", text)
+
+if match:
+    print("Matched")
+else:
+    print("Invalid")
+
+Output:
+
+Invalid
+
+----------------------------------------
+6. Raw Strings
+----------------------------------------
+
+Regex patterns commonly use backslashes.
+
+Example:
+
+r"\\d+"
+
+The r before the string creates a raw string.
+
+This makes regex patterns easier to write because backslashes are treated more directly.
+
+Prefer:
+
+r"\\d+"
+
+instead of:
+
+"\\d+"
+
+when writing regex patterns.
+
+----------------------------------------
+7. Common Regex Character Classes
+----------------------------------------
+
+\\d
+→ Any digit
+
+Example:
+
+r"\\d"
+
+Matches:
+
+0
+1
+2
+...
+9
+
+----------------------------------------
+
+\\D
+→ Any non-digit
+
+Example:
+
+r"\\D"
+
+Matches letters, spaces, punctuation, etc.
+
+----------------------------------------
+
+\\w
+→ Word character
+
+Usually includes:
+
+Letters
+Digits
+Underscore
+
+Example:
+
+r"\\w+"
+
+----------------------------------------
+
+\\W
+→ Non-word character
+
+----------------------------------------
+
+\\s
+→ Whitespace
+
+Matches:
+
+Space
+Tab
+Newline
+
+----------------------------------------
+
+\\S
+→ Non-whitespace character
+
+----------------------------------------
+8. Dot — .
+----------------------------------------
+
+The dot matches almost any character except newline by default.
+
+Example:
+
+r"c.t"
+
+Can match:
+
+cat
+cot
+cut
+
+----------------------------------------
+9. Character Sets — []
+----------------------------------------
+
+Square brackets define a character set.
+
+Example:
+
+r"[abc]"
+
+Matches one character that is:
+
+a
+b
+or c
+
+Example:
+
+import re
+
+text = "cat"
+
+match = re.search(r"[abc]", text)
+
+print(match.group())
+
+Output:
+
+c
+
+----------------------------------------
+10. Character Ranges
+----------------------------------------
+
+You can define ranges.
+
+Example:
+
+r"[a-z]"
+
+Matches lowercase letters.
+
+Example:
+
+r"[A-Z]"
+
+Matches uppercase letters.
+
+Example:
+
+r"[0-9]"
+
+Matches digits.
+
+Example:
+
+r"[a-zA-Z]"
+
+Matches uppercase or lowercase letters.
+
+----------------------------------------
+11. Negated Character Set
+----------------------------------------
+
+^ inside a character set means "not".
+
+Example:
+
+r"[^0-9]"
+
+Matches any character that is not a digit.
+
+----------------------------------------
+12. Quantifier — *
+----------------------------------------
+
+* means:
+
+Zero or more occurrences.
+
+Example:
+
+r"ab*"
+
+Matches:
+
+a
+ab
+abb
+abbb
+
+----------------------------------------
+13. Quantifier — +
+----------------------------------------
+
++ means:
+
+One or more occurrences.
+
+Example:
+
+r"ab+"
+
+Matches:
+
+ab
+abb
+abbb
+
+But does not match:
+
+a
+
+----------------------------------------
+14. Quantifier — ?
+----------------------------------------
+
+? means:
+
+Zero or one occurrence.
+
+Example:
+
+r"colou?r"
+
+Matches:
+
+color
+colour
+
+----------------------------------------
+15. Quantifier — {n}
+----------------------------------------
+
+{n} means exactly n occurrences.
+
+Example:
+
+r"\\d{4}"
+
+Matches:
+
+2026
+
+But not:
+
+123
+12345
+
+----------------------------------------
+16. Quantifier — {n,m}
+----------------------------------------
+
+{n,m} means between n and m occurrences.
+
+Example:
+
+r"\\d{2,4}"
+
+Can match:
+
+12
+123
+1234
+
+----------------------------------------
+17. Anchors — ^
+----------------------------------------
+
+^ matches the beginning of a string.
+
+Example:
+
+r"^Python"
+
+Matches:
+
+Python is great
+
+Does not match:
+
+I like Python
+
+----------------------------------------
+18. Anchors — $
+----------------------------------------
+
+$ matches the end of a string.
+
+Example:
+
+r"Python$"
+
+Matches:
+
+I like Python
+
+Does not match:
+
+Python is great
+
+----------------------------------------
+19. Combining ^ and $
+----------------------------------------
+
+Use both when you want to validate the complete structure.
+
+Example:
+
+r"^\\d{10}$"
+
+This requires exactly 10 digits.
+
+Example:
+
+9876543210
+
+Matches.
+
+Example:
+
+987654321
+
+Does not match.
+
+----------------------------------------
+20. re.findall()
+----------------------------------------
+
+findall() returns all matching strings.
+
+Example:
+
+import re
+
+text = "Python 3, Python 4, Python 5"
+
+numbers = re.findall(r"\\d+", text)
+
+print(numbers)
+
+Output:
+
+['3', '4', '5']
+
+----------------------------------------
+21. Extracting Words
+----------------------------------------
+
+Example:
+
+import re
+
+text = "Python makes programming easy"
+
+words = re.findall(r"\\w+", text)
+
+print(words)
+
+Output:
+
+[
+    'Python',
+    'makes',
+    'programming',
+    'easy'
+]
+
+----------------------------------------
+22. re.finditer()
+----------------------------------------
+
+finditer() returns match objects one at a time.
+
+Example:
+
+import re
+
+text = "Python 123 Java 456"
+
+for match in re.finditer(r"\\d+", text):
+    print(match.group())
+    print(match.start())
+    print(match.end())
+
+Output:
+
+123
+7
+10
+
+456
+16
+19
+
+finditer() is useful when you need:
+
+• Matched text
+• Start position
+• End position
+• Match groups
+
+----------------------------------------
+23. Match Object
+----------------------------------------
+
+A match object provides information about a match.
+
+Example:
+
+import re
+
+text = "Order ID: 12345"
+
+match = re.search(r"\\d+", text)
+
+if match:
+    print(match.group())
+    print(match.start())
+    print(match.end())
+
+Possible output:
+
+12345
+10
+15
+
+----------------------------------------
+24. re.sub()
+----------------------------------------
+
+sub() replaces matching text.
+
+Example:
+
+import re
+
+text = "Python is difficult"
+
+result = re.sub(
+    r"difficult",
+    "powerful",
+    text
+)
+
+print(result)
+
+Output:
+
+Python is powerful
+
+----------------------------------------
+25. Replacing Multiple Patterns
+----------------------------------------
+
+You can perform multiple replacements by chaining re.sub().
+
+Example:
+
+import re
+
+text = "Python is difficult and Python is slow"
+
+result = (
+    re.sub(r"Python", "Java", text)
+)
+
+result = (
+    re.sub(r"difficult", "easy", result)
+)
+
+result = (
+    re.sub(r"slow", "fast", result)
+)
+
+print(result)
+
+Output:
+
+Java is easy and Java is fast
+
+This is similar to chaining:
+
+.replace().replace().replace()
+
+but uses regex patterns.
+
+----------------------------------------
+26. re.split()
+----------------------------------------
+
+split() divides a string using a regex pattern.
+
+Example:
+
+import re
+
+text = "Python,Java;C++|Go"
+
+parts = re.split(
+    r"[,;|]",
+    text
+)
+
+print(parts)
+
+Output:
+
+[
+    'Python',
+    'Java',
+    'C++',
+    'Go'
+]
+
+The pattern matches:
+
+,
+;
+|
+
+----------------------------------------
+27. Capturing Groups
+----------------------------------------
+
+Parentheses create capturing groups.
+
+Example:
+
+import re
+
+text = "Name: Rahul, Age: 21"
+
+match = re.search(
+    r"Name: (\\w+), Age: (\\d+)",
+    text
+)
+
+if match:
+    print(match.group(1))
+    print(match.group(2))
+
+Output:
+
+Rahul
+21
+
+Group 1:
+
+Rahul
+
+Group 2:
+
+21
+
+----------------------------------------
+28. group()
+----------------------------------------
+
+group() returns the entire match.
+
+Example:
+
+import re
+
+match = re.search(
+    r"\\d+",
+    "Order 12345"
+)
+
+print(match.group())
+
+Output:
+
+12345
+
+----------------------------------------
+29. Named Groups
+----------------------------------------
+
+You can give groups names.
+
+Example:
+
+import re
+
+text = "Name: Rahul, Age: 21"
+
+match = re.search(
+    r"Name: (?P<name>\\w+), Age: (?P<age>\\d+)",
+    text
+)
+
+if match:
+    print(match.group("name"))
+    print(match.group("age"))
+
+Output:
+
+Rahul
+21
+
+Named groups make complex patterns easier to understand.
+
+----------------------------------------
+30. Non-Capturing Groups
+----------------------------------------
+
+Use:
+
+(?:...)
+
+when you need grouping but do not need to capture the matched value.
+
+Example:
+
+r"(?:Mr|Mrs|Ms)\\s+\\w+"
+
+This groups the alternatives without creating a numbered capture group.
+
+----------------------------------------
+31. Alternation — |
+----------------------------------------
+
+The | symbol means OR.
+
+Example:
+
+r"Python|Java"
+
+Matches either:
+
+Python
+
+or:
+
+Java
+
+Example:
+
+import re
+
+text = "I use Python"
+
+match = re.search(
+    r"Python|Java",
+    text
+)
+
+print(match.group())
+
+Output:
+
+Python
+
+----------------------------------------
+32. Optional Patterns
+----------------------------------------
+
+The ? quantifier can make part of a pattern optional.
+
+Example:
+
+r"https?://"
+
+Matches:
+
+http://example.com
+
+and:
+
+https://example.com
+
+Here:
+
+s?
+
+means the s is optional.
+
+----------------------------------------
+33. Email Validation Example
+----------------------------------------
+
+A simple email pattern can be written as:
+
+pattern = r"^[\\w.-]+@[\\w.-]+\\.\\w+$"
+
+Example:
+
+import re
+
+email = "user@example.com"
+
+if re.fullmatch(pattern, email):
+    print("Valid email")
+else:
+    print("Invalid email")
+
+Note:
+
+Email syntax is more complicated than this simple pattern. For real applications, use appropriate validation rather than assuming one simple regex covers every valid email address.
+
+----------------------------------------
+34. Phone Number Validation
+----------------------------------------
+
+Example:
+
+import re
+
+phone = "9876543210"
+
+pattern = r"^[0-9]{10}$"
+
+if re.fullmatch(pattern, phone):
+    print("Valid phone number")
+else:
+    print("Invalid phone number")
+
+This checks for exactly 10 digits.
+
+----------------------------------------
+35. Extracting Phone Numbers
+----------------------------------------
+
+Example:
+
+import re
+
+text = """
+Contact Rahul: 9876543210
+Contact Anu: 9123456789
+"""
+
+phones = re.findall(
+    r"\\b\\d{10}\\b",
+    text
+)
+
+print(phones)
+
+Output:
+
+[
+    '9876543210',
+    '9123456789'
+]
+
+----------------------------------------
+36. Extracting Dates
+----------------------------------------
+
+Example:
+
+import re
+
+text = "Meeting dates: 12-08-2026 and 15-08-2026"
+
+dates = re.findall(
+    r"\\b\\d{2}-\\d{2}-\\d{4}\\b",
+    text
+)
+
+print(dates)
+
+Output:
+
+[
+    '12-08-2026',
+    '15-08-2026'
+]
+
+This pattern checks the format, not whether the date is actually valid.
+
+----------------------------------------
+37. Compiling a Pattern
+----------------------------------------
+
+If the same pattern is used repeatedly, compile it.
+
+Example:
+
+import re
+
+pattern = re.compile(r"\\d+")
+
+print(pattern.findall("Python 123 Java 456"))
+print(pattern.findall("C++ 789"))
+
+Compiled patterns are useful when the same regex is reused multiple times.
+
+----------------------------------------
+38. Flags
+----------------------------------------
+
+Regex operations can use flags to change matching behavior.
+
+Example:
+
+import re
+
+text = "Python PYTHON python"
+
+matches = re.findall(
+    r"python",
+    text,
+    re.IGNORECASE
+)
+
+print(matches)
+
+Output:
+
+[
+    'Python',
+    'PYTHON',
+    'python'
+]
+
+----------------------------------------
+39. re.IGNORECASE
+----------------------------------------
+
+Makes matching case-insensitive.
+
+Example:
+
+re.search(
+    r"python",
+    "PYTHON",
+    re.IGNORECASE
+)
+
+matches.
+
+----------------------------------------
+40. re.MULTILINE
+----------------------------------------
+
+Changes how ^ and $ work with multi-line strings.
+
+Example:
+
+import re
+
+text = """Python
+Java
+Python"""
+
+matches = re.findall(
+    r"^Python$",
+    text,
+    re.MULTILINE
+)
+
+print(matches)
+
+Output:
+
+[
+    'Python',
+    'Python'
+]
+
+----------------------------------------
+41. re.DOTALL
+----------------------------------------
+
+Normally . does not match newline.
+
+With re.DOTALL:
+
+import re
+
+text = "Hello\\nPython"
+
+match = re.search(
+    r"Hello.Python",
+    text,
+    re.DOTALL
+)
+
+The dot can now match the newline.
+
+----------------------------------------
+42. Greedy Matching
+----------------------------------------
+
+Regex quantifiers are generally greedy.
+
+Example:
+
+import re
+
+text = "<b>Hello</b><b>World</b>"
+
+match = re.search(
+    r"<b>.*</b>",
+    text
+)
+
+A greedy .* can consume more text than intended.
+
+----------------------------------------
+43. Non-Greedy Matching
+----------------------------------------
+
+Add ? to make a quantifier non-greedy.
+
+Example:
+
+import re
+
+text = "<b>Hello</b><b>World</b>"
+
+matches = re.findall(
+    r"<b>.*?</b>",
+    text
+)
+
+Output:
+
+[
+    '<b>Hello</b>',
+    '<b>World</b>'
+]
+
+This is called lazy or non-greedy matching.
+
+----------------------------------------
+44. Word Boundary — \\b
+----------------------------------------
+
+\\b matches a word boundary.
+
+Example:
+
+import re
+
+text = "cat category cat"
+
+matches = re.findall(
+    r"\\bcat\\b",
+    text
+)
+
+print(matches)
+
+Output:
+
+[
+    'cat',
+    'cat'
+]
+
+It does not match the "cat" inside:
+
+category
+
+----------------------------------------
+45. Lookahead
+----------------------------------------
+
+A positive lookahead checks what comes next without consuming it.
+
+Example:
+
+import re
+
+text = "Python3 Python2 Java"
+
+matches = re.findall(
+    r"Python(?=3)",
+    text
+)
+
+print(matches)
+
+Output:
+
+['Python']
+
+The pattern finds Python only when it is followed by 3.
+
+----------------------------------------
+46. Negative Lookahead
+----------------------------------------
+
+Negative lookahead uses:
+
+(?!...)
+
+Example:
+
+import re
+
+text = "Python3 Python2"
+
+matches = re.findall(
+    r"Python(?!3)",
+    text
+)
+
+print(matches)
+
+Output:
+
+['Python']
+
+It finds Python when it is not followed by 3.
+
+----------------------------------------
+47. Common Regex Symbols
+----------------------------------------
+
+Symbol:
+
+.
+→ Any character except newline by default
+
+\\d
+→ Digit
+
+\\D
+→ Non-digit
+
+\\w
+→ Word character
+
+\\W
+→ Non-word character
+
+\\s
+→ Whitespace
+
+\\S
+→ Non-whitespace
+
+[]
+→ Character set
+
+[^]
+→ Negated character set
+
+*
+→ Zero or more
+
++
+→ One or more
+
+?
+→ Zero or one
+
+{n}
+→ Exactly n
+
+{n,m}
+→ Between n and m
+
+^
+→ Start
+
+$
+→ End
+
+()
+→ Capturing group
+
+(?:)
+→ Non-capturing group
+
+|
+→ OR
+
+\\b
+→ Word boundary
+
+----------------------------------------
+48. Common re Functions
+----------------------------------------
+
+re.search()
+→ Find first match anywhere
+
+re.match()
+→ Match from beginning
+
+re.fullmatch()
+→ Match entire string
+
+re.findall()
+→ Return all matches
+
+re.finditer()
+→ Return match objects
+
+re.sub()
+→ Replace matches
+
+re.split()
+→ Split using a pattern
+
+re.compile()
+→ Create reusable regex pattern
+
+----------------------------------------
+49. Regex vs Normal String Methods
+----------------------------------------
+
+For simple replacements:
+
+text.replace("old", "new")
+
+is usually clearer.
+
+For complex pattern-based replacements:
+
+re.sub(pattern, replacement, text)
+
+is more powerful.
+
+Example:
+
+text = "cat dog cow"
+
+result = re.sub(
+    r"\\b\\w{3}\\b",
+    "animal",
+    text
+)
+
+Output:
+
+animal animal animal
+
+Regex is most useful when the matching rule itself is complex.
+
+----------------------------------------
+50. Important Regex Rules
+----------------------------------------
+
+Rule 1:
+
+Import the module:
+
+import re
+
+Rule 2:
+
+Use raw strings for regex patterns when appropriate:
+
+r"\\d+"
+
+Rule 3:
+
+Use search() to find a pattern anywhere.
+
+Rule 4:
+
+Use match() to check from the beginning.
+
+Rule 5:
+
+Use fullmatch() when the entire string must match.
+
+Rule 6:
+
+Use findall() to collect all matches.
+
+Rule 7:
+
+Use finditer() when you need detailed match information.
+
+Rule 8:
+
+Use sub() for pattern-based replacement.
+
+Rule 9:
+
+Use split() for pattern-based splitting.
+
+Rule 10:
+
+Use compile() when repeatedly using the same pattern.
+
+----------------------------------------
+51. Professional Mental Model
+----------------------------------------
+
+Regex:
+
+Input text
+↓
+Pattern
+↓
+Regex engine
+↓
+Match?
+├── No → No match
+└── Yes
+     ↓
+     Extract / validate / replace / split
+
+For example:
+
+"Order ID: 12345"
+
+Pattern:
+
+r"\\d+"
+
+↓
+
+Regex finds:
+
+12345
+
+The key idea:
+
+Regular expressions allow Python programs to describe text patterns instead of checking every possible string manually.`,
+},
+
+{
+  heading: "Iterators & Generators",
+  body: `Iterators and generators allow Python to produce values one at a time instead of creating all values in memory at once.
+
+They are especially useful for:
+
+• Large datasets
+• Large files
+• Data pipelines
+• Streaming data
+• Memory-efficient processing
+• Infinite sequences
+• Lazy evaluation
+
+The main idea is:
+
+Instead of creating everything now,
+produce each value only when it is needed.
+
+----------------------------------------
+1. What Is an Iterable?
+----------------------------------------
+
+An iterable is an object that can be iterated over one item at a time.
+
+Common iterables include:
+
+• list
+• tuple
+• string
+• set
+• dictionary
+• range
+• file objects
+
+Example:
+
+numbers = [10, 20, 30]
+
+for number in numbers:
+    print(number)
+
+Output:
+
+10
+20
+30
+
+The list is iterable.
+
+----------------------------------------
+2. What Is an Iterator?
+----------------------------------------
+
+An iterator is an object that produces values one at a time.
+
+An iterator follows Python's iterator protocol:
+
+__iter__()
+__next__()
+
+Example:
+
+numbers = [10, 20, 30]
+
+iterator = iter(numbers)
+
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+
+Output:
+
+10
+20
+30
+
+When there are no more values:
+
+next(iterator)
+
+raises:
+
+StopIteration
+
+----------------------------------------
+3. Iterable vs Iterator
+----------------------------------------
+
+Iterable:
+
+An object that can provide an iterator.
+
+Example:
+
+numbers = [1, 2, 3]
+
+Iterator:
+
+An object that remembers its current position.
+
+Example:
+
+iterator = iter(numbers)
+
+Mental model:
+
+Iterable
+↓
+iter()
+↓
+Iterator
+↓
+next()
+↓
+Next value
+
+----------------------------------------
+4. iter()
+----------------------------------------
+
+iter() obtains an iterator from an iterable.
+
+Example:
+
+numbers = [10, 20, 30]
+
+iterator = iter(numbers)
+
+print(iterator)
+
+The iterator remembers where it currently is.
+
+----------------------------------------
+5. next()
+----------------------------------------
+
+next() requests the next value from an iterator.
+
+Example:
+
+numbers = [10, 20, 30]
+
+iterator = iter(numbers)
+
+print(next(iterator))
+print(next(iterator))
+print(next(iterator))
+
+Output:
+
+10
+20
+30
+
+Calling next() again:
+
+print(next(iterator))
+
+raises:
+
+StopIteration
+
+----------------------------------------
+6. StopIteration
+----------------------------------------
+
+StopIteration tells Python that an iterator has no more values.
+
+Example:
+
+numbers = [1, 2]
+
+iterator = iter(numbers)
+
+print(next(iterator))
+print(next(iterator))
+
+try:
+    print(next(iterator))
+
+except StopIteration:
+    print("No more values")
+
+Output:
+
+1
+2
+No more values
+
+A for loop handles StopIteration automatically.
+
+----------------------------------------
+7. How a for Loop Uses an Iterator
+----------------------------------------
+
+When you write:
+
+numbers = [1, 2, 3]
+
+for number in numbers:
+    print(number)
+
+Python conceptually does something similar to:
+
+iterator = iter(numbers)
+
+while True:
+
+    try:
+        number = next(iterator)
+        print(number)
+
+    except StopIteration:
+        break
+
+You normally do not write this manually.
+
+----------------------------------------
+8. Creating a Custom Iterator
+----------------------------------------
+
+A class can implement the iterator protocol.
+
+Example:
+
+class Count:
+
+    def __init__(self, maximum):
+        self.current = 1
+        self.maximum = maximum
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+
+        if self.current > self.maximum:
+            raise StopIteration
+
+        value = self.current
+        self.current += 1
+
+        return value
+
+
+numbers = Count(3)
+
+for number in numbers:
+    print(number)
+
+Output:
+
+1
+2
+3
+
+----------------------------------------
+9. __iter__()
+----------------------------------------
+
+__iter__() returns an iterator.
+
+For a custom iterator, it commonly returns self.
+
+Example:
+
+def __iter__(self):
+    return self
+
+This allows the object to be used in a for loop.
+
+----------------------------------------
+10. __next__()
+----------------------------------------
+
+__next__() produces the next value.
+
+Example:
+
+def __next__(self):
+
+    if self.current > self.maximum:
+        raise StopIteration
+
+    value = self.current
+    self.current += 1
+
+    return value
+
+When no values remain, it must raise:
+
+StopIteration
+
+----------------------------------------
+11. What Is a Generator?
+----------------------------------------
+
+A generator is a simple way to create an iterator.
+
+Generators use:
+
+yield
+
+instead of manually implementing:
+
+__iter__()
+__next__()
+
+Example:
+
+def numbers():
+
+    yield 1
+    yield 2
+    yield 3
+
+generator = numbers()
+
+print(next(generator))
+print(next(generator))
+print(next(generator))
+
+Output:
+
+1
+2
+3
+
+----------------------------------------
+12. yield
+----------------------------------------
+
+yield produces a value and pauses the generator.
+
+Example:
+
+def numbers():
+
+    yield 1
+    yield 2
+    yield 3
+
+When:
+
+next(generator)
+
+is called, execution continues until the next yield.
+
+The generator remembers its state.
+
+This is the key difference from return.
+
+----------------------------------------
+13. yield vs return
+----------------------------------------
+
+return:
+
+• Ends the function
+• Sends one final result
+• Function execution finishes
+
+yield:
+
+• Produces a value
+• Pauses execution
+• Remembers its state
+• Continues from that point when next() is called
+
+Example:
+
+def generator():
+    yield 1
+    yield 2
+    yield 3
+
+Each next() resumes from where the previous yield stopped.
+
+----------------------------------------
+14. Generator with a Loop
+----------------------------------------
+
+Example:
+
+def count_up_to(n):
+
+    current = 1
+
+    while current <= n:
+
+        yield current
+
+        current += 1
+
+
+for number in count_up_to(5):
+    print(number)
+
+Output:
+
+1
+2
+3
+4
+5
+
+The generator produces one number at a time.
+
+----------------------------------------
+15. Generator State
+----------------------------------------
+
+Consider:
+
+def test():
+
+    print("Start")
+
+    yield 1
+
+    print("Middle")
+
+    yield 2
+
+    print("End")
+
+    yield 3
+
+generator = test()
+
+print(next(generator))
+print(next(generator))
+print(next(generator))
+
+Output:
+
+Start
+1
+Middle
+2
+End
+3
+
+The function does not restart from the beginning.
+
+It resumes from the previous yield.
+
+----------------------------------------
+16. Generator Expressions
+----------------------------------------
+
+A generator expression looks similar to a list comprehension.
+
+List comprehension:
+
+squares = [
+    x ** 2
+    for x in range(10)
+]
+
+Generator expression:
+
+squares = (
+    x ** 2
+    for x in range(10)
+)
+
+The list creates all values immediately.
+
+The generator produces values lazily.
+
+----------------------------------------
+17. List vs Generator
+----------------------------------------
+
+List:
+
+numbers = [
+    x ** 2
+    for x in range(1_000_000)
+]
+
+This creates all one million values.
+
+Generator:
+
+numbers = (
+    x ** 2
+    for x in range(1_000_000)
+)
+
+Values are produced as needed.
+
+Conceptually:
+
+List:
+
+Create everything
+↓
+Store everything
+↓
+Use values
+
+Generator:
+
+Request value
+↓
+Produce value
+↓
+Use value
+↓
+Request next value
+
+----------------------------------------
+18. Memory Efficiency
+----------------------------------------
+
+Generators are useful when the complete sequence does not need to exist in memory at once.
+
+Example:
+
+def read_numbers():
+
+    for number in range(1_000_000):
+        yield number
+
+for number in read_numbers():
+    process(number)
+
+Only the current value and generator state need to be maintained.
+
+This makes generators especially useful for large sequences and streaming workflows.
+
+----------------------------------------
+19. Infinite Generators
+----------------------------------------
+
+Generators can represent infinite sequences.
+
+Example:
+
+def counter():
+
+    number = 0
+
     while True:
+
+        yield number
+
+        number += 1
+
+
+numbers = counter()
+
+print(next(numbers))
+print(next(numbers))
+print(next(numbers))
+print(next(numbers))
+
+Output:
+
+0
+1
+2
+3
+
+The generator itself does not need to store an infinite list.
+
+It generates values when requested.
+
+----------------------------------------
+20. Fibonacci Generator
+----------------------------------------
+
+Example:
+
+def fibonacci():
+
+    a, b = 0, 1
+
+    while True:
+
         yield a
+
         a, b = b, a + b
 
+
 fib = fibonacci()
-print([next(fib) for _ in range(10)])  # [0,1,1,2,3,5,8,13,21,34]
 
-# Generator expression (like list comp but lazy)
-squares_gen  = (x**2 for x in range(1_000_000))  # tiny memory!
-squares_list = [x**2 for x in range(1_000_000)]  # 8MB memory!
+for _ in range(10):
+    print(next(fib))
 
-total = sum(x**2 for x in range(1000))  # no intermediate list!
+Output:
 
-# yield from — delegate to sub-generator
-def flatten(nested):
-    for item in nested:
-        if isinstance(item, list):
-            yield from flatten(item)
-        else:
-            yield item
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
 
-deep = [1, [2, 3, [4, 5]], [6, [7, [8]]]]
-print(list(flatten(deep)))   # [1,2,3,4,5,6,7,8]
+This generator can continue producing Fibonacci numbers indefinitely.
 
-# File processing without loading into memory
-def read_chunks(filename, size=8192):
-    with open(filename, "rb") as f:
-        while chunk := f.read(size):
-            yield chunk`,
-            resources: [
+----------------------------------------
+21. yield from
+----------------------------------------
+
+yield from delegates value production to another iterable or generator.
+
+Example:
+
+def numbers():
+    yield from [1, 2, 3]
+
+for number in numbers():
+    print(number)
+
+Output:
+
+1
+2
+3
+
+Without yield from, you could write:
+
+def numbers():
+    for number in [1, 2, 3]:
+        yield number
+
+yield from provides a cleaner way to delegate iteration.
+
+----------------------------------------
+22. yield from Another Generator
+----------------------------------------
+
+Example:
+
+def first():
+    yield 1
+    yield 2
+
+def second():
+    yield 3
+    yield 4
+
+def combined():
+    yield from first()
+    yield from second()
+
+for value in combined():
+    print(value)
+
+Output:
+
+1
+2
+3
+4
+
+The combined generator delegates to both generators.
+
+----------------------------------------
+23. Generator Pipelines
+----------------------------------------
+
+Generators can be connected together to form a processing pipeline.
+
+Example:
+
+def numbers():
+    for i in range(1, 6):
+        yield i
+
+
+def squares(values):
+    for value in values:
+        yield value ** 2
+
+
+def even_only(values):
+    for value in values:
+        if value % 2 == 0:
+            yield value
+
+
+pipeline = even_only(
+    squares(
+        numbers()
+    )
+)
+
+for value in pipeline:
+    print(value)
+
+Output:
+
+4
+16
+
+The flow is:
+
+numbers
+↓
+squares
+↓
+even_only
+↓
+result
+
+Each stage produces values lazily.
+
+----------------------------------------
+24. Generator for Large Files
+----------------------------------------
+
+Generators are useful for processing large files.
+
+Example:
+
+def read_lines(filename):
+
+    with open(
+        filename,
+        "r",
+        encoding="utf-8"
+    ) as file:
+
+        for line in file:
+            yield line.strip()
+
+
+for line in read_lines("large.log"):
+    process(line)
+
+The entire file does not need to be loaded into memory.
+
+----------------------------------------
+25. Generator for CSV Data
+----------------------------------------
+
+Example:
+
+import csv
+
+def read_employees(filename):
+
+    with open(
+        filename,
+        "r",
+        newline="",
+        encoding="utf-8"
+    ) as file:
+
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            yield row
+
+
+for employee in read_employees("employees.csv"):
+    print(employee["name"])
+
+Each row is produced one at a time.
+
+----------------------------------------
+26. Generator for Database Results
+----------------------------------------
+
+The same idea can be used when processing database records.
+
+Conceptually:
+
+def get_users(connection):
+
+    cursor = connection.execute(
+        "SELECT id, name FROM users"
+    )
+
+    for row in cursor:
+        yield row
+
+
+for user in get_users(connection):
+    process(user)
+
+This allows application code to process records incrementally when the database driver supports streaming/cursor iteration.
+
+----------------------------------------
+27. Generator send()
+----------------------------------------
+
+Generators can also receive values using send().
+
+Example:
+
+def calculator():
+
+    total = 0
+
+    while True:
+
+        value = yield total
+
+        if value is None:
+            return
+
+        total += value
+
+
+calc = calculator()
+
+print(next(calc))
+
+print(calc.send(10))
+print(calc.send(20))
+print(calc.send(5))
+
+Output:
+
+0
+10
+30
+35
+
+send() resumes the generator and sends a value into the paused yield expression.
+
+----------------------------------------
+28. Generator close()
+----------------------------------------
+
+A generator can be stopped using close().
+
+Example:
+
+def numbers():
+
+    try:
+
+        for i in range(10):
+            yield i
+
+    finally:
+
+        print("Generator closed")
+
+
+gen = numbers()
+
+print(next(gen))
+print(next(gen))
+
+gen.close()
+
+Output:
+
+0
+1
+Generator closed
+
+close() causes the generator to terminate and allows its cleanup code to execute.
+
+----------------------------------------
+29. Generator throw()
+----------------------------------------
+
+throw() can inject an exception into a paused generator.
+
+Example:
+
+def generator():
+
+    try:
+        yield 1
+
+    except ValueError:
+        print("ValueError received")
+
+
+gen = generator()
+
+print(next(gen))
+
+gen.throw(ValueError)
+
+Output:
+
+1
+ValueError received
+
+This is an advanced generator feature and is less common than next() and send().
+
+----------------------------------------
+30. Generator Function vs Normal Function
+----------------------------------------
+
+Normal function:
+
+def get_numbers():
+    return [1, 2, 3]
+
+The entire list is created before it is returned.
+
+Generator function:
+
+def get_numbers():
+    yield 1
+    yield 2
+    yield 3
+
+The values are produced one at a time.
+
+----------------------------------------
+31. Lazy Evaluation
+----------------------------------------
+
+Lazy evaluation means delaying computation until the result is actually needed.
+
+Example:
+
+numbers = (
+    x ** 2
+    for x in range(1_000_000)
+)
+
+The square is calculated when a value is requested rather than all at once.
+
+This can reduce unnecessary computation and memory usage.
+
+----------------------------------------
+32. Eager vs Lazy
+----------------------------------------
+
+Eager:
+
+values = [
+    expensive_operation(x)
+    for x in data
+]
+
+All operations happen immediately.
+
+Lazy:
+
+values = (
+    expensive_operation(x)
+    for x in data
+)
+
+Operations happen as values are consumed.
+
+----------------------------------------
+33. Generator Consumption
+----------------------------------------
+
+Generators are generally one-time iterators.
+
+Example:
+
+gen = (x for x in range(3))
+
+print(list(gen))
+
+Output:
+
+[0, 1, 2]
+
+Now:
+
+print(list(gen))
+
+Output:
+
+[]
+
+The generator has already been exhausted.
+
+If you need to iterate multiple times, you may need to create a new generator or use a reusable iterable such as a list, depending on the problem.
+
+----------------------------------------
+34. Generator vs List
+----------------------------------------
+
+Use a list when:
+
+• You need all values immediately
+• You need indexing
+• You need repeated iteration
+• The dataset is reasonably sized
+
+Use a generator when:
+
+• Values can be processed one at a time
+• The dataset is large
+• You want lazy evaluation
+• You are building a data pipeline
+• The sequence may be infinite
+
+----------------------------------------
+35. Iterator vs Generator
+----------------------------------------
+
+Iterator:
+
+An object implementing the iterator protocol.
+
+Usually provides:
+
+__iter__()
+__next__()
+
+Generator:
+
+A convenient way to create an iterator using yield.
+
+Mental model:
+
+Iterator
+→ Protocol
+
+Generator
+→ Easy implementation of that protocol
+
+----------------------------------------
+36. Important Iterator Rules
+----------------------------------------
+
+Rule 1:
+
+An iterable can produce an iterator.
+
+Rule 2:
+
+iter() obtains an iterator.
+
+Rule 3:
+
+next() requests the next value.
+
+Rule 4:
+
+StopIteration signals that iteration is finished.
+
+Rule 5:
+
+A for loop handles iterator protocol automatically.
+
+----------------------------------------
+37. Important Generator Rules
+----------------------------------------
+
+Rule 1:
+
+A generator function contains yield.
+
+Rule 2:
+
+Calling a generator function returns a generator object; its body does not run to completion immediately.
+
+Rule 3:
+
+yield produces a value and pauses execution.
+
+Rule 4:
+
+The generator remembers its state.
+
+Rule 5:
+
+next() resumes execution.
+
+Rule 6:
+
+Generators can be infinite.
+
+Rule 7:
+
+Generator expressions provide a compact lazy form.
+
+Rule 8:
+
+yield from delegates iteration.
+
+----------------------------------------
+38. Performance and Memory
+----------------------------------------
+
+Generators do not automatically make every program faster.
+
+Their main advantage is often:
+
+Memory efficiency
++
+Lazy computation
++
+Streaming
+
+Example:
+
+large_data = (
+    process(x)
+    for x in huge_dataset
+)
+
+The program can process values incrementally instead of constructing another large collection.
+
+----------------------------------------
+39. Professional Mental Model
+----------------------------------------
+
+Iterable:
+
+Collection that can be iterated
+
+↓
+
+iter()
+
+↓
+
+Iterator
+
+↓
+
+next()
+
+↓
+
+Value
+
+↓
+
+next()
+
+↓
+
+Value
+
+↓
+
+StopIteration
+
+Generator:
+
+Generator function
+↓
+yield
+↓
+Pause
+↓
+next()
+↓
+Resume
+↓
+yield
+↓
+Pause
+↓
+Repeat
+
+The key idea:
+
+Iterator = object that produces values through the iterator protocol.
+
+Generator = convenient, lazy way to create an iterator.
+
+Use generators when data should be produced and processed one item at a time rather than materialized all at once.`,
+},
+
+{
+  heading: "Lambda Functions & Functional Programming",
+  body: `Lambda functions are small anonymous functions used when a short function is needed without defining it with def.
+
+Python's functional programming tools allow functions to be treated as values and passed to other functions.
+
+Important topics include:
+
+• lambda
+• map()
+• filter()
+• reduce()
+• sorted()
+• key functions
+• Higher-order functions
+• Function composition
+• Callable objects
+
+----------------------------------------
+1. What Is a Lambda Function?
+----------------------------------------
+
+A lambda function is a small anonymous function created using the lambda keyword.
+
+Syntax:
+
+lambda arguments: expression
+
+Example:
+
+square = lambda x: x ** 2
+
+print(square(5))
+
+Output:
+
+25
+
+The expression is automatically returned.
+
+----------------------------------------
+2. Lambda vs def
+----------------------------------------
+
+Using def:
+
+def square(x):
+    return x ** 2
+
+Using lambda:
+
+square = lambda x: x ** 2
+
+Both produce:
+
+square(5)
+→ 25
+
+Use def when the function is complex, needs documentation, type annotations, multiple statements, or is reused as a named function.
+
+Use lambda mainly for short expressions passed to another function.
+
+----------------------------------------
+3. Lambda with Multiple Arguments
+----------------------------------------
+
+A lambda can accept multiple arguments.
+
+Example:
+
+add = lambda a, b: a + b
+
+print(add(10, 20))
+
+Output:
+
+30
+
+Another example:
+
+multiply = lambda a, b: a * b
+
+print(multiply(5, 4))
+
+Output:
+
+20
+
+----------------------------------------
+4. Lambda with a Condition
+----------------------------------------
+
+A conditional expression can be used.
+
+Example:
+
+check_age = lambda age: "Adult" if age >= 18 else "Minor"
+
+print(check_age(21))
+print(check_age(15))
+
+Output:
+
+Adult
+Minor
+
+Keep lambda expressions simple. Complex logic is usually clearer with def.
+
+----------------------------------------
+5. What Is a Higher-Order Function?
+----------------------------------------
+
+A higher-order function is a function that:
+
+• Accepts another function as an argument
+or
+• Returns a function
+
+Example:
+
+def apply_operation(func, value):
+    return func(value)
+
+square = lambda x: x ** 2
+
+print(apply_operation(square, 5))
+
+Output:
+
+25
+
+Here:
+
+apply_operation()
+→ Higher-order function
+
+square
+→ Function passed as an argument
+
+----------------------------------------
+6. Functions Are First-Class Objects
+----------------------------------------
+
+In Python, functions can be:
+
+• Stored in variables
+• Passed as arguments
+• Returned from functions
+• Stored in collections
+
+Example:
+
+def greet():
+    return "Hello"
+
+message = greet
+
+print(message())
+
+Output:
+
+Hello
+
+The variable message now refers to the function.
+
+----------------------------------------
+7. map()
+----------------------------------------
+
+map() applies a function to every item in an iterable.
+
+Syntax:
+
+map(function, iterable)
+
+Example:
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = map(
+    lambda x: x ** 2,
+    numbers
+)
+
+print(list(squares))
+
+Output:
+
+[1, 4, 9, 16, 25]
+
+map() returns an iterator-like map object, so list() is commonly used when you want to materialize the results.
+
+----------------------------------------
+8. map() with a Named Function
+----------------------------------------
+
+Example:
+
+def square(x):
+    return x ** 2
+
+numbers = [1, 2, 3, 4]
+
+result = map(square, numbers)
+
+print(list(result))
+
+Output:
+
+[1, 4, 9, 16]
+
+You do not need lambda when a normal function already exists.
+
+----------------------------------------
+9. map() with Multiple Iterables
+----------------------------------------
+
+map() can work with multiple iterables.
+
+Example:
+
+numbers1 = [1, 2, 3]
+numbers2 = [10, 20, 30]
+
+result = map(
+    lambda a, b: a + b,
+    numbers1,
+    numbers2
+)
+
+print(list(result))
+
+Output:
+
+[11, 22, 33]
+
+The function receives one item from each iterable.
+
+----------------------------------------
+10. filter()
+----------------------------------------
+
+filter() keeps only the items for which a function returns a truthy value.
+
+Syntax:
+
+filter(function, iterable)
+
+Example:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+even_numbers = filter(
+    lambda x: x % 2 == 0,
+    numbers
+)
+
+print(list(even_numbers))
+
+Output:
+
+[2, 4, 6]
+
+----------------------------------------
+11. filter() with a Named Function
+----------------------------------------
+
+Example:
+
+def is_even(number):
+    return number % 2 == 0
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = filter(
+    is_even,
+    numbers
+)
+
+print(list(result))
+
+Output:
+
+[2, 4, 6]
+
+----------------------------------------
+12. filter() with None
+----------------------------------------
+
+If the function argument is None, filter() keeps truthy values.
+
+Example:
+
+values = [
+    0,
+    1,
+    "",
+    "Python",
+    None,
+    True,
+    False
+]
+
+result = filter(None, values)
+
+print(list(result))
+
+Output:
+
+[1, 'Python', True]
+
+----------------------------------------
+13. reduce()
+----------------------------------------
+
+reduce() repeatedly combines elements to produce a single result.
+
+It is provided by:
+
+functools
+
+Example:
+
+from functools import reduce
+
+numbers = [1, 2, 3, 4]
+
+result = reduce(
+    lambda a, b: a + b,
+    numbers
+)
+
+print(result)
+
+Output:
+
+10
+
+The operation works conceptually as:
+
+((1 + 2) + 3) + 4
+
+----------------------------------------
+14. reduce() with an Initial Value
+----------------------------------------
+
+Example:
+
+from functools import reduce
+
+numbers = [1, 2, 3]
+
+result = reduce(
+    lambda a, b: a + b,
+    numbers,
+    10
+)
+
+print(result)
+
+Output:
+
+16
+
+The calculation begins with:
+
+10 + 1
+
+then:
+
+11 + 2
+
+then:
+
+13 + 3
+
+Result:
+
+16
+
+----------------------------------------
+15. reduce() for Multiplication
+----------------------------------------
+
+Example:
+
+from functools import reduce
+
+numbers = [1, 2, 3, 4, 5]
+
+factorial = reduce(
+    lambda a, b: a * b,
+    numbers
+)
+
+print(factorial)
+
+Output:
+
+120
+
+----------------------------------------
+16. sorted()
+----------------------------------------
+
+sorted() returns a new sorted list.
+
+Example:
+
+numbers = [5, 2, 8, 1, 3]
+
+result = sorted(numbers)
+
+print(result)
+
+Output:
+
+[1, 2, 3, 5, 8]
+
+The original list remains unchanged.
+
+----------------------------------------
+17. sorted() with reverse
+----------------------------------------
+
+Example:
+
+numbers = [5, 2, 8, 1, 3]
+
+result = sorted(
+    numbers,
+    reverse=True
+)
+
+print(result)
+
+Output:
+
+[8, 5, 3, 2, 1]
+
+----------------------------------------
+18. sorted() with key
+----------------------------------------
+
+The key argument tells Python what value should be used for sorting.
+
+Example:
+
+names = [
+    "Rahul",
+    "Anu",
+    "Christopher",
+    "Sam"
+]
+
+result = sorted(
+    names,
+    key=len
+)
+
+print(result)
+
+Output:
+
+[
+    "Anu",
+    "Sam",
+    "Rahul",
+    "Christopher"
+]
+
+The strings are sorted by their length.
+
+----------------------------------------
+19. sorted() with lambda
+----------------------------------------
+
+Example:
+
+students = [
+    ("Rahul", 85),
+    ("Anu", 92),
+    ("Sam", 78)
+]
+
+result = sorted(
+    students,
+    key=lambda student: student[1]
+)
+
+print(result)
+
+Output:
+
+[
+    ("Sam", 78),
+    ("Rahul", 85),
+    ("Anu", 92)
+]
+
+The key function extracts the marks.
+
+----------------------------------------
+20. Sorting in Descending Order
+----------------------------------------
+
+Example:
+
+students = [
+    ("Rahul", 85),
+    ("Anu", 92),
+    ("Sam", 78)
+]
+
+result = sorted(
+    students,
+    key=lambda student: student[1],
+    reverse=True
+)
+
+print(result)
+
+Output:
+
+[
+    ("Anu", 92),
+    ("Rahul", 85),
+    ("Sam", 78)
+]
+
+----------------------------------------
+21. Sorting Dictionaries
+----------------------------------------
+
+Example:
+
+employees = [
+    {"name": "Rahul", "salary": 50000},
+    {"name": "Anu", "salary": 70000},
+    {"name": "Sam", "salary": 45000}
+]
+
+result = sorted(
+    employees,
+    key=lambda employee: employee["salary"],
+    reverse=True
+)
+
+for employee in result:
+    print(employee)
+
+The employees are sorted by salary.
+
+----------------------------------------
+22. Sorting by Multiple Criteria
+----------------------------------------
+
+A key function can return a tuple.
+
+Example:
+
+students = [
+    ("Rahul", 85),
+    ("Anu", 92),
+    ("Sam", 85),
+    ("Priya", 92)
+]
+
+result = sorted(
+    students,
+    key=lambda student: (-student[1], student[0])
+)
+
+print(result)
+
+The sorting rules are:
+
+1. Higher marks first
+2. Names alphabetically when marks are equal
+
+----------------------------------------
+23. map() + filter()
+----------------------------------------
+
+These functions can be combined.
+
+Example:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+even_squares = map(
+    lambda x: x ** 2,
+    filter(
+        lambda x: x % 2 == 0,
+        numbers
+    )
+)
+
+print(list(even_squares))
+
+Output:
+
+[4, 16, 36]
+
+Flow:
+
+numbers
+↓
+filter even numbers
+↓
+[2, 4, 6]
+↓
+square
+↓
+[4, 16, 36]
+
+----------------------------------------
+24. List Comprehension Alternative
+----------------------------------------
+
+The previous example can often be written more clearly as:
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+result = [
+    x ** 2
+    for x in numbers
+    if x % 2 == 0
+]
+
+print(result)
+
+Output:
+
+[4, 16, 36]
+
+In Python, comprehensions are often preferred when they make the transformation easier to read.
+
+----------------------------------------
+25. map() vs List Comprehension
+----------------------------------------
+
+map():
+
+result = map(
+    lambda x: x ** 2,
+    numbers
+)
+
+List comprehension:
+
+result = [
+    x ** 2
+    for x in numbers
+]
+
+Both can transform values.
+
+Choose the version that is clearer for the specific operation.
+
+----------------------------------------
+26. filter() vs List Comprehension
+----------------------------------------
+
+filter():
+
+result = filter(
+    lambda x: x > 10,
+    numbers
+)
+
+List comprehension:
+
+result = [
+    x
+    for x in numbers
+    if x > 10
+]
+
+Both can filter values.
+
+List comprehensions are often easier to read for simple conditions.
+
+----------------------------------------
+27. any()
+----------------------------------------
+
+any() returns True if at least one element is truthy.
+
+Example:
+
+numbers = [1, 3, 5, 8]
+
+result = any(
+    number % 2 == 0
+    for number in numbers
+)
+
+print(result)
+
+Output:
+
+True
+
+8 is even.
+
+----------------------------------------
+28. all()
+----------------------------------------
+
+all() returns True if every element is truthy.
+
+Example:
+
+numbers = [2, 4, 6, 8]
+
+result = all(
+    number % 2 == 0
+    for number in numbers
+)
+
+print(result)
+
+Output:
+
+True
+
+----------------------------------------
+29. any() and all() with Conditions
+----------------------------------------
+
+Example:
+
+ages = [21, 25, 30, 17]
+
+has_minor = any(
+    age < 18
+    for age in ages
+)
+
+all_adults = all(
+    age >= 18
+    for age in ages
+)
+
+print(has_minor)
+print(all_adults)
+
+Output:
+
+True
+False
+
+----------------------------------------
+30. Function Returning a Function
+----------------------------------------
+
+A higher-order function can return another function.
+
+Example:
+
+def multiplier(factor):
+
+    def multiply(number):
+        return number * factor
+
+    return multiply
+
+
+double = multiplier(2)
+triple = multiplier(3)
+
+print(double(10))
+print(triple(10))
+
+Output:
+
+20
+30
+
+The returned function remembers factor.
+
+This is related to closures, which will be covered separately.
+
+----------------------------------------
+31. Function as a Dictionary Value
+----------------------------------------
+
+Functions can be stored in dictionaries.
+
+Example:
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+operations = {
+    "add": add,
+    "subtract": subtract
+}
+
+print(operations["add"](10, 5))
+print(operations["subtract"](10, 5))
+
+Output:
+
+15
+5
+
+This pattern is useful for dispatch tables and command systems.
+
+----------------------------------------
+32. Callable Objects
+----------------------------------------
+
+Python objects can also be made callable using __call__().
+
+Example:
+
+class Multiplier:
+
+    def __init__(self, factor):
+        self.factor = factor
+
+    def __call__(self, value):
+        return value * self.factor
+
+
+double = Multiplier(2)
+
+print(double(10))
+
+Output:
+
+20
+
+Although double is an object, it can be called like a function.
+
+----------------------------------------
+33. functools.partial()
+----------------------------------------
+
+partial() creates a new callable with some arguments already supplied.
+
+Example:
+
+from functools import partial
+
+def power(base, exponent):
+    return base ** exponent
+
+square = partial(
+    power,
+    exponent=2
+)
+
+cube = partial(
+    power,
+    exponent=3
+)
+
+print(square(5))
+print(cube(5))
+
+Output:
+
+25
+125
+
+----------------------------------------
+34. operator Module
+----------------------------------------
+
+The operator module provides function versions of common operations.
+
+Example:
+
+from operator import add
+
+numbers = [1, 2, 3, 4]
+
+from functools import reduce
+
+total = reduce(add, numbers)
+
+print(total)
+
+Output:
+
+10
+
+This can sometimes be clearer than writing:
+
+lambda a, b: a + b
+
+----------------------------------------
+35. map() with operator
+----------------------------------------
+
+Example:
+
+from operator import mul
+
+numbers = [1, 2, 3, 4]
+
+result = list(
+    map(
+        lambda x: mul(x, 10),
+        numbers
+    )
+)
+
+print(result)
+
+Output:
+
+[10, 20, 30, 40]
+
+----------------------------------------
+36. Functional Pipeline
+----------------------------------------
+
+Functional tools can be combined into a data pipeline.
+
+Example:
+
+from functools import reduce
+
+numbers = range(1, 11)
+
+result = reduce(
+    lambda a, b: a + b,
+    map(
+        lambda x: x ** 2,
+        filter(
+            lambda x: x % 2 == 0,
+            numbers
+        )
+    )
+)
+
+print(result)
+
+Flow:
+
+1,2,3,4,5,6,7,8,9,10
+↓
+Filter even
+↓
+2,4,6,8,10
+↓
+Square
+↓
+4,16,36,64,100
+↓
+Reduce by addition
+↓
+220
+
+For complex pipelines, breaking the steps into named functions is often more readable.
+
+----------------------------------------
+37. Practical Example — Employee Salaries
+----------------------------------------
+
+employees = [
+    {"name": "Rahul", "salary": 50000},
+    {"name": "Anu", "salary": 70000},
+    {"name": "Sam", "salary": 45000},
+    {"name": "Priya", "salary": 80000}
+]
+
+high_salary = filter(
+    lambda employee: employee["salary"] >= 60000,
+    employees
+)
+
+names = map(
+    lambda employee: employee["name"],
+    high_salary
+)
+
+print(list(names))
+
+Output:
+
+[
+    "Anu",
+    "Priya"
+]
+
+----------------------------------------
+38. Practical Example — Data Transformation
+----------------------------------------
+
+prices = [100, 200, 300, 400]
+
+with_tax = map(
+    lambda price: price * 1.18,
+    prices
+)
+
+print(list(with_tax))
+
+Output:
+
+[118.0, 236.0, 354.0, 472.0]
+
+----------------------------------------
+39. Practical Example — Filtering Strings
+----------------------------------------
+
+names = [
+    "Rahul",
+    "Anu",
+    "Christopher",
+    "Sam"
+]
+
+long_names = filter(
+    lambda name: len(name) > 4,
+    names
+)
+
+print(list(long_names))
+
+Output:
+
+[
+    "Rahul",
+    "Christopher"
+]
+
+----------------------------------------
+40. Practical Example — Sorting Products
+----------------------------------------
+
+products = [
+    {"name": "Laptop", "price": 70000},
+    {"name": "Mouse", "price": 1200},
+    {"name": "Keyboard", "price": 2500}
+]
+
+products = sorted(
+    products,
+    key=lambda product: product["price"]
+)
+
+for product in products:
+    print(product["name"], product["price"])
+
+Output:
+
+Mouse 1200
+Keyboard 2500
+Laptop 70000
+
+----------------------------------------
+41. Important Functional Programming Concepts
+----------------------------------------
+
+First-class functions
+→ Functions can be stored and passed around.
+
+Higher-order functions
+→ Functions can accept or return functions.
+
+Lambda
+→ Small anonymous function.
+
+map()
+→ Transform each item.
+
+filter()
+→ Select items based on a condition.
+
+reduce()
+→ Combine values into one result.
+
+sorted(key=...)
+→ Sort using a derived value.
+
+any()
+→ At least one value is truthy.
+
+all()
+→ Every value is truthy.
+
+partial()
+→ Pre-fill function arguments.
+
+----------------------------------------
+42. Lambda Limitations
+----------------------------------------
+
+A lambda is limited to a single expression.
+
+This is valid:
+
+square = lambda x: x ** 2
+
+This is not appropriate for multi-step logic:
+
+lambda x:
+    y = x + 1
+    return y * 2
+
+Use def instead:
+
+def calculate(x):
+    y = x + 1
+    return y * 2
+
+Use lambda for short, simple operations.
+
+----------------------------------------
+43. Important Best Practices
+----------------------------------------
+
+Use lambda when it improves readability.
+
+Avoid deeply nested lambda expressions.
+
+Prefer named functions when logic becomes complex.
+
+Use list comprehensions when they are clearer than map() and filter().
+
+Use generators when lazy processing is useful.
+
+Use reduce() when the reduction operation is genuinely clearer than a loop or another built-in.
+
+Use key= with sorted() instead of manually sorting data.
+
+Keep functional pipelines readable.
+
+----------------------------------------
+44. Professional Mental Model
+----------------------------------------
+
+Functional programming in Python:
+
+Data
+↓
+Function
+↓
+Transform / Filter
+↓
+More functions
+↓
+Result
+
+Example:
+
+employees
+↓
+filter()
+↓
+Eligible employees
+↓
+map()
+↓
+Selected values
+↓
+sorted()
+↓
+Ordered result
+
+The key idea:
+
+Python treats functions as first-class objects, allowing functions to be passed, stored, returned, and combined to build reusable data-processing operations.`,
+},
+
+  ],
+        resources: [
               { label: "Generators (Real Python)", url: "https://realpython.com/introduction-to-python-generators/", type: "article" },
             ],
           },
@@ -19724,6 +66302,1213 @@ def read_chunks(filename, size=8192):
             title: "Decorators",
             type: "concept",
             detail: "Decorators add behavior to functions without modifying them. Used everywhere in Django, FastAPI, Flask, pytest.",
+            subsections: [
+                 {
+  heading: "Decorators",
+  body: `A decorator is a Python feature that allows you to modify or extend the behavior of a function or class without changing its original source code.
+
+Decorators are built on Python's first-class functions and higher-order functions.
+
+They are commonly used for:
+
+• Logging
+• Authentication
+• Authorization
+• Timing functions
+• Validation
+• Caching
+• Retry logic
+• Access control
+• API route handling
+• Database transactions
+
+The key idea is:
+
+Original function
+↓
+Decorator
+↓
+Enhanced behavior
+
+----------------------------------------
+1. What Is a Decorator?
+----------------------------------------
+
+A decorator is a function that receives another function and returns a modified or wrapped function.
+
+Example:
+
+def decorator(function):
+
+    def wrapper():
+        print("Before function")
+        function()
+        print("After function")
+
+    return wrapper
+
+Here:
+
+decorator()
+→ Decorator
+
+wrapper()
+→ Wrapper function
+
+function()
+→ Original function
+
+----------------------------------------
+2. Basic Decorator Example
+----------------------------------------
+
+Example:
+
+def logger(function):
+
+    def wrapper():
+        print("Function started")
+        function()
+        print("Function finished")
+
+    return wrapper
+
+
+def greet():
+    print("Hello Python")
+
+
+greet = logger(greet)
+
+greet()
+
+Output:
+
+Function started
+Hello Python
+Function finished
+
+The original greet() function has been wrapped with additional behavior.
+
+----------------------------------------
+3. @ Decorator Syntax
+----------------------------------------
+
+Python provides a shorter syntax using @.
+
+Instead of:
+
+greet = logger(greet)
+
+you can write:
+
+@logger
+def greet():
+    print("Hello Python")
+
+Then:
+
+greet()
+
+produces:
+
+Function started
+Hello Python
+Function finished
+
+The @logger syntax is called decorator syntax.
+
+----------------------------------------
+4. How @decorator Works
+----------------------------------------
+
+This:
+
+@logger
+def greet():
+    print("Hello")
+
+is essentially equivalent to:
+
+def greet():
+    print("Hello")
+
+greet = logger(greet)
+
+The decorator is applied when the function is defined.
+
+----------------------------------------
+5. Decorator with Arguments
+----------------------------------------
+
+A decorator should usually support functions that receive arguments.
+
+Example:
+
+def logger(function):
+
+    def wrapper(*args, **kwargs):
+
+        print("Function started")
+
+        result = function(
+            *args,
+            **kwargs
+        )
+
+        print("Function finished")
+
+        return result
+
+    return wrapper
+
+
+@logger
+def add(a, b):
+    return a + b
+
+
+print(add(10, 20))
+
+Output:
+
+Function started
+Function finished
+30
+
+----------------------------------------
+6. *args and **kwargs
+----------------------------------------
+
+A general-purpose wrapper often uses:
+
+*args
+**kwargs
+
+Example:
+
+def decorator(function):
+
+    def wrapper(*args, **kwargs):
+
+        return function(
+            *args,
+            **kwargs
+        )
+
+    return wrapper
+
+*args
+→ Positional arguments
+
+**kwargs
+→ Keyword arguments
+
+This allows the decorator to work with functions having different signatures.
+
+----------------------------------------
+7. Returning the Original Result
+----------------------------------------
+
+A wrapper should return the result when the original function returns a value.
+
+Example:
+
+def logger(function):
+
+    def wrapper(*args, **kwargs):
+
+        print("Calling function")
+
+        result = function(
+            *args,
+            **kwargs
+        )
+
+        return result
+
+    return wrapper
+
+
+@logger
+def multiply(a, b):
+    return a * b
+
+
+result = multiply(5, 4)
+
+print(result)
+
+Output:
+
+Calling function
+20
+
+Without return result, the decorated function would return None.
+
+----------------------------------------
+8. functools.wraps
+----------------------------------------
+
+Decorators can replace the original function's metadata with the wrapper's metadata.
+
+Use:
+
+from functools import wraps
+
+Example:
+
+from functools import wraps
+
+def logger(function):
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+
+        print("Calling function")
+
+        return function(
+            *args,
+            **kwargs
+        )
+
+    return wrapper
+
+
+@logger
+def greet(name):
+    """Greet a user."""
+
+    return f"Hello {name}"
+
+
+print(greet.__name__)
+print(greet.__doc__)
+
+Output:
+
+greet
+Greet a user.
+
+wraps() preserves important metadata from the original function.
+
+This is a standard best practice when writing decorators.
+
+----------------------------------------
+9. Decorator for Timing
+----------------------------------------
+
+Decorators can measure how long a function takes.
+
+Example:
+
+import time
+from functools import wraps
+
+def timer(function):
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+
+        start = time.perf_counter()
+
+        result = function(
+            *args,
+            **kwargs
+        )
+
+        end = time.perf_counter()
+
+        print(
+            f"Execution time: "
+            f"{end - start:.6f} seconds"
+        )
+
+        return result
+
+    return wrapper
+
+
+@timer
+def calculate():
+    total = sum(range(1_000_000))
+    return total
+
+
+print(calculate())
+
+The decorator measures the execution time without changing calculate() itself.
+
+----------------------------------------
+10. Decorator for Logging
+----------------------------------------
+
+Example:
+
+from functools import wraps
+
+def log_call(function):
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+
+        print(
+            f"Calling {function.__name__}"
+        )
+
+        result = function(
+            *args,
+            **kwargs
+        )
+
+        print(
+            f"{function.__name__} completed"
+        )
+
+        return result
+
+    return wrapper
+
+
+@log_call
+def add(a, b):
+    return a + b
+
+
+print(add(10, 20))
+
+Output:
+
+Calling add
+add completed
+30
+
+----------------------------------------
+11. Decorator for Authentication
+----------------------------------------
+
+Decorators are commonly used for access control.
+
+Example:
+
+from functools import wraps
+
+def require_login(function):
+
+    @wraps(function)
+    def wrapper(user, *args, **kwargs):
+
+        if not user.get("logged_in"):
+            raise PermissionError(
+                "Login required"
+            )
+
+        return function(
+            user,
+            *args,
+            **kwargs
+        )
+
+    return wrapper
+
+
+@require_login
+def dashboard(user):
+    return "Welcome to dashboard"
+
+
+user = {
+    "name": "Rahul",
+    "logged_in": True
+}
+
+print(dashboard(user))
+
+Output:
+
+Welcome to dashboard
+
+The decorator checks authentication before allowing the function to execute.
+
+----------------------------------------
+12. Decorator for Validation
+----------------------------------------
+
+Example:
+
+from functools import wraps
+
+def positive_numbers(function):
+
+    @wraps(function)
+    def wrapper(a, b):
+
+        if a <= 0 or b <= 0:
+            raise ValueError(
+                "Numbers must be positive"
+            )
+
+        return function(a, b)
+
+    return wrapper
+
+
+@positive_numbers
+def multiply(a, b):
+    return a * b
+
+
+print(multiply(5, 4))
+
+Output:
+
+20
+
+Calling:
+
+multiply(-5, 4)
+
+raises ValueError.
+
+----------------------------------------
+13. Decorator with Its Own Arguments
+----------------------------------------
+
+Sometimes the decorator itself needs configuration.
+
+Example:
+
+def repeat(times):
+
+    def decorator(function):
+
+        def wrapper(*args, **kwargs):
+
+            result = None
+
+            for _ in range(times):
+                result = function(
+                    *args,
+                    **kwargs
+                )
+
+            return result
+
+        return wrapper
+
+    return decorator
+
+
+@repeat(3)
+def greet():
+    print("Hello")
+
+
+greet()
+
+Output:
+
+Hello
+Hello
+Hello
+
+There are three levels:
+
+repeat()
+→ Decorator factory
+
+decorator()
+→ Receives the function
+
+wrapper()
+→ Executes the function
+
+----------------------------------------
+14. Decorator Factory
+----------------------------------------
+
+A function that creates and returns a decorator is called a decorator factory.
+
+Example:
+
+def repeat(times):
+
+    def decorator(function):
+
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                function(*args, **kwargs)
+
+        return wrapper
+
+    return decorator
+
+Usage:
+
+@repeat(3)
+def greet():
+    print("Hello")
+
+repeat(3)
+→ Creates the decorator
+
+----------------------------------------
+15. Decorator with Parameters and wraps
+----------------------------------------
+
+A production-style version:
+
+from functools import wraps
+
+def repeat(times):
+
+    def decorator(function):
+
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+
+            result = None
+
+            for _ in range(times):
+
+                result = function(
+                    *args,
+                    **kwargs
+                )
+
+            return result
+
+        return wrapper
+
+    return decorator
+
+
+@repeat(3)
+def greet(name):
+    print(f"Hello {name}")
+
+
+greet("Rahul")
+
+----------------------------------------
+16. Multiple Decorators
+----------------------------------------
+
+A function can have multiple decorators.
+
+Example:
+
+@decorator_one
+@decorator_two
+def greet():
+    print("Hello")
+
+Python applies them from the bottom upward.
+
+Conceptually:
+
+greet
+↓
+decorator_two
+↓
+decorator_one
+↓
+final function
+
+This is equivalent to:
+
+greet = decorator_one(
+    decorator_two(greet)
+)
+
+----------------------------------------
+17. Decorator Execution Order
+----------------------------------------
+
+Example:
+
+def first(function):
+
+    def wrapper():
+        print("First before")
+        function()
+        print("First after")
+
+    return wrapper
+
+
+def second(function):
+
+    def wrapper():
+        print("Second before")
+        function()
+        print("Second after")
+
+    return wrapper
+
+
+@first
+@second
+def greet():
+    print("Hello")
+
+
+greet()
+
+Output:
+
+First before
+Second before
+Hello
+Second after
+First after
+
+Understanding decorator order is important when several decorators are combined.
+
+----------------------------------------
+18. Decorating Methods
+----------------------------------------
+
+Decorators can also be used on class methods.
+
+Example:
+
+from functools import wraps
+
+def log_method(function):
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+
+        print(
+            f"Calling {function.__name__}"
+        )
+
+        return function(
+            *args,
+            **kwargs
+        )
+
+    return wrapper
+
+
+class Calculator:
+
+    @log_method
+    def add(self, a, b):
+        return a + b
+
+
+calculator = Calculator()
+
+print(calculator.add(10, 20))
+
+Output:
+
+Calling add
+30
+
+self is passed through *args automatically.
+
+----------------------------------------
+19. Class Decorators
+----------------------------------------
+
+Decorators can also modify classes.
+
+Example:
+
+def add_method(cls):
+
+    def hello(self):
+        return "Hello from class"
+
+    cls.hello = hello
+
+    return cls
+
+
+@add_method
+class Person:
+    pass
+
+
+person = Person()
+
+print(person.hello())
+
+Output:
+
+Hello from class
+
+The decorator receives the class and modifies it.
+
+----------------------------------------
+20. Built-in Decorator — @staticmethod
+----------------------------------------
+
+Python provides built-in decorators.
+
+Example:
+
+class Math:
+
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+
+print(Math.add(10, 20))
+
+Output:
+
+30
+
+staticmethod() makes a method that does not receive self automatically.
+
+----------------------------------------
+21. Built-in Decorator — @classmethod
+----------------------------------------
+
+classmethod() receives the class as its first argument.
+
+Example:
+
+class Person:
+
+    count = 0
+
+    @classmethod
+    def get_count(cls):
+        return cls.count
+
+
+print(Person.get_count())
+
+The first argument is:
+
+cls
+
+which refers to the class.
+
+----------------------------------------
+22. Built-in Decorator — @property
+----------------------------------------
+
+@property allows a method to be accessed like an attribute.
+
+Example:
+
+class Person:
+
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+
+person = Person("Rahul")
+
+print(person.name)
+
+Notice:
+
+person.name
+
+instead of:
+
+person.name()
+
+----------------------------------------
+23. Property Setter
+----------------------------------------
+
+@property can also define controlled assignment.
+
+Example:
+
+class Person:
+
+    def __init__(self, age):
+        self.age = age
+
+    @property
+    def age(self):
+        return self._age
+
+    @age.setter
+    def age(self, value):
+
+        if value < 0:
+            raise ValueError(
+                "Age cannot be negative"
+            )
+
+        self._age = value
+
+
+person = Person(21)
+
+print(person.age)
+
+person.age = 25
+
+print(person.age)
+
+----------------------------------------
+24. Decorators and Closures
+----------------------------------------
+
+Decorators commonly use closures.
+
+Example:
+
+def logger(prefix):
+
+    def decorator(function):
+
+        def wrapper(*args, **kwargs):
+
+            print(prefix)
+
+            return function(
+                *args,
+                **kwargs
+            )
+
+        return wrapper
+
+    return decorator
+
+
+@logger("DEBUG")
+def greet():
+    print("Hello")
+
+
+greet()
+
+The wrapper remembers the prefix supplied when the decorator was created.
+
+----------------------------------------
+25. Decorator for Retry Logic
+----------------------------------------
+
+Decorators can implement retry behavior.
+
+Example:
+
+from functools import wraps
+
+def retry(times):
+
+    def decorator(function):
+
+        @wraps(function)
+        def wrapper(*args, **kwargs):
+
+            for attempt in range(times):
+
+                try:
+                    return function(
+                        *args,
+                        **kwargs
+                    )
+
+                except Exception:
+
+                    if attempt == times - 1:
+                        raise
+
+        return wrapper
+
+    return decorator
+
+
+@retry(3)
+def unstable_operation():
+    print("Trying operation")
+    raise RuntimeError("Temporary failure")
+
+
+try:
+    unstable_operation()
+
+except RuntimeError as error:
+    print(error)
+
+The function is attempted multiple times before the final exception is raised.
+
+In production systems, retry logic should normally be limited to errors that are actually safe to retry.
+
+----------------------------------------
+26. Decorator for Caching
+----------------------------------------
+
+Python provides:
+
+functools.lru_cache
+
+Example:
+
+from functools import lru_cache
+
+@lru_cache(maxsize=None)
+def fibonacci(n):
+
+    if n < 2:
+        return n
+
+    return (
+        fibonacci(n - 1)
+        + fibonacci(n - 2)
+    )
+
+
+print(fibonacci(40))
+
+The decorator caches previously calculated results.
+
+This can dramatically reduce repeated computation for suitable functions.
+
+----------------------------------------
+27. Decorator and Function Metadata
+----------------------------------------
+
+Without wraps():
+
+def decorator(function):
+
+    def wrapper(*args, **kwargs):
+        return function(*args, **kwargs)
+
+    return wrapper
+
+The decorated function's metadata may appear to belong to wrapper.
+
+With:
+
+from functools import wraps
+
+@wraps(function)
+
+Python preserves important metadata such as:
+
+• __name__
+• __doc__
+• __module__
+• __annotations__
+
+Always consider using functools.wraps in custom decorators.
+
+----------------------------------------
+28. Decorator vs Function Call
+----------------------------------------
+
+Normal function call:
+
+result = calculate()
+
+Decorator:
+
+@timer
+def calculate():
+    ...
+
+The decorator changes what happens when calculate() is called.
+
+The original function itself does not need to contain the extra logging, timing, validation, or authentication logic.
+
+----------------------------------------
+29. Decorators in Web Frameworks
+----------------------------------------
+
+Decorators are heavily used in Python web development.
+
+Conceptually:
+
+@app.route("/users")
+def users():
+    ...
+
+The framework uses the decorator to register the function as a route.
+
+Authentication can also be represented conceptually as:
+
+@require_login
+@app.route("/dashboard")
+def dashboard():
+    ...
+
+The exact decorator order and behavior depend on the framework.
+
+----------------------------------------
+30. Decorators in Testing
+----------------------------------------
+
+Testing frameworks also use decorators.
+
+Example concept:
+
+@pytest.mark.parametrize(
+    "input_value, expected",
+    [
+        (1, 2),
+        (2, 4),
+        (3, 6)
+    ]
+)
+def test_double(input_value, expected):
+    assert input_value * 2 == expected
+
+The decorator adds metadata or behavior to the test.
+
+----------------------------------------
+31. When to Use Decorators
+----------------------------------------
+
+Decorators are useful when the same behavior must be applied to many functions.
+
+Examples:
+
+Logging:
+
+@log_call
+
+Authentication:
+
+@require_login
+
+Timing:
+
+@timer
+
+Caching:
+
+@lru_cache
+
+Validation:
+
+@validate_input
+
+Retry:
+
+@retry(3)
+
+Instead of duplicating the same logic inside every function, the behavior can be centralized in a decorator.
+
+----------------------------------------
+32. When Not to Use Decorators
+----------------------------------------
+
+Do not use decorators simply because they are advanced.
+
+Avoid them when:
+
+• A normal function is clearer
+• The behavior is used only once
+• The wrapper makes debugging difficult
+• The decorator hides important business logic
+• Nested decorators become difficult to understand
+
+Good Python code prioritizes readability.
+
+----------------------------------------
+33. Important Decorator Rules
+----------------------------------------
+
+Rule 1:
+
+A decorator receives a function or class.
+
+Rule 2:
+
+A decorator usually returns a modified function or class.
+
+Rule 3:
+
+Use @decorator syntax for readability.
+
+Rule 4:
+
+Use *args and **kwargs for general-purpose wrappers.
+
+Rule 5:
+
+Return the original function's result.
+
+Rule 6:
+
+Use functools.wraps() in custom function decorators.
+
+Rule 7:
+
+Decorator factories can accept configuration.
+
+Rule 8:
+
+Multiple decorators are applied from the bottom upward.
+
+Rule 9:
+
+Decorators can be applied to functions, methods, and classes.
+
+Rule 10:
+
+Python provides built-in decorators such as:
+
+@staticmethod
+@classmethod
+@property
+
+----------------------------------------
+34. Professional Mental Model
+----------------------------------------
+
+Decorator:
+
+Original function
+↓
+Decorator receives function
+↓
+Wrapper created
+↓
+Additional behavior added
+↓
+Wrapper returned
+↓
+Function call
+↓
+Additional behavior
+↓
+Original function
+↓
+Result
+
+Example:
+
+@timer
+@logger
+def process_data():
+    ...
+
+Conceptually:
+
+process_data
+↓
+logger
+↓
+timer
+↓
+Enhanced function
+
+The key idea:
+
+A decorator allows reusable behavior to be added around functions or classes without modifying their original implementation.`,
+},
+            ],
             code: `from functools import wraps
 import time
 
@@ -19776,6 +67561,1046 @@ def fetch_data(url):
             title: "Context Managers",
             type: "concept",
             detail: "The 'with' statement manages resources cleanly. Write your own with __enter__/__exit__ or @contextmanager for elegant resource management.",
+            subsections: [
+                {
+  heading: "Context Managers",
+  body: `A context manager is a Python feature used to manage resources safely and automatically.
+
+Context managers are commonly used with:
+
+• Files
+• Database connections
+• Locks
+• Network connections
+• Transactions
+• Temporary resources
+
+The main idea is:
+
+Acquire resource
+↓
+Use resource
+↓
+Automatically clean up resource
+
+Python provides the with statement to work with context managers.
+
+----------------------------------------
+1. What Is a Context Manager?
+----------------------------------------
+
+A context manager controls what happens before and after a block of code.
+
+Example:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+print(content)
+
+The file is automatically closed after the with block finishes.
+
+You do not need to manually call:
+
+file.close()
+
+----------------------------------------
+2. Why Use Context Managers?
+----------------------------------------
+
+Without a context manager:
+
+file = open("data.txt", "r")
+
+try:
+    content = file.read()
+
+finally:
+    file.close()
+
+With a context manager:
+
+with open("data.txt", "r") as file:
+    content = file.read()
+
+The second version is shorter and safer.
+
+----------------------------------------
+3. The with Statement
+----------------------------------------
+
+Syntax:
+
+with expression as variable:
+
+    # code
+
+Example:
+
+with open("data.txt", "r") as file:
+
+    content = file.read()
+
+The context manager handles setup and cleanup around the block.
+
+----------------------------------------
+4. File Handling with with
+----------------------------------------
+
+Example:
+
+with open(
+    "data.txt",
+    "w",
+    encoding="utf-8"
+) as file:
+
+    file.write("Hello Python")
+
+The file is automatically closed when the block ends.
+
+----------------------------------------
+5. Context Manager Lifecycle
+----------------------------------------
+
+A context manager generally has two important methods:
+
+__enter__()
+__exit__()
+
+Conceptually:
+
+with manager as value:
+
+is roughly equivalent to:
+
+manager.__enter__()
+
+try:
+
+    # with block
+
+finally:
+
+    manager.__exit__()
+
+The actual exception-handling semantics are more specific, but this is the useful mental model.
+
+----------------------------------------
+6. __enter__()
+----------------------------------------
+
+__enter__() runs when entering the with block.
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Resource acquired")
+
+        return self
+
+
+with Resource() as resource:
+
+    print("Using resource")
+
+Output:
+
+Resource acquired
+Using resource
+
+The value returned by __enter__() is assigned to:
+
+resource
+
+----------------------------------------
+7. __exit__()
+----------------------------------------
+
+__exit__() runs when leaving the with block.
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Resource acquired")
+
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Resource released")
+
+
+with Resource():
+
+    print("Using resource")
+
+Output:
+
+Resource acquired
+Using resource
+Resource released
+
+The cleanup happens automatically.
+
+----------------------------------------
+8. __exit__() Arguments
+----------------------------------------
+
+The __exit__() method receives three exception-related arguments:
+
+exc_type
+→ Exception class, or None
+
+exc_value
+→ Exception instance, or None
+
+traceback
+→ Traceback object, or None
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Start")
+
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Cleanup")
+
+        print("Exception:", exc_type)
+
+
+with Resource():
+
+    print("Inside")
+
+Output:
+
+Start
+Inside
+Cleanup
+Exception: None
+
+If an exception occurs inside the block, the exception information is passed to __exit__().
+
+----------------------------------------
+9. Handling Exceptions
+----------------------------------------
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Opened")
+
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Closed")
+
+        if exc_type:
+            print(
+                "Exception:",
+                exc_value
+            )
+
+        return False
+
+
+with Resource():
+
+    print("Working")
+
+    raise ValueError("Something went wrong")
+
+The resource is still cleaned up before the exception continues outward.
+
+----------------------------------------
+10. Suppressing Exceptions
+----------------------------------------
+
+If __exit__() returns True, the exception can be suppressed.
+
+Example:
+
+class IgnoreError:
+
+    def __enter__(self):
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        return True
+
+
+with IgnoreError():
+
+    raise ValueError("Ignored")
+
+print("Program continues")
+
+Output:
+
+Program continues
+
+Use exception suppression carefully. Usually, returning False or None is preferable unless suppressing the exception is intentional.
+
+----------------------------------------
+11. contextlib
+----------------------------------------
+
+Python provides the contextlib module for creating and working with context managers.
+
+Import:
+
+from contextlib import contextmanager
+
+This allows a generator function to be turned into a context manager.
+
+----------------------------------------
+12. @contextmanager
+----------------------------------------
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def resource():
+
+    print("Acquire resource")
+
+    try:
+
+        yield
+
+    finally:
+
+        print("Release resource")
+
+
+with resource():
+
+    print("Using resource")
+
+Output:
+
+Acquire resource
+Using resource
+Release resource
+
+The code before yield runs when entering the context.
+
+The code after yield runs when leaving it.
+
+----------------------------------------
+13. @contextmanager with a Value
+----------------------------------------
+
+The value yielded by the generator can be assigned using as.
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def connection():
+
+    print("Opening connection")
+
+    connection_object = {
+        "status": "connected"
+    }
+
+    try:
+
+        yield connection_object
+
+    finally:
+
+        print("Closing connection")
+
+
+with connection() as conn:
+
+    print(conn["status"])
+
+Output:
+
+Opening connection
+connected
+Closing connection
+
+----------------------------------------
+14. Why try/finally Is Important
+----------------------------------------
+
+Use try/finally around the yield when cleanup must happen even if an exception occurs.
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def resource():
+
+    print("Acquire")
+
+    try:
+
+        yield
+
+    finally:
+
+        print("Cleanup")
+
+
+with resource():
+
+    print("Work")
+
+    raise ValueError("Error")
+
+Output:
+
+Acquire
+Work
+Cleanup
+
+The cleanup runs even though the block raises an exception.
+
+----------------------------------------
+15. Context Manager for Temporary Settings
+----------------------------------------
+
+Context managers are useful when a setting should be changed temporarily and restored afterward.
+
+Example:
+
+from contextlib import contextmanager
+
+@contextmanager
+def temporary_setting(settings, key, value):
+
+    old_value = settings.get(key)
+
+    settings[key] = value
+
+    try:
+
+        yield
+
+    finally:
+
+        if old_value is None:
+            settings.pop(key, None)
+        else:
+            settings[key] = old_value
+
+
+settings = {
+    "debug": False
+}
+
+with temporary_setting(
+    settings,
+    "debug",
+    True
+):
+
+    print(settings["debug"])
+
+print(settings["debug"])
+
+Output:
+
+True
+False
+
+The setting is restored automatically.
+
+----------------------------------------
+16. Multiple Context Managers
+----------------------------------------
+
+Multiple resources can be opened in one with statement.
+
+Example:
+
+with (
+    open("input.txt", "r", encoding="utf-8") as source,
+    open("output.txt", "w", encoding="utf-8") as destination
+):
+
+    destination.write(
+        source.read()
+    )
+
+Both resources are managed automatically.
+
+----------------------------------------
+17. Nested Context Managers
+----------------------------------------
+
+Context managers can also be nested.
+
+Example:
+
+with open(
+    "input.txt",
+    "r",
+    encoding="utf-8"
+) as source:
+
+    with open(
+        "output.txt",
+        "w",
+        encoding="utf-8"
+    ) as destination:
+
+        destination.write(
+            source.read()
+        )
+
+Each context is exited safely.
+
+----------------------------------------
+18. Context Manager for Database Work
+----------------------------------------
+
+Database libraries often provide context-manager support for connections, cursors, or transactions.
+
+Conceptually:
+
+with database_connection() as connection:
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "SELECT * FROM employees"
+    )
+
+    rows = cursor.fetchall()
+
+The exact behavior depends on the database library.
+
+The important idea is:
+
+Acquire connection
+↓
+Perform database work
+↓
+Commit / rollback / close as appropriate
+
+----------------------------------------
+19. Context Manager for Locks
+----------------------------------------
+
+Context managers are especially useful with threading locks.
+
+Example:
+
+import threading
+
+lock = threading.Lock()
+
+with lock:
+
+    # Critical section
+
+    print("Shared resource")
+
+The lock is released automatically when leaving the block.
+
+This is safer than manually calling:
+
+lock.acquire()
+
+and:
+
+lock.release()
+
+----------------------------------------
+20. Context Manager for Temporary Files
+----------------------------------------
+
+Temporary resources can also be managed using context managers.
+
+Example:
+
+from tempfile import NamedTemporaryFile
+
+with NamedTemporaryFile(
+    mode="w",
+    encoding="utf-8",
+    delete=False
+) as file:
+
+    file.write("Temporary data")
+
+    print(file.name)
+
+The context manager ensures the file object is closed.
+
+The exact lifetime of the underlying temporary file depends on the options and operating system.
+
+----------------------------------------
+21. Class-Based Context Manager
+----------------------------------------
+
+A complete custom context manager can be implemented as a class.
+
+Example:
+
+class DatabaseConnection:
+
+    def __enter__(self):
+
+        print("Connecting to database")
+
+        self.connection = "DB Connection"
+
+        return self.connection
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Closing database")
+
+        self.connection = None
+
+
+with DatabaseConnection() as connection:
+
+    print(connection)
+
+Output:
+
+Connecting to database
+DB Connection
+Closing database
+
+----------------------------------------
+22. Context Manager with Exception Handling
+----------------------------------------
+
+A context manager can inspect exceptions.
+
+Example:
+
+class Transaction:
+
+    def __enter__(self):
+
+        print("BEGIN")
+
+        return self
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        if exc_type is None:
+
+            print("COMMIT")
+
+        else:
+
+            print("ROLLBACK")
+            print(
+                "Error:",
+                exc_value
+            )
+
+        return False
+
+
+with Transaction():
+
+    print("Updating database")
+
+Output:
+
+BEGIN
+Updating database
+COMMIT
+
+If an exception occurs:
+
+with Transaction():
+
+    raise ValueError(
+        "Database error"
+    )
+
+The context manager can perform rollback-related cleanup before the exception propagates.
+
+----------------------------------------
+23. Context Manager and return
+----------------------------------------
+
+A return statement inside the with block still causes the context to be exited.
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Open")
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Close")
+
+
+def test():
+
+    with Resource():
+
+        print("Inside")
+
+        return "Done"
+
+
+print(test())
+
+Output:
+
+Open
+Inside
+Close
+Done
+
+The cleanup happens before the function actually returns.
+
+----------------------------------------
+24. Context Manager and break
+----------------------------------------
+
+The context is also exited when a loop is broken.
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        print("Open")
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        print("Close")
+
+
+for number in range(3):
+
+    with Resource():
+
+        print(number)
+
+        if number == 1:
+            break
+
+The context is exited before the loop terminates.
+
+----------------------------------------
+25. Context Manager vs try/finally
+----------------------------------------
+
+Manual resource management:
+
+resource = acquire()
+
+try:
+
+    use(resource)
+
+finally:
+
+    release(resource)
+
+Context manager:
+
+with acquire_resource() as resource:
+
+    use(resource)
+
+The context-manager version packages resource management into a reusable abstraction.
+
+----------------------------------------
+26. Context Manager vs Decorator
+----------------------------------------
+
+Decorator:
+
+Usually modifies behavior around a function or class.
+
+Example:
+
+@timer
+def calculate():
+    ...
+
+
+Context manager:
+
+Usually manages a resource or temporary state around a block of code.
+
+Example:
+
+with database_connection():
+    ...
+
+
+Mental model:
+
+Decorator
+→ Around a function/class
+
+Context manager
+→ Around a block
+
+----------------------------------------
+27. contextlib.closing()
+----------------------------------------
+
+contextlib provides helpers for resource management.
+
+closing() can be used with objects that provide close() but do not implement the context-manager protocol.
+
+Example:
+
+from contextlib import closing
+
+with closing(resource) as value:
+
+    use(value)
+
+When the block ends:
+
+resource.close()
+
+is called.
+
+----------------------------------------
+28. contextlib.suppress()
+----------------------------------------
+
+suppress() can intentionally ignore specified exceptions.
+
+Example:
+
+from contextlib import suppress
+
+with suppress(FileNotFoundError):
+
+    remove_file("missing.txt")
+
+print("Continue")
+
+This is useful when a specific exception is expected and intentionally irrelevant.
+
+Use it only when suppressing the exception is clear and safe.
+
+----------------------------------------
+29. contextlib.redirect_stdout()
+----------------------------------------
+
+contextlib can temporarily redirect standard output.
+
+Example:
+
+from contextlib import redirect_stdout
+from io import StringIO
+
+buffer = StringIO()
+
+with redirect_stdout(buffer):
+
+    print("Hello")
+    print("Python")
+
+result = buffer.getvalue()
+
+print(result)
+
+The printed output inside the block is captured in the buffer.
+
+----------------------------------------
+30. Reusable Resource Pattern
+----------------------------------------
+
+A good context manager should clearly define:
+
+1. What resource is acquired?
+2. What value is returned?
+3. What cleanup is required?
+4. What happens if an exception occurs?
+
+Example:
+
+class Resource:
+
+    def __enter__(self):
+
+        self.resource = acquire()
+
+        return self.resource
+
+    def __exit__(
+        self,
+        exc_type,
+        exc_value,
+        traceback
+    ):
+
+        release(self.resource)
+
+        return False
+
+----------------------------------------
+31. Important Context Manager Rules
+----------------------------------------
+
+Rule 1:
+
+Use with when a resource needs reliable cleanup.
+
+Rule 2:
+
+Class-based context managers implement:
+
+__enter__()
+__exit__()
+
+Rule 3:
+
+__enter__() returns the value used after as.
+
+Rule 4:
+
+__exit__() is called when leaving the with block.
+
+Rule 5:
+
+Cleanup should happen even when an exception occurs.
+
+Rule 6:
+
+Use try/finally inside @contextmanager functions when cleanup is required.
+
+Rule 7:
+
+Returning True from __exit__() suppresses an exception.
+
+Rule 8:
+
+Returning False or None allows the exception to propagate.
+
+Rule 9:
+
+contextlib provides convenient context-manager utilities.
+
+Rule 10:
+
+Context managers are especially valuable for resources and temporary state.
+
+----------------------------------------
+32. Professional Mental Model
+----------------------------------------
+
+Context manager:
+
+with resource() as value:
+    use(value)
+
+Conceptually:
+
+Enter
+↓
+Acquire resource
+↓
+Run block
+↓
+Exit
+↓
+Cleanup
+↓
+Exception?
+├── No → Continue
+└── Yes → Cleanup → Propagate or suppress
+
+Common examples:
+
+with open(...)
+→ File management
+
+with lock
+→ Thread synchronization
+
+with database_transaction()
+→ Transaction management
+
+with temporary_setting(...)
+→ Temporary state
+
+The key idea:
+
+A context manager guarantees that setup and cleanup are handled around a block of code, making resource management safer, cleaner, and more reusable.`,
+},
+            ],
             code: `from contextlib import contextmanager
 import time
 
@@ -19818,6 +68643,1694 @@ with open("in.txt") as src, open("out.txt","w") as dst:
             title: "Type Hints & Dataclasses",
             type: "concept",
             detail: "Type hints are now standard in all professional Python. dataclasses auto-generate __init__, __repr__, __eq__ — use them instead of manual classes for data containers.",
+            subsections: [
+                {
+  heading: "Type Hints & Dataclasses",
+  body: `Type hints and dataclasses are two important Python features for writing cleaner, safer, and more maintainable code.
+
+Type hints describe what type of data a variable, parameter, or return value is expected to contain.
+
+Dataclasses provide a convenient way to create classes mainly used for storing structured data.
+
+They are commonly used in:
+
+• APIs
+• Backend applications
+• Data models
+• Configuration objects
+• Database models
+• Request and response structures
+• Large Python projects
+
+----------------------------------------
+1. What Are Type Hints?
+----------------------------------------
+
+A type hint is an optional annotation that tells developers and development tools what type of value is expected.
+
+Example:
+
+name: str = "Tharun"
+
+age: int = 25
+
+salary: float = 45000.50
+
+is_active: bool = True
+
+Python does not normally enforce these annotations at runtime.
+
+They mainly improve:
+
+• Code readability
+• IDE support
+• Static analysis
+• Autocomplete
+• Error detection
+• Documentation
+
+----------------------------------------
+2. Basic Type Hint Syntax
+----------------------------------------
+
+Syntax:
+
+variable: type = value
+
+Example:
+
+name: str = "Python"
+
+age: int = 30
+
+price: float = 99.99
+
+active: bool = True
+
+Without type hints:
+
+name = "Python"
+
+With type hints:
+
+name: str = "Python"
+
+----------------------------------------
+3. Function Parameter Type Hints
+----------------------------------------
+
+Parameters can also have type hints.
+
+Example:
+
+def greet(name: str):
+
+    print(
+        f"Hello {name}"
+    )
+
+
+greet("Python")
+
+The annotation:
+
+name: str
+
+means the function expects a string.
+
+----------------------------------------
+4. Return Type Hints
+----------------------------------------
+
+Use -> to specify the expected return type.
+
+Example:
+
+def add(
+    a: int,
+    b: int
+) -> int:
+
+    return a + b
+
+
+result = add(10, 20)
+
+The function:
+
+add()
+
+expects two integers and is expected to return an integer.
+
+----------------------------------------
+5. Multiple Parameter Types
+----------------------------------------
+
+Example:
+
+def calculate_salary(
+    basic: float,
+    bonus: float,
+    tax: float
+) -> float:
+
+    return basic + bonus - tax
+
+
+salary = calculate_salary(
+    50000.0,
+    5000.0,
+    2000.0
+)
+
+Each parameter has its own annotation.
+
+----------------------------------------
+6. Type Hints Do Not Automatically Validate
+----------------------------------------
+
+Important:
+
+Python normally does not stop you from passing a different type just because a type hint exists.
+
+Example:
+
+def add(
+    a: int,
+    b: int
+) -> int:
+
+    return a + b
+
+
+print(
+    add("Hello", " Python")
+)
+
+This can still execute because Python's normal runtime behavior is not replaced by type hints.
+
+The annotation communicates the intended type.
+
+----------------------------------------
+7. list Type Hints
+----------------------------------------
+
+Modern Python can specify the type of elements inside a list.
+
+Example:
+
+names: list[str] = [
+    "Alice",
+    "Bob",
+    "Charlie"
+]
+
+numbers: list[int] = [
+    10,
+    20,
+    30
+]
+
+Function example:
+
+def total(
+    numbers: list[int]
+) -> int:
+
+    return sum(numbers)
+
+----------------------------------------
+8. dict Type Hints
+----------------------------------------
+
+Dictionary key and value types can be specified.
+
+Example:
+
+users: dict[int, str] = {
+    1: "Alice",
+    2: "Bob",
+    3: "Charlie"
+}
+
+Here:
+
+int
+→ Key type
+
+str
+→ Value type
+
+Function:
+
+def get_user(
+    users: dict[int, str],
+    user_id: int
+) -> str:
+
+    return users[user_id]
+
+----------------------------------------
+9. tuple Type Hints
+----------------------------------------
+
+Tuple types can also be described.
+
+Example:
+
+point: tuple[float, float] = (
+    10.5,
+    20.3
+)
+
+This means the tuple contains:
+
+float
+float
+
+A fixed structure can also be described:
+
+person: tuple[str, int] = (
+    "Alice",
+    25
+)
+
+----------------------------------------
+10. set Type Hints
+----------------------------------------
+
+Example:
+
+numbers: set[int] = {
+    1,
+    2,
+    3,
+    4
+}
+
+Function:
+
+def unique_numbers(
+    values: list[int]
+) -> set[int]:
+
+    return set(values)
+
+----------------------------------------
+11. Optional Values
+----------------------------------------
+
+Sometimes a value can be a specific type or None.
+
+Modern Python syntax:
+
+name: str | None = None
+
+Example:
+
+def find_user(
+    user_id: int
+) -> str | None:
+
+    if user_id == 1:
+
+        return "Alice"
+
+    return None
+
+The return type means:
+
+str
+OR
+None
+
+Older Python code commonly used:
+
+from typing import Optional
+
+def find_user(
+    user_id: int
+) -> Optional[str]:
+
+    ...
+
+Both express the same basic idea.
+
+----------------------------------------
+12. Union Types
+----------------------------------------
+
+A value can sometimes accept multiple types.
+
+Modern syntax:
+
+value: int | float
+
+Example:
+
+def square(
+    value: int | float
+) -> int | float:
+
+    return value ** 2
+
+The function accepts either:
+
+int
+
+or:
+
+float
+
+Older syntax:
+
+from typing import Union
+
+value: Union[int, float]
+
+----------------------------------------
+13. Any
+----------------------------------------
+
+Any means that a value can have any type.
+
+Example:
+
+from typing import Any
+
+data: Any = "Python"
+
+data = 100
+
+data = [1, 2, 3]
+
+Any should be used carefully because it removes much of the benefit of static type checking.
+
+Prefer a more specific type when possible.
+
+----------------------------------------
+14. Type Aliases
+----------------------------------------
+
+A type alias gives a reusable name to a complex type.
+
+Example:
+
+UserID = int
+
+user_id: UserID = 101
+
+Another example:
+
+UserData = dict[str, str]
+
+user: UserData = {
+    "name": "Alice",
+    "city": "Delhi"
+}
+
+This makes complex annotations easier to read.
+
+----------------------------------------
+15. Callable Type Hints
+----------------------------------------
+
+Callable can describe functions passed as arguments.
+
+Example:
+
+from collections.abc import Callable
+
+def calculate(
+    operation: Callable[[int, int], int],
+    a: int,
+    b: int
+) -> int:
+
+    return operation(a, b)
+
+
+def add(a: int, b: int) -> int:
+
+    return a + b
+
+
+print(
+    calculate(add, 10, 20)
+)
+
+The Callable describes:
+
+Input:
+int, int
+
+Return:
+int
+
+----------------------------------------
+16. TypeVar
+----------------------------------------
+
+TypeVar is useful when a function should preserve a relationship between input and output types.
+
+Example:
+
+from typing import TypeVar
+
+T = TypeVar("T")
+
+
+def first(
+    values: list[T]
+) -> T:
+
+    return values[0]
+
+
+print(
+    first([1, 2, 3])
+)
+
+print(
+    first(["a", "b", "c"])
+)
+
+The same generic function can work with different element types.
+
+----------------------------------------
+17. Generic Types
+----------------------------------------
+
+Generic types allow reusable code to work with different data types while preserving type information.
+
+Example:
+
+from typing import TypeVar
+
+T = TypeVar("T")
+
+
+def get_item(
+    items: list[T],
+    index: int
+) -> T:
+
+    return items[index]
+
+
+number = get_item(
+    [10, 20, 30],
+    1
+)
+
+name = get_item(
+    ["Alice", "Bob"],
+    0
+)
+
+The function works with different types.
+
+----------------------------------------
+18. Type Hints for Classes
+----------------------------------------
+
+Class attributes can have type hints.
+
+Example:
+
+class Employee:
+
+    name: str
+    age: int
+    salary: float
+
+    def __init__(
+        self,
+        name: str,
+        age: int,
+        salary: float
+    ):
+
+        self.name = name
+        self.age = age
+        self.salary = salary
+
+
+employee = Employee(
+    "Alice",
+    25,
+    50000.0
+)
+
+----------------------------------------
+19. What Is a Dataclass?
+----------------------------------------
+
+A dataclass is a class designed mainly for storing data.
+
+Python provides dataclasses through:
+
+from dataclasses import dataclass
+
+Instead of manually writing repetitive methods such as:
+
+__init__()
+__repr__()
+__eq__()
+
+@dataclass can generate them automatically.
+
+----------------------------------------
+20. Basic Dataclass
+----------------------------------------
+
+Example:
+
+from dataclasses import dataclass
+
+@dataclass
+class Employee:
+
+    name: str
+    age: int
+    salary: float
+
+
+employee = Employee(
+    "Alice",
+    25,
+    50000.0
+)
+
+print(employee)
+
+Output:
+
+Employee(
+    name='Alice',
+    age=25,
+    salary=50000.0
+)
+
+The __init__() method is generated automatically.
+
+----------------------------------------
+21. Dataclass Syntax
+----------------------------------------
+
+Basic syntax:
+
+from dataclasses import dataclass
+
+@dataclass
+class ClassName:
+
+    field1: type
+    field2: type
+    field3: type
+
+Example:
+
+@dataclass
+class Product:
+
+    name: str
+    price: float
+    quantity: int
+
+----------------------------------------
+22. Default Values
+----------------------------------------
+
+Fields can have default values.
+
+Example:
+
+from dataclasses import dataclass
+
+@dataclass
+class User:
+
+    name: str
+    age: int = 18
+    active: bool = True
+
+
+user = User("Alice")
+
+print(user)
+
+Output:
+
+User(
+    name='Alice',
+    age=18,
+    active=True
+)
+
+----------------------------------------
+23. Field Ordering
+----------------------------------------
+
+Fields without defaults must come before fields with defaults.
+
+Correct:
+
+@dataclass
+class User:
+
+    name: str
+    age: int = 18
+
+Incorrect:
+
+@dataclass
+class User:
+
+    age: int = 18
+    name: str
+
+This causes an initialization error because a non-default field follows a default field.
+
+----------------------------------------
+24. field()
+----------------------------------------
+
+The field() function provides more control over dataclass fields.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    field
+)
+
+@dataclass
+class Student:
+
+    name: str
+
+    subjects: list[str] = field(
+        default_factory=list
+    )
+
+
+student = Student("Alice")
+
+print(student.subjects)
+
+Output:
+
+[]
+
+default_factory is especially useful for mutable values such as:
+
+list
+dict
+set
+
+----------------------------------------
+25. Why Not Use [] as a Default?
+----------------------------------------
+
+Avoid:
+
+@dataclass
+class Student:
+
+    subjects: list[str] = []
+
+Instead use:
+
+@dataclass
+class Student:
+
+    subjects: list[str] = field(
+        default_factory=list
+    )
+
+This creates a separate list for each object.
+
+----------------------------------------
+26. Dataclass Automatically Creates __init__()
+----------------------------------------
+
+Normal class:
+
+class User:
+
+    def __init__(
+        self,
+        name,
+        age
+    ):
+
+        self.name = name
+        self.age = age
+
+
+user = User(
+    "Alice",
+    25
+)
+
+Dataclass:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+
+user = User(
+    "Alice",
+    25
+)
+
+The constructor is generated automatically.
+
+----------------------------------------
+27. Dataclass Automatically Creates __repr__()
+----------------------------------------
+
+Example:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+
+user = User(
+    "Alice",
+    25
+)
+
+print(user)
+
+Output:
+
+User(name='Alice', age=25)
+
+This makes debugging easier.
+
+----------------------------------------
+28. Dataclass Equality
+----------------------------------------
+
+Dataclasses can automatically generate equality comparison.
+
+Example:
+
+@dataclass
+class Point:
+
+    x: int
+    y: int
+
+
+p1 = Point(10, 20)
+
+p2 = Point(10, 20)
+
+print(p1 == p2)
+
+Output:
+
+True
+
+The generated equality compares the fields.
+
+----------------------------------------
+29. frozen=True
+----------------------------------------
+
+A dataclass can be made immutable using frozen=True.
+
+Example:
+
+@dataclass(frozen=True)
+class Point:
+
+    x: int
+    y: int
+
+
+point = Point(
+    10,
+    20
+)
+
+point.x = 50
+
+This raises:
+
+FrozenInstanceError
+
+Use frozen dataclasses when objects should not be modified after creation.
+
+----------------------------------------
+30. order=True
+----------------------------------------
+
+order=True can generate comparison methods.
+
+Example:
+
+@dataclass(order=True)
+class Product:
+
+    price: float
+    name: str
+
+
+p1 = Product(
+    100.0,
+    "A"
+)
+
+p2 = Product(
+    200.0,
+    "B"
+)
+
+print(p1 < p2)
+
+Output:
+
+True
+
+The generated ordering follows the field order.
+
+Use it when ordering based on fields makes sense.
+
+----------------------------------------
+31. slots=True
+----------------------------------------
+
+Modern Python dataclasses can use:
+
+slots=True
+
+Example:
+
+@dataclass(slots=True)
+class User:
+
+    name: str
+    age: int
+
+Slots can reduce per-instance memory overhead and prevent arbitrary new instance attributes.
+
+Example:
+
+user = User(
+    "Alice",
+    25
+)
+
+user.email = "alice@example.com"
+
+This will not be allowed when the generated slots configuration does not provide that attribute.
+
+----------------------------------------
+32. Dataclass with Methods
+----------------------------------------
+
+A dataclass can contain normal methods.
+
+Example:
+
+@dataclass
+class Rectangle:
+
+    width: float
+    height: float
+
+    def area(self) -> float:
+
+        return (
+            self.width *
+            self.height
+        )
+
+
+rectangle = Rectangle(
+    10,
+    5
+)
+
+print(
+    rectangle.area()
+)
+
+Output:
+
+50
+
+Dataclass does not mean that the class cannot contain behavior.
+
+----------------------------------------
+33. __post_init__()
+----------------------------------------
+
+__post_init__() runs automatically after the generated __init__().
+
+Example:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+    def __post_init__(self):
+
+        if self.age < 0:
+
+            raise ValueError(
+                "Age cannot be negative"
+            )
+
+
+user = User(
+    "Alice",
+    25
+)
+
+This is useful for validation or derived values.
+
+----------------------------------------
+34. Derived Fields
+----------------------------------------
+
+A field can be excluded from the generated constructor.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    field
+)
+
+@dataclass
+class Rectangle:
+
+    width: float
+    height: float
+
+    area: float = field(
+        init=False
+    )
+
+    def __post_init__(self):
+
+        self.area = (
+            self.width *
+            self.height
+        )
+
+
+rectangle = Rectangle(
+    10,
+    5
+)
+
+print(rectangle.area)
+
+Output:
+
+50
+
+The caller only provides width and height.
+
+----------------------------------------
+35. Class Variables
+----------------------------------------
+
+Use ClassVar for values shared by the class rather than stored as normal dataclass fields.
+
+Example:
+
+from dataclasses import dataclass
+from typing import ClassVar
+
+@dataclass
+class Employee:
+
+    company: ClassVar[str] = "ABC Corp"
+
+    name: str
+    salary: float
+
+
+employee = Employee(
+    "Alice",
+    50000
+)
+
+print(employee.name)
+print(Employee.company)
+
+----------------------------------------
+36. InitVar
+----------------------------------------
+
+InitVar represents a value accepted during initialization but not stored as a normal field.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    InitVar
+)
+
+@dataclass
+class User:
+
+    name: str
+    password: InitVar[str]
+
+    def __post_init__(
+        self,
+        password: str
+    ):
+
+        print(
+            "Password received"
+        )
+
+
+user = User(
+    "Alice",
+    "secret"
+)
+
+The password is available during initialization but is not stored as a dataclass field.
+
+----------------------------------------
+37. asdict()
+----------------------------------------
+
+asdict() converts a dataclass instance into a dictionary.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    asdict
+)
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+
+user = User(
+    "Alice",
+    25
+)
+
+data = asdict(user)
+
+print(data)
+
+Output:
+
+{
+    'name': 'Alice',
+    'age': 25
+}
+
+This is useful when preparing structured data for APIs or serialization.
+
+----------------------------------------
+38. astuple()
+----------------------------------------
+
+astuple() converts a dataclass instance into a tuple.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    astuple
+)
+
+@dataclass
+class Point:
+
+    x: int
+    y: int
+
+
+point = Point(
+    10,
+    20
+)
+
+print(
+    astuple(point)
+)
+
+Output:
+
+(10, 20)
+
+----------------------------------------
+39. fields()
+----------------------------------------
+
+fields() provides information about dataclass fields.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    fields
+)
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+
+for field_info in fields(User):
+
+    print(
+        field_info.name,
+        field_info.type
+    )
+
+Output:
+
+name <class 'str'>
+age <class 'int'>
+
+----------------------------------------
+40. replace()
+----------------------------------------
+
+dataclasses.replace() creates a new object with selected fields changed.
+
+Example:
+
+from dataclasses import (
+    dataclass,
+    replace
+)
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+
+user1 = User(
+    "Alice",
+    25
+)
+
+user2 = replace(
+    user1,
+    age=26
+)
+
+print(user1)
+print(user2)
+
+Output:
+
+User(name='Alice', age=25)
+User(name='Alice', age=26)
+
+This is particularly useful with frozen dataclasses.
+
+----------------------------------------
+41. Dataclass vs Normal Class
+----------------------------------------
+
+Normal class:
+
+class User:
+
+    def __init__(
+        self,
+        name: str,
+        age: int
+    ):
+
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+
+        return (
+            f"User("
+            f"name={self.name!r}, "
+            f"age={self.age!r})"
+        )
+
+Dataclass:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+The dataclass removes repetitive boilerplate.
+
+----------------------------------------
+42. Type Hints + Dataclasses
+----------------------------------------
+
+These features work especially well together.
+
+Example:
+
+from dataclasses import dataclass
+
+@dataclass
+class Employee:
+
+    id: int
+    name: str
+    department: str
+    salary: float
+    active: bool = True
+
+
+employee = Employee(
+    id=101,
+    name="Alice",
+    department="Engineering",
+    salary=75000.0
+)
+
+This provides a clean model for structured data.
+
+----------------------------------------
+43. Nested Dataclasses
+----------------------------------------
+
+Dataclasses can contain other dataclasses.
+
+Example:
+
+@dataclass
+class Address:
+
+    city: str
+    country: str
+
+
+@dataclass
+class User:
+
+    name: str
+    address: Address
+
+
+user = User(
+    name="Alice",
+    address=Address(
+        city="Delhi",
+        country="India"
+    )
+)
+
+print(user.address.city)
+
+Output:
+
+Delhi
+
+This is useful for representing nested data structures.
+
+----------------------------------------
+44. Dataclasses for API Data
+----------------------------------------
+
+Dataclasses can represent structured application data.
+
+Example:
+
+@dataclass
+class Product:
+
+    id: int
+    name: str
+    price: float
+    in_stock: bool
+
+
+product = Product(
+    id=101,
+    name="Laptop",
+    price=65000.0,
+    in_stock=True
+)
+
+This gives the object a clear structure.
+
+Frameworks may provide their own model systems, but dataclasses are useful for general Python application models and internal data structures.
+
+----------------------------------------
+45. Dataclasses for Configuration
+----------------------------------------
+
+Example:
+
+@dataclass
+class AppConfig:
+
+    host: str
+    port: int
+    debug: bool = False
+
+
+config = AppConfig(
+    host="localhost",
+    port=8000,
+    debug=True
+)
+
+print(config)
+
+This is cleaner than passing around an unstructured dictionary.
+
+----------------------------------------
+46. Type Hints for Dictionaries vs Dataclasses
+----------------------------------------
+
+Dictionary:
+
+user = {
+    "name": "Alice",
+    "age": 25
+}
+
+The structure is flexible.
+
+Dataclass:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+user = User(
+    "Alice",
+    25
+)
+
+The structure is explicit.
+
+Use a dictionary when the structure is naturally dynamic.
+
+Use a dataclass when the structure represents a known data model.
+
+----------------------------------------
+47. Dataclass vs NamedTuple
+----------------------------------------
+
+NamedTuple:
+
+from typing import NamedTuple
+
+class Point(NamedTuple):
+
+    x: int
+    y: int
+
+A NamedTuple behaves like a tuple and is immutable by default.
+
+Dataclass:
+
+@dataclass
+class Point:
+
+    x: int
+    y: int
+
+A dataclass behaves like a normal class and is mutable by default.
+
+Use NamedTuple when tuple behavior is useful.
+
+Use dataclass when you want a structured object with class-like behavior.
+
+----------------------------------------
+48. Dataclass vs Pydantic Models
+----------------------------------------
+
+Dataclass:
+
+@dataclass
+class User:
+
+    name: str
+    age: int
+
+Type hints mainly describe the intended structure.
+
+Pydantic models can perform runtime data parsing and validation.
+
+For example, in API development, Pydantic is commonly used for validating incoming request data.
+
+Mental model:
+
+Type hints
+→ Describe expected types
+
+Dataclass
+→ Store structured data conveniently
+
+Pydantic
+→ Validate and parse structured data at runtime
+
+----------------------------------------
+49. Static Type Checking
+----------------------------------------
+
+Type hints become much more useful with static type checkers.
+
+Common tools include:
+
+mypy
+pyright
+
+Example:
+
+def add(
+    a: int,
+    b: int
+) -> int:
+
+    return a + b
+
+
+result = add(
+    "10",
+    "20"
+)
+
+A static type checker can report that strings are not the expected argument types.
+
+The Python interpreter itself does not normally enforce the annotation.
+
+----------------------------------------
+50. Type Hints in Large Projects
+----------------------------------------
+
+Type hints become especially valuable as projects grow.
+
+Example:
+
+def create_employee(
+    name: str,
+    age: int,
+    salary: float
+) -> Employee:
+
+    return Employee(
+        name=name,
+        age=age,
+        salary=salary
+    )
+
+A developer reading the function can immediately understand:
+
+Input:
+str, int, float
+
+Output:
+Employee
+
+This reduces ambiguity.
+
+----------------------------------------
+51. Complete Practical Example
+----------------------------------------
+
+from dataclasses import (
+    dataclass,
+    field,
+    asdict
+)
+
+
+@dataclass
+class Employee:
+
+    id: int
+    name: str
+    department: str
+    skills: list[str] = field(
+        default_factory=list
+    )
+    active: bool = True
+
+    def add_skill(
+        self,
+        skill: str
+    ) -> None:
+
+        self.skills.append(skill)
+
+
+employee = Employee(
+    id=101,
+    name="Alice",
+    department="Engineering"
+)
+
+employee.add_skill(
+    "Python"
+)
+
+employee.add_skill(
+    "FastAPI"
+)
+
+print(employee)
+
+print(
+    asdict(employee)
+)
+
+The dataclass provides the structure while type hints clearly describe the expected data.
+
+----------------------------------------
+52. Important Type Hint Rules
+----------------------------------------
+
+Rule 1:
+
+Type hints describe expected types.
+
+Rule 2:
+
+Type hints normally do not enforce types at runtime.
+
+Rule 3:
+
+Use -> for function return annotations.
+
+Rule 4:
+
+Use list[str], dict[str, int], etc. for container element types.
+
+Rule 5:
+
+Use str | None for a value that can be a string or None.
+
+Rule 6:
+
+Avoid Any unless flexibility is actually required.
+
+Rule 7:
+
+Use TypeVar and generics when relationships between types matter.
+
+----------------------------------------
+53. Important Dataclass Rules
+----------------------------------------
+
+Rule 1:
+
+Use @dataclass above the class.
+
+Rule 2:
+
+Fields require type annotations.
+
+Rule 3:
+
+Fields without defaults must come before fields with defaults.
+
+Rule 4:
+
+Use field(default_factory=...) for mutable defaults.
+
+Rule 5:
+
+Use frozen=True when objects should be immutable.
+
+Rule 6:
+
+Use __post_init__() for post-construction validation or calculations.
+
+Rule 7:
+
+Use asdict() to convert a dataclass into a dictionary.
+
+Rule 8:
+
+Use astuple() to convert a dataclass into a tuple.
+
+Rule 9:
+
+Use replace() to create a modified copy.
+
+----------------------------------------
+54. Professional Mental Model
+----------------------------------------
+
+Type hints:
+
+Code
+↓
+Annotations
+↓
+Developer understanding
+↓
+IDE support
+↓
+Static analysis
+↓
+Fewer type-related mistakes
+
+Dataclass:
+
+Class definition
+↓
+Fields
+↓
+Automatic __init__()
+↓
+Automatic __repr__()
+↓
+Automatic equality
+↓
+Clean structured data object
+
+Together:
+
+Type hints
++
+Dataclasses
+↓
+Clear
++
+Structured
++
+Maintainable
+Python code.
+
+The key idea:
+
+Type hints communicate what types Python code expects, while dataclasses provide a concise way to define classes whose main purpose is storing structured data.`,
+},
+            ],
             code: `from typing import Optional, Union
 from dataclasses import dataclass, field
 
@@ -20463,7 +70976,7 @@ def good(lst=None):   # CORRECT
   },
 ];
 
-// ─────────────────────────────────────────────────────────────────
+//─────────────────────────────────────────────────────────────────
 // HELPER: localStorage progress
 // ─────────────────────────────────────────────────────────────────
 const STORAGE_KEY = "py-roadmap-progress-v2";
@@ -20592,7 +71105,11 @@ function SubsectionAccordion({ subsections }) {
             <pre className="font-mono text-sm leading-6 whitespace-pre overflow-x-auto">
               {codeBlock.map((line, idx) => (
                 <span key={idx}>
-                  <SyntaxLine line={line} />
+                  {line === "" ? "\u200B" : highlight(line).map((tok, j) =>
+                    tok.color
+                      ? <span key={j} style={{ color: tok.color, fontStyle: tok.italic ? "italic" : "normal" }}>{tok.text}</span>
+                      : <span key={j}>{tok.text}</span>
+                  )}
                   {idx < codeBlock.length - 1 ? "\n" : ""}
                 </span>
               ))}
@@ -20705,93 +71222,131 @@ const PY_BUILTINS = new Set([
   "super","property","staticmethod","classmethod","next","iter","any","all",
 ]);
 
-function tokenizeLine(raw) {
-  // Preserve leading indent exactly
-  const indent = raw.match(/^( *)/)[1];
-  const code   = raw.slice(indent.length);
-
-  // Detect trailing comment, skip # inside strings
-  let body    = code;
-  let comment = "";
-  let inStr   = false;
-  let strChar = "";
-  for (let ci = 0; ci < code.length; ci++) {
-    const ch = code[ci];
-    if (!inStr && (ch === '"' || ch === "'")) { inStr = true; strChar = ch; }
-    else if (inStr && ch === strChar && code[ci-1] !== "\\") inStr = false;
-    else if (!inStr && ch === "#") { comment = code.slice(ci); body = code.slice(0, ci); break; }
+// -----------------------------------------------------------------
+// highlight(line) -- tokenize one Python line, return token array
+// -----------------------------------------------------------------
+function highlight(raw) {
+  let body = raw, comment = "";
+  let inStr = false, strCh = "";
+  for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
+    if (!inStr && (ch === '"' || ch === "'")) { inStr = true; strCh = ch; }
+    else if (inStr && ch === strCh && raw[i - 1] !== "\\") inStr = false;
+    else if (!inStr && ch === "#") { comment = raw.slice(i); body = raw.slice(0, i); break; }
   }
-
-  // Regex tokenizer: strings, numbers, identifiers, operators, whitespace
-  const TOKEN_RE = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\d+\.?\d*|[a-zA-Z_]\w*|\s+|[^\w\s"'])/g;
+  const TOKEN_RE = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\d+\.?\d*|[a-zA-Z_]\w*|[ \t]+|[^\w\s"'])/g;
   const tokens = [];
   let m;
   while ((m = TOKEN_RE.exec(body)) !== null) {
-    const tok = m[0];
-    if (!tok) continue;
-    let cls = "";
-    if (/^["']/.test(tok))                     cls = "text-amber-300";
-    else if (/^\d/.test(tok))                 cls = "text-orange-300";
-    else if (PY_KEYWORDS.has(tok))             cls = "text-violet-400 font-semibold";
-    else if (PY_BUILTINS.has(tok))             cls = "text-cyan-300";
-    else if (/^[A-Z_][A-Z0-9_]{2,}$/.test(tok)) cls = "text-orange-200";
-    else if (/^[A-Z][a-zA-Z]+/.test(tok))     cls = "text-emerald-300";
-    else if (/^[=<>!+\-*/%&|^~()\[\]{},.:;@]/.test(tok)) cls = "text-slate-400";
-    else if (/^\s+$/.test(tok))               cls = "";
-    else                                       cls = "text-slate-100";
-    tokens.push({ text: tok, cls });
+    const t = m[0];
+    let color = "";
+    if (/^["']/.test(t))                          color = "#fbbf24";
+    else if (/^\d/.test(t))                       color = "#fb923c";
+    else if (PY_KEYWORDS.has(t))                  color = "#a78bfa";
+    else if (PY_BUILTINS.has(t))                  color = "#67e8f9";
+    else if (/^[A-Z_][A-Z0-9_]{2,}$/.test(t))     color = "#fed7aa";
+    else if (/^[A-Z][a-z]/.test(t))               color = "#6ee7b7";
+    else if (/^[=<>!+\-*/%&|^~()\[\]{},.:;@]/.test(t)) color = "#94a3b8";
+    tokens.push({ text: t, color });
   }
-
-  return { indent, tokens, comment };
+  if (comment) tokens.push({ text: comment, color: "#475569", italic: true });
+  return tokens;
 }
 
-// ─────────────────────────────────────────────────────────────────
-// SyntaxLine — renders ONE line, preserving exact indentation
-// ─────────────────────────────────────────────────────────────────
-function SyntaxLine({ line }) {
-  const { indent, tokens, comment } = tokenizeLine(line);
-  return (
-    <span>
-      {indent ? <span>{indent}</span> : null}
-      {tokens.map((tok, i) =>
-        tok.cls
-          ? <span key={i} className={tok.cls}>{tok.text}</span>
-          : <span key={i}>{tok.text}</span>
-      )}
-      {comment ? <span className="text-slate-500 italic">{comment}</span> : null}
-    </span>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// CodeBlock — syntax-highlighted Python code editor look
-// ─────────────────────────────────────────────────────────────────
+// -----------------------------------------------------------------
+// CodeBlock -- real VS Code editor feel
+// Single scroll container, real indentation preserved, no forced
+// blank space below short snippets.
+// -----------------------------------------------------------------
 function CodeBlock({ code, filename = "solution.py" }) {
-  const lines = code.split("\n");
+  const [copied, setCopied] = useState(false);
+
+  // Clean: tabs -> spaces, strip leading/trailing blank lines only
+  const cleaned = code
+    .replace(/\t/g, "    ")
+    .replace(/^[\n\r]+/, "")
+    .replace(/[\n\r]+$/, "");
+
+  const lines     = cleaned.split("\n");
+  const lineCount = lines.length;
+  const gutterW   = `${String(lineCount).length * 8 + 28}px`;
+
+  const copyCode = () => {
+    navigator.clipboard?.writeText(cleaned).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
-    <div className="rounded-xl overflow-hidden border border-white/5 shadow-xl">
-      <div className="flex items-center gap-3 px-4 py-2.5 bg-[#161b22] border-b border-white/5">
-        <div className="flex gap-1.5">
-          <span className="block w-3 h-3 rounded-full bg-red-500/70" />
-          <span className="block w-3 h-3 rounded-full bg-yellow-500/70" />
-          <span className="block w-3 h-3 rounded-full bg-emerald-500/70" />
+    <div className="rounded-xl overflow-hidden border border-white/[0.07] shadow-2xl my-2"
+      style={{ fontFamily: '"Fira Code","Cascadia Code","JetBrains Mono","Consolas",monospace', fontSize: "12.5px" }}>
+
+      {/* Title bar */}
+      <div className="flex items-center gap-2.5 px-4 py-2.5 bg-[#1c2028] border-b border-white/[0.06]">
+        <div className="flex gap-1.5 flex-shrink-0">
+          <span className="w-3 h-3 rounded-full bg-[#ff5f57] block" />
+          <span className="w-3 h-3 rounded-full bg-[#febc2e] block" />
+          <span className="w-3 h-3 rounded-full bg-[#28c840] block" />
         </div>
-        <span className="text-[11px] text-slate-500 font-mono">{filename}</span>
-        <span className="ml-auto text-[10px] text-slate-600 font-mono">Python 3.12 🐍</span>
+        <span className="text-[11px] text-slate-500 font-mono flex-1 truncate min-w-0">{filename}</span>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <span className="text-[10px] text-slate-600 font-mono">{lineCount} lines</span>
+          <button onClick={copyCode}
+            className="text-[10px] font-semibold px-2.5 py-0.5 rounded-md bg-white/[0.05] hover:bg-white/[0.10] text-slate-500 hover:text-white border border-white/[0.07] transition-all">
+            {copied ? "\u2713 Copied" : "Copy"}
+          </button>
+          <span className="text-[10px] text-slate-600 font-mono">Python 3.12</span>
+        </div>
       </div>
-      <div className="flex bg-[#0d1117] overflow-x-auto">
-        <div className="select-none flex-shrink-0 py-3 pl-3 pr-4 border-r border-white/5 text-right">
-          {lines.map((_, i) => (
-            <div key={i} className="text-[11px] text-slate-600 font-mono leading-5">{i + 1}</div>
-          ))}
+
+      {/*
+        Single overflow container -- ONE scroll for both gutter + code.
+        max-height: shrinks to fit content, scrolls only when > ~22 lines.
+        minWidth: max-content on inner div prevents line-wrap, enables
+        horizontal scroll for long lines.
+      */}
+      <div className="bg-[#0d1117] overflow-auto" style={{ maxHeight: "460px" }}>
+        <div className="flex" style={{ minWidth: "max-content" }}>
+
+          {/* Gutter -- line numbers */}
+          <div
+            className="select-none flex-shrink-0 bg-[#0d1117] sticky left-0 z-10 py-3"
+            style={{ minWidth: gutterW, paddingLeft: "8px", paddingRight: "12px", borderRight: "1px solid rgba(255,255,255,0.05)" }}
+          >
+            {lines.map((_, i) => (
+              <div key={i}
+                className="text-right text-[11px] text-slate-700 tabular-nums font-mono"
+                style={{ lineHeight: "1.6rem", height: "1.6rem" }}>
+                {i + 1}
+              </div>
+            ))}
+          </div>
+
+          {/*
+            <pre> with whiteSpace:"pre" preserves ALL spaces and
+            indentation exactly as written. Each line is its own div
+            so React keys work, spans preserve raw text/leading spaces.
+          */}
+          <pre className="flex-1 py-3 pl-4 pr-8 m-0 bg-[#0d1117]"
+            style={{ whiteSpace: "pre", lineHeight: "1.6rem", color: "#86efac" }}>
+            {lines.map((line, i) => (
+              <div key={i} style={{ minHeight: "1.6rem" }}>
+                {line === "" ? "\u200B" : highlight(line).map((tok, j) =>
+                  tok.color
+                    ? <span key={j} style={{ color: tok.color, fontStyle: tok.italic ? "italic" : "normal" }}>{tok.text}</span>
+                    : <span key={j}>{tok.text}</span>
+                )}
+              </div>
+            ))}
+          </pre>
         </div>
-        <pre className="flex-1 py-3 px-4 text-[12px] font-mono leading-5 overflow-x-auto whitespace-pre max-h-80 overflow-y-auto">
-          {lines.map((line, i) => (
-            <div key={i}>
-              <SyntaxLine line={line} />
-            </div>
-          ))}
-        </pre>
+      </div>
+
+      {/* Status bar */}
+      <div className="flex items-center justify-between px-4 py-1 bg-[#1c2028] border-t border-white/[0.05]">
+        <span className="text-[9px] text-slate-700 font-mono">UTF-8 . LF</span>
+        <span className="text-[9px] text-indigo-500 font-semibold font-mono">Python 3.12</span>
       </div>
     </div>
   );
