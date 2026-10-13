@@ -10,7 +10,7 @@ import Roadmap from "../pages/Roadmap";
 import ResumeAnalyzer from "../pages/ResumeAnalyzer";
 import InterviewAI from "../pages/InterviewAI";
 import CodingTracker from "../pages/CodingTracker";
-import Jobs from "../pages/Jobs";
+//import Jobs from "../pages/Jobs";
 import Profile from "../pages/Profile";
 import MockInterview from "../pages/MockInterview";
 import SkillGapAnalyzer from "../pages/SkillGapAnalyzer";
@@ -36,15 +36,15 @@ export default function AppRoutes() {
       <Route path="/register"        element={<Register />} />
       <Route path="/onboarding"      element={<PrivateRoute><Onboarding /></PrivateRoute>} />
       <Route path="/dashboard"       element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-      <Route path="/career-path"     element={<PrivateRoute><CareerPath /></PrivateRoute>} />
+      {/*<Route path="/career-path"     element={<PrivateRoute><CareerPath /></PrivateRoute>} />*/}
       <Route path="/roadmap"         element={<PrivateRoute><Roadmap /></PrivateRoute>} />
-      <Route path="/concept-hub"     element={<PrivateRoute><ConceptHub /></PrivateRoute>} />
+      {/*<Route path="/concept-hub"     element={<PrivateRoute><ConceptHub /></PrivateRoute>} />
       <Route path="/mock-interview"  element={<PrivateRoute><MockInterview /></PrivateRoute>} />
-      <Route path="/skill-gap"       element={<PrivateRoute><SkillGapAnalyzer /></PrivateRoute>} />
-      <Route path="/resume-analyzer" element={<PrivateRoute><ResumeAnalyzer /></PrivateRoute>} />
+      {/* <Route path="/skill-gap"       element={<PrivateRoute><SkillGapAnalyzer /></PrivateRoute>} /> */}
+      {/*<Route path="/resume-analyzer" element={<PrivateRoute><ResumeAnalyzer /></PrivateRoute>} />*/}
       <Route path="/interview-ai"    element={<PrivateRoute><InterviewAI /></PrivateRoute>} />
-      <Route path="/coding-tracker"  element={<PrivateRoute><CodingTracker /></PrivateRoute>} />
-      <Route path="/jobs"            element={<PrivateRoute><Jobs /></PrivateRoute>} />
+      {/*<Route path="/coding-tracker"  element={<PrivateRoute><CodingTracker /></PrivateRoute>} />*/}
+      {/* <Route path="/jobs"            element={<PrivateRoute><Jobs /></PrivateRoute>} /> */}
       <Route path="/profile"         element={<PrivateRoute><Profile /></PrivateRoute>} />
       <Route path="/interview-room"  element={<PrivateRoute><InterviewRoom /></PrivateRoute>} />
     </Routes>
