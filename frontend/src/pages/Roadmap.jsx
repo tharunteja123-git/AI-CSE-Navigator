@@ -20605,7 +20605,6 @@ Using Negative Indexes in Slicing
 Negative indexes can also be used.
 Example:
 numbers = [10, 20, 30, 40, 50]
-print(numbers[-4:-1])
 Output:
 [20, 30, 40]
 Negative indexes:

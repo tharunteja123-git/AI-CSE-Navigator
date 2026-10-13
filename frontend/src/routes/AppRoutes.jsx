@@ -5,16 +5,16 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Onboarding from "../pages/Onboarding";
 import Dashboard from "../pages/Dashboard";
-import CareerPath from "../pages/CareerPath";
-import Roadmap from "../pages/Roadmap";
-import ResumeAnalyzer from "../pages/ResumeAnalyzer";
+//import CareerPath from "../pages/CareerPath";
+//import Roadmap from "../pages/Roadmap";
+//import ResumeAnalyzer from "../pages/ResumeAnalyzer";
 import InterviewAI from "../pages/InterviewAI";
 import CodingTracker from "../pages/CodingTracker";
 //import Jobs from "../pages/Jobs";
 import Profile from "../pages/Profile";
-import MockInterview from "../pages/MockInterview";
-import SkillGapAnalyzer from "../pages/SkillGapAnalyzer";
-import ConceptHub from "../pages/ConceptHub";
+//import MockInterview from "../pages/MockInterview";
+//import SkillGapAnalyzer from "../pages/SkillGapAnalyzer";
+//import ConceptHub from "../pages/ConceptHub";
 import InterviewRoom from "../pages/InterviewRoom";
 
 
@@ -37,7 +37,7 @@ export default function AppRoutes() {
       <Route path="/onboarding"      element={<PrivateRoute><Onboarding /></PrivateRoute>} />
       <Route path="/dashboard"       element={<PrivateRoute><Dashboard /></PrivateRoute>} />
       {/*<Route path="/career-path"     element={<PrivateRoute><CareerPath /></PrivateRoute>} />*/}
-      <Route path="/roadmap"         element={<PrivateRoute><Roadmap /></PrivateRoute>} />
+      {/*<Route path="/roadmap"         element={<PrivateRoute><Roadmap /></PrivateRoute>} />*/}
       {/*<Route path="/concept-hub"     element={<PrivateRoute><ConceptHub /></PrivateRoute>} />
       <Route path="/mock-interview"  element={<PrivateRoute><MockInterview /></PrivateRoute>} />
       {/* <Route path="/skill-gap"       element={<PrivateRoute><SkillGapAnalyzer /></PrivateRoute>} /> */}
