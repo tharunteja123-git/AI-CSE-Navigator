@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000";
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
 const getToken = () => localStorage.getItem("token");
 const authHeaders = () => ({
@@ -7,7 +7,7 @@ const authHeaders = () => ({
 });
 
 const req = async (url, opts = {}) => {
-  const res = await fetch(`${BASE}${url}`, opts);
+  const res = await fetch(`${API_BASE_URL}${url}`, opts);
   return res.json();
 };
 

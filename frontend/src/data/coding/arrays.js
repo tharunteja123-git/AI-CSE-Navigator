@@ -997,6 +997,3 @@ def product_except_self_wrong(nums):
 };
 
 export default arrays;
-
-
-

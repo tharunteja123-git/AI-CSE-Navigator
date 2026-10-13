@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { api } from '../services/api'
+import { api, API_BASE_URL } from '../services/api'
 import toast from 'react-hot-toast'
 import { Ripple, AuthTabs, TechOrbitDisplay } from '../components/ui/animated-sign-in'
 
@@ -22,8 +22,6 @@ import { Ripple, AuthTabs, TechOrbitDisplay } from '../components/ui/animated-si
   tailwind.config.js and index.css need a few additions for the animations and
   CSS variables this template relies on — see the notes at the end of my reply.
 */
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || ''
 
 const iconsArray = [
   {

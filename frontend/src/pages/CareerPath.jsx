@@ -1971,11 +1971,14 @@ function StudyAbroadSection() {
 // ─────────────────────────────────────────────────────────────────
 // MAIN PAGE COMPONENT
 // ─────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
+// MAIN PAGE COMPONENT — layout fixed for DashboardLayout fixed shell
+// ─────────────────────────────────────────────────────────────────
 export default function CareerPath() {
   const [activeSection, setActiveSection] = useState("overview");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [search, setSearch] = useState("");
-  const [openGroup, setOpenGroup] = useState("Start Here");
+  const [sidebarOpen,   setSidebarOpen]   = useState(false);
+  const [search,        setSearch]        = useState("");
+  const [openGroup,     setOpenGroup]     = useState("Start Here");
 
   const filteredNav = NAV_SECTIONS.filter(s =>
     s.label.toLowerCase().includes(search.toLowerCase())
@@ -1983,8 +1986,9 @@ export default function CareerPath() {
 
   const scrollTo = (id) => {
     setActiveSection(id);
-    document.getElementById(id)?.scrollIntoView({ behavior:"smooth", block:"start" });
     setSidebarOpen(false);
+    // scroll the main content area to top when switching sections
+    document.querySelector(".cp-main-scroll")?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const renderSection = () => {
@@ -2016,37 +2020,63 @@ export default function CareerPath() {
 
   return (
     <DashboardLayout>
-      <div className="flex -mx-4 sm:-mx-6 -mt-4 bg-[#060810]" style={{ minHeight:"calc(100vh - 64px)" }}>
+      {/*
+        ── LAYOUT FIX ──────────────────────────────────────────────
+        DashboardLayout uses `fixed inset-0` shell. Its <main> is
+        overflow-y-auto and is the ONLY scroll container.
 
-        {/* ── SIDEBAR ── */}
+        Rules for child pages with their OWN inner sidebar:
+        1. NO negative margins (-mx, -mt) — they break fixed layout
+        2. NO h-screen / min-h-screen — parent is already 100% height
+        3. NO fixed/sticky on inner sidebar — use flex column instead
+        4. Inner scroll goes on the content area, not the outer wrapper
+        5. Use height:100% to fill parent, not min-height calculations
+        ─────────────────────────────────────────────────────────────
+      */}
+      <div className="flex bg-[#060810]" style={{ height: "100%", minHeight: "100%" }}>
+
+        {/* ── Mobile overlay ── */}
         {sidebarOpen && (
           <div className="fixed inset-0 z-40 lg:hidden" onClick={() => setSidebarOpen(false)}>
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"/>
           </div>
         )}
+
+        {/*
+          ── INNER SIDEBAR ──────────────────────────────────────────
+          Uses flex-col with overflow-y-auto on the nav section only.
+          No fixed, no h-screen — it fills the parent flex container.
+          On mobile: absolute positioned overlay from top-0 left-0.
+        */}
         <aside className={`
-          fixed lg:sticky top-0 z-50 lg:z-auto h-screen bg-[#0d1117] border-r border-white/[0.07]
-          flex-shrink-0 flex flex-col transition-all duration-300
-          ${sidebarOpen?"left-0":"left-[-280px] lg:left-0"} w-[280px] lg:w-64
+          flex-shrink-0 flex flex-col bg-[#0d1117] border-r border-white/[0.07]
+          transition-all duration-300 z-50
+          ${sidebarOpen
+            ? "fixed top-0 left-0 bottom-0 w-72"       /* mobile: overlay */
+            : "hidden lg:flex lg:w-64"                   /* desktop: inline */
+          }
         `}>
-          {/* Sidebar header */}
-          <div className="p-4 border-b border-white/[0.07] flex-shrink-0">
+          {/* Search — always visible at top */}
+          <div className="flex-shrink-0 p-4 border-b border-white/[0.07]">
             <div className="relative">
               <FiSearch className="absolute left-3 top-2.5 text-white/25 text-sm"/>
-              <input value={search} onChange={e => setSearch(e.target.value)}
+              <input
+                value={search}
+                onChange={e => setSearch(e.target.value)}
                 placeholder="Search topics..."
-                className="w-full pl-9 pr-3 py-2 bg-white/[0.04] border border-white/[0.07] rounded-xl text-xs text-white/60 outline-none focus:border-indigo-500/50 placeholder:text-white/20 transition-colors"/>
+                className="w-full pl-9 pr-3 py-2 bg-white/[0.04] border border-white/[0.07] rounded-xl text-xs text-white/60 outline-none focus:border-indigo-500/50 placeholder:text-white/20 transition-colors"
+              />
             </div>
           </div>
 
-          {/* Nav */}
-          <nav className="flex-1 overflow-y-auto p-3 pb-8">
+          {/* Nav — scrollable, fills remaining height */}
+          <nav className="flex-1 min-h-0 overflow-y-auto p-3 pb-8">
             {search ? (
               <div className="space-y-0.5">
                 {filteredNav.map(s => (
                   <button key={s.id} onClick={() => scrollTo(s.id)}
                     className={`w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
-                      activeSection===s.id
+                      activeSection === s.id
                         ? "bg-indigo-600/15 text-indigo-300 border border-indigo-500/20"
                         : "text-white/40 hover:bg-white/[0.04] hover:text-white/70"
                     }`}>
@@ -2054,30 +2084,37 @@ export default function CareerPath() {
                     <span className="truncate">{s.label}</span>
                   </button>
                 ))}
+                {filteredNav.length === 0 && (
+                  <p className="text-xs text-white/20 text-center py-4">No results</p>
+                )}
               </div>
             ) : (
               GROUPS.map(group => {
-                const items = NAV_SECTIONS.filter(s => s.group===group);
-                const isOpen = openGroup===group;
+                const items  = NAV_SECTIONS.filter(s => s.group === group);
+                const isOpen = openGroup === group;
                 return (
                   <div key={group} className="mb-1">
-                    <button onClick={() => setOpenGroup(isOpen?"":group)}
-                      className="w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-white/20 uppercase tracking-widest hover:text-white/40 transition-colors">
+                    <button
+                      onClick={() => setOpenGroup(isOpen ? "" : group)}
+                      className="w-full flex items-center justify-between px-3 py-2 text-[10px] font-bold text-white/20 uppercase tracking-widest hover:text-white/40 transition-colors"
+                    >
                       {group}
-                      <FiChevronDown className={`transition-transform text-xs ${isOpen?"rotate-180":""}`}/>
+                      <FiChevronDown className={`transition-transform text-xs ${isOpen ? "rotate-180" : ""}`}/>
                     </button>
                     {isOpen && (
                       <div className="space-y-0.5 ml-1 mb-1">
                         {items.map(s => (
                           <button key={s.id} onClick={() => scrollTo(s.id)}
                             className={`w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
-                              activeSection===s.id
+                              activeSection === s.id
                                 ? "bg-indigo-600/15 text-indigo-300 border border-indigo-500/20"
                                 : "text-white/40 hover:bg-white/[0.04] hover:text-white/70"
                             }`}>
                             <span className="text-sm flex-shrink-0">{s.emoji}</span>
                             <span className="truncate">{s.label}</span>
-                            {activeSection===s.id && <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 ml-auto flex-shrink-0"/>}
+                            {activeSection === s.id && (
+                              <div className="w-1.5 h-1.5 rounded-full bg-indigo-400 ml-auto flex-shrink-0"/>
+                            )}
                           </button>
                         ))}
                       </div>
@@ -2089,21 +2126,27 @@ export default function CareerPath() {
           </nav>
         </aside>
 
-        {/* ── MAIN CONTENT ── */}
+        {/* ── MAIN CONTENT ─────────────────────────────────────── */}
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          {/* Mobile header */}
-          <div className="lg:hidden flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] bg-[#0d1117] flex-shrink-0">
+
+          {/* Mobile top bar */}
+          <div className="lg:hidden flex-shrink-0 flex items-center gap-3 px-4 py-3 border-b border-white/[0.07] bg-[#0d1117]">
             <button onClick={() => setSidebarOpen(true)} className="text-white/40 hover:text-white/70 transition-colors">
               <FiMenu className="text-xl"/>
             </button>
             <p className="text-white/60 text-sm font-semibold truncate">
-              {NAV_SECTIONS.find(s => s.id===activeSection)?.emoji} {NAV_SECTIONS.find(s => s.id===activeSection)?.label}
+              {NAV_SECTIONS.find(s => s.id === activeSection)?.emoji}{" "}
+              {NAV_SECTIONS.find(s => s.id === activeSection)?.label}
             </p>
           </div>
 
-          {/* Section content */}
-          <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="max-w-4xl">
+          {/*
+            Content area — THIS is the scroll container for page content.
+            flex-1 min-h-0 lets it shrink within the flex column.
+            overflow-y-auto provides vertical scroll for section content.
+          */}
+          <main className="cp-main-scroll flex-1 min-h-0 overflow-y-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="max-w-4xl mx-auto">
               {renderSection()}
             </div>
           </main>
@@ -2112,6 +2155,7 @@ export default function CareerPath() {
     </DashboardLayout>
   );
 }
+
 
 // ─────────────────────────────────────────────────────────────────
 // SECTION: DOMAINS (quick visual overview)
