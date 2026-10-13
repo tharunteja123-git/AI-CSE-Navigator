@@ -2,10 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from app.core.config import settings
 
-engine = create_engine(
-    settings.DATABASE_URL,
-    echo=True  # Shows SQL queries in terminal (disable in production)
-)
+database_url = settings.DATABASE_URL
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+engine = create_engine(database_url, echo=False)
 
 SessionLocal = sessionmaker(
     autocommit=False,

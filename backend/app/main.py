@@ -11,6 +11,7 @@ from app.api.resume import router as resume_router
 from app.db.database import Base, engine
 from app.middleware.rate_limit import rate_limit_middleware
 from app.core.logger import app_logger
+from app.core.config import settings
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,7 +23,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:5174", "http://localhost:5175", "http://localhost:5176", "http://localhost:3000"],
+    allow_origins=[origin.strip() for origin in settings.CORS_ORIGINS.split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
